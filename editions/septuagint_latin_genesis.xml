@@ -18,11 +18,12 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
   </teiHeader>
   <text>
     <body>
+      <div n="genesis">
         <div n="1">
           
           <div  n="1">
               <p>IN principio fecit deus celum et terram.
-              
+      
               </p>
           </div>
         
@@ -156,6 +157,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           <p> </p>
           </div>
 
+        </div>
         </div>
     </body>
     </text>

@@ -22,6 +22,10 @@ urn:cts:compnov:tanach.genesis.complutVulgate:
 
 urn:cts:compnov:tanach.genesis.complutMasoretic:
 
+
+
+urn:cts:compnov:tanach.genesis.LXXlatin:
+
 ## Cross referencing
 
 TLG does this for LXX:
