@@ -32,7 +32,7 @@ end
 md"""# View alignment of Vulgate and Hebrew texts"""
 
 # ╔═╡ e3da1b21-c13f-4b3a-b0a4-910133abcfbe
-
+md"""### View indexing"""
 
 # ╔═╡ 652f58d7-e33a-4195-addc-dc75dca4a940
 md"""### Token lists (for reference)"""
@@ -177,6 +177,17 @@ vulgatepsg = filter(vulgatetkns) do tkn
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
 end
 
+# ╔═╡ a67afac6-b927-4d43-946c-102f28380362
+begin
+	vulgatedisplay = []
+	for tkn in vulgatepsg
+		if passagecomponent(tkn.passage.urn) in latinbreaks
+			push!(vulgatedisplay, "BREAK!")
+		end
+	end
+	join(vulgatedisplay,"\n") |> Markdown.parse
+end
+
 # ╔═╡ e9f1c6bb-5fbd-4b96-8527-737c418cd552
 if showtokens
 	latinmdlist = map(vulgatepsg) do tkn
@@ -219,6 +230,7 @@ BiblicalHebrew = "23d2231d-1fc1-47c2-a612-987552d9b38e"
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableImage = "17ccb2e5-db19-44b3-b354-4fd16d92c74e"
+CitableObject = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
@@ -230,6 +242,7 @@ BiblicalHebrew = "~0.3.3"
 CitableBase = "~10.3.1"
 CitableCorpus = "~0.13.5"
 CitableImage = "~0.7.1"
+CitableObject = "~0.16.1"
 CitableText = "~0.16.2"
 LatinOrthography = "~0.7.2"
 Orthography = "~0.21.3"
@@ -243,7 +256,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "3d04ad5a2854f99d1fb2470694742f5ec1408665"
+project_hash = "9949c7cf31ec2acf801566faf0c99ce9f47580dd"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1721,12 +1734,13 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═a3e8dcf8-cb64-11ee-3271-eb9e084ace5b
+# ╟─a3e8dcf8-cb64-11ee-3271-eb9e084ace5b
 # ╟─d2de56cb-b6ed-4c2a-81be-4fbc15ccc467
 # ╟─956f17b1-7392-429b-b58b-d8bfec779033
 # ╟─e348ce07-3558-4cb9-9ee6-38eaf57f9161
 # ╟─e0857b16-f62f-49ca-a33e-e89856cdd2a1
-# ╠═e3da1b21-c13f-4b3a-b0a4-910133abcfbe
+# ╟─e3da1b21-c13f-4b3a-b0a4-910133abcfbe
+# ╠═a67afac6-b927-4d43-946c-102f28380362
 # ╟─652f58d7-e33a-4195-addc-dc75dca4a940
 # ╟─1e7ac8d6-f890-4bda-a09d-09b401422564
 # ╟─e9f1c6bb-5fbd-4b96-8527-737c418cd552
