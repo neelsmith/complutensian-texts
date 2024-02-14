@@ -16,7 +16,7 @@ end
 
 # ╔═╡ 505e5234-c399-11ee-2a14-bfee14a8bf57
 begin
-	using LatinOrthography
+	using Orthography, LatinOrthography
 	using CitableText
 	using CitableCorpus
 	using CitableBase
@@ -45,6 +45,37 @@ html"""
 # Using these URNs:
 # urn:cts:compnov:tanach.genesis.sept_latin:
 # urn:cts:compnov:tanach.genesis.septuagint:
+
+# ╔═╡ cf9ebba5-d90c-42ae-8a11-bdef4660991c
+md"""> Token lists"""
+
+# ╔═╡ 1d7b8019-0a2f-42ab-a2f4-ff53d266e1ae
+"""Get lower case vocab list for a list of passages."""
+function wordlist(tkns)
+	map(tkns) do tkn
+		lowercase(tkn.passage.text )
+	end
+end
+
+# ╔═╡ ba2247ab-6b07-4230-9661-5cc9a17bed66
+"""Format tokens in psg1 for display. Apply hilighting if a token is absent from list of tokens in psg2.
+"""
+function formatdiff(psg1, psg2)
+	checklist = wordlist(psg2) |> unique
+	tokenlist = map(psg1) do tkn
+		if tkn.tokentype isa LexicalToken
+			if lowercase(tkn.passage.text) in checklist
+				" " * tkn.passage.text
+			else
+				" <span class=\"hilite\">" * tkn.passage.text * "</span>"
+			end
+		else
+			tkn.passage.text
+		end
+	end
+	"<p>" * join(tokenlist,"") * "</p>"
+
+end
 
 # ╔═╡ 5cf92532-b67a-40a3-ad1a-c7f03cdb0eda
 md"""> Load Vulgate and tokenize
@@ -112,6 +143,12 @@ end
 # ╔═╡ 9aca0d5f-f4ed-44a6-8470-1d0e91b006eb
  md"""*Verse* $(@bind verse Select(versesforchapter(vulgate, book, chap)))"""
 
+# ╔═╡ f56c3f61-cae0-4d1a-b755-86ddff6d3c53
+"""<h3>Compare: <i>$(titlecase(book))</i> $(verse)</h3>
+
+<blockquote><p><i>Terms not found in the comparison text are</i> <span class="hilite">highlighted</span>.</p></blockquote>
+""" |> HTML
+
 # ╔═╡ 73919628-120d-4317-ba7b-26e74d2d75d9
 md"""> Display Vulgate
 """
@@ -123,30 +160,17 @@ vulgatepsg = filter(vulgatetkns) do tkn
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
 end
 
-# ╔═╡ 1d7b8019-0a2f-42ab-a2f4-ff53d266e1ae
-function wordlist(tkns)
-	map(tkns) do tkn
-		lowercase(tkn.passage.text )
-	end
-end
-
 # ╔═╡ c2fbb1d6-a63f-47ef-9f5d-fc98fb4f5f5a
 md"""> Load XML edition of Latin glosses on Septuagint."""
 
 # ╔═╡ 1eabb81f-291a-4701-ab71-5eaaa8f03693
 bldr = diplomaticbuilder(; versionid = "lxxlatinnormed")
 
-# ╔═╡ 05e406a0-b775-483f-8852-3ae62c5a3fcd
-
-
 # ╔═╡ 50966a9c-b83a-42c2-94b2-a1899fe51f12
 md"""> Load glossing text data"""
 
 # ╔═╡ 13825cdf-a2da-4be9-8052-80a86adf024c
 repo = dirname(pwd())
-
-# ╔═╡ f23b99fe-4d0e-4f7e-9204-4d7567284420
-
 
 # ╔═╡ 049e6845-f4e8-4223-a69d-8fbb877e98de
 xml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
@@ -167,14 +191,42 @@ septlatinpsg =  filter(septlatintkns) do tkn
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
 end
 
+# ╔═╡ 298c9a4b-2a24-4c7d-8575-e0f42ae16044
+septlatindiff = formatdiff( septlatinpsg, vulgatepsg) 
+
+# ╔═╡ 44522bfa-9420-4aac-a402-5f55ebc29e05
+vulgatediff = formatdiff(vulgatepsg, septlatinpsg) 
+
+# ╔═╡ 966eedc9-1c4d-4117-8076-26b8eda54e96
+"""
+<table>
+<tr>
+<th>Vulgate</th><td>$(vulgatediff)</td>
+</tr>
+<tr>
+<th>Glosses on Septuagint</th><td>$(septlatindiff)</td>
+</tr>
+</table>
+"""  |> HTML
+
 # ╔═╡ c9a7de07-e374-4131-ac70-9442a8728de3
 # ╠═╡ disabled = true
 #=╠═╡
-u = CtsUrn("urn:cts:compnov:tanach.genesis.LXXlatin:")
+
   ╠═╡ =#
 
 # ╔═╡ 95d5cb19-ce6b-4e06-8cc6-451faa5ec194
 ortho = latin24()
+
+# ╔═╡ acd6ae5a-0390-48e6-bf80-eae7ab9b2910
+css = html"""
+<style>
+.hilite {
+	background-color: yellow;
+	font-weight: bold;
+}
+</style>
+"""
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -185,6 +237,7 @@ CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
 EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
+Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
@@ -194,6 +247,7 @@ CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
 EditionBuilders = "~0.8.4"
 LatinOrthography = "~0.7.0"
+Orthography = "~0.21.3"
 PlutoUI = "~0.7.55"
 """
 
@@ -203,7 +257,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "24a65fd7f01eb1a068ba5f7787a37689dfa6ada4"
+project_hash = "464903301b0b03026cbdeb9c3eca14e9a885f29e"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -866,34 +920,39 @@ version = "17.4.0+2"
 # ╟─571bfd40-3fc5-40ed-beb1-7035e25cf5bc
 # ╟─77bbc155-3d5d-4941-9188-d664e45e2d81
 # ╟─9aca0d5f-f4ed-44a6-8470-1d0e91b006eb
+# ╟─f56c3f61-cae0-4d1a-b755-86ddff6d3c53
+# ╟─966eedc9-1c4d-4117-8076-26b8eda54e96
 # ╟─71ce25d9-6fb1-407c-91f0-1636fb550cde
 # ╟─b873d268-5af3-4d6c-a1b7-3af6f3c764bf
 # ╠═763fe204-9aa3-4c2a-81f6-98e8a6299b34
+# ╟─cf9ebba5-d90c-42ae-8a11-bdef4660991c
+# ╠═9f98852b-acf8-4740-92c5-00e291d2943c
+# ╟─96ea76d5-0e3d-46df-b807-97a9a61ac519
+# ╟─298c9a4b-2a24-4c7d-8575-e0f42ae16044
+# ╟─44522bfa-9420-4aac-a402-5f55ebc29e05
+# ╟─1d7b8019-0a2f-42ab-a2f4-ff53d266e1ae
+# ╟─ba2247ab-6b07-4230-9661-5cc9a17bed66
 # ╟─5cf92532-b67a-40a3-ad1a-c7f03cdb0eda
 # ╟─cb77fe26-a3c9-48f9-8364-c6288ffd50d5
 # ╟─1c27264c-cb66-4f0f-89ad-8d151a60bd58
 # ╟─b049d8ff-6092-4174-9bc8-3138bd272eaf
 # ╟─80e36d02-a7a0-4b18-9cf7-b26bbcadc345
-# ╟─9f98852b-acf8-4740-92c5-00e291d2943c
 # ╟─ed6016b0-ebba-4403-b6e7-697e8a36e719
 # ╟─f6db2166-5dd2-422f-ba88-917b6a687773
 # ╟─0681c83f-f445-460e-891c-2d55ff54d918
 # ╟─c1791f30-a4ef-409c-86ce-80708df51291
 # ╟─73919628-120d-4317-ba7b-26e74d2d75d9
 # ╟─c2379250-5def-4e3e-b310-739c7e1b1587
-# ╟─22e0f5ff-d3c7-4450-a968-1165aefc1caa
-# ╟─1d7b8019-0a2f-42ab-a2f4-ff53d266e1ae
+# ╠═22e0f5ff-d3c7-4450-a968-1165aefc1caa
 # ╟─c2fbb1d6-a63f-47ef-9f5d-fc98fb4f5f5a
 # ╠═7f933451-896a-48a9-96f7-4fe1a048288f
 # ╠═1eabb81f-291a-4701-ab71-5eaaa8f03693
 # ╠═9af25ad8-168c-4f28-9d24-54164b298db7
-# ╠═96ea76d5-0e3d-46df-b807-97a9a61ac519
-# ╠═05e406a0-b775-483f-8852-3ae62c5a3fcd
 # ╟─50966a9c-b83a-42c2-94b2-a1899fe51f12
 # ╠═13825cdf-a2da-4be9-8052-80a86adf024c
-# ╠═f23b99fe-4d0e-4f7e-9204-4d7567284420
 # ╠═049e6845-f4e8-4223-a69d-8fbb877e98de
 # ╠═c9a7de07-e374-4131-ac70-9442a8728de3
 # ╠═95d5cb19-ce6b-4e06-8cc6-451faa5ec194
+# ╠═acd6ae5a-0390-48e6-bf80-eae7ab9b2910
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
