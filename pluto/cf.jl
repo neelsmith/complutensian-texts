@@ -16,7 +16,8 @@ end
 
 # ╔═╡ 505e5234-c399-11ee-2a14-bfee14a8bf57
 begin
-	using Orthography, LatinOrthography
+	using Orthography
+	using LatinOrthography
 	using CitableText
 	using CitableCorpus
 	using CitableBase
@@ -28,11 +29,23 @@ begin
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
-# ╔═╡ 2af244a9-24db-4908-9695-2f4a45b70b4f
-md"""## Select a passage"""
+# ╔═╡ 01cd9b04-4308-4776-ad22-bcd4eb48a966
+md"""*Noteboook version*: **1.0.0**"""
 
-# ╔═╡ 71ce25d9-6fb1-407c-91f0-1636fb550cde
+# ╔═╡ ecbcee9e-9719-4883-8615-20a1602014a6
+md"""# Compare texts of the Complutensis"""
 
+# ╔═╡ 36dd1391-3550-4c87-8ba8-4325e007316a
+md"""> This notebook lets you compare the Latin text of the Vulgate with the Latin text of the glossing commentary on the Septuagint in the Complutensis. For reference, it juxtaposes the Greek text of the Septuagint.
+"""
+
+# ╔═╡ f56c3f61-cae0-4d1a-b755-86ddff6d3c53
+"""
+<blockquote><p>Terms not found in the comparison text are <span class="hilite">highlighted</span>.</p></blockquote>
+""" |> HTML
+
+# ╔═╡ a2171ec8-6691-4f52-b9ec-a6281594d4b2
+@bind reloadtext Button("Reload edition of glossing text")
 
 # ╔═╡ b873d268-5af3-4d6c-a1b7-3af6f3c764bf
 html"""
@@ -48,6 +61,9 @@ html"""
 
 # ╔═╡ cf9ebba5-d90c-42ae-8a11-bdef4660991c
 md"""> Token lists"""
+
+# ╔═╡ 80e36d02-a7a0-4b18-9cf7-b26bbcadc345
+vulgateortho = latin24()
 
 # ╔═╡ 1d7b8019-0a2f-42ab-a2f4-ff53d266e1ae
 """Get lower case vocab list for a list of passages."""
@@ -78,7 +94,7 @@ function formatdiff(psg1, psg2)
 end
 
 # ╔═╡ 5cf92532-b67a-40a3-ad1a-c7f03cdb0eda
-md"""> Load Vulgate and tokenize
+md"""> Load Vulgate
 
 """
 
@@ -93,11 +109,13 @@ vulgate = filter(corpus.passages) do psg
 	versionid(psg.urn) == "vulgate"
 end |> CitableTextCorpus
 
-# ╔═╡ 80e36d02-a7a0-4b18-9cf7-b26bbcadc345
-vulgateortho = latin23()
-
 # ╔═╡ 9f98852b-acf8-4740-92c5-00e291d2943c
 vulgatetkns = tokenize(vulgate, vulgateortho)
+
+# ╔═╡ a538cd79-f58f-44d0-b4b3-413461084ff9
+septuagint = filter(corpus.passages) do psg
+	versionid(psg.urn) == "septuagint"
+end |> CitableTextCorpus
 
 # ╔═╡ ed6016b0-ebba-4403-b6e7-697e8a36e719
 md"""> Menus for user selection of passages"""
@@ -143,14 +161,12 @@ end
 # ╔═╡ 9aca0d5f-f4ed-44a6-8470-1d0e91b006eb
  md"""*Verse* $(@bind verse Select(versesforchapter(vulgate, book, chap)))"""
 
-# ╔═╡ f56c3f61-cae0-4d1a-b755-86ddff6d3c53
-"""<h3>Compare: <i>$(titlecase(book))</i> $(verse)</h3>
-
-<blockquote><p><i>Terms not found in the comparison text are</i> <span class="hilite">highlighted</span>.</p></blockquote>
-""" |> HTML
+# ╔═╡ 7d035d8d-7f3c-4b1d-9eb9-2069f317109e
+md"""### *$(titlecase(book))*  $(verse)
+"""
 
 # ╔═╡ 73919628-120d-4317-ba7b-26e74d2d75d9
-md"""> Display Vulgate
+md"""> Gather tokens for selected passage
 """
 
 # ╔═╡ c2379250-5def-4e3e-b310-739c7e1b1587
@@ -159,6 +175,16 @@ vulgatepsg = filter(vulgatetkns) do tkn
 	workid(tkn.passage.urn) == book &&
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
 end
+
+# ╔═╡ 22e0f5ff-d3c7-4450-a968-1165aefc1caa
+septuagintpsg =  filter(septuagint.passages) do psg	
+	workid(psg.urn) == book &&
+	passagecomponent(psg.urn) == verse
+end
+
+
+# ╔═╡ e2fa65bd-9084-4ce9-805e-9b1565bb5794
+
 
 # ╔═╡ c2fbb1d6-a63f-47ef-9f5d-fc98fb4f5f5a
 md"""> Load XML edition of Latin glosses on Septuagint."""
@@ -176,7 +202,10 @@ repo = dirname(pwd())
 xml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
 
 # ╔═╡ 7f933451-896a-48a9-96f7-4fe1a048288f
-xmlcorpus = readcitable(xml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
+xmlcorpus = begin
+	reloadtext
+	readcitable(xml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
+end
 
 # ╔═╡ 9af25ad8-168c-4f28-9d24-54164b298db7
 septlatin = edited(bldr, xmlcorpus)
@@ -184,7 +213,7 @@ septlatin = edited(bldr, xmlcorpus)
 # ╔═╡ 96ea76d5-0e3d-46df-b807-97a9a61ac519
 septlatintkns = tokenize(septlatin, vulgateortho)
 
-# ╔═╡ 22e0f5ff-d3c7-4450-a968-1165aefc1caa
+# ╔═╡ 4676bd78-0a1c-48ec-9a38-6171fc168b96
 septlatinpsg =  filter(septlatintkns) do tkn
 	passagebase = verse * "."
 	workid(tkn.passage.urn) == book &&
@@ -200,11 +229,15 @@ vulgatediff = formatdiff(vulgatepsg, septlatinpsg)
 # ╔═╡ 966eedc9-1c4d-4117-8076-26b8eda54e96
 """
 <table>
+<tr><th><i>Version</i></th><th><i>Text</i></th></tr>
 <tr>
 <th>Vulgate</th><td>$(vulgatediff)</td>
 </tr>
 <tr>
 <th>Glosses on Septuagint</th><td>$(septlatindiff)</td>
+</tr>
+<tr>
+<th>Septuagint</th><td>$(septuagintpsg[1].text)</td>
 </tr>
 </table>
 """  |> HTML
@@ -246,7 +279,7 @@ CitableCorpus = "~0.13.5"
 CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
 EditionBuilders = "~0.8.4"
-LatinOrthography = "~0.7.0"
+LatinOrthography = "~0.7.2"
 Orthography = "~0.21.3"
 PlutoUI = "~0.7.55"
 """
@@ -257,7 +290,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "464903301b0b03026cbdeb9c3eca14e9a885f29e"
+project_hash = "6462465ff68a9758be9a00de97ced5a48a99922d"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -541,9 +574,9 @@ version = "0.21.4"
 
 [[deps.LatinOrthography]]
 deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "Orthography", "Test"]
-git-tree-sha1 = "5752ea025c2a40b82c435cf84d405dcbdacdcd4c"
+git-tree-sha1 = "2fea442e6ce1e5934b1098c9c849674305c5d2c8"
 uuid = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
-version = "0.7.0"
+version = "0.7.2"
 
 [[deps.LazilyInitializedFields]]
 git-tree-sha1 = "8f7f3cabab0fd1800699663533b6d5cb3fc0e612"
@@ -916,16 +949,20 @@ version = "17.4.0+2"
 
 # ╔═╡ Cell order:
 # ╟─505e5234-c399-11ee-2a14-bfee14a8bf57
-# ╟─2af244a9-24db-4908-9695-2f4a45b70b4f
+# ╟─01cd9b04-4308-4776-ad22-bcd4eb48a966
+# ╟─ecbcee9e-9719-4883-8615-20a1602014a6
+# ╟─36dd1391-3550-4c87-8ba8-4325e007316a
+# ╟─f56c3f61-cae0-4d1a-b755-86ddff6d3c53
+# ╟─a2171ec8-6691-4f52-b9ec-a6281594d4b2
+# ╟─7d035d8d-7f3c-4b1d-9eb9-2069f317109e
+# ╟─966eedc9-1c4d-4117-8076-26b8eda54e96
 # ╟─571bfd40-3fc5-40ed-beb1-7035e25cf5bc
 # ╟─77bbc155-3d5d-4941-9188-d664e45e2d81
 # ╟─9aca0d5f-f4ed-44a6-8470-1d0e91b006eb
-# ╟─f56c3f61-cae0-4d1a-b755-86ddff6d3c53
-# ╟─966eedc9-1c4d-4117-8076-26b8eda54e96
-# ╟─71ce25d9-6fb1-407c-91f0-1636fb550cde
 # ╟─b873d268-5af3-4d6c-a1b7-3af6f3c764bf
 # ╠═763fe204-9aa3-4c2a-81f6-98e8a6299b34
 # ╟─cf9ebba5-d90c-42ae-8a11-bdef4660991c
+# ╟─80e36d02-a7a0-4b18-9cf7-b26bbcadc345
 # ╠═9f98852b-acf8-4740-92c5-00e291d2943c
 # ╟─96ea76d5-0e3d-46df-b807-97a9a61ac519
 # ╟─298c9a4b-2a24-4c7d-8575-e0f42ae16044
@@ -936,18 +973,20 @@ version = "17.4.0+2"
 # ╟─cb77fe26-a3c9-48f9-8364-c6288ffd50d5
 # ╟─1c27264c-cb66-4f0f-89ad-8d151a60bd58
 # ╟─b049d8ff-6092-4174-9bc8-3138bd272eaf
-# ╟─80e36d02-a7a0-4b18-9cf7-b26bbcadc345
+# ╟─a538cd79-f58f-44d0-b4b3-413461084ff9
 # ╟─ed6016b0-ebba-4403-b6e7-697e8a36e719
-# ╟─f6db2166-5dd2-422f-ba88-917b6a687773
+# ╠═f6db2166-5dd2-422f-ba88-917b6a687773
 # ╟─0681c83f-f445-460e-891c-2d55ff54d918
 # ╟─c1791f30-a4ef-409c-86ce-80708df51291
 # ╟─73919628-120d-4317-ba7b-26e74d2d75d9
 # ╟─c2379250-5def-4e3e-b310-739c7e1b1587
-# ╠═22e0f5ff-d3c7-4450-a968-1165aefc1caa
+# ╟─4676bd78-0a1c-48ec-9a38-6171fc168b96
+# ╟─22e0f5ff-d3c7-4450-a968-1165aefc1caa
+# ╟─e2fa65bd-9084-4ce9-805e-9b1565bb5794
 # ╟─c2fbb1d6-a63f-47ef-9f5d-fc98fb4f5f5a
-# ╠═7f933451-896a-48a9-96f7-4fe1a048288f
-# ╠═1eabb81f-291a-4701-ab71-5eaaa8f03693
-# ╠═9af25ad8-168c-4f28-9d24-54164b298db7
+# ╟─7f933451-896a-48a9-96f7-4fe1a048288f
+# ╟─1eabb81f-291a-4701-ab71-5eaaa8f03693
+# ╟─9af25ad8-168c-4f28-9d24-54164b298db7
 # ╟─50966a9c-b83a-42c2-94b2-a1899fe51f12
 # ╠═13825cdf-a2da-4be9-8052-80a86adf024c
 # ╠═049e6845-f4e8-4223-a69d-8fbb877e98de
