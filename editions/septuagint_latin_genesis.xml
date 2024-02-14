@@ -3,162 +3,162 @@
 schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0">
   <teiHeader>
-    <fileDesc>
-      <titleStmt>
-        <title>Genesis</title>
-        <editor>Ashley Terjanian</editor>
-      </titleStmt>
-      <publicationStmt>
-        <p>Unpublished edition of the Complutensian Bible's Latin glosses on the Septuagint.</p>
-      </publicationStmt>
-      <sourceDesc>
-        <p>Edited directly from photography of the copy in the National Library of Spain</p>
-      </sourceDesc>
-    </fileDesc>
+   <fileDesc>
+    <titleStmt>
+    <title>Genesis</title>
+     <editor>Ashley Terjanian</editor>
+    </titleStmt>
+    <publicationStmt>
+       <p>Unpublished edition of the Complutensian Bible's Latin glosses on the Septuagint.</p>
+    </publicationStmt>
+    <sourceDesc>
+    <p>Edited directly from photography of the copy in the National Library of Spain</p>
+    </sourceDesc>
+  </fileDesc>
   </teiHeader>
   <text>
     <body>
-      <div n="genesis">
+
         <div n="1">
           
-          <div  n="1">
-              <p>IN principio fecit deus celum et terram.
+          <ab  n="1">
+              IN principio fecit deus celum et terram.
       
-              </p>
-          </div>
+              
+          </ab>
         
-           <div  n="2">
-            <p> at terra erat inuisibilis et incomposita. 
+           <ab  n="2">
+             at terra erat inuisibilis et incomposita. 
             et tenebre super abyssum: et spiritus dei ferebatur super aquam.
-           </p>
-          </div>
+           
+          </ab>
 
-          <div n="3">
-          <p> et dixit deus fiat lux. et facta est lux. </p>
-          </div>
+          <ab n="3">
+           et dixit deus fiat lux. et facta est lux. 
+          </ab>
 
 
-           <div n="4">
-          <p> et vidit deus lucem: quod bona. et diuisit deus inter lucem: et inter tenebras.</p>
-          </div>
+           <ab n="4">
+           et vidit deus lucem: quod bona. et diuisit deus inter lucem: et inter tenebras.
+          </ab>
 
-          <div n="5">
-          <p> et vocauit deus lucem diem: et tenebras vocauit noctem. et facum est vespere: et factum est mane: dies vnus. </p>
-          </div>
+          <ab n="5">
+           et vocauit deus lucem diem: et tenebras vocauit noctem. et facum est vespere: et factum est mane: dies vnus. 
+          </ab>
 
-          <div n="6">
-          <p> et dixit deus fiat firmamentum in medio aque. et sit diuidens inter aquam et aquam.  </p>
-          </div>
+          <ab n="6">
+           et dixit deus fiat firmamentum in medio aque. et sit diuidens inter aquam et aquam.  
+          </ab>
 
-          <div n="7">
-          <p> et fecit deus firmamentum. 
+          <ab n="7">
+           et fecit deus firmamentum. 
           et diuicit deus inter aquam: <choice><abbr>q</abbr><expan>quae</expan></choice> erat sub firmamento: et inter aquam: 
-          que super firmamentum.</p>
-          </div>
+          que super firmamentum.
+          </ab>
 
-          <div n="8">
-          <p> et vocauit deus firmamentum celum. et vidit deus. quod bonum. et factum est vespere: et factum est mane: dies secundus. </p>
-          </div>
+          <ab n="8">
+           et vocauit deus firmamentum celum. et vidit deus. quod bonum. et factum est vespere: et factum est mane: dies secundus. 
+          </ab>
 
-          <div n="9">
-          <p> et dixit deus congregetur aqua que sub celo in congregationes vnam: et appareat arida. et factum est ita. </p>
-          </div>
+          <ab n="9">
+           et dixit deus congregetur aqua que sub celo in congregationes vnam: et appareat arida. et factum est ita. 
+          </ab>
 
-          <div n="10">
-          <p> et congregata est aqua que sub celo in congregationes suas: et apparuit arida et vocauit deus aridam: terram. 
-          </p>
-          </div>
+          <ab n="10">
+           et congregata est aqua que sub celo in congregationes suas: et apparuit arida et vocauit deus aridam: terram. 
+          
+          </ab>
 
-          <div n="11">
-          <p>     et congregationes aquarum vocauit maria. et vidit deus: quod bonum. </p>
-          </div>
+          <ab n="11">
+               et congregationes aquarum vocauit maria. et vidit deus: quod bonum. 
+          </ab>
 
-          <div n="12">
-          <p> et dixit deus germinet terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: et lignum pomiferum faciens fructum. 
-          cuius semen ipsius in ipso <unclear> suos </unclear> genus super terram. et factum est ita. </p>
-          </div>
+          <ab n="12">
+           et dixit deus germinet terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: et lignum pomiferum faciens fructum. 
+          cuius semen ipsius in ipso <unclear> suos </unclear> genus super terram. et factum est ita. 
+          </ab>
 
           
 
-          <div n="13">
-          <p> et protulit terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: 
-          et lignum pomiferum faciens fructum. cuius semen eium in ipso: <unclear>suos</unclear> genus super terram. et vidit</p>
-          </div>
+          <ab n="13">
+           et protulit terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: 
+          et lignum pomiferum faciens fructum. cuius semen eium in ipso: <unclear>suos</unclear> genus super terram. et vidit
+          </ab>
 
-          <div n="14">
-          <p> </p>
-          </div>
+          <ab n="14">
+           
+          </ab>
 
-          <div n="15">
-          <p> </p>
-          </div>
+          <ab n="15">
+           
+          </ab>
 
-          <div n="16">
-          <p> </p>
-          </div>
+          <ab n="16">
+           
+          </ab>
 
-          <div n="17">
-          <p> </p>
-          </div>
+          <ab n="17">
+           
+          </ab>
 
-          <div n="18">
-          <p> </p>
-          </div>
+          <ab n="18">
+           
+          </ab>
 
-          <div n="19">
-          <p> </p>
-          </div>
+          <ab n="19">
+           
+          </ab>
 
-          <div n="20">
-          <p> </p>
-          </div>
+          <ab n="20">
+           
+          </ab>
 
-          <div n="21">
-          <p> </p>
-          </div>
+          <ab n="21">
+           
+          </ab>
 
-          <div n="22">
-          <p> </p>
-          </div>
+          <ab n="22">
+           
+          </ab>
 
-          <div n="23">
-          <p> </p>
-          </div>
+          <ab n="23">
+           
+          </ab>
 
-          <div n="24">
-          <p> </p>
-          </div>
+          <ab n="24">
+           
+          </ab>
 
-          <div n="25">
-          <p> </p>
-          </div>
+          <ab n="25">
+           
+          </ab>
 
-          <div n="26">
-          <p> </p>
-          </div>
+          <ab n="26">
+           
+          </ab>
 
-          <div n="27">
-          <p> </p>
-          </div>
+          <ab n="27">
+           
+          </ab>
 
-          <div n="28">
-          <p> </p>
-          </div>
+          <ab n="28">
+           
+          </ab>
 
-          <div n="29">
-          <p> </p>
-          </div>
+          <ab n="29">
+           
+          </ab>
 
-          <div n="30">
-          <p> </p>
-          </div>
+          <ab n="30">
+           
+          </ab>
 
-          <div n="31">
-          <p> </p>
-          </div>
+          <ab n="31">
+           
+          </ab>
 
         </div>
-        </div>
+       
     </body>
     </text>
 </TEI>
