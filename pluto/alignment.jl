@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.38
+# v0.19.37
 
 using Markdown
 using InteractiveUtils
@@ -26,19 +26,18 @@ begin
 
 	using PlutoTeachingTools
 	using PlutoUI
+
+	md"""*Unhide this cell to view Julia environment.*"""
 end
+
+# ╔═╡ be599f13-2129-4601-ba80-228205f1f65d
+md"""*Notebook version*:  **1.0.0**"""
 
 # ╔═╡ d2de56cb-b6ed-4c2a-81be-4fbc15ccc467
 md"""# View alignment of Vulgate and Hebrew texts"""
 
-# ╔═╡ e3da1b21-c13f-4b3a-b0a4-910133abcfbe
-md"""### View indexing"""
-
-# ╔═╡ 652f58d7-e33a-4195-addc-dc75dca4a940
-md"""### Token lists (for reference)"""
-
-# ╔═╡ 1e7ac8d6-f890-4bda-a09d-09b401422564
-md"""*Show token lists* $(@bind showtokens CheckBox())"""
+# ╔═╡ 31c33225-0474-4c59-9be4-532bd4bedf59
+@bind reload Button("Reload indexing data")
 
 # ╔═╡ 16fbcd1d-132b-467b-93f7-7d30172ec021
 #=if showtokens
@@ -88,14 +87,30 @@ md"""> Load indexing data
 repo = dirname(pwd())
 
 # ╔═╡ 6dc8bb4c-8d5c-436b-8854-696ded89f127
-latinsrc = joinpath(repo, "indexing", "latinspacers.cex")
+latinsrc = begin
+	reload
+	joinpath(repo, "indexing", "latinspacers.cex")
+end
 
 # ╔═╡ 0deefae2-0067-4085-ab21-a795d3e20572
-latinlines = readlines(latinsrc)[2:end]
+latinlines = begin
+	reload
+	readlines(latinsrc)[2:end]
+end
 
 # ╔═╡ f1c88738-80f7-45f2-a94c-510424b50187
 latinbreaks = map(latinlines) do ln
 	split(ln, "|")[1] |> CtsUrn |> passagecomponent
+end
+
+# ╔═╡ aaf081cc-4e04-450b-986b-85220ece779b
+imgurns = map(latinlines) do ln
+	split(ln, "|")[3]
+end
+
+# ╔═╡ 9cc79c3f-61c8-4138-840c-e209e964273a
+hebrewmatches = map(latinlines) do ln
+	split(ln, "|")[2] |> CtsUrn |> passagecomponent
 end
 
 # ╔═╡ 916e7a2e-2ce5-458a-9de1-61321031290f
@@ -108,10 +123,7 @@ vulgateortho = latin24()
 srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
 
 # ╔═╡ 08773fc6-2a9e-4173-9785-7a76ac6d1919
-corpus = begin
-	
-	fromcex(srcurl, CitableTextCorpus, UrlReader)
-end
+corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 
 # ╔═╡ b7598778-4f72-4815-892d-80886dcdc8d5
 vulgate = filter(corpus.passages) do psg
@@ -177,38 +189,11 @@ vulgatepsg = filter(vulgatetkns) do tkn
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
 end
 
-# ╔═╡ a67afac6-b927-4d43-946c-102f28380362
-begin
-	vulgatedisplay = []
-	for tkn in vulgatepsg
-		if passagecomponent(tkn.passage.urn) in latinbreaks
-			push!(vulgatedisplay, "BREAK!")
-		end
-	end
-	join(vulgatedisplay,"\n") |> Markdown.parse
-end
-
-# ╔═╡ e9f1c6bb-5fbd-4b96-8527-737c418cd552
-if showtokens
-	latinmdlist = map(vulgatepsg) do tkn
-		string("- ", tkn.passage.text, " **", passagecomponent(tkn.passage.urn), "**")
-	end
-	"Vulgate tokens\n\n" * join(latinmdlist, "\n") |> Markdown.parse |> aside
-end
-
 # ╔═╡ 768f871e-0f42-43d5-9183-03ed50654d82
 tanachpsg = filter(tanachtkns) do tkn
 	passagebase = chap * "."
 	workid(tkn.passage.urn) == book &&
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
-end
-
-# ╔═╡ aa61968b-5138-4adc-b092-492f48c431fd
-if showtokens
-	hebrewmdlist = map(tanachpsg) do tkn
-		string("- ", tkn.passage.text, " **", passagecomponent(tkn.passage.urn), "**")
-	end
-	join(hebrewmdlist, "\n") |> Markdown.parse 
 end
 
 # ╔═╡ 861169fd-623a-4f35-97a8-a5077485f1f1
@@ -222,6 +207,85 @@ root = "/project/homer/pyramidal/deepzoom"
 
 # ╔═╡ ab269958-70ad-4ed7-bc3b-6c9ae138569c
 service = IIIFservice(baseurl, root)
+
+# ╔═╡ 63a033b9-6f1f-4690-86dd-950970a46815
+ictbase = "http://www.homermultitext.org/ict2?"
+
+# ╔═╡ b9fdb253-7832-4aef-a6f1-40e30bd80f3c
+ictlink = ictbase * "urn=" * join(imgurns, "&urn=")
+
+
+# ╔═╡ 00f4d893-b7fc-4dda-9db3-ee35b46f189a
+"""> *See this page with [spacing markers in Latin text highlighted]($ictlink)*.""" |> Markdown.parse
+
+# ╔═╡ 969d911b-1cc6-4733-9b6d-dcdcbdf6ad19
+md"""> HTML + CSS"""
+
+# ╔═╡ 5f177baf-f4d7-41bc-bb77-3b2d7aafb706
+css = html"""
+<style>
+.hilite {
+	background-color: yellow;
+	font-weight: bold;
+}
+</style>
+"""
+
+# ╔═╡ a67afac6-b927-4d43-946c-102f28380362
+vulgatechunks = begin
+	vulgatedisplay = []
+	currentpassage = []
+	for tkn in vulgatepsg
+		if passagecomponent(tkn.passage.urn) in latinbreaks
+			push!(vulgatedisplay, join(currentpassage,""))
+			global currentpassage = [string(" <span class=\"hilite\">", tkn.passage.text,"</span>")]
+		else
+
+		
+			if tkn.tokentype isa LexicalToken
+				push!(currentpassage, " " * tkn.passage.text)
+			else
+				push!(currentpassage, tkn.passage.text)
+			end
+		end
+	end
+	push!(vulgatedisplay, join(currentpassage,""))
+	vulgatedisplay
+end
+
+# ╔═╡ fbe2abd1-e1cf-4312-b061-ce8c94bbc0ca
+tanachchunks = begin
+	tanachdisplay = []
+	currenttanach = []
+	for tkn in tanachpsg
+		if passagecomponent(tkn.passage.urn) in hebrewmatches
+			push!(tanachdisplay, join(currenttanach,""))
+			global currenttanach = ["<span class=\"hilite\">", tkn.passage.text,"</span>"]
+		else
+
+		
+			if tkn.tokentype isa LexicalToken
+				push!(currenttanach, " " * tkn.passage.text)
+			else
+				push!(currenttanach, tkn.passage.text)
+			end
+		end
+		
+	end
+	push!(tanachdisplay, join(currenttanach,""))
+	tanachdisplay
+end
+
+# ╔═╡ 372d2c9e-6253-462e-8e87-c9e76a395a1a
+begin
+	html = ["<table><tr><th>Vulgate</th><th>Tanach</th></tr>"]
+	for (i, cell) in enumerate(vulgatechunks)
+		push!(html, string("<tr><td>", cell, "</td><td>", tanachchunks[i], "</td></tr>"))
+		#push!(html, string("<tr><td>", cell, "</td></tr>"))
+	end
+	push!(html,"</table>")
+	join(html) |> HTML
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1735,16 +1799,14 @@ version = "17.4.0+2"
 
 # ╔═╡ Cell order:
 # ╟─a3e8dcf8-cb64-11ee-3271-eb9e084ace5b
+# ╟─be599f13-2129-4601-ba80-228205f1f65d
 # ╟─d2de56cb-b6ed-4c2a-81be-4fbc15ccc467
+# ╟─31c33225-0474-4c59-9be4-532bd4bedf59
 # ╟─956f17b1-7392-429b-b58b-d8bfec779033
 # ╟─e348ce07-3558-4cb9-9ee6-38eaf57f9161
 # ╟─e0857b16-f62f-49ca-a33e-e89856cdd2a1
-# ╟─e3da1b21-c13f-4b3a-b0a4-910133abcfbe
-# ╠═a67afac6-b927-4d43-946c-102f28380362
-# ╟─652f58d7-e33a-4195-addc-dc75dca4a940
-# ╟─1e7ac8d6-f890-4bda-a09d-09b401422564
-# ╟─e9f1c6bb-5fbd-4b96-8527-737c418cd552
-# ╟─aa61968b-5138-4adc-b092-492f48c431fd
+# ╟─00f4d893-b7fc-4dda-9db3-ee35b46f189a
+# ╟─372d2c9e-6253-462e-8e87-c9e76a395a1a
 # ╟─16fbcd1d-132b-467b-93f7-7d30172ec021
 # ╟─dffea0cc-d43f-4fe4-9250-23514c0f0bed
 # ╟─df3b4dd9-0cab-4e5f-b28c-d848636c0b37
@@ -1756,10 +1818,12 @@ version = "17.4.0+2"
 # ╟─6dc8bb4c-8d5c-436b-8854-696ded89f127
 # ╟─0deefae2-0067-4085-ab21-a795d3e20572
 # ╟─f1c88738-80f7-45f2-a94c-510424b50187
+# ╟─aaf081cc-4e04-450b-986b-85220ece779b
+# ╟─9cc79c3f-61c8-4138-840c-e209e964273a
 # ╟─916e7a2e-2ce5-458a-9de1-61321031290f
 # ╟─1955b9aa-a943-4781-8c34-60b6dff19ab6
 # ╟─3b87cd58-4766-4524-9d46-66a3b6e6c089
-# ╟─86c12aff-de9b-4b79-a494-a929d23a0e5b
+# ╠═86c12aff-de9b-4b79-a494-a929d23a0e5b
 # ╟─08773fc6-2a9e-4173-9785-7a76ac6d1919
 # ╟─b7598778-4f72-4815-892d-80886dcdc8d5
 # ╟─5929a6d3-0f33-44e8-a249-4311936ce73a
@@ -1773,5 +1837,11 @@ version = "17.4.0+2"
 # ╟─1ae07e30-0321-46b6-80f6-80f90d90be23
 # ╟─257a021d-0941-49ae-9b1b-71e99a559638
 # ╟─ab269958-70ad-4ed7-bc3b-6c9ae138569c
+# ╟─63a033b9-6f1f-4690-86dd-950970a46815
+# ╟─b9fdb253-7832-4aef-a6f1-40e30bd80f3c
+# ╟─969d911b-1cc6-4733-9b6d-dcdcbdf6ad19
+# ╟─5f177baf-f4d7-41bc-bb77-3b2d7aafb706
+# ╟─a67afac6-b927-4d43-946c-102f28380362
+# ╟─fbe2abd1-e1cf-4312-b061-ce8c94bbc0ca
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
