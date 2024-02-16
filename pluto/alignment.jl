@@ -46,7 +46,14 @@ end
 md"""# View Complutensian's alignment of Vulgate and Hebrew texts"""
 
 # ╔═╡ 30199859-e3e6-4ce2-b73c-c98bf1465bf6
-md"""*Visualize alignment of*: $(@bind choice Select(["latin" => "Latin spacing markers", "hebrew" => "Hebrew spacing markers"]))  $(@bind reload Button("Reload indexing data"))"""
+md"""*Visualize alignment based on*: $(@bind choice Select(["latin" => "Latin spacing markers", "hebrew" => "Hebrew spacing markers"]))  $(@bind reload Button("Reload indexing data"))"""
+
+# ╔═╡ 258d2334-54e7-45ae-8198-1c620ba5b8fc
+if choice == "latin"
+	md"""### Alignment based on spacing markers in Latin text"""
+else
+	md"""### Alignment based on spacing markers in Hebrew text"""
+end
 
 # ╔═╡ 16fbcd1d-132b-467b-93f7-7d30172ec021
 #=if showtokens
@@ -370,7 +377,6 @@ end
 function alignment(spacers)
 	if spacers == "hebrew"
 		hebrewhtml = [
-		"<h3>Alignment based on spacing markers in Hebrew text</h3>",
 		"<table><tr><th>Vulgate</th><th>Spacer</th><th>Tanach</th></tr>"]
 		for (i, cell) in enumerate(tanachchunkedhebrew)
 			imglink = ""
@@ -385,7 +391,6 @@ function alignment(spacers)
 		
 	elseif spacers == "latin"
 		html = [
-			"<h3>Alignment based on spacing markers in Latin text</h3>",
 			"<table><tr><th>Vulgate</th><th>Spacer</th><th>Tanach</th></tr>"]
 		for (i, cell) in enumerate(vulgatechunkedlatin)
 			imglink = ""
@@ -1920,6 +1925,7 @@ version = "17.4.0+2"
 # ╟─b73eda9e-f336-4673-ae69-3f346db591d0
 # ╟─d2de56cb-b6ed-4c2a-81be-4fbc15ccc467
 # ╟─30199859-e3e6-4ce2-b73c-c98bf1465bf6
+# ╟─258d2334-54e7-45ae-8198-1c620ba5b8fc
 # ╟─956f17b1-7392-429b-b58b-d8bfec779033
 # ╟─e348ce07-3558-4cb9-9ee6-38eaf57f9161
 # ╟─7635fcdc-020c-4285-a3b1-41fad1067c47
@@ -1970,6 +1976,6 @@ version = "17.4.0+2"
 # ╟─99e2fd6c-b25d-49e5-9e18-a2b692c95231
 # ╟─fbe2abd1-e1cf-4312-b061-ce8c94bbc0ca
 # ╟─2e86078c-fbb0-4450-9d8a-c40316b32dc4
-# ╟─b43b764b-5f5e-4e74-9e18-8bd9d1451163
+# ╠═b43b764b-5f5e-4e74-9e18-8bd9d1451163
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
