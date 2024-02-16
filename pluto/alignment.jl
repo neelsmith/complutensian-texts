@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.37
+# v0.19.38
 
 using Markdown
 using InteractiveUtils
@@ -31,13 +31,22 @@ begin
 end
 
 # ╔═╡ be599f13-2129-4601-ba80-228205f1f65d
-md"""*Notebook version*:  **1.0.0**"""
+md"""*Notebook version*:  **1.1.0**  *See version notes*: $(@bind versioninfo CheckBox())"""
+
+# ╔═╡ b73eda9e-f336-4673-ae69-3f346db591d0
+if versioninfo
+	md"""
+
+- **1.1.0**: display alignment based on either Latin or Hebrew spacing markers.
+- **1.0.0**: initial release displays alignment based on Latin spacing markers.	
+"""	
+end
 
 # ╔═╡ d2de56cb-b6ed-4c2a-81be-4fbc15ccc467
-md"""# View alignment of Vulgate and Hebrew texts"""
+md"""# View Complutensian's alignment of Vulgate and Hebrew texts"""
 
-# ╔═╡ 31c33225-0474-4c59-9be4-532bd4bedf59
-@bind reload Button("Reload indexing data")
+# ╔═╡ 30199859-e3e6-4ce2-b73c-c98bf1465bf6
+md"""*Visualize alignment of*: $(@bind choice Select(["latin" => "Latin spacing markers", "hebrew" => "Hebrew spacing markers"]))  $(@bind reload Button("Reload indexing data"))"""
 
 # ╔═╡ 16fbcd1d-132b-467b-93f7-7d30172ec021
 #=if showtokens
@@ -80,7 +89,7 @@ md"""
 """
 
 # ╔═╡ f5fb87ea-9df8-44e3-a232-1bc3ee036aa9
-md"""> Load indexing data
+md"""> Load indexing data for Latin spacers
 """
 
 # ╔═╡ 61122160-bf90-43a9-81f3-bd92858a65ac
@@ -105,12 +114,43 @@ end
 
 # ╔═╡ aaf081cc-4e04-450b-986b-85220ece779b
 imgurns = map(latinlines) do ln
-	split(ln, "|")[3]
+	split(ln, "|")[3] |> Cite2Urn
 end
 
 # ╔═╡ 9cc79c3f-61c8-4138-840c-e209e964273a
 hebrewmatches = map(latinlines) do ln
 	split(ln, "|")[2] |> CtsUrn |> passagecomponent
+end
+
+# ╔═╡ 803b0416-5113-42e5-bebf-553e47ddb378
+md"""> Load indexing data for Hebrew spacers
+"""
+
+# ╔═╡ 3cecb01e-0e3b-41e8-b5b1-93af2e188b75
+hebrewsrc = begin
+	reload
+	joinpath(repo, "indexing", "hebrewspacers.cex")
+end
+
+# ╔═╡ 57fb022d-a731-4189-9a3d-b68a5802930c
+hebrewlines = begin
+	reload
+	readlines(hebrewsrc)[2:end]
+end
+
+# ╔═╡ 0f5c3391-f534-41e4-a9cd-14f53ee4edd0
+hebrewbreaks = map(hebrewlines) do ln
+	split(ln, "|")[1] |> CtsUrn |> passagecomponent
+end
+
+# ╔═╡ eb8fca8e-9a85-4643-9ffa-ce387a188ad6
+latinmatches = map(hebrewlines) do ln
+	split(ln, "|")[2] |> CtsUrn |> passagecomponent
+end
+
+# ╔═╡ f798f575-7a0a-4bdc-b4c7-d37d61d82790
+hebrewimgs = map(hebrewlines) do ln
+	split(ln, "|")[3] |> Cite2Urn
 end
 
 # ╔═╡ 916e7a2e-2ce5-458a-9de1-61321031290f
@@ -130,16 +170,6 @@ vulgate = filter(corpus.passages) do psg
 	versionid(psg.urn) == "vulgate"
 end |> CitableTextCorpus
 
-# ╔═╡ 1955b9aa-a943-4781-8c34-60b6dff19ab6
-workids = map(vulgate.passages) do psg
-	workid(psg.urn)
-end |> unique
-
-# ╔═╡ 956f17b1-7392-429b-b58b-d8bfec779033
-md"""
-*Book*: $(@bind book Select(workids)) 
-""" 
-
 # ╔═╡ 5929a6d3-0f33-44e8-a249-4311936ce73a
 vulgatetkns = tokenize(vulgate, vulgateortho)
 
@@ -150,6 +180,19 @@ end |> CitableTextCorpus
 
 # ╔═╡ 7bf8ba23-9da9-4ef5-bc45-b530ae404611
 tanachtkns = tokenize(tanach, HebrewOrthography())
+
+# ╔═╡ bfc265d1-d028-4ca6-af90-566c86282901
+md"""> UI menus"""
+
+# ╔═╡ 1955b9aa-a943-4781-8c34-60b6dff19ab6
+workids = map(vulgate.passages) do psg
+	workid(psg.urn)
+end |> unique
+
+# ╔═╡ 956f17b1-7392-429b-b58b-d8bfec779033
+md"""
+*Book*: $(@bind book Select(workids)) 
+""" 
 
 # ╔═╡ 0382b20c-86be-45ec-9c7c-7cc60bdccb10
 """Find unique list of verse values for given book and chapter in a corpus."""
@@ -177,10 +220,7 @@ function chaptersforbook(corpus, bookid)
 end
 
 # ╔═╡ e348ce07-3558-4cb9-9ee6-38eaf57f9161
-md"""*Chapter* $(@bind chap Select(chaptersforbook(vulgate, book)))"""
-
-# ╔═╡ e0857b16-f62f-49ca-a33e-e89856cdd2a1
-md"""*Verse* $(@bind verse Select(versesforchapter(vulgate, book, chap)))"""
+md"""*Chapter* $(@bind chap Select(chaptersforbook(vulgate, book)))""" 
 
 # ╔═╡ e6ed7738-2d4b-4bc5-8f52-cd2d024e71e5
 vulgatepsg = filter(vulgatetkns) do tkn
@@ -215,8 +255,15 @@ ictbase = "http://www.homermultitext.org/ict2?"
 ictlink = ictbase * "urn=" * join(imgurns, "&urn=")
 
 
-# ╔═╡ 00f4d893-b7fc-4dda-9db3-ee35b46f189a
-"""> *See this page with [spacing markers in Latin text highlighted]($ictlink)*.""" |> Markdown.parse
+# ╔═╡ 99a414a3-a1b4-4d15-a2f8-bdd293445341
+hebrewictlink = ictbase * "urn=" * join(hebrewimgs, "&urn=")
+
+# ╔═╡ 7635fcdc-020c-4285-a3b1-41fad1067c47
+if choice == "hebrew"
+	"""> *See a zoomable image with [spacing markers in the Hebrew text highlighted]($hebrewictlink)*.""" |> Markdown.parse
+else
+	"""> *See a zoomable image with [spacing markers in the Latin text highlighted]($ictlink)*.""" |> Markdown.parse
+end
 
 # ╔═╡ 969d911b-1cc6-4733-9b6d-dcdcbdf6ad19
 md"""> HTML + CSS"""
@@ -232,7 +279,7 @@ css = html"""
 """
 
 # ╔═╡ a67afac6-b927-4d43-946c-102f28380362
-vulgatechunks = begin
+vulgatechunkedlatin = begin
 	vulgatedisplay = []
 	currentpassage = []
 	for tkn in vulgatepsg
@@ -253,8 +300,28 @@ vulgatechunks = begin
 	vulgatedisplay
 end
 
+# ╔═╡ 99e2fd6c-b25d-49e5-9e18-a2b692c95231
+vulgatechunkedhebrew = begin
+	vulgatechunk = []
+	currentvulgatechunk = []
+	for tkn in vulgatepsg
+		if passagecomponent(tkn.passage.urn) in latinmatches
+			push!(vulgatechunk, join(currentvulgatechunk,""))
+			global currentvulgatechunk = ["<span class=\"hilite\">", tkn.passage.text,"</span>"]
+		else
+			if tkn.tokentype isa LexicalToken
+				push!(currentvulgatechunk, " " * tkn.passage.text)
+			else
+				push!(currentvulgatechunk, tkn.passage.text)
+			end
+		end
+	end
+	push!(vulgatechunk, join(currentvulgatechunk,""))
+	vulgatechunk
+end
+
 # ╔═╡ fbe2abd1-e1cf-4312-b061-ce8c94bbc0ca
-tanachchunks = begin
+tanachchunkedlatin = begin
 	tanachdisplay = []
 	currenttanach = []
 	for tkn in tanachpsg
@@ -276,16 +343,66 @@ tanachchunks = begin
 	tanachdisplay
 end
 
-# ╔═╡ 372d2c9e-6253-462e-8e87-c9e76a395a1a
-begin
-	html = ["<table><tr><th>Vulgate</th><th>Tanach</th></tr>"]
-	for (i, cell) in enumerate(vulgatechunks)
-		push!(html, string("<tr><td>", cell, "</td><td>", tanachchunks[i], "</td></tr>"))
-		#push!(html, string("<tr><td>", cell, "</td></tr>"))
+# ╔═╡ 2e86078c-fbb0-4450-9d8a-c40316b32dc4
+tanachchunkedhebrew = begin
+	tanachchunking = []
+	tanachcurrentpassage = []
+	for tkn in tanachpsg
+		if passagecomponent(tkn.passage.urn) in hebrewbreaks
+			push!(tanachchunking, join(tanachcurrentpassage,""))
+			global tanachcurrentpassage = [string(" <span class=\"hilite\">", tkn.passage.text,"</span>")]
+		else
+
+		
+			if tkn.tokentype isa LexicalToken
+				push!(tanachcurrentpassage, " " * tkn.passage.text)
+			else
+				push!(tanachcurrentpassage, tkn.passage.text)
+			end
+		end
 	end
-	push!(html,"</table>")
-	join(html) |> HTML
+	push!(tanachchunking, join(tanachcurrentpassage,""))
+	tanachchunking
 end
+
+# ╔═╡ b43b764b-5f5e-4e74-9e18-8bd9d1451163
+"""Compose HTML tabular display of alignment."""
+function alignment(spacers)
+	if spacers == "hebrew"
+		hebrewhtml = [
+		"<h3>Alignment based on spacing markers in Hebrew text</h3>",
+		"<table><tr><th>Vulgate</th><th>Spacer</th><th>Tanach</th></tr>"]
+		for (i, cell) in enumerate(tanachchunkedhebrew)
+			imglink = ""
+			if i <= length(hebrewimgs)
+				imglink = linkedHtmlImage(ictbase, hebrewimgs[i], service, w = 100)
+			end
+			push!(hebrewhtml, string("<tr><td>", vulgatechunkedhebrew[i], "</td><td>$(imglink)</td><td>", cell, "</td></tr>"))
+		end
+		push!(hebrewhtml,"</table>")
+		join(hebrewhtml)
+
+		
+	elseif spacers == "latin"
+		html = [
+			"<h3>Alignment based on spacing markers in Latin text</h3>",
+			"<table><tr><th>Vulgate</th><th>Spacer</th><th>Tanach</th></tr>"]
+		for (i, cell) in enumerate(vulgatechunkedlatin)
+			imglink = ""
+			if i <= length(imgurns)
+				imglink = linkedHtmlImage(ictbase, imgurns[i], service, w = 100)
+			end
+			push!(html, string("<tr><td>", cell, "</td><td>$(imglink)</td><td>", tanachchunkedlatin[i], "</td></tr>"))
+			#push!(html, string("<tr><td>", cell, "</td></tr>"))
+		end
+		push!(html,"</table>")
+		join(html)
+		
+	end
+end
+
+# ╔═╡ 2796ce46-10ee-483d-a08f-d02be5d7ad33
+alignment(choice) |> HTML
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1800,13 +1917,13 @@ version = "17.4.0+2"
 # ╔═╡ Cell order:
 # ╟─a3e8dcf8-cb64-11ee-3271-eb9e084ace5b
 # ╟─be599f13-2129-4601-ba80-228205f1f65d
+# ╟─b73eda9e-f336-4673-ae69-3f346db591d0
 # ╟─d2de56cb-b6ed-4c2a-81be-4fbc15ccc467
-# ╟─31c33225-0474-4c59-9be4-532bd4bedf59
+# ╟─30199859-e3e6-4ce2-b73c-c98bf1465bf6
 # ╟─956f17b1-7392-429b-b58b-d8bfec779033
 # ╟─e348ce07-3558-4cb9-9ee6-38eaf57f9161
-# ╟─e0857b16-f62f-49ca-a33e-e89856cdd2a1
-# ╟─00f4d893-b7fc-4dda-9db3-ee35b46f189a
-# ╟─372d2c9e-6253-462e-8e87-c9e76a395a1a
+# ╟─7635fcdc-020c-4285-a3b1-41fad1067c47
+# ╠═2796ce46-10ee-483d-a08f-d02be5d7ad33
 # ╟─16fbcd1d-132b-467b-93f7-7d30172ec021
 # ╟─dffea0cc-d43f-4fe4-9250-23514c0f0bed
 # ╟─df3b4dd9-0cab-4e5f-b28c-d848636c0b37
@@ -1820,10 +1937,15 @@ version = "17.4.0+2"
 # ╟─f1c88738-80f7-45f2-a94c-510424b50187
 # ╟─aaf081cc-4e04-450b-986b-85220ece779b
 # ╟─9cc79c3f-61c8-4138-840c-e209e964273a
+# ╟─803b0416-5113-42e5-bebf-553e47ddb378
+# ╟─3cecb01e-0e3b-41e8-b5b1-93af2e188b75
+# ╟─57fb022d-a731-4189-9a3d-b68a5802930c
+# ╟─0f5c3391-f534-41e4-a9cd-14f53ee4edd0
+# ╟─eb8fca8e-9a85-4643-9ffa-ce387a188ad6
+# ╟─f798f575-7a0a-4bdc-b4c7-d37d61d82790
 # ╟─916e7a2e-2ce5-458a-9de1-61321031290f
-# ╟─1955b9aa-a943-4781-8c34-60b6dff19ab6
 # ╟─3b87cd58-4766-4524-9d46-66a3b6e6c089
-# ╠═86c12aff-de9b-4b79-a494-a929d23a0e5b
+# ╟─86c12aff-de9b-4b79-a494-a929d23a0e5b
 # ╟─08773fc6-2a9e-4173-9785-7a76ac6d1919
 # ╟─b7598778-4f72-4815-892d-80886dcdc8d5
 # ╟─5929a6d3-0f33-44e8-a249-4311936ce73a
@@ -1831,6 +1953,8 @@ version = "17.4.0+2"
 # ╟─c32b88c8-fe85-47ab-b34b-42978a8094d3
 # ╟─7bf8ba23-9da9-4ef5-bc45-b530ae404611
 # ╟─768f871e-0f42-43d5-9183-03ed50654d82
+# ╟─bfc265d1-d028-4ca6-af90-566c86282901
+# ╟─1955b9aa-a943-4781-8c34-60b6dff19ab6
 # ╟─0382b20c-86be-45ec-9c7c-7cc60bdccb10
 # ╟─b89c3d47-f8f9-4914-9488-a10630af77ca
 # ╟─861169fd-623a-4f35-97a8-a5077485f1f1
@@ -1839,9 +1963,13 @@ version = "17.4.0+2"
 # ╟─ab269958-70ad-4ed7-bc3b-6c9ae138569c
 # ╟─63a033b9-6f1f-4690-86dd-950970a46815
 # ╟─b9fdb253-7832-4aef-a6f1-40e30bd80f3c
+# ╟─99a414a3-a1b4-4d15-a2f8-bdd293445341
 # ╟─969d911b-1cc6-4733-9b6d-dcdcbdf6ad19
 # ╟─5f177baf-f4d7-41bc-bb77-3b2d7aafb706
 # ╟─a67afac6-b927-4d43-946c-102f28380362
+# ╟─99e2fd6c-b25d-49e5-9e18-a2b692c95231
 # ╟─fbe2abd1-e1cf-4312-b061-ce8c94bbc0ca
+# ╟─2e86078c-fbb0-4450-9d8a-c40316b32dc4
+# ╟─b43b764b-5f5e-4e74-9e18-8bd9d1451163
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
