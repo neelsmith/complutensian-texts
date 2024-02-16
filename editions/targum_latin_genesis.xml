@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model  href="https://vault.tei-c.org/P5/current/xml/tei/custom/schema/relaxng/tei_all.rng" 
+schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+   <fileDesc>
+    <titleStmt>
+    <title>Genesis</title>
+     <editor>Ashley Terjanian</editor>
+    </titleStmt>
+    <publicationStmt>
+       <p>Unpublished edition of the Complutensian Bible's Latin glosses on the Targum Onkelos.</p>
+    </publicationStmt>
+    <sourceDesc>
+    <p>Edited directly from photography of the copy in the National Library of Spain</p>
+    </sourceDesc>
+  </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+
+        <div n="1">
+          
+          <ab  n="1"> In pricipio creauit deus celum et terram.
+          </ab>
+
+          <ab n="2"> Terra <choice><abbr>aut</abbr><expan>autem</expan></choice> erat deserta et vacua: 
+          et tenebre super faciem abyssi: et <choice><abbr>spus</abbr><expan>spiritus</abbr></choice> dei insufflabat super faciem aquarum.
+          </ab>
+
+          <ab n="3"> Et dixit deus. Sit lux: et fuit lux.
+          </ab>
+
+          <ab n="4"> Et vidit deus lucem quod esset bona. Et diuisit deus inter lucem et inteer tenebras.
+          </ab>
+
+          <ab n="5"> appellauitque deus lucem diem: et tenebras vocauit noctem. Et fuit vespere et fuit mane dies vnus.
+          </ab>
+
+          <ab n="6"> Et dixit deus. Sit firmamentum in medio aquarum: et diuidat inter aquas et <choice><abbr>aqs</abbr><expan>aquas</expan></choice>.
+          </ab>
+
+          <ab n="7"> Et fecit deus firmamentum: et diuisit inter aquas <choice><abbr>q</abbr><expan>quae</expan></choice> erant super firmamentum: et fuit ita.
+          </ab>
+
+          <ab n="8"> Et vocauit deus firmamentum celum. Et fuit vespere et fuit mane dies <choice><abbr>scds</abbr><expan>secundus</expan></choice>.
+          </ab>
+
+          <ab n="9"> Et dixit deus. Congregentur aque <choice><abbr>q</abbr><expan>quae</expan></choice> sub celo sunt in locum vnum: et appareat arida. Et fuit ita. 
+          </ab>
+
+          <ab n="10"> Et vocauit deus aridam terram: et locum congregationis aquarum appellauit maria. Et vidit deus <choice><abbr>qd</abbr><expan>quod</expan></choice> esset bonum.
+          </ab>
+
+          <ab n="11"> Et dixit deus. Germinet terra germinationem herbe cuius filius sementis seminat: arboresque fructiferam facientem fructus <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus suum: cuius filius sementis in ipso sit super terram. Et fuit ita.
+          </ab>
+
+          <ab n="12"> Et pro duxit terra 
+          </ab>
+        </div>
+    </body>
+    </text>
+</TEI>

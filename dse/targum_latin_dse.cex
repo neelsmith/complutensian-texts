@@ -1,0 +1,7 @@
+#!datamodels
+Collection|Model|Label|Description
+urn:cite2:compnov:dse.v1:targum_latin|urn:cite2:cite:datamodels.v1:dsemodel|Relations of text, manuscript page and documentary image for Latin glosses to the Targum Onkelos in the Complutensian Bible.
+
+
+#!citerelationset
+urn:cts:compnov:tanach.genesis.targum_latin:1.1|urn:cite2:citebne:complutensian.v1:v1p19@0.5213,0.7057,0.2324,0.03036|urn:cite2:compnov:complutpages.v1:1
