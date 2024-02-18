@@ -25,7 +25,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="2"> Terra <choice><abbr>aut</abbr><expan>autem</expan></choice> erat deserta et vacua: 
-          et tenebre super faciem abyssi: et <choice><abbr>spus</abbr><expan>spiritus</abbr></choice> dei insufflabat super faciem aquarum.
+          et tenebre super faciem abyssi: et <choice><abbr>spus</abbr><expan>spiritus</expan></choice> dei insufflabat super faciem aquarum.
           </ab>
 
           <ab n="3"> Et dixit deus. Sit lux: et fuit lux.
