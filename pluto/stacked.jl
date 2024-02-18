@@ -60,14 +60,38 @@ md"""> Load local editing of glosses"""
 # ╔═╡ 7dad7dcb-a26f-476b-ad52-b7c5216e738b
 repo = dirname(pwd())
 
+# ╔═╡ 351d283b-566f-4017-92cf-eee688539de1
+lxxbldr = diplomaticbuilder(; versionid = "lxxlatinnormed")
+
 # ╔═╡ 5258de34-31fb-424a-8b25-d0bc2c1ba741
-xml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
+septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
 
 # ╔═╡ e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
-xmlcorpus = begin
+septlatinxmlcorpus = begin
 	reloadtext
-	readcitable(xml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
+	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
+
+# ╔═╡ 71c20bea-6be6-4178-b007-2061dce423bd
+septlatin = edited(lxxbldr, septlatinxmlcorpus)
+
+# ╔═╡ bcfe3e21-ee8b-4b8b-ba53-74d594782848
+targbldr = diplomaticbuilder(; versionid = "targumlatinnormed")
+
+# ╔═╡ c5b9c5ab-da3d-4213-9979-d5699c87adad
+targumlatinxml =  joinpath(repo, "editions", "targum_latin_genesis.xml")
+
+# ╔═╡ 0c63d698-e476-40e3-ad49-d7a6b1a3ab5d
+targumlatinxmlcorpus = begin
+	reloadtext
+	readcitable(targumlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
+end
+
+# ╔═╡ 7961004b-a350-4040-8c10-8ba5b8f36385
+targumlatin = edited(targbldr, targumlatinxmlcorpus)
+
+# ╔═╡ 574582d9-f692-4755-821d-021b3c38bb0c
+targumlatin.passages[1]
 
 # ╔═╡ 127f8b5d-a9cf-4612-816c-9f432bda1b0d
 md"""> Menus for user selections"""
@@ -129,28 +153,34 @@ function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondic
 	wrk = workid(psgurn) |> titlecase
 	psgref = passagecomponent(psgurn)
 	mdlines = [	]
-	txtlines = filter(corpus.passages) do psg
+	txtlines = filter(c.passages) do psg
 		psg.urn == psgurn
 	end
 	txtcontent = map(psg -> psg.text, txtlines)
 	join(vcat(mdlines, txtcontent), "\n")
+	
 end
 
 # ╔═╡ 2f3f28c1-80b0-41db-a645-7c82454ff608
 begin
 	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).masoretic:$(verse)"), corpus)
 	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).vulgate:$(verse)"), corpus)
+	latinseptpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).lxxlatinnormed:$(verse)"), septlatin)
+
 	septpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).septuagint:$(verse)"), corpus)
 
+	targlatinpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).targumlatinnormed:$(verse)"), targumlatin)
+
+	
 """
 | Version | Text |
 | --- | --- |
 | Hebrew Bible | $(hebrewpsg) |
 | Vulgate | $(vulgatepsg) |
-| Latin glosses on Septuagint | |
+| Latin glosses on Septuagint | $(latinseptpsg) |
 | Septuagint | $(septpsg) |
+| Latin glosses on Targum |$(targlatinpsg) |
 | Targum Onkelos | *NA* |
-| Latin glosses on Targum | *NA* |
 """ |> Markdown.parse
 end
 
@@ -827,9 +857,16 @@ version = "17.4.0+2"
 # ╟─6802262c-d391-4bea-aa11-7a31925d547b
 # ╟─9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
 # ╟─5d04b924-b152-4bcd-8584-8f4e5140c50f
-# ╠═7dad7dcb-a26f-476b-ad52-b7c5216e738b
-# ╠═5258de34-31fb-424a-8b25-d0bc2c1ba741
-# ╠═e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
+# ╟─7dad7dcb-a26f-476b-ad52-b7c5216e738b
+# ╟─351d283b-566f-4017-92cf-eee688539de1
+# ╟─5258de34-31fb-424a-8b25-d0bc2c1ba741
+# ╟─e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
+# ╟─71c20bea-6be6-4178-b007-2061dce423bd
+# ╟─bcfe3e21-ee8b-4b8b-ba53-74d594782848
+# ╟─c5b9c5ab-da3d-4213-9979-d5699c87adad
+# ╟─0c63d698-e476-40e3-ad49-d7a6b1a3ab5d
+# ╠═7961004b-a350-4040-8c10-8ba5b8f36385
+# ╠═574582d9-f692-4755-821d-021b3c38bb0c
 # ╟─127f8b5d-a9cf-4612-816c-9f432bda1b0d
 # ╟─8f4fd44a-4f68-4cfd-9165-2c8626caae51
 # ╟─cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65

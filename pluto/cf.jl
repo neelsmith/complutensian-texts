@@ -94,7 +94,7 @@ function formatdiff(psg1, psg2)
 end
 
 # ╔═╡ 5cf92532-b67a-40a3-ad1a-c7f03cdb0eda
-md"""> Load Vulgate
+md"""> Load texts
 
 """
 
@@ -242,11 +242,8 @@ vulgatediff = formatdiff(vulgatepsg, septlatinpsg)
 </table>
 """  |> HTML
 
-# ╔═╡ c9a7de07-e374-4131-ac70-9442a8728de3
-# ╠═╡ disabled = true
-#=╠═╡
-
-  ╠═╡ =#
+# ╔═╡ ffc7785d-1750-431d-877a-70c478d6fbc5
+md"> CSS + HTML"
 
 # ╔═╡ 95d5cb19-ce6b-4e06-8cc6-451faa5ec194
 ortho = latin24()
@@ -963,9 +960,9 @@ version = "17.4.0+2"
 # ╠═763fe204-9aa3-4c2a-81f6-98e8a6299b34
 # ╟─cf9ebba5-d90c-42ae-8a11-bdef4660991c
 # ╟─80e36d02-a7a0-4b18-9cf7-b26bbcadc345
-# ╠═9f98852b-acf8-4740-92c5-00e291d2943c
+# ╟─9f98852b-acf8-4740-92c5-00e291d2943c
 # ╟─96ea76d5-0e3d-46df-b807-97a9a61ac519
-# ╟─298c9a4b-2a24-4c7d-8575-e0f42ae16044
+# ╠═298c9a4b-2a24-4c7d-8575-e0f42ae16044
 # ╟─44522bfa-9420-4aac-a402-5f55ebc29e05
 # ╟─1d7b8019-0a2f-42ab-a2f4-ff53d266e1ae
 # ╟─ba2247ab-6b07-4230-9661-5cc9a17bed66
@@ -975,7 +972,7 @@ version = "17.4.0+2"
 # ╟─b049d8ff-6092-4174-9bc8-3138bd272eaf
 # ╟─a538cd79-f58f-44d0-b4b3-413461084ff9
 # ╟─ed6016b0-ebba-4403-b6e7-697e8a36e719
-# ╠═f6db2166-5dd2-422f-ba88-917b6a687773
+# ╟─f6db2166-5dd2-422f-ba88-917b6a687773
 # ╟─0681c83f-f445-460e-891c-2d55ff54d918
 # ╟─c1791f30-a4ef-409c-86ce-80708df51291
 # ╟─73919628-120d-4317-ba7b-26e74d2d75d9
@@ -988,10 +985,10 @@ version = "17.4.0+2"
 # ╟─1eabb81f-291a-4701-ab71-5eaaa8f03693
 # ╟─9af25ad8-168c-4f28-9d24-54164b298db7
 # ╟─50966a9c-b83a-42c2-94b2-a1899fe51f12
-# ╠═13825cdf-a2da-4be9-8052-80a86adf024c
-# ╠═049e6845-f4e8-4223-a69d-8fbb877e98de
-# ╠═c9a7de07-e374-4131-ac70-9442a8728de3
-# ╠═95d5cb19-ce6b-4e06-8cc6-451faa5ec194
-# ╠═acd6ae5a-0390-48e6-bf80-eae7ab9b2910
+# ╟─13825cdf-a2da-4be9-8052-80a86adf024c
+# ╟─049e6845-f4e8-4223-a69d-8fbb877e98de
+# ╟─ffc7785d-1750-431d-877a-70c478d6fbc5
+# ╟─95d5cb19-ce6b-4e06-8cc6-451faa5ec194
+# ╟─acd6ae5a-0390-48e6-bf80-eae7ab9b2910
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
