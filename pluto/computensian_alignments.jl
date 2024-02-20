@@ -28,11 +28,18 @@ begin
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
+# ╔═╡ 42dd83e0-db01-47aa-9cb2-535cf0583a2e
+md"""*Notebook version*: **1.0.0**"""
+
 # ╔═╡ bbbd1982-cf94-11ee-2d3d-df018dd63688
 md"""# View Complutensian alignments"""
 
 # ╔═╡ ba1b47d9-0c2b-457b-8a7f-6fd786f9f2c7
 md"""$(@bind reload Button("Reload indexing data"))"""
+
+# ╔═╡ 6876234c-a2c7-46df-b999-c2888a2e84e4
+html"""<blockquote>In the text of the Vulgate passage, Latin terms not indexed to a Hebrew token are  <span class="hilite">highlighted like this</span>.</blockquote>
+"""
 
 # ╔═╡ 12e7c4f5-72b5-430a-ae33-0b99c242b5be
 html"""
@@ -53,7 +60,10 @@ srcfile = joinpath(repo, "indexing", "hebrew-to-vulgate-glosses.cex")
 # ╔═╡ 626deef8-93f0-475a-9792-3904887b1569
 indexdata = begin
 	reload
-	map(readlines(srcfile)[2:end]) do ln
+	raw = filter(readlines(srcfile)[2:end]) do ln
+		! isempty(ln)
+	end
+	map(raw) do ln
 		cols = split(ln, "|")
 		latinurn = if isempty(cols[2]) 
 			nothing 
@@ -134,6 +144,11 @@ end
 # ╔═╡ ed596167-b794-4e03-8c0a-fe4489d56440
 md"""*Verse* $(@bind verse Select(versesforchapter(vulgate, book, chap)))"""
 
+# ╔═╡ 9149b47c-ef86-4265-ab23-b5d65dab72fe
+hebrewpsgtext = filter(tanach.passages) do psg
+		workid(psg.urn) == book && passagecomponent(psg.urn) == verse
+	end[1].text
+
 # ╔═╡ ab902fc9-612d-4780-832a-532fa7538815
 psgindexing = filter(indexdata) do tkn
 	psgopener = verse * "."
@@ -180,11 +195,44 @@ tanachpsg = filter(tanachtkns) do tkn
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
 end
 
+# ╔═╡ bcfdf29a-1f92-4d34-bd79-269d832c0893
+"""Wrap highlighting span around unindexed tokens."""
+function hilitemissing(tknlist, crossindex)
+	indexedlatin = map(crossindex) do triple
+		triple.latin
+	end
+	tkns = []
+	for tkn in tknlist
+		if tkn.tokentype isa LexicalToken
+
+			if tkn.passage.urn in indexedlatin
+				push!(tkns, string(" ", tkn.passage.text))
+			else
+				push!(tkns, string(" <span class=\"hilite\">", tkn.passage.text, "</span>"))
+			end
+		else
+			push!(tkns, tkn.passage.text)
+		end
+	end
+	join(tkns)
+end
+
+# ╔═╡ 18cf2eb7-5fae-4258-bc29-684459232d0f
+"""<table>
+<tr> <th>Hebrew text</th> <th>Latin text</th> </tr>
+<tr><td> $(hebrewpsgtext) </td><td> $(hilitemissing(vulgatepsg,psgindexing)) </td>
+</table>
+""" |> HTML
+
 # ╔═╡ 79aada91-1f12-44ce-b66d-1b0bf99181c9
 @htl """
 <style>
 	pluto-output {
 		--julia-mono-font-stack: system-ui,sans-serif;
+	}
+	.hilite {
+		background-color: yellow;
+		font-weight: bold;
 	}
 </style>
 """
@@ -934,13 +982,17 @@ version = "17.4.0+2"
 
 # ╔═╡ Cell order:
 # ╟─aee454c5-4aaf-41dd-9226-f5525885e3df
+# ╟─42dd83e0-db01-47aa-9cb2-535cf0583a2e
 # ╟─bbbd1982-cf94-11ee-2d3d-df018dd63688
 # ╟─ba1b47d9-0c2b-457b-8a7f-6fd786f9f2c7
 # ╟─425decdf-18de-4c7e-9033-5a3e7418a485
 # ╟─1e31d65c-094a-47b7-a9e4-b8296a48d311
 # ╟─ed596167-b794-4e03-8c0a-fe4489d56440
+# ╟─6876234c-a2c7-46df-b999-c2888a2e84e4
+# ╟─18cf2eb7-5fae-4258-bc29-684459232d0f
 # ╟─bdf4e5c9-e302-45af-9f01-74eb1aad0a8f
 # ╟─12e7c4f5-72b5-430a-ae33-0b99c242b5be
+# ╠═9149b47c-ef86-4265-ab23-b5d65dab72fe
 # ╟─b9c39ad2-8f5e-4627-a08a-9e4fbc5fc3b0
 # ╟─03aaf337-1d04-4b72-9db4-2cea181c9acc
 # ╟─352a283b-4e77-4b31-bb7e-e64e5557b91c
@@ -959,6 +1011,7 @@ version = "17.4.0+2"
 # ╟─f2e3aa94-0563-4891-9884-0166d025dfff
 # ╟─ec57d857-c98d-4f5b-81b7-0a7cf2f43f54
 # ╟─55d29a44-c2c6-4594-a64a-56ec563527f7
+# ╟─bcfdf29a-1f92-4d34-bd79-269d832c0893
 # ╠═79aada91-1f12-44ce-b66d-1b0bf99181c9
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

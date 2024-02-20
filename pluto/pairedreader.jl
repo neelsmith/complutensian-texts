@@ -20,6 +20,9 @@ begin
 	using CitableText
 	using CitableCorpus
 	using CitableBase
+	
+	using CitableTeiReaders
+	using EditionBuilders
 
 
 	using PlutoTeachingTools
@@ -31,17 +34,49 @@ end
 md"""*Notebook version*:  **1.0.0**"""
 
 # ╔═╡ fbe09532-ccd0-11ee-3ed7-2bb05352d2c3
-md"""# Multireader"""
+md"""# Complutensian Bible: paired reader"""
+
+# ╔═╡ dbe57cb8-f488-4f77-9f13-e6183906785a
+@bind reloadtext Button("Reload texts")
 
 # ╔═╡ 3e405edb-3378-4023-83ad-020fdd643242
-md""">*Choose a pair of texts and a passage.*
-"""
+md""">*Choose two of the four Biblical texts in the Complutensian Bible, and a passage to view.*"""
 
 # ╔═╡ c7f731c0-2e5d-4a28-a480-e37be59cb74e
 html"""
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 """
+
+# ╔═╡ 2433b7fb-f2fb-4adf-aa6e-4e8f6eb4d3ba
+md"""> Load glosses"""
+
+# ╔═╡ 9260c70f-8880-4829-9fc8-193a229243f5
+repo = dirname(pwd())
+
+# ╔═╡ ea613ce4-bf5c-46b2-99b0-643a2fddf1c1
+lxxbldr = diplomaticbuilder(; versionid = "lxxlatinnormed")
+
+# ╔═╡ e3f67c62-7a68-47ca-ba0c-78585ef97b19
+septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
+
+# ╔═╡ d1dc58a9-5ad7-4be1-89c8-0cf6347ef3cb
+septlatinxmlcorpus = begin
+	reloadtext
+	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
+end
+
+# ╔═╡ 2ef27488-8982-47e1-9f01-197f11a8dfbd
+septlatin = edited(lxxbldr, septlatinxmlcorpus)
+
+# ╔═╡ ffa251e3-125b-4d01-8a85-393b0f0d608f
+targlatinxml  = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
+
+# ╔═╡ 5308d2fd-094b-4044-84cb-9326914afcb0
+targlatincorpus =  begin
+	reloadtext
+	readcitable(targlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.targum_latin:"), TEIDivAb, FileReader)
+end
 
 # ╔═╡ 947930b8-8cdb-4b69-ab7f-841f2d4f3957
 md"""> Load texts"""
@@ -55,6 +90,11 @@ corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 # ╔═╡ 9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
 tanach = filter(corpus.passages) do psg
 	versionid(psg.urn) == "masoretic"
+end |> CitableTextCorpus
+
+# ╔═╡ ea71dfeb-e384-41e5-82ae-91fab1ed97e2
+targum = filter(corpus.passages) do psg
+	versionid(psg.urn) == "onkelos"
 end |> CitableTextCorpus
 
 # ╔═╡ 127f8b5d-a9cf-4612-816c-9f432bda1b0d
@@ -102,7 +142,8 @@ end
 md"""*Verse* $(@bind verse Select(versesforchapter(tanach, book, chap)))"""
 
 # ╔═╡ 8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
-versionlabels = ["masoretic" => "Hebrew Bible", "vulgate" => "Latin Vulgate", "septuagint" => "Greek Septuagint"]
+versionlabels = ["masoretic" => "Hebrew Bible", "vulgate" => "Latin Vulgate", "septuagint" => "Greek Septuagint","onkelos" => "Targum Onkelos"
+]
 
 # ╔═╡ 423f8e9c-4186-433b-948c-40c2181c5ab0
 md"""*Text 1*: $(@bind col1 Select(versionlabels, default = "septuagint")) *Text 2*: $(@bind col2 Select(versionlabels, default = "masoretic")) *Side by side?* $(@bind adjacent CheckBox())"""
@@ -146,14 +187,18 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
+CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
+EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
 CitableBase = "~10.3.1"
 CitableCorpus = "~0.13.5"
+CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
+EditionBuilders = "~0.8.5"
 PlutoTeachingTools = "~0.2.14"
 PlutoUI = "~0.7.55"
 """
@@ -164,7 +209,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "87f077b64cd82aeaede3eb48a4e0c221f03c7b72"
+project_hash = "63da455434785f52c440ec60135240f7ed1feeed"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -214,6 +259,12 @@ deps = ["CitableBase", "CitableText", "CiteEXchange", "DocStringExtensions", "Do
 git-tree-sha1 = "f400484e7b0fc1707f9dfd288fa297a4a2d9a2ad"
 uuid = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 version = "0.13.5"
+
+[[deps.CitableTeiReaders]]
+deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "HTTP", "Test"]
+git-tree-sha1 = "deed5242dad324dfd619bdeaa23528e131664a91"
+uuid = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
+version = "0.10.3"
 
 [[deps.CitableText]]
 deps = ["CitableBase", "DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
@@ -306,6 +357,12 @@ deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
 
+[[deps.EditionBuilders]]
+deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "Test"]
+git-tree-sha1 = "2934d7babf1127b7e8ef380de231b9683893aa49"
+uuid = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
+version = "0.8.5"
+
 [[deps.ExceptionUnwrapping]]
 deps = ["Test"]
 git-tree-sha1 = "dcb08a0d93ec0b1cdc4af184b26b591e9695423a"
@@ -317,6 +374,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "4558ab818dcceaab612d1bb8c19cee87eda2b83c"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
 version = "2.5.0+0"
+
+[[deps.EzXML]]
+deps = ["Printf", "XML2_jll"]
+git-tree-sha1 = "380053d61bb9064d6aa4a9777413b40429c79901"
+uuid = "8f5d6c58-4d21-5cfd-889c-e3ad7ee6a615"
+version = "1.2.0"
 
 [[deps.FilePathsBase]]
 deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]
@@ -751,6 +814,12 @@ git-tree-sha1 = "cd1659ba0d57b71a464a29e64dbc67cfe83d54e7"
 uuid = "76eceee3-57b5-4d4a-8e66-0e911cebbf60"
 version = "1.6.1"
 
+[[deps.XML2_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Libiconv_jll", "Zlib_jll"]
+git-tree-sha1 = "801cbe47eae69adc50f36c3caec4758d2650741b"
+uuid = "02c8fc9c-b97f-50b9-bbe4-9be30ff0a78a"
+version = "2.12.2+0"
+
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
@@ -776,6 +845,7 @@ version = "17.4.0+2"
 # ╟─403fca78-6436-48ac-961f-4b3812d79f86
 # ╟─8c3742a1-96ab-4c44-8a68-5b9594b1420b
 # ╟─fbe09532-ccd0-11ee-3ed7-2bb05352d2c3
+# ╟─dbe57cb8-f488-4f77-9f13-e6183906785a
 # ╟─3e405edb-3378-4023-83ad-020fdd643242
 # ╟─423f8e9c-4186-433b-948c-40c2181c5ab0
 # ╟─cfa5898e-7cd3-4158-ae02-41f734cd6927
@@ -784,10 +854,19 @@ version = "17.4.0+2"
 # ╟─4a46b1d5-395a-45e3-a078-93f0df69a6e8
 # ╟─b9279e2a-080c-43ea-b838-83e5d96f8a1a
 # ╟─c7f731c0-2e5d-4a28-a480-e37be59cb74e
+# ╟─2433b7fb-f2fb-4adf-aa6e-4e8f6eb4d3ba
+# ╟─9260c70f-8880-4829-9fc8-193a229243f5
+# ╟─ea613ce4-bf5c-46b2-99b0-643a2fddf1c1
+# ╟─e3f67c62-7a68-47ca-ba0c-78585ef97b19
+# ╟─d1dc58a9-5ad7-4be1-89c8-0cf6347ef3cb
+# ╟─2ef27488-8982-47e1-9f01-197f11a8dfbd
+# ╟─ffa251e3-125b-4d01-8a85-393b0f0d608f
+# ╟─5308d2fd-094b-4044-84cb-9326914afcb0
 # ╟─947930b8-8cdb-4b69-ab7f-841f2d4f3957
 # ╟─bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
 # ╟─6802262c-d391-4bea-aa11-7a31925d547b
 # ╟─9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
+# ╟─ea71dfeb-e384-41e5-82ae-91fab1ed97e2
 # ╟─127f8b5d-a9cf-4612-816c-9f432bda1b0d
 # ╟─8f4fd44a-4f68-4cfd-9165-2c8626caae51
 # ╟─cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65

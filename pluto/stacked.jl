@@ -23,10 +23,15 @@ begin
 	using CitableTeiReaders
 	using EditionBuilders
 
+	using HypertextLiteral
+
 	using PlutoTeachingTools
 	using PlutoUI
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
+
+# ╔═╡ 5bfc5920-0d98-4a7d-8c60-fe3030981ab2
+md"""*Notebook version*: **1.0.0**"""
 
 # ╔═╡ fbe09532-ccd0-11ee-3ed7-2bb05352d2c3
 md"""# Texts of the Complutensian Bible"""
@@ -52,6 +57,11 @@ corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 # ╔═╡ 9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
 tanach = filter(corpus.passages) do psg
 	versionid(psg.urn) == "masoretic"
+end |> CitableTextCorpus
+
+# ╔═╡ 834b2e1f-e262-46aa-87b0-4daa5370cad3
+onkelos = filter(corpus.passages) do psg
+	versionid(psg.urn) == "onkelos"
 end |> CitableTextCorpus
 
 # ╔═╡ 5d04b924-b152-4bcd-8584-8f4e5140c50f
@@ -169,6 +179,8 @@ begin
 
 	septpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).septuagint:$(verse)"), corpus)
 
+	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).onkelos:$(verse)"), corpus)
+
 	targlatinpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).targumlatinnormed:$(verse)"), targumlatin)
 
 	
@@ -180,9 +192,18 @@ begin
 | Latin glosses on Septuagint | $(latinseptpsg) |
 | Septuagint | $(septpsg) |
 | Latin glosses on Targum |$(targlatinpsg) |
-| Targum Onkelos | *NA* |
+| Targum Onkelos | $(targumpsg) |
 """ |> Markdown.parse
 end
+
+# ╔═╡ 6400b3c7-398c-4ad2-a8f8-f45e3e2387cb
+@htl """
+<style>
+	pluto-output {
+		--julia-mono-font-stack: system-ui,sans-serif;
+	}
+</style>
+"""
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -192,6 +213,7 @@ CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
 EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
+HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
@@ -201,6 +223,7 @@ CitableCorpus = "~0.13.5"
 CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
 EditionBuilders = "~0.8.5"
+HypertextLiteral = "~0.9.5"
 PlutoTeachingTools = "~0.2.14"
 PlutoUI = "~0.7.55"
 """
@@ -211,7 +234,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "63da455434785f52c440ec60135240f7ed1feeed"
+project_hash = "67548badf650c2348ef08e34a723a20bc837e5a2"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -845,6 +868,7 @@ version = "17.4.0+2"
 
 # ╔═╡ Cell order:
 # ╟─403fca78-6436-48ac-961f-4b3812d79f86
+# ╟─5bfc5920-0d98-4a7d-8c60-fe3030981ab2
 # ╟─fbe09532-ccd0-11ee-3ed7-2bb05352d2c3
 # ╟─06b9ba91-49b4-4793-9ad0-96fb3b1ba5be
 # ╟─cfa5898e-7cd3-4158-ae02-41f734cd6927
@@ -856,17 +880,18 @@ version = "17.4.0+2"
 # ╟─bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
 # ╟─6802262c-d391-4bea-aa11-7a31925d547b
 # ╟─9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
+# ╟─834b2e1f-e262-46aa-87b0-4daa5370cad3
 # ╟─5d04b924-b152-4bcd-8584-8f4e5140c50f
 # ╟─7dad7dcb-a26f-476b-ad52-b7c5216e738b
 # ╟─351d283b-566f-4017-92cf-eee688539de1
-# ╟─5258de34-31fb-424a-8b25-d0bc2c1ba741
-# ╟─e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
-# ╟─71c20bea-6be6-4178-b007-2061dce423bd
+# ╠═5258de34-31fb-424a-8b25-d0bc2c1ba741
+# ╠═e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
+# ╠═71c20bea-6be6-4178-b007-2061dce423bd
 # ╟─bcfe3e21-ee8b-4b8b-ba53-74d594782848
 # ╟─c5b9c5ab-da3d-4213-9979-d5699c87adad
 # ╟─0c63d698-e476-40e3-ad49-d7a6b1a3ab5d
-# ╠═7961004b-a350-4040-8c10-8ba5b8f36385
-# ╠═574582d9-f692-4755-821d-021b3c38bb0c
+# ╟─7961004b-a350-4040-8c10-8ba5b8f36385
+# ╟─574582d9-f692-4755-821d-021b3c38bb0c
 # ╟─127f8b5d-a9cf-4612-816c-9f432bda1b0d
 # ╟─8f4fd44a-4f68-4cfd-9165-2c8626caae51
 # ╟─cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
@@ -874,5 +899,6 @@ version = "17.4.0+2"
 # ╟─8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
 # ╟─5d9a7607-c148-4904-a430-14b1412732a0
 # ╟─d915f29c-7257-497a-a35a-adf1c655e750
+# ╠═6400b3c7-398c-4ad2-a8f8-f45e3e2387cb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
