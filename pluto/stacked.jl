@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.38
+# v0.19.37
 
 using Markdown
 using InteractiveUtils
@@ -116,60 +116,11 @@ md"""
 *Book*: $(@bind book Select(workids)) 
 """ 
 
-# ╔═╡ cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
-"""Find unique list of chapter values for given book in a corpus."""
-function chaptersforbook(corpus, bookid)
-	bookpassages = filter(corpus.passages) do psg
-		workid(psg.urn) == bookid
-	end
-	map(bookpassages) do psg
-		collapsePassageTo(psg.urn, 1) |> passagecomponent
-		
-	end |> unique
-		
-end
-
 # ╔═╡ a80a4bc5-8ef3-4b8b-88d7-7ad4214826d9
 md"""*Chapter* $(@bind chap Select(chaptersforbook(tanach, book)))"""
 
-# ╔═╡ 53c0b147-b805-4fc9-a464-fa78a54acc5b
-"""Find unique list of verse values for given book and chapter in a corpus."""
-function versesforchapter(c, bk, chptr)
-	chapterpassages = filter(c.passages) do psg
-		psgchapter = collapsePassageTo(psg.urn, 1) |> passagecomponent
-		workid(psg.urn) == bk && psgchapter == chptr
-	end
-	map(chapterpassages) do psg
-		passagecomponent(psg.urn)
-	end
-end
-
 # ╔═╡ 865eff3a-b44e-428c-a439-00b387e5f442
 md"""*Verse* $(@bind verse Select(versesforchapter(tanach, book, chap)))"""
-
-# ╔═╡ 8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
-versionlabels = ["masoretic" => "Hebrew Bible", "vulgate" => "Latin Vulgate", "septuagint" => "Greek Septuagint"]
-
-# ╔═╡ 5d9a7607-c148-4904-a430-14b1412732a0
-versiondict = Dict(
-	versionlabels
-	
-)
-
-# ╔═╡ d915f29c-7257-497a-a35a-adf1c655e750
-"""Format a passage for display."""
-function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondict)
-	version = versionid(psgurn) |> string
-	wrk = workid(psgurn) |> titlecase
-	psgref = passagecomponent(psgurn)
-	mdlines = [	]
-	txtlines = filter(c.passages) do psg
-		psg.urn == psgurn
-	end
-	txtcontent = map(psg -> psg.text, txtlines)
-	join(vcat(mdlines, txtcontent), "\n")
-	
-end
 
 # ╔═╡ 2f3f28c1-80b0-41db-a645-7c82454ff608
 begin
@@ -194,6 +145,55 @@ begin
 | Latin glosses on Targum |$(targlatinpsg) |
 | Targum Onkelos | $(targumpsg) |
 """ |> Markdown.parse
+end
+
+# ╔═╡ cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
+"""Find unique list of chapter values for given book in a corpus."""
+function chaptersforbook(corpus, bookid)
+	bookpassages = filter(corpus.passages) do psg
+		workid(psg.urn) == bookid
+	end
+	map(bookpassages) do psg
+		collapsePassageTo(psg.urn, 1) |> passagecomponent
+		
+	end |> unique
+		
+end
+
+# ╔═╡ 53c0b147-b805-4fc9-a464-fa78a54acc5b
+"""Find unique list of verse values for given book and chapter in a corpus."""
+function versesforchapter(c, bk, chptr)
+	chapterpassages = filter(c.passages) do psg
+		psgchapter = collapsePassageTo(psg.urn, 1) |> passagecomponent
+		workid(psg.urn) == bk && psgchapter == chptr
+	end
+	map(chapterpassages) do psg
+		passagecomponent(psg.urn)
+	end
+end
+
+# ╔═╡ 8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
+versionlabels = ["masoretic" => "Hebrew Bible", "vulgate" => "Latin Vulgate", "septuagint" => "Greek Septuagint"]
+
+# ╔═╡ 5d9a7607-c148-4904-a430-14b1412732a0
+versiondict = Dict(
+	versionlabels
+	
+)
+
+# ╔═╡ d915f29c-7257-497a-a35a-adf1c655e750
+"""Format a passage for display."""
+function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondict)
+	version = versionid(psgurn) |> string
+	wrk = workid(psgurn) |> titlecase
+	psgref = passagecomponent(psgurn)
+	mdlines = [	]
+	txtlines = filter(c.passages) do psg
+		psg.urn == psgurn
+	end
+	txtcontent = map(psg -> psg.text, txtlines)
+	join(vcat(mdlines, txtcontent), "\n")
+	
 end
 
 # ╔═╡ 6400b3c7-398c-4ad2-a8f8-f45e3e2387cb
