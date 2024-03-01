@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.37
+# v0.19.38
 
 using Markdown
 using InteractiveUtils
@@ -116,11 +116,60 @@ md"""
 *Book*: $(@bind book Select(workids)) 
 """ 
 
+# ╔═╡ cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
+"""Find unique list of chapter values for given book in a corpus."""
+function chaptersforbook(corpus, bookid)
+	bookpassages = filter(corpus.passages) do psg
+		workid(psg.urn) == bookid
+	end
+	map(bookpassages) do psg
+		collapsePassageTo(psg.urn, 1) |> passagecomponent
+		
+	end |> unique
+		
+end
+
 # ╔═╡ a80a4bc5-8ef3-4b8b-88d7-7ad4214826d9
 md"""*Chapter* $(@bind chap Select(chaptersforbook(tanach, book)))"""
 
+# ╔═╡ 53c0b147-b805-4fc9-a464-fa78a54acc5b
+"""Find unique list of verse values for given book and chapter in a corpus."""
+function versesforchapter(c, bk, chptr)
+	chapterpassages = filter(c.passages) do psg
+		psgchapter = collapsePassageTo(psg.urn, 1) |> passagecomponent
+		workid(psg.urn) == bk && psgchapter == chptr
+	end
+	map(chapterpassages) do psg
+		passagecomponent(psg.urn)
+	end
+end
+
 # ╔═╡ 865eff3a-b44e-428c-a439-00b387e5f442
 md"""*Verse* $(@bind verse Select(versesforchapter(tanach, book, chap)))"""
+
+# ╔═╡ 8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
+versionlabels = ["masoretic" => "Hebrew Bible", "vulgate" => "Latin Vulgate", "septuagint" => "Greek Septuagint"]
+
+# ╔═╡ 5d9a7607-c148-4904-a430-14b1412732a0
+versiondict = Dict(
+	versionlabels
+	
+)
+
+# ╔═╡ d915f29c-7257-497a-a35a-adf1c655e750
+"""Format a passage for display."""
+function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondict)
+	version = versionid(psgurn) |> string
+	wrk = workid(psgurn) |> titlecase
+	psgref = passagecomponent(psgurn)
+	mdlines = [	]
+	txtlines = filter(c.passages) do psg
+		psg.urn == psgurn
+	end
+	txtcontent = map(psg -> psg.text, txtlines)
+	join(vcat(mdlines, txtcontent), "\n")
+	
+end
 
 # ╔═╡ 2f3f28c1-80b0-41db-a645-7c82454ff608
 begin
@@ -145,55 +194,6 @@ begin
 | Latin glosses on Targum |$(targlatinpsg) |
 | Targum Onkelos | $(targumpsg) |
 """ |> Markdown.parse
-end
-
-# ╔═╡ cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
-"""Find unique list of chapter values for given book in a corpus."""
-function chaptersforbook(corpus, bookid)
-	bookpassages = filter(corpus.passages) do psg
-		workid(psg.urn) == bookid
-	end
-	map(bookpassages) do psg
-		collapsePassageTo(psg.urn, 1) |> passagecomponent
-		
-	end |> unique
-		
-end
-
-# ╔═╡ 53c0b147-b805-4fc9-a464-fa78a54acc5b
-"""Find unique list of verse values for given book and chapter in a corpus."""
-function versesforchapter(c, bk, chptr)
-	chapterpassages = filter(c.passages) do psg
-		psgchapter = collapsePassageTo(psg.urn, 1) |> passagecomponent
-		workid(psg.urn) == bk && psgchapter == chptr
-	end
-	map(chapterpassages) do psg
-		passagecomponent(psg.urn)
-	end
-end
-
-# ╔═╡ 8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
-versionlabels = ["masoretic" => "Hebrew Bible", "vulgate" => "Latin Vulgate", "septuagint" => "Greek Septuagint"]
-
-# ╔═╡ 5d9a7607-c148-4904-a430-14b1412732a0
-versiondict = Dict(
-	versionlabels
-	
-)
-
-# ╔═╡ d915f29c-7257-497a-a35a-adf1c655e750
-"""Format a passage for display."""
-function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondict)
-	version = versionid(psgurn) |> string
-	wrk = workid(psgurn) |> titlecase
-	psgref = passagecomponent(psgurn)
-	mdlines = [	]
-	txtlines = filter(c.passages) do psg
-		psg.urn == psgurn
-	end
-	txtcontent = map(psg -> psg.text, txtlines)
-	join(vcat(mdlines, txtcontent), "\n")
-	
 end
 
 # ╔═╡ 6400b3c7-398c-4ad2-a8f8-f45e3e2387cb
@@ -232,7 +232,7 @@ PlutoUI = "~0.7.55"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.9.1"
 manifest_format = "2.0"
 project_hash = "67548badf650c2348ef08e34a723a20bc837e5a2"
 
@@ -334,7 +334,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.0.2+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -527,26 +527,21 @@ version = "1.2.2"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
-version = "0.6.4"
+version = "0.6.3"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.4.0+0"
+version = "7.84.0+0"
 
 [[deps.LibGit2]]
-deps = ["Base64", "LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
+deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
-
-[[deps.LibGit2_jll]]
-deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll"]
-uuid = "e37daf67-58a4-590a-8e99-b0245dd2ffc5"
-version = "1.6.4+0"
 
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.11.0+1"
+version = "1.10.2+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -606,14 +601,14 @@ version = "1.1.9"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.2+1"
+version = "2.28.2+0"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2023.1.10"
+version = "2022.10.11"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
@@ -622,7 +617,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.21+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -644,7 +639,7 @@ version = "1.6.3"
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
-version = "10.42.0+1"
+version = "10.42.0+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
@@ -655,7 +650,7 @@ version = "2.8.1"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.10.0"
+version = "1.9.0"
 
 [[deps.PlutoHooks]]
 deps = ["InteractiveUtils", "Markdown", "UUIDs"]
@@ -708,7 +703,7 @@ deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 
 [[deps.Random]]
-deps = ["SHA"]
+deps = ["SHA", "Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
 [[deps.Reexport]]
@@ -758,17 +753,16 @@ uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 [[deps.SparseArrays]]
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
-version = "1.10.0"
 
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
-version = "1.10.0"
+version = "1.9.0"
 
 [[deps.SuiteSparse_jll]]
-deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
+deps = ["Artifacts", "Libdl", "Pkg", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
-version = "7.2.1+1"
+version = "5.10.1+6"
 
 [[deps.TOML]]
 deps = ["Dates"]
@@ -848,22 +842,22 @@ version = "2.12.2+0"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.13+1"
+version = "1.2.13+0"
 
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.8.0+1"
+version = "5.8.0+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.52.0+1"
+version = "1.48.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.4.0+2"
+version = "17.4.0+0"
 """
 
 # ╔═╡ Cell order:
