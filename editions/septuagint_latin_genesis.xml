@@ -28,91 +28,102 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
         
            <ab  n="2">
-             at terra erat inuisibilis et incomposita. 
+             At terra erat inuisibilis et incomposita. 
             et tenebre super abyssum: et spiritus dei ferebatur super aquam.
            
           </ab>
 
           <ab n="3">
-           et dixit deus fiat lux. et facta est lux. 
+           Et dixit deus fiat lux. Et facta est lux. 
           </ab>
 
 
            <ab n="4">
-           et vidit deus lucem: quod bona. et diuisit deus inter lucem: et inter tenebras.
+           Et vidit deus lucem: quod bona. Et diuisit deus inter lucem: et inter tenebras.
           </ab>
 
           <ab n="5">
-           et vocauit deus lucem diem: et tenebras vocauit noctem. et facum est vespere: et factum est mane: dies vnus. 
+           Et vocauit deus lucem diem: et tenebras vocauit noctem. Et facum est vespere: et factum est mane: dies vnus. 
           </ab>
 
           <ab n="6">
-           et dixit deus fiat firmamentum in medio aque. et sit diuidens inter aquam et aquam.  
+           Et dixit deus fiat firmamentum in medio aque. Et sit diuidens inter aquam et aquam.  
           </ab>
 
           <ab n="7">
-           et fecit deus firmamentum. 
-          et diuicit deus inter aquam: <choice><abbr>q</abbr><expan>quae</expan></choice> erat sub firmamento: et inter aquam: 
+           Et fecit deus firmamentum. 
+          Et diuicit deus inter aquam: <choice><abbr>q</abbr><expan>quae</expan></choice> erat sub firmamento: et inter aquam: 
           que super firmamentum.
           </ab>
 
           <ab n="8">
-           et vocauit deus firmamentum celum. et vidit deus. quod bonum. et factum est vespere: et factum est mane: dies secundus. 
+           Et vocauit deus firmamentum celum. Et vidit deus. quod bonum. Et factum est vespere: et factum est mane: dies secundus. 
           </ab>
 
           <ab n="9">
-           et dixit deus congregetur aqua que sub celo in congregationes vnam: et appareat arida. et factum est ita. 
+           Et dixit deus congregetur aqua que sub celo in congregationes vnam: et appareat arida. Et factum est ita. 
          
-           et congregata est aqua que sub celo in congregationes suas: et apparuit arida et vocauit deus aridam: terram. 
+           Et congregata est aqua que sub celo in congregationes suas: et apparuit arida et vocauit deus aridam: terram. 
           
           </ab>
 
           <ab n="10">
-               et congregationes aquarum vocauit maria. et vidit deus: quod bonum. 
+               Et congregationes aquarum vocauit maria. Et vidit deus: quod bonum. 
           </ab>
 
           <ab n="11">
-           et dixit deus germinet terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: et lignum pomiferum faciens fructum. 
-          cuius semen ipsius in ipso <unclear> suos </unclear> genus super terram. et factum est ita. 
+           Et dixit deus germinet terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: et lignum pomiferum faciens fructum. 
+          Cuius semen ipsius in ipso <unclear> suos </unclear> genus super terram. Et factum est ita. 
           </ab>
 
-          
+        
+          <ab n="12"@et-n="12"@vidit>
+           Et protulit terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: 
+          et lignum pomiferum faciens fructum. Cuius semen eium in ipso: <unclear>suos</unclear> genus super terram. Et vidit
+          </ab>
 
-          <ab n="12">
-           et protulit terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: 
-          et lignum pomiferum faciens fructum. cuius semen eium in ipso: <unclear>suos</unclear> genus super terram. et vidit
+
+
+
+
+          <ab n="12"@deus-n="12"@>
+          deus <choice><abbr>q</abbr><expan>quod</expan></abbr> bonum.
+          </ab>
+        
+          <ab n="13">
+          Et factum est vespere et factum est mane dies tertius.
           </ab>
 
           <ab n="14">
-           
+          Et dixit deus: fiant luminaria in firmamenta celi. Ut luceant super terram: ad <unclear>diuidend</unclear> inter diem et inter noctem. Et sint in signa: et in tempora: et in dies: et in annos.
           </ab>
 
           <ab n="15">
-           
+           Et sint in <unclear>illuminationeue</unclear> in firmamento celi: ut luceant super terram. Et factum est ita.
           </ab>
 
           <ab n="16">
-           
+           Et fecit deus duo luminaria magna: luminare magnum in principatus diei. Et luminare minus in principatus noctis: et stellas.
           </ab>
 
           <ab n="17">
-           
+           Et posuit eas deus in firmamento celi: ut lucerent super terram: 
           </ab>
 
           <ab n="18">
-           
+           et <unclear>preessent</unclear> diei et nocti. et diuiderent inter lucem et inter tenebras. Et vidit deus <choice><abbr>q</abbr><expan>quod</expan></choice> bonum. 
           </ab>
 
           <ab n="19">
-           
+           Et factum est vespere et factum est mane quartus. 
           </ab>
 
           <ab n="20">
-           
+           Et dixit deus: producant aque reptilia <unclear>aiarum</unclear> viuentium: et volatilia volantia super terram: <unclear>sum</unclear> firmamentum celi. Et factum est ita. 
           </ab>
 
           <ab n="21">
-           
+          
           </ab>
 
           <ab n="22">
