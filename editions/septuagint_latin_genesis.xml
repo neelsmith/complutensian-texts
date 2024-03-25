@@ -77,17 +77,10 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
         
-          <ab n="12"@et-n="12"@vidit>
+          <ab n="12">
            Et protulit terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: 
           et lignum pomiferum faciens fructum. Cuius semen eium in ipso: <unclear>suos</unclear> genus super terram. Et vidit
-          </ab>
-
-
-
-
-
-          <ab n="12"@deus-n="12"@>
-          deus <choice><abbr>q</abbr><expan>quod</expan></abbr> bonum.
+          deus <choice><abbr>q</abbr><expan>quod</expan></choice> bonum.
           </ab>
         
           <ab n="13">
