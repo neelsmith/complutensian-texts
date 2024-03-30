@@ -21,7 +21,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         <div n="1">
           
-          <ab  n="1"> In pricipio creauit deus celum et terram.
+          <ab  n="1"> In principio creauit deus celum et terram.
           </ab>
 
           <ab n="2"> Terra <choice><abbr>aut</abbr><expan>autem</expan></choice> erat deserta et vacua: 

@@ -28,6 +28,9 @@ begin
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
+# ╔═╡ f957e7a9-aa14-41c1-9c39-27baf90a0635
+
+
 # ╔═╡ 42dd83e0-db01-47aa-9cb2-535cf0583a2e
 md"""*Notebook version*: **1.0.0**"""
 
@@ -40,9 +43,6 @@ html"""<blockquote>In the text of the Vulgate passage, Latin terms not indexed t
 
 # ╔═╡ bbbd1982-cf94-11ee-2d3d-df018dd63688
 md"""# View alignments of Vulgate and Hebrew Bible"""
-
-# ╔═╡ f957e7a9-aa14-41c1-9c39-27baf90a0635
-
 
 # ╔═╡ 12e7c4f5-72b5-430a-ae33-0b99c242b5be
 html"""

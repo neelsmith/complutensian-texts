@@ -14,109 +14,129 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ aee454c5-4aaf-41dd-9226-f5525885e3df
+# ╔═╡ 505e5234-c399-11ee-2a14-bfee14a8bf57
 begin
-	using CitableBase, CitableText, CitableCorpus
 	using Orthography
 	using LatinOrthography
-	using BiblicalHebrew
+	using CitableText
+	using CitableCorpus
+	using CitableBase
+	using CitableTeiReaders
+	using EditionBuilders
 
 	using HypertextLiteral
 
-	using PlutoTeachingTools
 	using PlutoUI
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
-# ╔═╡ 42dd83e0-db01-47aa-9cb2-535cf0583a2e
-md"""*Notebook version*: **1.0.0**"""
+# ╔═╡ 01cd9b04-4308-4776-ad22-bcd4eb48a966
+md"""*Noteboook version*: **1.0.0**"""
 
-# ╔═╡ ba1b47d9-0c2b-457b-8a7f-6fd786f9f2c7
-md"""$(@bind reload Button("Reload indexing data"))"""
-
-# ╔═╡ 6876234c-a2c7-46df-b999-c2888a2e84e4
-html"""<blockquote>In the text of the Vulgate passage, Latin terms not indexed to a Hebrew token are  <span class="hilite">highlighted like this</span>.</blockquote>
+# ╔═╡ 36dd1391-3550-4c87-8ba8-4325e007316a
+md"""> This notebook lets you compare the Latin text of the Vulgate with the Latin text of the glossing commentary on the Septuagint in the Complutensis. For reference, it juxtaposes the Greek text of the Septuagint.
 """
 
-# ╔═╡ bbbd1982-cf94-11ee-2d3d-df018dd63688
-md"""# View alignments of Vulgate and Hebrew Bible"""
+# ╔═╡ f56c3f61-cae0-4d1a-b755-86ddff6d3c53
+"""
+<blockquote><p>Terms not found in the comparison text are <span class="hilite">highlighted</span>.</p></blockquote>
+""" |> HTML
 
-# ╔═╡ f957e7a9-aa14-41c1-9c39-27baf90a0635
+# ╔═╡ a2171ec8-6691-4f52-b9ec-a6281594d4b2
+@bind reloadtext Button("Reload edition of glossing text")
 
+# ╔═╡ ecbcee9e-9719-4883-8615-20a1602014a6
+md"""# Compare vocabulary of glossing in the Complutensis"""
 
-# ╔═╡ 12e7c4f5-72b5-430a-ae33-0b99c242b5be
+# ╔═╡ b873d268-5af3-4d6c-a1b7-3af6f3c764bf
 html"""
-<br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
 """
 
-# ╔═╡ b9c39ad2-8f5e-4627-a08a-9e4fbc5fc3b0
-md"""> Load index"""
+# ╔═╡ 763fe204-9aa3-4c2a-81f6-98e8a6299b34
+# Using these URNs:
+# urn:cts:compnov:tanach.genesis.sept_latin:
+# urn:cts:compnov:tanach.genesis.septuagint:
 
-# ╔═╡ 03aaf337-1d04-4b72-9db4-2cea181c9acc
-repo = pwd() |> dirname
+# ╔═╡ cf9ebba5-d90c-42ae-8a11-bdef4660991c
+md"""> Token lists"""
 
-# ╔═╡ 352a283b-4e77-4b31-bb7e-e64e5557b91c
-srcfile = joinpath(repo, "indexing", "hebrew-to-vulgate-glosses.cex")
+# ╔═╡ 80e36d02-a7a0-4b18-9cf7-b26bbcadc345
+vulgateortho = latin24()
 
-# ╔═╡ 626deef8-93f0-475a-9792-3904887b1569
-indexdata = begin
-	reload
-	raw = filter(readlines(srcfile)[2:end]) do ln
-		! isempty(ln)
-	end
-	map(raw) do ln
-		cols = split(ln, "|")
-		latinurn = if isempty(cols[2]) 
-			nothing 
-		else
-			CtsUrn(cols[2])
-		end
-		
-		(hebrew = CtsUrn(cols[1]), latin = latinurn, marker = cols[3])
+# ╔═╡ 1d7b8019-0a2f-42ab-a2f4-ff53d266e1ae
+"""Get lower case vocab list for a list of passages."""
+function wordlist(tkns)
+	map(tkns) do tkn
+		lowercase(tkn.passage.text )
 	end
 end
 
-# ╔═╡ 0e96a21d-b461-4282-a572-8d8fbb1ffe13
-md"""> Load texts"""
+# ╔═╡ ba2247ab-6b07-4230-9661-5cc9a17bed66
+"""Format tokens in psg1 for display. Apply hilighting if a token is absent from list of tokens in psg2.
+"""
+function formatdiff(psg1, psg2)
+	checklist = wordlist(psg2) |> unique
+	tokenlist = map(psg1) do tkn
+		if tkn.tokentype isa LexicalToken
+			if lowercase(tkn.passage.text) in checklist
+				" " * tkn.passage.text
+			else
+				" <span class=\"hilite\">" * tkn.passage.text * "</span>"
+			end
+		else
+			tkn.passage.text
+		end
+	end
+	"<p>" * join(tokenlist,"") * "</p>"
 
-# ╔═╡ f8e5919c-d3be-432b-b827-f5642ad5619e
+end
+
+# ╔═╡ 5cf92532-b67a-40a3-ad1a-c7f03cdb0eda
+md"""> Load texts
+
+"""
+
+# ╔═╡ cb77fe26-a3c9-48f9-8364-c6288ffd50d5
 srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
 
-# ╔═╡ c6edd3a5-ffcd-40c1-b2c1-b3b02196ae7b
+# ╔═╡ 1c27264c-cb66-4f0f-89ad-8d151a60bd58
 corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 
-# ╔═╡ ea4f5761-3eca-48de-9621-ad95763feca2
+# ╔═╡ b049d8ff-6092-4174-9bc8-3138bd272eaf
 vulgate = filter(corpus.passages) do psg
 	versionid(psg.urn) == "vulgate"
 end |> CitableTextCorpus
 
-# ╔═╡ 24c747b8-b347-4a24-9e04-9cdea4aa9a30
-vulgatetkns = tokenize(vulgate, latin24())
+# ╔═╡ 9f98852b-acf8-4740-92c5-00e291d2943c
+vulgatetkns = tokenize(vulgate, vulgateortho)
 
-# ╔═╡ 1570c4a6-570d-43d9-b40f-3477baba008c
-tanach = filter(corpus.passages) do psg
-	versionid(psg.urn) == "masoretic"
+# ╔═╡ a538cd79-f58f-44d0-b4b3-413461084ff9
+septuagint = filter(corpus.passages) do psg
+	versionid(psg.urn) == "septuagint"
 end |> CitableTextCorpus
 
-# ╔═╡ 6b573723-2437-4add-a7ce-01a7eb0fd6d4
-tanachtkns = tokenize(tanach, HebrewOrthography())
+# ╔═╡ 43f6d597-11ee-4faf-8710-964ca97b2c89
+targum = filter(corpus.passages) do psg
+	versionid(psg.urn) == "onkelos"
+end |> CitableTextCorpus
 
-# ╔═╡ f7154a06-9b17-4a37-ae21-dfd10ce0944c
-md"""> UI"""
+# ╔═╡ ed6016b0-ebba-4403-b6e7-697e8a36e719
+md"""> Menus for user selection of passages"""
 
-# ╔═╡ f2e3aa94-0563-4891-9884-0166d025dfff
+# ╔═╡ f6db2166-5dd2-422f-ba88-917b6a687773
 workids = map(vulgate.passages) do psg
 	workid(psg.urn)
 end |> unique
 
-# ╔═╡ 425decdf-18de-4c7e-9033-5a3e7418a485
+# ╔═╡ 571bfd40-3fc5-40ed-beb1-7035e25cf5bc
 md"""
 *Book*: $(@bind book Select(workids)) 
 """ 
 
-# ╔═╡ ec57d857-c98d-4f5b-81b7-0a7cf2f43f54
+# ╔═╡ 0681c83f-f445-460e-891c-2d55ff54d918
 """Find unique list of chapter values for given book in a corpus."""
 function chaptersforbook(corpus, bookid)
 	bookpassages = filter(corpus.passages) do psg
@@ -129,10 +149,10 @@ function chaptersforbook(corpus, bookid)
 		
 end
 
-# ╔═╡ 1e31d65c-094a-47b7-a9e4-b8296a48d311
+# ╔═╡ 77bbc155-3d5d-4941-9188-d664e45e2d81
 md"""*Chapter* $(@bind chap Select(chaptersforbook(vulgate, book)))"""
 
-# ╔═╡ 55d29a44-c2c6-4594-a64a-56ec563527f7
+# ╔═╡ c1791f30-a4ef-409c-86ce-80708df51291
 """Find unique list of verse values for given book and chapter in a corpus."""
 function versesforchapter(c, bk, chptr)
 	chapterpassages = filter(c.passages) do psg
@@ -144,101 +164,164 @@ function versesforchapter(c, bk, chptr)
 	end
 end
 
-# ╔═╡ ed596167-b794-4e03-8c0a-fe4489d56440
-md"""*Verse* $(@bind verse Select(versesforchapter(vulgate, book, chap)))"""
+# ╔═╡ 9aca0d5f-f4ed-44a6-8470-1d0e91b006eb
+ md"""*Verse* $(@bind verse Select(versesforchapter(vulgate, book, chap)))"""
 
-# ╔═╡ 009ac7b3-40b7-4d96-8559-2ee0174c6575
-"""*$(titlecase(book))* $(verse):""" |> Markdown.parse
+# ╔═╡ 7d035d8d-7f3c-4b1d-9eb9-2069f317109e
+md"""### *$(titlecase(book))*  $(verse)
+"""
 
-# ╔═╡ 9149b47c-ef86-4265-ab23-b5d65dab72fe
-hebrewpsgtext = filter(tanach.passages) do psg
-		workid(psg.urn) == book && passagecomponent(psg.urn) == verse
-	end[1].text
+# ╔═╡ 73919628-120d-4317-ba7b-26e74d2d75d9
+md"""> Gather tokens for selected passage
+"""
 
-# ╔═╡ ab902fc9-612d-4780-832a-532fa7538815
-psgindexing = filter(indexdata) do tkn
-	psgopener = verse * "."
-	workid(tkn.hebrew) == book &&
-	startswith(passagecomponent(tkn.hebrew), psgopener)
-end
-
-# ╔═╡ bdf4e5c9-e302-45af-9f01-74eb1aad0a8f
-if isempty(psgindexing)
-	md"""*No indexing found for* $(titlecase(book)) $(verse)"""
-else
-	mdlines = ["| Hebrew | marker | Latin |", 
-	"| --- | --- | --- |"]
-
-	for triple in psgindexing
-		
-		hebrewform = filter(t -> t.passage.urn == triple.hebrew, tanachtkns)
-		latinform = if isnothing(triple.latin) 
-			""
-		else
-			lattokenmatches = filter(t -> t.passage.urn == triple.latin, vulgatetkns)
-			lattokenmatches[1].passage.text
-		end
-			
-			 #isnothing(triple.latin) ? nothing : filter(t -> t.passage.urn == triple.latin[1].passage.textg, vulgatetkns)
-		
-		push!(mdlines, string("| ", hebrewform[1].passage.text, "| ", triple.marker, " | ", latinform, "| "))
-	end
-
-	join(mdlines,"\n") |> Markdown.parse
-end
-
-# ╔═╡ 5a0a3ff2-818a-4dec-b77e-7ed514da2420
+# ╔═╡ c2379250-5def-4e3e-b310-739c7e1b1587
 vulgatepsg = filter(vulgatetkns) do tkn
 	passagebase = verse * "."
 	workid(tkn.passage.urn) == book &&
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
 end
 
-# ╔═╡ 1311fb4b-3897-41b0-bed3-c87192f6cc27
-tanachpsg = filter(tanachtkns) do tkn
+# ╔═╡ 22e0f5ff-d3c7-4450-a968-1165aefc1caa
+septuagintpsg =  filter(septuagint.passages) do psg	
+	workid(psg.urn) == book &&
+	passagecomponent(psg.urn) == verse
+end
+
+
+# ╔═╡ 09556565-5d85-4684-a476-640aa025bf70
+targumpsg =  filter(targum.passages) do psg	
+	workid(psg.urn) == book &&
+	passagecomponent(psg.urn) == verse
+end
+
+# ╔═╡ 90752577-0748-4ee5-92ee-934ada8263b9
+
+
+# ╔═╡ e2fa65bd-9084-4ce9-805e-9b1565bb5794
+
+
+# ╔═╡ c2fbb1d6-a63f-47ef-9f5d-fc98fb4f5f5a
+md"""> Load XML edition of Latin glosses on Septuagint."""
+
+# ╔═╡ 1eabb81f-291a-4701-ab71-5eaaa8f03693
+bldr = diplomaticbuilder(; versionid = "lxxlatinnormed")
+
+# ╔═╡ a9592b4a-3db9-485e-a087-32786d584b1f
+# ╠═╡ disabled = true
+#=╠═╡
+
+  ╠═╡ =#
+
+# ╔═╡ 50966a9c-b83a-42c2-94b2-a1899fe51f12
+md"""> Load glossing text data"""
+
+# ╔═╡ 13825cdf-a2da-4be9-8052-80a86adf024c
+repo = dirname(pwd())
+
+# ╔═╡ 049e6845-f4e8-4223-a69d-8fbb877e98de
+septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
+
+# ╔═╡ 7f933451-896a-48a9-96f7-4fe1a048288f
+septlatinxmlcorpus = begin
+	reloadtext
+	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
+end
+
+# ╔═╡ 9af25ad8-168c-4f28-9d24-54164b298db7
+septlatin = edited(bldr, septlatinxmlcorpus)
+
+# ╔═╡ 96ea76d5-0e3d-46df-b807-97a9a61ac519
+septlatintkns = tokenize(septlatin, vulgateortho)
+
+# ╔═╡ 4676bd78-0a1c-48ec-9a38-6171fc168b96
+septlatinpsg =  filter(septlatintkns) do tkn
 	passagebase = verse * "."
 	workid(tkn.passage.urn) == book &&
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
 end
 
-# ╔═╡ bcfdf29a-1f92-4d34-bd79-269d832c0893
-"""Wrap highlighting span around unindexed tokens."""
-function hilitemissing(tknlist, crossindex)
-	indexedlatin = map(crossindex) do triple
-		triple.latin
-	end
-	tkns = []
-	for tkn in tknlist
-		if tkn.tokentype isa LexicalToken
+# ╔═╡ 298c9a4b-2a24-4c7d-8575-e0f42ae16044
+septlatindiff = formatdiff( septlatinpsg, vulgatepsg) 
 
-			if tkn.passage.urn in indexedlatin
-				push!(tkns, string(" ", tkn.passage.text))
-			else
-				push!(tkns, string(" <span class=\"hilite\">", tkn.passage.text, "</span>"))
-			end
-		else
-			push!(tkns, tkn.passage.text)
-		end
-	end
-	join(tkns)
+# ╔═╡ 44522bfa-9420-4aac-a402-5f55ebc29e05
+vulgatediff = formatdiff(vulgatepsg, septlatinpsg) 
+
+# ╔═╡ 7d789a64-08f5-492f-9d02-e1ed674570ca
+targumlatinxml =  joinpath(repo, "editions", "targum_latin_genesis.xml")
+
+# ╔═╡ 8f070001-b104-4d5d-9b08-90a1e0247892
+targumlatinxmlcorpus = begin
+	reloadtext
+	readcitable(targumlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
 
-# ╔═╡ 18cf2eb7-5fae-4258-bc29-684459232d0f
-"""<table>
-<tr> <th>Hebrew text</th> <th>Latin text</th> </tr>
-<tr><td> $(hebrewpsgtext) </td><td> $(hilitemissing(vulgatepsg,psgindexing)) </td>
-</table>
-""" |> HTML
+# ╔═╡ 2a6dc443-9ccc-4c74-95e0-a6a7c126cea6
+targumlatin = edited(bldr, targumlatinxmlcorpus)
 
-# ╔═╡ 79aada91-1f12-44ce-b66d-1b0bf99181c9
+# ╔═╡ 048b9dc6-7e1d-4180-bb00-7efca50656ce
+targumlatintkns = tokenize(targumlatin, vulgateortho)
+
+# ╔═╡ fb2be480-9679-4a69-a578-091ae1c6f7b2
+
+targumlatinpsg = filter(targumlatintkns) do tkn
+	passagebase = verse * "."
+	workid(tkn.passage.urn) == book &&
+	startswith(passagecomponent(tkn.passage.urn), passagebase)
+end
+
+# ╔═╡ 5af37c2d-595d-4043-a601-22f88e55ef79
+targumlatindiff = formatdiff( targumlatinpsg, vulgatepsg) 
+
+# ╔═╡ 966eedc9-1c4d-4117-8076-26b8eda54e96
+"""
+<table>
+<tr><th><i>Version</i></th><th><i>Text</i></th></tr>
+<tr>
+<th>Vulgate</th><td>$(vulgatediff)</td>
+</tr>
+<tr>
+<th>Glosses on Septuagint</th><td>$(septlatindiff)</td>
+</tr>
+<tr>
+<th>Septuagint</th><td>$(septuagintpsg[1].text)</td>
+</tr>
+
+<tr>
+<th>Glosses on Targum Onkelos</th><td>$(targumlatindiff)</td>
+</tr>
+<tr>
+
+<tr>
+<th>Targum Onkelos</th><td>$(targumpsg[1].text)</td>
+</tr>
+</table>
+"""  |> HTML
+
+# ╔═╡ ffc7785d-1750-431d-877a-70c478d6fbc5
+md"> CSS + HTML"
+
+# ╔═╡ 95d5cb19-ce6b-4e06-8cc6-451faa5ec194
+ortho = latin24()
+
+# ╔═╡ acd6ae5a-0390-48e6-bf80-eae7ab9b2910
+css = html"""
+<style>
+.hilite {
+	background-color: yellow;
+	font-weight: bold;
+}
+</style>
+"""
+
+# ╔═╡ e0a33f4a-3dfb-476c-ac98-7e4934b07b4b
+md"""More CSS in next cell, too..."""
+
+# ╔═╡ 5d114d2c-8be4-4d9a-a3a9-dca01082f0bc
 @htl """
 <style>
 	pluto-output {
 		--julia-mono-font-stack: system-ui,sans-serif;
-	}
-	.hilite {
-		background-color: yellow;
-		font-weight: bold;
 	}
 </style>
 """
@@ -246,25 +329,25 @@ end
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
-BiblicalHebrew = "23d2231d-1fc1-47c2-a612-987552d9b38e"
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
+CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
+EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
 HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
-PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
-BiblicalHebrew = "~0.3.3"
 CitableBase = "~10.3.1"
 CitableCorpus = "~0.13.5"
+CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
+EditionBuilders = "~0.8.4"
 HypertextLiteral = "~0.9.5"
 LatinOrthography = "~0.7.2"
 Orthography = "~0.21.3"
-PlutoTeachingTools = "~0.2.14"
 PlutoUI = "~0.7.55"
 """
 
@@ -274,7 +357,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "def9871b71c91d39811962e19af7ce188f77516f"
+project_hash = "528fde96c5dd92b26c18a3c5a01e822a1d4b5771"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -314,12 +397,6 @@ uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
-[[deps.BiblicalHebrew]]
-deps = ["DocStringExtensions", "Documenter", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "eda764973393dea4a6f5b70e218b010e8286718f"
-uuid = "23d2231d-1fc1-47c2-a612-987552d9b38e"
-version = "0.3.3"
-
 [[deps.BitFlags]]
 git-tree-sha1 = "2dc09997850d68179b69dafb58ae806167a32b1b"
 uuid = "d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35"
@@ -343,6 +420,12 @@ git-tree-sha1 = "f400484e7b0fc1707f9dfd288fa297a4a2d9a2ad"
 uuid = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 version = "0.13.5"
 
+[[deps.CitableTeiReaders]]
+deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "HTTP", "Test"]
+git-tree-sha1 = "deed5242dad324dfd619bdeaa23528e131664a91"
+uuid = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
+version = "0.10.3"
+
 [[deps.CitableText]]
 deps = ["CitableBase", "DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
 git-tree-sha1 = "00ddf4c75f3e2b8dd54a4e4808b8ec27053d9bb3"
@@ -354,12 +437,6 @@ deps = ["CSV", "CitableBase", "DocStringExtensions", "Documenter", "HTTP", "Test
 git-tree-sha1 = "da30bc6866a19e0235319c7fa3ffa6ab7f27e02e"
 uuid = "e2e9ead3-1b6c-4e96-b95f-43e6ab899178"
 version = "0.10.2"
-
-[[deps.CodeTracking]]
-deps = ["InteractiveUtils", "UUIDs"]
-git-tree-sha1 = "c0216e792f518b39b22212127d4a84dc31e4e386"
-uuid = "da1fd8a2-8d9e-5ec2-8556-3022fb5608a2"
-version = "1.3.5"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
@@ -390,9 +467,9 @@ version = "1.0.5+1"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
-git-tree-sha1 = "9c4708e3ed2b799e6124b5673a712dda0b596a9b"
+git-tree-sha1 = "8cfa272e8bdedfa88b6aefbbca7c19f1befac519"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
-version = "2.3.1"
+version = "2.3.0"
 
 [[deps.DataAPI]]
 git-tree-sha1 = "abe83f3a2f1b857aac70ef8b269080af17764bbe"
@@ -421,9 +498,9 @@ version = "1.2.0"
 
 [[deps.Dictionaries]]
 deps = ["Indexing", "Random", "Serialization"]
-git-tree-sha1 = "573c92ef22ee0783bfaa4007c732b044c791bc6d"
+git-tree-sha1 = "8b73c5a704d74e78a114b785d648ceba1e5790a9"
 uuid = "85a47980-9c8c-11e8-2b9f-f7ca1fa99fb4"
-version = "0.4.1"
+version = "0.4.0"
 
 [[deps.Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
@@ -446,6 +523,12 @@ deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
 
+[[deps.EditionBuilders]]
+deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "Test"]
+git-tree-sha1 = "1aae9a01bb737937c3b774c6c7939f9176255ba1"
+uuid = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
+version = "0.8.4"
+
 [[deps.ExceptionUnwrapping]]
 deps = ["Test"]
 git-tree-sha1 = "dcb08a0d93ec0b1cdc4af184b26b591e9695423a"
@@ -457,6 +540,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "4558ab818dcceaab612d1bb8c19cee87eda2b83c"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
 version = "2.5.0+0"
+
+[[deps.EzXML]]
+deps = ["Printf", "XML2_jll"]
+git-tree-sha1 = "380053d61bb9064d6aa4a9777413b40429c79901"
+uuid = "8f5d6c58-4d21-5cfd-889c-e3ad7ee6a615"
+version = "1.2.0"
 
 [[deps.FilePathsBase]]
 deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]
@@ -472,12 +561,6 @@ deps = ["Statistics"]
 git-tree-sha1 = "335bfdceacc84c5cdf16aadc768aa5ddfc5383cc"
 uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
 version = "0.8.4"
-
-[[deps.Formatting]]
-deps = ["Printf"]
-git-tree-sha1 = "8339d61043228fdd3eb658d86c926cb282ae72a8"
-uuid = "59287772-0a20-5a39-b81b-1366585eb4c0"
-version = "0.4.2"
 
 [[deps.Future]]
 deps = ["Random"]
@@ -556,31 +639,6 @@ git-tree-sha1 = "31e996f0a15c7b280ba9f76636b3ff9e2ae58c9a"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "0.21.4"
 
-[[deps.JuliaInterpreter]]
-deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
-git-tree-sha1 = "04663b9e1eb0d0eabf76a6d0752e0dac83d53b36"
-uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
-version = "0.9.28"
-
-[[deps.LaTeXStrings]]
-git-tree-sha1 = "50901ebc375ed41dbf8058da26f9de442febbbec"
-uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
-version = "1.3.1"
-
-[[deps.Latexify]]
-deps = ["Formatting", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "OrderedCollections", "Printf", "Requires"]
-git-tree-sha1 = "f428ae552340899a935973270b8d98e5a31c49fe"
-uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
-version = "0.16.1"
-
-    [deps.Latexify.extensions]
-    DataFramesExt = "DataFrames"
-    SymEngineExt = "SymEngine"
-
-    [deps.Latexify.weakdeps]
-    DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-    SymEngine = "123dc426-2d89-5057-bbad-38513e3affd8"
-
 [[deps.LatinOrthography]]
 deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "Orthography", "Test"]
 git-tree-sha1 = "2fea442e6ce1e5934b1098c9c849674305c5d2c8"
@@ -654,22 +712,10 @@ git-tree-sha1 = "c1dd6d7978c12545b4179fb6153b9250c96b0075"
 uuid = "e6f89c97-d47a-5376-807f-9c37f3926c36"
 version = "1.0.3"
 
-[[deps.LoweredCodeUtils]]
-deps = ["JuliaInterpreter"]
-git-tree-sha1 = "20ce1091ba18bcdae71ad9b71ee2367796ba6c48"
-uuid = "6f1432cf-f94c-5a45-995e-cdbf5db27b0b"
-version = "2.4.4"
-
 [[deps.MIMEs]]
 git-tree-sha1 = "65f28ad4b594aebe22157d6fac869786a255b7eb"
 uuid = "6c6e2e6c-3030-632d-7369-2d6c69616d65"
 version = "0.1.4"
-
-[[deps.MacroTools]]
-deps = ["Markdown", "Random"]
-git-tree-sha1 = "2fa9ee3e63fd3a4f7a9a4f4744a52f4856de82df"
-uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
-version = "0.5.13"
 
 [[deps.Markdown]]
 deps = ["Base64"]
@@ -753,24 +799,6 @@ deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 version = "1.10.0"
 
-[[deps.PlutoHooks]]
-deps = ["InteractiveUtils", "Markdown", "UUIDs"]
-git-tree-sha1 = "072cdf20c9b0507fdd977d7d246d90030609674b"
-uuid = "0ff47ea0-7a50-410d-8455-4348d5de0774"
-version = "0.0.5"
-
-[[deps.PlutoLinks]]
-deps = ["FileWatching", "InteractiveUtils", "Markdown", "PlutoHooks", "Revise", "UUIDs"]
-git-tree-sha1 = "8f5fa7056e6dcfb23ac5211de38e6c03f6367794"
-uuid = "0ff47ea0-7a50-410d-8455-4348d5de0420"
-version = "0.1.6"
-
-[[deps.PlutoTeachingTools]]
-deps = ["Downloads", "HypertextLiteral", "LaTeXStrings", "Latexify", "Markdown", "PlutoLinks", "PlutoUI", "Random"]
-git-tree-sha1 = "89f57f710cc121a7f32473791af3d6beefc59051"
-uuid = "661c6b06-c737-4d37-b85c-46df65de6f69"
-version = "0.2.14"
-
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
 git-tree-sha1 = "68723afdb616445c6caaef6255067a8339f91325"
@@ -823,12 +851,6 @@ deps = ["UUIDs"]
 git-tree-sha1 = "838a3a4188e2ded87a4f9f184b4b0d78a1e91cb7"
 uuid = "ae029012-a4dd-5104-9daa-d747884805df"
 version = "1.3.0"
-
-[[deps.Revise]]
-deps = ["CodeTracking", "Distributed", "FileWatching", "JuliaInterpreter", "LibGit2", "LoweredCodeUtils", "OrderedCollections", "Pkg", "REPL", "Requires", "UUIDs", "Unicode"]
-git-tree-sha1 = "3fe4e5b9cdbb9bbc851c57b149e516acc07f8f72"
-uuid = "295af30f-e4ad-537b-8983-00126c2a3abe"
-version = "3.5.13"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
@@ -965,6 +987,12 @@ git-tree-sha1 = "cd1659ba0d57b71a464a29e64dbc67cfe83d54e7"
 uuid = "76eceee3-57b5-4d4a-8e66-0e911cebbf60"
 version = "1.6.1"
 
+[[deps.XML2_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Libiconv_jll", "Zlib_jll"]
+git-tree-sha1 = "801cbe47eae69adc50f36c3caec4758d2650741b"
+uuid = "02c8fc9c-b97f-50b9-bbe4-9be30ff0a78a"
+version = "2.12.2+0"
+
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
@@ -987,39 +1015,62 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─aee454c5-4aaf-41dd-9226-f5525885e3df
-# ╠═f957e7a9-aa14-41c1-9c39-27baf90a0635
-# ╟─42dd83e0-db01-47aa-9cb2-535cf0583a2e
-# ╟─ba1b47d9-0c2b-457b-8a7f-6fd786f9f2c7
-# ╟─425decdf-18de-4c7e-9033-5a3e7418a485
-# ╟─1e31d65c-094a-47b7-a9e4-b8296a48d311
-# ╟─ed596167-b794-4e03-8c0a-fe4489d56440
-# ╟─6876234c-a2c7-46df-b999-c2888a2e84e4
-# ╟─bbbd1982-cf94-11ee-2d3d-df018dd63688
-# ╟─009ac7b3-40b7-4d96-8559-2ee0174c6575
-# ╟─18cf2eb7-5fae-4258-bc29-684459232d0f
-# ╟─bdf4e5c9-e302-45af-9f01-74eb1aad0a8f
-# ╟─12e7c4f5-72b5-430a-ae33-0b99c242b5be
-# ╠═9149b47c-ef86-4265-ab23-b5d65dab72fe
-# ╟─b9c39ad2-8f5e-4627-a08a-9e4fbc5fc3b0
-# ╟─03aaf337-1d04-4b72-9db4-2cea181c9acc
-# ╟─352a283b-4e77-4b31-bb7e-e64e5557b91c
-# ╟─626deef8-93f0-475a-9792-3904887b1569
-# ╟─ab902fc9-612d-4780-832a-532fa7538815
-# ╟─0e96a21d-b461-4282-a572-8d8fbb1ffe13
-# ╟─f8e5919c-d3be-432b-b827-f5642ad5619e
-# ╟─c6edd3a5-ffcd-40c1-b2c1-b3b02196ae7b
-# ╟─ea4f5761-3eca-48de-9621-ad95763feca2
-# ╟─24c747b8-b347-4a24-9e04-9cdea4aa9a30
-# ╟─5a0a3ff2-818a-4dec-b77e-7ed514da2420
-# ╟─1570c4a6-570d-43d9-b40f-3477baba008c
-# ╟─6b573723-2437-4add-a7ce-01a7eb0fd6d4
-# ╟─1311fb4b-3897-41b0-bed3-c87192f6cc27
-# ╟─f7154a06-9b17-4a37-ae21-dfd10ce0944c
-# ╟─f2e3aa94-0563-4891-9884-0166d025dfff
-# ╟─ec57d857-c98d-4f5b-81b7-0a7cf2f43f54
-# ╟─55d29a44-c2c6-4594-a64a-56ec563527f7
-# ╟─bcfdf29a-1f92-4d34-bd79-269d832c0893
-# ╠═79aada91-1f12-44ce-b66d-1b0bf99181c9
+# ╠═505e5234-c399-11ee-2a14-bfee14a8bf57
+# ╟─01cd9b04-4308-4776-ad22-bcd4eb48a966
+# ╟─36dd1391-3550-4c87-8ba8-4325e007316a
+# ╟─f56c3f61-cae0-4d1a-b755-86ddff6d3c53
+# ╟─a2171ec8-6691-4f52-b9ec-a6281594d4b2
+# ╟─ecbcee9e-9719-4883-8615-20a1602014a6
+# ╟─7d035d8d-7f3c-4b1d-9eb9-2069f317109e
+# ╟─966eedc9-1c4d-4117-8076-26b8eda54e96
+# ╟─571bfd40-3fc5-40ed-beb1-7035e25cf5bc
+# ╟─77bbc155-3d5d-4941-9188-d664e45e2d81
+# ╟─9aca0d5f-f4ed-44a6-8470-1d0e91b006eb
+# ╟─b873d268-5af3-4d6c-a1b7-3af6f3c764bf
+# ╠═763fe204-9aa3-4c2a-81f6-98e8a6299b34
+# ╟─cf9ebba5-d90c-42ae-8a11-bdef4660991c
+# ╟─80e36d02-a7a0-4b18-9cf7-b26bbcadc345
+# ╠═9f98852b-acf8-4740-92c5-00e291d2943c
+# ╟─048b9dc6-7e1d-4180-bb00-7efca50656ce
+# ╟─96ea76d5-0e3d-46df-b807-97a9a61ac519
+# ╠═298c9a4b-2a24-4c7d-8575-e0f42ae16044
+# ╠═5af37c2d-595d-4043-a601-22f88e55ef79
+# ╟─44522bfa-9420-4aac-a402-5f55ebc29e05
+# ╟─1d7b8019-0a2f-42ab-a2f4-ff53d266e1ae
+# ╟─ba2247ab-6b07-4230-9661-5cc9a17bed66
+# ╟─5cf92532-b67a-40a3-ad1a-c7f03cdb0eda
+# ╟─cb77fe26-a3c9-48f9-8364-c6288ffd50d5
+# ╟─1c27264c-cb66-4f0f-89ad-8d151a60bd58
+# ╟─b049d8ff-6092-4174-9bc8-3138bd272eaf
+# ╟─a538cd79-f58f-44d0-b4b3-413461084ff9
+# ╟─43f6d597-11ee-4faf-8710-964ca97b2c89
+# ╟─ed6016b0-ebba-4403-b6e7-697e8a36e719
+# ╟─f6db2166-5dd2-422f-ba88-917b6a687773
+# ╟─0681c83f-f445-460e-891c-2d55ff54d918
+# ╟─c1791f30-a4ef-409c-86ce-80708df51291
+# ╟─73919628-120d-4317-ba7b-26e74d2d75d9
+# ╠═c2379250-5def-4e3e-b310-739c7e1b1587
+# ╟─4676bd78-0a1c-48ec-9a38-6171fc168b96
+# ╠═22e0f5ff-d3c7-4450-a968-1165aefc1caa
+# ╠═09556565-5d85-4684-a476-640aa025bf70
+# ╠═fb2be480-9679-4a69-a578-091ae1c6f7b2
+# ╠═90752577-0748-4ee5-92ee-934ada8263b9
+# ╟─e2fa65bd-9084-4ce9-805e-9b1565bb5794
+# ╟─c2fbb1d6-a63f-47ef-9f5d-fc98fb4f5f5a
+# ╟─1eabb81f-291a-4701-ab71-5eaaa8f03693
+# ╠═7f933451-896a-48a9-96f7-4fe1a048288f
+# ╟─9af25ad8-168c-4f28-9d24-54164b298db7
+# ╠═a9592b4a-3db9-485e-a087-32786d584b1f
+# ╟─8f070001-b104-4d5d-9b08-90a1e0247892
+# ╟─2a6dc443-9ccc-4c74-95e0-a6a7c126cea6
+# ╟─50966a9c-b83a-42c2-94b2-a1899fe51f12
+# ╟─13825cdf-a2da-4be9-8052-80a86adf024c
+# ╠═049e6845-f4e8-4223-a69d-8fbb877e98de
+# ╠═7d789a64-08f5-492f-9d02-e1ed674570ca
+# ╟─ffc7785d-1750-431d-877a-70c478d6fbc5
+# ╟─95d5cb19-ce6b-4e06-8cc6-451faa5ec194
+# ╟─acd6ae5a-0390-48e6-bf80-eae7ab9b2910
+# ╟─e0a33f4a-3dfb-476c-ac98-7e4934b07b4b
+# ╟─5d114d2c-8be4-4d9a-a3a9-dca01082f0bc
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
