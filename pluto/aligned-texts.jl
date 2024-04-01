@@ -30,11 +30,16 @@ begin
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
-# ╔═╡ 795dc15c-8eb4-4b5d-81a6-51779991e04c
-
-
 # ╔═╡ 5bfc5920-0d98-4a7d-8c60-fe3030981ab2
-md"""*Notebook version*: **1.0.0**"""
+md"""*Notebook version*: **1.0.1** *See version info*: $(@bind versioninfo CheckBox())"""
+
+# ╔═╡ 9cfd5713-a21b-4f98-8ece-f3cf17657818
+if versioninfo
+	md"""
+- **1.0.1**: work with new URNs	
+- **1.0.0**: initial release	
+"""	
+end
 
 # ╔═╡ 06b9ba91-49b4-4793-9ad0-96fb3b1ba5be
 @bind reloadtext Button("Reload editing of glosses")
@@ -137,13 +142,13 @@ end
 
 # ╔═╡ 2f3f28c1-80b0-41db-a645-7c82454ff608
 begin
-	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).masoretic:$(verse)"), corpus)
-	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).vulgate:$(verse)"), corpus)
+	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).masoretic:$(verse)"), corpus)
+	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).vulgate:$(verse)"), corpus)
 	latinseptpsg = 
 
-	septpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).septuagint:$(verse)"), corpus)
+	septpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).septuagint:$(verse)"), corpus)
 
-	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).onkelos:$(verse)"), corpus)
+	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).onkelos:$(verse)"), corpus)
 
 	
 
@@ -194,7 +199,7 @@ PlutoUI = "~0.7.55"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
 project_hash = "67548badf650c2348ef08e34a723a20bc837e5a2"
 
@@ -296,7 +301,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -584,7 +589,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -829,9 +834,9 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═795dc15c-8eb4-4b5d-81a6-51779991e04c
 # ╟─403fca78-6436-48ac-961f-4b3812d79f86
 # ╟─5bfc5920-0d98-4a7d-8c60-fe3030981ab2
+# ╟─9cfd5713-a21b-4f98-8ece-f3cf17657818
 # ╟─06b9ba91-49b4-4793-9ad0-96fb3b1ba5be
 # ╟─fbe09532-ccd0-11ee-3ed7-2bb05352d2c3
 # ╟─cfa5898e-7cd3-4158-ae02-41f734cd6927
@@ -843,7 +848,7 @@ version = "17.4.0+2"
 # ╟─bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
 # ╟─6802262c-d391-4bea-aa11-7a31925d547b
 # ╟─9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
-# ╠═834b2e1f-e262-46aa-87b0-4daa5370cad3
+# ╟─834b2e1f-e262-46aa-87b0-4daa5370cad3
 # ╟─127f8b5d-a9cf-4612-816c-9f432bda1b0d
 # ╟─8f4fd44a-4f68-4cfd-9165-2c8626caae51
 # ╟─cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
