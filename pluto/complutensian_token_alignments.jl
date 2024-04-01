@@ -28,11 +28,17 @@ begin
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
-# ╔═╡ f957e7a9-aa14-41c1-9c39-27baf90a0635
-
-
 # ╔═╡ 42dd83e0-db01-47aa-9cb2-535cf0583a2e
-md"""*Notebook version*: **1.0.0**"""
+md"""*Notebook version*: **1.0.1** *See version info*: $(@bind versioninfo CheckBox())"""
+
+# ╔═╡ 29b9fb0a-441b-4ae7-b4b5-a5aace20236f
+if versioninfo
+md"""
+
+- **1.0.1**: work with new URNs
+- **1.0.0**: initial release
+"""
+end
 
 # ╔═╡ ba1b47d9-0c2b-457b-8a7f-6fd786f9f2c7
 md"""$(@bind reload Button("Reload indexing data"))"""
@@ -150,11 +156,6 @@ md"""*Verse* $(@bind verse Select(versesforchapter(vulgate, book, chap)))"""
 # ╔═╡ 009ac7b3-40b7-4d96-8559-2ee0174c6575
 """*$(titlecase(book))* $(verse):""" |> Markdown.parse
 
-# ╔═╡ 9149b47c-ef86-4265-ab23-b5d65dab72fe
-hebrewpsgtext = filter(tanach.passages) do psg
-		workid(psg.urn) == book && passagecomponent(psg.urn) == verse
-	end[1].text
-
 # ╔═╡ ab902fc9-612d-4780-832a-532fa7538815
 psgindexing = filter(indexdata) do tkn
 	psgopener = verse * "."
@@ -168,23 +169,21 @@ if isempty(psgindexing)
 else
 	mdlines = ["| Hebrew | marker | Latin |", 
 	"| --- | --- | --- |"]
-
 	for triple in psgindexing
-		
-		hebrewform = filter(t -> t.passage.urn == triple.hebrew, tanachtkns)
-		latinform = if isnothing(triple.latin) 
-			""
-		else
-			lattokenmatches = filter(t -> t.passage.urn == triple.latin, vulgatetkns)
-			lattokenmatches[1].passage.text
-		end
 			
-			 #isnothing(triple.latin) ? nothing : filter(t -> t.passage.urn == triple.latin[1].passage.textg, vulgatetkns)
-		
-		push!(mdlines, string("| ", hebrewform[1].passage.text, "| ", triple.marker, " | ", latinform, "| "))
-	end
-
-	join(mdlines,"\n") |> Markdown.parse
+			hebrewform = filter(t -> t.passage.urn == triple.hebrew, tanachtkns)
+			latinform = if isnothing(triple.latin) 
+				""
+			else
+				lattokenmatches = filter(t -> t.passage.urn == triple.latin, vulgatetkns)
+				lattokenmatches[1].passage.text
+			end
+				
+				 #isnothing(triple.latin) ? nothing : filter(t -> t.passage.urn == triple.latin[1].passage.textg, vulgatetkns)
+			
+			push!(mdlines, string("| ", hebrewform[1].passage.text, "| ", triple.marker, " | ", latinform, "| "))
+		end
+		join(mdlines,"\n") |> Markdown.parse
 end
 
 # ╔═╡ 5a0a3ff2-818a-4dec-b77e-7ed514da2420
@@ -193,6 +192,11 @@ vulgatepsg = filter(vulgatetkns) do tkn
 	workid(tkn.passage.urn) == book &&
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
 end
+
+# ╔═╡ 9149b47c-ef86-4265-ab23-b5d65dab72fe
+hebrewpsgtext = filter(tanach.passages) do psg
+		workid(psg.urn) == book && passagecomponent(psg.urn) == verse
+	end[1].text
 
 # ╔═╡ 1311fb4b-3897-41b0-bed3-c87192f6cc27
 tanachpsg = filter(tanachtkns) do tkn
@@ -272,7 +276,7 @@ PlutoUI = "~0.7.55"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
 project_hash = "def9871b71c91d39811962e19af7ce188f77516f"
 
@@ -386,7 +390,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -712,7 +716,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -988,19 +992,18 @@ version = "17.4.0+2"
 
 # ╔═╡ Cell order:
 # ╟─aee454c5-4aaf-41dd-9226-f5525885e3df
-# ╠═f957e7a9-aa14-41c1-9c39-27baf90a0635
 # ╟─42dd83e0-db01-47aa-9cb2-535cf0583a2e
+# ╟─29b9fb0a-441b-4ae7-b4b5-a5aace20236f
 # ╟─ba1b47d9-0c2b-457b-8a7f-6fd786f9f2c7
+# ╟─6876234c-a2c7-46df-b999-c2888a2e84e4
+# ╟─bbbd1982-cf94-11ee-2d3d-df018dd63688
 # ╟─425decdf-18de-4c7e-9033-5a3e7418a485
 # ╟─1e31d65c-094a-47b7-a9e4-b8296a48d311
 # ╟─ed596167-b794-4e03-8c0a-fe4489d56440
-# ╟─6876234c-a2c7-46df-b999-c2888a2e84e4
-# ╟─bbbd1982-cf94-11ee-2d3d-df018dd63688
 # ╟─009ac7b3-40b7-4d96-8559-2ee0174c6575
 # ╟─18cf2eb7-5fae-4258-bc29-684459232d0f
 # ╟─bdf4e5c9-e302-45af-9f01-74eb1aad0a8f
 # ╟─12e7c4f5-72b5-430a-ae33-0b99c242b5be
-# ╠═9149b47c-ef86-4265-ab23-b5d65dab72fe
 # ╟─b9c39ad2-8f5e-4627-a08a-9e4fbc5fc3b0
 # ╟─03aaf337-1d04-4b72-9db4-2cea181c9acc
 # ╟─352a283b-4e77-4b31-bb7e-e64e5557b91c
@@ -1013,8 +1016,9 @@ version = "17.4.0+2"
 # ╟─24c747b8-b347-4a24-9e04-9cdea4aa9a30
 # ╟─5a0a3ff2-818a-4dec-b77e-7ed514da2420
 # ╟─1570c4a6-570d-43d9-b40f-3477baba008c
-# ╟─6b573723-2437-4add-a7ce-01a7eb0fd6d4
+# ╟─9149b47c-ef86-4265-ab23-b5d65dab72fe
 # ╟─1311fb4b-3897-41b0-bed3-c87192f6cc27
+# ╟─6b573723-2437-4add-a7ce-01a7eb0fd6d4
 # ╟─f7154a06-9b17-4a37-ae21-dfd10ce0944c
 # ╟─f2e3aa94-0563-4891-9884-0166d025dfff
 # ╟─ec57d857-c98d-4f5b-81b7-0a7cf2f43f54
