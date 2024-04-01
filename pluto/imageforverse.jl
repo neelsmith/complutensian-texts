@@ -50,6 +50,18 @@ md"""> *Image URNs are linked to the Homer Multitext project's Image Citation To
 # ╔═╡ 0fea9172-cfe7-11ee-291e-4396c1545f9e
 md"""# Find citable image for text passage"""
 
+# ╔═╡ a6a74533-dd97-4417-a075-1211274bbd57
+# ╠═╡ disabled = true
+#=╠═╡
+begin #
+	img_md_lines =  []
+	for pr in indexpairs
+		push!(img_md_lines, markdownImage(Cite2Urn(pr.image), service; w = 100))
+	end
+	join(img_md_lines, " ") |> Markdown.parse
+end
+  ╠═╡ =#
+
 # ╔═╡ cb0b2194-6696-4d75-b449-fd5b6e7f3200
 html"""
 <br/><br/><br/><br/><br/>
@@ -68,6 +80,9 @@ md"""> Display linked thumbnail."""
 
 # ╔═╡ 04951dd2-48b6-41b8-b96a-947190b9897e
 md"""> UI"""
+
+# ╔═╡ 7c423a37-21cd-49d2-a5b9-5c4b4b9e40b8
+
 
 # ╔═╡ 0604b20b-b0cc-436a-a8d8-e8326f4cd722
 """Find unique list of chapter values for given book in a corpus."""
@@ -225,18 +240,6 @@ begin
 	end
 	join(img_md_lines, " ") |> Markdown.parse
 end
-
-# ╔═╡ a6a74533-dd97-4417-a075-1211274bbd57
-# ╠═╡ disabled = true
-#=╠═╡
-begin #
-	img_md_lines =  []
-	for pr in indexpairs
-		push!(img_md_lines, markdownImage(Cite2Urn(pr.image), service; w = 100))
-	end
-	join(img_md_lines, " ") |> Markdown.parse
-end
-  ╠═╡ =#
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1692,6 +1695,7 @@ version = "17.4.0+2"
 # ╟─0bd64110-0dd9-43a1-bdf4-1794c979a950
 # ╟─04951dd2-48b6-41b8-b96a-947190b9897e
 # ╟─503bec07-6f1c-4e71-a5a9-a28e63766d63
+# ╠═7c423a37-21cd-49d2-a5b9-5c4b4b9e40b8
 # ╟─0604b20b-b0cc-436a-a8d8-e8326f4cd722
 # ╟─d5d39c6f-3f30-49f0-b30a-64035cab5421
 # ╟─aeebccb9-8d07-4716-93b0-7c4dab08a547

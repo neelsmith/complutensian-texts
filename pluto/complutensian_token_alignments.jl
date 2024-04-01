@@ -23,18 +23,21 @@ begin
 
 	using HypertextLiteral
 
+	using Downloads
+	
 	using PlutoTeachingTools
 	using PlutoUI
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
 # ╔═╡ 42dd83e0-db01-47aa-9cb2-535cf0583a2e
-md"""*Notebook version*: **1.0.1** *See version info*: $(@bind versioninfo CheckBox())"""
+md"""*Notebook version*: **1.0.2** *See version info*: $(@bind versioninfo CheckBox())"""
 
 # ╔═╡ 29b9fb0a-441b-4ae7-b4b5-a5aace20236f
 if versioninfo
 md"""
 
+- **1.0.2**: use curated list of book IDs from gh repo
 - **1.0.1**: work with new URNs
 - **1.0.0**: initial release
 """
@@ -113,42 +116,25 @@ tanachtkns = tokenize(tanach, HebrewOrthography())
 md"""> UI"""
 
 # ╔═╡ f2e3aa94-0563-4891-9884-0166d025dfff
-workids = map(vulgate.passages) do psg
-	workid(psg.urn)
-end |> unique
+#workids = map(vulgate.passages) do psg
+#	workid(psg.urn)
+#end |> unique
+
+# ╔═╡ c8f65a73-2487-4651-80a3-98c2307b0aff
+begin
+	booksurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/bookslist.txt"
+	tmp = Downloads.download(booksurl)
+	workids = readlines(tmp)
+	rm(tmp)
+end
 
 # ╔═╡ 425decdf-18de-4c7e-9033-5a3e7418a485
 md"""
 *Book*: $(@bind book Select(workids)) 
 """ 
 
-# ╔═╡ ec57d857-c98d-4f5b-81b7-0a7cf2f43f54
-"""Find unique list of chapter values for given book in a corpus."""
-function chaptersforbook(corpus, bookid)
-	bookpassages = filter(corpus.passages) do psg
-		workid(psg.urn) == bookid
-	end
-	map(bookpassages) do psg
-		collapsePassageTo(psg.urn, 1) |> passagecomponent
-		
-	end |> unique
-		
-end
-
 # ╔═╡ 1e31d65c-094a-47b7-a9e4-b8296a48d311
 md"""*Chapter* $(@bind chap Select(chaptersforbook(vulgate, book)))"""
-
-# ╔═╡ 55d29a44-c2c6-4594-a64a-56ec563527f7
-"""Find unique list of verse values for given book and chapter in a corpus."""
-function versesforchapter(c, bk, chptr)
-	chapterpassages = filter(c.passages) do psg
-		psgchapter = collapsePassageTo(psg.urn, 1) |> passagecomponent
-		workid(psg.urn) == bk && psgchapter == chptr
-	end
-	map(chapterpassages) do psg
-		passagecomponent(psg.urn)
-	end
-end
 
 # ╔═╡ ed596167-b794-4e03-8c0a-fe4489d56440
 md"""*Verse* $(@bind verse Select(versesforchapter(vulgate, book, chap)))"""
@@ -198,11 +184,43 @@ hebrewpsgtext = filter(tanach.passages) do psg
 		workid(psg.urn) == book && passagecomponent(psg.urn) == verse
 	end[1].text
 
+# ╔═╡ 18cf2eb7-5fae-4258-bc29-684459232d0f
+"""<table>
+<tr> <th>Hebrew text</th> <th>Latin text</th> </tr>
+<tr><td> $(hebrewpsgtext) </td><td> $(hilitemissing(vulgatepsg,psgindexing)) </td>
+</table>
+""" |> HTML
+
 # ╔═╡ 1311fb4b-3897-41b0-bed3-c87192f6cc27
 tanachpsg = filter(tanachtkns) do tkn
 	passagebase = verse * "."
 	workid(tkn.passage.urn) == book &&
 	startswith(passagecomponent(tkn.passage.urn), passagebase)
+end
+
+# ╔═╡ ec57d857-c98d-4f5b-81b7-0a7cf2f43f54
+"""Find unique list of chapter values for given book in a corpus."""
+function chaptersforbook(corpus, bookid)
+	bookpassages = filter(corpus.passages) do psg
+		workid(psg.urn) == bookid
+	end
+	map(bookpassages) do psg
+		collapsePassageTo(psg.urn, 1) |> passagecomponent
+		
+	end |> unique
+		
+end
+
+# ╔═╡ 55d29a44-c2c6-4594-a64a-56ec563527f7
+"""Find unique list of verse values for given book and chapter in a corpus."""
+function versesforchapter(c, bk, chptr)
+	chapterpassages = filter(c.passages) do psg
+		psgchapter = collapsePassageTo(psg.urn, 1) |> passagecomponent
+		workid(psg.urn) == bk && psgchapter == chptr
+	end
+	map(chapterpassages) do psg
+		passagecomponent(psg.urn)
+	end
 end
 
 # ╔═╡ bcfdf29a-1f92-4d34-bd79-269d832c0893
@@ -227,13 +245,6 @@ function hilitemissing(tknlist, crossindex)
 	join(tkns)
 end
 
-# ╔═╡ 18cf2eb7-5fae-4258-bc29-684459232d0f
-"""<table>
-<tr> <th>Hebrew text</th> <th>Latin text</th> </tr>
-<tr><td> $(hebrewpsgtext) </td><td> $(hilitemissing(vulgatepsg,psgindexing)) </td>
-</table>
-""" |> HTML
-
 # ╔═╡ 79aada91-1f12-44ce-b66d-1b0bf99181c9
 @htl """
 <style>
@@ -254,6 +265,7 @@ BiblicalHebrew = "23d2231d-1fc1-47c2-a612-987552d9b38e"
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
@@ -278,7 +290,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "def9871b71c91d39811962e19af7ce188f77516f"
+project_hash = "a0a534cb21a661892d2b401355de22458ea9e3ef"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1021,6 +1033,7 @@ version = "17.4.0+2"
 # ╟─6b573723-2437-4add-a7ce-01a7eb0fd6d4
 # ╟─f7154a06-9b17-4a37-ae21-dfd10ce0944c
 # ╟─f2e3aa94-0563-4891-9884-0166d025dfff
+# ╠═c8f65a73-2487-4651-80a3-98c2307b0aff
 # ╟─ec57d857-c98d-4f5b-81b7-0a7cf2f43f54
 # ╟─55d29a44-c2c6-4594-a64a-56ec563527f7
 # ╟─bcfdf29a-1f92-4d34-bd79-269d832c0893

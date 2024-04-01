@@ -23,6 +23,8 @@ begin
 	using CitableTeiReaders
 	using EditionBuilders
 
+	using Downloads
+	
 	using HypertextLiteral
 
 	using PlutoTeachingTools
@@ -31,11 +33,12 @@ begin
 end
 
 # ╔═╡ 5bfc5920-0d98-4a7d-8c60-fe3030981ab2
-md"""*Notebook version*: **1.0.1** *See version info*: $(@bind versioninfo CheckBox())"""
+md"""*Notebook version*: **1.0.2** *See version info*: $(@bind versioninfo CheckBox())"""
 
 # ╔═╡ 9cfd5713-a21b-4f98-8ece-f3cf17657818
 if versioninfo
 	md"""
+- **1.0.2**: use list of book IDs from gh repo.
 - **1.0.1**: work with new URNs	
 - **1.0.0**: initial release	
 """	
@@ -49,6 +52,8 @@ md"""# Texts of the Complutensian Bible"""
 
 # ╔═╡ c7f731c0-2e5d-4a28-a480-e37be59cb74e
 html"""
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 """
@@ -76,14 +81,51 @@ end |> CitableTextCorpus
 md"""> Menus for user selections"""
 
 # ╔═╡ 8f4fd44a-4f68-4cfd-9165-2c8626caae51
-workids = map(tanach.passages) do psg
-	workid(psg.urn)
-end |> unique
+#workids = map(tanach.passages) do psg#
+#	workid(psg.urn)
+#end |> unique
+
+# ╔═╡ 49938ceb-8e39-4e7c-8aba-2e62587d7b5c
+begin
+	booksurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/bookslist.txt"
+	tmp = Downloads.download(booksurl)
+	workids = readlines(tmp)
+	rm(tmp)
+end
 
 # ╔═╡ cfa5898e-7cd3-4158-ae02-41f734cd6927
 md"""
 *Book*: $(@bind book Select(workids)) 
 """ 
+
+# ╔═╡ a80a4bc5-8ef3-4b8b-88d7-7ad4214826d9
+md"""*Chapter* $(@bind chap Select(chaptersforbook(tanach, book)))"""
+
+# ╔═╡ 865eff3a-b44e-428c-a439-00b387e5f442
+md"""*Verse* $(@bind verse Select(versesforchapter(tanach, book, chap)))"""
+
+# ╔═╡ 2f3f28c1-80b0-41db-a645-7c82454ff608
+begin
+	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).masoretic:$(verse)"), corpus)
+	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).vulgate:$(verse)"), corpus)
+	latinseptpsg = 
+
+	septpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).septuagint:$(verse)"), corpus)
+
+	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).onkelos:$(verse)"), corpus)
+
+	
+
+	
+"""
+| Version | Text |
+| --- | --- |
+| Hebrew Bible | $(hebrewpsg) |
+| Vulgate | $(vulgatepsg) |
+| Septuagint | $(septpsg) |
+| Targum Onkelos | $(targumpsg) |
+""" |> Markdown.parse
+end
 
 # ╔═╡ cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
 """Find unique list of chapter values for given book in a corpus."""
@@ -98,9 +140,6 @@ function chaptersforbook(corpus, bookid)
 		
 end
 
-# ╔═╡ a80a4bc5-8ef3-4b8b-88d7-7ad4214826d9
-md"""*Chapter* $(@bind chap Select(chaptersforbook(tanach, book)))"""
-
 # ╔═╡ 53c0b147-b805-4fc9-a464-fa78a54acc5b
 """Find unique list of verse values for given book and chapter in a corpus."""
 function versesforchapter(c, bk, chptr)
@@ -112,9 +151,6 @@ function versesforchapter(c, bk, chptr)
 		passagecomponent(psg.urn)
 	end
 end
-
-# ╔═╡ 865eff3a-b44e-428c-a439-00b387e5f442
-md"""*Verse* $(@bind verse Select(versesforchapter(tanach, book, chap)))"""
 
 # ╔═╡ 8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
 versionlabels = ["masoretic" => "Hebrew Bible", "vulgate" => "Latin Vulgate", "septuagint" => "Greek Septuagint"]
@@ -140,29 +176,6 @@ function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondic
 	
 end
 
-# ╔═╡ 2f3f28c1-80b0-41db-a645-7c82454ff608
-begin
-	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).masoretic:$(verse)"), corpus)
-	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).vulgate:$(verse)"), corpus)
-	latinseptpsg = 
-
-	septpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).septuagint:$(verse)"), corpus)
-
-	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).onkelos:$(verse)"), corpus)
-
-	
-
-	
-"""
-| Version | Text |
-| --- | --- |
-| Hebrew Bible | $(hebrewpsg) |
-| Vulgate | $(vulgatepsg) |
-| Septuagint | $(septpsg) |
-| Targum Onkelos | $(targumpsg) |
-""" |> Markdown.parse
-end
-
 # ╔═╡ 6400b3c7-398c-4ad2-a8f8-f45e3e2387cb
 @htl """
 <style>
@@ -179,6 +192,7 @@ CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
 HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
@@ -201,7 +215,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "67548badf650c2348ef08e34a723a20bc837e5a2"
+project_hash = "fdbe8777bb7e054a3fae796c9664465479af709f"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -845,12 +859,13 @@ version = "17.4.0+2"
 # ╟─2f3f28c1-80b0-41db-a645-7c82454ff608
 # ╟─c7f731c0-2e5d-4a28-a480-e37be59cb74e
 # ╟─947930b8-8cdb-4b69-ab7f-841f2d4f3957
-# ╟─bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
+# ╠═bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
 # ╟─6802262c-d391-4bea-aa11-7a31925d547b
 # ╟─9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
 # ╟─834b2e1f-e262-46aa-87b0-4daa5370cad3
 # ╟─127f8b5d-a9cf-4612-816c-9f432bda1b0d
-# ╟─8f4fd44a-4f68-4cfd-9165-2c8626caae51
+# ╠═8f4fd44a-4f68-4cfd-9165-2c8626caae51
+# ╠═49938ceb-8e39-4e7c-8aba-2e62587d7b5c
 # ╟─cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
 # ╟─53c0b147-b805-4fc9-a464-fa78a54acc5b
 # ╟─8edeed6e-1a70-4e2d-8dc0-2995c9a77aed

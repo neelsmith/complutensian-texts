@@ -24,6 +24,8 @@ begin
 	using CitableObject
 	using CitableImage
 
+	using Downloads
+	
 	using PlutoTeachingTools
 	using PlutoUI
 
@@ -31,12 +33,12 @@ begin
 end
 
 # ╔═╡ be599f13-2129-4601-ba80-228205f1f65d
-md"""*Notebook version*:  **1.1.0**  *See version notes*: $(@bind versioninfo CheckBox())"""
+md"""*Notebook version*:  **1.1.1**  *See version notes*: $(@bind versioninfo CheckBox())"""
 
 # ╔═╡ b73eda9e-f336-4673-ae69-3f346db591d0
 if versioninfo
 	md"""
-
+- **1.1.1**: use curated list of book IDs from gh repo
 - **1.1.0**: display alignment based on either Latin or Hebrew spacing markers.
 - **1.0.0**: initial release displays alignment based on Latin spacing markers.	
 """	
@@ -192,9 +194,17 @@ tanachtkns = tokenize(tanach, HebrewOrthography())
 md"""> UI menus"""
 
 # ╔═╡ 1955b9aa-a943-4781-8c34-60b6dff19ab6
-workids = map(vulgate.passages) do psg
-	workid(psg.urn)
-end |> unique
+#workids = map(vulgate.passages) do psg
+#	workid(psg.urn)
+#end |> unique
+
+# ╔═╡ 109be12b-6a03-4dc8-ad2b-a5fbc1cec9de
+begin
+	booksurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/bookslist.txt"
+	tmp = Downloads.download(booksurl)
+	workids = readlines(tmp)
+	rm(tmp)
+end
 
 # ╔═╡ 956f17b1-7392-429b-b58b-d8bfec779033
 md"""
@@ -418,6 +428,7 @@ CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableImage = "17ccb2e5-db19-44b3-b354-4fd16d92c74e"
 CitableObject = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
@@ -440,9 +451,9 @@ PlutoUI = "~0.7.55"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "9949c7cf31ec2acf801566faf0c99ce9f47580dd"
+project_hash = "750abf628b7ebf2d383a17bab4ed64c82bb1d566"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -684,7 +695,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ComputationalResources]]
 git-tree-sha1 = "52cb3ec90e8a8bea0e62e275ba577ad0f74821f7"
@@ -1374,7 +1385,7 @@ weakdeps = ["Adapt"]
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenEXR]]
 deps = ["Colors", "FileIO", "OpenEXR_jll"]
@@ -1929,7 +1940,7 @@ version = "17.4.0+2"
 # ╟─956f17b1-7392-429b-b58b-d8bfec779033
 # ╟─e348ce07-3558-4cb9-9ee6-38eaf57f9161
 # ╟─7635fcdc-020c-4285-a3b1-41fad1067c47
-# ╠═2796ce46-10ee-483d-a08f-d02be5d7ad33
+# ╟─2796ce46-10ee-483d-a08f-d02be5d7ad33
 # ╟─16fbcd1d-132b-467b-93f7-7d30172ec021
 # ╟─dffea0cc-d43f-4fe4-9250-23514c0f0bed
 # ╟─df3b4dd9-0cab-4e5f-b28c-d848636c0b37
@@ -1961,6 +1972,7 @@ version = "17.4.0+2"
 # ╟─768f871e-0f42-43d5-9183-03ed50654d82
 # ╟─bfc265d1-d028-4ca6-af90-566c86282901
 # ╟─1955b9aa-a943-4781-8c34-60b6dff19ab6
+# ╠═109be12b-6a03-4dc8-ad2b-a5fbc1cec9de
 # ╟─0382b20c-86be-45ec-9c7c-7cc60bdccb10
 # ╟─b89c3d47-f8f9-4914-9488-a10630af77ca
 # ╟─861169fd-623a-4f35-97a8-a5077485f1f1
@@ -1976,6 +1988,6 @@ version = "17.4.0+2"
 # ╟─99e2fd6c-b25d-49e5-9e18-a2b692c95231
 # ╟─fbe2abd1-e1cf-4312-b061-ce8c94bbc0ca
 # ╟─2e86078c-fbb0-4450-9d8a-c40316b32dc4
-# ╠═b43b764b-5f5e-4e74-9e18-8bd9d1451163
+# ╟─b43b764b-5f5e-4e74-9e18-8bd9d1451163
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

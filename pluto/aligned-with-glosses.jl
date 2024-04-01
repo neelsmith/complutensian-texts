@@ -23,6 +23,7 @@ begin
 	using CitableTeiReaders
 	using EditionBuilders
 
+	using Downloads
 	using HypertextLiteral
 
 	using PlutoTeachingTools
@@ -31,11 +32,12 @@ begin
 end
 
 # ╔═╡ 5bfc5920-0d98-4a7d-8c60-fe3030981ab2
-md"""*Notebook version*: **1.0.1** *See version info* $(@bind versioninfo CheckBox())"""
+md"""*Notebook version*: **1.0.2** *See version info* $(@bind versioninfo CheckBox())"""
 
 # ╔═╡ badbc51a-7d5d-4ca8-b57b-163fcc9bac42
 if versioninfo
 	md"""
+- **1.0.2**: use curated list of book IDs from gh repository
 - **1.0.1**: works with new URNs		
 - **1.0.0**: initial release	
 """	
@@ -114,10 +116,13 @@ targumlatin.passages[1]
 # ╔═╡ 127f8b5d-a9cf-4612-816c-9f432bda1b0d
 md"""> Menus for user selections"""
 
-# ╔═╡ 8f4fd44a-4f68-4cfd-9165-2c8626caae51
-workids = map(tanach.passages) do psg
-	workid(psg.urn)
-end |> unique
+# ╔═╡ 41de212e-92ed-407b-8aa3-ea82b686be27
+begin
+	booksurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/bookslist.txt"
+	tmp = Downloads.download(booksurl)
+	workids = readlines(tmp)
+	rm(tmp)
+end
 
 # ╔═╡ cfa5898e-7cd3-4158-ae02-41f734cd6927
 md"""
@@ -220,6 +225,7 @@ CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
 HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
@@ -242,7 +248,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "67548badf650c2348ef08e34a723a20bc837e5a2"
+project_hash = "fdbe8777bb7e054a3fae796c9664465479af709f"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -893,7 +899,7 @@ version = "17.4.0+2"
 # ╟─5d04b924-b152-4bcd-8584-8f4e5140c50f
 # ╟─7dad7dcb-a26f-476b-ad52-b7c5216e738b
 # ╟─351d283b-566f-4017-92cf-eee688539de1
-# ╠═5258de34-31fb-424a-8b25-d0bc2c1ba741
+# ╟─5258de34-31fb-424a-8b25-d0bc2c1ba741
 # ╟─e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
 # ╟─71c20bea-6be6-4178-b007-2061dce423bd
 # ╟─bcfe3e21-ee8b-4b8b-ba53-74d594782848
@@ -902,7 +908,7 @@ version = "17.4.0+2"
 # ╟─7961004b-a350-4040-8c10-8ba5b8f36385
 # ╟─574582d9-f692-4755-821d-021b3c38bb0c
 # ╟─127f8b5d-a9cf-4612-816c-9f432bda1b0d
-# ╟─8f4fd44a-4f68-4cfd-9165-2c8626caae51
+# ╠═41de212e-92ed-407b-8aa3-ea82b686be27
 # ╟─cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
 # ╟─53c0b147-b805-4fc9-a464-fa78a54acc5b
 # ╟─8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
