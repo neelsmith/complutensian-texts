@@ -31,7 +31,15 @@ begin
 end
 
 # ╔═╡ 5bfc5920-0d98-4a7d-8c60-fe3030981ab2
-md"""*Notebook version*: **1.0.0**"""
+md"""*Notebook version*: **1.0.1** *See version info* $(@bind versioninfo CheckBox())"""
+
+# ╔═╡ badbc51a-7d5d-4ca8-b57b-163fcc9bac42
+if versioninfo
+	md"""
+- **1.0.1**: works with new URNs		
+- **1.0.0**: initial release	
+"""	
+end
 
 # ╔═╡ 06b9ba91-49b4-4793-9ad0-96fb3b1ba5be
 @bind reloadtext Button("Reload editing of glosses")
@@ -79,7 +87,7 @@ septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
 # ╔═╡ e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
 septlatinxmlcorpus = begin
 	reloadtext
-	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
+	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
 
 # ╔═╡ 71c20bea-6be6-4178-b007-2061dce423bd
@@ -94,7 +102,7 @@ targumlatinxml =  joinpath(repo, "editions", "targum_latin_genesis.xml")
 # ╔═╡ 0c63d698-e476-40e3-ad49-d7a6b1a3ab5d
 targumlatinxmlcorpus = begin
 	reloadtext
-	readcitable(targumlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
+	readcitable(targumlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
 
 # ╔═╡ 7961004b-a350-4040-8c10-8ba5b8f36385
@@ -173,15 +181,15 @@ end
 
 # ╔═╡ 2f3f28c1-80b0-41db-a645-7c82454ff608
 begin
-	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).masoretic:$(verse)"), corpus)
-	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).vulgate:$(verse)"), corpus)
-	latinseptpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).lxxlatinnormed:$(verse)"), septlatin)
+	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).masoretic:$(verse)"), corpus)
+	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).vulgate:$(verse)"), corpus)
+	latinseptpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).lxxlatinnormed:$(verse)"), septlatin)
 
-	septpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).septuagint:$(verse)"), corpus)
+	septpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).septuagint:$(verse)"), corpus)
 
-	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).onkelos:$(verse)"), corpus)
+	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).onkelos:$(verse)"), corpus)
 
-	targlatinpsg = formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).targumlatinnormed:$(verse)"), targumlatin)
+	targlatinpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).targumlatinnormed:$(verse)"), targumlatin)
 
 	
 """
@@ -232,7 +240,7 @@ PlutoUI = "~0.7.55"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
 project_hash = "67548badf650c2348ef08e34a723a20bc837e5a2"
 
@@ -334,7 +342,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -622,7 +630,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -869,6 +877,7 @@ version = "17.4.0+2"
 # ╔═╡ Cell order:
 # ╟─403fca78-6436-48ac-961f-4b3812d79f86
 # ╟─5bfc5920-0d98-4a7d-8c60-fe3030981ab2
+# ╟─badbc51a-7d5d-4ca8-b57b-163fcc9bac42
 # ╟─06b9ba91-49b4-4793-9ad0-96fb3b1ba5be
 # ╟─fbe09532-ccd0-11ee-3ed7-2bb05352d2c3
 # ╟─cfa5898e-7cd3-4158-ae02-41f734cd6927
@@ -885,8 +894,8 @@ version = "17.4.0+2"
 # ╟─7dad7dcb-a26f-476b-ad52-b7c5216e738b
 # ╟─351d283b-566f-4017-92cf-eee688539de1
 # ╠═5258de34-31fb-424a-8b25-d0bc2c1ba741
-# ╠═e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
-# ╠═71c20bea-6be6-4178-b007-2061dce423bd
+# ╟─e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
+# ╟─71c20bea-6be6-4178-b007-2061dce423bd
 # ╟─bcfe3e21-ee8b-4b8b-ba53-74d594782848
 # ╟─c5b9c5ab-da3d-4213-9979-d5699c87adad
 # ╟─0c63d698-e476-40e3-ad49-d7a6b1a3ab5d
