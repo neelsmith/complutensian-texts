@@ -14,50 +14,41 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ cb0ac51a-5db6-4a3d-b933-9e9f33c9ac32
+# ╔═╡ 2bd94d35-9be7-4bc7-9780-0c81869f4ec6
 begin
 	using Kanones, CitableParserBuilder
 	using CitableBase, CitableCorpus, CitableText
 	using Orthography, PolytonicGreek
-
 	using Downloads
-	using HypertextLiteral
 	using PlutoUI
-	md"""*Unhide this cell to see the Julia environment*."""
+	using HypertextLiteral
 end
 
-# ╔═╡ c34f4686-6943-4ef1-bb73-b629db9974ed
-md"""*Notebook version*: **1.0.0**"""
-
-# ╔═╡ 289a17a3-e79a-41ce-bb08-6d7be5fd4045
+# ╔═╡ dccb4e7f-0bad-4032-90d5-e60ca7e73388
 TableOfContents()
 
-# ╔═╡ 931ec1e2-8e81-44fc-a079-3307bd2f6256
+# ╔═╡ 8e52d024-f271-11ee-388e-8f75d05fa7af
+md"""# Syntactic alignments"""
 
+# ╔═╡ a3691f09-9bd6-4b8e-8a65-6067c4261ee6
+function lemmata(v)
+	[a.lexeme for a in v]	
+end
 
-# ╔═╡ c2e59afa-61d2-4b7e-9515-cef97ec4d914
-md"""!!! warning "Just guessing"
-
-    Find forms in `lsjx` namespace...
-"""
-
-# ╔═╡ 07571440-9a60-4539-a862-1b87853bf3f9
+# ╔═╡ b58b7554-e2c6-4145-b7a1-38e68236288d
 html"""
-<br/><br/><br/><br/>
-<br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 """
 
-# ╔═╡ 4ab07c7e-eeab-47ba-a970-108ed2083e7a
-md"""> # Stuff to ignore"""
+# ╔═╡ f6f3f7f6-7a48-4633-ab4e-c2df99a578d5
+md"""> # Stuff you don't need to look at"""
 
-# ╔═╡ 6099eb66-6e13-4986-8a9c-515efcd6d9d1
-md"""> ## Load parser"""
+# ╔═╡ e35dfe3d-6fa0-4f4b-938a-9b8e5ab6817d
+md"""> ## Parsing"""
 
-# ╔═╡ c5b56926-a012-45f6-890b-898e7db8e103
-parserurl = "http://shot.holycross.edu/morphology/comprehensive-current.csv"
-
-# ╔═╡ 7e852d44-299c-498a-9684-1448a6a50cab
-"""Download parser data from URN `u` and instantiate a DataFrame parser.""" 
+# ╔═╡ d88a4262-e6f9-4106-a344-d2078a322186
 function getremoteparser(u)
 	tmp = Downloads.download(u)
 	parser = dfParser(tmp)
@@ -65,71 +56,16 @@ function getremoteparser(u)
 	parser
 end
 
-# ╔═╡ 90acf012-b7c5-4a9a-90fe-071deee41a95
-parser = getremoteparser(parserurl)
+# ╔═╡ 3974854b-1427-46e4-91cf-5c0415a51082
+parserurl = "http://shot.holycross.edu/morphology/comprehensive-current.csv"
 
-# ╔═╡ ed860a94-4b94-470a-9822-37afd44d40c4
-md"""> ## Load corpus"""
+# ╔═╡ 716e95db-70b7-4a7b-bc21-0f46b7b2b282
+greekparser = getremoteparser(parserurl)
 
-# ╔═╡ 11adb4fd-a27a-4f84-b593-e49c77c525f6
-ortho = literaryGreek()
+# ╔═╡ cf883e11-107b-4e66-816c-f0cc94a3760c
+md"""> ## Passage selection"""
 
-# ╔═╡ 7aca8886-970d-4d71-ae89-4664207143e2
-repo = pwd() |> dirname
-
-# ╔═╡ 811f7e61-9f26-4c15-abd1-b7e8081ab710
-srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
-
-# ╔═╡ 35fb0ee9-e575-4a42-9bfb-7c9d3ce61894
-corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
-
-# ╔═╡ 71520e7e-5424-4a7d-8ced-f5b648fbc607
-sept = filter(corpus.passages) do psg
-    versionid(psg.urn) == "septuagint"
-end |> CitableTextCorpus
-
-# ╔═╡ 389c3acc-d47e-42ec-98f0-b2a43fd23c25
-worklist = map(psg -> workid(psg.urn), corpus.passages) |> unique .|> titlecase
-
-# ╔═╡ a8fed7ce-26c2-476a-a573-544a14853f7b
-md"""*Book*: $(@bind book Select(worklist))"""
-
-# ╔═╡ d0e20af9-95f0-427a-8e11-5441412e5e97
-md"""> ## User selection of passage"""
-
-# ╔═╡ 30a18ef4-d0d3-48d0-8537-ab7f94e0985a
-"""Get list of chapters in a give book."""
-function chapters(bk, c)
-	psglist = filter(c.passages) do psg
-		lowercase(bk) == workid(psg.urn)
-	end
-	map(psglist) do psg
-		collapsePassageBy(psg.urn, 1) |> passagecomponent
-	end |> unique
-end
-
-# ╔═╡ 6dbef999-1916-449f-b722-44c1a5c32135
-md"""*Chapter:* $(@bind chapter Select(chapters(book, sept)))"""
-
-# ╔═╡ f35abc0b-43d1-498a-9fb4-316708670c4b
-"""Get list of verses for a give book and chapter."""
-function verses(book, chap, corp)
-	psgs = filter(corp.passages) do psg
-		workid(psg.urn) == lowercase(book) &&
-		passagecomponent(collapsePassageBy(psg.urn, 1)) == chap
-	end
-	map(psgs) do psg
-		passagecomponent(psg.urn)
-	end
-end
-
-# ╔═╡ 1d69d1de-0297-488e-ae79-a2a118ab2095
-md"""*Verse*: $(@bind verse Select(verses(book, chapter, sept)))"""
-
-# ╔═╡ 68882aa0-dbb4-11ee-32aa-435d45432691
-md"""# Parse a passage: *$(book)* $(verse)"""
-
-# ╔═╡ edb5a8ad-398d-43bc-b9bb-87fe3542c169
+# ╔═╡ 8f05a331-c663-4c65-97c3-da880502a022
 """Retrieve citable passage from corpus."""
 function retrieve(bk, psgref, corp)
 	matchlist = filter(corp.passages) do psg
@@ -139,52 +75,30 @@ function retrieve(bk, psgref, corp)
 	matchlist[1]
 end
 
-# ╔═╡ e6b7e046-331c-47ef-ae1f-02f313942be3
-selectedpsg = retrieve(book, verse, sept)
-
-# ╔═╡ dacc8642-3320-48a7-ac56-5ff23a302581
-md"""> ## Tokenizing"""
-
-# ╔═╡ 82ffcb74-481b-434b-bf5d-1dac8f6b4eef
-tkns = tokenize(selectedpsg, ortho)
-
-# ╔═╡ 341c91e8-b590-425c-b224-ca7b7daff1c9
-lex = filter(t -> t.tokentype isa LexicalToken, tkns)
-
-# ╔═╡ be294d15-c0a3-4836-96b9-933e24e58c4f
-formslist = [t.passage.text for t in lex]
-
-# ╔═╡ 9032bb62-14a2-4817-a75a-63f23bbc4a53
-parses = parsewordlist(formslist, parser)
-
-# ╔═╡ acf97178-4a19-43ba-9d21-6d9cf4b18377
-formsmenu = [i => formslist[i] for i in 1:length(formslist)]
-
-# ╔═╡ 4c90ddf0-1478-456e-9e87-169b943f30f7
-md"""*See analyses for*: $(@bind showthese MultiCheckBox(formsmenu))"""
-
-# ╔═╡ 923445f1-e5ae-4c72-9a26-69ea69e3a171
-	selectedtokens = map(idx -> formslist[idx], showthese)
-
-# ╔═╡ 690eea8a-fea7-4306-88ea-af57c6382210
-"""Format Markdown display of form"""
-function formatanalysis(an)
-	an.form |> greekForm |> label
-end
-
-# ╔═╡ 3fdcb5e5-74bb-44fc-af6a-fd2a840ea1e6
-begin
-	formsdisplay  = []
-	for selectedform in showthese
-		formdisplay = join([string("1. **", formslist[selectedform], "**, ", formatanalysis(a)) for a in parses[selectedform]],"\n")# |> Markdown.parse
-		push!(formsdisplay, formdisplay)
+# ╔═╡ a5694418-53b5-4edf-9d7d-fa1e05905e4a
+"""Format a passage for display."""
+function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondict)
+	version = versionid(psgurn) |> string
+	wrk = workid(psgurn)# |> titlecase
+	psgref = passagecomponent(psgurn)
+	mdlines = [	]
+	txtlines = filter(c.passages) do psg
+		psg.urn == psgurn
 	end
-	join(formsdisplay,"\n") |> Markdown.parse
+	txtcontent = map(psg -> psg.text, txtlines)
+	join(vcat(mdlines, txtcontent), "\n")
+	
 end
 
-# ╔═╡ a76705de-783d-48fb-b2f5-f134fca283ed
+# ╔═╡ 525d8ee4-f7b9-4755-8169-8d2590ccd2b5
+md"""> ## Passage parsing"""
+
+# ╔═╡ 19b95c0b-0109-449d-a9b2-4b99199b1588
+md"""> ## Isolate verbs"""
+
+# ╔═╡ 4ca4fca7-3eea-40fc-a2ad-94de721e0050
 """Format passages for markdown display."""
-function formatpassage(psg, checklist)
+function formatpassagehilite(psg, checklist)
 	#string("*", titlecase(workid(psg.urn)),"* ", passagecomponent(psg.urn), ":\n> ", psg.text)
 	tkns = split(psg.text)
 	nopunct = [filter(c -> ! ispunct(c), t) for t in tkns]
@@ -205,30 +119,152 @@ function formatpassage(psg, checklist)
 	out
 end
 
-# ╔═╡ f84c423f-01f1-4b32-b67d-cc6932111a31
-formatpassage(selectedpsg, selectedtokens) |> HTML
-
-# ╔═╡ b825bd8f-5fdf-44c4-beea-18158aed4361
-noanalysisidx = findall(plist -> isempty(plist), parses)
-
-# ╔═╡ 33f10955-df93-437c-924e-add1b484336f
-if isempty(noanalysisidx)
-else
-
-md"""!!! warning "Unanalyzed forms!"
-
-    The following forms could not be analyzed:
-"""
+# ╔═╡ fcc64828-fc6d-4cc5-bff7-4ed7d9097666
+function isverb(frm::GreekMorphologicalForm)
+	frm isa GMFFiniteVerb ||
+	frm isa GMFParticiple ||
+	frm isa GMFInfinitive ||
+	frm isa GMFVerbalAdjective
 end
 
-# ╔═╡ 83ce3f40-b718-4e9b-829f-1c7965c70525
-if isempty(noanalysisidx)
-else
-	failed = map(idx -> string("- ", formslist[idx]), noanalysisidx)
-	faillist = join(failed,"\n") |> Markdown.parse
+# ╔═╡ ad9489c9-a85a-4905-8670-4582de373b10
+function isverb(a::Analysis)
+	a |> greekForm |> isverb
 end
 
-# ╔═╡ 163ae3a3-30f2-462a-8b93-f24bbd09b44a
+# ╔═╡ caa66d36-c45b-4717-8ae8-ccbe08dde554
+function isverb(v::Vector{Analysis})
+	
+	allparses = [isverb(p) for p in v]
+	true in allparses
+end
+
+# ╔═╡ e5c46abb-92e9-47b7-becd-e33020e87283
+md"""> ## Text corpus"""
+
+# ╔═╡ ed867179-f37b-4581-a356-ad4113a64c15
+srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
+
+
+# ╔═╡ b416ec54-c49a-41fb-9104-62380d44670f
+corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
+
+# ╔═╡ 09a6641d-5113-4e01-a50d-aa7d531d8950
+worklist = map(psg -> workid(psg.urn), corpus.passages) |> unique .|> titlecase
+
+# ╔═╡ e7137097-b1ca-44a9-823f-36cdc53204f0
+md"""*Book*: $(@bind book Select(worklist))"""
+
+# ╔═╡ 74e301b2-c36a-4df5-bdfd-80b6b87eaa7d
+sept = filter(corpus.passages) do psg
+    versionid(psg.urn) == "septuagint" && workid(psg.urn) == "genesis"
+end |> CitableTextCorpus
+
+# ╔═╡ f3e24a4a-8ef4-4ed3-9951-ddc1ff70e667
+"""Get list of chapters in a give book."""
+function chapters(bk, c)
+	psglist = filter(c.passages) do psg
+		lowercase(bk) == workid(psg.urn)
+	end
+	map(psglist) do psg
+		collapsePassageBy(psg.urn, 1) |> passagecomponent
+	end |> unique
+end
+
+# ╔═╡ b35cc61f-59d8-4363-a430-efe48cf58d6b
+md"""*Chapter:* $(@bind chapter Select(chapters(book, sept)))"""
+
+# ╔═╡ 388b7459-039b-415f-bf3c-db985de05e00
+"""Get list of verses for a give book and chapter."""
+function verses(book, chap, corp)
+	psgs = filter(corp.passages) do psg
+		workid(psg.urn) == lowercase(book) &&
+		passagecomponent(collapsePassageBy(psg.urn, 1)) == chap
+	end
+	map(psgs) do psg
+		passagecomponent(psg.urn)
+	end
+end
+
+# ╔═╡ 243adc54-b265-4565-90f3-930a5f9b9519
+md"""*Verse*: $(@bind verse Select(verses(book, chapter, sept)))"""
+
+# ╔═╡ 16694be3-dc78-43c9-bfa3-3fa5df0097c2
+selectedpsg = retrieve(book, verse, sept)
+
+# ╔═╡ 049546aa-cc41-4e17-8a2a-6b3d860a3691
+md"""> ## Indexing corpus"""
+
+# ╔═╡ e682eacf-6b41-4abf-808c-24033f2cd9aa
+lg = literaryGreek()
+
+# ╔═╡ 61e011df-f64d-4cc1-8921-a6fcb7aa6105
+tkns = tokenize(selectedpsg, lg)
+
+# ╔═╡ 4b2f1bcb-686a-4773-8ad0-f989f57c580c
+lex = filter(t -> t.tokentype isa LexicalToken, tkns)
+
+# ╔═╡ 647f54b5-5880-4d32-8f43-5c59b63a12f4
+formslist = [t.passage.text for t in lex]
+
+# ╔═╡ 06c46514-7494-4c3e-b9c9-7e036048e8a8
+parses = parsewordlist(formslist, greekparser)
+
+# ╔═╡ 3c51355d-820d-411a-ae2f-5fc08949e4c0
+verbforms = filter(p -> isverb(p), parses)
+
+# ╔═╡ 06a32bb3-b7c8-43e8-bdf4-a81c4460d894
+begin
+	lemmalist = []
+	for alist in verbforms
+		
+		push!(lemmalist, lemmata(alist))
+	end
+	lemmalist |> Iterators.flatten |> collect
+end
+
+# ╔═╡ 8a71a3f6-a4e2-40c6-ad1c-ad98eab98002
+lemmalist
+
+# ╔═╡ b36fa27f-cd59-4993-b36f-736636b002ac
+verbtokens = map(frm -> frm[1].token, verbforms)
+
+# ╔═╡ ca9e73d5-ff00-4456-94fa-e72a9dd68207
+formatpassagehilite(selectedpsg, verbtokens) |> HTML
+
+# ╔═╡ c7535699-32a2-414a-8072-116bfad60fba
+greektknidx = corpusindex(sept, lg)
+
+# ╔═╡ 63162376-13d9-42e5-a564-4b45d0ccd9e2
+greektokenized = tokenize(sept,lg)
+
+# ╔═╡ 92563350-22a1-42b5-9a93-9dafdc81d73a
+md"""> ## Tokenized corpus and the lexicon"""
+
+# ╔═╡ e9acacb6-51eb-4864-949c-c27e20416597
+greeklex = filter(greektokenized) do t
+    t.tokentype isa LexicalToken
+end
+
+# ╔═╡ 5d98b1e7-1e5c-4e01-955c-05d5f330ebd7
+greeklex |> length
+
+# ╔═╡ 8123f883-db88-4103-aa53-ffb6c90e11ee
+greektcorpus = map(t -> t.passage, greeklex) |> CitableTextCorpus
+
+# ╔═╡ 3c8005f3-38d6-4b8f-9db9-772fcbd43e56
+greekvocab = map(t -> t.passage.text, greeklex) |> unique
+
+# ╔═╡ 403d7f92-8656-4236-bd40-fd8c1154607e
+md"""> ## The lemmatized dictionary"""
+
+# ╔═╡ 5f80024f-31f7-46b6-8170-df3e1fc71d98
+greekparsedtokens = parsecorpus(greektcorpus, greekparser)
+
+# ╔═╡ 216bf433-e1df-464f-b85d-0c88541a69b2
+biggreekdict = lexemedictionary(greekparsedtokens.analyses, greektknidx)
+
+# ╔═╡ 6f6fbce0-b60d-43c1-8ad4-69edd6c45ebb
 @htl """
 <style>
 	pluto-output {
@@ -293,9 +329,9 @@ version = "0.4.5"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra", "Requires"]
-git-tree-sha1 = "0fb305e0253fd4e833d486914367a2ee2c2e78d0"
+git-tree-sha1 = "6a55b747d1812e699320963ffde36f1ebdda4099"
 uuid = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
-version = "4.0.1"
+version = "4.0.4"
 
     [deps.Adapt.extensions]
     AdaptStaticArraysExt = "StaticArrays"
@@ -407,9 +443,9 @@ version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
-git-tree-sha1 = "9c4708e3ed2b799e6124b5673a712dda0b596a9b"
+git-tree-sha1 = "6cbbd4d241d7e6579ab354737f4dd95ca43946e1"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
-version = "2.3.1"
+version = "2.4.1"
 
 [[deps.Crayons]]
 git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
@@ -536,9 +572,9 @@ version = "1.3.1"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "db864f2d91f68a5912937af80327d288ea1f3aee"
+git-tree-sha1 = "8e59b47b9dc525b70550ca082ce85bcd7f5477cd"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.10.3"
+version = "1.10.5"
 
 [[deps.Hyperscript]]
 deps = ["Test"]
@@ -746,9 +782,9 @@ version = "1.4.2"
 
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "60e3045590bd104a16fefb12836c00c0ef8c7f8c"
+git-tree-sha1 = "3da7367955dcc5c54c1ba4d402ccdc09a1a3e046"
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.0.13+0"
+version = "3.0.13+1"
 
 [[deps.OrderedCollections]]
 git-tree-sha1 = "dfdf5519f235516220579f949664f1bf44e741c5"
@@ -797,9 +833,9 @@ version = "1.4.3"
 
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
-git-tree-sha1 = "03b4c25b43cb84cee5c90aa9b5ea0a78fd848d2f"
+git-tree-sha1 = "5aa36f7049a63a1528fe8f7c3f2113413ffd4e1f"
 uuid = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
-version = "1.2.0"
+version = "1.2.1"
 
 [[deps.Preferences]]
 deps = ["TOML"]
@@ -969,9 +1005,9 @@ uuid = "98d24dd4-01ad-11ea-1b02-c9a08f80db04"
 version = "2.0.0"
 
 [[deps.TranscodingStreams]]
-git-tree-sha1 = "3caa21522e7efac1ba21834a03734c57b4611c7e"
+git-tree-sha1 = "71509f04d045ec714c4748c785a59045c3736349"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
-version = "0.10.4"
+version = "0.10.7"
 weakdeps = ["Random", "Test"]
 
     [deps.TranscodingStreams.extensions]
@@ -1033,48 +1069,57 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─cb0ac51a-5db6-4a3d-b933-9e9f33c9ac32
-# ╟─c34f4686-6943-4ef1-bb73-b629db9974ed
-# ╟─289a17a3-e79a-41ce-bb08-6d7be5fd4045
-# ╟─68882aa0-dbb4-11ee-32aa-435d45432691
-# ╟─a8fed7ce-26c2-476a-a573-544a14853f7b
-# ╟─6dbef999-1916-449f-b722-44c1a5c32135
-# ╟─1d69d1de-0297-488e-ae79-a2a118ab2095
-# ╠═931ec1e2-8e81-44fc-a079-3307bd2f6256
-# ╠═f84c423f-01f1-4b32-b67d-cc6932111a31
-# ╟─4c90ddf0-1478-456e-9e87-169b943f30f7
-# ╟─3fdcb5e5-74bb-44fc-af6a-fd2a840ea1e6
-# ╟─33f10955-df93-437c-924e-add1b484336f
-# ╟─83ce3f40-b718-4e9b-829f-1c7965c70525
-# ╟─c2e59afa-61d2-4b7e-9515-cef97ec4d914
-# ╟─07571440-9a60-4539-a862-1b87853bf3f9
-# ╟─4ab07c7e-eeab-47ba-a970-108ed2083e7a
-# ╟─6099eb66-6e13-4986-8a9c-515efcd6d9d1
-# ╠═90acf012-b7c5-4a9a-90fe-071deee41a95
-# ╟─c5b56926-a012-45f6-890b-898e7db8e103
-# ╟─7e852d44-299c-498a-9684-1448a6a50cab
-# ╠═9032bb62-14a2-4817-a75a-63f23bbc4a53
-# ╟─ed860a94-4b94-470a-9822-37afd44d40c4
-# ╠═11adb4fd-a27a-4f84-b593-e49c77c525f6
-# ╟─7aca8886-970d-4d71-ae89-4664207143e2
-# ╠═811f7e61-9f26-4c15-abd1-b7e8081ab710
-# ╠═35fb0ee9-e575-4a42-9bfb-7c9d3ce61894
-# ╠═71520e7e-5424-4a7d-8ced-f5b648fbc607
-# ╠═389c3acc-d47e-42ec-98f0-b2a43fd23c25
-# ╟─d0e20af9-95f0-427a-8e11-5441412e5e97
-# ╟─e6b7e046-331c-47ef-ae1f-02f313942be3
-# ╟─30a18ef4-d0d3-48d0-8537-ab7f94e0985a
-# ╟─f35abc0b-43d1-498a-9fb4-316708670c4b
-# ╟─acf97178-4a19-43ba-9d21-6d9cf4b18377
-# ╠═923445f1-e5ae-4c72-9a26-69ea69e3a171
-# ╟─edb5a8ad-398d-43bc-b9bb-87fe3542c169
-# ╟─dacc8642-3320-48a7-ac56-5ff23a302581
-# ╟─be294d15-c0a3-4836-96b9-933e24e58c4f
-# ╠═341c91e8-b590-425c-b224-ca7b7daff1c9
-# ╠═82ffcb74-481b-434b-bf5d-1dac8f6b4eef
-# ╟─690eea8a-fea7-4306-88ea-af57c6382210
-# ╟─a76705de-783d-48fb-b2f5-f134fca283ed
-# ╟─b825bd8f-5fdf-44c4-beea-18158aed4361
-# ╠═163ae3a3-30f2-462a-8b93-f24bbd09b44a
+# ╟─2bd94d35-9be7-4bc7-9780-0c81869f4ec6
+# ╟─dccb4e7f-0bad-4032-90d5-e60ca7e73388
+# ╟─8e52d024-f271-11ee-388e-8f75d05fa7af
+# ╟─e7137097-b1ca-44a9-823f-36cdc53204f0
+# ╟─b35cc61f-59d8-4363-a430-efe48cf58d6b
+# ╟─243adc54-b265-4565-90f3-930a5f9b9519
+# ╠═ca9e73d5-ff00-4456-94fa-e72a9dd68207
+# ╠═8a71a3f6-a4e2-40c6-ad1c-ad98eab98002
+# ╠═a3691f09-9bd6-4b8e-8a65-6067c4261ee6
+# ╠═06a32bb3-b7c8-43e8-bdf4-a81c4460d894
+# ╟─b58b7554-e2c6-4145-b7a1-38e68236288d
+# ╟─f6f3f7f6-7a48-4633-ab4e-c2df99a578d5
+# ╟─e35dfe3d-6fa0-4f4b-938a-9b8e5ab6817d
+# ╟─d88a4262-e6f9-4106-a344-d2078a322186
+# ╟─3974854b-1427-46e4-91cf-5c0415a51082
+# ╟─716e95db-70b7-4a7b-bc21-0f46b7b2b282
+# ╟─cf883e11-107b-4e66-816c-f0cc94a3760c
+# ╟─09a6641d-5113-4e01-a50d-aa7d531d8950
+# ╠═16694be3-dc78-43c9-bfa3-3fa5df0097c2
+# ╠═61e011df-f64d-4cc1-8921-a6fcb7aa6105
+# ╠═4b2f1bcb-686a-4773-8ad0-f989f57c580c
+# ╠═647f54b5-5880-4d32-8f43-5c59b63a12f4
+# ╟─8f05a331-c663-4c65-97c3-da880502a022
+# ╟─a5694418-53b5-4edf-9d7d-fa1e05905e4a
+# ╟─525d8ee4-f7b9-4755-8169-8d2590ccd2b5
+# ╠═06c46514-7494-4c3e-b9c9-7e036048e8a8
+# ╟─19b95c0b-0109-449d-a9b2-4b99199b1588
+# ╠═4ca4fca7-3eea-40fc-a2ad-94de721e0050
+# ╠═b36fa27f-cd59-4993-b36f-736636b002ac
+# ╠═3c51355d-820d-411a-ae2f-5fc08949e4c0
+# ╠═fcc64828-fc6d-4cc5-bff7-4ed7d9097666
+# ╠═ad9489c9-a85a-4905-8670-4582de373b10
+# ╠═caa66d36-c45b-4717-8ae8-ccbe08dde554
+# ╟─e5c46abb-92e9-47b7-becd-e33020e87283
+# ╟─ed867179-f37b-4581-a356-ad4113a64c15
+# ╟─b416ec54-c49a-41fb-9104-62380d44670f
+# ╟─74e301b2-c36a-4df5-bdfd-80b6b87eaa7d
+# ╟─f3e24a4a-8ef4-4ed3-9951-ddc1ff70e667
+# ╟─388b7459-039b-415f-bf3c-db985de05e00
+# ╟─049546aa-cc41-4e17-8a2a-6b3d860a3691
+# ╟─e682eacf-6b41-4abf-808c-24033f2cd9aa
+# ╟─c7535699-32a2-414a-8072-116bfad60fba
+# ╠═63162376-13d9-42e5-a564-4b45d0ccd9e2
+# ╟─92563350-22a1-42b5-9a93-9dafdc81d73a
+# ╠═5d98b1e7-1e5c-4e01-955c-05d5f330ebd7
+# ╠═e9acacb6-51eb-4864-949c-c27e20416597
+# ╠═8123f883-db88-4103-aa53-ffb6c90e11ee
+# ╟─3c8005f3-38d6-4b8f-9db9-772fcbd43e56
+# ╟─403d7f92-8656-4236-bd40-fd8c1154607e
+# ╠═5f80024f-31f7-46b6-8170-df3e1fc71d98
+# ╠═216bf433-e1df-464f-b85d-0c88541a69b2
+# ╠═6f6fbce0-b60d-43c1-8ad4-69edd6c45ebb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

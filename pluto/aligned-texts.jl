@@ -98,35 +98,6 @@ md"""
 *Book*: $(@bind book Select(workids)) 
 """ 
 
-# ╔═╡ a80a4bc5-8ef3-4b8b-88d7-7ad4214826d9
-md"""*Chapter* $(@bind chap Select(chaptersforbook(tanach, book)))"""
-
-# ╔═╡ 865eff3a-b44e-428c-a439-00b387e5f442
-md"""*Verse* $(@bind verse Select(versesforchapter(tanach, book, chap)))"""
-
-# ╔═╡ 2f3f28c1-80b0-41db-a645-7c82454ff608
-begin
-	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).masoretic:$(verse)"), corpus)
-	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).vulgate:$(verse)"), corpus)
-	latinseptpsg = 
-
-	septpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).septuagint:$(verse)"), corpus)
-
-	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).onkelos:$(verse)"), corpus)
-
-	
-
-	
-"""
-| Version | Text |
-| --- | --- |
-| Hebrew Bible | $(hebrewpsg) |
-| Vulgate | $(vulgatepsg) |
-| Septuagint | $(septpsg) |
-| Targum Onkelos | $(targumpsg) |
-""" |> Markdown.parse
-end
-
 # ╔═╡ cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
 """Find unique list of chapter values for given book in a corpus."""
 function chaptersforbook(corpus, bookid)
@@ -140,6 +111,9 @@ function chaptersforbook(corpus, bookid)
 		
 end
 
+# ╔═╡ a80a4bc5-8ef3-4b8b-88d7-7ad4214826d9
+md"""*Chapter* $(@bind chap Select(chaptersforbook(tanach, book)))"""
+
 # ╔═╡ 53c0b147-b805-4fc9-a464-fa78a54acc5b
 """Find unique list of verse values for given book and chapter in a corpus."""
 function versesforchapter(c, bk, chptr)
@@ -151,6 +125,9 @@ function versesforchapter(c, bk, chptr)
 		passagecomponent(psg.urn)
 	end
 end
+
+# ╔═╡ 865eff3a-b44e-428c-a439-00b387e5f442
+md"""*Verse* $(@bind verse Select(versesforchapter(tanach, book, chap)))"""
 
 # ╔═╡ 8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
 versionlabels = ["masoretic" => "Hebrew Bible", "vulgate" => "Latin Vulgate", "septuagint" => "Greek Septuagint"]
@@ -174,6 +151,29 @@ function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondic
 	txtcontent = map(psg -> psg.text, txtlines)
 	join(vcat(mdlines, txtcontent), "\n")
 	
+end
+
+# ╔═╡ 2f3f28c1-80b0-41db-a645-7c82454ff608
+begin
+	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).masoretic:$(verse)"), corpus)
+	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).vulgate:$(verse)"), corpus)
+	latinseptpsg = 
+
+	septpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).septuagint:$(verse)"), corpus)
+
+	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).onkelos:$(verse)"), corpus)
+
+	
+
+	
+"""
+| Version | Text |
+| --- | --- |
+| Hebrew Bible | $(hebrewpsg) |
+| Vulgate | $(vulgatepsg) |
+| Septuagint | $(septpsg) |
+| Targum Onkelos | $(targumpsg) |
+""" |> Markdown.parse
 end
 
 # ╔═╡ 6400b3c7-398c-4ad2-a8f8-f45e3e2387cb
@@ -859,7 +859,7 @@ version = "17.4.0+2"
 # ╟─2f3f28c1-80b0-41db-a645-7c82454ff608
 # ╟─c7f731c0-2e5d-4a28-a480-e37be59cb74e
 # ╟─947930b8-8cdb-4b69-ab7f-841f2d4f3957
-# ╠═bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
+# ╟─bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
 # ╟─6802262c-d391-4bea-aa11-7a31925d547b
 # ╟─9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
 # ╟─834b2e1f-e262-46aa-87b0-4daa5370cad3
@@ -868,9 +868,9 @@ version = "17.4.0+2"
 # ╠═49938ceb-8e39-4e7c-8aba-2e62587d7b5c
 # ╟─cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
 # ╟─53c0b147-b805-4fc9-a464-fa78a54acc5b
-# ╟─8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
-# ╟─5d9a7607-c148-4904-a430-14b1412732a0
-# ╟─d915f29c-7257-497a-a35a-adf1c655e750
+# ╠═8edeed6e-1a70-4e2d-8dc0-2995c9a77aed
+# ╠═5d9a7607-c148-4904-a430-14b1412732a0
+# ╠═d915f29c-7257-497a-a35a-adf1c655e750
 # ╠═6400b3c7-398c-4ad2-a8f8-f45e3e2387cb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

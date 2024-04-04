@@ -32,9 +32,6 @@ md"""*Notebook version*: **1.0.0**"""
 # ╔═╡ 289a17a3-e79a-41ce-bb08-6d7be5fd4045
 TableOfContents()
 
-# ╔═╡ 931ec1e2-8e81-44fc-a079-3307bd2f6256
-
-
 # ╔═╡ c2e59afa-61d2-4b7e-9515-cef97ec4d914
 md"""!!! warning "Just guessing"
 
@@ -49,6 +46,29 @@ html"""
 
 # ╔═╡ 4ab07c7e-eeab-47ba-a970-108ed2083e7a
 md"""> # Stuff to ignore"""
+
+# ╔═╡ a746730e-a892-44f6-8575-6698e1de21fe
+md"""> ## Isolate verbs"""
+
+# ╔═╡ 10a72fbc-52c9-43ff-8acc-e789b737ac9a
+function isverb(frm::GreekMorphologicalForm)
+	frm isa GMFFiniteVerb ||
+	frm isa GMFParticiple ||
+	frm isa GMFInfinitive ||
+	frm isa GMFVerbalAdjective
+end
+
+# ╔═╡ a93b0c84-d771-4241-a1a0-ce0e26c89d2c
+function isverb(a::Analysis)
+	a |> greekForm |> isverb
+end
+
+# ╔═╡ 78639acb-1650-4eb2-a488-2e6c0021d0ba
+function isverb(v::Vector{Analysis})
+	
+	allparses = [isverb(p) for p in v]
+	true in allparses
+end
 
 # ╔═╡ 6099eb66-6e13-4986-8a9c-515efcd6d9d1
 md"""> ## Load parser"""
@@ -86,6 +106,16 @@ corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 # ╔═╡ 71520e7e-5424-4a7d-8ced-f5b648fbc607
 sept = filter(corpus.passages) do psg
     versionid(psg.urn) == "septuagint"
+end |> CitableTextCorpus
+
+# ╔═╡ b9971e14-c7af-4299-b851-1a8c7a07bf57
+tanach = filter(corpus.passages) do psg
+	versionid(psg.urn) == "masoretic"
+end |> CitableTextCorpus
+
+# ╔═╡ 6156b721-39de-4261-b00d-63ce36d0e330
+onkelos = filter(corpus.passages) do psg
+	versionid(psg.urn) == "onkelos"
 end |> CitableTextCorpus
 
 # ╔═╡ 389c3acc-d47e-42ec-98f0-b2a43fd23c25
@@ -127,7 +157,7 @@ end
 md"""*Verse*: $(@bind verse Select(verses(book, chapter, sept)))"""
 
 # ╔═╡ 68882aa0-dbb4-11ee-32aa-435d45432691
-md"""# Parse a passage: *$(book)* $(verse)"""
+md"""# Find verbal forms in a passage: *$(book)* $(verse)"""
 
 # ╔═╡ edb5a8ad-398d-43bc-b9bb-87fe3542c169
 """Retrieve citable passage from corpus."""
@@ -141,6 +171,51 @@ end
 
 # ╔═╡ e6b7e046-331c-47ef-ae1f-02f313942be3
 selectedpsg = retrieve(book, verse, sept)
+
+# ╔═╡ a9b6a0b5-5ca5-4937-9fc9-4bb62b5c4dc8
+versionlabels = ["masoretic" => "Hebrew Bible", "vulgate" => "Latin Vulgate", "septuagint" => "Greek Septuagint"]
+
+# ╔═╡ a7080ceb-1cc3-4a2a-87db-ef3547de4301
+versiondict = Dict(
+	versionlabels
+	
+)
+
+# ╔═╡ a556fd6b-fb8c-4844-b8bc-8e8e499b75e1
+"""Format a passage for display."""
+function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondict)
+	version = versionid(psgurn) |> string
+	wrk = workid(psgurn)# |> titlecase
+	psgref = passagecomponent(psgurn)
+	mdlines = [	]
+	txtlines = filter(c.passages) do psg
+		psg.urn == psgurn
+	end
+	txtcontent = map(psg -> psg.text, txtlines)
+	join(vcat(mdlines, txtcontent), "\n")
+	
+end
+
+# ╔═╡ cdc1d1be-bb9b-43b3-9326-ed66419d5cbe
+begin
+	hebrewpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(lowercase(book)).masoretic:$(verse)"), corpus)
+	vulgatepsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(lowercase(book)).vulgate:$(verse)"), corpus)
+	latinseptpsg = 
+	targumpsg = formatpsg(CtsUrn("urn:cts:compnov:bible.$(lowercase(book)).onkelos:$(verse)"), corpus)
+
+	
+
+	
+"""
+Parallel passages:
+
+
+
+- *Hebrew Bible*: $(hebrewpsg) 
+- *Vulgate*: $(vulgatepsg) 
+- *Targum Onkelos*: $(targumpsg) 
+""" |> Markdown.parse
+end
 
 # ╔═╡ dacc8642-3320-48a7-ac56-5ff23a302581
 md"""> ## Tokenizing"""
@@ -157,14 +232,14 @@ formslist = [t.passage.text for t in lex]
 # ╔═╡ 9032bb62-14a2-4817-a75a-63f23bbc4a53
 parses = parsewordlist(formslist, parser)
 
+# ╔═╡ 4ea14f67-c45d-415b-95f9-d03d1e1adacc
+verbforms = filter(p -> isverb(p), parses)
+
+# ╔═╡ c0b61d2a-7784-4dba-8ae9-6ee22e762125
+	selectedtokens = map(frm -> frm[1].token, verbforms)
+
 # ╔═╡ acf97178-4a19-43ba-9d21-6d9cf4b18377
 formsmenu = [i => formslist[i] for i in 1:length(formslist)]
-
-# ╔═╡ 4c90ddf0-1478-456e-9e87-169b943f30f7
-md"""*See analyses for*: $(@bind showthese MultiCheckBox(formsmenu))"""
-
-# ╔═╡ 923445f1-e5ae-4c72-9a26-69ea69e3a171
-	selectedtokens = map(idx -> formslist[idx], showthese)
 
 # ╔═╡ 690eea8a-fea7-4306-88ea-af57c6382210
 """Format Markdown display of form"""
@@ -172,14 +247,16 @@ function formatanalysis(an)
 	an.form |> greekForm |> label
 end
 
-# ╔═╡ 3fdcb5e5-74bb-44fc-af6a-fd2a840ea1e6
+# ╔═╡ 1f46e36b-b2a8-4bc5-a292-23288f07e754
 begin
-	formsdisplay  = []
-	for selectedform in showthese
-		formdisplay = join([string("1. **", formslist[selectedform], "**, ", formatanalysis(a)) for a in parses[selectedform]],"\n")# |> Markdown.parse
-		push!(formsdisplay, formdisplay)
+	verbsdisplay = isempty(verbforms) ? ["No verb forms identified."] : ["$(length(verbforms)) possible verb form(s) found.", "\n"]
+	for frm in verbforms
+		formanalyses = [formatanalysis(a) for a in frm]
+
+		vformdisplay = join([string("1. **", frm[1].token, "**, ", formatanalysis(a)) for a in frm],"\n")# |> Markdown.parse
+		push!(verbsdisplay, vformdisplay)
 	end
-	join(formsdisplay,"\n") |> Markdown.parse
+	join(verbsdisplay,"\n") |> Markdown.parse
 end
 
 # ╔═╡ a76705de-783d-48fb-b2f5-f134fca283ed
@@ -205,7 +282,7 @@ function formatpassage(psg, checklist)
 	out
 end
 
-# ╔═╡ f84c423f-01f1-4b32-b67d-cc6932111a31
+# ╔═╡ 24361a9e-58ed-48d2-b92a-768e416553d9
 formatpassage(selectedpsg, selectedtokens) |> HTML
 
 # ╔═╡ b825bd8f-5fdf-44c4-beea-18158aed4361
@@ -1040,15 +1117,20 @@ version = "17.4.0+2"
 # ╟─a8fed7ce-26c2-476a-a573-544a14853f7b
 # ╟─6dbef999-1916-449f-b722-44c1a5c32135
 # ╟─1d69d1de-0297-488e-ae79-a2a118ab2095
-# ╠═931ec1e2-8e81-44fc-a079-3307bd2f6256
-# ╠═f84c423f-01f1-4b32-b67d-cc6932111a31
-# ╟─4c90ddf0-1478-456e-9e87-169b943f30f7
-# ╟─3fdcb5e5-74bb-44fc-af6a-fd2a840ea1e6
+# ╟─24361a9e-58ed-48d2-b92a-768e416553d9
+# ╟─1f46e36b-b2a8-4bc5-a292-23288f07e754
+# ╟─cdc1d1be-bb9b-43b3-9326-ed66419d5cbe
 # ╟─33f10955-df93-437c-924e-add1b484336f
 # ╟─83ce3f40-b718-4e9b-829f-1c7965c70525
 # ╟─c2e59afa-61d2-4b7e-9515-cef97ec4d914
 # ╟─07571440-9a60-4539-a862-1b87853bf3f9
 # ╟─4ab07c7e-eeab-47ba-a970-108ed2083e7a
+# ╟─a746730e-a892-44f6-8575-6698e1de21fe
+# ╠═c0b61d2a-7784-4dba-8ae9-6ee22e762125
+# ╠═4ea14f67-c45d-415b-95f9-d03d1e1adacc
+# ╠═10a72fbc-52c9-43ff-8acc-e789b737ac9a
+# ╠═a93b0c84-d771-4241-a1a0-ce0e26c89d2c
+# ╠═78639acb-1650-4eb2-a488-2e6c0021d0ba
 # ╟─6099eb66-6e13-4986-8a9c-515efcd6d9d1
 # ╠═90acf012-b7c5-4a9a-90fe-071deee41a95
 # ╟─c5b56926-a012-45f6-890b-898e7db8e103
@@ -1057,22 +1139,26 @@ version = "17.4.0+2"
 # ╟─ed860a94-4b94-470a-9822-37afd44d40c4
 # ╠═11adb4fd-a27a-4f84-b593-e49c77c525f6
 # ╟─7aca8886-970d-4d71-ae89-4664207143e2
-# ╠═811f7e61-9f26-4c15-abd1-b7e8081ab710
+# ╟─811f7e61-9f26-4c15-abd1-b7e8081ab710
 # ╠═35fb0ee9-e575-4a42-9bfb-7c9d3ce61894
-# ╠═71520e7e-5424-4a7d-8ced-f5b648fbc607
-# ╠═389c3acc-d47e-42ec-98f0-b2a43fd23c25
+# ╟─71520e7e-5424-4a7d-8ced-f5b648fbc607
+# ╟─b9971e14-c7af-4299-b851-1a8c7a07bf57
+# ╟─6156b721-39de-4261-b00d-63ce36d0e330
+# ╟─389c3acc-d47e-42ec-98f0-b2a43fd23c25
 # ╟─d0e20af9-95f0-427a-8e11-5441412e5e97
-# ╟─e6b7e046-331c-47ef-ae1f-02f313942be3
+# ╠═e6b7e046-331c-47ef-ae1f-02f313942be3
 # ╟─30a18ef4-d0d3-48d0-8537-ab7f94e0985a
 # ╟─f35abc0b-43d1-498a-9fb4-316708670c4b
 # ╟─acf97178-4a19-43ba-9d21-6d9cf4b18377
-# ╠═923445f1-e5ae-4c72-9a26-69ea69e3a171
+# ╟─a556fd6b-fb8c-4844-b8bc-8e8e499b75e1
 # ╟─edb5a8ad-398d-43bc-b9bb-87fe3542c169
+# ╠═a9b6a0b5-5ca5-4937-9fc9-4bb62b5c4dc8
+# ╟─a7080ceb-1cc3-4a2a-87db-ef3547de4301
 # ╟─dacc8642-3320-48a7-ac56-5ff23a302581
-# ╟─be294d15-c0a3-4836-96b9-933e24e58c4f
-# ╠═341c91e8-b590-425c-b224-ca7b7daff1c9
-# ╠═82ffcb74-481b-434b-bf5d-1dac8f6b4eef
-# ╟─690eea8a-fea7-4306-88ea-af57c6382210
+# ╠═be294d15-c0a3-4836-96b9-933e24e58c4f
+# ╟─341c91e8-b590-425c-b224-ca7b7daff1c9
+# ╟─82ffcb74-481b-434b-bf5d-1dac8f6b4eef
+# ╠═690eea8a-fea7-4306-88ea-af57c6382210
 # ╟─a76705de-783d-48fb-b2f5-f134fca283ed
 # ╟─b825bd8f-5fdf-44c4-beea-18158aed4361
 # ╠═163ae3a3-30f2-462a-8b93-f24bbd09b44a
