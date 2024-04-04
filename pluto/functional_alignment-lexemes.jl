@@ -63,9 +63,6 @@ md"""> # Stuff you can ignore"""
 # ╔═╡ eb29a5e8-800f-4bb4-b630-d7699d64b896
 md"""> ## Displaying results"""
 
-# ╔═╡ 75ab6922-7f31-4e9f-a974-9c31d9ba3019
-
-
 # ╔═╡ b49e002f-42c4-438d-9c84-8795c439fd20
 function displayalignmenthtml(u,c,hilite)
 	reduced = collapsePassageBy(u,1) |> dropversion
@@ -256,32 +253,6 @@ end
 </style>
 """
 
-# ╔═╡ b67a7edb-2d6b-442b-84b1-a03fc0ff29ef
-md"""> ## Junk all this"""
-
-# ╔═╡ 7a5954ae-f425-44b3-8017-4ec00cd73639
-x = ""
-
-# ╔═╡ d326142c-b060-499f-a6ec-47e7326a24a6
-y = ""
-
-# ╔═╡ b7da0b1d-03b9-4b01-9846-8524eb47995a
-
-
-# ╔═╡ 40f57529-5538-47ce-85b2-220b53212550
-eg = sort(lemmaforms)[1]
-
-# ╔═╡ 7d2eee78-1bde-47d4-9d30-54962bc10e62
-lemmapassages[eg]
-
-# ╔═╡ 8a7a559b-a3ac-4aa9-adb8-55a4042de7ec
-z = ""
-
-# ╔═╡ 8b9b9542-03cf-46a7-a919-153c06e6399f
-#displayalignment(lemmapassages[showthisform][1], corpus) |> Markdown.parse
-
-
-
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -312,7 +283,7 @@ PolytonicGreek = "~0.21.11"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
 project_hash = "289cf797738e9f7e89eddfeccd6ef7fe18b14872"
 
@@ -444,7 +415,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -777,7 +748,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -1091,9 +1062,8 @@ version = "17.4.0+2"
 # ╟─5a9506ae-d2ae-476b-80c5-c74cb2475d1f
 # ╟─ad7b93d4-aaf6-4ade-8563-42741ab3b9b8
 # ╟─eb29a5e8-800f-4bb4-b630-d7699d64b896
-# ╠═75ab6922-7f31-4e9f-a974-9c31d9ba3019
-# ╠═b49e002f-42c4-438d-9c84-8795c439fd20
-# ╟─542bef3e-ce23-4b0f-9e01-8827bff33c30
+# ╟─b49e002f-42c4-438d-9c84-8795c439fd20
+# ╠═542bef3e-ce23-4b0f-9e01-8827bff33c30
 # ╟─5725ebb6-0acb-4878-8d90-29b38c4b17ac
 # ╟─0bdd5b87-82f8-4480-98a8-f161a9aa12ad
 # ╟─383b7946-47f6-4b27-a561-ebce1d1325b3
@@ -1121,13 +1091,5 @@ version = "17.4.0+2"
 # ╟─ff2a4c70-effc-4656-afd9-908e9b84d44e
 # ╟─218b24e5-bb42-4999-a457-c39541282bba
 # ╠═e58197c9-8129-4e17-a96c-2f1f64901e6e
-# ╟─b67a7edb-2d6b-442b-84b1-a03fc0ff29ef
-# ╠═7a5954ae-f425-44b3-8017-4ec00cd73639
-# ╠═d326142c-b060-499f-a6ec-47e7326a24a6
-# ╠═b7da0b1d-03b9-4b01-9846-8524eb47995a
-# ╠═7d2eee78-1bde-47d4-9d30-54962bc10e62
-# ╠═40f57529-5538-47ce-85b2-220b53212550
-# ╠═8a7a559b-a3ac-4aa9-adb8-55a4042de7ec
-# ╠═8b9b9542-03cf-46a7-a919-153c06e6399f
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
