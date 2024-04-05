@@ -112,55 +112,61 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="20">
-           Et dixit deus: producant aque reptilia <unclear>aiarum</unclear> viuentium: et volatilia volantia super terram: <unclear>sum</unclear> firmamentum celi. Et factum est ita. 
+           Et dixit deus: producant aque reptilia aiarum viuentium: et volatilia volantia super terram: <choice><abbr>sm</abbr><expan>secundum</expan></choice> firmamentum celi. Et factum est ita. 
           </ab>
 
           <ab n="21">
-          
+          Et fecit deus cete grandia: et <choice><abbr>oes</abbr><expan>omnes</expan></choice> animam <choice><abbr>aialium</abbr><expan>animalium</expan></choice> reptilium: <choice><abbr>q</abbr><expan>quae</expan></choice> produxerunt aque <choice><abbr>sm</abbr><expan>secundum</expan></choice> <choice><abbr>gna</abbr><expan>genera</expan></choice> eorum. et <choice><abbr>oe</abbr><expan>omne</expan></choice> volatile pennatum <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus. Et vidit deus quod bona. 
           </ab>
 
           <ab n="22">
-           
+           Et benedixit eis deus. Dicens: crescite et multiplicamini: et replete aquas in maribus. Et volatilia multiplicentur super terram. 
           </ab>
 
           <ab n="23">
-           
+           Et factum est vespere et factum est mane dies quintus.  
           </ab>
 
           <ab n="24">
-           
+           Et dixit deus: producat terra <choice><abbr>aiam</abbr><expan>animam</expan></choice> viuentem <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus: quadrupedia et reptilia et bestias terre: iumentia: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> reptilia terre <choice><abbr>ss</abbr><expan>secundum</expan></choice> genus eorum. Et factum est ita. 
           </ab>
 
           <ab n="25">
-           
+          Et fecit deus bestias terre <choice><abbr>ss</abbr><expan>secundum</expan></choice> genus: et iumentta et <choice><abbr>oia</abbr><expan>omnia</expan></choice> reptilia terre <choice><abbr>sm</abbr><expan>secundum</expan></choice>  genus eorum. Et vidit deus quod bona.   
           </ab>
 
           <ab n="26">
-           
+           Et dixit deus: faciamus <choice><abbr>hoiem</abbr><expan>hominem</expan></choice> ad imaginem nostram et ad similitudinem. Et presint piscibus maris: et volatilibus celi: et iumentia: et <choice><abbr>oibus</abbr><expan>omnibus</expan> terre:
           </ab>
 
           <ab n="27">
-           
+           Et fecit deus <choice><abbr>hoiem</abbr><expan>hominem</expan></choice>. Ad imaginem dei fecit illum. Masculum et feminam fect eos. 
           </ab>
 
           <ab n="28">
-           
+           Et benedixit eis deus: dicens: crescite et multiplicamini et replete terram: et dominamini ei. Et imperate piscibus maris: et omni terre: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> reptilibus reptantibus super terram. 
           </ab>
 
           <ab n="29">
+           Et dixit deus: ecce dedi vobis <choice><abbr>oem</abbr><expan>omnem</expan></choice> herbam seminiferam seminantem semen: <choice><abbr>qd</abbr><expan>quod</expan></choice> est super terram. Et omne lignum: <choice><abbr>qd</abbr><expan>quod</expan></choice> <choice><abbr>hm</abbr><expan>habet</expan></choice> in <choice><abbr>semetipo</abbr><expan>semetipso</expan></choice> fructum seminis seminifei: vobis erit in escam:
+           </ab>
            
-          </ab>
+          
 
           <ab n="30">
-           
-          </ab>
+           et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bestiis terre: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> volatilibus celi: et omni reptili reptanti super terram: <choice><abbr>qd</abbr><expan>quod</expan></choice> 
+          </ab> <choice><abbr>hm</abbr><expan>habet</expan><choice> in <choice><abbr>semetipo</abbr><expan>semetipso</expan></choice> <choice><abbr>aiam</abbr><expan>animam</expan></choice> vite: et <choice><abbr>oem</abbr><expan>omnem</expan></choice> herbam viridem in escam. Et factum est ita.  
 
-          <ab n="31">
-           
+          <ab n="31"> Et vidit deus omnia <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> 
+          </ab> fecit. Et ecce bona valde. Et factum est vespere: et factum est mane dies sexta.
           </ab>
 
         </div>
-       
+        <div n="2">
+          <ab n="1">
+          
+          </ab>
+        </div>
     </body>
     </text>
 </TEI>
