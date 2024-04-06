@@ -136,7 +136,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="26">
-           Et dixit deus: faciamus <choice><abbr>hoiem</abbr><expan>hominem</expan></choice> ad imaginem nostram et ad similitudinem. Et presint piscibus maris: et volatilibus celi: et iumentia: et <choice><abbr>oibus</abbr><expan>omnibus</expan> terre:
+           Et dixit deus: faciamus <choice><abbr>hoiem</abbr><expan>hominem</expan></choice> ad imaginem nostram et ad similitudinem. Et presint piscibus maris: et volatilibus celi: et iumentia: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> terre:
           </ab>
 
           <ab n="27">
@@ -155,10 +155,21 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
           <ab n="30">
            et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bestiis terre: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> volatilibus celi: et omni reptili reptanti super terram: <choice><abbr>qd</abbr><expan>quod</expan></choice> 
-          </ab> <choice><abbr>hm</abbr><expan>habet</expan><choice> in <choice><abbr>semetipo</abbr><expan>semetipso</expan></choice> <choice><abbr>aiam</abbr><expan>animam</expan></choice> vite: et <choice><abbr>oem</abbr><expan>omnem</expan></choice> herbam viridem in escam. Et factum est ita.  
+    
+
+          <choice>
+          <abbr>hm</abbr><expan>habet</expan></choice> in 
+
+          <choice><abbr>semetipo</abbr><expan>semetipso</expan></choice> 
+          <choice><abbr>aiam</abbr><expan>animam</expan></choice> vite: et 
+
+          <choice><abbr>oem</abbr><expan>omnem</expan></choice> 
+          
+          herbam viridem in escam. Et factum est ita.  
+          </ab>
 
           <ab n="31"> Et vidit deus omnia <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> 
-          </ab> fecit. Et ecce bona valde. Et factum est vespere: et factum est mane dies sexta.
+           fecit. Et ecce bona valde. Et factum est vespere: et factum est mane dies sexta.
           </ab>
 
         </div>
