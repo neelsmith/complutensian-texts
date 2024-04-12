@@ -31,7 +31,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           <ab n="3"> Et dixit deus. Sit lux: et fuit lux.
           </ab>
 
-          <ab n="4"> Et vidit deus lucem quod esset bona. Et diuisit deus inter lucem et inteer tenebras.
+          <ab n="4"> Et vidit deus lucem quod esset bona. Et diuisit deus inter lucem et inter tenebras.
           </ab>
 
           <ab n="5"> appellauitque deus lucem diem: et tenebras vocauit noctem. Et fuit vespere et fuit mane dies vnus.
@@ -55,8 +55,46 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           <ab n="11"> Et dixit deus. Germinet terra germinationem herbe cuius filius sementis seminat: arboresque fructiferam facientem fructus <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus suum: cuius filius sementis in ipso sit super terram. Et fuit ita.
           </ab>
 
-          <ab n="12"> Et pro duxit terra 
+          <ab n="12"> Et pro duxit terra germem herbe cuius filius sementis feminat <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus suum: etarborem facientem fructus: cui filius sementis in ipso <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus suum. Et vidit deus quod esset bonum.
           </ab>
+
+          <ab n="13"> Et fuit vespere et fuit mane dies tertius. 
+          </ab>
+
+          <ab n="14"> Et dixit deus. Sin luminaria in firmamento celi: ut dividant inter diem et noctem: et sint in signa et in tempora: et ut numerentur per ea dies et anni. 
+          </ab>
+
+          <ab n="15"> Et sint in luminaria in firmamento celi ad illuminandum super terram: et fuit ita. 
+          </ab>
+
+          <ab n="16"> Et fecit deus duo luminaria magna: liminare maius ut dominaretur in die: et luminare minus ut dominaretur in nocte: et stellas:
+          </ab>
+
+          <ab n="17"> Et posuit eas deus in firmamento celi ad illuminandum super terram. 
+          </ab>
+
+          <ab n="18"> Et ut <choice><abbr>dnarentur</abbr><expan>dominarentur</expan></choice> in die et in nocte: et ut diuiderent inter lucem et tenebras: et vidit deus quod esset bonum. 
+          </ab>
+
+          <ab n="19">
+          Et fuit vespere et fuit mane dies quartus.
+          </ab>
+
+          <ab n="20"> Et dixit deus serpant aque reptile <choice><abbr>aie</abbr><expan>anime</expan></choice> viuentis: et auem que volat super terram super faciem aeris firmamenti celorum. 
+          </ab>
+
+          <ab n="21"> Et creauit deus colubros magnos: et omnem animam viuentem reptilium: que produxerant aque <choice><abbr>sm</abbr><expan>secundum</expan></choice> species suas et omnem volucrem que volat <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus suum: et vidit deus quod esset bonum. 
+          </ab>
+
+          <ab n="22"> Et benedixit eis deus dicens. Crescite et multiplicamini et replete aquas maris: et volucris multiplicetur in terra. 
+          </ab>
+
+          <ab n="23"> Et fuit vespere et fuit mane dies quintus. 
+          </ab>
+
+          <ab n="24"> Et dixit deus Producat terra animam viuentem <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus suum:
+          </ab>
+          
         </div>
     </body>
     </text>
