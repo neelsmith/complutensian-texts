@@ -175,8 +175,95 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </div>
         <div n="2">
           <ab n="1">
-          
+          perfecti sunt celum et terra: et <choice><abbr>ois</abbr><expan>omnes</expan></choice> ornatus eorum. 
           </ab>
+
+          <ab n="2">
+          Et perfecit deus in die sexta opera sua: <choice><abbr>q</abbr><expan>quod</expan></choice> fecit. Et requieuit deus in die septima ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> opibus fuis: que fecit. 
+          </ab>
+
+          <ab n="3"> 
+          Et benedixit deus diei septimo: et sanctificauit illum. <choice><abbr>q</abbr><expan>quod</expan></choice> in illo cessauit ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> opibus suis: <choice><abbr>q</abbr><expan>quod</expan></choice> incepit deus facere.
+          </ab>
+
+          <ab n="4">
+          Hic liber generationis celi et terre: <choice><abbr>qn</abbr><expan>quando</expan></choice> facta sunt. <choice><abbr>q</abbr><expan>qua</expan></choice> fecit deus celum et terram:
+          </ab>
+
+          <ab n="5">
+          Et omne virrgultum agri <choice><abbr>anq</abbr><expan>antequam</expan></choice> oriretur in terra. Et omnes herbam agri <choice><abbr>anq</abbr><expan>antequam</expan></choice> germinaret. Non enim pluerat dominus deus super terram: et homo non erat adoperandum eam. 
+          </ab>
+
+          <ab n="6">
+          Fons <choice><abbr>aut</abbr><expan>autem</expan></choice> ascendebat ex terra: et irrigabat <choice><abbr>oes</abbr><expan>omnes</expan></choice> faciem terre. 
+          </ab>
+
+          <ab n="7">
+          Et formauit deus hominem: puluerem acciptens de terra. Et inspirauit in faciem eius spiraculum vite: et factus est homo in animam viuentem. 
+          </ab>
+
+          <ab n="8">
+          Et plantauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus paradisum in eden ad orientem. Et posuit illic hominem: quem formauit. 
+          </ab>
+
+          <ab n="9">
+          Et produxit deus adhuc de terra <choice><abbr>oe</abbr><expan>omnes</expan></choice>
+          lignum pulchrum ad visum et bonum ad cibum. Et lignum vite in medio paradisi: Et lignum sciendi scientiam boni et mali.
+          </ab>
+          
+          <ab n="10">
+          Fluius <choice><abbr>aut</abbr><expan>autem</expan></choice> egreditur ex <placeName>eden</placeName> ad irrigandum paradisum. Inde diuiditus in quattor principia.
+          </ab> 
+
+          <ab n="11">
+          Nomen vni <placeName>phison</placeName>. Hic qui circuit <choice><abbr>oes</abbr><expan>omnem</expan></choice> terram <placeName>euilat</placeName>. Illic ubi est aurum. 
+          </ab>
+
+          <ab n="12">
+          Et aurum terre illius bonum. Illic est carbunculus et lapis prasinus.
+          </ab>
+
+          <ab n="13">
+          Et nomen fluuio secundo: <placeName>geon</placeName>. Hic qui circuit omnes terram <placeName>ethiopie</placeName>
+          </ab>
+
+          <ab n="14">
+          Et fluuius tertius: <placeName>tigris</placeName>. Hic qui vadit contra <rs type="ethnic">assyrios</rs>. At fluuius quartus: hic <placeName>euphrates</placeName>. 
+          </ab>
+
+          <ab n="15">
+          Et accepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus hominem quem formauit: et posuit eum in peradiso voluptatis: ad operandum eum et custodiendum. 
+          </ab>
+
+          <ab n="16">
+          Et precepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus ade dicens ex omni ligno <choice><abbr>qd</abbr><expan>quod</expan></choice> in paradiso escam comedes: 
+          </ab>
+
+          <ab n="17">
+          ex <choice><abbr>at</abbr><expan>autem</expan></choice> ligno cognoscendi bonum et malum: non comedatis ex eo. qua <choice><abbr>at</abbr><expan>autem</expan></choice> die comedetis ex eo: morte moriemini
+          </ab>
+
+          <ab n="18">
+          Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus: non bonum esse hominem solum: faciamus et adiutorem <choice><abbr>ss</abbr><expan>secundum</expan></choice> eum. 
+          </ab>
+
+          <ab n="19">
+          Et formauit deus adhuc ex terra <choice><abbr>oes</abbr><expan>omnes</expan></choice> bestias agri: et omnia volatilia celi. Et adduxit ea ad <persName>adam</persName>: 
+          </ab>
+
+          <ab n="20">
+          Et vocauit <persName>adam</persName> nomina <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bestiis terre. At <persName>adam</persName> non inuentus est adiutos <choice><abbr>sims</abbr><expan>similus</expan></choice> sibi.
+          </ab>
+
+          <ab n="21">
+          Et immisit deus soporem in <persName>adam</persName> et dormiuit. Et tulit vnam costarum eius: et repleuit carnem pro ea.
+          </ab>
+
+          <ab n="22">
+          Et edificauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus costam quam accepit ab <persName>adam</persName> in mulierem. Et adduxit eam ad <persName>adam</persName>. 
+          </ab>
+
+          
         </div>
     </body>
     </text>
