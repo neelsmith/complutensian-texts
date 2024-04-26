@@ -20,8 +20,12 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
     <body>
 
         <div n="1">
-          
+        
+
           <ab  n="1"> In principio creauit deus celum et terram.
+          </ab>
+
+          <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num type="ordinal" value="1">1.</num>
           </ab>
 
           <ab n="2"> Terra <choice><abbr>aut</abbr><expan>autem</expan></choice> erat deserta et vacua: 
@@ -94,7 +98,39 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
           <ab n="24"> Et dixit deus Producat terra animam viuentem <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus suum:
           </ab>
+
+          <ab n="25"> Et fecit deus bestiam terre <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus suum et iumentum iuxta genus suum: et <choice><abbr>oe</abbr><expan>omne</expan></choice> reptile terre <choice><abbr>iux</abbr><expan>iuxta</expan></choice> genus suum: et vidit deus <choice><abbr>qd</abbr><expan>quod</expan></choice> esset bonum.
+          </ab>
+
+          <ab n="26"> Et dixit deus faciamus hominem ad imaginem nostram: sicut similitudo nostra: et <choice><abbr>dnetor</abbr><expan>dominetor</expan></choice>in pisces maris et in volatilia celorum et in iumenta et in omnem terrram: et in <choice><abbr>ome</abbr><expan>omne</expan></choice> reptile <choice><abbr>qd</abbr><expan>quod</expan></choice> reptat super terram.
+         </ab>
           
+          <ab n="27"> Et creauit deus <choice><abbr>hoiem</abbr><expan>hominem</expan></choice> ad imaginem suam: ad imaginem dei creauit illum: masculum et feminam creauit eos. 
+          </ab>
+
+          <ab n="28"> Et <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> eis deus: et dixit eis deus. Crescite et multiplicamini: et replete terram et roboramini super eam: et <choice><abbr>dnamini</abbr><expan>dominamini</expan></choice> piscibus maris et volatili celi et omni animanti <choice><abbr>qd</abbr><expan>quod</expan></choice> reptat super terrram.
+          </ab>
+
+          <ab n="29"> Et dixit deus. Ecce dedi vobis omnem herbam. cuius granum sementis seminatur: que est super faciem vniuerse terre: et <choice><abbr>oem</abbr><expan>omnem</expan></choice> arborem in qua est fructus arboris: cuius granum sementis seminatur: vobis erit ad vescendum:
+          </ab>
+
+          <ab n="30"> Et omni bestie terre et omni volatili celi et omni reptili <choice><abbr>qd</abbr><expan>quod</expan></choice> reptat super terram. In quo est animal viuens: omnem virentem herbam ad vescendum. Et fuit ita.
+          </ab>
+
+          <ab n="31"> Et vidit deus cuncta <choice><abbr>q</abbr><expan>quae</expan></choice> fecerat: Et ecce bona valde. Et fuit vespere et fuit mane dies sextus. 
+          </ab>
+
+        </div>
+
+        <div n="2">
+
+          <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="2" type="ordinal">2.</num>
+          </ab>
+          <ab n="1"> Et perfect sunt celi et terra et <choice><abbr>ois</abbr><expan>omnis</expan></choice> exercitus eorum. 
+          </ab>
+
+          <ab n="2"> Et delectatus est deus in die septimo opere suo quod fecerat: et requieuit in die septimo ab vniuerso opere suo quod fecerat. 
+          </ab>
         </div>
     </body>
     </text>
