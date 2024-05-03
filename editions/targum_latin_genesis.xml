@@ -131,6 +131,66 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
           <ab n="2"> Et delectatus est deus in die septimo opere suo quod fecerat: et requieuit in die septimo ab vniuerso opere suo quod fecerat. 
           </ab>
+
+          <ab n="3"> Et benedixit deus diei septimo et sanctificauit eum: qquia in ipso requieuit ab vniuerso opere suo quod creauit deus vt faceret. 
+          </ab>
+
+          <ab n="4"> Iste sunt generationes celi et terre quando create sunt: in die quo creauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus terram et celum:
+          </ab>
+
+          <ab n="5"> Et <choice><abbr>oem</abbr><expan>omnem</expan></choice> arborem agri antequam esset in terra et omnes herbam agri antequam germinaret: <choice><abbr>qr</abbr><expan>quia</expan></choice> non pluerat <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus super terram: et homo non erat ad operandum terram.
+          </ab>
+
+          <ab n="6"> Et nubes ascendebat de terra: et irrigabat vniuersam faciem terre.
+          </ab>
+
+          <ab n="7"> Et creauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus hominem puluerem de terra: et in spirauit in faciem eius animam vite: et fuit homo in spiritum loquentem. 
+          </ab>
+
+          <ab n="8"> Et plantauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus hortum in loco voluptatis a principio: et posuit ibi hominem quem creauit.
+          </ab>
+
+          <ab n="9"> Et germinare fecit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus de terram <choice><abbr>oem</abbr><expan>omnem</expan></choice> arborem <choice><abbr>q</abbr><expan>quae</expan></choice> erat desiderabilis ad videndum et bona ad veescendum. Et arborem vite in medio horti: et arborem cuius fructus manducantes scient inter bonum et malum. 
+          </ab>
+
+          <ab n="10"> Et fluuius egrediebatur de loco voluptatis ad irrigandum hortum. Et inde diuidebatur: et erat in quattutor capita fluminum. 
+          </ab>
+
+          <ab n="11"> Nomen vnius <placeName>phison</placeName>: ipse est <choice><abbr>q</abbr><expan>quod</expan></choice> circuit <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram euila: vbi est aurum. 
+          </ab>
+
+          <ab n="12"> Et aurum terre illius bonum. Ubi est bdelium et lapis onychinus. 
+          </ab>
+
+          <ab n="13"> Et nomen fluuii secundi <placeName>gion</placeName>: ipse est qui circuit omnem terram <placeName>ethiopie</placeName>. 
+          </ab>
+
+          <ab n="14"> Et nomen fluuii tertii <placeName>hidecel</placeName>: ipse est qui vadit ad orientem <rs type="ethnic">assyrie</rs>. Et fluuius quartus est <placeName>euphrates</placeName>. 
+          </ab>
+
+          <ab n="15"> Et tulit dominus deus hominem: et collocauit eum in horto voluptatis vt operaretur eum: et cuscodiret illum. 
+          </ab>
+
+          <ab n="16"> Et precepit dominus deus ade dicens. Ex omni arbore horti comedens comedes: 
+          </ab>
+
+          <ab n="17"> Et de arbore cuius fuctum comedentes scient inter bonum et malum: non comedes ex ea: quontiam in die qua comederis ex ea: morte morieris. 
+          </ab>
+
+          <ab n="18"> Et dixit dominus deus: non est bonum esse hominem solum: faciam ei adiutorium  quasi eum
+          </ab>
+
+          <ab n="19"> Et creauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus de terra <choice><abbr>oes</abbr><expan>omnes</expan></choice> bestias agri et omnia volatilia celi: et adduxit ad <persName>adam</persName> vt videret quid vocaret ea: et omne <choice><abbr>qd</abbr><expan>quod</expan></choice> vocabat <persName>adam</persName> <choice><abbr>aie</abbr><expan>anime</expan></choice> viuentis: ipsum est nomen eius. 
+          </ab>
+
+          <ab n="20"> Et vocauit <persName>adam</persName> nominibus <choice><abbr>oe</abbr><expan>omnem</expan></choice> inmentum et volatile celi: et omnem bestiam agri: et ade non inuenit adiutorium quasi eum. 
+          </ab>
+
+          <ab n="21"> Et immisit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus soporem in <persName>adam</persName>: et dormiuit: et tulit vnam de costis eius: et posuit carnem pro ea. 
+          </ab>
+
+          <ab n="22"> Et edificauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus costam quam tulerat de <persName>adam</persName> in mulierem: et adduxit eam ad <persName>adam</persName>. 
+          </ab>
         </div>
     </body>
     </text>
