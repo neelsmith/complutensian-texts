@@ -9,22 +9,22 @@ urn:cts:greekLit:tlg0031.tlg001:
 
 ## Tanach
 
-urn:cts:compnov:tanach:
+urn:cts:compnov:bible:
 
 Genesis
-urn:cts:compnov:tanach.genesis:
+urn:cts:compnov:bible.genesis:
 
 Versions:
 
-urn:cts:compnov:tanach.genesis.complutLXX:
+urn:cts:compnov:bible.genesis.complutLXX:
 
-urn:cts:compnov:tanach.genesis.complutVulgate:
+urn:cts:compnov:bible.genesis.complutVulgate:
 
-urn:cts:compnov:tanach.genesis.complutMasoretic:
+urn:cts:compnov:bible.genesis.complutMasoretic:
 
 
 
-urn:cts:compnov:tanach.genesis.LXXlatin:
+urn:cts:compnov:bible.genesis.LXXlatin:
 
 ## Cross referencing
 

@@ -1,5 +1,5 @@
 urn|file|converter|diplomatic|normalized|orthography
-urn:cts:compnov:tanach.genesis.targum_latin:|targum_latin_genesis.xml|TEIDivAb|MidDiplomaticBuilder("Diplomatic edition builder","dipl")|MidNormalizedBuilder("Normalized edition builder","normed")|msGreek()
+urn:cts:compnov:bible.genesis.targum_latin:|targum_latin_genesis.xml|TEIDivAb|MidDiplomaticBuilder("Diplomatic edition builder","dipl")|MidNormalizedBuilder("Normalized edition builder","normed")|msGreek()
 
 
-urn:cts:compnov:tanach.genesis.sept_latin:|septuagint_latin_genesis.xml|TEIDivAb|MidDiplomaticBuilder("Diplomatic edition builder","dipl")|MidNormalizedBuilder("Normalized edition builder","normed")|msGreek()
+urn:cts:compnov:bible.genesis.sept_latin:|septuagint_latin_genesis.xml|TEIDivAb|MidDiplomaticBuilder("Diplomatic edition builder","dipl")|MidNormalizedBuilder("Normalized edition builder","normed")|msGreek()

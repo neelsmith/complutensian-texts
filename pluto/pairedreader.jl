@@ -63,7 +63,7 @@ septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
 # ╔═╡ d1dc58a9-5ad7-4be1-89c8-0cf6347ef3cb
 septlatinxmlcorpus = begin
 	reloadtext
-	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.sept_latin:"), TEIDivAb, FileReader)
+	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
 
 # ╔═╡ 2ef27488-8982-47e1-9f01-197f11a8dfbd
@@ -75,7 +75,7 @@ targlatinxml  = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
 # ╔═╡ 5308d2fd-094b-4044-84cb-9326914afcb0
 targlatincorpus =  begin
 	reloadtext
-	readcitable(targlatinxml, CtsUrn("urn:cts:compnov:tanach.genesis.targum_latin:"), TEIDivAb, FileReader)
+	readcitable(targlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.targum_latin:"), TEIDivAb, FileReader)
 end
 
 # ╔═╡ 947930b8-8cdb-4b69-ab7f-841f2d4f3957
@@ -173,14 +173,14 @@ end
 
 # ╔═╡ 4a46b1d5-395a-45e3-a078-93f0df69a6e8
 if adjacent
-	formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).$(col2):$(verse)"), corpus) |> Markdown.parse |> aside
+	formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).$(col2):$(verse)"), corpus) |> Markdown.parse |> aside
 else
-	formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).$(col2):$(verse)"), corpus) |> Markdown.parse 
+	formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).$(col2):$(verse)"), corpus) |> Markdown.parse 
 end
 
 
 # ╔═╡ b9279e2a-080c-43ea-b838-83e5d96f8a1a
-formatpsg(CtsUrn("urn:cts:compnov:tanach.$(book).$(col1):$(verse)"), corpus) |> Markdown.parse
+formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).$(col1):$(verse)"), corpus) |> Markdown.parse
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
