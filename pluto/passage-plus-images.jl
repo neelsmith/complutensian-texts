@@ -24,7 +24,7 @@ begin
 end
 
 # ╔═╡ 9ede2afe-121f-11ef-2fea-0f5c98f24f8c
-md"""# Utility: expand page indexing"""
+md"""# Read Vulgate text with link to image of page"""
 
 # ╔═╡ 003b4ee4-4e89-43a3-8a6b-6cb5e7bea312
 md"""Images are linked to ICT"""
@@ -1623,7 +1623,7 @@ version = "17.4.0+2"
 # ╟─3bb2427a-4fa7-4a64-a464-ce4122803bb6
 # ╟─cb7d7867-1cd5-4aeb-9204-0022c01dbb93
 # ╟─77576140-ead2-4994-a4db-793adbbc62d5
-# ╠═4e0e1ebe-827d-4ed1-9477-20b01eb1f5f9
+# ╟─4e0e1ebe-827d-4ed1-9477-20b01eb1f5f9
 # ╟─8fd6efe6-e931-462c-bc07-d4252264f980
 # ╟─059dd132-ce76-4a12-9def-5aef1f35a670
 # ╟─ff40aa80-ed3a-478e-9064-33c7bc847011
