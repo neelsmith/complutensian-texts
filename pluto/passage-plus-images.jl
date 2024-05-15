@@ -81,22 +81,22 @@ function versemenu(book, chapter, index)
 
 end
 
-# ╔═╡ fdf9d04f-d616-40d8-ae0d-08e019ce6114
-
-
 # ╔═╡ cd0cbd07-05cd-4a75-8bf8-1d2da4f9062a
 md"""> **Build index**"""
 
-# ╔═╡ 4576f9c1-8cfc-4c03-ab49-64986397178b
-f = joinpath(dirname(pwd()), "indexing", "vulgate-to-image.cex")
+# ╔═╡ 69820688-4d45-47df-b1e9-172cc1f3a10c
+filelist = [
+	joinpath(dirname(pwd()), "indexing", "vulgate-to-image-vol1.cex"),
+	joinpath(dirname(pwd()), "indexing", "vulgate-to-image-vol2.cex"),
 
-# ╔═╡ 9665f647-34e2-4d44-afec-2efca77cd8da
-rawdata = filter(readlines(f)[2:end]) do ln
-	! isempty(ln)
-end
+]
 
-# ╔═╡ d04da5dc-9832-4576-9058-87427648afd7
-
+# ╔═╡ 4e3c0831-fa03-49bb-ad9a-105852d4ad8c
+rawdata = map(filelist) do f
+	filter(readlines(f)[2:end]) do ln
+		! isempty(ln)
+	end
+end |> Iterators.flatten |> collect
 
 # ╔═╡ 79b82e5c-4bd4-4f51-8469-0f26ceb5a136
 md"""> **Reference corpus**"""
@@ -163,9 +163,6 @@ chosentext = select(chosenurn,vulgate)[1].text
 
 # ╔═╡ e64ad078-14aa-4af8-95b9-fa9c6bddbf07
 md"""*$(chosentext)*"""
-
-# ╔═╡ 40c45c61-990c-43d4-a3c7-99ddb95fec22
-
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1633,16 +1630,13 @@ version = "17.4.0+2"
 # ╟─1c21bab5-ce49-4c3b-85b5-9c072df65708
 # ╟─d4ec0f52-2cc6-42ed-95d7-ad415aa7a769
 # ╟─d515ea81-7d41-4334-94e7-e7c8823874d5
-# ╠═fdf9d04f-d616-40d8-ae0d-08e019ce6114
 # ╟─cd0cbd07-05cd-4a75-8bf8-1d2da4f9062a
-# ╟─4576f9c1-8cfc-4c03-ab49-64986397178b
-# ╟─9665f647-34e2-4d44-afec-2efca77cd8da
+# ╟─69820688-4d45-47df-b1e9-172cc1f3a10c
+# ╟─4e3c0831-fa03-49bb-ad9a-105852d4ad8c
 # ╟─700e6922-93a6-4547-b3c7-c8de5305b496
-# ╠═d04da5dc-9832-4576-9058-87427648afd7
 # ╟─79b82e5c-4bd4-4f51-8469-0f26ceb5a136
 # ╟─5a986b08-51de-42c1-a44f-9155f510fbee
 # ╟─753e5c6c-10fc-4a09-974e-4e7316f523ce
 # ╟─6b4aa4a4-a36e-4e78-99bb-11332f8f2774
-# ╠═40c45c61-990c-43d4-a3c7-99ddb95fec22
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
