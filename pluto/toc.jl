@@ -14,172 +14,104 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ ad962a57-3d81-4665-a74a-84a150b04971
+# ╔═╡ 2ac6ddb4-1382-11ef-259d-b969fbb73079
 begin
-	using CitableBase, CitableText, CitableCorpus
-	using CitableObject, CitableImage
+	using CitableBase, CitableObject, CitableImage
 	using PlutoUI
-	
-	md"""*Unhide this cell to see the Julia environment.*"""
+	md"""*Unhide this cell to see Julia environment*"""
 end
 
-# ╔═╡ 9ede2afe-121f-11ef-2fea-0f5c98f24f8c
-md"""# Read Vulgate text with link to image of page"""
+# ╔═╡ cda9909c-1a99-4a68-8277-8b21926409a0
+md"""# Complutensian polyglot Bible: contents"""
 
-# ╔═╡ 003b4ee4-4e89-43a3-8a6b-6cb5e7bea312
-md"""Images are linked to ICT"""
+# ╔═╡ 0517ca20-5e76-4ef6-93ef-faf5307cd108
+md"""
+View the opening page of major divisions of the Complutensian Bible in a citable image environment.
+"""
 
-# ╔═╡ 70b7ffbe-cc15-4f71-b181-7f725c208e67
+# ╔═╡ aa758f2e-c4eb-46a4-b6c7-0d6e54da231b
+md"""
+
+*Type of content to view*: $(@bind category Select(
+	[ 	"editorial" => "Prefatory material from editors of the Complutensian",
+		"jerome" => "Prefatory material from Jerome's Vulgate",
+		"text" => "Biblical text"
+	], default = "text"
+))"""
+
+# ╔═╡ 7f884091-f961-4516-ba34-7d3c24805c10
 html"""
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 """
 
-# ╔═╡ 8ba148e3-80b3-4d70-9e81-39a927b64066
-md"""> **Compose text and image displays**"""
 
-# ╔═╡ 8fd6efe6-e931-462c-bc07-d4252264f980
+# ╔═╡ d21883b2-e4e6-498e-a28b-9b23e5597479
+md"""> **Data for ToC**"""
+
+# ╔═╡ 4ce2e147-c592-4b16-ad66-6b1370db65b5
+f = joinpath(dirname(pwd()), "indexing", "book-breaks.cex")
+
+# ╔═╡ 823d7789-2074-44e3-9bf8-42bfed342515
+datalines = filter(readlines(f)[2:end]) do  ln
+	! isempty(ln)
+end
+
+# ╔═╡ 576c9c77-7b3a-43fd-a997-9727631ce78b
+data = map(datalines) do ln
+	cols = split(ln, "|")
+	(title = cols[1], pgref = cols[2], category = cols[3], notes = cols[4])
+end
+
+
+# ╔═╡ d425614b-63fa-424d-b7fa-84e8cef640b7
+records = filter(record -> record.category == category, data)
+
+# ╔═╡ 9282525b-6a71-47e6-b452-79d8491e0b5a
 md"""> **Image service**"""
 
-# ╔═╡ 059dd132-ce76-4a12-9def-5aef1f35a670
+# ╔═╡ 94e88a41-c43e-4e74-980f-b2ec926a8b0d
 baseurl = "http://www.homermultitext.org/iipsrv"
 
 
-# ╔═╡ ff40aa80-ed3a-478e-9064-33c7bc847011
+# ╔═╡ 5c42e4eb-1c61-4b06-af47-2e0cff5ff1e8
 root = "/project/homer/pyramidal/deepzoom"
 
 
-# ╔═╡ a2036153-00aa-46ad-b0bf-02fac326d856
+# ╔═╡ 10f3693b-1bf6-4f6b-b41a-b5a1fbcc49fd
 imgservice = IIIFservice(baseurl, root)
 
-# ╔═╡ 94474e0f-dd42-4abe-9905-d0122f0bd7eb
+# ╔═╡ 8e0c4673-7120-4fe8-9ead-54b0653d7205
 ict = "http://www.homermultitext.org/ict2/?"
 
-# ╔═╡ a90332ed-5bcc-4a04-b33f-82bd67a3768e
-md"""> **UI**"""
+# ╔═╡ ecc85ee8-f2c4-4455-a03b-0abf16433266
+begin
+	mdlines = []
+	for rec in records
+		pgurn = Cite2Urn(rec.pgref)
+		volre = r"v([1-6]).+"
+		volume =  replace(objectcomponent(pgurn), volre => s"\1")
 
-# ╔═╡ d4ec0f52-2cc6-42ed-95d7-ad415aa7a769
-function chaptermenu(book, index)
-	prsinbook = filter(index) do pr
-		workid(pr.ref) == lowercase(book)
+		lnk = ict * "urn=" * rec.pgref
+		
+		ln = string("1. [", rec.title,"](", lnk,  ") (volume ", volume, ")")
+		push!(mdlines, ln)
 	end
-	map(prsinbook) do pr
-		collapsePassageTo(pr.ref, 1) |> passagecomponent
-	end |> unique
+	join(mdlines, "\n") |> Markdown.parse
 end
-
-# ╔═╡ d515ea81-7d41-4334-94e7-e7c8823874d5
-function versemenu(book, chapter, index)
-	prs = filter(index) do pr
-		chapref = collapsePassageTo(pr.ref, 1) |> passagecomponent
-		workid(pr.ref) == lowercase(book) &&
-		chapref == chapter
-	end
-	map(prs)do pr
-		passagecomponent(pr.ref)
-	end
-
-end
-
-# ╔═╡ cd0cbd07-05cd-4a75-8bf8-1d2da4f9062a
-md"""> **Build index**"""
-
-# ╔═╡ 69820688-4d45-47df-b1e9-172cc1f3a10c
-filelist = [
-	joinpath(dirname(pwd()), "indexing", "vulgate-to-image-vol1.cex"),
-	joinpath(dirname(pwd()), "indexing", "vulgate-to-image-vol2.cex"),
-
-]
-
-# ╔═╡ 4e3c0831-fa03-49bb-ad9a-105852d4ad8c
-rawdata = map(filelist) do f
-	filter(readlines(f)[2:end]) do ln
-		! isempty(ln)
-	end
-end |> Iterators.flatten |> collect
-
-# ╔═╡ 79b82e5c-4bd4-4f51-8469-0f26ceb5a136
-md"""> **Reference corpus**"""
-
-# ╔═╡ 5a986b08-51de-42c1-a44f-9155f510fbee
-srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
-
-# ╔═╡ 753e5c6c-10fc-4a09-974e-4e7316f523ce
-corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
-
-# ╔═╡ 6b4aa4a4-a36e-4e78-99bb-11332f8f2774
-vulgate = filter(corpus.passages) do ln
-	versionid(ln.urn) == "vulgate"
-end |> CitableTextCorpus
-
-# ╔═╡ 700e6922-93a6-4547-b3c7-c8de5305b496
-psgindex = map(rawdata) do ln
-	cols = split(ln, "|")
-	rangevals = select(CtsUrn(cols[1]), vulgate)
-	map(rangevals) do psg
-		#string(psg.urn, "|", cols[2])
-		(ref = psg.urn, image = cols[2])
-	end
-
-end |> Iterators.flatten |> collect
-
-	
-
-# ╔═╡ 1c21bab5-ce49-4c3b-85b5-9c072df65708
-bookmenu = map(psgindex) do psg
-	titlecase(workid(psg.ref))
-end |> unique
-
-# ╔═╡ 33174b97-b127-4e1b-930c-481de5108b66
-md"""*Book* $(@bind bookchoice Select(bookmenu))"""
-
-# ╔═╡ 1402fe34-e5f0-4992-a9df-198f2078a3d3
-md"""*Chapter* $(@bind chapterchoice Select(chaptermenu(bookchoice, psgindex)))"""
-
-# ╔═╡ c996dd3e-edcf-45bf-9ea0-fd55ff25b808
-md"""*Verse* $(@bind versechoice Select(versemenu(bookchoice, chapterchoice, psgindex)))"""
-
-# ╔═╡ 77576140-ead2-4994-a4db-793adbbc62d5
-chosenurn = string("urn:cts:compnov:bible.", lowercase(bookchoice),".vulgate:", versechoice) |> CtsUrn
-
-# ╔═╡ e0da9c3b-c02d-41c2-8c76-e0190ee50d9e
-chosenpairs = filter(psgindex) do pr
-	pr.ref == chosenurn
-end
-
-# ╔═╡ 3bb2427a-4fa7-4a64-a464-ce4122803bb6
-chosenimgs = map(pr -> Cite2Urn(pr.image), chosenpairs)
-
-# ╔═╡ cb7d7867-1cd5-4aeb-9204-0022c01dbb93
-mdlinks = map(chosenimgs) do img
-	linkedMarkdownImage(ict, img, imgservice; w = 200)
-end
-
-# ╔═╡ ee9ff91e-3481-43e3-844f-f1c3804b7aaa
-join(mdlinks,"   ") |> Markdown.parse
-
-# ╔═╡ 4e0e1ebe-827d-4ed1-9477-20b01eb1f5f9
-chosentext = select(chosenurn,vulgate)[1].text
-
-# ╔═╡ e64ad078-14aa-4af8-95b9-fa9c6bddbf07
-md"""*$(chosentext)*"""
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
-CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableImage = "17ccb2e5-db19-44b3-b354-4fd16d92c74e"
 CitableObject = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
-CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
 CitableBase = "~10.3.1"
-CitableCorpus = "~0.13.5"
 CitableImage = "~0.7.1"
 CitableObject = "~0.16.1"
-CitableText = "~0.16.2"
 PlutoUI = "~0.7.59"
 """
 
@@ -189,7 +121,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "fa0fc93293fa42c4e1eb47240c9e4956b7b265a6"
+project_hash = "539036d723ff89bf03900d10f2cc590a9c73d99a"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -302,9 +234,9 @@ version = "0.5.0"
 
 [[deps.CPUSummary]]
 deps = ["CpuId", "IfElse", "PrecompileTools", "Static"]
-git-tree-sha1 = "601f7e7b3d36f18790e2caf83a882d88e9b71ff1"
+git-tree-sha1 = "585a387a490f1c4bd88be67eea15b93da5e85db7"
 uuid = "2a0fbf3d-bb9c-48f3-b0a9-814d99fd7ab9"
-version = "0.2.4"
+version = "0.2.5"
 
 [[deps.CSV]]
 deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "PrecompileTools", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings", "WorkerUtilities"]
@@ -334,12 +266,6 @@ git-tree-sha1 = "cc4f1e1db392c4a05eb29026774d6f26ae8ca457"
 uuid = "d6f014bd-995c-41bd-9893-703339864534"
 version = "10.3.1"
 
-[[deps.CitableCorpus]]
-deps = ["CitableBase", "CitableText", "CiteEXchange", "DocStringExtensions", "Documenter", "HTTP", "Tables", "Test"]
-git-tree-sha1 = "f400484e7b0fc1707f9dfd288fa297a4a2d9a2ad"
-uuid = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
-version = "0.13.5"
-
 [[deps.CitableImage]]
 deps = ["CitableBase", "CitableObject", "CiteEXchange", "DocStringExtensions", "Documenter", "Downloads", "FileIO", "ImageIO", "Images", "Test", "TestImages", "TestSetExtensions"]
 git-tree-sha1 = "01ac71c69da0a11f406449aa9881a956851519f8"
@@ -351,12 +277,6 @@ deps = ["CitableBase", "CiteEXchange", "DocStringExtensions", "Documenter", "Dow
 git-tree-sha1 = "86eb34cc98bc2c5b73dc96da5fe116adba903d56"
 uuid = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
 version = "0.16.1"
-
-[[deps.CitableText]]
-deps = ["CitableBase", "DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
-git-tree-sha1 = "00ddf4c75f3e2b8dd54a4e4808b8ec27053d9bb3"
-uuid = "41e66566-473b-49d4-85b7-da83b66615d8"
-version = "0.16.2"
 
 [[deps.CiteEXchange]]
 deps = ["CSV", "CitableBase", "DocStringExtensions", "Documenter", "HTTP", "Test"]
@@ -384,9 +304,9 @@ version = "0.7.4"
 
 [[deps.ColorSchemes]]
 deps = ["ColorTypes", "ColorVectorSpace", "Colors", "FixedPointNumbers", "PrecompileTools", "Random"]
-git-tree-sha1 = "67c1f244b991cad9b0aa4b7540fb758c2488b129"
+git-tree-sha1 = "4b270d6465eb21ae89b732182c20dc165f8bf9f2"
 uuid = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
-version = "3.24.0"
+version = "3.25.0"
 
 [[deps.ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
@@ -402,9 +322,9 @@ version = "0.9.10"
 
 [[deps.Colors]]
 deps = ["ColorTypes", "FixedPointNumbers", "Reexport"]
-git-tree-sha1 = "fc08e5930ee9a4e03f84bfb5211cb54e7769758a"
+git-tree-sha1 = "362a287c3aa50601b0bc359053d5c2468f0e7ce0"
 uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
-version = "0.12.10"
+version = "0.12.11"
 
 [[deps.Compat]]
 deps = ["TOML", "UUIDs"]
@@ -553,9 +473,9 @@ uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.FixedPointNumbers]]
 deps = ["Statistics"]
-git-tree-sha1 = "335bfdceacc84c5cdf16aadc768aa5ddfc5383cc"
+git-tree-sha1 = "05882d6995ae5c12bb5f36dd2ed3f61c98cbb172"
 uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
-version = "0.8.4"
+version = "0.8.5"
 
 [[deps.Future]]
 deps = ["Random"]
@@ -593,9 +513,9 @@ version = "1.11.0"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "2c3ec1f90bb4a8f7beafb0cffea8a4c3f4e636ab"
+git-tree-sha1 = "d1d712be3164d61d1fb98e7ce9bcbc6cc06b45ed"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.10.6"
+version = "1.10.8"
 
 [[deps.HistogramThresholding]]
 deps = ["ImageBase", "LinearAlgebra", "MappedArrays"]
@@ -682,9 +602,9 @@ version = "0.7.6"
 
 [[deps.ImageIO]]
 deps = ["FileIO", "IndirectArrays", "JpegTurbo", "LazyModules", "Netpbm", "OpenEXR", "PNGFiles", "QOI", "Sixel", "TiffImages", "UUIDs"]
-git-tree-sha1 = "bca20b2f5d00c4fbc192c3212da8fa79f4688009"
+git-tree-sha1 = "437abb322a41d527c197fa800455f79d414f0a3c"
 uuid = "82e4d734-157c-48bb-816b-45c225c6df19"
-version = "0.6.7"
+version = "0.6.8"
 
 [[deps.ImageMagick]]
 deps = ["FileIO", "ImageCore", "ImageMagick_jll", "InteractiveUtils", "Libdl", "Pkg", "Random"]
@@ -818,9 +738,9 @@ version = "1.0.0"
 
 [[deps.JLD2]]
 deps = ["FileIO", "MacroTools", "Mmap", "OrderedCollections", "Pkg", "PrecompileTools", "Printf", "Reexport", "Requires", "TranscodingStreams", "UUIDs"]
-git-tree-sha1 = "5ea6acdd53a51d897672edb694e3cc2912f3f8a7"
+git-tree-sha1 = "dca9ff5abdf5fab4456876bc93f80c59a37b81df"
 uuid = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
-version = "0.4.46"
+version = "0.4.47"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
@@ -842,9 +762,9 @@ version = "0.1.5"
 
 [[deps.JpegTurbo_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "3336abae9a713d2210bb57ab484b1e065edd7d23"
+git-tree-sha1 = "c84a835e1a09b289ffcd2271bf2a337bbdda6637"
 uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
-version = "3.0.2+0"
+version = "3.0.3+0"
 
 [[deps.LERC_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -907,9 +827,9 @@ version = "1.17.0+0"
 
 [[deps.Libtiff_jll]]
 deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "LERC_jll", "Libdl", "XZ_jll", "Zlib_jll", "Zstd_jll"]
-git-tree-sha1 = "2da088d113af58221c52828a80378e16be7d037a"
+git-tree-sha1 = "6355fb9a4d22d867318db186fd09b09b35bd2ed7"
 uuid = "89763e89-9b03-5906-acba-b20f662cd828"
-version = "4.5.1+1"
+version = "4.6.0+0"
 
 [[deps.LinearAlgebra]]
 deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
@@ -917,9 +837,9 @@ uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [[deps.LittleCMS_jll]]
 deps = ["Artifacts", "JLLWrappers", "JpegTurbo_jll", "Libdl", "Libtiff_jll"]
-git-tree-sha1 = "08ed30575ffc5651a50d3291beaf94c3e7996e55"
+git-tree-sha1 = "fa7fd067dca76cadd880f1ca937b4f387975a9f5"
 uuid = "d3a379c0-f9a3-5b72-a4c0-6bf4d2e8af0f"
-version = "2.15.0+0"
+version = "2.16.0+0"
 
 [[deps.LogExpFunctions]]
 deps = ["DocStringExtensions", "IrrationalConstants", "LinearAlgebra"]
@@ -1084,9 +1004,9 @@ version = "3.2.4+0"
 
 [[deps.OpenJpeg_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libtiff_jll", "LittleCMS_jll", "libpng_jll"]
-git-tree-sha1 = "8d4c87ffaf09dbdd82bcf8c939843e94dd424df2"
+git-tree-sha1 = "f4cb457ffac5f5cf695699f82c537073958a6a6c"
 uuid = "643b3616-a352-519d-856d-80112ee9badc"
-version = "2.5.0+0"
+version = "2.5.2+0"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1296,6 +1216,12 @@ weakdeps = ["RecipesBase"]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 version = "0.7.0"
 
+[[deps.SIMD]]
+deps = ["PrecompileTools"]
+git-tree-sha1 = "2803cab51702db743f3fda07dd1745aadfbf43bd"
+uuid = "fdea26ae-647d-5447-a871-4b548cad5224"
+version = "3.5.0"
+
 [[deps.SIMDTypes]]
 git-tree-sha1 = "330289636fb8107c5f32088d2741e9fd7a061a5c"
 uuid = "94e857df-77ce-4151-89e5-788b33177be4"
@@ -1309,9 +1235,9 @@ version = "0.6.42"
 
 [[deps.SentinelArrays]]
 deps = ["Dates", "Random"]
-git-tree-sha1 = "0e7508ff27ba32f26cd459474ca2ede1bc10991f"
+git-tree-sha1 = "363c4e82b66be7b9f7c7c7da7478fdae07de44b9"
 uuid = "91c51154-3ec4-41a3-a24f-3f23e20d615c"
-version = "1.4.1"
+version = "1.4.2"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
@@ -1359,9 +1285,9 @@ version = "1.10.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
-git-tree-sha1 = "e2cfc4012a19088254b3950b85c3c1d8882d864d"
+git-tree-sha1 = "2f5d4697f21388cbe1ff299430dd169ef97d7e14"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "2.3.1"
+version = "2.4.0"
 weakdeps = ["ChainRulesCore"]
 
     [deps.SpecialFunctions.extensions]
@@ -1489,10 +1415,10 @@ uuid = "8290d209-cae3-49c0-8002-c8c24d57dab5"
 version = "0.5.2"
 
 [[deps.TiffImages]]
-deps = ["ColorTypes", "DataStructures", "DocStringExtensions", "FileIO", "FixedPointNumbers", "IndirectArrays", "Inflate", "Mmap", "OffsetArrays", "PkgVersion", "ProgressMeter", "UUIDs"]
-git-tree-sha1 = "34cc045dd0aaa59b8bbe86c644679bc57f1d5bd0"
+deps = ["ColorTypes", "DataStructures", "DocStringExtensions", "FileIO", "FixedPointNumbers", "IndirectArrays", "Inflate", "Mmap", "OffsetArrays", "PkgVersion", "ProgressMeter", "SIMD", "UUIDs"]
+git-tree-sha1 = "bc7fd5c91041f44636b2c134041f7e5263ce58ae"
 uuid = "731e570b-9d59-4bfa-96dc-6df516fadf69"
-version = "0.6.8"
+version = "0.10.0"
 
 [[deps.TiledIteration]]
 deps = ["OffsetArrays", "StaticArrayInterface"]
@@ -1606,37 +1532,21 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─ad962a57-3d81-4665-a74a-84a150b04971
-# ╟─9ede2afe-121f-11ef-2fea-0f5c98f24f8c
-# ╟─33174b97-b127-4e1b-930c-481de5108b66
-# ╟─1402fe34-e5f0-4992-a9df-198f2078a3d3
-# ╟─c996dd3e-edcf-45bf-9ea0-fd55ff25b808
-# ╟─e64ad078-14aa-4af8-95b9-fa9c6bddbf07
-# ╟─003b4ee4-4e89-43a3-8a6b-6cb5e7bea312
-# ╟─ee9ff91e-3481-43e3-844f-f1c3804b7aaa
-# ╟─70b7ffbe-cc15-4f71-b181-7f725c208e67
-# ╟─8ba148e3-80b3-4d70-9e81-39a927b64066
-# ╟─e0da9c3b-c02d-41c2-8c76-e0190ee50d9e
-# ╟─3bb2427a-4fa7-4a64-a464-ce4122803bb6
-# ╠═cb7d7867-1cd5-4aeb-9204-0022c01dbb93
-# ╟─77576140-ead2-4994-a4db-793adbbc62d5
-# ╟─4e0e1ebe-827d-4ed1-9477-20b01eb1f5f9
-# ╟─8fd6efe6-e931-462c-bc07-d4252264f980
-# ╠═059dd132-ce76-4a12-9def-5aef1f35a670
-# ╠═ff40aa80-ed3a-478e-9064-33c7bc847011
-# ╠═a2036153-00aa-46ad-b0bf-02fac326d856
-# ╠═94474e0f-dd42-4abe-9905-d0122f0bd7eb
-# ╟─a90332ed-5bcc-4a04-b33f-82bd67a3768e
-# ╟─1c21bab5-ce49-4c3b-85b5-9c072df65708
-# ╟─d4ec0f52-2cc6-42ed-95d7-ad415aa7a769
-# ╟─d515ea81-7d41-4334-94e7-e7c8823874d5
-# ╟─cd0cbd07-05cd-4a75-8bf8-1d2da4f9062a
-# ╟─69820688-4d45-47df-b1e9-172cc1f3a10c
-# ╟─4e3c0831-fa03-49bb-ad9a-105852d4ad8c
-# ╟─700e6922-93a6-4547-b3c7-c8de5305b496
-# ╟─79b82e5c-4bd4-4f51-8469-0f26ceb5a136
-# ╟─5a986b08-51de-42c1-a44f-9155f510fbee
-# ╟─753e5c6c-10fc-4a09-974e-4e7316f523ce
-# ╟─6b4aa4a4-a36e-4e78-99bb-11332f8f2774
+# ╟─2ac6ddb4-1382-11ef-259d-b969fbb73079
+# ╟─cda9909c-1a99-4a68-8277-8b21926409a0
+# ╟─0517ca20-5e76-4ef6-93ef-faf5307cd108
+# ╟─aa758f2e-c4eb-46a4-b6c7-0d6e54da231b
+# ╟─ecc85ee8-f2c4-4455-a03b-0abf16433266
+# ╟─7f884091-f961-4516-ba34-7d3c24805c10
+# ╟─d21883b2-e4e6-498e-a28b-9b23e5597479
+# ╟─d425614b-63fa-424d-b7fa-84e8cef640b7
+# ╟─4ce2e147-c592-4b16-ad66-6b1370db65b5
+# ╟─823d7789-2074-44e3-9bf8-42bfed342515
+# ╟─576c9c77-7b3a-43fd-a997-9727631ce78b
+# ╟─9282525b-6a71-47e6-b452-79d8491e0b5a
+# ╟─94e88a41-c43e-4e74-980f-b2ec926a8b0d
+# ╟─5c42e4eb-1c61-4b06-af47-2e0cff5ff1e8
+# ╟─10f3693b-1bf6-4f6b-b41a-b5a1fbcc49fd
+# ╟─8e0c4673-7120-4fe8-9ead-54b0653d7205
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
