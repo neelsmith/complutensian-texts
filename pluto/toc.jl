@@ -26,18 +26,28 @@ md"""# Complutensian polyglot Bible: contents"""
 
 # ╔═╡ 0517ca20-5e76-4ef6-93ef-faf5307cd108
 md"""
-View the opening page of major divisions of the Complutensian Bible in a citable image environment.
+> View the opening page of major divisions of the Complutensian Bible in a citable image environment.
 """
 
-# ╔═╡ aa758f2e-c4eb-46a4-b6c7-0d6e54da231b
-md"""
+# ╔═╡ 7068990f-53fb-4915-8fa2-b4480ef94ae0
+md"""*View contents for*: $(@bind view Select(["by_category" => "a category of text", "by_volume" => "a single volume"]))"""
 
-*Type of content to view*: $(@bind category Select(
+# ╔═╡ b8278563-7dfd-44dd-a12c-2d7f71b6d181
+if view == "by_volume"
+	
+md"""*Volume*: $(@bind volume NumberField(1:6))
+"""
+elseif view == "by_volume"
+	
+md"Contents of volume $(volume)"
+else
+	md"""*Type of content to view*: $(@bind category Select(
 	[ 	"editorial" => "Prefatory material from editors of the Complutensian",
 		"jerome" => "Prefatory material from Jerome's Vulgate",
 		"text" => "Biblical text"
 	], default = "text"
 ))"""
+end
 
 # ╔═╡ 7f884091-f961-4516-ba34-7d3c24805c10
 html"""
@@ -48,6 +58,9 @@ html"""
 
 # ╔═╡ d21883b2-e4e6-498e-a28b-9b23e5597479
 md"""> **Data for ToC**"""
+
+# ╔═╡ fc31b758-512f-4d6c-80a9-33ac0af034de
+volmenu = collect(1:6) 
 
 # ╔═╡ 4ce2e147-c592-4b16-ad66-6b1370db65b5
 f = joinpath(dirname(pwd()), "indexing", "book-breaks.cex")
@@ -65,7 +78,12 @@ end
 
 
 # ╔═╡ d425614b-63fa-424d-b7fa-84e8cef640b7
-records = filter(record -> record.category == category, data)
+records = if view == "by_category" 
+	filter(record -> record.category == category, data)
+else
+	starter = string("urn:cite2:citebne:complutensian.v1:v",volume)
+	filter(record -> startswith(record.pgref,starter), data)
+end
 
 # ╔═╡ 9282525b-6a71-47e6-b452-79d8491e0b5a
 md"""> **Image service**"""
@@ -1535,10 +1553,12 @@ version = "17.4.0+2"
 # ╟─2ac6ddb4-1382-11ef-259d-b969fbb73079
 # ╟─cda9909c-1a99-4a68-8277-8b21926409a0
 # ╟─0517ca20-5e76-4ef6-93ef-faf5307cd108
-# ╟─aa758f2e-c4eb-46a4-b6c7-0d6e54da231b
+# ╟─7068990f-53fb-4915-8fa2-b4480ef94ae0
+# ╟─b8278563-7dfd-44dd-a12c-2d7f71b6d181
 # ╟─ecc85ee8-f2c4-4455-a03b-0abf16433266
 # ╟─7f884091-f961-4516-ba34-7d3c24805c10
 # ╟─d21883b2-e4e6-498e-a28b-9b23e5597479
+# ╟─fc31b758-512f-4d6c-80a9-33ac0af034de
 # ╟─d425614b-63fa-424d-b7fa-84e8cef640b7
 # ╟─4ce2e147-c592-4b16-ad66-6b1370db65b5
 # ╟─823d7789-2074-44e3-9bf8-42bfed342515
