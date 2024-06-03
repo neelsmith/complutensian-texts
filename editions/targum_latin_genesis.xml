@@ -65,13 +65,13 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           <ab n="13"> Et fuit vespere et fuit mane dies tertius. 
           </ab>
 
-          <ab n="14"> Et dixit deus. Sin luminaria in firmamento celi: ut dividant inter diem et noctem: et sint in signa et in tempora: et ut numerentur per ea dies et anni. 
+          <ab n="14"> Et dixit deus. Sint luminaria in firmamento celi: ut dividant inter diem et noctem: et sint in signa et in tempora: et ut numerentur per ea dies et anni. 
           </ab>
 
           <ab n="15"> Et sint in luminaria in firmamento celi ad illuminandum super terram: et fuit ita. 
           </ab>
 
-          <ab n="16"> Et fecit deus duo luminaria magna: liminare maius ut dominaretur in die: et luminare minus ut dominaretur in nocte: et stellas:
+          <ab n="16"> Et fecit deus duo luminaria magna: luminare maius ut dominaretur in die: et luminare minus ut dominaretur in nocte: et stellas:
           </ab>
 
           <ab n="17"> Et posuit eas deus in firmamento celi ad illuminandum super terram. 
@@ -132,7 +132,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           <ab n="2"> Et delectatus est deus in die septimo opere suo quod fecerat: et requieuit in die septimo ab vniuerso opere suo quod fecerat. 
           </ab>
 
-          <ab n="3"> Et benedixit deus diei septimo et sanctificauit eum: qquia in ipso requieuit ab vniuerso opere suo quod creauit deus vt faceret. 
+          <ab n="3"> Et benedixit deus diei septimo et sanctificauit eum: quia in ipso requieuit ab vniuerso opere suo quod creauit deus vt faceret. 
           </ab>
 
           <ab n="4"> Iste sunt generationes celi et terre quando create sunt: in die quo creauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus terram et celum:
@@ -150,7 +150,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           <ab n="8"> Et plantauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus hortum in loco voluptatis a principio: et posuit ibi hominem quem creauit.
           </ab>
 
-          <ab n="9"> Et germinare fecit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus de terram <choice><abbr>oem</abbr><expan>omnem</expan></choice> arborem <choice><abbr>q</abbr><expan>quae</expan></choice> erat desiderabilis ad videndum et bona ad veescendum. Et arborem vite in medio horti: et arborem cuius fructus manducantes scient inter bonum et malum. 
+          <ab n="9"> Et germinare fecit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus de terra <choice><abbr>oem</abbr><expan>omnem</expan></choice> arborem <choice><abbr>q</abbr><expan>quae</expan></choice> erat desiderabilis ad videndum et bona ad vescendum. Et arborem vite in medio horti: et arborem cuius fructus manducantes scient inter bonum et malum. 
           </ab>
 
           <ab n="10"> Et fluuius egrediebatur de loco voluptatis ad irrigandum hortum. Et inde diuidebatur: et erat in quattutor capita fluminum. 
@@ -168,13 +168,13 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           <ab n="14"> Et nomen fluuii tertii <placeName>hidecel</placeName>: ipse est qui vadit ad orientem <rs type="ethnic">assyrie</rs>. Et fluuius quartus est <placeName>euphrates</placeName>. 
           </ab>
 
-          <ab n="15"> Et tulit dominus deus hominem: et collocauit eum in horto voluptatis vt operaretur eum: et cuscodiret illum. 
+          <ab n="15"> Et tulit dominus deus hominem: et collocauit eum in horto voluptatis vt operaretur eum: et custodiret illum. 
           </ab>
 
           <ab n="16"> Et precepit dominus deus ade dicens. Ex omni arbore horti comedens comedes: 
           </ab>
 
-          <ab n="17"> Et de arbore cuius fuctum comedentes scient inter bonum et malum: non comedes ex ea: quontiam in die qua comederis ex ea: morte morieris. 
+          <ab n="17"> Et de arbore cuius fructum comedentes scient inter bonum et malum: non comedes ex ea: quontiam in die qua comederis ex ea: morte morieris. 
           </ab>
 
           <ab n="18"> Et dixit dominus deus: non est bonum esse hominem solum: faciam ei adiutorium  quasi eum
@@ -197,7 +197,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="24">
-          Propterea relinquet homo lectulum patris sui et matris sue: et ad herebit vxori sue: et ereunt in carnem vnam.
+          Propterea relinquet homo lectulum patris sui et matris sue: et ad herebit vxori sue: et erunt in carnem vnam.
           </ab>
 
           <ab n="25">

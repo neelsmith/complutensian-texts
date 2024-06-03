@@ -88,7 +88,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="14">
-          Et dixit deus: fiant luminaria in firmamenta celi. Ut luceant super terram: ad <unclear>diuidend</unclear> inter diem et inter noctem. Et sint in signa: et in tempora: et in dies: et in annos.
+          Et dixit deus: fiant luminaria in firmamenta celi. Ut luceant super terram: ad diuidendum inter diem et inter noctem. Et sint in signa: et in tempora: et in dies: et in annos.
           </ab>
 
           <ab n="15">
@@ -136,7 +136,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="26">
-           Et dixit deus: faciamus <choice><abbr>hoiem</abbr><expan>hominem</expan></choice> ad imaginem nostram et ad similitudinem. Et presint piscibus maris: et volatilibus celi: et iumentia: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> terre:
+           Et dixit deus: faciamus <choice><abbr>hoiem</abbr><expan>hominem</expan></choice> ad imaginem nostram et ad similitudinem. Et presint piscibus maris: et volatilibus celi: et iumentia: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> terre: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> reptilibus reptantibus super terram. 
           </ab>
 
           <ab n="27">
@@ -144,11 +144,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="28">
-           Et benedixit eis deus: dicens: crescite et multiplicamini et replete terram: et dominamini ei. Et imperate piscibus maris: et omni terre: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> reptilibus reptantibus super terram. 
+           Et benedixit eis deus: dicens: crescite et multiplicamini et replete terram: et dominamini ei. Et imperate piscibus maris: et volatilibus celi: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> iumentis: et omni terre: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> reptilibus reptantibus super terram. 
           </ab>
 
           <ab n="29">
-           Et dixit deus: ecce dedi vobis <choice><abbr>oem</abbr><expan>omnem</expan></choice> herbam seminiferam seminantem semen: <choice><abbr>qd</abbr><expan>quod</expan></choice> est super terram. Et omne lignum: <choice><abbr>qd</abbr><expan>quod</expan></choice> <choice><abbr>hm</abbr><expan>habet</expan></choice> in <choice><abbr>semetipo</abbr><expan>semetipso</expan></choice> fructum seminis seminifei: vobis erit in escam:
+           Et dixit deus: ecce dedi vobis <choice><abbr>oem</abbr><expan>omnem</expan></choice> herbam seminiferam seminantem semen: <choice><abbr>qd</abbr><expan>quod</expan></choice> est super terram. Et omne lignum: <choice><abbr>qd</abbr><expan>quod</expan></choice> <choice><abbr>hm</abbr><expan>habet</expan></choice> in <choice><abbr>semetipo</abbr><expan>semetipso</expan></choice> fructum seminis seminiferi: vobis erit in escam:
            </ab>
            
           
@@ -175,7 +175,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </div>
         <div n="2">
           <ab n="1">
-          perfecti sunt celum et terra: et <choice><abbr>ois</abbr><expan>omnes</expan></choice> ornatus eorum. 
+          Et perfecti sunt celum et terra: et <choice><abbr>ois</abbr><expan>omnes</expan></choice> ornatus eorum. 
           </ab>
 
           <ab n="2">
@@ -187,11 +187,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="4">
-          Hic liber generationis celi et terre: <choice><abbr>qn</abbr><expan>quando</expan></choice> facta sunt. <choice><abbr>q</abbr><expan>qua</expan></choice> fecit deus celum et terram:
+          Hic liber generationis celi et terre: <choice><abbr>qn</abbr><expan>quando</expan></choice> facta sunt. <choice><abbr>q</abbr><expan>qua</expan></choice> die fecit deus celum et terram:
           </ab>
 
           <ab n="5">
-          Et omne virrgultum agri <choice><abbr>anq</abbr><expan>antequam</expan></choice> oriretur in terra. Et omnes herbam agri <choice><abbr>anq</abbr><expan>antequam</expan></choice> germinaret. Non enim pluerat dominus deus super terram: et homo non erat adoperandum eam. 
+          Et omne virgultum agri <choice><abbr>anq</abbr><expan>antequam</expan></choice> oriretur in terra. Et omnes herbam agri <choice><abbr>anq</abbr><expan>antequam</expan></choice> germinaret. Non enim pluerat dominus deus super terram: et homo non erat adoperandum eam. 
           </ab>
 
           <ab n="6">
@@ -212,7 +212,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
           
           <ab n="10">
-          Fluius <choice><abbr>aut</abbr><expan>autem</expan></choice> egreditur ex <placeName>eden</placeName> ad irrigandum paradisum. Inde diuiditus in quattor principia.
+          Fluius <choice><abbr>aut</abbr><expan>autem</expan></choice> egreditur ex <placeName>eden</placeName> ad irrigandum paradisum. Inde diuiditur in quattor principia.
           </ab> 
 
           <ab n="11">
@@ -232,7 +232,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="15">
-          Et accepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus hominem quem formauit: et posuit eum in peradiso voluptatis: ad operandum eum et custodiendum. 
+          Et accepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus hominem quem formauit: et posuit eum in paradiso voluptatis: ad operandum eum et custodiendum. 
           </ab>
 
           <ab n="16">
@@ -248,7 +248,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="19">
-          Et formauit deus adhuc ex terra <choice><abbr>oes</abbr><expan>omnes</expan></choice> bestias agri: et omnia volatilia celi. Et adduxit ea ad <persName>adam</persName>: 
+          Et formauit deus adhuc ex terra <choice><abbr>oes</abbr><expan>omnes</expan></choice> bestias agri: et omnia volatilia celi. Et adduxit ea ad <persName>adam</persName>: ut videret <choice><abbr>qd</abbr><expan>quod</expan></choice> vocabit ea. Et oe <choice><abbr>qdcumque</abbr><expan>quodcumque</expan></choice> vocauit ipsum <persName>adam</persName> <choice><abbr>aiam</abbr><expan>aiarum</expan></choice> viuentem: hoc nomen illi.
           </ab>
 
           <ab n="20">
@@ -274,6 +274,41 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           <ab n="25">
           Et erant duo nudi et <persName>adam</persName> et vxor eius: et non erubescebant 
           </ab>
+
+          
+        </div>
+
+        <div n="3">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="3" type="ordinal">3.</num>
+        </ab>
+
+        <ab n="1">
+        Et serprens erat prudentissimus omnium bestiarum <choice><abbr>q</abbr><expan>quae</expan></choice> super terram: <choice><abbr>qs</abbr><expan>quas</expan></choice> fecit dominus deus. Et dixit serpens mulieri quare dixit deus non comedatis ab omni ligno quood in paradiso. 
+        </ab>
+
+        <ab n="2">
+         Et dixit mulier serpenti ab omni ligno paradisi vescimur.
+        </ab>
+
+        <ab n="3">
+        Ab autem fructu ligni <choice><abbr>qd</abbr><expan>quod</expan></choice> est in medio paradisi dixit deus: non comedatis ex eo: neque tangatis illud:ut non moriamini
+        </ab>
+
+        <ab n="4">
+        Et dixit serpes mulieri non morte moriemini 
+        </ab>
+
+        <ab n="5">
+        scit enim deus. Quod <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> die comederitis ex eo: aperientur vestri oculi. Et eritis sicut dii scientes bonum et malum.
+        </ab>
+
+        <ab n="6">
+        Et vidit mulier quod bonum lignum in escam: et quod placidum oculis ad videndum: et pulchrum est ad intelligendum. Et accipiens mulier de fructu eius comedit. Et dedit et viro suo cum ea: et comederunt. 
+        </ab>
+
+        <ab n="7">
+        Et aperti sunt oculi amborum: et cognouerunt <choice><abbr>q</abbr><expan>quod</expan></choice> nudi erant. Et confuerunt folia ficus: et fecerunt sibi perimomata. 
+        </ab>
 
           
         </div>
