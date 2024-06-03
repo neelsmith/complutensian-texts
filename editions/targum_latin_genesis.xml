@@ -22,7 +22,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <div n="1">
         
 
-          <ab  n="1"> In principio creauit deus celum et terram.
+          <ab n="1"> In principio creauit deus celum et terram.
           </ab>
 
           <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num type="ordinal" value="1">1.</num>
@@ -190,6 +190,18 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="22"> Et edificauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus costam quam tulerat de <persName>adam</persName> in mulierem: et adduxit eam ad <persName>adam</persName>. 
+          </ab>
+
+          <ab n="23">
+          Et dixit <persName>adam</persName>: hec nunc os de ossibus meis et caro de carne mea: hec vocabitur mulier <choice><abbr>qr</abbr><expan>quoniam</expan></choice> de viro suo assumpta est ista. 
+          </ab>
+
+          <ab n="24">
+          Propterea relinquet homo lectulum patris sui et matris sue: et ad herebit vxori sue: et ereunt in carnem vnam.
+          </ab>
+
+          <ab n="25">
+          Et erant ambo nudi: <persName>adam</persName> et vxor eius: et non erubescebant. 
           </ab>
         </div>
     </body>

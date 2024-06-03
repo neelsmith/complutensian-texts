@@ -15,13 +15,13 @@ urn:cts:compnov:bible.genesis.sept_latin:1.5|urn:cite2:citebne:complutensian.v1:
 urn:cts:compnov:bible.genesis.sept_latin:1.6|urn:cite2:citebne:complutensian.v1:v1p19@0.06044,0.2416,0.2773,0.05638|urn:cite2:compnov:complutpages.v1:1
 urn:cts:compnov:bible.genesis.sept_latin:1.7|urn:cite2:citebne:complutensian.v1:v1p19@0.05822,0.2838,0.2844,0.07993|urn:cite2:compnov:complutpages.v1:1
 urn:cts:compnov:bible.genesis.sept_latin:1.8|urn:cite2:citebne:complutensian.v1:v1p19@0.06044,0.3479,0.2769,0.05948|urn:cite2:compnov:complutpages.v1:1
-urn:cts:compnov:bible.genesis.sept_latin:1.9|urn:cite2:citebne:complutensian.v1:v1p19@0.05822,0.3928,0.2844,0.05452|urn:cite2:compnov:complutpages.v1:1
+urn:cts:compnov:bible.genesis.sept_latin:1.9|urn:cite2:citebne:complutensian.v1:v1p19@0.05511,0.3906,0.2876,0.1211|urn:cite2:compnov:complutpages.v1:1
 urn:cts:compnov:bible.genesis.sept_latin:1.10|urn:cite2:citebne:complutensian.v1:v1p19@0.06133,0.4780,0.2827,0.05731|urn:cite2:compnov:complutpages.v1:1
 urn:cts:compnov:bible.genesis.sept_latin:1.11|urn:cite2:citebne:complutensian.v1:v1p19@0.06133,0.5195,0.2800,0.1007|urn:cite2:compnov:complutpages.v1:1
-urn:cts:compnov:bible.genesis.sept_latin:1.12@et-1.12@vidit|urn:cite2:citebne:complutensian.v1:v1p19@0.06044,0.6044,0.2800,0.08178|urn:cite2:compnov:complutpages.v1:1
+urn:cts:compnov:bible.genesis.sept_latin:1.12|urn:cite2:citebne:complutensian.v1:v1p19@0.06044,0.6044,0.2800,0.08178|urn:cite2:compnov:complutpages.v1:1
 
 
-urn:cts:compnov:bible.genesis.sept_latin:1.12@deus-1.12@bonum|urn:cite2:citebne:complutensian.v1:v1p20@0.6547,0.06289,0.1142,0.02138|urn:cite2:compnov:complutpages.v1:2
+urn:cts:compnov:bible.genesis.sept_latin:1.12|urn:cite2:citebne:complutensian.v1:v1p20@0.6547,0.06289,0.1142,0.02138|urn:cite2:compnov:complutpages.v1:2
 urn:cts:compnov:bible.genesis.sept_latin:1.13|urn:cite2:citebne:complutensian.v1:v1p20@0.6560,0.06568,0.2782,0.03841|urn:cite2:compnov:complutpages.v1:2
 urn:cts:compnov:bible.genesis.sept_latin:1.14|urn:cite2:citebne:complutensian.v1:v1p20@0.6502,0.08705,0.2960,0.1437|urn:cite2:compnov:complutpages.v1:2
 urn:cts:compnov:bible.genesis.sept_latin:1.15|urn:cite2:citebne:complutensian.v1:v1p20@0.6520,0.2196,0.2933,0.03408|urn:cite2:compnov:complutpages.v1:2
@@ -51,7 +51,7 @@ urn:cts:compnov:bible.genesis.sept_latin:2.4|urn:cite2:citebne:complutensian.v1:
 urn:cts:compnov:bible.genesis.sept_latin:2.5|urn:cite2:citebne:complutensian.v1:v1p22@0.6627,0.2348,0.2898,0.1004|urn:cite2:compnov:complutpages.v2:4
 urn:cts:compnov:bible.genesis.sept_latin:2.6|urn:cite2:citebne:complutensian.v1:v1p22@0.6671,0.3222,0.2889,0.03656|urn:cite2:compnov:complutpages.v2:4
 urn:cts:compnov:bible.genesis.sept_latin:2.7|urn:cite2:citebne:complutensian.v1:v1p22@0.6667,0.3432,0.2871,0.07962|urn:cite2:compnov:complutpages.v2:4
-urn:cts2:compnov:tanach.genesis.sept_latin:2.8|urn:cite2:citebne:complutensian.v1:v1p22@0.6684,0.4092,0.2844,0.07683|urn:cite2:compnov:complutpages.v2:4
+urn:cts:compnov:tanach.genesis.sept_latin:2.8|urn:cite2:citebne:complutensian.v1:v1p22@0.6684,0.4092,0.2844,0.07683|urn:cite2:compnov:complutpages.v2:4
 urn:cts:compnov:bible.genesis.sept_latin:2.9|urn:cite2:citebne:complutensian.v1:v1p22@0.6671,0.4721,0.2929,0.07838|urn:cite2:compnov:complutpages.v2:4
 urn:cts:compnov:bible.genesis.sept_latin:2.10|urn:cite2:citebne:complutensian.v1:v1p22@0.6684,0.5359,0.2880,0.05669|urn:cite2:compnov:complutpages.v2:4
 urn:cts:compnov:bible.genesis.sept_latin:2.11|urn:cite2:citebne:complutensian.v1:v1p22@0.6640,0.6004,0.2867,0.03625|urn:cite2:compnov:complutpages.v2:4
@@ -69,4 +69,5 @@ urn:cts:compnov:bible.genesis.sept_latin:2.22|urn:cite2:citebne:complutensian.v1
 urn:cts:compnov:bible.genesis.sept_latin:2.23|urn:cite2:citebne:complutensian.v1:v1p23@0.07022,0.6394,0.2244,0.01704|urn:cite2:compnov:complutpages.v2:5
 urn:cts:compnov:bible.genesis.sept_latin:2.23|urn:cite2:citebne:complutensian.v1:v1p24@0.6418,0.06041,0.2987,0.06227|urn:cite2:compnov:complutpages.v2:6
 
-
+urn:cts:compnov:bible.genesis.sept_latin:2.24|urn:cite2:citebne:complutensian.v1:v1p24@0.6471,0.1044,0.2876,0.07900|urn:cite2:compnov:complutpages.v2:6
+urn:cts:compnov:bible.genesis.sept_latin:2.25|urn:cite2:citebne:complutensian.v1:v1p24@0.6507,0.1704,0.2849,0.03563|urn:cite2:compnov:complutpages.v2:6

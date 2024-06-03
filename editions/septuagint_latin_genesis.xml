@@ -52,7 +52,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
           <ab n="7">
            Et fecit deus firmamentum. 
-          Et diuicit deus inter aquam: <choice><abbr>q</abbr><expan>quae</expan></choice> erat sub firmamento: et inter aquam: 
+          Et diuisit deus inter aquam: <choice><abbr>q</abbr><expan>quae</expan></choice> erat sub firmamento: et inter aquam: 
           que super firmamentum.
           </ab>
 
@@ -261,6 +261,18 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
           <ab n="22">
           Et edificauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus costam quam accepit ab <persName>adam</persName> in mulierem. Et adduxit eam ad <persName>adam</persName>. 
+          </ab>
+
+          <ab n="23">
+          Et dixit <persName>adam</persName> hoc nunc os ex ossibus meis: et caro de carne mea. Hec vocabitur mulier <choice><abbr>qm</abbr><expan>quoniam</expan></choice> de viro suo assumpta est hec. 
+          </ab>
+
+          <ab n="24">
+          <choice><abbr>ppter</abbr><expan>propter</expan></choice> hoc relinquet homo patrem suum et matrem: et adherebit ad vxorem suam. Et erunt duo in carne vna. 
+          </ab>
+
+          <ab n="25">
+          Et erant duo nudi et <persName>adam</persName> et vxor eius: et non erubescebant 
           </ab>
 
           
