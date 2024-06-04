@@ -204,6 +204,220 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           Et erant ambo nudi: <persName>adam</persName> et vxor eius: et non erubescebant. 
           </ab>
         </div>
+
+        <div n="3">
+
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="3" type="ordinal">3.</num>
+        </ab>
+        
+        <ab n="1">
+        Et serpens erat sapientior cunctis bestiis agri quas fecit dominus deus: et dixit mulieri verumne est quod dixit deus: non comedatis exomni arbore horti. 
+        </ab>
+
+        <ab n="2">
+        Et dixit mulier serpenti. De fructu arboris horti comedemus:
+        </ab>
+
+        <ab n="3">
+        sed de fructu arboris <choice><abbr>q</abbr><expan>quae</expan></choice> est in medio paradisi dixit deus non comedetis ex eo: neque accedatis ad eum: ne forte moriamini. 
+        </ab>
+
+        <ab n="4">
+        Ex dixit serpens mulieri. Non morte moriemini:
+        </ab>
+
+        <ab n="5">
+        quoniam manifestum est coram deo quod in die qua comederitis ex eo aperientur oculi vestri: et critis sicut principes scientes inter bonum et malum. 
+        </ab>
+
+        <ab n="6">
+        Et vidit mulier quod bona esset arbor ad vescendum: et quod salutifera esset oculis: et delectabilis arbor ad intuendum in eam: et tulit de fructu eius et comedit: et dedit etiam marito suo et comedit cum ea. 
+        </ab>
+
+        <ab n="7">
+        Et aperti sunt oculi amborum: et cognouerunt quod nudi essent: et consuerunt sibi folia ficus: et fecerunt sibi cinctoria. 
+        </ab>
+
+        <ab n="8">
+        Et audierunt vocem verbi domini dei deambulantis in horto ad auram diei: et absconderunt se <persName>adam</persName> et vxorr eius a facie <choice><abbr>dni</abbr><expan>domini</expan></choice> dei in medio arboris horti. 
+        </ab>
+
+        <ab n="9">
+        Et vocauit dominus deus <persName>adam</persName>: et dixit ei ubi es tu. 
+        </ab>
+
+        <ab n="10">
+        Et ait. Vocem verbi tui audiui in horto et timui quoniam nudus sum ego: abscondi me. 
+        </ab>
+
+        <ab n="11">
+        Et ait. Quid indicauit tibi quod nudus esses tu: tumquid de arbore de qua precepi tibi ut non comederes ex ea comedisti?
+        </ab>
+
+        <ab n="12">
+        Et dixit adam. Mulier quam dedisti mecum ipsa dedit mihi de arbore et comedi. Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus mulieri. 
+        </ab>
+
+        <ab n="13">
+        Quid hoc fecisti: et dixit mulier: serpens seduxit me et comedi. 
+        </ab>
+
+        <ab n="14">
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus serpenti> Quia fecisti hoc: maledictus tu pre omnibus iumentis et preo omnibus bestiis agri: super ventrem tuum gradieris: et puluerem comedes <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> diebus vite tue.
+        </ab>
+
+        <ab n="15">
+        Et inimiciciam ponam inter te et inter mulierem et inter filium tuum et inter filium eius: ipse obseruabit tibit quod fecisti ei a principio: et tu obseruabis ei in finem. 
+        </ab>
+
+        <ab n="16">
+        Mulieri dixit. Multiplicans multiplicabo tribulationes tuas et conceptiones tuas: in tribulatione paries filios et ad virum tuum erit conuersio tua: et ipse <choice><abbr>dnabitur</abbr><expan>dominabitur</expan></choice> tui. 
+        </ab>
+
+        <ab n="17">
+        Ade quoque dixit. Quia obedisti verbo vxoris tue: et comedisti de arbore de qua precepi tibi dicens ne comedas ex ea. Maledicta terra propter te: in tribulatione comedas eam omnibus diebus vite tue.
+        </ab>
+
+        <ab n="18">
+        Et spinas et tribulos germinabit tibi: Et comedes herbam agri. 
+        </ab>
+
+        <ab n="19">
+        In sudore vultus tui comedes panem: donec reuertaris in terram de qua creatus es: quia puluis tu: et in puluerem reuerteris. 
+        </ab>
+
+        <ab n="20">
+        Et vocauit <persName>adam</persName> nomen vxoris sue euam: eo quod ipsa esset mater omnium filiorum hominis. 
+        </ab>
+
+        <ab n="21">
+        Et fecit dominis deus ade et vxori eius vestimenta honoris super cutem carnis sue: et induit eos. 
+        </ab>
+
+        <ab n="22">
+        Et dixit dominus deus ecce <persName>adam</persName> est vnicus in seculo: ex se sciens bonum et malum: et nunc forte extendat manum suam et sumet etiam de arbore vite et comedet et viuet in eternum. 
+        </ab>
+
+        <ab n="23">
+        Et emisit eum dominus deus de horto voluptatis vt operaretur terram de qua creatus fuerat. 
+        </ab>
+
+        <ab n="24">
+        Et eiecit <persName>adam</persName>: et collocauit ad orientem horti voluptatis cherubim et acutum gladium versatilem: ad custodiendam viam arboris vite. 
+        </ab>
+
+        </div>
+
+        <div n="4">
+
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="4" type="ordinal">4.</num>
+        </ab>
+
+        <ab n="1">
+        <unclear></unclear> <persName>adam</persName> cognouit euam vxorem suam: et concepit et peperit <persName>cain</persName>: et dixit: possedi virum coram domino. 
+        </ab>
+
+        <ab n="2">
+        Et addidit vt pareret fratrem eius <persName>abel</persName>. Fuitque <persName>abel</persName> pastor ouium: et <persName>cain</persName> fuit vir agricola  
+        </ab>
+
+        <ab n="3">
+        Et factum est post aliquot dies: et adduxit cain de fructu terre munus coram <choice><abbr>dno</abbr><expan>domino</expan></choice>
+        </ab>
+
+        <ab n="4">
+        Et abel adduxit etiam ipse de primo genitis ouium fuarum et de adipibus earum: et suscepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> cum <unclear>bonplacito</unclear> <persName>abel</persName> et munus eius. 
+        </ab>
+
+        <ab n="5">
+        <persName>Cain</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> et munus eius non suscepit cum bonplacito: et iratus est <persName>cain</persName> vehementer: et ceciderrunt vultus eius.  
+        </ab>
+        
+        <ab n="6">
+        Dixitque <choice><abbr>dns</abbr><expan>dominus</expan></choice> ad cain cur irasceris tu: et <choice><abbr>qre</abbr><expan>quare</expan></choice> ceciderunt vultus tui?
+        </ab>
+
+        <ab n="7">
+        Nonne si bene egeris opera tua dimittetur tibi: et si non <choice><abbr>bn</abbr><expan>bene</expan></choice> egeris: in diem iudicii <choice><abbr>pctm</abbr><expan>peccatum</expan></choice> tuum seruatum est: in <choice><abbr>q</abbr><expan>quod</expan></choice> futurum est vt vlciscatur de te: si non concuerteris: et si concuerteris dimittetur tibi 
+        </ab>
+
+        <ab n="8">
+        Et loquens <persName>cain</persName> ad <persName>abel</persName> fratrem suum: fuitque cum essent in agro: et surrexit <persName>cain</persName> contra <persName>abel</persName> fratrem suum et occidit eum.     
+        </ab>
+        
+        <ab n="9">
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> ad <persName>cain</persName>. Ubi est abel <choice><abbr>fr</abbr><expan>frater</expan></choice> tuus. Et dixit nescio. <choice><abbr>Nunqd</abbr><expan>nunquod</expan></choice> custos <choice><abbr>fris</abbr><expan>fratris</expan></choice> mei ego sum?
+        </ab>
+
+        <ab n="10">
+        Et ait <choice><abbr>qd</abbr><expan>quod</expan></choice> fecisti vox sanguinis <choice><abbr>gnationum</abbr><expan>generationum</expan></choice> <choice><abbr>q</abbr><expan>quod</expan></choice> future erant fuccedere de <choice><abbr>fre</abbr><expan>fratre</expan></choice> tuo clamant coram me de fra.
+        </ab>
+
+        <ab n="11">
+        Et nunc maledictus tu de terra <choice><abbr>q</abbr><expan>quod</expan></choice> aperuit os suum vt susciperet sanguinem <choice><abbr>fris</abbr><expan>fratris</expan></choice> tui de manu tua. 
+        </ab>
+
+        <ab n="12">
+        <unclear>On</unclear> operatus fueris <choice><abbr>fra</abbr><expan>fratrem</expan></choice>: non dabit amplius tibi virtutem suam: instabilis et transmigrans eris in <choice><abbr>fra</abbr><expan>fratre</expan></choice>
+        </ab>
+
+        <ab n="13">
+        Et dixit <persName>cain</persName> coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. Magna est <choice><abbr>iniqtas</abbr><expan>iniquitas</expan></choice> mea vt dimittatur. 
+        </ab>
+
+        <ab n="14">
+        Ecce eiecisti me hodie de superfictte <choice><abbr>fre</abbr><expan>fratre</expan></choice>: et a facie tua ero absconditus: et ero instabilis et transmigrans in fra: et crit <choice><abbr>ois</abbr><expan>omnibus</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> inuenerit me occidet me. 
+        </ab>
+
+        <ab n="15">
+        Et dixit ei <choice><abbr>dns</abbr><expan>dominus</expan></choice> propterea <choice><abbr>oes</abbr><expan>omnes</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> occiderint <persName>cain</persName>: in septem <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> vindicta assumetur ex eo: et posuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> in <persName>cain</persName> signum: vt occideret eum omnis qui inuenisset eum. 
+        </ab>
+
+        <ab n="16">
+        Et egressus est <persName>cain</persName> a facie domini: et habitauit in terra nod ad orientem <placeName>eden</placeName>. 
+        </ab>
+
+        <ab n="17">
+        Et cognouit <persName>cain</persName> vxorem suam: et concepit et peperit <persName>enoch</persName>: et fuit edificator ciuitatis. Et vocauit nomen ciuitatis sicut nomen filii sui <persName>enoch</persName>. 
+        </ab>
+
+        <ab n="18">
+        Et natus est ipsi <persName>enoch</persName> <persName>irad</persName>. Et <persName>irad</persName> genuit <persName>mauiael</persName>: et <persName>mauiael</persName> genuit <persName>mathusael</persName>: et <persName>mathusael</persName> genuit <persName>lamech</persName>.
+        </ab>
+
+        <ab n="19">
+        Et accepit sibi <persName>lamech</persName> duas vxores: nomen vnius <persName>ada</persName>: et nomen alterius <persName>sella</persName>. 
+        </ab>
+
+        <ab n="20">
+        Et peperit <persName>ada</persName> <persName>iabal</persName>: ipse fuit magister habitantium in tabernaculis et possidentium peccora. 
+        </ab>
+
+        <ab n="21">
+        Et nomen fratris sui <persName>iubal</persName>: ipse fuit magister camentium in cithara et organo. 
+        </ab>
+
+        <ab n="22">
+        Et <persName>sella</persName> etiam ipsa peperit <persName>tubal</persName> <persName>cain</persName>: qui fuit magister eorum omnium scientium opus eris et ferri: et soror ipsius <persName>tubal</persName> cain fuit <persName>naama</persName>. 
+        </ab>
+
+        <ab n="23">
+        Et dixit <persName>lamech</persName> vxoribus suis <persName>ade</persName> et <persName>selle</persName>. Audite vocem meam vxores lamech: ausculta te sermonem meum. Quoniam non occidi virum: vt propter eum ego portem peccatum: neque adolescentulum disperdidi vt propter eum consumatur semen meum. 
+        </ab>
+
+        <ab n="24">
+        Quoniam si in septem generationes vindicta dabitur de <persName>cain</persName>: nonne de <persName>lamech</persName> in septuaginta et septem. 
+        </ab>
+
+        <ab n="25">
+        Et cognouit <persName>adam</persName> rursus vxorem suam et peperit filium: et vocauit nomen eius <persName>seth</persName>: <choice><abbr>qm</abbr><expan>quam</expan></choice> posuit deus mihi filium aluim pro <persName>abel</persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> interfecit eum <persName>cain</persName>
+        </ab>
+
+        <ab n="26">
+        Et <persName>seth</persName> quoque natus est filius: et vocauit nomen eius enos: tunc inceperunt filii <choice><abbr>hoim</abbr><expan>hominem</expan></choice> orare in <choice><abbr>noie</abbr><expan>nomine</expan></choice> domini. 
+        </ab>
+
+        </div>
     </body>
     </text>
 </TEI>
