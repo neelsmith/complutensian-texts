@@ -15,6 +15,46 @@ Pkg.activate(root)
 ```
 ```{julia}
 using EditorsRepo
+using CitableObject
+using CitableText
+using CitableCorpus
+using CitableBase
 
 r = repository(root |> dirname)
+pgurn = Cite2Urn("urn:cite2:compnov:complutpages.v1:1")
+vizprs = surfacevizpairs(r, pgurn, strict = false)
+txtlist = map(vizprs) do pr
+        pr[1]|> droppassage
+end |> unique
+
+corpus = diplomaticcorpus(r)
+
+textlines = []
+for txt in txtlist
+    push!(textlines, string("## " , txt, "\n"))
+    currpassages = filter(pr -> droppassage(pr[1]) == txt, vizprs)
+    for pr in currpassages
+        # get text contents
+        psgs = filter(psg -> urncontains(pr[1], psg.urn), corpus.passages)
+        psgtext = if isempty(psgs)
+            @warn("No passages match indexed URN $(pr[1])")
+            ""
+        elseif length(psgs) != 1
+            @warn("Found $(length(psgs)) passages matching indexed URN $(pr[1])")
+            @warn("Type of first is $(typeof(psgs[1]))")
+            textcontent = map(p -> p.text, psgs)
+            join(textcontent, "\n")
+        else
+            psgs[1].text
+        end
+
+        mdtext = string("**", passagecomponent(pr[1]), "** ", psgtext, "\n" )
+        # get image markup
+        #mdimg = linkedMarkdownImage(ict, pr[2], iiif; w=width, caption="image")
+        push!(textlines, mdtext )
+    end
+end
+textlines
+
 ```
+
