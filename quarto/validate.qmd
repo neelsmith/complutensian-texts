@@ -1,0 +1,20 @@
+---
+title: "Test and debug validation"
+format:
+    html: default
+---
+
+
+Set up environment:
+
+```{julia}
+using Pkg
+root = pwd()
+Pkg.activate(root)
+
+```
+```{julia}
+using EditorsRepo
+
+r = repository(root |> dirname)
+```
