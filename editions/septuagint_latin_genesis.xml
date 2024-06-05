@@ -490,6 +490,171 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         </div>
+
+        <div n="5">
+        
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="5" type="ordinal">5.</num>
+        </ab>
+
+        <ab n="1">
+        Hic liber generationis hominum. Qua die fecit deus <persName>adam</persName>. Ad imaginem dei fecit illum. 
+        </ab>
+
+        <ab n="2">
+        Masculum et feminam fecit eos et benedixit eis. Et nominauit nomen eius <persName>adam</persName>: qua die fecit eos. 
+        </ab>
+
+        <ab n="3">
+        Vixit autem <persName>adam</persName> annos ducentos triginta. Et genuit ad figuram suam: et ad imaginem suam: et nominauit nomen eius: <persName>seth</persName>. 
+        </ab>
+
+        <ab n="4">
+        Facti sunt <choice><abbr>aut</abbr><expan>autem</expan></choice> dies <persName>adam</persName>: quos vixit postquam genuit ipse <persName>seth</persName>: anni septingenti. Et genuit filios et filias. 
+        </ab>
+
+        <ab n="5">
+        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>adam</persName>: quos vixit: anni nongenti triginta: et mortuus est.
+        </ab>
+
+        <ab n="6">
+        vixut <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>seth</persName> annos ducentos quinque. Et genuit <persName>enos</persName>. 
+        </ab>
+
+        <ab n="7">
+        Et vixit <persName>seth</persName> postquam genuit ipse <persName>enos</persName>: annos septingentos septem. Et genuit filios et filias. 
+        </ab>
+
+        <ab n="8">
+        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>seth</persName>: anni nongenti duodecim: et mortuus est. 
+        </ab>
+
+        <ab n="9">
+        Et vixit <persName>enos</persName> annos centum nonaguita. Et gennit <persName>cainam</persName>.
+        </ab>
+
+        <ab n="10">
+        Et vixit <persName>enos</persName> postquam genuit ipse <persName>cainam</persName>: annos septingetos quindecim. Et genuit filios et filias
+        </ab>
+
+        <ab n="11">
+        et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>enos</persName> anni nongenti quinque: et mortuus est. 
+        </ab>
+
+        <ab n="12">
+        Et vixit <persName>cainam</persName> annos centum septuaginta. Et genuit <persName>malalehel</persName>.
+        </ab>
+
+        <ab n="13">
+        Et vixit <persName>cainam</persName> postquam genuit ipse <persName>malalehel</persName>: annos septingentos quadraginta et genuit. 
+        </ab>
+
+        <ab n="14">
+        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>cainam</persName>: anni nongenti decem. Et mortuus est. 
+        </ab>
+
+        <ab n="15">
+        Et vixit <persName>malalehel</persName> annos centum sexaginta quinque. Et genuit <persName>iared</persName>. 
+        </ab>
+
+        <ab n="16">
+        Et vixit <persName>malalehel</persName> postquam genuit ipse <persName>iared</persName>: annos septingentos triginta. Et genuit filios et filias. 
+        </ab>
+
+        <ab n="17">
+        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>malalehel</persName> anni octigenti nonaginta quinque. 
+        </ab>
+
+        <ab n="18">
+        Et vixit <persName>iared</persName> annnos cenetum sexaginta duos. Et genuit <persName>enoch</persName>
+        </ab>
+
+        <ab n="19">
+        Et vixit <persName>iared</persName> postquam genuit ipse <persName>enoch</persName>: annos octingentos: et genuit filios et filias. 
+        </ab>
+
+        <ab n="20">
+        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>iared</persName> anni nongenti sexaginta duo. Et mortuus est. 
+        </ab>
+
+        <ab n="21">
+        Et vixit <persName>enoch</persName> annos centum sexaginta quinque. Et genuit <persName>mathusala</persName>. 
+        </ab>
+
+        <ab n="22">
+        Placuit <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>enoch</persName> deo. Et vixit <persName>enoch</persName> postquam genuit ipse <persName>mathusalem</persName>: annos ducentos. Et genuit filios et filias. 
+        </ab>
+
+        <ab n="23">
+        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>enoch</persName> anni trecenti sexaginta quinque. 
+        </ab>
+
+        <ab n="24">
+        Et placuit <persName>enoch</persName> deo. Et non inueniebant: <choice><abbr>q</abbr><expan>qui</expan></choice> transtulit eum deus. 
+        </ab>
+
+        <ab n="25">
+        Et vixit <persName>mathusalem</persName> annos centum sexaginta quinque. Et genuit <persName>lamech</persName>. 
+        </ab>
+
+        <ab n="26">
+        Et vixit <persName>mathusalem</persName>: postquam genuit ipse <persName>lamech</persName>: annos octingentos duos. Et genuit
+        </ab>
+
+        <ab n="27">
+        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>mathusale</persName>: quas vixit: anni nongenti sexaginta nouem. Et mortuus est. 
+        </ab>
+
+        <ab n="28">
+        Et vixit <persName>lamech</persName> annos centum octuaginta octo. Et genuit filium: 
+        </ab>
+
+        <ab n="29">
+        et nominauit nomen eius <persName>noe</persName>. Dicens: hic requiescere faciet nos ab operibus nostris: et a tristiciis manuum nostrarum: et a terra: cui maledixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus. 
+        </ab>
+
+        <ab n="30">
+        Et vixit <persName>lamech</persName> postquam genuit ipse <persName>noe</persName>: annos quingentos sexaginta quinque. Et genuit filios et filias. 
+        </ab>
+
+        <ab n="31">
+        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>lamech</persName>h anni septingenti quinquaginta tres. Et mortuus est. Et <persName>noe</persName> tres filios: <persName>sem</persName> <persName>cham</persName> <persName>iapeth</persName>. 
+        </ab>
+
+        </div>
+
+        <div n="6">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="6" type="ordinal">6.</num>
+        </ab>
+
+        <ab n="1">
+        Et factum est <choice><abbr>qn</abbr><expan>quaenam</expan></choice> ceperunt <choice><abbr>hoies</abbr><expan>homines</expan></choice> multi fieri super terram: et filie nate siit eis
+        </ab>
+
+        <ab n="2">
+        videntes <choice><abbr>aut</abbr><expan>autem</expan></choice> filii dei filias hominum: quod pulchre sunt: acceperut sibi vxores ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice>: <choice><abbr>qs</abbr><expan>quas</expan></choice> elegerant. 
+        </ab>
+
+        <ab n="3">
+        Et dixitt dominus deus: non promanebit spiritus meus in hominibus istis in eternum: eorum sunt ipsi carnes. Erunt <choice><abbr>at</abbr><expan>autem</expan></choice> dies illorum centum viginti anni. 
+        </ab>
+
+        <ab n="4">
+        At gigantes erant super terram in diebus illis. Et post illud postqquam ingressi sunt filii dei ad filias hominum: et genuerunt illis. Isti fuerunt gigantes a seculo: homines nominati. 
+        </ab>
+        
+        <ab n="5">
+        Videns <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus: quod multiplicate sunt malitie hominum super terram: et <choice><abbr>ois</abbr><expan>omnibus</expan></choice> cogitat in corde suo diligenter ad mala <choice><abbr>ois</abbr><expan>omnibus</expan></choice> diebus. 
+        </ab>
+
+        <ab n="6">
+        Et considerauit deus: quod fecit hominem in terra. Et cogitauit. 
+        </ab>
+
+        <ab n="7">
+        Et dixit deus: delebo hominem: quem feci: a facie terre: ab homine vsque ad iumentum: et a reptilibus vsque ad volatilia celi. <choice><abbr>Q</abbr><expan>qui</expan></choice> consideraut quam feci eum. 
+        </ab>
+
+        </div>
     </body>
     </text>
 </TEI>

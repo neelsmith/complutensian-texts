@@ -418,6 +418,230 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         </div>
+
+        <div n="5">
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="5" type="ordinal">5.</num>
+        </ab>
+
+        <ab n="1">
+        Hic est liber generationis <persName>adam</persName> in die qua creauit deus <choice><abbr>hoiem</abbr><expan>hominem</expan></choice>: ad similitudinem dei fecit illum: 
+        </ab>
+
+        <ab n="2">
+        masculum et feminam creauit eos: et benedixit illis: et vocauit nomen eorum <persName>adam</persName>: in die qua creati sunt. 
+        </ab>
+
+        <ab n="3">
+        Et vixit <persName>adam</persName> centum et trigenta annis: et genuit ad similitudinem suam <choice><abbr>sm</abbr><expan>secundum</expan></choice> imaginem suam: et vocauit nomen eius <persName>seth</persName>.
+        </ab>
+
+        <ab n="4">
+        Et fuerunt dies <persName>adam</persName> postquam genuit <persName>seth</persName> octingenti anni: et genuit filios et filias. 
+        </ab>
+        
+        <ab n="5">
+        Et fuerunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>adam</persName> quibus vixit nongenti et trigenti anni: et mortuus est. 
+        </ab>
+
+        <ab n="6">
+        Et vixit <persName>seth</persName> centum et quinque annis: et genuit <persName>enos</persName>.
+        </ab>
+
+        <ab n="7">
+        Et vixit <persName>seth</persName> postquam genuit <persName>enos</persName> octingentis et septem annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="8">
+        Et <choice><abbr>fuert</abbr><expan>fuerunt</expan></choice> <choice><abbr>oes</abbr><expan>omnes</expan></choice> <persName>seth</persName> nongenti et duodecim anni: et mortuus est. 
+        </ab>
+
+        <ab n="9">
+        Et vixit <persName>enos</persName> nonaginta annis: et genuit <persName>chainan</persName>. 
+        </ab>
+
+        <ab n="10">
+        Et vixit <persName>enos</persName> post quam genuit <persName>chainan</persName> octingentis et quindecim annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="11">
+        Et fuerunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>enos</persName> nongenti et quinque anni: et mortuus est. 
+        </ab>
+
+        <ab n="12">
+        Et vixit <persName>chainan</persName> septuaginta annis: et genuit <persName>malalehel</persName>
+        </ab>
+
+        <ab n="13">
+        Et vixit <persName>chainan</persName> postquam genuit <persName>malalehel octingentis et quadraginta annis: et genuit </persName> filios et filias.
+        </ab>
+        
+        <ab n="14">
+        Et fuerunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>chainan</persName> nongenti et decem anni: et mortuus est. 
+        </ab>
+
+        <ab n="15">
+        Et vixit <persName>malalehel</persName> sexaginta et quinque annis: et genuit <persName>iared</persName>. 
+        </ab>
+
+        <ab n="16">
+        Et vixit <persName>malalehel</persName> postquam genuit <persName>iared</persName> octingentis et triginta annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="17">
+        Et fuerunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>malalehel</persName> octingenti et nonaginta et quinque anni: et mortuus est. 
+        </ab>
+
+        <ab n="18">
+        Et vixit <persName>iared</persName> centum et sexaginta et duobus annis: et genuit <persName>enoch</persName>. 
+        </ab>
+
+        <ab n="19">
+        Et vixit <persName>iared</persName> postquam genuit <persName>enoch</persName> octingentis annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="20">
+        Et fuerunt omnes dies <persName>iared</persName> nongenti et sexaginta et duo anni: et mortuus est. 
+        </ab>
+
+        <ab n="21">
+        Et vixit <persName>enoch</persName> sexaginta et quinque annis: et genuit <persName>mathusalach</persName>: 
+        </ab>
+
+        <ab n="22">
+        et ambulauit <persName>enoch</persName> in timore dei postquam genuit <persName>mathusalach</persName> trecentis annis: et genuit filios et filias.
+        </ab>
+
+        <ab n="23">
+        Et fuerunt omnes dies <persName>enoch</persName> trecenti et sexaginta et <choice><abbr>qnque</abbr><expan>quinque</expan></choice> anni. 
+        </ab>
+
+        <ab n="24">
+        Et ambulauit enoch in timore dei: et non comparuit: nec etiam occidit eum deus. 
+        </ab>
+
+        <ab n="25">
+        Et vixit <persName>mathusalach</persName> centum et octoginta et septem annis: et genuit <persName>lamech</persName>. 
+        </ab>
+
+        <ab n="26">
+        Et vixit <persName>mathusalach</persName> postquam genuit <persName>lamech</persName> septingentis et octoginta et duobus annis: et genuit filios et filias.
+        </ab>
+
+        <ab n="27">
+        Et fuerunt omnes dies <persName>mathusalach</persName> nongenti et sexaginta et nouem anni: et mortuus est. 
+        </ab>
+
+        <ab n="28">
+        Et vixit <persName>lamech</persName> centum et octoginta et duobus annis: et genuit filius: 
+        </ab>
+
+        <ab n="29">
+        et vocauit nomen eius <persName>noe</persName> dicens. Iste consolabitur nos ab operibus nostris et a labore manuum nostrarum: de terra cui maledixit <choice><abbr>dns</abbr><expan>dominus</expan></choice>.
+        </ab>
+
+        <ab n="30">
+        Et vixit <persName>lamech</persName> postquam genuit <persName>noe</persName> quingentis et nonaginta et quinque annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="31">
+        Et fuerunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>lamech</persName>s septigenti et septuaginta et septem anni: et mortuus est. Et fuit <persName>noe</persName> filius <choice><abbr>qungentorum</abbr><expan>quingentorum</expan></choice> annorum: et genuit <persName>noe</persName> <persName>sem</persName>: <persName>cham</persName> et <persName>lapheth</persName>.
+        </ab>
+
+        </div>
+
+        <div n="6">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="6" type="ordinal">6.</num>
+        </ab>
+
+        <ab n="1">
+        Et factum est cum cepissent filii hominum multiplicari super faciem terre et filie nate essent eis: 
+        </ab>
+
+        <ab n="2">
+        et vidissent filii principum filias hominum quod essent pulchre: acceperunt sibi vxores ex omnibus quas voluerunt. 
+        </ab>
+
+        <ab n="3">
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> non permanebit generatio pessima hec coram me in eternum: eo quia caro sunt: et opera eorum pessima: et terminus dabitur eis centum et viginti annorum:si forte conuertantur. 
+        </ab>
+
+        <ab n="4">
+        Gigantes erant in terra in diebus illis: et etiam postquam ingressi sunt filii principum ad filias hominum et genuerunnt eis. Ipsi sunt potentes a seculo viri <choice><abbr>nois</abbr><expan>nominis</expan></choice>.
+        </ab>
+
+        <ab n="5">
+        Et palam fuit coram <choice><abbr>dns</abbr><expan>dominus</expan></choice> quod multa esset malicia hominis in terra: et omnis sensus cogitationis cordis sui esset malum omni tempore. 
+        </ab>
+
+        <ab n="6">
+        Et penituit dominum in verbo suo quod fecisset hominem in terra: et dixit in verbo suo vt contereret fortitudinem eorum iuxta beneplacitum suum. 
+        </ab>
+
+        <ab n="7">
+        Et dixit deus. Delebo hominem quem creaui super faciem terre: ab homine vsque ad iumentum: vsque ad eptile: et vsque ad volucres celi: quoniam penitet me in verbo mea quod fecerim eos. 
+        </ab>
+
+        <ab n="8">
+        <persName>noe</persName> autem inuenit misericordiam ccoram domino. 
+        </ab>
+
+        <ab n="9">
+        Iste sunt generationes <persName>noe</persName>: <persName>Noe</persName> vir iustus perfectusque fuit in generationibus suis: in timore dei ambulauit <persName>noe</persName>. 
+        </ab>
+
+        <ab n="10">
+        Et genuit <persName>noe</persName> tres filios: <persName>sem</persName> <persName>cham</persName> <persName>iapeth</persName>.
+        </ab>
+
+        <ab n="11">
+        Et corrupta est terra coram deo: et impleta est terra rapinis. 
+        </ab>
+
+        <ab n="12">
+        Et vidit deus terram: et ecce erat corrupta: quoniam corruperat omnis caro: vnusquisque viam suam super terram. 
+        </ab>
+
+        <ab n="13">
+        Et dixit deus ad <persName>noe</persName>. Finis vniuerse carnis venit coram me: quoniam replete est terra rapinis a facie operum suorum pessimorum: et ecce ego disperdam eos cum terra. 
+        </ab>
+
+        <ab n="14">
+        Fac tibi arcam de lignis cedri: mansiones facies in arca: et operies eam intus et foris bitumine. 
+        </ab>
+
+        <ab n="15">
+        Et sic facies eam: trecentorum cubitorum erit longitudo arce: quinquaginta cubitorum latitudo: et triginta cubitorum altitudo eius. 
+        </ab>
+
+        <ab n="16">
+        Fenestram facies in arca: et in cubito consumabis eam desuper: et ostium arce in latere eius pones: mansiones inferiorres: secundas et tertias facies in ea. 
+        </ab>
+
+        <ab n="17">
+        Et ecce ego adducam diluurum aquarum super terram: vt disperdat omnem carnem in qua est spiritus vite sub celo: <choice><abbr>oia</abbr><expan>omnia</expan></choice> que in terra sunt morientur. 
+        </ab>
+
+        <ab n="18">
+        Et statuam pactum meum tecum: et ingredieris in arcam tu et filii tui: et vxor tuaO: et vxores filiorum tuorum tecum:
+        </ab>
+
+        <ab n="19">
+        et de omni viuenti de vniuersa carne bina de omnibus introduces in arcam: vt sustententur tecum: masculus et femina erunt. 
+        </ab>
+
+        <ab n="20">
+        De volucribus <choice><abbr>sm</abbr><expan>secundum</expan></choice> species suas: et iumentis <choice><abbr>sm</abbr><expan>secundum</expan></choice> species suas: et de omni reptili terre iuxta species suas: bina ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> ingredientur tecum vt promaneant. 
+        </ab>
+
+        <ab n="21">
+        Et tu sume tibi de omni esca <choice><abbr>q</abbr><expan>quae</expan></choice> comeditus et repones apud te: et erit tibit et eis ad vescendum. 
+        </ab>
+
+        <ab n="22">
+        Et fecit <persName>noe</persName> iuxta <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> precepit ei <choice><abbr>dns</abbr><expan>dominus</expan></choice>: ita fecit. 
+        </ab>
+
+        </div>
     </body>
     </text>
 </TEI>
