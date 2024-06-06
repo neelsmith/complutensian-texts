@@ -72,14 +72,14 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="11">
-           Et dixit deus germinet terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: et lignum pomiferum faciens fructum. 
-          Cuius semen ipsius in ipso <unclear> suos </unclear> genus super terram. Et factum est ita. 
+           Et dixit deus germinet terra herbam seni seminantem semen <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus et <choice><abbr>sedm</abbr><expan>secundum</expan></choice>similitudinem: et lignum pomiferum faciens fructum. 
+          Cuius semen ipsius in ipso <choice><abbr>sedm</abbr><expan>secundum</expan></choice> genus super terram. Et factum est ita. 
           </ab>
 
         
           <ab n="12">
-           Et protulit terra herbam seni seminantem semen <unclear>et</unclear> in genus et <unclear>suos</unclear> similitudinem: 
-          et lignum pomiferum faciens fructum. Cuius semen eium in ipso: <unclear>suos</unclear> genus super terram. Et vidit
+           Et protulit terra herbam seni seminantem semen <choice><abbr>sn</abbr><expan>secundum</expan></choice> genus et<choice><abbr>sedm</abbr><expan>secundum</expan></choice> similitudinem: 
+          et lignum pomiferum faciens fructum. Cuius semen eium in ipso: <choice><abbr>sedm</abbr><expan>secundum</expan></choice> genus super terram. Et vidit
           deus <choice><abbr>q</abbr><expan>quod</expan></choice> bonum.
           </ab>
         
@@ -92,7 +92,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="15">
-           Et sint in <unclear>illuminationeue</unclear> in firmamento celi: ut luceant super terram. Et factum est ita.
+           Et sint in illuminationem in firmamento celi: ut luceant super terram. Et factum est ita.
           </ab>
 
           <ab n="16">
@@ -104,7 +104,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="18">
-           et <unclear>preessent</unclear> diei et nocti. et diuiderent inter lucem et inter tenebras. Et vidit deus <choice><abbr>q</abbr><expan>quod</expan></choice> bonum. 
+           et preessent diei et nocti. et diuiderent inter lucem et inter tenebras. Et vidit deus <choice><abbr>q</abbr><expan>quod</expan></choice> bonum. 
           </ab>
 
           <ab n="19">
@@ -323,7 +323,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="11">
-        et dixit eei quis indicauit tibi quod nudus es. Nisi a ligno <choice><abbr>qd</abbr><expan>quod</expan></choice> precepi tibi hoc solo non comedere. ab eo comedisti. 
+        et dixit ei quis indicauit tibi quod nudus es. Nisi a ligno <choice><abbr>qd</abbr><expan>quod</expan></choice> precepi tibi hoc solo non comedere. ab eo comedisti. 
         </ab>
 
         <ab n="12">
@@ -339,7 +339,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="15">
-        Et intimicitiam ponam inter te et inter mulierem: et inter semen tuum et inter semen illius. Ipse tuum conteret caput: et tu conteres illius calcaneum. 
+        Et inimicitiam ponam inter te et inter mulierem: et inter semen tuum et inter semen illius. Ipse tuum conteret caput: et tu conteres illius calcaneum. 
         </ab>
 
         <ab n="16">
@@ -375,7 +375,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="24">
-        Et eiecit <persName>adam</persName>: et collocauit eum ante paradisum voluptatis. Et posuit cherubim et flammeum gladium ersatilem ad custo diendam viam ligni vite. 
+        Et eiecit <persName>adam</persName>: et collocauit eum ante paradisum voluptatis. Et posuit cherubim et flammeum gladium versatilem ad custo diendam viam ligni vite. 
         </ab>
 
           
@@ -391,10 +391,10 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         <ab n="2">
         Et addidit parere fratrem eius <persName>abel</persName>. Et fuit <persName>abel</persName> pastor ouium. Cain <choice><abbr>aut</abbr><expan>autem</expan></choice> fuit operans terram. 
-        </ab>
+        </ab> 
 
         <ab n="3">
-        Et factum est post dies obtulit <persName>cain</persName> de fructibus terre sacrrificium <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
+        Et factum est post dies obtulit <persName>cain</persName> de fructibus terre sacrificium <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
         </ab>
 
         <ab n="4">
@@ -462,7 +462,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        Et peperit <persName>adda</persName> <persName>iobel</persName>. Hic pater habitantium in tentoriis pastorum. 
+        Et peperit <persName>adda</persName> <persName>iobel</persName>. Hic fuit pater habitantium in tentoriis pastorum. 
         </ab>
 
         <ab n="21">
@@ -474,7 +474,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="23">
-        Dixit <choice><abbr>at</abbr><expan>atque</expan></choice> <persName>lamech</persName> vxxoribus suis <persName>adda</persName> et <persName>sella</persName>: audite meam vocem vxores <persName>lamech</persName>: auscultate meos sermones. <choice><abbr>qm</abbr><expan>quam</expan></choice> virum occidi in vulnus mihi: et adolescentulum in liuorem mihi. 
+        Dixit <choice><abbr>at</abbr><expan>atque</expan></choice> <persName>lamech</persName> vxoribus suis <persName>adda</persName> et <persName>sella</persName>: audite meam vocem vxores <persName>lamech</persName>: auscultate meos sermones. <choice><abbr>qm</abbr><expan>quam</expan></choice> virum occidi in vulnus mihi: et adolescentulum in liuorem mihi. 
         </ab>
 
         <ab n="24">
@@ -482,7 +482,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="25">
-        Cognouit <choice><abbr>at</abbr><expan>atque</expan></choice> <persName>adam</persName> <unclear>euam</unclear> vxorem suam. Et concipiens: peperit filium. Et nominauit nomen eius <persName>seth</persName>. Dicens: suscitauit enim mihi deus semen aliud pro <persName>abel</persName>. Quem occidit <persName>cain</persName>. 
+        Cognouit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>adam</persName> euam vxorem suam. Et concipiens: peperit filium. Et nominauit nomen eius <persName>seth</persName>. Dicens: suscitauit enim mihi deus semen aliud pro <persName>abel</persName>. Quem occidit <persName>cain</persName>. 
         </ab>
 
         <ab n="26">
@@ -517,7 +517,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="6">
-        vixut <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>seth</persName> annos ducentos quinque. Et genuit <persName>enos</persName>. 
+        vixit <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>seth</persName> annos ducentos quinque. Et genuit <persName>enos</persName>. 
         </ab>
 
         <ab n="7">
@@ -533,7 +533,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="10">
-        Et vixit <persName>enos</persName> postquam genuit ipse <persName>cainam</persName>: annos septingetos quindecim. Et genuit filios et filias
+        Et vixit <persName>enos</persName> postquam genuit ipse <persName>cainam</persName>: annos septingentos quindecim. Et genuit filios et filias
         </ab>
 
         <ab n="11">
@@ -545,7 +545,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="13">
-        Et vixit <persName>cainam</persName> postquam genuit ipse <persName>malalehel</persName>: annos septingentos quadraginta et genuit. 
+        Et vixit <persName>cainam</persName> postquam genuit ipse <persName>malalehel</persName>: annos septingentos quadraginta. et genuit. Filios et filias. 
         </ab>
 
         <ab n="14">
@@ -565,7 +565,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="18">
-        Et vixit <persName>iared</persName> annnos cenetum sexaginta duos. Et genuit <persName>enoch</persName>
+        Et vixit <persName>iared</persName> annos centum sexaginta duos. Et genuit <persName>enoch</persName>.
         </ab>
 
         <ab n="19">
@@ -597,7 +597,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="26">
-        Et vixit <persName>mathusalem</persName>: postquam genuit ipse <persName>lamech</persName>: annos octingentos duos. Et genuit
+        Et vixit <persName>mathusalem</persName>: postquam genuit ipse <persName>lamech</persName>: annos octingentos duos. Et genuit filios et filias. 
         </ab>
 
         <ab n="27">
@@ -617,7 +617,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="31">
-        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>lamech</persName>h anni septingenti quinquaginta tres. Et mortuus est. Et <persName>noe</persName> tres filios: <persName>sem</persName> <persName>cham</persName> <persName>iapeth</persName>. 
+        Et facti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>lamech</persName> anni septingenti quinquaginta tres. Et mortuus est. Et <persName>noe</persName> erat annorum quingentorum. et genuit <persName>noe</persName>tres filios: <persName>sem</persName> <persName>cham</persName> <persName>iapeth</persName>. 
         </ab>
 
         </div>
@@ -627,19 +627,19 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="1">
-        Et factum est <choice><abbr>qn</abbr><expan>quaenam</expan></choice> ceperunt <choice><abbr>hoies</abbr><expan>homines</expan></choice> multi fieri super terram: et filie nate siit eis
+        Et factum est <choice><abbr>qn</abbr><expan>quaenam</expan></choice> ceperunt <choice><abbr>hoies</abbr><expan>homines</expan></choice> multi fieri super terram: et filie nate sunt eis
         </ab>
 
         <ab n="2">
-        videntes <choice><abbr>aut</abbr><expan>autem</expan></choice> filii dei filias hominum: quod pulchre sunt: acceperut sibi vxores ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice>: <choice><abbr>qs</abbr><expan>quas</expan></choice> elegerant. 
+        videntes <choice><abbr>aut</abbr><expan>autem</expan></choice> filii dei filias hominum: quod pulchre sunt: acceperunt sibi vxores ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice>: <choice><abbr>qs</abbr><expan>quas</expan></choice> elegerant. 
         </ab>
 
         <ab n="3">
-        Et dixitt dominus deus: non promanebit spiritus meus in hominibus istis in eternum: eorum sunt ipsi carnes. Erunt <choice><abbr>at</abbr><expan>autem</expan></choice> dies illorum centum viginti anni. 
+        Et dixit dominus deus: non promanebit spiritus meus in hominibus istis in eternum: eorum sunt ipsi carnes. Erunt <choice><abbr>at</abbr><expan>autem</expan></choice> dies illorum centum viginti anni. 
         </ab>
 
         <ab n="4">
-        At gigantes erant super terram in diebus illis. Et post illud postqquam ingressi sunt filii dei ad filias hominum: et genuerunt illis. Isti fuerunt gigantes a seculo: homines nominati. 
+        At gigantes erant super terram in diebus illis. Et post illud postquam ingressi sunt filii dei ad filias hominum: et genuerunt illis. Isti fuerunt gigantes a seculo: homines nominati. 
         </ab>
         
         <ab n="5">
@@ -659,7 +659,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        He <choice><abbr>aut</abbr><expan>autem</expan></choice><choice><abbr>gnationes</abbr><expan>generationes</expan></choice> sua: deo placuit <persName>noe</persName>. 
+        He <choice><abbr>aut</abbr><expan>autem</expan></choice><choice><abbr>gnationes</abbr><expan>generationes</expan></choice> <persName>noe</persName>. <persName>noe</persName> homo: iustus: perfectus eristens in <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> sua: deo placuit <persName>noe</persName>. 
         </ab> 
 
         <ab n="10">
@@ -667,7 +667,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="11">
-        Corrupta est <choice><abbr>at</abbr><expan>autem</expan></choice> terra coram deo. Et replete est terra inquitate. 
+        Corrupta est <choice><abbr>at</abbr><expan>autem</expan></choice> terra coram deo. Et repleta est terra inquitate. 
         </ab>
 
         <ab n="12">
@@ -699,7 +699,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="19">
-        Et ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> iumentis et ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> iumentis et ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bestiis: et ab <choice><abbr>oi</abbr><expan>omni</expan></choice> carne bina bina: ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> induces in arcam vt nutria tecum. Masculus et femina crunt 
+        Et ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> iumentis et ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bestiis: et ab <choice><abbr>oi</abbr><expan>omni</expan></choice> carne bina bina: ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> induces in arcam vt nutrias tecum. Masculus et femina erunt 
         </ab>
 
         <ab n="20">
@@ -713,6 +713,108 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="22">
         Et fecit <persName>noe</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> procepit ei deus: sic fecit. 
         </ab>  
+
+        </div>
+
+        <div n="7">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="7" type="ordinal">7.</num>
+        </ab>
+
+        <ab n="1">
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus ad <persName>noe</persName>. Ingredere tu et <choice><abbr>ois</abbr><expan>omnis</expan></choice> domus tua in arcam. <choice><abbr>Qm</abbr><expan>quam</expan></choice> te vidi iustum coram me in <choice><abbr>gnatione</abbr><expan>generatione</expan></choice> hac. 
+        </ab>
+
+        <ab n="2">
+        Ex <choice><abbr>at</abbr><expan>autem</expan></choice> iumentis mundis introduc ad te septem septem masculum et feminam: et ex iumentis non mundis: bina bina masculum et feminam:
+        </ab>
+
+        <ab n="3">
+        et de volucribuus celi septem septem masculum et feminam: vt nutriatur semen super <choice><abbr>oem</abbr><expan>omnem</expan></choice> semen super <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram 
+        </ab>
+
+        <ab n="4">
+        adhuc. <unclear>n</unclear> diebus septem ego inducam pluuiam super terram: quadraginta diebus et quadraginta noctibus. Et delebo <choice><abbr>oem</abbr><expan>omnem</expan></choice> resurrectionem: quam feci a facie terre: 
+        </ab>
+
+        <ab n="5">
+        ab <choice><abbr>hoie</abbr><expan>homine</expan></choice> vsque ad pecus. Et fecit <persName>noe</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice>: <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> precepit ei <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus. 
+        </ab>
+
+        <ab n="6">
+        <persName>noe</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> annorum sexaginta. Et diluuium aque fuit super terram. 
+        </ab>
+
+        <ab n="7">
+        Ingressus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>noe</persName> et filii eius et vxor eius: et vxores filiorum eius: cum eo in arcam: <choice><abbr>ppf</abbr><expan>propter</expan></choice> aquam diluuii. 
+        </ab>
+
+        <ab n="8">
+        Et de iumentis mundis: et de iumentis non mundis. Et de volucribus: et de omnibus reptilibus reptantibus super terram: 
+        </ab>
+
+        <ab n="9">
+        duo duo: de <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> ingressa sunt ad <persName>noe</persName> in arcam masculus et femina. Sicut precepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus <persName>noe</persName>. 
+        </ab>
+
+        <ab n="10">
+        Et factum est post septem dies: et aqua diluuii facta est super terram: 
+        </ab>
+
+        <ab n="11">
+        in sexcentesimo annos: in vita <persName>noe</persName>: secundo mense: septima et vigesima mensis. In die hac rupti sunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> fontes abyssi: et cataracte celi aperte sunt. 
+        </ab>
+
+        <ab n="12">
+        Et facta est pluuia super terram quadraginta diebus et quadraginta noctibus. 
+        </ab>
+
+        <ab n="13">
+        In diem hac ingressus est <persName>noe</persName> <persName>cham</persName>: <persName>iaphet</persName> filii <persName>noe</persName>: et vxor <persName>noe</persName>: et tres vxores filiorum eius cum eis in arcam. 
+        </ab>
+
+        <ab n="14">
+        Et <choice><abbr>oes</abbr><expan>omnes</expan></choice> bestie terre <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus: et omne volucre volatile <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus: et <choice><abbr>oe</abbr><expan>omne</expan></choice> reptile quod mouetur super terram <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus: 
+        </ab>
+
+        <ab n="15">
+        ingressus sunt ad <persName>noe</persName> in arcam: bina bina ex <choice><abbr>oi</abbr><expan>omni</expan></choice> carne in <choice><abbr>q</abbr><expan>qua</expan></choice> est spiritus vite. 
+        </ab>
+
+        <ab n="16">
+        Et <choice><abbr>q</abbr><expan>quae</expan></choice> ingressa sunt. Masculus et femina ex omni carne ingressa sunt ad <persName>noe</persName> in arcam. Sicut precepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus <persName>noe</persName>. Et clausit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus de foris eius arcam. 
+        </ab>
+
+        <ab n="17">
+        Et factum est diluuium quadraginta diebus et quadraginta noctibus. Et multiplicata est <choice><abbr>aq</abbr><expan>aquam</expan></choice>. Et eleuauit arcam: et exaltata est a terra. 
+        </ab>
+
+        <ab n="18">
+        Et inualuit aqua: et multiplicata envalde super terram. Et ferebatur arca super aquam. 
+        </ab>
+
+        <ab n="19">
+        At aqua inualui nimis valde super terram. Et cooperuit <choice><abbr>oes</abbr><expan>omnes</expan></choice> montes excelsos <choice><abbr>q</abbr><expan>quae</expan></choice> erant subter celum. 
+        </ab>
+
+        <ab n="20">
+        Quindecim cubitos desuper exaltata est aqua: et cooperuit omnes montes. 
+        </ab>
+
+        <ab n="21">
+        Et mortua est <choice><abbr>ois</abbr><expan>omnis</expan></choice> caro <choice><abbr>q</abbr><expan>quae</expan></choice> mouebatur super terra: volatilium: et iumentorum. Et bestiarum: et <choice><abbr>oe</abbr><expan>omnem</expan></choice> reptile quod mouetur super terram: et <choice><abbr>ois</abbr><expan>omnis</expan></choice> homo: 
+        </ab>
+
+        <ab n="22">
+        Et <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> habent spiritum vite: et <choice><abbr>ois</abbr><expan>omnis</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> erat super aridam: mortuus est. 
+        </ab>
+
+        <ab n="23">
+        Et deleuit <choice><abbr>oe</abbr><expan>omnem</expan></choice> surgens: quod erat super faciem terre: ab homine vsque ad pecus: et reptilia et volucres celi. Et deleta sunt de terra. Et remansit <persName>noe</persName> solus: et <choice><abbr>q</abbr><expan>qui</expan></choice> cum eo in arca. 
+        </ab>
+
+        <ab n="24">
+        
+        </ab>
 
         </div>
     </body>
