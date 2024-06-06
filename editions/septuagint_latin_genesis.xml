@@ -654,6 +654,66 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         Et dixit deus: delebo hominem: quem feci: a facie terre: ab homine vsque ad iumentum: et a reptilibus vsque ad volatilia celi. <choice><abbr>Q</abbr><expan>qui</expan></choice> consideraut quam feci eum. 
         </ab>
 
+        <ab n="8">
+        <persName>noe</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> inuenit <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram <choice><abbr>dno</abbr><expan>domino</expan></choice> deo. 
+        </ab>
+
+        <ab n="9">
+        He <choice><abbr>aut</abbr><expan>autem</expan></choice><choice><abbr>gnationes</abbr><expan>generationes</expan></choice> sua: deo placuit <persName>noe</persName>. 
+        </ab> 
+
+        <ab n="10">
+        Genuit <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>noe</persName> tres filios : <persName>sem</persName>: <persName>cham</persName>: <persName>iapeth</persName>.
+        </ab>
+
+        <ab n="11">
+        Corrupta est <choice><abbr>at</abbr><expan>autem</expan></choice> terra coram deo. Et replete est terra inquitate. 
+        </ab>
+
+        <ab n="12">
+        Et vidit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus terram. Et erat corrupta. <choice><abbr>Q</abbr><expan>qui</expan></choice> corrupit <choice><abbr>ois</abbr><expan>omnibus</expan></choice> caro viam suam super terram. 
+        </ab>
+
+        <ab n="13">
+        Et dixit deus ad <persName>noe</persName>. Tempus <choice><abbr>ois</abbr><expan>omnibus</expan></choice> hominis venit coram me. <choice><abbr>Q</abbr><expan>Qui</expan></choice> repleta est terra iniquitate ab eis. Et ecce ego disperdam eos: et terram. 
+        </ab>
+
+        <ab n="14">
+        Fac igitur tibi arcam de lignis quadratis: mansiunculas facies in ea. Et bituminabis eam intrinsecus et extrinsecus bitumine: 
+        </ab>
+
+        <ab n="15">
+        et sic facies arcam: trecentorum cubitorum longitudo arce: et quinquaginta cubitorum latitudo: et triginta cubitorum altitudo. 
+        </ab>
+
+        <ab n="16">
+        Colligens facies arcam. Et in cubitum consumabis eam desuper. At portam facies ex latere. Inferiora bicamerata et tricamerata facies eam. 
+        </ab>
+
+        <ab n="17">
+        Ego <choice><abbr>at</abbr><expan>autem</expan></choice> ecce inducam diluuium: aquam super terram: vt interficiam <choice><abbr>oem</abbr><expan>omnem</expan></choice> carnem: in <choice><abbr>q</abbr><expan>quae</expan></choice> est spiritus vite subter celum. Et <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice>  sunt super terram morientur. 
+        </ab>
+
+        <ab n="18">
+        Et statuam fedus meum tecum. Ingredieris <choice><abbr>at</abbr><expan>autem</expan></choice> in arcam tu et filii tui: et vxor tua: et vxores filiorum tuorum tecum. 
+        </ab>
+
+        <ab n="19">
+        Et ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> iumentis et ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> iumentis et ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bestiis: et ab <choice><abbr>oi</abbr><expan>omni</expan></choice> carne bina bina: ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> induces in arcam vt nutria tecum. Masculus et femina crunt 
+        </ab>
+
+        <ab n="20">
+        ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> auibus volatilibus celi <choice><abbr>sm</abbr><expan>secundum</expan></choice> genus: et ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> ingredientur ad te: vt nutriantur tecum masculus et femina. 
+        </ab>
+
+        <ab n="21">
+        Tu <choice><abbr>at</abbr><expan>autem</expan></choice> accipies tecum ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> escis <choice><abbr>qs</abbr><expan>quas</expan></choice> comeditis: et congregabis apud te ipsum. Et erunt tibi et illius ad manducandum. 
+        </ab>
+
+        <ab n="22">
+        Et fecit <persName>noe</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> procepit ei deus: sic fecit. 
+        </ab>
+
         </div>
     </body>
     </text>
