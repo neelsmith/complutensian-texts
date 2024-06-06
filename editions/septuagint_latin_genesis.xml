@@ -712,7 +712,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         <ab n="22">
         Et fecit <persName>noe</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> procepit ei deus: sic fecit. 
-        </ab>
+        </ab>  
 
         </div>
     </body>
