@@ -744,6 +744,101 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         </div>
+
+        <div n="8">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="8" type="ordinal">8.</num>
+        </ab>
+
+        <ab n="1">
+        At recordatus est deus <persName>noe</persName> et <choice><abbr>oim</abbr><expan>omnium</expan></choice> <choice><abbr>aialium</abbr><expan>animalium</expan></choice> et <choice><abbr>oim</abbr><expan>omnium</expan></choice> iumentorum que erant cum eo in arca: et transire fecit deus ventum super terram: et cessarunt aque. 
+        </ab>
+
+        <ab n="2">
+        Et clausi sunt fontes abyssi et fenestre celi: et prohibita est pluuia de celo. 
+        </ab>
+
+        <ab n="3">
+        Et reuerse sunt aque desuper terram euntes et reuertentes: et diminute sunt aque post centum et <choice><abbr>qnquaginta</abbr><expan>quinquaginta</expan></choice> dies. 
+        </ab>
+
+        <ab n="4">
+        Et <choice><abbr>qeuit</abbr><expan>quieuit</expan></choice> arca in mense septimo in decimaseptima die mensis super montes cardu. 
+        </ab>
+
+        <ab n="5">
+        Et aque ibant et diminuebantur vsque ad decimum mensem: in prima die mensis decimi apparuerunt capita montium: 
+        </ab>
+        
+        <ab n="6">
+        Et factum est in fine quadraginta dierum: et aperuit <persName>noe</persName> fenestram arce quam fecerat: et emisit coruum: 
+        </ab>
+
+        <ab n="7">
+        et egrediebatur et reuertebatur: donec siccarentur aque desuper terram. 
+        </ab>
+
+        <ab n="8">
+        Et emisit columbam a se: vt videret si alleuiate fuissent aque desuper faciem terre. 
+        </ab>
+
+        <ab n="9">
+        Et non inuenit columba requiem plante pedis fui: et reuersa est ad eum in arcam: quoniam aque erant super faciem vniuerse terre: et extendit manum suam et tulit eam: et induxit eam secum in arcam. 
+        </ab>
+
+        <ab n="10">
+        Et expectauit ad huc septem diebus aliis: et rursus emisit columbam ex arca. 
+        </ab>
+
+        <ab n="11">
+        Et venit ad eum columba in tempore vesper tino: et ecce folium oliue quod decerpserat ore suo: et cognouit <persName>noe</persName> quod aque inminuite erant desuper terram. 
+        </ab>
+
+        <ab n="12">
+        Et expectauit vltra septem diebus aliis: et emisit columbam: et nunquam est reuersa ad eum amplius
+        </ab>
+
+        <ab n="13">
+        Et factum est in sexcentesimo et vno anno: prima die mensis siccate sunt aque desuper terram: et abstulit <persName>noe</persName> tectum arce: et vidit: et ecce siccata erat facies terre. 
+        </ab>
+
+        <ab n="14">
+        Et in mense <choice><abbr>sedo</abbr><expan>secundo</expan></choice> vigesima septima die mensis: arefacta est terra. 
+        </ab>
+
+        <ab n="15">
+        Et locutus est deus cum <persName>noe</persName> dicens. 
+        </ab>
+
+        <ab n="16">
+        Egredere de arca tu et vxor tua et filii tui: et vxores filiorum tuorum tecum: 
+        </ab>
+
+        <ab n="17">
+        et cunta animantia que tecum sunt ex omni carne tam de volucribus quae de iumentis et de reptilibus que reptant super terram educ tecum: et generent in terra: et multiplicentur et crescant super terram. 
+        </ab>
+
+        <ab n="18">
+        Et egressus est <persName>noe</persName> et filii sui et vxor eius et vxores filiorum suorum cum eo. 
+        </ab>
+
+        <ab n="19">
+        Omnia animalia et <choice><abbr>oia</abbr><expan>omnia</expan></choice> reptilia et omnes volucres omne quod mouetur super terram <choice><abbr>sm</abbr><expan>secundum</expan></choice> generationes eorum egressa sunt de arca. 
+        </ab>
+
+        <ab n="20">
+        Et edificauit <persName>noe</persName> altare coram <choice><abbr>dno</abbr><expan>domino</expan></choice>: et tulit ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> animalibus mundis et ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> volucribus mundis: et obtulit holocaustum super altare. 
+        </ab>
+
+        <ab n="21">
+        Et suscepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> cum beneplacito oblationem eius: et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> in verbo suo non addam maledicere rursus terram propter peccata hominum: quoniam sensus cordis humani malus est ab infantia sua: et non addam vltra percutere omne viuens: sicut feci. 
+        </ab>
+
+        <ab n="22">
+        Adhuc <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> diebus terre seminatio et messis et frigus et calor et estus et hyems et dies et noctes non cessabunt. 
+        </ab>
+
+        </div>
+
     </body>
     </text>
 </TEI>
