@@ -813,9 +813,223 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="24">
-        
+        et exaltata est aqua super terram diebus centum quinquaginta. 
         </ab>
 
+        </div>
+
+        <div n="8">
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="6" type="ordinal">6.</num> </ab>
+
+         <ab n="1">
+         At recordatus est deus <persName>noe</persName> et omnium bestiarum: et omnium iumentorum: et omnium volatilium: et omnium reptilium reptantium: <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> erant cum eo in arca. et induxit deus spiritum super terram: et cessauit aqua. 
+         </ab>
+
+         <ab n="2">
+         Et cooperti sunt fontes abyssi et cataracte celi. 
+         </ab>
+
+         <ab n="3">
+         Et remissa est aqua vadens a terra. Et imminuebatur aqua: post centum quinquaginta dies. 
+         </ab>
+
+         <ab n="4">
+         Et fedit arca in septimo mense: septima et vigesima mensis: super montes <placeName>ararat</placeName>. 
+         </ab>
+
+         <ab n="5">
+         Aqua diminuebatur vsque ad decimum mensem. Apparuerunt <choice><abbr>at</abbr><expan>autem</expan></choice> capita montium in decimo mense: prima mensis. 
+         </ab>
+
+         <ab n="6">
+         Et factum est post quadraginta dies. Et aperuit <persName>noe</persName> fenestram arc: quam fecit. 
+         </ab>
+
+         <ab n="7">
+         Et misit coruum ad videndum: si cessauit aqua. Et exiens: non est reuersus: donec siccaretur aqua a facie terre. 
+         </ab>
+
+         <ab n="8">
+         Et emisit columbam post eum: vt videret: si cessauit aqua a facie terre. Et non inueniens columba requiem pedibus suis: reuersa est ad eum in arcam: <choice><abbr>q</abbr><expan>qui</expan></choice> aqua erat super <choice><abbr>oem</abbr><expan>omnem</expan></choice> faciem terre. Et extendens manum suam: accepit eam: et induxit eam ad se in arcam. 
+         </ab>
+
+         <ab n="9">
+         Et expectans vltra septem dies: emisit columbam ex arca. 
+         </ab>
+
+         <ab n="10">
+         Et reuersa est ad eum columba. Et habebat solium oliue festucam in ore suo. Et cognouit <persName>noe</persName>: quod cessauit aqua a facie terre. 
+         </ab>
+
+         <ab n="11">
+         Et expectans adhuc septem dies: emisit columbam: et non addidit. Reuerti ad eum vltra. 
+         </ab>
+
+         <ab n="12">
+         Et factum est in vno et sexcentesimo anno: in vita <persName>noe</persName>: primo mense deficit aqua a facie terre. Et aperuit <persName>noe</persName> tectum arce: quam fecit. Et vidit: qui defecit aqua a facie terre. 
+         </ab>
+
+         <ab n="13">
+         In <choice><abbr>aut</abbr><expan>autem</expan></choice> secundo mense septima et decima die arefacta est terra. 
+         </ab>
+
+         <ab n="14">
+         Et septima et vigesima mensis aperuit arcam. 
+         </ab>
+
+         <ab n="15">
+         Et air <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus <persName>noe</persName>: dicens
+         </ab>
+
+         <ab n="16">
+         egredere de arca tu: et filii tui: et vxor tua: et vxores filiorum tuorum tecum: 
+         </ab>
+
+         <ab n="17">
+         et <choice><abbr>oes</abbr><expan>omnes</expan></choice> bestie quecumque sunt tecum: et <choice><abbr>ois</abbr><expan>omnis</expan></choice> caro a volatilibus vsque ad iumenta: et <choice><abbr>oe</abbr><expan>omne</expan></choice> reptile quae mouetur super terram: educ tecum et crescite et multiplicamini: et replete <choice><abbr>tram</abbr><expan>teram</expan></choice>
+         </ab>
+
+         <ab n="18">
+         Et egressus est <persName>noe</persName>: et vxor eius: et filii eius et vxores filiorum eius cum eo: 
+         </ab>
+
+         <ab n="19">
+         et <choice><abbr>oes</abbr><expan>omnes</expan></choice> bestie. Et omnia iumenta: et <choice><abbr>oe</abbr><expan>omne</expan></choice> volatile: et <choice><abbr>oe</abbr><expan>omne</expan></choice> reptile quod mouetur super terram: egressa sunt ex arca. 
+         </ab>
+
+         <ab n="20">
+         Et edificauit <persName>noe</persName> altare <choice><abbr>dno</abbr><expan>domino</expan></choice>. Et accepit de cunctis iumentis mundis: et de cunctis volatilibus mundis: et obtulit holocaustum super altare. 
+         </ab>
+
+         <ab n="21">
+         Et odoratus est <choice><abbr>dno</abbr><expan>domino</expan></choice> deus odorem suauitatis. Et ait <choice><abbr>dno</abbr><expan>domino</expan></choice> deus. Recogitans: non addam vltra maledicere terre: <choice><abbr>propt</abbr><expan>propter</expan></choice> opera hominum. <choice><abbr>Q</abbr><expan>qui</expan></choice> incumbit cogitatio hominis diligenter ad mala: ex adolescentia sua. Non addam igitur percutere <choice><abbr>oem</abbr><expan>omnem</expan></choice> carnem viuentem: sicut feci
+         </ab>
+
+         <ab n="22">
+         cunctis diebus terre. Sementis et messis. Frigus et calor: estas et ver: diem et noctem: non requiescent. 
+         </ab>
+
+        </div>
+
+        <div n="9">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="9" type="ordinal">9.</num> </ab>
+
+        <ab n="1">
+        Et benedixit deus <persName>noe</persName>: et filiis eius. Et dixit eis: crescite et multiplicamini: et replete terram: 
+        </ab>
+
+        <ab n="2">
+        et dominamini eius. Et tremor vester: et timor vester erit super <choice><abbr>oes</abbr><expan>omnes</expan></choice> bestias terre: et super <choice><abbr>oia</abbr><expan>omnia</expan></choice> volatilia celi: et super <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> mouentur super terram. Et <choice><abbr>oes</abbr><expan>omnes</expan></choice> pisces maris sub manibus vobis dedi. 
+        </ab>
+
+        <ab n="3">
+        Et <choice><abbr>oe</abbr><expan>omne</expan></choice> volatile: <choice><abbr>qd</abbr><expan>quod</expan></choice> est viuens: vobis erit in cibum. <unclear><choice><abbr>Tanq</abbr><expan>tanquam</expan></choice></unclear> olera herbe dedi vobis omnia. 
+        </ab>
+
+        <ab n="4">
+        <unclear>Veruntn</unclear> carnes in sanguine <choice><abbr>aie</abbr><expan>anime</expan></choice> non comedetis. 
+        </ab>
+
+        <ab n="5">
+        Et enim vestrum sanguinem <choice><abbr>aiarum</abbr><expan>animarum</expan></choice> vestarum: de manu cunctarum bestiarum requiram illum. Et de manu hominis fratris eius: requiram <choice><abbr>aiam</abbr><expan>animam</expan></choice> <choice><abbr>hois</abbr><expan>hominis</expan></choice>
+        </ab>
+
+        <ab n="6">
+        <choice><abbr>Q</abbr><expan>Qui</expan></choice> essuderit sanguinem <choice><abbr>hois</abbr><expan>hominis</expan></choice>: pro sanguine <choice><abbr>hois</abbr><expan>hominis</expan></choice>: eius essundetur <choice><abbr>q</abbr><expan>qui</expan></choice> in imagine dei feci <choice><abbr>hoiem</abbr><expan>hominem</expan></choice>
+        </ab>
+
+        <ab n="7">
+        Vos <choice><abbr>at</abbr><expan>autem</expan></choice> crescite et multiplicamini. Et replete terram. Et dominamini eius. 
+        </ab>
+
+        <ab n="8">
+        Et ait deus ad <persName>noe</persName>: et filios eius cum eo:
+        </ab>
+
+        <ab n="9">
+        dicens: ecce ego statuo pactum meum vobis: et semini vestro post vos: 
+        </ab>
+
+        <ab n="10">
+        et <choice><abbr>oi</abbr><expan>omni</expan></choice> anime viuenti vobiscum: in eternum: a volucribus: et a iumentis: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bestiis terre: <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> sunt vobiscum: ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> exeuntibus ex arca. 
+        </ab>
+        
+        <ab n="11">
+        Et statuam pactum meum ad vos. Et non morietur <choice><abbr>ois</abbr><expan>omnis</expan></choice> caro vltra ab aqua diluuii. Et non vltra erit diluuium aque: ad corumpendum <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram. 
+        </ab>
+
+        <ab n="12">
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus <persName>noe</persName>: hoc signum federis: quod do inter me et vos: et inter <choice><abbr>oem</abbr><expan>omnem</expan></choice> animam: <choice><abbr>q</abbr><expan>quae</expan></choice> est vobiscum in <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> sempiternas:
+        </ab>
+
+        <ab n="13">
+        arcum meum pono in nube. Et erit in signum federis: inter me et terram. 
+        </ab>
+
+        <ab n="14">
+        Et erit in <unclear>connubilando</unclear> me nubes super terram. Apparebit arcus meus in nube: 
+        </ab>
+
+        <ab n="15">
+        et recordabor federis mei: quod erit inter me et vos: et inter <choice><abbr>oes</abbr><expan>omnes</expan></choice> <choice><abbr>aiam</abbr><expan>animam</expan></choice> in omni carne. Et non erit aqui in diluuium: ad delendam vniuersam carnem. 
+        </ab>
+
+        <ab n="16">
+        Et erit arcus meus in nube. Et videbo illum: vt recorder federis sempiterni: inter me et vos: et inter animam viuentem in <choice><abbr>oi</abbr><expan>omni</expan></choice> carne: <choice><abbr>q</abbr><expan>quae</expan></choice> est super terram. 
+        </ab>
+
+        <ab n="17">
+        Et ait <choice><abbr>dus</abbr><expan>dominus</expan></choice> deus <persName>noe</persName>: hoc signum federis: quod constitui inter me: et inter <choice><abbr>oem</abbr><expan>omnem</expan></choice> carnem: <choice><abbr>q</abbr><expan>quae</expan></choice> est super terram. 
+        </ab>
+
+        <ab n="18">
+        Erant <choice><abbr>aut</abbr><expan>autem</expan></choice> filii <persName>noe</persName>:<choice><abbr>q</abbr><expan>qui</expan></choice> egressi sunt de arca: <persName>sem</persName>: <persName>cham</persName>: <persName>iapheth</persName>. <persName>cham</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> erat pater <persName>chanaam</persName>. Tres isti sunt filii <persName>noe</persName>. 
+        </ab>
+
+        <ab n="19">
+        Tres isti sunt filii <persName>noe</persName>. Ab istis disseminati sunt super <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram. 
+        </ab>
+
+        <ab n="20">
+        Et cepit <persName>noe</persName> homo agricola terre. Et plantauit vineam. 
+        </ab>
+
+        <ab n="21">
+        Et bibit de vino: et inebriatus est: et nudatus est in domo sua. 
+        </ab>
+
+        <ab n="22">
+        Et vidit <persName>cham</persName> pater <persName>chainaam</persName> nuditatem patris sui: et egressus nunciauit duobus fratribus suis foris. 
+        </ab>
+
+        <ab n="23">
+        Et accipientes <persName>sem</persName> et <persName>iapheth</persName> pallium: imposuerunt super duo dorsa eorum: et abierunt retrorsum: et operuerunt nuditatem patris sui: et facies eorum retrorsum: et nuditatem patris sui non viderunt. 
+        </ab>
+
+        <ab n="24">
+        Euigilauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>noe</persName> a vino: et cognouit <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> fecit ei filius suus iunior. 
+        </ab>
+
+        <ab n="25">
+        Et ait: maledictus <persName>chanaan</persName>. feruus domesticus erit fratribus suis. 
+        </ab>
+
+        <ab n="26">
+        Et ait: benedictus <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus <persName>sem</persName>. Et erit <persName>chanaam</persName> seruus domesticus eius
+        </ab>
+
+        <ab n="27">
+        dilatet deus <persName>iapheth</persName>: et habitet in domibus <persName>sem</persName>. Et erit <persName>chanaan</persName> feruus eorum. 
+        </ab>
+
+        <ab n="28">
+        Vixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>noe</persName> post diluuium: annos trecentos quinquaginta. 
+        </ab>
+
+        <ab n="29">
+        Et fuerunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>noe</persName> nongenti quinquagint anni. Et mortuus est. 
+        </ab>
+        
         </div>
     </body>
     </text>

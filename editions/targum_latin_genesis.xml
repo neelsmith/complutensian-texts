@@ -839,6 +839,128 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="9">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="9" type="ordinal">9.</num>
+        </ab>
+
+        <ab n="1">
+        At benedixit deus <persName>noe</persName> filiis eius: et dixit eis. Crescite et multiplicamini et replete terram. 
+        </ab>
+
+        <ab n="2">
+        Et timor vester et terror erit super bestias terre et super <choice><abbr>oes</abbr><expan>omnes</expan></choice> volucres celi in <choice><abbr>omi</abbr><expan>omni</expan></choice> quae reptat super terram: et in <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> piscibus maris: <choice><abbr>q</abbr><expan>quae</expan></choice> in manu vestra traditi sunt. 
+        </ab>
+
+        <ab n="3">
+        <choice><abbr>Ome</abbr><expan>Omne</expan></choice> quod mouetur et viuit: vobit erit ad vescendum: quasi herbam virentem dedi vobis <choice><abbr>oia</abbr><expan>omnia</expan></choice>. 
+        </ab>
+
+        <ab n="4">
+        Verumtamen carnem cum anima sua sanguineque suo non comedetis.
+        </ab>
+
+        <ab n="5">
+        Eternium sanguinem animarum vestrarum requiram: de manu cunctarum bestiarum requiram eum: et de manu <choice><abbr>hois</abbr><expan>hominis</expan></choice>: de manu viri qui effuderit sanguinem fratris sui requiram animal hominis. 
+        </ab>
+
+        <ab n="6">
+        Quicumque effuderit sanguinem <choice><abbr>hois</abbr><expan>hominis</expan></choice>cum testibus: per sententiam iudicum sanguis eius fundetur: quam ad imaginem dei fecit <choice><abbr>hoiem</abbr><expan>hominem</expan></choice>
+        </ab>
+
+        <ab n="7">
+        No <choice><abbr>aut</abbr><expan>autem</expan></choice> crescite et multiplicamini <choice><abbr>gnationemque</abbr><expan>generationemque</expan></choice> facite in terra et multiplicamini in ea. 
+        </ab>
+
+        <ab n="8">
+        Et dixit deus ad <persName>noe</persName> et ad filios eius cum eo dicens. 
+        </ab>
+
+        <ab n="9">
+        Ecce ego statuam pactum meum vobiscum et cum filiis <unclear>vris</unclear> post vos: 
+        </ab>
+
+        <ab n="10">
+        et cum <choice><abbr>omi</abbr><expan>omnia</expan></choice> <choice><abbr>aia</abbr><expan>anima</expan></choice> viuenti <choice><abbr>q</abbr><expan>quae</expan></choice> est vobiscum tam in volucribus quam in <choice><abbr>aialibus</abbr><expan>animalibus</expan></choice> et in <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bestiis terre <choice><abbr>q</abbr><expan>quae</expan></choice> sunt vobiscum ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> egredientibus de arca in vniuersis animantibus terre. 
+        </ab>
+
+        <ab n="11">
+        Et statuam pactum meum nobiscum: et non consumabitur vltra <choice><abbr>ois</abbr><expan>omnis</expan></choice> caro propter aquas diluuii: neque erit vltra diluuium ad disperdendam terram. 
+        </ab>
+
+        <ab n="12">
+        Dixitque deus. HOc est signum pacto quod ego ponam inter verbum meum et inter vos et inter omnem animam viuentem quae est vobiscum in generationes seculi. 
+        </ab>
+
+        <ab n="13">
+        Arcum meum ponam in nube: et erit in sugnum federis inter verbummeum et terram. 
+        </ab>
+
+        <ab n="14">
+        Et erit cum adduxero nubem super terram: et videbitur arcus in nube. 
+        </ab>
+
+        <ab n="15">
+        Et recordabor pacti mei <choice><abbr>q</abbr><expan>qui</expan></choice> est inter verbum meum: et inter vos: et inter <choice><abbr>oem</abbr><expan>omnem</expan></choice> animam viuentem in vniuersa carne:
+        </ab>
+
+        <ab n="16">
+        neque erit vltra aqua diluuii ad disperdendam <choice><abbr>oem</abbr><expan>omnem</expan></choice> carnem: Et erit arcus in nube: et videbo eum in memoriam federis sempiterni: quod est inter verbum dei et inter <choice><abbr>oem</abbr><expan>omnem</expan></choice> animam viuentem in vniuersa carne que est super terram. 
+        </ab>
+
+        <ab n="17">
+        Dixitque deus ad <persName>noe</persName>. Hoc est signum federis inter verbum meum: et vniuersam carnem que est super terram. 
+        </ab>
+
+        <ab n="18">
+        Et fuerunt filii <persName>noe</persName> <choice><abbr>q</abbr><expan>qui</expan></choice> egressi sunt de arca: <persName>sem</persName> et <persName>cham</persName> et <persName>iapheth</persName>. Et <persName>cham</persName> ipse est pater <persName>chanaam</persName>. 
+        </ab>
+
+        <ab n="19">
+        Tres isti sunt filii <persName>noe</persName>: et ab his disseminata est vniuersa <choice><abbr>tra</abbr><expan>terra</expan></choice>.
+        </ab>
+
+        <ab n="20">
+        Et cepit <persName>noe</persName> esse vir operarius in terra: et plantatuit vineam. 
+        </ab>
+
+        <ab n="21">
+        Et bibit ex vino et inebriatus est: et nudatum est in medio tabernaculi sui
+        </ab>
+
+        <ab n="22">
+        Et vidit <persName>cham</persName> <choice><abbr>pr</abbr><expan>pater</expan></choice> <persName>chanaam</persName> verenda <choice><abbr>pris</abbr><expan>patris</expan></choice> sui: nunciauit duobus <choice><abbr>fribus</abbr><expan>fratribus</expan></choice> suis foras. 
+        </ab>
+
+        <ab n="23">
+        Et tulerunt <persName>sem</persName> et <persName>iapeth</persName> pallium et imposuerunt super humerum amborum: et abierunt retrorsum: et operuerunt verenda patris sui: et facies eorum auerse erant: et verenda patris sui non viderunt. 
+        </ab>
+
+        <ab n="24">
+        Euigilans <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>noe</persName> ex vino: cognouit <choice><abbr>q</abbr><expan>quae</expan></choice> fecerat ei filius suus minor. 
+        </ab>
+
+        <ab n="25">
+        Et ait. Maledictus <persName>chanaam</persName>: serum seruiens erit <choice><abbr>fribus</abbr><expan>fratribus</expan></choice> suis. 
+        </ab>
+
+        <ab n="26">
+        Et ait. <choice><abbr>Bndictus</abbr><expan>Benedictus</expan></choice> <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus <persName>sem</persName>: et sit <persName>chanaan</persName> sertuus illis. 
+        </ab>
+
+        <ab n="27">
+        Dilatet deus <persName>iapheth</persName>: et habitet gloria eius in tabernaculis <persName>sem</persName>: et sit <persName>chanaam</persName> seruus eis. 
+        </ab>
+
+        <ab n="28">
+        Et vixit <persName>noe</persName> post diluuium trecentis et <choice><abbr>qnquaginta</abbr><expan>quinquaginta</expan></choice> annis. 
+        </ab>
+
+        <ab n="29">
+        Et fuerunt omnes dies <persName>noe</persName> nongenti et quinquaginta anni: et mortuus est. 
+        </ab>
+        
+        </div>
+
     </body>
     </text>
 </TEI>
