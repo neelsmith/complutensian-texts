@@ -959,7 +959,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus <persName>noe</persName>: hoc signum federis: quod do inter me et vos: et inter <choice><abbr>oem</abbr><expan>omnem</expan></choice> animam: <choice><abbr>q</abbr><expan>quae</expan></choice> est vobiscum in <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> sempiternas:
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus <persName>noe</persName>: hoc signum federis: quod ego do inter me et vos: et inter <choice><abbr>oem</abbr><expan>omnem</expan></choice> animam: <choice><abbr>q</abbr><expan>quae</expan></choice> est vobiscum in <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> sempiternas:
         </ab>
 
         <ab n="13">

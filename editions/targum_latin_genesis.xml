@@ -860,7 +860,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        Eternium sanguinem animarum vestrarum requiram: de manu cunctarum bestiarum requiram eum: et de manu <choice><abbr>hois</abbr><expan>hominis</expan></choice>: de manu viri qui effuderit sanguinem fratris sui requiram animal hominis. 
+        Eternium sanguinem animarum vestrarum requiram: de manu cunctarum bestiarum requiram eum: et de manu <choice><abbr>hois</abbr><expan>hominis</expan></choice>: de manu viri qui effuderit sanguinem fratris sui requiram animam hominis. 
         </ab>
 
         <ab n="6">
@@ -868,7 +868,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="7">
-        No <choice><abbr>aut</abbr><expan>autem</expan></choice> crescite et multiplicamini <choice><abbr>gnationemque</abbr><expan>generationemque</expan></choice> facite in terra et multiplicamini in ea. 
+        Nos <choice><abbr>aut</abbr><expan>autem</expan></choice> crescite et multiplicamini <choice><abbr>gnationemque</abbr><expan>generationemque</expan></choice> facite in terra et multiplicamini in ea. 
         </ab>
 
         <ab n="8">
@@ -888,11 +888,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        Dixitque deus. HOc est signum pacto quod ego ponam inter verbum meum et inter vos et inter omnem animam viuentem quae est vobiscum in generationes seculi. 
+        Dixitque deus. Hoc est signum pacti quod ego ponam inter verbum meum et inter vos et inter omnem animam viuentem quae est vobiscum in generationes seculi. 
         </ab>
 
         <ab n="13">
-        Arcum meum ponam in nube: et erit in sugnum federis inter verbummeum et terram. 
+        Arcum meum ponam in nube: et erit in signum federis inter verbummeum et terram. 
         </ab>
 
         <ab n="14">
