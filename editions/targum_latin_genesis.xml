@@ -961,6 +961,274 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         
         </div>
 
+        <div n="10">
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="10" type="ordinal">10.</num>
+        </ab>
+
+        <ab n="1">
+        <unclear>Ac</unclear> he sunt generationes filiorum <persName>noe</persName>: <persName>sem</persName> et <persName>cham</persName> et <persName>iapheth</persName>: natique sunt eis filii post diluuium. 
+        </ab>
+
+        <ab n="2">
+        Filii <persName>iapheth</persName> <persName>gomer</persName> et <persName>magog</persName> et <persName>madai</persName> et <persName>iauan</persName> et <persName>tubal</persName> et <persName>mesech</persName> et <persName>thiras</persName>. 
+        </ab>
+
+        <ab n="3">
+        Et filii <persName>gomer</persName> <persName>ascenem</persName> et <persName>riphat</persName> et <persName>togarma</persName>. 
+        </ab>
+
+        <ab n="4">
+        Et filii <persName>iauam</persName> <persName>helifa</persName> et <persName>tharsis</persName>: <persName>cethim</persName> et <persName>dodanim</persName>.
+        </ab>
+
+        <ab n="5">
+        Ab his diuise sunt insule gentium in terris suis: vnusquisque <choice><abbr>sm</abbr><expan>secundum</expan></choice> linguam suam <choice><abbr>sm</abbr><expan>secundum</expan></choice> familias suas in <unclear>pplis</unclear> suis. 
+        </ab>
+
+        <ab n="6">
+        Et filii <persName>cham</persName> <persName>chus</persName> et <persName>mesraim</persName> et <persName>phut</persName> et <persName>chanaam</persName>
+        </ab>
+
+        <ab n="7">
+        Et filii <persName>chus</persName> <persName>saba</persName> et <persName>sabatha</persName> et <persName>regina</persName> et <persName>sabathaca</persName>: et filii <persName>regma</persName> <persName>saba</persName> et <persName>dedan</persName>.
+        </ab>
+
+        <ab n="8">
+        Et <persName>chus</persName> genuit <persName>nemrod</persName>: ipse cepit esse potens in <choice><abbr>tra</abbr><expan>terra</expan></choice>
+        </ab>
+
+        <ab n="9">
+        Ipse erat vir robustus coram domino: propterea dicebatur quasi <persName>nemrod</persName> virobustus coram domino. 
+        </ab>
+
+        <ab n="10">
+        Et fuit principium regni sui <placeName>babylon</placeName>: et <placeName>erech</placeName> et <placeName>achad</placeName> et <placeName>calane</placeName> in terra <placeName>babylonis</placeName>.
+        </ab>
+
+        <ab n="11">
+        De terra illa egressus est <placeName>asur</placeName>: et edificauit <placeName>niniuem</placeName> et <placeName>rooboth</placeName> ciuitatem et <placeName>chale</placeName> 
+        </ab>
+
+        <ab n="12">
+        et <placeName>resen</placeName>: que est inter <placeName>ninine</placeName> et inter <placeName>cale</placeName>. Hec est ciuitas magna. 
+        </ab>
+
+        <ab n="13">
+        Et <placeName>Mesraim</placeName> genuit <placeName>ludim</placeName> et <placeName>ananiim</placeName> et <placeName>laabim</placeName> et <placeName>neptium</placeName>
+        </ab>
+
+        <ab n="14">
+        et <placeName>phetrusism</placeName> et <placeName>cesluim</placeName>. De quibus egressi sunt <placeName>philistiim</placeName> et cappadoces. 
+        </ab>
+
+        <ab n="15">
+        Et <placeName>chanaan</placeName> genuit <placeName>sidon</placeName> primogenitum suum: et <placeName>etheum</placeName>
+        </ab>
+
+        <ab n="16">
+        et <placeName>iebeseos</placeName> et <placeName>amorreos</placeName> et <placeName>gergeseos</placeName>
+        </ab>
+
+        <ab n="17">
+        et <placeName>eueos</placeName> et <placeName>aracheos</placeName> et <placeName>cineos</placeName>
+        </ab>
+
+        <ab n="18">
+        et <persName>aradios</persName> et <persName>samaratheos</persName> et <persName>amatheos</persName>: et postea disseininate sunt familie <persName>chananeorum</persName>.
+        </ab>
+
+        <ab n="19">
+        Et fuit terminus <placeName>cananeorum</placeName> a <persName>sidone</persName>: pertingens <placeName>geraram</placeName> vsque <placeName>gazam</placeName>: pertingens <placeName>sodomam</placeName> et <placeName>gomorram</placeName> et <placeName>adama</placeName> et seboym vsque <placeName>lassa</placeName>. 
+        </ab>
+
+        <ab n="20">
+        Isti sunt filii <persName>cham</persName> per cognationes suas et linguas suas in terris suis in populis suis. 
+        </ab>
+
+        <ab n="21">
+        Et de <persName>sem</persName> nati sunt: ipse quoque est pater omnium filiorum <persName>heber</persName>: frater <persName>iapheth</persName> maior. 
+        </ab>
+
+        <ab n="22">
+        Filii <persName>sem</persName> <persName>helam</persName> et <persName>asur</persName> et <persName>arpharad</persName>: et <persName>lud</persName> et <persName>aram. </persName>
+        </ab>
+
+        <ab n="23">
+        Et filii <persName>aram</persName> <persName>hus</persName> et <persName>hul</persName> et <persName>gether</persName> et <persName>mes</persName>
+        </ab>
+
+        <ab n="24">
+        <persName>Arphaxad</persName> autem genuit <persName>sale</persName>: et <persName>sale</persName> genuit <persName>heber</persName>: 
+        </ab>
+
+        <ab n="25">
+        et de <persName>heber</persName> nati sunt duo filii: nomen vnius <persName>phaleg</persName>: <choice><abbr>q</abbr><expan>quod</expan></choice> in diebus suis diuisa est terra: et nomen fratris sui <persName>iectan</persName>. 
+        </ab>
+
+        <ab n="26">
+        <persName>Jectan</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> genuit elmodad et <persName>saleph</persName> et <persName>asarmoth</persName> et <persName>iare</persName> 
+        </ab>
+
+        <ab n="27">
+        et <persName>adurain</persName> et <persName>vmal</persName> et <persName>decla</persName>
+        </ab>
+
+        <ab n="28">
+        et <persName>hobal</persName> et <persName>abimael</persName> et <persName>saba</persName> 
+        </ab>
+        
+        <ab n="29">
+        et <persName>ophir</persName> et <persName>eiula</persName> et <persName>iobab</persName>: <choice><abbr>oes</abbr><expan>omnes</expan></choice> isti filii <persName>iectan</persName>.
+        </ab>
+
+        <ab n="30">
+        Et fuit habitatio eorum a <placeName>messa</placeName> pertingens vsque <placeName>sephar</placeName> montem orientalem.
+        </ab>
+
+        <ab n="31">
+        Isti sunt filii <persName>sem</persName> per cognationes et liguas suas in terris suis in populis suis. 
+        </ab>
+
+        <ab n="32">
+        Iste sunt cognationes filiorum <persName>noe</persName> per generationes suas in populis suis: et ab his diuisi sunt populi in terra post diluuium. 
+        </ab>
+
+        </div>
+
+        <div n="11">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="11" type="ordinal">11.</num>
+        </ab>
+
+        <ab n="1">
+        Eratque <choice><abbr>ois</abbr><expan>omnis</expan></choice> terra lingue vnius et loquele vnius. Et factum est
+        </ab>
+
+        <ab n="2">
+        cum proficiscerentur in principio et inuenissent campum in terram <placeName>babylonis</placeName>: habitauerunt ibi. 
+        </ab>
+
+        <ab n="3">
+        Dixeruntque vnusquisque ad proximum suum: venite faciamus lateres: et coquamus eos igni: et erat eis later pro lapide: et bitumen erat eis pro luto. 
+        </ab>
+
+        <ab n="4">
+        Et dixerunt: venite edificemus nobis ciuitatem et turrim: et culmen eius pertingat vsque ad celos: et faciamus nobis nomen: ne forte dispergamur super faciem vniuerse terre. 
+        </ab>
+
+        <ab n="5">
+        Et apparuit dominus vt vlcisceretur super opera ciuitatis et turris: quas edificauerunt filii hominum. 
+        </ab>
+
+        <ab n="6">
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice>. Ecce populus vnus et lingua vna est <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> illis. Et hoc est quod ceperunt facere: et nunc non prohibetur ab eis omne quod cogitauerunt facere. 
+        </ab>
+
+        <ab n="7">
+        Venite appareamus et confundamus ibi linguam eorum: vt non audiat vnusquisque linguam proximi sui. 
+        </ab>
+
+        <ab n="8">
+        Et dispersit eos <choice><abbr>dns</abbr><expan>dominus</expan></choice> inde super faciem vniuerse terre: et prohibiti sunt ab edificatione ciuitatis. 
+        </ab>
+
+        <ab n="9">
+        Idcirco vocatus est nomen eius <placeName>babel</placeName>: <choice><abbr>qm</abbr><expan>quam</expan></choice> ibi confudit <choice><abbr>dns</abbr><expan>dominus</expan></choice> linguam vniuerse terre: et inde dispersit eos <choice><abbr>dns</abbr><expan>dominus</expan></choice> super faciem vniuerse terre. 
+        </ab>
+
+        <ab n="10">
+        De sunt generationes <persName>sem</persName>: sem filius centum annorum erat <choice><abbr>qn</abbr><expan>quando</expan></choice> genuit <persName>arphaxad</persName> duobus annis post diluuium. 
+        </ab>
+
+        <ab n="11">
+        Et vixit <persName>sem</persName> postquam genuit <persName>arphaxad</persName> <choice><abbr>qngentis</abbr><expan>quingentis</expan></choice> annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="12">
+        Et <persName>arphaxad</persName> vixit triginta et quinque annis: et genuit <persName>sale</persName>:
+        </ab>
+
+        <ab n="13">
+        et vixit <persName>arphaxad</persName> postquam genuit <persName>sale</persName> <choice><abbr>qdrigentis</abbr><expan>quadringentis</expan></choice> et tribus annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="14">
+        Et <persName>sale</persName> vixit triginta annis et genuit <persName>heber</persName>: 
+        </ab>
+
+        <ab n="15">
+        et vixit <persName>sale</persName> postquam genuit <persName>heber</persName> quadringentis et tribus annis et genuit filios et filias. 
+        </ab>
+
+        <ab n="16">
+        Et vixit <persName>heber</persName> triginta et quattuor annis et genuitt <persName>phaleg</persName>
+        </ab>
+
+        <ab n="17">
+        et vixit <persName>heber</persName> postquam genuit <persName>phaleg</persName> quadringentis et triginta annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="18">
+        Et vixit <persName>phaleg</persName> triginta annis: et genuit <persName>reu</persName>.
+        </ab>
+
+        <ab n="19">
+        Et vixit <persName>phaleg</persName> postquam genuit <persName>reu</persName> ducentis et nouem annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="20">
+        Et vixit <persName>reu</persName> triginta et duobus annis: et genuit <persName>sarug</persName>:
+        </ab>
+
+        <ab n="21">
+        et vixit <persName>reu</persName> postquam genuit <persName>sarug</persName> ducentis et septem annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="22">
+        Et vixit <persName>sarug</persName> triginta annis: et genuit <persName>nachor</persName>.
+        </ab>
+
+        <ab n="23">
+        Et vixit <persName>sarug</persName> postquam genuit <persName>nachor</persName> ducentis annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="24">
+        Et vixit <persName>nachor</persName> viginti et nouem annis: et genuit <persName>thare</persName>. 
+        </ab>
+        
+        <ab n="25">
+        Et vixit <persName>nachor</persName> postquam genuit <persName>thare</persName> centum et decem et nouem annis: et genuit filios et filias. 
+        </ab>
+
+        <ab n="26">
+        Et vixit <persName>thare</persName> septuaginta annis: et genuit <persName>Abram</persName>: <persName>nachor</persName>: et <persName>aran</persName>.
+        </ab>
+
+        <ab n="27">
+        De sunt generationes <persName>thare</persName>: <persName>thare</persName> genuit <persName>abram</persName>: <persName>nachor</persName>: et <persName>aran</persName> <persName>aran</persName> autem genuit <persName>loth</persName>. 
+        </ab>
+
+        <ab n="28">
+        Et mortuus est <persName>aran</persName> viuente <persName>thare</persName> patre suo in terra natiuitatis sue in <placeName>vr</placeName> <persName>chaldeorum</persName>.
+        </ab>
+
+        <ab n="29">
+        Et acceperunt sibi <persName>abram</persName> et <persName>nachor</persName> vxores: nomen vxoris <persName>abram</persName> <persName>sarai</persName>: et nomen vxoris <persName>nachor</persName> <persName>melcha</persName> filia <persName>aran</persName> patris <persName>melche</persName> et patris <persName>iesche</persName>:
+        </ab>
+
+        <ab n="30">
+        eratque <persName>sarai</persName> sterilis: nec erat ei filius. 
+        </ab>
+
+        <ab n="31">
+        Et tulit <persName>thare</persName> <persName>abram</persName> filium suum et <persName>loth</persName> filium <persName>aran</persName> filium filii sui et <persName>sarai</persName> nurum suam vxorem <persName>abram</persName> filii sui: et egressi sunt simul de vr <persName>chaldeorum</persName> vt irent in terram <placeName>chanaam</placeName>: veneruntque vsque <persName>aran</persName> et habitauerunt ibi. 
+        </ab>
+
+        <ab n="32">
+        Et fuerunt dies <persName>thare</persName> ducenti et <choice><abbr>qnque</abbr><expan>quinque</expan></choice> anni: et mortuus est <persName>thare</persName> in <placeName>aram</placeName>.
+        </ab>
+
+        </div>
+
     </body>
     </text>
 </TEI>
