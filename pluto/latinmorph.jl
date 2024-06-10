@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.41
+# v0.19.42
 
 using Markdown
 using InteractiveUtils
@@ -35,13 +35,13 @@ md"""> ## Things you can skip"""
 md"""> ### Build a parser"""
 
 # ╔═╡ d8198183-4e97-4f39-9e8e-03a98a939d0a
-parserurl = "http://shot.holycross.edu/tabulae/coreparser-current.cex"
+parserurl = "http://shot.holycross.edu/tabulae/core-lat23-medieval-current.cex"
 
 # ╔═╡ 7b96d31c-b45c-4848-ab8f-64900cc2d1d4
 p = tabulaeStringParser(parserurl, UrlReader)
 
 # ╔═╡ 0809e4d8-0714-44e1-a8c2-977c2304b30a
-parsetoken("creavit", p)
+parsetoken("genuit", p)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -62,7 +62,7 @@ Tabulae = "~0.10.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
 project_hash = "c8ea4d891540cb50b09e08611e496527c8661842"
 
@@ -176,7 +176,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -485,7 +485,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -757,11 +757,11 @@ version = "17.4.0+2"
 # ╟─0abfe5ae-2752-11ef-38cf-f984b91b0112
 # ╟─ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
 # ╟─2d774dd8-0513-4957-9b6a-5a33fd300199
-# ╟─0809e4d8-0714-44e1-a8c2-977c2304b30a
+# ╠═0809e4d8-0714-44e1-a8c2-977c2304b30a
 # ╟─db93c0c9-4848-4b32-a090-8c57c605e633
 # ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
 # ╟─0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-# ╟─d8198183-4e97-4f39-9e8e-03a98a939d0a
+# ╠═d8198183-4e97-4f39-9e8e-03a98a939d0a
 # ╟─7b96d31c-b45c-4848-ab8f-64900cc2d1d4
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
