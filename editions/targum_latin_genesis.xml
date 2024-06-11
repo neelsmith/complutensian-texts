@@ -1229,6 +1229,88 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="12">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="12" type="ordinal">12.</num>
+        </ab>
+
+        <ab n="1">
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> ad <persName>abram</persName>: proficiscere de terra tua et de cognatione tua et domo patris tui ad terram quam monstrauero tibi. 
+        </ab>
+
+        <ab n="2">
+        Et faciam te in populum magnum: et benedicam tibi: et magnificabo noment tuum: et eris benedictus. 
+        </ab>
+
+        <ab n="3">
+        Benedicamque benedicentibus tibi: et maledicentibus tibi maledicam: et benedicentur propter te <choice><abbr>oes</abbr><expan>omnes</expan></choice> cognationes terre. 
+        </ab>
+        
+        <ab n="4">
+        Et abiit <persName>abram</persName> sicut locutum est cum eo <choice><abbr>dns</abbr><expan>dominus</expan></choice>: et abiit cum eo <persName>loth</persName>. <persName>Abram</persName> auem erat filius septuaginta et <choice><abbr>qnque</abbr><expan>quinque</expan></choice> annorum cum egrederetur de <persName>aran</persName>.
+        </ab>
+
+        <ab n="5">
+        Et tulit <persName>abram</persName> <persName>sarai</persName> vxorem suam: et <persName>loth</persName> filium fratris  sui et omnem possessionem suam quam possederant: et <choice><abbr>oes</abbr><expan>omnes</expan></choice> <choice><abbr>aias</abbr><expan>animas</expan></choice> quas subiecerant legi in <persName>aran</persName>: et egressi sunt vt irent in terram <placeName>chanaam</placeName>: et venerunt in terram <placeName>chanaam</placeName>. 
+        </ab>
+
+        <ab n="6">
+        Et pertransiuit <persName>abram</persName> per terram vsque ad locum <placeName>sichem</placeName> vsque ad planiciem more: <persName>chananeus</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> tunc morabatur in terra. 
+        </ab>
+
+        <ab n="7">
+        Et apparuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>abram</persName>: et dixit. Filiis tuis dabo terram hanc: et edificauit ibi altare <choice><abbr>dno</abbr><expan>domino</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> apparuerat ei. 
+        </ab>
+
+        <ab n="8">
+        Et ascendit inde in montem qui erat ad orientem <placeName>bethel</placeName> et tetendit tabernaculum suum ab occidente habens <placeName>bethel</placeName> et ab orient <placeName>hai</placeName>: et edificauit ibi altare coram <choice><abbr>dno</abbr><expan>domino</expan></choice> et orauit in <choice><abbr>noie</abbr><expan>nomine</expan></choice> <choice><abbr>dni</abbr><expan>domini</expan></choice>
+        </ab>
+
+        <ab n="9">
+        Et profectus est <persName>abram</persName> vadens et proficiscens ad meridiem. 
+        </ab>
+
+        <ab n="10">
+        Et fuit fames in terra: descenditque <persName>abram</persName> in <placeName>egyptum</placeName> vt peregrinaretur ibi: quam preualuerat fames in terra. 
+        </ab>
+
+        <ab n="11">
+        Et factum est cum appropinquaret vt ingrederetur in <placeName>egyptum</placeName>: dixit <persName>sarai</persName> vxori sue. Ecce nunc cognoui quod mulier pulchra aspectu tues.
+        </ab>
+
+        <ab n="12">
+        Et erit cum viderint te <persName>egyptii</persName>: et dicent vxor eius est hec: interficientque me: et te reseruabunt. 
+        </ab>
+
+        <ab n="13">
+        Dic nunc quod soror mea sis tu: vt bene sit mihi propter tee: et sustentetur <choice><abbr>aia</abbr><expan>anima</expan></choice> mea propter verba tua. 
+        </ab>
+
+        <ab n="14">
+        Et factum est ingressus esset <persName>abram</persName> in <placeName>egyptum</placeName>: viderunt <persName>egyptii</persName> mulierem quod pulchra esset nimis. 
+        </ab>
+
+        <ab n="15">
+        Et viderunt eam principes <persName>pharaonis</persName>: et laudauerunt eam apud <persName>pharaonem</persName>: et sublata est mulier in domum <persName>pharaonis</persName>. 
+        </ab>
+
+        <ab n="16">
+        Et <persName>abram</persName> <choice><abbr>bnfecit</abbr><expan>benefecit</expan></choice> propter eam. Et fuerunt ei oues et boues et asini et serui et ancille et asine et cameli. 
+        </ab>
+
+        <ab n="17">
+        Et adduxit <choice><abbr>dns</abbr><expan>dominus</expan></choice> super <persName>pharaonem</persName> plagas magnas et super <choice><abbr>hoies</abbr><expan>homines</expan></choice> domus eius propter <persName>sarai</persName> vxorem <persName>abram</persName>. 
+        </ab>
+
+        <ab n="18">
+        Vocauitque <persName>pharao</persName> <persName>abram</persName> et dixit. Quid est hoc quod fecisti mihi? Quare non nunciasti mihi quod vxor tua esset. 
+        </ab>
+
+        <ab n="19">
+        Quare dixisti soror mea est: et tuli eam mihi in vxorem: et nunc ecce vxor tua: tolle et vade. 
+        </ab>
+
+        </div>
+
     </body>
     </text>
 </TEI>

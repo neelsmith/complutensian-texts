@@ -38,7 +38,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
 
-           <ab n="4">
+          <ab n="4">
            Et vidit deus lucem: quod bona. Et diuisit deus inter lucem: et inter tenebras.
           </ab>
 
@@ -1244,6 +1244,167 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="19">
         Et vixit <persName>phalec</persName> postquam genuit ipse <persName>ragau</persName>: annos ducentos nouem: et genuit filios et filias. 
         </ab>
+
+        <ab n="20">
+        Et vixit <persName>ragau</persName> annos. Centum triginta duo. Et genuit <persName>seruch</persName>.
+        </ab>
+
+        <ab n="21">
+        Et vixit <persName>ragau</persName>: postquam genuit ipse <persName>seruch</persName>: annos ducentos septem: et genuit filios et filias. 
+        </ab>
+
+        <ab n="22">
+        Et vixit <persName>seruch</persName> annos centum triginta: et genuit <persName>nachor</persName>. 
+        </ab>
+
+        <ab n="23">
+        Et vixit <persName>seruch</persName>: postquam genuit ipse <persName>nachor</persName>: annos ducentos. Et genuit filios et filias. 
+        </ab>
+        
+        <ab n="24">
+        Et vixit <persName>nachor</persName> annos centum septuaginta nouem. Et genuit <persName>thare</persName>. 
+        </ab>
+
+        <ab n="25">
+        Et vixit <persName>nachor</persName>: postquam genuit ipse <persName>thare</persName>: annos centum viginti quinque. Et genuit filios et filias. 
+        </ab>
+
+        <ab n="26">
+        Et mortuus est. Et vixit <persName>thare</persName> annos septuaginta. Et genuit <persName>abram</persName>: et <persName>nachor</persName>: et <persName>aran</persName>. He <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> <persName>thare</persName>. <persName>thare</persName> genuit <persName>abram</persName>: et nachor: et <persName>aran</persName>. 
+        </ab>
+
+        <ab n="27">
+        He <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> <persName>thare</persName>. <persName>thare</persName> genuit <persName>abram</persName>: et nachor: et <persName>aran</persName>. <persName>aran</persName> genuit <persName>loth</persName>. 
+        </ab>
+
+        <ab n="28">
+        Et mortuus est <persName>aran</persName> coram <persName>thaare</persName> patre suo in terra <choice><abbr>q</abbr><expan>quae</expan></choice> natus est: in regione <placeName>chaldeorum</placeName>.
+        </ab>
+
+        <ab n="29">
+        Et acceperunt <persName>abram</persName> et <persName>nachor</persName> sibi vxores. Nomen vxori <persName>abram</persName>: <persName>sara</persName>. Et nomen vxori <persName>nachor</persName> <persName>melcha</persName>: filia <persName>aran</persName>: et pater <persName>melcha</persName>: et pater <persName>iescha</persName>.
+        </ab>
+
+        <ab n="30">
+        Et erat <persName>sara</persName> sterilis: et non genuerat 
+        </ab>
+
+        <ab n="31">
+        et accepit <persName>thare</persName> <persName>abram</persName> filium suum: et <persName>lot</persName> filium <persName>aran</persName>: filium filii sui: et <persName>saram</persName> nurum suam: vxorem <persName>abram</persName> filii sui. Et eduxit eos deregione <placeName>chaldeorum</placeName>: vt irent in terram <placeName>chanaan</placeName>. Et venerunt vsque ad <placeName>charam</placeName> et habititauerunt illic. 
+        </ab>
+
+        <ab n="32">
+        Et facti sunt dies <persName>thare</persName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> <placeName>charam</placeName>: anni ducenti quinque et mortuus est <persName>thare</persName> in <placeName>charan</placeName>. 
+        </ab>
+
+        </div>
+
+        <div n="12">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="12" type="ordinal">12.</num></ab>
+
+        <ab n="1">
+        At dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>abram</persName> egredere de terra tua et de cognatione tua: et de domo patris tui: et veni in terram: quam tibi monstrabo
+        </ab>
+
+        <ab n="2">
+        et faciam te in gentem magnam. Et <choice><abbr>bndicam</abbr><expan>benedicam</expan></choice> te: et magnificabo nomen tuum. Et eris <choice><abbr>bndicam</abbr><expan>benedicam</expan></choice>
+        </ab>
+
+        <ab n="3">
+        Et <choice><abbr>bndicam</abbr><expan>benedicam</expan></choice> benedicentes te: et maledicentes te: maledicam. Et <choice><abbr>bndicentur</abbr><expan>benedicentur</expan></choice> in te omnes tribus terre. 
+        </ab>
+
+        <ab n="4">
+        Et abiit <persName>abram</persName> sicut locutus est ei <choice><abbr>dns</abbr><expan>dominus</expan></choice>. Et iuit cum eo ot. <persName>Abram</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> erat annorum septuaginta quinque: <choice><abbr>qn</abbr><expan>quando</expan></choice> egressus est de <placeName>charan</placeName>. 
+        </ab>
+
+        <ab n="5">
+        Et accepit <persName>abram</persName> <persName>saram</persName> vxorem suam: et <persName>lot</persName> filium fratris sui: et <choice><abbr>oem</abbr><expan>omnem</expan></choice> substantiam eorum: <choice><abbr>qcunque</abbr><expan>quicunque</expan></choice> possidebant. Et <choice><abbr>oem</abbr><expan>omnem</expan></choice> <choice><abbr>aiam</abbr><expan>animam</expan></choice>: quam possiderunt in <placeName>charan</placeName>. Et egressus est vt iret in terram <placeName>chanaan</placeName>. 
+        </ab>
+
+        <ab n="6">
+        Et pertransiuit <persName>abram</persName> terram vsque ad locum <persName>sychem</persName>: ad quercum excelsam. At <persName>chananei</persName> tunc habitabant terram. 
+        </ab>
+
+        <ab n="7">
+        Et apparuit dominus <persName>abram</persName>: et dixit ei: semini tuo dabo terram hanc. Et edificauit illic <persName>abram</persName> altare <choice><abbr>dno</abbr><expan>domino</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> apparuit ei. 
+        </ab>
+
+        <ab n="8">
+        Et recessit inde ad montem ad orientem <placeName>bethel</placeName>. Et statuit tabernaculum suum in <placeName>bethel</placeName> versus mare: et <placeName>hay</placeName> ad orientem. Et edificauit ibi altare <choice><abbr>dno</abbr><expan>domino</expan></choice>. Et inuocauit in nomine <choice><abbr>dni</abbr><expan>domini</expan></choice>. 
+        </ab>
+
+        <ab n="9">
+        Et discessit <persName>abram</persName>. Et vadens castrametatus est in deserto. 
+        </ab>
+
+        <ab n="10">
+        Et facta est fames in terra. Et descendit <persName>abram</persName> in <placeName>egyptum</placeName> vt habitaret ibi. <choice><abbr>Q</abbr><expan>Quod</expan></choice> inualuit fames in terra. 
+        </ab>
+
+        <ab n="11">
+        Factum est <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>qn</abbr><expan>quando</expan></choice> appropinquauit <persName>abram</persName> vt ingrederetur in <placeName>egyptum</placeName>: dixit <persName>abram</persName> <persName>sare</persName> vxori sue: noui ego> quod mulier pulchra es.
+        </ab>
+
+        <ab n="12">
+        Erit ergo cum viderint te <placeName>egyptii</placeName>: dicent quod vxor illius est hec: et interficient me: te <choice><abbr>at</abbr><expan>autem</expan></choice> vendicabunt. 
+        </ab>
+
+        <ab n="13">
+        Dic ergo quod <persName>soror</persName> illius sum: vt <choice><abbr>bn</abbr><expan>bene</expan></choice> mihi sit propter te: et viuet <choice><abbr>aiam</abbr><expan>animam</expan></choice> mea propter te. 
+        </ab>
+
+        <ab n="14">
+        Factum est <choice><abbr>qn</abbr><expan>quando</expan></choice> ingressus est <persName>abram</persName> in <placeName>egyptum</placeName>. Videntes <placeName>egyptii</placeName> mulierem: quod pulchra erat nimis. 
+        </ab>
+
+        <ab n="15">
+        Et viderunt eam principes <persName>pharaonis</persName>: et laudauerunt eam ad <persName>pharaonem</persName>: et induxeerunt eam in domum <persName>pharaonis</persName>. 
+        </ab>
+
+        <ab n="16">
+        Et <persName>abram</persName> bene vsi sunt propter eam. Et fuerunt ei oues: et vituli: et asuni: et serui: et famule: et muli: et cameli. 
+        </ab>
+
+        <ab n="17">
+        Et cruciauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>pharaonem</persName> cruciatibus magnis et malis: et domum eius propter <persName>saram</persName> vxorem <persName>abram</persName>. 
+        </ab>
+
+        <ab n="18">
+        Vocans <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>pharao</persName> <persName>abram</persName>: dixit <choice><abbr>qd</abbr><expan>quod</expan></choice> hoc fecisti mihi: <choice><abbr>qr</abbr><expan>quare</expan></choice> non renunciasti mihi: quod vxor tua
+        </ab>
+
+        <ab n="19">
+        Et quare dixisti quod soror mea est: et accepi eam mihi vxorem. Et nunc ecce vxor tua coram te: accipiens recede. 
+        </ab>
+
+        <ab n="20">
+        Et precepit <persName>pharao</persName> viris de <persName>abram</persName> comitari eum: et vxorem eius: et omnia <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> erant ei: et <persName>lot</persName> cum eo. 
+        </ab>
+        </div>
+
+        <div n="13">
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="13" type="ordinal">13.</num></ab>
+
+         <ab n="1">
+         Ascendit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName> de <placeName>egypto</placeName> ipse: et vxor eius: et omnia sua: et <persName>lot</persName> cum eo in desertum. 
+         </ab>
+
+         <ab n="2">
+         <persName>Abram</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> erat diues valde: in pecoribus et argerito: et auro. 
+         </ab>
+
+         <ab n="3">
+         Et abiit vnde egressus est in desertum: vsque <placeName>bethel</placeName>: vsque ad locum vbi fuit tentorium eius prius: inter <placeName>bethel</placeName> et inter <placeName>hai</placeName>: 
+         </ab>
+
+         <ab n="4">
+         in locum altaris: quod fecit illic prius. Et inuocauit <persName>abram</persName> nomen <choice><abbr>dni</abbr><expan>domini</expan></choice>.
+         </ab>
+
+         <ab n="5">
+         Et <persName>lot</persName> qui simul ibat cum abram: <choice><abbr>fuert</abbr><expan>fuerunt</expan></choice> oues: et boues: et armenta. 
+         </ab>
 
         </div>
     </body>
