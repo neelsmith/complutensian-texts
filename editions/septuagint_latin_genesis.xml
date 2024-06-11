@@ -1165,6 +1165,87 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         </div>
+
+        <div n="11">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="11" type="ordinal">11.</num></ab>
+
+        <ab n="1">
+        Et erat <choice><abbr>ois</abbr><expan>omnis</expan></choice> terra labium vnum: et vox vna <choice><abbr>oibus</abbr><expan>omnibus</expan></choice>.
+        </ab>
+
+        <ab n="2">
+        Et factum est cum mouerentur ipsi ab oriente: inuenerunt campum in terra <placeName>sennaar</placeName>: et habitauerunt ibi
+        </ab>
+
+        <ab n="3">
+        dixit homo proximo suo: venite laterificemus laterem: et coquamus eos igni et factus est illis later in lapidem. Et bitumen fuit illis lutum. 
+        </ab>
+
+        <ab n="4">
+        Et dixerunt: venite edificemus nobis ciuitatem et turrim: cuius erit caput vsque ad celum. Et faciamus nobis nomen. <choice><abbr>Anquam</abbr><expan>Antequam</expan></choice> diipergamur nos a facie vniuerse terre. 
+        </ab>
+
+        <ab n="5">
+        Et descendit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus videret ciuitatem et turrim: quam edificauerunt filii hominum. 
+        </ab>
+
+        <ab n="6">
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> ecce genus vnum et labium vnum omnium. Et hoc ceperunt facere. Et nunc non deficient ab eis <choice><abbr>oia</abbr><expan>omnia</expan></choice>: <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> agressi sunt facere. 
+        </ab>
+
+        <ab n="7">
+        Venite et descendentes confundamus eorum linguam vt non audiant <choice><abbr>vnusqsque</abbr><expan>vnusquisque</expan></choice> vocem proximi. 
+        </ab>
+
+        <ab n="8">
+        Et dispersit <choice><abbr>dns</abbr><expan>dominus</expan></choice> ipsos inde super faciem <choice><abbr>ois</abbr><expan>omnis</expan></choice> terre. Et cessauerunt edificantes ciuitatm et turrim. 
+        </ab>
+
+        <ab n="9">
+        <choice><abbr>Propt</abbr><expan>propter</expan></choice> hoc vocatum est nomen eius: confusio. <choice><abbr>q</abbr><expan>quia</expan></choice> ibi confudit <choice><abbr>dns</abbr><expan>dominus</expan></choice> labia vniuerse terre: et inde dispersit eos <choice><abbr>dns</abbr><expan>dominus</expan></choice> super faciam <choice><abbr>ois</abbr><expan>omnis</expan></choice> terre. 
+        </ab>
+
+        <ab n="10">
+        Et he <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> <persName>sem</persName>. <persName>Sem</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> erat filius centum annorum: <choice><abbr>qn</abbr><expan>quando</expan></choice> genuit <persName>arphaxad</persName>: secundo anno post diluuium
+        </ab>
+
+        <ab n="11">
+        Et vixit <persName>sem</persName>: postquam genuit ipse <persName>arphaxad</persName>: annos quingentos. Et genuit filios et filias: et mortuus est. 
+        </ab>
+
+        <ab n="12">
+        Et vixit <persName>arphaxad</persName> annos centum triginta quinque. Et genuit <placeName>cainan</placeName>. 
+        </ab>
+
+        <ab n="13">
+        Et vixit <persName>arphaxad</persName>: postquam genit ipse <placeName>cainan</placeName> annosquadringentos triginta. Et genuit filios et filias: et mortuus est. Et vixit <placeName>cainan</placeName> annos centum triginta. Et gennit <persName>sala</persName> et vixit <placeName>cainan</placeName> postquam genuit ipse <persName>sala</persName>. Annos trecentos triginta. Et genuit filios et filias: et mortuus est. 
+        </ab>
+
+        <ab n="14">
+        Et vixit <persName>sala</persName> annos centum triginta. Et genuit <persName>eber</persName>.
+        </ab>
+
+        <ab n="15">
+        Et vixit <persName>sala</persName> postuqam genuit ipse <persName>eber</persName> annos trecentos triginta: et mortuus est. 
+        </ab> 
+
+        <ab n="16">
+        Et vixit <persName>eber</persName> annos centum triginta <choice><abbr>qttuor</abbr><expan>quattor</expan></choice> et genuit <persName>phalec</persName>.
+        </ab>
+
+        <ab n="17">
+        Et vixit <persName>eber</persName>: postqquam genuit ipse <persName>phalec</persName>: annos trecentos septuaginta et genuit filios et filias. 
+        </ab>
+
+        <ab n="18">
+        Et mortuus est. Et vixit <persName>phalec</persName> annos centum triginta quattor. Et genuit <persName>ragau</persName>.
+        </ab>
+
+        <ab n="19">
+        Et vixit <persName>phalec</persName> postquam genuit ipse <persName>ragau</persName>: annos ducentos nouem: et genuit filios et filias. 
+        </ab>
+
+        </div>
     </body>
     </text>
 </TEI>
