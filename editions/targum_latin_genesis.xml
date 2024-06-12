@@ -1311,6 +1311,84 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="13">
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="12" type="ordinal">12.</num>
+        </ab>
+
+        <ab n="1">
+        Et ascendit <persName>abram</persName> de <placeName>egypto</placeName> ipse et vxor eius et <choice><abbr>oia</abbr><expan>omnia</expan></choice> sua et <persName>loth</persName> cum eo ad austrum. 
+        </ab>
+
+        <ab n="2">
+        Et <persName>abram</persName> erat honoratus valde in pecoribus et argento et auro. 
+        </ab>
+
+        <ab n="3">
+        Et abiit per mansiones suas a meridie et vsque <placeName>bethel</placeName> et vsque ad locum in quo tetenderat prius tabernaculum suum inter <placeName>bethel</placeName> et inter <placeName>hai</placeName>:
+        </ab>
+
+        <ab n="4">
+        ad locum altaris quod ibi fecerat prius: et orauit ibi <persName>abram</persName> in <choice><abbr>noie</abbr><expan>nomine</expan></choice> <choice><abbr>dni</abbr><expan>domini</expan></choice>. 
+        </ab>
+
+        <ab n="5">
+        Sed et <persName>loth</persName> qui abiit cum <persName>abram</persName> fuerunt oues et boues et tabernacula. 
+        </ab>
+
+        <ab n="6">
+        Et non poterat sustinere eos terra vt habitarent simul: 
+        </ab>
+
+        <ab n="7">
+        <unclear>qr</unclear> erat substantia eorum multa: et non poterant habitare simul. Et facta est rica inter pastores pecorum <persName>abram</persName> et pastores pecorum <persName>loth</persName>: <persName>chananeus</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> et <persName>pheremeus</persName> tunc habitabant in terra. 
+        </ab>
+
+        <ab n="8">
+        Et dixit <persName>abram</persName> ad <persName>loth</persName>. He sit nunc iurgium inter me et inter te et inter pastores meos et inter pastores tuos: quoniam viri fratres sumus nos. 
+        </ab>
+
+        <ab n="9">
+        Ecce <choice><abbr>ois</abbr><expan>omnis</expan></choice> terra coram te est: recede nunc a me. Si tu ad aquilonem: ego ad meridiem: et si tu ad meridiem ego ad aquilonem. 
+        </ab>
+
+        <ab n="10">
+        Et leuauit <persName>loth</persName> oculos suos et vidit omenm planiciem iordanis: <unclear>qr</unclear> tota esset irrigua antequam dispereret <choice><abbr>dns</abbr><expan>dominus</expan></choice> <placeName>sodomam</placeName> et <placeName>gomorram</placeName>: sicut hortus <choice><abbr>dni</abbr><expan>domini</expan></choice> et sicut terra <placeName>egypti</placeName> et introitum <placeName>sogor</placeName>. 
+        </ab>
+
+        <ab n="11">
+        Et elegit sibi <persName>loth</persName> omnem planiciem iordanis: et <unclear>profectus</unclear> est <persName>loth</persName> prius: et diuisi sunt vnusquisque a fratre suo. 
+        </ab>
+
+        <ab n="12">
+        <persName>Abram</persName> habitabat in terra <placeName>chanaam</placeName>: et <persName>loth</persName> habitabat in vrbibus campestribus: et tetendit tabernacula vsque ad <placeName>sodomam</placeName>.
+        </ab>
+
+        <ab n="13">
+        Viri autem <placeName>sodome</placeName> erant iniqui cum suo mamona et pessimi in corporibus suis coram <choice><abbr>dno</abbr><expan>domino</expan></choice> nimis.
+        </ab>
+
+        <ab n="14">
+        Dixitque <choice><abbr>dns</abbr><expan>dominus</expan></choice> ad <persName>abram</persName> postquam diuisus est <persName>loth</persName> ab eo: leua nunc oculos tuos: et vide a loco in quo tu es ad quilonem et ad meridiem: et ad orientem: et ad occidentem. 
+        </ab>
+
+        <ab n="15">
+        Quoniam omnem terram quam tu vides tibi dabo eam et filiis tuis vsque in seculum. 
+        </ab>
+
+        <ab n="16">
+        Et ponam filios tuos multos sicut puluerem terre: sicut enim non est possibile viro numerare puluerem terre: sic filii tui non numerabuntur. 
+        </ab>
+
+        <ab n="17">
+        Surge ambula per terram in longitudine et in latitudine sua: <unclear>qr</unclear> tibi dabo eam. 
+        </ab>
+
+        <ab n="18">
+        Et tetendit <persName>abram</persName> tabernaculum et venit et habitauit in planiciemamre: <choice><abbr>q</abbr><expan>quae</expan></choice> est in ebrom: et edificauit ibi altare coram <choice><abbr>dno</abbr><expan>domino</expan></choice> . 
+        </ab>
+        
+        </div>
+
     </body>
     </text>
 </TEI>

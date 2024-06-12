@@ -1,4 +1,4 @@
-#!datamodels
+usingusing#!datamodels
 Collection|Model|Label|Description
 urn:cite2:compnov:dse.v1:sept_latin|urn:cite2:cite:datamodels.v1:dsemodel|Relations of text, manuscript page and documentary image for Latin glosses to the Septuagint in the Complutensian Bible.
 
@@ -385,3 +385,18 @@ rn:cts:compnov:bible.genesis.sept_latin:13.2|urn:cite2:citebne:complutensian.v1:
 rn:cts:compnov:bible.genesis.sept_latin:13.3|urn:cite2:citebne:complutensian.v1:v1p47@0.05956,0.2515,0.2920,0.08860|urn:cite2:compnov:complutpages.v1:28
 rn:cts:compnov:bible.genesis.sept_latin:13.4|urn:cite2:citebne:complutensian.v1:v1p47@0.06178,0.3151,0.2938,0.06413|urn:cite2:compnov:complutpages.v1:28
 rn:cts:compnov:bible.genesis.sept_latin:13.5|urn:cite2:citebne:complutensian.v1:v1p47@0.06178,0.3550,0.2902,0.04926|urn:cite2:compnov:complutpages.v1:28
+rn:cts:compnov:bible.genesis.sept_latin:13.6|urn:cite2:citebne:complutensian.v1:v1p47@0.06178,0.3829,0.2902,0.06382|urn:cite2:compnov:complutpages.v1:28
+rn:cts:compnov:bible.genesis.sept_latin:13.7|urn:cite2:citebne:complutensian.v1:v1p47@0.06089,0.4238,0.3000,0.08860|urn:cite2:compnov:complutpages.v1:28
+rn:cts:compnov:bible.genesis.sept_latin:13.8|urn:cite2:citebne:complutensian.v1:v1p47@0.06000,0.4870,0.3098,0.08209|urn:cite2:compnov:complutpages.v1:28
+rn:cts:compnov:bible.genesis.sept_latin:13.9|urn:cite2:citebne:complutensian.v1:v1p47@0.06267,0.5520,0.2929,0.08705|urn:cite2:compnov:complutpages.v1:28
+rn:cts:compnov:bible.genesis.sept_latin:13.10|urn:cite2:citebne:complutensian.v1:v1p47@0.1093,0.6183,0.2458,0.01952|urn:cite2:compnov:complutpages.v1:28
+
+rn:cts:compnov:bible.genesis.sept_latin:13.10|urn:cite2:citebne:complutensian.v1:v1p48@0.6453,0.05824,0.3022,0.08767|urn:cite2:compnov:complutpages.v1:29
+rn:cts:compnov:bible.genesis.sept_latin:13.11|urn:cite2:citebne:complutensian.v1:v1p48@0.6493,0.1230,0.2938,0.08705|urn:cite2:compnov:complutpages.v1:29
+rn:cts:compnov:bible.genesis.sept_latin:13.12|urn:cite2:citebne:complutensian.v1:v1p48@0.6502,0.1843,0.3009,0.06908|urn:cite2:compnov:complutpages.v1:29
+rn:cts:compnov:bible.genesis.sept_latin:13.13|urn:cite2:citebne:complutensian.v1:v1p48@0.6542,0.2327,0.3053,0.06289|urn:cite2:compnov:complutpages.v1:29
+rn:cts:compnov:bible.genesis.sept_latin:13.14|urn:cite2:citebne:complutensian.v1:v1p48@0.6529,0.2751,0.2942,0.08271|urn:cite2:compnov:complutpages.v1:29
+rn:cts:compnov:bible.genesis.sept_latin:13.15|urn:cite2:citebne:complutensian.v1:v1p48@0.6538,0.3352,0.3004,0.07001|urn:cite2:compnov:complutpages.v1:29
+rn:cts:compnov:bible.genesis.sept_latin:13.16|urn:cite2:citebne:complutensian.v1:v1p48@0.6564,0.3773,0.2933,0.06846|urn:cite2:compnov:complutpages.v1:29
+rn:cts:compnov:bible.genesis.sept_latin:13.17|urn:cite2:citebne:complutensian.v1:v1p48@0.6604,0.4250,0.2916,0.08860|urn:cite2:compnov:complutpages.v1:29
+rn:cts:compnov:bible.genesis.sept_latin:13.18|urn:cite2:citebne:complutensian.v1:v1p48@0.6618,0.4876,0.2929,0.06753|urn:cite2:compnov:complutpages.v1:29

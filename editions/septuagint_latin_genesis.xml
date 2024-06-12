@@ -1406,6 +1406,58 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          Et <persName>lot</persName> qui simul ibat cum abram: <choice><abbr>fuert</abbr><expan>fuerunt</expan></choice> oues: et boues: et armenta. 
          </ab>
 
+         <ab n="6">
+         Et non capiebat eos <choice><abbr>tra</abbr><expan>terra</expan></choice>: et non poterant habitare simul. 
+         </ab>
+
+         <ab  n="7">
+         Et facta est pugna inter pastores pecorum <persName>abram</persName>: et inter pastores <persName>lot</persName>. At <persName>chananei</persName> et <persName>pheremei</persName> tunc habitabant terram. 
+         </ab>
+
+         <ab n="8">
+         Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName> <persName>lot</persName>: ne sit pugna inter me et te: et inter pastores meos et inter passtores tuos: <choice><abbr>q</abbr><expan>qui</expan></choice> <choice><abbr>hoies</abbr><expan>homines</expan></choice> fratres sumus nos. 
+         </ab>
+
+         <ab n="9">
+         Non ecce <choice><abbr>ois</abbr><expan>omnis</expan></choice> terra coram te est? Recede a ma: si tu ad sinistram: ego ad dexteram. Si tu ad dexteram: ego ad sinistram. 
+         </ab>
+
+         <ab n="10">
+         Et eleuans oculos suos <persName>lot</persName>: vidi <choice><abbr>oem</abbr><expan>omnem</expan></choice> circa regionem iordanis: <choice><abbr>q</abbr><expan>qui</expan></choice> irrigata erat <choice><abbr>anteq</abbr><expan>antequam</expan></choice> subuerteret deus <placeName>sodomam</placeName> et <placeName>gomorram</placeName>: sicut paradisus dei: et sicut <choice><abbr>tra</abbr><expan>terra</expan></choice> <placeName>egypti</placeName>: donec veniatur in <placeName>segor</placeName>.
+         </ab>
+
+         <ab n="11">
+         Et elegit <persName>lot</persName> sibi <choice><abbr>oem</abbr><expan>omnem</expan></choice> circa regionem iordanis: et recessit <persName>lot</persName> oriente. Et diuisi sunt vnusquisque a fratre suo. 
+         </ab>
+
+         <ab n="12">
+         <persName>abram</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> habitauit in terra <placeName>chanaan</placeName>. <persName>Lot</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> habitauit in <choice><abbr>tra</abbr><expan>terra</expan></choice> sinitimorum: et habitauit in <placeName>sodomis</placeName>.
+         </ab>
+
+         <ab n="13">
+         At homines <choice><abbr>q</abbr><expan>qui</expan></choice> in sodomis mali et peccatores coram deo nimis.
+         </ab>
+
+         <ab n="14">
+         Dixit <choice><abbr>aut</abbr><expan>autem</expan></choice> deus ad <persName>abram</persName> <choice><abbr>postq</abbr><expan>postquam</expan></choice> diuisus est <persName>lot</persName> ab eo: suspiciens oculis tuis vide a loco vbi tu nunc es: ad aquilonem et meridiem et orientem et mare. 
+         </ab>
+
+         <ab n="15">
+         <unclear>Qr</unclear> <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram quam tu vides: tibi dabo eam: et semini tuo vsque in seculum. 
+         </ab>
+
+         <ab n="16">
+         Et faciam semen tuum sicut arenam terre. Si potest aliquis numerare arenam terre: et semen tuum numerabit. 
+         </ab>
+
+         <ab n="17">
+         Furgens perambula terram in longitudinem suam et in latitudinem. <unclear>Qr</unclear> tibi dabo eam et semini tuo in seculum. 
+         </ab>
+
+         <ab n="18">
+          Et mouens tabernaculum <persName>abram</persName>: veniens habitauit iuxta quercum manbre. <choice><abbr>Q</abbr><expan>Quae</expan></choice> erat in chebrom. Et edificauit ibi altare <choice><abbr>dno</abbr><expan>domino</expan></choice>
+         </ab>
+
         </div>
     </body>
     </text>
