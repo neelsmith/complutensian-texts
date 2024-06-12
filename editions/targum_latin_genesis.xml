@@ -1312,7 +1312,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </div>
 
         <div n="13">
-         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="12" type="ordinal">12.</num>
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="13" type="ordinal">13.</num>
         </ab>
 
         <ab n="1">
@@ -1384,9 +1384,183 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="18">
-        Et tetendit <persName>abram</persName> tabernaculum et venit et habitauit in planiciemamre: <choice><abbr>q</abbr><expan>quae</expan></choice> est in ebrom: et edificauit ibi altare coram <choice><abbr>dno</abbr><expan>domino</expan></choice> . 
+        Et tetendit <persName>abram</persName> tabernaculum et venit et habitauit in planiciemamre: <choice><abbr>q</abbr><expan>quae</expan></choice> est in ebrom: et edificauit ibi altare coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
         </ab>
         
+        </div>
+
+        <div n="14">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="14" type="ordinal">14.</num>
+        </ab>
+
+        <ab n="1">
+        Et factum est in diebus <persName>amraphel</persName> regis <placeName>babylonis</placeName>: <persName>arioch</persName> rex <placeName>elasar</placeName>: <persName>codorlaomor</persName> rex <placeName>elam</placeName>: et <persName>tadaal</persName> rex gentium
+        </ab>
+
+        <ab n="2">
+        fecerunt prelium cum bera <persName>rege</persName> <placeName>sodome</placeName> et cum <persName>bersa</persName> rege <placeName>gomorre</placeName>: <persName>senaab</persName> rege <placeName>adame</placeName> et <persName>semeber</persName> rege <placeName>seboim</placeName> et rege <placeName>bale</placeName>: ipsa est <persName>segor</persName>. 
+        </ab>
+
+        <ab n="3">
+        <choice><abbr>Oes</abbr><expan>Omnes</expan></choice> hi congregati sunt in valle campestri <choice><abbr>q</abbr><expan>quae</expan></choice> est mare salis. 
+        </ab>
+
+        <ab n="4">
+        Duodecim annis seruierant codorlaomor: et in tertiodecimo anno rebellauerunt. 
+        </ab>
+
+        <ab n="5">
+        In quartodecimo autem anno venit <persName>codorlaomor</persName> et reges qui erant cum eo: et percusserunt gigantes qui erat in <persName>astaroth</persName> <placeName>carnaim</placeName>: et robustos qui erant in ham: et horrendos qui erant in <persName>saue</persName> <placeName>cariathaim</placeName>: 
+        </ab>
+
+        <ab n="6">
+        et <persName>chorreos</persName> qui erant in montibus <placeName>seyr</placeName> vsque ad planiciem <placeName>pharam</placeName>: que est iuncta deserto. 
+        </ab>
+
+        <ab n="7">
+        Et reuersi sunt et venerunt ad planiciem diuisionis iudicii: que est <placeName>cades</placeName>: et percusserunt omnnem regionem <persName>amalech</persName> et amorr<persName></persName>eum qui habitabat in engadi. 
+        </ab>
+
+        <ab n="8">
+        Et egressus est rex <placeName>sodome</placeName> et rex <placeName>gomorre</placeName> et rex <placeName>adame</placeName> et rex <placeName>seboim</placeName> et rex <placeName>bale</placeName> que est <persName>sogor</persName>: et inierunt cum eis certamen in valle campestri: 
+        </ab>
+
+        <ab n="9">
+        cum <persName>codorlaomor</persName> rege <persName>elam</persName>: et <persName>tadal</persName> rege gentium et <persName>amraphel</persName> rege babylonis et <persName>arioth</persName> rege elasar: quattuor reges contra quinque. 
+        </ab>
+
+        <ab n="10">
+        Vallis autem campestris habebat puteos ex quibus effodiebatur bitumen: et fugerunt rex <placeName>sodome</placeName> et rex <placeName>gomorre</placeName> et ceciderunt ibi: et qui remanserant in montem fugerunt. 
+        </ab>
+
+        <ab n="11">
+        Et depredati sunt omnem substantiam <persName>sodome</persName> et <persName>gomorre</persName> et omnes cibos eorum: et abierunt. 
+        </ab>
+
+        <ab n="12">
+        Ceperunt quoque <persName>loth</persName> filium fratris <persName>abrae</persName> et substantiam eius et abierunt: et ipse habitabat in <placeName>sodoma</placeName>. 
+        </ab>
+
+        <ab n="13">
+        Et venit qui euaserat et nunciauit <persName>abrae</persName> hebreo qui morabatur in campestribus <persName>mamre</persName> <persName>amorrei</persName> fratris <persName>eschol</persName> et fratris <persName>aner</persName>: et hi erant confederati <persName>abrae</persName>. 
+        </ab>
+
+        <ab n="14">
+        Et audiuit <persName>abram</persName> quod captus esset frater suus: et armauit pueros suos natos in domo sua trecentos et decem et octo et perfecutus est vsque <persName>dan</persName>: 
+        </ab>
+
+        <ab n="15">
+        et diuisis seruis suis contra eos percusserunt eos nocte: et perfecutus est eos vsquee <placeName>hoba</placeName>: que est ad aquilonem <placeName>damasci</placeName>. 
+        </ab>
+
+        <ab n="16">
+        Et reduxit vniuersam substantiam: et etiam <persName>loth</persName> fratrem suum et substantiam eius reduxit: mulieres quoque et populum. 
+        </ab>
+
+        <ab n="17">
+        Et egressus est rex <placeName>sodome</placeName> in occursum eius postquam reuersus est a cede codorlaomor et regum qui erant cum in valle plana: que erat locus refrigerii regis. 
+        </ab>
+
+        <ab n="18">
+        Et <persName>melchisedech</persName> rex ierusalem adduxit panem et vinum: et ipse erat minister coram deo excelso. 
+        </ab>
+
+        <ab n="19">
+        Et benedixit ei: et dixit. Benedictus <persName>abram</persName> coram deo excelso: cuius possessio est celum et terra. 
+        </ab>
+
+        <ab n="20">
+        Et benedictus deus excelsus qui tradidit hostes tuos in manu tua. Et dedi ei vnum ex decem de omnibus. 
+        </ab>
+
+        <ab n="21">
+        Et dixit rex <placeName>sodome</placeName> ad <persName>abram</persName>. Da mihi animas: et substantiam tolle tibi.
+        </ab>
+
+        <ab n="22">
+        Et dixit <persName>abram</persName> regi <placeName>sodome</placeName>. Leuo manum meam in oratione coram deo excelso: cuius possessio celum et terra est: 
+        </ab>
+
+        <ab n="23">
+        si a filo et vsque ad corrigiam calciamenti accipiam ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> que tua sunt: et non dices ego ditaui <persName>abram</persName>. 
+        </ab>
+
+        <ab n="24">
+        Exceptis his que comederunt iuuenes et parte virorum qui venerunt mecum: <persName>aner</persName> <persName>Eschol</persName>: et <persName>mainre</persName>: illi recipiant partes suas. 
+        </ab>
+
+        </div>
+
+        <div n="15">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="15" type="ordinal">15.</num>
+        </ab>
+
+        <ab n="1">
+        Post verba hec factus est sermo a facie domini ad <persName>abram</persName> in prophetia dicens. He timeas <persName>abram</persName> verbum meum erit fortitudo tua: merces tua multa nimis. 
+        </ab>
+
+        <ab n="2">
+        Et dixit <persName>abram</persName>. <choice><abbr>Dne</abbr><expan>Domine</expan></choice> deus quid dabis mihi: et ego vado absque liberis: et filius gubernator iste qui in domo mea est: ipse est <placeName>damascenus</placeName> <persName>eliezer</persName>. 
+        </ab>
+
+        <ab n="3">
+        Et dixit <persName>abram</persName>. Ecce mihi non dedisti generationem: et ecce filius domus mee heres meus erit. 
+        </ab>
+
+        <ab n="4">
+        Et ecce sermo a facie <choice><abbr>dni</abbr><expan>domini</expan></choice> factus est ad eum dicens. Non erit hic heres tuus: sed filius quem genueris ipse erit heres tuus. 
+        </ab>
+
+        <ab n="5">
+        Et eduxit eum foras: et dixit. Respice nunc celum et numera stellas: si potes numerare eas. Et dixit ei. Sic erunt filii tui. 
+        </ab>
+
+        <ab n="6">
+        Et credidit in verbo domini: et reputatum est ei ad iusticiam. 
+        </ab>
+
+        <ab n="7">
+        Dixitque ei. Ego dominus qui eduxi te de <placeName>vr</placeName> <persName>chaldeorum</persName>: vt darem tibi terram hanc in hereditatem. 
+        </ab>
+
+        <ab n="8">
+        Et dixit. Domine deus in quo sciam: quod
+        </ab>
+
+        <ab n="9">
+        Et dixxit ei. Offer coram me vitulos tres et capras tres et arietes tres et turturem et filium columbe. 
+        </ab>
+
+        <ab n="10">
+        Et obtulit coram eo <choice><abbr>oia</abbr><expan>omnia</expan></choice> hec: et diuisit ea equaliter: et posuit diuisiones vnamquamque e regione alterius: aues autem non diuisit. 
+        </ab>
+
+        <ab n="11">
+        Et descenderunt volucrres super diuisiones: et eiecit eas <persName>abram</persName>. 
+        </ab>
+
+        <ab n="12">
+        Et factum est cum sol occumberet et somnus cecidit super <persName>abram</persName>: et ecce horror tenebrosus magnus cecidit super eum. 
+        </ab>
+
+        <ab n="13">
+        Et dixit ad <persName>abram</persName>. Sciens scies <unclear>qr</unclear> peregrini erunt filii tui in terra non sua: et seruitutem redigent eos et affligent eos quadringentis annis. 
+        </ab>
+
+        <ab n="14">
+        Populum quoque cui seruituri sunt ego iudicabo: et post hec egredientur cum magna substantia. 
+        </ab>
+
+        <ab n="15">
+        Et tu colligeris ad patres tuos in pace: scpelierisque in senectute bona. 
+        </ab>
+
+        <ab n="16">
+        Generatione <choice><abbr>aut</abbr><expan>autem</expan></choice> quarta reuertentur huc: quoniam non est completum peccatum amorrei vsque adhuc. 
+        </ab>
+
+
+
         </div>
 
     </body>

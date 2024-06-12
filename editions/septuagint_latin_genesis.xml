@@ -1459,6 +1459,199 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
         </div>
+
+        <div n="14">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="14" type="ordinal">14.</num></ab>
+
+        <ab n="1">
+        Factum est <choice><abbr>aut</abbr><expan>autem</expan></choice> in regno <persName>amraphel</persName> regis <placeName>sennaar</placeName>: <persName>arioch</persName> rex <placeName>elasar</placeName>: <persName>chodorlaomor</persName> rex <placeName>clam</placeName>: et <persName>thargal</persName> rex gentium
+        </ab>
+
+        <ab n="2">
+        Fecit bellum cum <persName>balla</persName> rege <placeName>sodomorum</placeName>: et cum <persName>barsa</persName> rege <placeName>gomorre</placeName>: et <persName>sennaar</persName> rege <placeName>adama</placeName>: et <persName>symor</persName> rege <placeName>seboim</placeName>: et rege <persName>balac</persName>, hec est <placeName>segor</placeName>.
+        </ab>
+
+        <ab n="3">
+        <choice><abbr>Oes</abbr><expan>Omnes</expan></choice> hi conuenerunt in vallem salsam. Hoc mare salis. 
+        </ab>
+
+        <ab n="4">
+        Duodecim annis ipsi seruierunt <persName>chodorlaomor</persName>. Et terciodecimo anno recesserunt. 
+        </ab>
+
+        <ab n="5">
+        In <choice><abbr>at</abbr><expan>autem</expan></choice> quarto decimo anno venit <persName>chodorlaomor</persName> et reges cum eo: et trucidauerunt gigantes in <placeName>astaroth</placeName>: <persName>carnain</persName>: et gentes fortes cum eis. Et <persName>emmeos</persName> in <placeName>sane</placeName> ciuitate. 
+        </ab>
+
+        <ab n="6">
+        Et <persName>chorreos</persName> in montibus <placeName>seir</placeName> vsque ad <placeName>terebinthum</placeName> <placeName>pharam</placeName>. <choice><abbr>Q</abbr><expan>Quae</expan></choice> est in solitudine. 
+        </ab>
+
+        <ab n="7">
+        Et reuersi venerunt ad fontem iudicii. Ipsa <placeName>cades</placeName> et trucidauerunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> principes a <placeName>malec</placeName>: et <persName>amorreos</persName>: et habitantes in <placeName>asasonthamar</placeName>. 
+        </ab>
+
+        <ab n="8">
+        Egressus est <choice><abbr>at</abbr><expan>autem</expan></choice> rex <placeName>sodomorum</placeName>: et rex <placeName>gomorre</placeName>: et rex <placeName>adama</placeName>: et rex <placeName>seboim</placeName>: et rex <placeName>balac</placeName>. Hec est <persName>segor</persName>. Et occurrerunt cum acte eis in prelium in valle salsa
+        </ab>
+
+        <ab n="9">
+        aduersus <persName>chodorlaomor</persName> regem <persName>elam</persName>: et <persName>chargal</persName> regem gentium: et <persName>amraphel</persName> regem <placeName>sennaar</placeName>: et <persName>arioch</persName> regem <placeName>elasor</placeName>: et quattor reges aduersus quinque. 
+        </ab>
+
+        <ab n="10">
+        At vallis salsa: putei putei bituminis. Fugit <choice><abbr>at</abbr><expan>autem</expan></choice> rex <placeName>sodomorum</placeName>: et rex <placeName>gomorre</placeName> et ceciderunt illic. At qui remanserunt fugerunt in montana. 
+        </ab>
+
+        <ab n="11">
+        Ac ceperunt <choice><abbr>at</abbr><expan>autem</expan></choice> equitatum <choice><abbr>oem</abbr><expan>omnem</expan></choice> <persName>sodomorum</persName> et <persName>gomorre</persName>: et <choice><abbr>oes</abbr><expan>omnes</expan></choice> cibos eorum: et abierunt. 
+        </ab>
+
+        <ab n="12">
+        Acceperunt <choice><abbr>at</abbr><expan>autem</expan></choice> et <persName>lot</persName> filium fratris <persName>abram</persName>: et suppellectilem eius: et abierunt. Erat. <unclear>n</unclear>. Habitans in <placeName>sodomis</placeName>. 
+        </ab>
+
+        <ab n="13">
+        Adueniens <choice><abbr>at</abbr><expan>autem</expan></choice> quidam saluatorum: nunciauit <persName>abram</persName> transitori: ipse <choice><abbr>at</abbr><expan>autem</expan></choice> habitabat apud quercum <persName>mambre</persName> <persName>ammor</persName> fratris <persName>eschol</persName>: et fratris <persName>aunam</persName>. Qui erant confederati <persName>abram</persName>. 
+        </ab>
+
+        <ab n="14">
+        Audiens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName>: quod capitiuatus est <persName>lot</persName> nepos eius: numerauit <unclear>proprios</unclear> vernaculos suos: trecentos decem et octo et perfecutus est vsque ad <persName>dan</persName>.
+        </ab>
+
+        <ab n="15">
+        Et irruit super eos nocte ipse: et pueri eius. Et percussit eos. Et perfecutus est vsque ad <placeName>chobal</placeName>. <choice><abbr>Q</abbr><expan>Quae</expan></choice> est in sinistra <placeName>damasca</placeName>. 
+        </ab>
+
+        <ab n="16">
+        Et reduxit omnem equitatum <placeName>sodomorum</placeName>. Et <persName>lot</persName> nepotem suum reduxit: et substantiam suam: et mulieres: et <choice><abbr>pplm</abbr><expan>populum</expan></choice>. 
+        </ab>
+
+        <ab n="17">
+        Egressus est <choice><abbr>at</abbr><expan>autem</expan></choice> rex <placeName>sodomorum</placeName>: et rex <persName>gomorre</persName> in ocursum eis: postquam reuersus est a cede <persName>chodorlaomor</persName>: et regum qui cum eo in valle saue. Hic erat campus regis <persName>melchisedec</persName>:
+        </ab>
+
+        <ab n="18">
+        et <persName>melchisedec</persName> rex salem protulit ipsi panes et vinum. Erat <choice><abbr>at</abbr><expan>autem</expan></choice> sacerdos dei altissimi. 
+        </ab>
+
+        <ab n="19">
+        Et benedixit ei <persName>melchisedec</persName>. Et dixit benedictus <persName>abram</persName> deo altissimo: qui creauit celum et terram.
+        </ab>
+
+        <ab n="20">
+        Et benedictus <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus altissimus: <choice><abbr>q</abbr><expan>quo</expan></choice> tradidit inimicos tuos capitiuos tuos. Et dedit ei <persName>abram</persName> decimam ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice>. 
+        </ab>
+
+        <ab n="21">
+        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> rex <placeName>sodomorum</placeName> ad <persName>abram</persName>: da mihi viros: at qequitatum accipe tibiipsi. 
+        </ab>
+
+        <ab n="22">
+        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName> ad regem <persName>sodomorum</persName>: extendam manum meam ad deum altissimum: <choice><abbr>q</abbr><expan>qui</expan></choice> creauit celum et terram: 
+        </ab>
+
+        <ab n="23">
+        si a filo vsque ad corigiam calciamenti accipiam ex <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> tuis: vt non dicas: quod ego ditaui <persName>abram</persName>. 
+        </ab>
+
+        <ab n="24">
+        Preter ea <choice><abbr>q</abbr><expan>quae</expan></choice> comederunt iuuenes: et partem vtrorum qui venerunt mecum: <persName>eschol</persName> <persName>aner</persName> <persName>mambre</persName>. Isti accipient partem. 
+        </ab>
+
+        </div>
+
+        <div n="15">
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="15" type="ordinal">15.</num></ab>
+
+         <ab n="1">
+         Post <choice><abbr>at</abbr><expan>autem</expan></choice> verba hec: factum est verbum <choice><abbr>dni</abbr><expan>domini</expan></choice> ad <persName>abram</persName> in visione: dicens: ne timeas abram: ego protegam te. Merces tua multa erit nimis. 
+         </ab>
+
+         <ab n="2">
+         Dicit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName> domine <choice><abbr>qd</abbr><expan>quod</expan></choice> mihi dabis: ego <choice><abbr>at</abbr><expan>autem</expan></choice> dimittor fine liberis at filius masec vernacule mee: hic: <placeName>damascus</placeName> <persName>eliezer</persName>. 
+         </ab>
+
+         <ab n="3">
+         Et ait <persName>abram</persName>: <choice><abbr>qm</abbr><expan>quam</expan></choice> mihi non dedisti filium: at vernaculus meus he reditabit me. 
+         </ab>
+
+         <ab n="4">
+         Et statim vox dei factum est ad eum: dicens: non hereditabit te hic: sed <choice><abbr>q</abbr><expan>qui</expan></choice> egredietur de te: hic hereditabit te. 
+         </ab>
+
+         <ab n="5">
+         Eduxit <choice><abbr>at</abbr><expan>autem</expan></choice> eum foras. Et dixit ipsi: respice in celum: et numera stellas: si poteris numerare ipsas. Et dixit sic erit semen tuum. 
+         </ab>
+
+         <ab n="6">
+         Credidit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName> deo: et reputatum est illi ad iusticiam. 
+         </ab>
+
+         <ab n="7">
+         Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ad eum: ego deus qui eduxi te de regione <persName>chaldeorum</persName>: vt darem tibi terram hanc hereditare:
+         </ab>
+
+         <ab n="8">
+         ait <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>dnator</abbr><expan>dominator</expan></choice> <choice><abbr>dne</abbr><expan>domine</expan></choice> deus <choice><abbr>sm</abbr><expan>secundum</expan></choice> <choice><abbr>qd</abbr><expan>quod</expan></choice> sciam: quod hereditabo eam?
+         </ab>
+
+         <ab n="9">
+         Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> illi: accipe mihi vitulam triennein: et capram trimam: et arietem trimum: et turturem. Et columbam. 
+         </ab>
+
+         <ab n="10">
+         Et accepit ipsi <choice><abbr>oia</abbr><expan>omnia</expan></choice> hec. Et diuisit ea media. Et posuit ea contraria ad iuicem: et aues non diuisit. 
+         </ab>
+
+         <ab n="11">
+         Descenderut <choice><abbr>at</abbr><expan>autem</expan></choice> volucres super corpora et diuisiones eorum: et sedit cum eis <persName>abram</persName>. 
+         </ab>
+
+         <ab n="12">
+         Circa <choice><abbr>at</abbr><expan>autem</expan></choice> solis occasus extasis ceciditt super <persName>abram</persName>: et ecce caligo tenebrosa irruit in eum. 
+         </ab>
+
+         <ab n="13">
+         Et dictum est ad <persName>abram</persName>: cognoscens scies: quod pergrinum erit semen tuum in <choice><abbr>tra</abbr><expan>terra</expan></choice> non sua: et subiicient seruituti eos. Et affligent: et humiliabunt annis quadringentis. 
+         </ab>
+
+         <ab n="14">
+         Et gentem cui seruient: iudicabo ego: dicit <choice><abbr>dns</abbr><expan>dominus</expan></choice>. Post <choice><abbr>at</abbr><expan>autem</expan></choice> hec regredientur huc cum supellectili multa:
+         </ab>
+
+         <ab n="15">
+         tu <choice><abbr>at</abbr><expan>autem</expan></choice> ibis ad patres tuos cum pace: sepulius in senectute bona: quart <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>gnatioe</abbr><expan>generatione</expan></choice> reuertentur huc. 
+         </ab>
+
+         <ab n="16">
+         Nondum <unclear>.n.</unclear> complete sunt iniquitates <persName>amorreorum</persName> vsque nunc.
+         </ab>
+
+         <ab n="17">
+         Postquam <choice><abbr>at</abbr><expan>autem</expan></choice> iam fuit sol ad occasum: flamma facta est. Et ecce clibanus sumans: et venerunt lampades  ignic. <choice><abbr>Q</abbr><expan>Quae</expan></choice> <unclear>pertransierunt</unclear> <unclear>pro</unclear> medium diuisionum istarum. 
+         </ab>
+
+         <ab n="18">
+         In die illa disposuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> fedus <persName>abram</persName>: dicens: semini tuo dabo terram hanc: a flumine <placeName>egypti</placeName> vsque ad flumen magnum <placeName>euphratem</placeName> 
+         </ab>
+
+         <ab n="19">
+         <persName>ceneos</persName>: et <persName>cenemeos</persName>: et <persName>cedmoneos</persName>: 
+         </ab>
+
+         <ab n="20">
+         Et <persName>chette</persName> os et <persName>pheremeos</persName>: et <persName>raphaim</persName>: 
+         </ab>
+
+         <ab n="21">
+         et
+         </ab>
+
+
+
+
+        </div>
     </body>
     </text>
 </TEI>
