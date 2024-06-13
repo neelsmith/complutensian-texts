@@ -37,6 +37,14 @@ end
 # ╔═╡ ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
 TableOfContents()
 
+# ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
+nbversion = "1.0.0";
+
+# ╔═╡ 0db4f2f7-2846-4b4f-a33a-88cb6053618e
+md"""
+*Notebook version*: **$(nbversion)**
+"""
+
 # ╔═╡ 2d774dd8-0513-4957-9b6a-5a33fd300199
 md"""# Morphology of Latin verbs in Complutensian Bible"""
 
@@ -49,6 +57,9 @@ md"""*Book*: $(@bind book Select(["genesis" => "Genesis"]))"""
 # ╔═╡ 459f076a-c991-41aa-97a4-2fb4b8070fd8
 #md"""*Optionally, add a reference for a passage formatted like* `1.1` or a range of passages formatted like `1.1-1.5`: $(@bind verse confirm(TextField()))"""
 md"""*Optionally, add a reference for a passage formatted like* `1.1`: $(@bind verse confirm(TextField()))"""
+
+# ╔═╡ 03ef3d79-4d6e-41b7-9189-4863f3dfbe3c
+
 
 # ╔═╡ db93c0c9-4848-4b32-a090-8c57c605e633
 html"""
@@ -101,7 +112,18 @@ end
 function formatpsg(psgvect, ortho, p)
 	tlist = []
 	for psg in psgvect
-		push!(tlist, formatsingle(psg, ortho, p))
+		if ortho == ortho23
+			normedstr = replace(psg.text, "v" => "u")
+			
+			
+			normed = CitablePassage(urn(psg),normedstr)
+				
+			
+			push!(tlist, formatsingle(normed, ortho, p))
+		else
+			
+			push!(tlist, formatsingle(psg, ortho, p))
+		end
 	end
 	
 	join(tlist,"\n")
@@ -200,13 +222,19 @@ vulgate = filter(corpus.passages) do psg
 end |> CitableTextCorpus
 
 # ╔═╡ 0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-md"""> ### Build a parser"""
+md"""> ### Build parsers"""
 
 # ╔═╡ d8198183-4e97-4f39-9e8e-03a98a939d0a
-parserurl = "http://shot.holycross.edu/tabulae/core-lat23-medieval-current.cex"
+p23url = "http://shot.holycross.edu/tabulae/core-lat23-current.cex"
+
+# ╔═╡ e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
+p24url = "http://shot.holycross.edu/tabulae/core-lat24-current.cex"
 
 # ╔═╡ 7b96d31c-b45c-4848-ab8f-64900cc2d1d4
-parser = tabulaeStringParser(parserurl, UrlReader)
+parser23 = tabulaeStringParser(p23url, UrlReader)
+
+# ╔═╡ 8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
+parser24 = tabulaeStringParser(p24url, UrlReader)
 
 # ╔═╡ 97753b65-a272-4620-8469-df6485ca34c3
 md"""> ### User selections"""
@@ -248,12 +276,39 @@ vulgatepsg = retrieve(u, vulgate)
 begin
 	hdr = isempty(verse) ? "<h4><i>$(titlecase(book))</i> $(chapter)</h4>" : "<h4><i>$(titlecase(book))</i> $(verse)</h4>" 
 
-	targumdisplay = "<p><i>Targum</i></p>" * formatpsg(targumpsg, ortho23, parser)
-	septdisplay = "<p><i>Septuagint</i></p>" * formatpsg(septpsg, ortho23, parser)
-	vulgatedisplay = "<p><i>Vulgate</i></p>" * formatpsg(vulgatepsg, ortho24, parser)
+	targumdisplay = "<p><i>Targum</i></p>" * formatpsg(targumpsg, ortho23, parser23)
+	septdisplay = "<p><i>Septuagint</i></p>" * formatpsg(septpsg, ortho23, parser23)
+	vulgatedisplay = "<p><i>Vulgate</i></p>" * formatpsg(vulgatepsg, ortho24, parser24)
 	
 	hdr * targumdisplay * septdisplay * vulgatedisplay |> HTML
 end
+
+# ╔═╡ aadc9d89-d5dd-4c41-825a-6296dca32fbc
+md"""> Debugging"""
+
+# ╔═╡ 7f80a08a-a653-4a4a-9048-da7b82113518
+"""Format a single passage for HTML display"""
+function debug(psg, ortho, p)
+	tlist = ["<p>"]
+	for t in tokenize(psg, ortho)
+		if tokencategory(t) isa LexicalToken
+			push!(tlist, " " * formatlexstring(t.passage.text, p))
+		else
+			push!(tlist, t.passage.text)
+		end
+	end
+	push!(tlist,"</p>")
+	join(tlist)
+end
+
+# ╔═╡ 8124a305-8f48-44ab-a9dc-1fadbe4d7f13
+t1 = septpsg[1]
+
+# ╔═╡ cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
+tokenize(t1, ortho24)
+
+# ╔═╡ 5150037b-d2b5-41de-b536-5026372ef442
+debug(t1,ortho24, parser24)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1007,18 +1062,21 @@ version = "17.4.0+2"
 # ╔═╡ Cell order:
 # ╟─0abfe5ae-2752-11ef-38cf-f984b91b0112
 # ╟─ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
+# ╟─a41a17e7-f985-4a5d-8b76-f91f07824242
+# ╟─0db4f2f7-2846-4b4f-a33a-88cb6053618e
 # ╟─2d774dd8-0513-4957-9b6a-5a33fd300199
 # ╟─b8b8224e-ad2e-47e7-b45a-605ad4571af7
 # ╟─ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
 # ╟─ff99f087-856e-4b35-a63b-e76d7d2d8709
 # ╟─459f076a-c991-41aa-97a4-2fb4b8070fd8
+# ╠═03ef3d79-4d6e-41b7-9189-4863f3dfbe3c
 # ╟─b01b5ff3-9e46-477b-94bc-3f1140c3f52d
 # ╟─db93c0c9-4848-4b32-a090-8c57c605e633
 # ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
 # ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
 # ╟─ae699e89-b241-42ee-85ca-bfed095d8037
 # ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
-# ╟─15f946b0-6261-4369-900f-aaa6605175d5
+# ╠═15f946b0-6261-4369-900f-aaa6605175d5
 # ╟─4a9214db-c200-4e3b-944d-45a67a2c85a7
 # ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
 # ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
@@ -1046,10 +1104,17 @@ version = "17.4.0+2"
 # ╟─2cf59288-55cf-4f40-a7a8-37ac25435a13
 # ╟─10d7b498-f9e8-479e-8d61-fe4233b76df0
 # ╟─fff4dd01-fe30-4363-bd21-0c44206be92b
-# ╟─0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-# ╟─d8198183-4e97-4f39-9e8e-03a98a939d0a
-# ╟─7b96d31c-b45c-4848-ab8f-64900cc2d1d4
+# ╠═0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
+# ╠═d8198183-4e97-4f39-9e8e-03a98a939d0a
+# ╠═e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
+# ╠═7b96d31c-b45c-4848-ab8f-64900cc2d1d4
+# ╠═8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
 # ╟─97753b65-a272-4620-8469-df6485ca34c3
 # ╟─a776ad50-892d-4d98-99b7-e7a111934622
+# ╟─aadc9d89-d5dd-4c41-825a-6296dca32fbc
+# ╟─7f80a08a-a653-4a4a-9048-da7b82113518
+# ╠═cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
+# ╠═5150037b-d2b5-41de-b536-5026372ef442
+# ╠═8124a305-8f48-44ab-a9dc-1fadbe4d7f13
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
