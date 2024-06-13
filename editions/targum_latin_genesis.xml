@@ -1657,7 +1657,63 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="1">
-        Eratx
+        Eratque <persName>abram</persName> filius nonaginta et nouem annorum: et apparuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>abraea</persName> et dixit ei. Ego deus <choice><abbr>oipotens</abbr><expan>omnipotens</expan></choice>: seruias coram me esto perfectus: 
+        </ab>
+
+        <ab n="2">
+        et dabo sedus meus inter verbum mecum et inter te: et multiplicabo te vehementer nimis. 
+        </ab>
+
+        <ab n="3">
+        Et cecidit <persName>abram</persName> super faciem suam: 
+        </ab>
+
+        <ab n="4">
+        et locutus est cum eo deus dicens. Ecce ego pepigi pactum meum tecum: et eris in patrem multarum gentium. 
+        </ab>
+
+        <ab n="5">
+        Et non vacabitur vltra nomen tuum <persName>abram</persName>: sed erit nomen tuum <persName>abraham</persName>: <choice><abbr>qr</abbr><expan>quia</expan></choice> patrem multarum gentium dedi de. 
+        </ab>
+
+        <ab n="6">
+        Et multiplicabo te valde nimis: et ponam te in gentes: et reges <choice><abbr>q</abbr><expan>qui</expan></choice> dnabuntur populis ex te egredientur. 
+        </ab>
+        
+        <ab n="7">
+        Et statuam pactum meum inter verbum meum et inter te: et inter filios tuos post te in <choice><abbr>gnationibus</abbr><expan>generationibus</expan></choice> suis in pactum sempiternum: vt sum tibi in deum: et filiis tuis post te. 
+        </ab>
+
+        <ab n="8">
+        Et dabo tibi et filiis tuis post te terram habitationis tue: vniuersam terram <placeName>chanaan</placeName> in hereditatem eternam: et ero eis in deum. 
+        </ab>
+
+        <ab n="9">
+        Et dixit deus <persName>abrahe</persName>. Tu <choice><abbr>aut</abbr><expan>autem</expan></choice> pactum meum seruabis: tu et filii tui post te in <choice><abbr>gnationibus</abbr><expan>generationibus</expan></choice> suis. 
+        </ab>
+
+        <ab n="10">
+        Hoc est pactum meum quod seruabitis inter verbum meum et inter vos: et inter filios tuos post te: vt circumcidatur in vobis <choice><abbr>ois</abbr><expan>omnis</expan></choice> masculus.
+        </ab>
+
+        <ab n="11">
+        Et circumcidetis carnem preputii vesti: et erit in signum federis inter verbum meum et inter vos. 
+        </ab>
+
+        <ab n="12">
+        Et filius octo dierum circumcidetur in vobis:<choice><abbr>ois</abbr><expan>omnis</expan></choice> masculus in <choice><abbr>gnationibus</abbr><expan>generationibus</expan></choice> <choice><abbr>vxis</abbr><expan>vxoris</expan></choice>: tam natus domi quam emptus argento ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> filiis populorum <choice><abbr>q</abbr><expan>quam</expan></choice> non sunt de filiis tuis. Circumcisione circumcidetur tam natus domi tue <unclear>quod</unclear> emptus argento tuo: 
+        </ab>
+
+        <ab n="13">
+        et erit pactum meum in carne <choice><abbr>vra</abbr><expan>vestra</expan></choice> in pactum eternum. 
+        </ab>
+
+        <ab n="14">
+        Et masculus habens preputium <choice><abbr>q</abbr><expan>cuius</expan></choice> non circumciderit ccarnem preputii sui: peribit homo ille de populo suo: <choice><abbr>qm</abbr><expan>quam</expan></choice> pactum meum irritum fecit. 
+        </ab>
+
+        <ab n="15">
+        Et dixit deus ad <persName>abraham</persName>. <persName>Sarai</persName> vxorem tuam non vocabis
         </ab>
         </div>
 

@@ -1740,8 +1740,44 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        et non vocabitur vltra nomen tuum <persName>abram</persName>: sed erit
+        et non vocabitur vltra nomen tuum <persName>abram</persName>: sed erit nomen tuum <persName>abraam</persName>. <choice><abbr>Q</abbr><expan>Quia</expan></choice> patrem multarum gentium posui te: 
         </ab>
+
+        <ab n="6">
+        et faciam crescere te valde nimis. Et ponam te in gentes. Et reges gentium ex te erunt. 
+        </ab>
+
+        <ab n="7">
+        Et statuam pactum meum inter me et inter te et inter semen tuum post te in <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> suas: in sedus sempiternum visum tuus deus et seminis tui post te. 
+        </ab>
+
+        <ab n="8">
+        Et dabo tibi et semini tuo post te terram: quam habitas: <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram <placeName>chanaan</placeName> in possessionem eternam. Et ero illis in deum. 
+        </ab>
+
+        <ab n="9">
+        Et dixit deus ad <persName>abraam</persName>. Tu <choice><abbr>at</abbr><expan>autem</expan></choice> pactum meum custodies: et semen tuum post te in <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> suas
+        </ab>
+
+        <ab n="10">
+        et hoc pactum quod obseruabis inter me et vox: et inter semen tuum post te. Circuncidetur vobis <choice><abbr>oe</abbr><expan>omne</expan></choice> masculinum:
+        </ab>
+
+        <ab n="11">
+        et circuncidetis carnem preputii vestri. Et erit in signum federis inter me et vos. Et infans octo dierum circuncidetur vobis: <choice><abbr>oe</abbr><expan>omne</expan></choice> masculinum in <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> vestras. Vernaculus domus tue: et emptitius ex <choice><abbr>oi</abbr><expan>omni</expan></choice> filio alieno <choice><abbr>q</abbr><expan>qui</expan></choice> non est de semine tuo. 
+        </ab>
+
+        <ab n="12">
+        Circumcisione circumcidetur. Et erit pactum meum in carne vestra in fedus eternum. 
+        </ab>
+
+        <ab n="13">
+        Et in circumcisus masculus: <choice><abbr>q</abbr><expan>cuius</expan></choice> non circuncidetur carnem preputii sui in die octaua: extermi nabitur: et delebitur <choice><abbr>aia</abbr><expan>anima</expan></choice> illa de genere suo. <choice><abbr>Q</abbr><expan>Quia</expan></choice> pactum meum dissipauit: 
+        </ab>
+
+
+
+
 
         </div>
     </body>
