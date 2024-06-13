@@ -1645,11 +1645,103 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="21">
-         et
+         et <persName>amorrheos</persName>: et <persName>chananeos</persName>: et <persName>gergeseos</persName>: et <persName>iebuseos</persName>. 
          </ab>
 
+        </div>
+
+        <div n="16">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="16" type="ordinal">16.</num></ab>
+
+        <ab n="1">
+        <persName>Sara</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> vxor <persName>abram</persName> non peperit ei. Erat <choice><abbr>at</abbr><expan>autem</expan></choice> ipsi ancilla <placeName>egyptia</placeName>: cui nomen <persName>agar</persName>.
+        </ab>
+
+        <ab n="2">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>sara</persName> ad <persName>abram</persName>: ecce iam conclusit me <choice><abbr>dns</abbr><expan>dominus</expan></choice> ne parerem. Ingredere igitur ad ancillam meam. vt suscipiam filios ex ea. Audiuit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName> vocem <persName>sare</persName>. 
+        </ab>
+
+        <ab n="3">
+        Et accipiens <persName>sara</persName> vxor <persName>abram</persName> <persName>agar</persName> <placeName>egyptiam</placeName> suam ancillam: post decem annos <choice><abbr>hitatiois</abbr><expan>habitationis</expan></choice> <persName>abram</persName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> <placeName>chanaan</placeName>: et dedit eam <persName>abram</persName> viro suo ipsi vxorem.
+        </ab>
+
+        <ab n="4">
+        Et ingressus est ad <persName>agar</persName>: et concepit. Et vidit. Quod in ventre habet: et inhonorata fui <choice><abbr>dna</abbr><expan>domina</expan></choice> coram ipsa.
+        </ab>
+
+        <ab n="5">
+        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>sara</persName> ad <persName>abram</persName>: iniurias patior ex te. Ego dedi ancillam meam in finum tuum. Videns <choice><abbr>at</abbr><expan>autem</expan></choice> quod in vtero habet: inhonorata sui coram ipsa: iudicet deus inter me et te: 
+        </ab>
+
+        <ab n="6">
+        dixit <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>abram</persName> ad <persName>saram</persName>: ecce ancilla tua in manibus tuis: vtere ea vt tibi placitum est. Et afflixit eam <persName>sara</persName>. Et fugit a facie eius. 
+        </ab>
+
+        <ab n="7">
+        Inuenit <choice><abbr>at</abbr><expan>autem</expan></choice> eam angelus domini super fonte aque. 
+        </ab>
+
+        <ab n="8">
+        Et dixit illi angelus <choice><abbr>dni</abbr><expan>domini</expan></choice>: <persName>agar</persName> ancilla <persName>sare</persName>: vnde venis: et quo vadis? Et ait a facie <persName>sare</persName> <choice><abbr>dne</abbr><expan>domine</expan></choice> mee ego fugio. 
+        </ab>
+
+        <ab n="9">
+        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ei angelus reuertere ad <choice><abbr>dnam</abbr><expan>dominam</expan></choice> tuam: et humiliare sub manibus eius. 
+        </ab>
+
+        <ab n="10">
+        Et dixit ei angelus <choice><abbr>dni</abbr><expan>domini</expan></choice>: multiplicans multiplicabo semen tuum: et non numerabitur pre multitudine. 
+        </ab>
+
+        <ab n="11">
+         Et ait ei angelus <choice><abbr>dni</abbr><expan>domini</expan></choice>: ecce tu in vtero habes: et paries filium: et vocabis nomen eius: <persName>ismael</persName>. <choice><abbr>Qr</abbr><expan>Quod</expan></choice> exaudiuit deus humiliationem tuam. 
+        </ab>
+
+        <ab n="12">
+        Hic erit serus homo manus eius contra <choice><abbr>oes</abbr><expan>omnes</expan></choice>: et manus <choice><abbr>oium</abbr><expan>omnium</expan></choice> contra eum. Et ante faciem omnium fratrum suorum habitabit. 
+        </ab>
+
+        <ab n="13">
+        Et vocauit nomen <choice><abbr>dni</abbr><expan>domini</expan></choice> loquentis ad eam. Tu es deus <choice><abbr>q</abbr><expan>qui</expan></choice> vidisti me. <choice><abbr>Qr</abbr><expan>Quod</expan></choice> dixit: et eninm coram vidi eum <choice><abbr>q</abbr><expan>qui</expan></choice> apparuit mihi. 
+        </ab>
+
+        <ab n="14">
+        <choice><abbr>Pptea</abbr><expan>Propterea</expan></choice> appellauit puteum: puteam vbi coram vidi. Ecce inter <persName>cades</persName> et inter <persName>barad</persName>.
+        </ab>
+
+        <ab n="15">
+        Et peperit <persName>agar</persName> <persName>abram</persName> filium: et vocauit nomen filii sui: quem peperit ipsi <persName>agar</persName>: <persName>ismael</persName>.
+        </ab>
+
+        <ab n="16">
+        <persName>Abram</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> erat annorum octoginta sex: <choice><abbr>qn</abbr><expan>quando</expan></choice> peperit <persName>agar</persName> <persName>ismael</persName> <persName>abram</persName>.
+        </ab>
 
 
+        </div>
+
+        <div n="17">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="17" type="ordinal">17.</num></ab>
+
+        <ab n="1">
+        Erat <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName> annorum nonaginta. Et apparuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>abram</persName>. Et dixit ei: ego sum deus tuus: conplace coram me: et esto <unclear>irrephensibil</unclear>:
+        </ab>
+
+        <ab n="2">
+        Et ponam fedus meus intere me et inter te: et multiplicabo te valde. 
+        </ab>
+
+        <ab n="3">
+        Et cecidit <persName>abram</persName> super faciem suam. 
+        </ab>
+
+        <ab n="4">
+        Et locutus est ei deus: dicens: et ecce fedus meum tecum: et eris pater multitudinis gentium: 
+        </ab>
+
+        <ab n="5">
+        et non vocabitur vltra nomen tuum <persName>abram</persName>: sed erit
+        </ab>
 
         </div>
     </body>
