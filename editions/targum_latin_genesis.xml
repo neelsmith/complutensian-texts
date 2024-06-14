@@ -1713,9 +1713,97 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="15">
-        Et dixit deus ad <persName>abraham</persName>. <persName>Sarai</persName> vxorem tuam non vocabis
+        Et dixit deus ad <persName>abraham</persName>. <persName>Sarai</persName> vxorem tuam non vocabis nomen eius <persName>sarai</persName>: sed <persName>sara</persName> est nomen eius. 
+        </ab>
+
+        <ab n="16">
+        Et benedican ei: et insuper dabo tibi ex ea filium: et benedicam ei: et erit in gentes: et reges qui <choice><abbr>dnabuntur</abbr><expan>dominabuntur</expan></choice> populis ex ea erunt. 
+        </ab>
+
+        <ab n="17">
+        Et cecidit <persName>abraham</persName> super faciem suam et gauisus est. Et dixit in corde suo. Nunquid homini centum annorum nascetur filius. Et si <persName>sara</persName> nonagenaria pariet. 
+        </ab>
+
+        <ab n="18">
+        Utinam <persName>ismael</persName> perinaneat coram te. 
+        </ab>
+
+        <ab n="19">
+        Et dixit deus. In veritate <persName>sara</persName> vxor tua pariet tibi filium: et vocabis nomen eius <persName>Isaac</persName>: et statuam pactum meum um eo in pactum eternum et filiis suis post eum. 
+        </ab>
+
+        <ab n="20">
+        Et super <persName>ismael</persName> suscepi orationem tuam: ecce benedixi ei: et crescere eum faciam et multiplicabo eum valde nimis: duodecim principes generabit: et ponam eum in gentem magnam. 
+        </ab>
+
+        <ab n="21">
+        Et pactum meum statuam cum <persName>isaac</persName>: quem pariet tibi <persName>sara</persName> in tempore isti anno altero. 
+        </ab>
+
+        <ab n="22">
+        Et cum consumasset loqui cum eo: ascendit gloria <choice><abbr>dni</abbr><expan>domini</expan></choice> desuper <persName>abraham</persName>.
+        </ab>
+
+        <ab n="23">
+        Et tulit <persName>abraham</persName> <persName>ismaelem</persName> filium suum et omnes vernaculos domus sue et omnes quos emerat argento suo: cunctos masculos ex viris domus <persName>abrahe</persName>: et circumcidit carnem preputii eorum in ipsa die: sicut locutus est cum eo deus. 
+        </ab>
+
+        <ab n="24">
+        Et <persName>abraham</persName> erat filius nonaginta et nouem annorum quando circuncidit carnem preputii sui. 
+        </ab>
+
+        <ab n="25">
+        Et <persName>ismael</persName> filius eius erat filius tredecim annorum quando circuncisa est caro preputii sui. 
+        </ab>
+
+        <ab n="26">
+        In ipsa die circuncisus est <persName>abraham</persName> et <persName>ismael</persName> filius eius. 
+        </ab>
+
+        <ab n="27">
+        et <choice><abbr>oes</abbr><expan>omnes</expan></choice> viri domus sue. Tam vernaculi quam emptitii de filiis populorum circuncisi sunt cum eo. 
+        </ab>
+
+        </div>
+
+        <div n="18">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="18" type="ordinal">18.</num>
+        </ab>
+
+        <ab n="1">
+        Et apparuit ei <choice><abbr>dns</abbr><expan>dominus</expan></choice> in conualle <placeName>mamre</placeName>: et ipse se debat in ostio tabernaculi cum incaluisset dies. 
+        </ab>
+
+        <ab n="2">
+        Et leuauit oculos suos et vidit: et ecce tres viri stantes iuxta eum: et vidit et cucurrit in occursum corum de ostio tabernaculi: et adorauit super terram. 
+        </ab>
+
+        <ab n="3">
+        Et dixit. Domine si inueni nunc gratiam coram te: ne transeas obsero a seruo tuo. 
+        </ab>
+
+        <ab n="4">
+        Accipiant nunc pauxillium aque et lanate pedes vestros: et recumbite sub arbore
+        </ab>
+
+        <ab n="5">
+        et accipiam bucellam panis: et confortate cor vestrum postea transibitis: quia idcirco transistis iuxta seruum vestum. Et dixerunt: sic facies sicut locutus es.  
+        </ab>
+
+        <ab n="6">
+        Et festinauit <persName>abraham</persName> in tabernaculo ad <persName>saram</persName>. Et dixit. Accelera tria sata farine simile: comisce et fac placentas. 
+        </ab>
+
+        <ab n="7">
+        Et ad boues concurrit <persName>abraham</persName>: et tulit vitulum tenerum et optimum et dedit puero: et sestinauit vt coqueret eum.
+        </ab>
+
+        <ab n="8">
+        Et tulit butyrum et lac et vitulum quem coxerat: et posuit coram eis: et ipse ministrabat iuxta eos sub
         </ab>
         </div>
+
+        
 
     </body>
     </text>
