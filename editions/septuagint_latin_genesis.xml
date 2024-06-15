@@ -1945,11 +1945,49 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="29">
-          Et addidit vltra loqui ad eum: et dixit. Si inuenti fuerint illic <choice><abbr>qdraginta</abbr><expan>quadraginta</expan></choice>. Et dixit: non perdam
+          Et addidit vltra loqui ad eum: et dixit. Si inuenti fuerint illic <choice><abbr>qdraginta</abbr><expan>quadraginta</expan></choice>. Et dixit: non perdam propter quadraginta. 
         </ab>
 
+        <ab n="30">
+          Et ait: <choice><abbr>nunqd</abbr><expan>nunquid</expan></choice> si locutus fuero <choice><abbr>dne</abbr><expan>domine</expan></choice>? Si <choice><abbr>aut</abbr><expan>autem</expan></choice> inuenti fuerint illic triginta. Et dixit: non perdam <choice><abbr>ppter</abbr><expan>propter</expan></choice> triginta. 
+        </ab>
 
+        <ab n="31">
+          Et dixit: <choice><abbr>postq</abbr><expan>postquam</expan></choice> habeo loqui ad <choice><abbr>dnm</abbr><expan>dominum</expan></choice>: si <choice><abbr>aut</abbr><expan>autem</expan></choice> inuenti fuerint illic viginti. Et dixit: non perdam: si inuenero illic viginti. 
+        </ab>
 
+        <ab n="32">
+          Et dixit: <choice><abbr>nunqd</abbr><expan>nunquid</expan></choice> domine si locutus fuero adhuc semel. Si <choice><abbr>at</abbr><expan>autem</expan></choice> inuenti fuerint illic decem. Et dixit: non perdam propter decem. 
+        </ab>
+
+        <ab n="33">
+          Abiit <choice><abbr>aut</abbr><expan>autem</expan></choice> <choice><abbr>dns</abbr><expan>dominus</expan></choice>: vt cessauit loquens <persName>abraam</persName>. Et <persName>abraam</persName> reuersus est in locum suum. 
+        </ab>
+
+        </div>
+
+        <div n="19">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="19" type="ordinal">19.</num></ab>
+
+        <ab n="1">
+        Venerunt <choice><abbr>at</abbr><expan>autem</expan></choice> duo angeli in <placeName>sodoma</placeName> vespere. <persName>lot</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> sedebat apud portam <placeName>sodomorum</placeName>. Videns <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>lot</persName>: furrexit in occursum illis. Et adorauit facie in terram. 
+        </ab>
+
+        <ab n="2">
+        Et dixit: ecce <choice><abbr>dni</abbr><expan>domini</expan></choice> declinate in domum pueri vestri: et manete: et lauate pedes vestros: et manicantes: proficiscemini viam vestram. Dixerunt <choice><abbr>aut</abbr><expan>autem</expan></choice> non: sed in platea manebimus. 
+        </ab>
+
+        <ab n="3">
+        Et coegit eos: et declinauerunt ad eum. Et ingressi sunt in domum eius. Et fecit illis conuiuium: et azymos coxit eis: et <choice><abbr>comedrt</abbr><expan>comederunt</expan></choice>. 
+        </ab>
+
+        <ab n="4">
+        <choice><abbr>Anteq</abbr><expan>Antequam</expan></choice> dormierant <choice><abbr>at</abbr><expan>autem</expan></choice>: et viri ciuitatis sodomite: circuerunt domum a puero vsque ad senem: <choice><abbr>ois</abbr><expan>omnis</expan></choice> populus simul. 
+        </ab>
+
+        <ab n="5">
+        Et vocauerunt <persName>lot</persName>. Et dixerunt
+        </ab>
 
         </div>
     </body>
