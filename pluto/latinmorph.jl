@@ -38,12 +38,20 @@ end
 TableOfContents()
 
 # ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
-nbversion = "1.0.0";
+nbversion = "1.1.0";
 
-# ╔═╡ 0db4f2f7-2846-4b4f-a33a-88cb6053618e
+# ╔═╡ 6048a3e7-abf5-46de-b450-9d6812f915dc
+md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversion CheckBox())"""
+
+# ╔═╡ 64b25989-dd2d-4407-9993-f083529d918f
+if showversion
 md"""
-*Notebook version*: **$(nbversion)**
+
+- **1.1.0**: distinguish parsed and unparsed verbs with visual highlighting
+- **1.0.0**: initial release
 """
+
+end
 
 # ╔═╡ 2d774dd8-0513-4957-9b6a-5a33fd300199
 md"""# Morphology of Latin verbs in Complutensian Bible"""
@@ -58,9 +66,6 @@ md"""*Book*: $(@bind book Select(["genesis" => "Genesis"]))"""
 #md"""*Optionally, add a reference for a passage formatted like* `1.1` or a range of passages formatted like `1.1-1.5`: $(@bind verse confirm(TextField()))"""
 md"""*Optionally, add a reference for a passage formatted like* `1.1`: $(@bind verse confirm(TextField()))"""
 
-# ╔═╡ 03ef3d79-4d6e-41b7-9189-4863f3dfbe3c
-
-
 # ╔═╡ db93c0c9-4848-4b32-a090-8c57c605e633
 html"""
 <br/><br/><br/><br/><br/>
@@ -69,7 +74,7 @@ html"""
 """
 
 # ╔═╡ 40fce696-fcfe-43b5-a84e-dc670935e6c4
-md"""> ## Things you can skip"""
+md"""> # Things you can skip"""
 
 # ╔═╡ 8b00adaa-4f2d-47a5-b1db-591ac763380e
 md"""> ### Tokenization and parsing"""
@@ -80,14 +85,25 @@ ortho23 = latin23()
 # ╔═╡ 2a1cebbe-7594-4eee-bbbe-a1b90705f924
 ortho24 = latin24()
 
+# ╔═╡ 07f9a37b-a39a-452c-a705-3d51d1430c8b
+"""True if analysis has a verb form."""
+function verbform(a::Analysis)
+	latform = latinForm(a)
+	latform isa LMFFiniteVerb ||
+	latform isa LMFInfinitive ||
+	latform isa LMFParticiple 
+end
+
 # ╔═╡ 86022f06-27b8-480c-b2b6-446d2eb059a1
 """Format a string representing a lexical token for HTML display."""
 function formatlexstring(s, p)
 	parses = parsetoken(s,p)
 	if isempty(parses)
-		s
-	else
+		"""<span class="unparsed">$(s)</span>"""
+	elseif verbform(parses[1])
 		"""<span class="hilite">$(s)</span>"""
+	else
+		s
 	end
 end
 
@@ -137,6 +153,9 @@ md"""(NB: CSS for highlighting in following cell.)"""
 <style>
 	.hilite {
 		background-color: yellow;
+	}
+	.unparsed {
+		color: silver
 	}
 </style>
 """
@@ -329,7 +348,7 @@ Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
 [compat]
 CitableBase = "~10.4.0"
 CitableCorpus = "~0.13.5"
-CitableParserBuilder = "~0.27.2"
+CitableParserBuilder = "~0.29.0"
 CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
 EditionBuilders = "~0.8.5"
@@ -337,7 +356,7 @@ HypertextLiteral = "~0.9.5"
 LatinOrthography = "~0.7.3"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.59"
-Tabulae = "~0.10.0"
+Tabulae = "~0.11.1"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -346,7 +365,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "d21b9908a5f94514ff6be19eece19bd417ce4ba6"
+project_hash = "acbef897e192a27103ffb7b45f01f31caa0a8bb7"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -417,9 +436,9 @@ version = "0.16.1"
 
 [[deps.CitableParserBuilder]]
 deps = ["CSV", "CitableBase", "CitableCorpus", "CitableObject", "CitableText", "Compat", "DataFrames", "Dictionaries", "DocStringExtensions", "Documenter", "Downloads", "OrderedCollections", "Orthography", "StatsBase", "Test", "TestSetExtensions", "TypedTables"]
-git-tree-sha1 = "113e87067574d33e3f7cc426e36b77021e76a1e6"
+git-tree-sha1 = "fbce105543993f657c2a6a18d98e640eed3bbc70"
 uuid = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
-version = "0.27.2"
+version = "0.29.0"
 
 [[deps.CitableTeiReaders]]
 deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "HTTP", "Test"]
@@ -615,9 +634,9 @@ version = "0.9.5"
 
 [[deps.IOCapture]]
 deps = ["Logging", "Random"]
-git-tree-sha1 = "8b72179abc660bfab5e28472e019392b97d0985c"
+git-tree-sha1 = "b6d6bfdd7ce25b0f9b2f6b3dd56b2673a66c8770"
 uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
-version = "0.2.4"
+version = "0.2.5"
 
 [[deps.Indexing]]
 git-tree-sha1 = "ce1566720fd6b19ff3411404d4b977acd4814f9f"
@@ -970,9 +989,9 @@ version = "1.11.1"
 
 [[deps.Tabulae]]
 deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "6d5d305cb000f10f90650c5fdced9f44fef956d6"
+git-tree-sha1 = "1405e6b3f0080f373c97572fa192e52e2dfaeb4a"
 uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-version = "0.10.0"
+version = "0.11.1"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -1063,21 +1082,22 @@ version = "17.4.0+2"
 # ╟─0abfe5ae-2752-11ef-38cf-f984b91b0112
 # ╟─ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
 # ╟─a41a17e7-f985-4a5d-8b76-f91f07824242
-# ╟─0db4f2f7-2846-4b4f-a33a-88cb6053618e
+# ╟─6048a3e7-abf5-46de-b450-9d6812f915dc
+# ╟─64b25989-dd2d-4407-9993-f083529d918f
 # ╟─2d774dd8-0513-4957-9b6a-5a33fd300199
 # ╟─b8b8224e-ad2e-47e7-b45a-605ad4571af7
 # ╟─ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
 # ╟─ff99f087-856e-4b35-a63b-e76d7d2d8709
 # ╟─459f076a-c991-41aa-97a4-2fb4b8070fd8
-# ╠═03ef3d79-4d6e-41b7-9189-4863f3dfbe3c
 # ╟─b01b5ff3-9e46-477b-94bc-3f1140c3f52d
 # ╟─db93c0c9-4848-4b32-a090-8c57c605e633
 # ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
 # ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
 # ╟─ae699e89-b241-42ee-85ca-bfed095d8037
 # ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
-# ╠═15f946b0-6261-4369-900f-aaa6605175d5
+# ╟─15f946b0-6261-4369-900f-aaa6605175d5
 # ╟─4a9214db-c200-4e3b-944d-45a67a2c85a7
+# ╟─07f9a37b-a39a-452c-a705-3d51d1430c8b
 # ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
 # ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
 # ╠═7b5000d9-7208-4075-8206-dec7b96de23d
