@@ -1234,11 +1234,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="1">
-        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> ad <persName>abram</persName>: proficiscere de terra tua et de cognatione tua et domo patris tui ad terram quam monstrauero tibi. 
+        Et dixit <choice><abbr>dns</abbr><expan>dominus</expan></choice> ad <persName>abram</persName>: proficiscere de terra tua et de cognatione tua et de domo patris tui ad terram quam monstrauero tibi. 
         </ab>
 
         <ab n="2">
-        Et faciam te in populum magnum: et benedicam tibi: et magnificabo noment tuum: et eris benedictus. 
+        Et faciam te in populum magnum: et benedicam tibi: et magnificabo nomen tuum: et eris benedictus. 
         </ab>
 
         <ab n="3">
@@ -1246,7 +1246,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
         
         <ab n="4">
-        Et abiit <persName>abram</persName> sicut locutum est cum eo <choice><abbr>dns</abbr><expan>dominus</expan></choice>: et abiit cum eo <persName>loth</persName>. <persName>Abram</persName> auem erat filius septuaginta et <choice><abbr>qnque</abbr><expan>quinque</expan></choice> annorum cum egrederetur de <persName>aran</persName>.
+        Et abiit <persName>abram</persName> sicut locutum est cum eo <choice><abbr>dns</abbr><expan>dominus</expan></choice>: et abiit cum eo <persName>loth</persName>. <persName>Abram</persName> autem erat filius septuaginta et <choice><abbr>qnque</abbr><expan>quinque</expan></choice> annorum cum egrederetur de <persName>aran</persName>.
         </ab>
 
         <ab n="5">
@@ -1309,6 +1309,10 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         Quare dixisti soror mea est: et tuli eam mihi in vxorem: et nunc ecce vxor tua: tolle et vade. 
         </ab>
 
+        <ab n="20">
+        Precepitque super eum pharao viris: et comitati sunt eum et vxorem suam et omnia que habebat. 
+        </ab>
+
         </div>
 
         <div n="13">
@@ -1340,7 +1344,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="7">
-        <unclear>qr</unclear> erat substantia eorum multa: et non poterant habitare simul. Et facta est rica inter pastores pecorum <persName>abram</persName> et pastores pecorum <persName>loth</persName>: <persName>chananeus</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> et <persName>pheremeus</persName> tunc habitabant in terra. 
+        <unclear>qr</unclear> erat substantia eorum multa: et non poterant habitare simul. Et facta est <unclear>rica</unclear> inter pastores pecorum <persName>abram</persName> et pastores pecorum <persName>loth</persName>: <persName>chananeus</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> et <persName>pheremeus</persName> tunc habitabant in terra. 
         </ab>
 
         <ab n="8">
@@ -1368,7 +1372,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="14">
-        Dixitque <choice><abbr>dns</abbr><expan>dominus</expan></choice> ad <persName>abram</persName> postquam diuisus est <persName>loth</persName> ab eo: leua nunc oculos tuos: et vide a loco in quo tu es ad quilonem et ad meridiem: et ad orientem: et ad occidentem. 
+        Dixitque <choice><abbr>dns</abbr><expan>dominus</expan></choice> ad <persName>abram</persName> postquam diuisus est <persName>loth</persName> ab eo: leua nunc oculos tuos: et vide a loco in quo tu es ad aquilonem et ad meridiem: et ad orientem: et ad occidentem. 
         </ab>
 
         <ab n="15">
@@ -1384,7 +1388,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="18">
-        Et tetendit <persName>abram</persName> tabernaculum et venit et habitauit in planiciemamre: <choice><abbr>q</abbr><expan>quae</expan></choice> est in ebrom: et edificauit ibi altare coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
+        Et tetendit <persName>abram</persName> tabernaculum et venit et habitauit in planicie mamre: <choice><abbr>q</abbr><expan>quae</expan></choice> est in ebrom: et edificauit ibi altare coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
         </ab>
         
         </div>
@@ -1418,7 +1422,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="7">
-        Et reuersi sunt et venerunt ad planiciem diuisionis iudicii: que est <placeName>cades</placeName>: et percusserunt omnnem regionem <persName>amalech</persName> et amorr<persName></persName>eum qui habitabat in engadi. 
+        Et reuersi sunt et venerunt ad planiciem diuisionis iudicii: que est <placeName>cades</placeName>: et percusserunt omnnem regionem <persName>amalech</persName> et <persName>amorreum</persName> qui habitabat in engadi. 
         </ab>
 
         <ab n="8">
@@ -1450,7 +1454,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="15">
-        et diuisis seruis suis contra eos percusserunt eos nocte: et perfecutus est eos vsquee <placeName>hoba</placeName>: que est ad aquilonem <placeName>damasci</placeName>. 
+        et diuisis seruis suis contra eos percusserunt eos nocte: et perfecutus est eos vsque <placeName>hoba</placeName>: que est ad aquilonem <placeName>damasci</placeName>. 
         </ab>
 
         <ab n="16">
@@ -1470,7 +1474,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        Et benedictus deus excelsus qui tradidit hostes tuos in manu tua. Et dedi ei vnum ex decem de omnibus. 
+        Et benedictus deus excelsus qui tradidit hostes tuos in manu tua. Et dedit ei vnum ex decem de omnibus. 
         </ab>
 
         <ab n="21">
@@ -1528,15 +1532,15 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        Et dixxit ei. Offer coram me vitulos tres et capras tres et arietes tres et turturem et filium columbe. 
+        Et dixit ei. Offer coram me vitulos tres et <unclear>capras</unclear> tres et arietes tres et turturem et filium columbe. 
         </ab>
 
         <ab n="10">
-        Et obtulit coram eo <choice><abbr>oia</abbr><expan>omnia</expan></choice> hec: et diuisit ea equaliter: et posuit diuisiones vnamquamque e regione alterius: aues autem non diuisit. 
+        Et obtulit coram eo <choice><abbr>oia</abbr><expan>omnia</expan></choice> hec: et diuisit ea equaliter: et posuit diuisiones <unclear>vnamquamque</unclear> e regione alterius: aues autem non diuisit. 
         </ab>
 
         <ab n="11">
-        Et descenderunt volucrres super diuisiones: et eiecit eas <persName>abram</persName>. 
+        Et descenderunt volucres super diuisiones: et eiecit eas <persName>abram</persName>. 
         </ab>
 
         <ab n="12">
@@ -1572,7 +1576,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        et <persName>etheos</persName>: et <persName>pheremeos</persName>: et gigantes: et
+        et <persName>etheos</persName>: et <persName>pheremeos</persName>: et gigantes:
         </ab>
 
         <ab n="21">
@@ -1603,7 +1607,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        Et dixitt <persName>sarai</persName> ad <persName>abram</persName>. Judicium habeo contra: ego dedi ancillam meam in manu tua. et videns quia concepit despecta sum in oculis eius: iudicet dominus inter me et te. 
+        Et dixit <persName>sarai</persName> ad <persName>abram</persName>. Judicium habeo contra te: ego dedi ancillam meam in manu tua. et videns quia concepit despecta sum in oculis eius: iudicet dominus inter me et te. 
         </ab>
 
         <ab n="6">
@@ -1627,7 +1631,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="11">
-        Et dixit ei angelus domini. Ecce tu concepisti et paries filium: et vocabis nomen eius <persName>ismael</persName> quia suscepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> oratio nem tuam. 
+        Et dixit ei angelus domini. Ecce tu concepisti et paries filium: et vocabis nomen eius <persName>ismael</persName> quia suscepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> orationem tuam. 
         </ab>
 
         <ab n="12">
@@ -1643,7 +1647,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="15">
-        Et peperit <persName>Agar</persName> <persName>abrae</persName> filium. Et vocauit nomen filii sui quem peperit <persName>ismaelem</persName>. 
+        Et peperit <persName>Agar</persName> <persName>abrae</persName> filium: Et vocauit nomen filii sui quem peperit <persName>ismaelem</persName>. 
         </ab>
 
         <ab n="16">
@@ -1657,7 +1661,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="1">
-        Eratque <persName>abram</persName> filius nonaginta et nouem annorum: et apparuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>abraea</persName> et dixit ei. Ego deus <choice><abbr>oipotens</abbr><expan>omnipotens</expan></choice>: seruias coram me esto perfectus: 
+        Eratque <persName>abram</persName> filius nonaginta et nouem annorum: et apparuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>abrae</persName> et dixit ei. Ego deus <choice><abbr>oipotens</abbr><expan>omnipotens</expan></choice>: seruias coram me esto perfectus: 
         </ab>
 
         <ab n="2">
@@ -1701,7 +1705,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        Et filius octo dierum circumcidetur in vobis:<choice><abbr>ois</abbr><expan>omnis</expan></choice> masculus in <choice><abbr>gnationibus</abbr><expan>generationibus</expan></choice> <choice><abbr>vxis</abbr><expan>vxoris</expan></choice>: tam natus domi quam emptus argento ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> filiis populorum <choice><abbr>q</abbr><expan>quam</expan></choice> non sunt de filiis tuis. Circumcisione circumcidetur tam natus domi tue <unclear>quod</unclear> emptus argento tuo: 
+        Et filius octo dierum circuncidetur in vobis:<choice><abbr>ois</abbr><expan>omnis</expan></choice> masculus in <choice><abbr>gnationibus</abbr><expan>generationibus</expan></choice> <choice><abbr>vxis</abbr><expan>vxoris</expan></choice>: tam natus domi quam emptus argento ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> filiis populorum <choice><abbr>q</abbr><expan>quam</expan></choice> non sunt de filiis tuis. Circumcisione circuncidetur tam natus domi tue <unclear>quod</unclear> emptus argento tuo: 
         </ab>
 
         <ab n="13">
@@ -1709,7 +1713,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="14">
-        Et masculus habens preputium <choice><abbr>q</abbr><expan>cuius</expan></choice> non circumciderit ccarnem preputii sui: peribit homo ille de populo suo: <choice><abbr>qm</abbr><expan>quam</expan></choice> pactum meum irritum fecit. 
+        Et masculus habens preputium <choice><abbr>q</abbr><expan>cuius</expan></choice> non circumciderit carnem preputii sui: peribit homo ille de populo suo: <choice><abbr>qm</abbr><expan>quam</expan></choice> pactum meum irritum fecit. 
         </ab>
 
         <ab n="15">
