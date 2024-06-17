@@ -1012,7 +1012,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="25">
-        Et ait: maledictus <persName>chanaan</persName>. feruus domesticus erit fratribus suis. 
+        Et ait: maledictus <persName>chanaan</persName>. Feruus domesticus erit fratribus suis. 
         </ab>
 
         <ab n="26">
@@ -1028,7 +1028,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="29">
-        Et fuerunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>noe</persName> nongenti quinquagint anni. Et mortuus est. 
+        Et fuerunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> dies <persName>noe</persName> nongenti quinquaginta anni. Et mortuus est. 
         </ab>
         
         </div>
@@ -1089,7 +1089,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="14">
-        Et <placeName>phetrusiim</placeName>: et <placeName>celuim</placeName>: vnde egressi sunt inde <persName>philistiim</persName>. Et <persName>caphtthurim</persName>
+        Et <placeName>phetrusiim</placeName>: et <placeName>celuim</placeName>: vnde egressi sunt inde <persName>philistiim</persName>. Et <persName>caphthurim</persName>
         </ab>
 
         <ab n="15">
@@ -1109,7 +1109,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="19">
-        Et facti sunt termini <placeName>chananeorum</placeName> a <placeName>sidone</placeName> donce veniatur in <placeName>gerara</placeName> et <placeName>gazam</placeName>: donec veniatur <placeName>sodomam</placeName> et <placeName>gomorram</placeName>. <placeName>adama</placeName> et <placeName>seboim</placeName> vsque ad <placeName>lasa</placeName>. 
+        Et facti sunt termini <placeName>chananeorum</placeName> a <placeName>sidone</placeName> donce veniatur in <placeName>gerara</placeName> et <placeName>gazam</placeName>: donec veniatur <placeName>sodomam</placeName> et <placeName>gomoram</placeName>. <placeName>adama</placeName> et <placeName>seboim</placeName> vsque ad <placeName>lasa</placeName>. 
         </ab>
 
         <ab n="20">
@@ -1137,7 +1137,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="26">
-        <persName>Iectan</persName> aut <choice><abbr>aut</abbr><expan>autem</expan></choice> genuit <persName>elmodad</persName>: et <persName>saleph</persName>: et <persName>asarmoth</persName>: et <persName>iared</persName>:
+        <persName>Iectan</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> genuit <persName>elmodad</persName>: et <persName>saleph</persName>: et <persName>asarmoth</persName>: et <persName>iared</persName>:
         </ab>
 
         <ab n="27">
@@ -1198,11 +1198,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="8">
-        Et dispersit <choice><abbr>dns</abbr><expan>dominus</expan></choice> ipsos inde super faciem <choice><abbr>ois</abbr><expan>omnis</expan></choice> terre. Et cessauerunt edificantes ciuitatm et turrim. 
+        Et dispersit <choice><abbr>dns</abbr><expan>dominus</expan></choice> ipsos inde super faciem <choice><abbr>ois</abbr><expan>omnis</expan></choice> terre. Et cessauerunt edificantes ciuitatem et turrim. 
         </ab>
 
         <ab n="9">
-        <choice><abbr>Propt</abbr><expan>propter</expan></choice> hoc vocatum est nomen eius: confusio. <choice><abbr>q</abbr><expan>quia</expan></choice> ibi confudit <choice><abbr>dns</abbr><expan>dominus</expan></choice> labia vniuerse terre: et inde dispersit eos <choice><abbr>dns</abbr><expan>dominus</expan></choice> super faciam <choice><abbr>ois</abbr><expan>omnis</expan></choice> terre. 
+        <choice><abbr>Propt</abbr><expan>propter</expan></choice> hoc vocatum est nomen eius: confusio. <choice><abbr>Q</abbr><expan>Quia</expan></choice> ibi confudit <choice><abbr>dns</abbr><expan>dominus</expan></choice> labia vniuerse terre: et inde dispersit eos <choice><abbr>dns</abbr><expan>dominus</expan></choice> super faciem <choice><abbr>ois</abbr><expan>omnis</expan></choice> terre. 
         </ab>
 
         <ab n="10">
@@ -1218,7 +1218,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="13">
-        Et vixit <persName>arphaxad</persName>: postquam genit ipse <placeName>cainan</placeName> annosquadringentos triginta. Et genuit filios et filias: et mortuus est. Et vixit <placeName>cainan</placeName> annos centum triginta. Et gennit <persName>sala</persName> et vixit <placeName>cainan</placeName> postquam genuit ipse <persName>sala</persName>. Annos trecentos triginta. Et genuit filios et filias: et mortuus est. 
+        Et vixit <persName>arphaxad</persName>: postquam genit ipse <placeName>cainan</placeName> annos quadringentos triginta. Et genuit filios et filias: et mortuus est. Et vixit <placeName>cainan</placeName> annos centum triginta. Et gennit <persName>sala</persName> et vixit <placeName>cainan</placeName>: postquam genuit ipse <persName>sala</persName>. Annos trecentos triginta. Et genuit filios et filias: et mortuus est. 
         </ab>
 
         <ab n="14">
@@ -1270,7 +1270,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="26">
-        Et mortuus est. Et vixit <persName>thare</persName> annos septuaginta. Et genuit <persName>abram</persName>: et <persName>nachor</persName>: et <persName>aran</persName>. He <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> <persName>thare</persName>. <persName>thare</persName> genuit <persName>abram</persName>: et nachor: et <persName>aran</persName>. 
+        Et mortuus est. Et vixit <persName>thare</persName> annos septuaginta. Et genuit <persName>abram</persName>: et <persName>nachor</persName>: et <persName>aran</persName>. 
         </ab>
 
         <ab n="27">
@@ -1278,7 +1278,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="28">
-        Et mortuus est <persName>aran</persName> coram <persName>thaare</persName> patre suo in terra <choice><abbr>q</abbr><expan>quae</expan></choice> natus est: in regione <placeName>chaldeorum</placeName>.
+        Et mortuus est <persName>aran</persName> coram <persName>thare</persName> patre suo in terra <choice><abbr>q</abbr><expan>quae</expan></choice> natus est: in regione <placeName>chaldeorum</placeName>.
         </ab>
 
         <ab n="29">
@@ -1307,7 +1307,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="2">
-        et faciam te in gentem magnam. Et <choice><abbr>bndicam</abbr><expan>benedicam</expan></choice> te: et magnificabo nomen tuum. Et eris <choice><abbr>bndicam</abbr><expan>benedicam</expan></choice>
+        et faciam te in gentem magnam. Et <choice><abbr>bndicam</abbr><expan>benedicam</expan></choice> te: et magnificabo nomen tuum. Et eris <choice><abbr>bndictus</abbr><expan>benedictus</expan></choice>
         </ab>
 
         <ab n="3">
@@ -1986,7 +1986,23 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        Et vocauerunt <persName>lot</persName>. Et dixerunt
+        Et vocauerunt <persName>lot</persName>. Et dixerunt ad eum: vbi sunt viri <choice><abbr>q</abbr><expan>qui</expan></choice> ingressi sunt ad te nocte. Edhuc illos ad nos: vt coeamus cum eis. 
+        </ab>
+
+        <ab n="6">
+        Egressus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>lot</persName> ad vestibulum: at hostium adaperuit post se. Ait <choice><abbr>at</abbr><expan>autem</expan></choice> eis:  
+        </ab>
+
+        <ab n="7">
+        <choice><abbr>nequaq</abbr><expan>nequaquam</expan></choice> viri fratres ne malum feceritis. 
+        </ab>
+
+        <ab n="8">
+        Sunt <choice><abbr>at</abbr><expan>autem</expan></choice> mihi due filie: que non cognouerunt virum: educam eas ad vos: et vtimini eis: sicut placuerit vobis: solum in viros istos ne faciatis iniustum: cuius causa ingressi sunt sub tegmine trabium mearum. 
+        </ab>
+
+        <ab n="9">
+        Dixerunt <choice><abbr>at</abbr><expan>autem</expan></choice> illi: recede illuc. Ingressus es habitare: <choice><abbr>nunqd</abbr><expan>nunquid</expan></choice> ett iudicium iudicare? Nunc ergo te affligemus magis <choice><abbr>q</abbr><expan>quae</expan></choice> illos. Et coegerunt virum <persName>lot</persName> vehementer. Et <choice><abbr>appropinquauert</abbr><expan>appropinquauerunt</expan></choice>
         </ab>
 
         </div>

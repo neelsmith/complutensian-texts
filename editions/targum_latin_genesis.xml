@@ -990,7 +990,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="7">
-        Et filii <persName>chus</persName> <persName>saba</persName> et <persName>sabatha</persName> et <persName>regina</persName> et <persName>sabathaca</persName>: et filii <persName>regma</persName> <persName>saba</persName> et <persName>dedan</persName>.
+        Et filii <persName>chus</persName> <persName>saba</persName> et <persName>euila</persName> et <persName>sabatha</persName> et <persName>regina</persName> et <persName>sabathaca</persName>: et filii <persName>regma</persName> <persName>saba</persName> et <persName>dedan</persName>.
         </ab>
 
         <ab n="8">
@@ -1050,7 +1050,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="22">
-        Filii <persName>sem</persName> <persName>helam</persName> et <persName>asur</persName> et <persName>arpharad</persName>: et <persName>lud</persName> et <persName>aram. </persName>
+        Filii <persName>sem</persName> <persName>helam</persName> et <persName>asur</persName> et <persName>arphaxad</persName>: et <persName>lud</persName> et <persName>aram. </persName>
         </ab>
 
         <ab n="23">
@@ -1086,7 +1086,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="31">
-        Isti sunt filii <persName>sem</persName> per cognationes et liguas suas in terris suis in populis suis. 
+        Isti sunt filii <persName>sem</persName> per cognationes et linguas suas in terris suis in populis suis. 
         </ab>
 
         <ab n="32">
@@ -1160,7 +1160,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="16">
-        Et vixit <persName>heber</persName> triginta et quattuor annis et genuitt <persName>phaleg</persName>
+        Et vixit <persName>heber</persName> triginta et quattuor annis et genuit <persName>phaleg</persName>
         </ab>
 
         <ab n="17">
@@ -1204,7 +1204,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="27">
-        De sunt generationes <persName>thare</persName>: <persName>thare</persName> genuit <persName>abram</persName>: <persName>nachor</persName>: et <persName>aran</persName> <persName>aran</persName> autem genuit <persName>loth</persName>. 
+        De sunt generationes <persName>thare</persName>: <persName>thare</persName> genuit <persName>abram</persName>: <persName>nachor</persName>: et <persName>aran</persName>: <persName>aran</persName> autem genuit <persName>loth</persName>. 
         </ab>
 
         <ab n="28">
@@ -1941,6 +1941,26 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         <ab n="9">
         Et dixerunt. Recede illuc: et dixerunt: vnus venit ad peregrinandum et ecce iudicat iudicium: nunc malefaciemus tibi magis <choice><abbr>q</abbr><expan>quam</expan></choice> eis et <unclear>conpulerunt</unclear> virum <persName>lot</persName> valde: et accesserunt ad confringendam ianuam. 
+        </ab>
+
+        <ab n="10">
+        Et extenderunt viri manus suas et introduxerunt <persName>lot</persName> ad se in domum: et ianuam clauserunt. 
+        </ab>
+
+        <ab n="11">
+        Et viros qui erant in porta domus percusserunt cecita te a minimo vsque ad maximum. Defatigatique sunt vt in uenirent portam. 
+        </ab>
+
+        <ab n="12">
+        Dixeruntque viri ad <persName>lot</persName>. Quoscumque habes hic generos tuos et filios tuos et filias tuas et <choice><abbr>oia</abbr><expan>omnia</expan></choice> que habes in ciuitate educ de loco isto:
+        </ab>
+
+        <ab n="13">
+        <choice><abbr>qm</abbr><expan>quam</expan></choice> disperdemus nos locum istum: <choice><abbr>qr</abbr><expan>quod</expan></choice> magnus est clamor eorum coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. Et misit nos <choice><abbr>dno</abbr><expan>domino</expan></choice> vt disperderemus eum. 
+        </ab>
+
+        <ab n="14">
+        Et egressus est <persName>lot</persName>: et locutus est cum generis suis <choice><abbr>q</abbr><expan>qui</expan></choice> accepturi erant filias suas. Et ait. Surgite egredimini de loco isto: 
         </ab>
         </div>
 
