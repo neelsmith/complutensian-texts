@@ -734,7 +734,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="4">
-        adhuc. <unclear>n</unclear> diebus septem ego inducam pluuiam super terram: quadraginta diebus et quadraginta noctibus. Et delebo <choice><abbr>oem</abbr><expan>omnem</expan></choice> resurrectionem: quam feci a facie terre: 
+        adhuc. <choice><abbr>n</abbr><expan>nam</expan></choice> diebus septem ego inducam pluuiam super terram: quadraginta diebus et quadraginta noctibus. Et delebo <choice><abbr>oem</abbr><expan>omnem</expan></choice> resurrectionem: quam feci a facie terre: 
         </ab>
 
         <ab n="5">
@@ -924,11 +924,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="3">
-        Et <choice><abbr>oe</abbr><expan>omne</expan></choice> volatile: <choice><abbr>qd</abbr><expan>quod</expan></choice> est viuens: vobis erit in cibum. <unclear><choice><abbr>Tanq</abbr><expan>tanquam</expan></choice></unclear> olera herbe dedi vobis omnia. 
+        Et <choice><abbr>oe</abbr><expan>omne</expan></choice> volatile: <choice><abbr>qd</abbr><expan>quod</expan></choice> est viuens: vobis erit in cibum. <choice><abbr>Tanq</abbr><expan>tanquam</expan></choice> olera herbe dedi vobis omnia. 
         </ab>
 
         <ab n="4">
-        <unclear>Veruntn</unclear> carnes in sanguine <choice><abbr>aie</abbr><expan>anime</expan></choice> non comedetis. 
+        <choice><abbr>veruntn</abbr><expan>verumtamen</expan></choice> carnes in sanguine <choice><abbr>aie</abbr><expan>anime</expan></choice> non comedetis. 
         </ab>
 
         <ab n="5">
@@ -968,7 +968,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="14">
-        Et erit in <unclear>connubilando</unclear> me nubes super terram. Apparebit arcus meus in nube: 
+        Et erit in connubilando me nubes super terram. Apparebit arcus meus in nube: 
         </ab>
 
         <ab n="15">
@@ -1407,7 +1407,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="6">
-         Et non capiebat eos <choice><abbr>tra</abbr><expan>terra</expan></choice> vt habitarent simul. <unclear>qi</unclear> substantia eorum multa: et non poterant habitare simul. 
+         Et non capiebat eos <choice><abbr>tra</abbr><expan>terra</expan></choice> vt habitarent simul. <unclear>qn</unclear> substantia eorum multa: et non poterant habitare simul. 
          </ab>
 
          <ab  n="7">
@@ -1443,15 +1443,15 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="15">
-         <unclear>Qr</unclear> <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram quam tu vides: tibi dabo eam: et semini tuo vsque in seculum. 
+         <choice><abbr>Qr</abbr><expan>quia</expan></choice> <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram quam tu vides: tibi dabo eam: et semini tuo vsque in seculum. 
          </ab>
 
          <ab n="16">
-         Et faciam semen <unclear>tuum</unclear> sicut arenam terre. Si potest aliquis numerare arenam terre: et semen tuum numerabit. 
+         Et faciam semen <sic>tnum</sic> sicut arenam terre. Si potest aliquis numerare arenam terre: et semen tuum numerabit. 
          </ab>
 
          <ab n="17">
-         Furgens perambula terram in longitudinem suam et in latitudinem. <unclear>Qr</unclear> tibi dabo eam et semini tuo in seculum. 
+         Furgens perambula terram in longitudinem suam et in latitudinem. <choice><abbr>Qr</abbr><expan>quia</expan></choice> tibi dabo eam et semini tuo in seculum. 
          </ab>
 
          <ab n="18">
@@ -1508,7 +1508,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        Acceperunt <choice><abbr>at</abbr><expan>autem</expan></choice> et <persName>lot</persName> filium fratris <persName>abram</persName>: et suppellectilem eius: et abierunt. Erat. <unclear>n</unclear>. Habitans in <placeName>sodomis</placeName>. 
+        Acceperunt <choice><abbr>at</abbr><expan>autem</expan></choice> et <persName>lot</persName> filium fratris <persName>abram</persName>: et suppellectilem eius: et abierunt. Erat. <choice><abbr>n</abbr><expan>nam</expan></choice>. Habitans in <placeName>sodomis</placeName>. 
         </ab>
 
         <ab n="13">
@@ -1516,7 +1516,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="14">
-        Audiens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName>: quod capitiuatus est <persName>lot</persName> nepos eius: numerauit <unclear>proprios</unclear> vernaculos suos: trecentos decem et octo et perfecutus est vsque ad <persName>dan</persName>.
+        Audiens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName>: quod capitiuatus est <persName>lot</persName> nepos eius: numerauit proprios vernaculos suos: trecentos decem et octo et perfecutus est vsque ad <persName>dan</persName>.
         </ab>
 
         <ab n="15">
@@ -1597,7 +1597,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="9">
-         Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> illi: accipe mihi vitulam triennem: et <unclear>capram</unclear> trimam: et arietem trimum: et turturem. Et columbam. 
+         Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> illi: accipe mihi vitulam triennem: et capram trimam: et arietem trimum: et turturem. Et columbam. 
          </ab>
 
          <ab n="10">
@@ -1625,11 +1625,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="16">
-         Nondum <unclear>.n.</unclear> complete sunt iniquitates <persName>amorreorum</persName> vsque nunc.
+         Nondum <choice><abbr>.n.</abbr><expan>nam</expan></choice> complete sunt iniquitates <persName>amorreorum</persName> vsque nunc.
          </ab>
 
          <ab n="17">
-         Postquam <choice><abbr>at</abbr><expan>autem</expan></choice> iam fuit sol ad occasum: flamma facta est. Et ecce clibanus sumans: et venerunt lampades  ignis. <choice><abbr>Q</abbr><expan>Quae</expan></choice> <unclear>pertransierunt</unclear> <unclear>pro</unclear> medium diuisionum istarum. 
+         Postquam <choice><abbr>at</abbr><expan>autem</expan></choice> iam fuit sol ad occasum: flamma facta est. Et ecce clibanus sumans: et venerunt lampades  ignis. <choice><abbr>Q</abbr><expan>Quae</expan></choice> pertransierunt per medium diuisionum istarum. 
          </ab>
 
          <ab n="18">
@@ -1724,7 +1724,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="17" type="ordinal">17.</num></ab>
 
         <ab n="1">
-        Erat <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName> annorum nonaginta. Et apparuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>abram</persName>. Et dixit ei: ego sum deus tuus: conplace coram me: et esto <unclear>irrephensibil</unclear>:
+        Erat <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abram</persName> annorum nonaginta. Et apparuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>abram</persName>. Et dixit ei: ego sum deus tuus: conplace coram me: et esto irreprehensibilis:
         </ab>
 
         <ab n="2">
@@ -1748,7 +1748,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="7">
-        Et statuam pactum meum inter me et inter te et inter semen tuum post te in <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> suas: in fedus sempiternum <unclear>vt sum</unclear> tuus deus et seminis tui post te. 
+        Et statuam pactum meum inter me et inter te et inter semen tuum post te in <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> suas: in fedus sempiternum vt sim tuus deus et seminis tui post te. 
         </ab>
 
         <ab n="8">
@@ -1804,7 +1804,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="21">
-        at pactum meum stattuam ad <persName>isaac</persName>: quem pariet tibi <persName>sarra</persName> iin tempore hoc: in anno altero. 
+        at pactum meum stattuam ad <persName>isaac</persName>: quem pariet tibi <persName>sarra</persName> in tempore hoc: in anno altero. 
         </ab>
 
         <ab n="22">
@@ -1812,11 +1812,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="23">
-        Accepitant <persName>abraam</persName> <persName>ismael</persName> filium suum: et omnes vernaculos suos: et <choice><abbr>oes</abbr><expan>omnes</expan></choice> masculum virorum <choice><abbr>q</abbr><expan>quorum</expan></choice> in domo <persName>abraam</persName>: et circumcidit preputia eorum: in tempore diei illius: sicut locutus? Est ei deus. 
+        Accepitant <persName>abraam</persName> <persName>ismael</persName> filium suum: et omnes vernaculos suos: et <choice><abbr>oes</abbr><expan>omnes</expan></choice> qui empti sunt: et <choice><abbr>oe</abbr><expan>omne</expan></choice> masculum virorum <choice><abbr>q</abbr><expan>quorum</expan></choice> in domo <persName>abraam</persName>: et circumcidit preputia eorum: in tempore diei illius: sicut locutus? Est ei deus. 
         </ab>
 
         <ab n="24">
-        <persName>abraam</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> erat annorum nonaginta nouem: <unclear>lquando</unclear> circumcidit carnem preputii sui
+        <persName>abraam</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> erat annorum nonaginta nouem: <sic>lquando</sic> circumcidit carnem preputii sui
         </ab>
 
         <ab n="25">
@@ -1841,11 +1841,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="2">
-        Suspiciens <choice><abbr>at</abbr><expan>autem</expan></choice> oculis suis: vidit. Et ecce tres viri steterunt super eum. Et videns cucurrit in occursum eis: de ostio tabernaculi sui. Et adorauit super terra: 
+        Suspiciens <choice><abbr>aut</abbr><expan>autem</expan></choice> oculis suis: vidit. Et ecce tres viri steterunt super eum. Et videns cucurrit in occursum eis: de ostio tabernaculi sui. Et adorauit super terra: 
         </ab>
 
         <ab n="3">
-        et dixit. <choice><abbr>dne</abbr><expan>domine</expan></choice> si vtique inueni <choice><abbr>gtam</abbr><expan>gratiam</expan></choice> coram te ne transeas seruum tuum. 
+        et dixit. <choice><abbr>dne</abbr><expan>domine</expan></choice> si vtique inueni <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram te ne transeas seruum tuum. 
         </ab>
 
         <ab n="4">
@@ -1869,11 +1869,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ad eum. Vbi <persName>sarra</persName> vxor tua. Ille <choice><abbr>aut</abbr><expan>autem</expan></choice> <choice><abbr>rndens</abbr><expan>respondens</expan></choice> dixit: ecce in <unclear>tabernaclo</unclear>.
+        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ad eum. Vbi <persName>sarra</persName> vxor tua. Ille <choice><abbr>aut</abbr><expan>autem</expan></choice> <choice><abbr>rndens</abbr><expan>respondens</expan></choice> dixit: ecce in <choice><abbr>tabernaclo</abbr><expan>tabernaculo</expan></choice>.
         </ab>
 
         <ab n="10">
-        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> reuertens veniam ad te <choice><abbr>scdm</abbr><expan>secundum</expan></choice> tempus hoc in horas: et habebit filium <persName>sarra</persName> vxor tua. <persName>sarra</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> audiuit ad ostium tabernaculi <unclear>exns</unclear> post eum. 
+        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> reuertens veniam ad te <choice><abbr>scdm</abbr><expan>secundum</expan></choice> tempus hoc in horas: et habebit filium <persName>sarra</persName> vxor tua. <persName>sarra</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> audiuit ad ostium tabernaculi <choice><abbr>exns</abbr><expan>exiens</expan></choice> post eum. 
         </ab>
 
         <ab n="11">
@@ -1893,7 +1893,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="15">
-        Negauit <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>sarra</persName>: dicens. Non risi. Timuit. <unclear>n</unclear>.  Et ait illi non: Sed risisti. 
+        Negauit <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>sarra</persName>: dicens. Non risi. Timuit. <choice><abbr>n</abbr><expan>nam</expan></choice>.  Et ait illi non: Sed risisti. 
         </ab>
 
         <ab n="16">
@@ -1909,7 +1909,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="19">
-        Scio enim quod precipiet filiis suis: et domui sue post se. Et costodient vias <choice><abbr>dni</abbr><expan>domini</expan></choice> vt faciant iustitiam et iudicium. Vt adducat <choice><abbr>dns</abbr><expan>dominus</expan></choice> super <persName>abraam</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> locutus est ad eum. 
+        Scio enim quod precipiet filiis suis: et domui sue post se. Et custodient vias <choice><abbr>dni</abbr><expan>domini</expan></choice> vt faciant iustitiam et iudicium. Vt adducat <choice><abbr>dns</abbr><expan>dominus</expan></choice> super <persName>abraam</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quaecumque</expan></choice> locutus est ad eum. 
         </ab>
 
         <ab n="20">
@@ -2006,8 +2006,126 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        Dixerunt <choice><abbr>at</abbr><expan>autem</expan></choice> illi: recede illuc. Ingressus es habitare: <choice><abbr>nunqd</abbr><expan>nunquid</expan></choice> ett iudicium iudicare? Nunc ergo te affligemus magis <choice><abbr>q</abbr><expan>quae</expan></choice> illos. Et coegerunt virum <persName>lot</persName> vehementer. Et <choice><abbr>appropinquauert</abbr><expan>appropinquauerunt</expan></choice>
+        Dixerunt <choice><abbr>at</abbr><expan>autem</expan></choice> illi: recede illuc. Ingressus es habitare: <choice><abbr>nunqd</abbr><expan>nunquid</expan></choice> et iudicium iudicare? Nunc ergo te affligemus magis <choice><abbr>q</abbr><expan>quae</expan></choice> illos. Et coegerunt virum <persName>lot</persName> vehementer. Et <choice><abbr>appropinquauert</abbr><expan>appropinquauerunt</expan></choice> confringere ostium. 
         </ab>
+
+        <ab n="10">
+        Extendentes <choice><abbr>at</abbr><expan>autem</expan></choice> viri manus: attraxerunt <persName>lot</persName> in domum ad se: et ostium domus clauserunt. 
+        </ab>
+
+        <ab n="11">
+        At viros existentes ad ianuam percusserunt in cecitate a minimo vsque ad magnum. Et preterierunt querentes ostium. 
+        </ab>
+
+        <ab n="12">
+        Dixerunt <choice><abbr>at</abbr><expan>autem</expan></choice> viri ad <persName>lot</persName>: sunt tibi hic generi aut filii aut filie? Aut si <choice><abbr>qs</abbr><expan>quaas</expan></choice> tibi alius est in ciuitate? Educ de loco isto. 
+        </ab>
+
+        <ab n="13">
+        <choice><abbr>Q</abbr><expan>qui</expan></choice> perdimus nos locum istum. <choice><abbr>Q</abbr><expan>Qui</expan></choice> exaltatus est clamor eorum coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. Et misit nos <choice><abbr>dns</abbr><expan>dominus</expan></choice> delere eam. 
+        </ab>
+
+        <ab n="14">
+        Egressus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>lot</persName>: et locutus est ad generos suos: qui acceperunt filias suas. Et dixit: surgite et egredimini de loco isto. <choice><abbr>Q</abbr><expan>Qui</expan></choice> delebit <choice><abbr>dns</abbr><expan>dominus</expan></choice> ciuitatem. Visus est <choice><abbr>at</abbr><expan>autem</expan></choice> deridere coram generis suis. 
+        </ab>
+
+        <ab n="15">
+        Vt <choice><abbr>at</abbr><expan>autem</expan></choice> diluculum factum est: vrgebant angeli <persName>lot</persName>: dicentes: surgens accipe vxorem tuam et filias <choice><abbr>qs</abbr><expan>quas</expan></choice> habes: et egredere: vt non pereas cum iniquitatibus ciuitatis. 
+        </ab>
+
+        <ab n="16">
+        Et turbati sunt. Et tenuerunt angeli manum eius: et manum vxoris eius: et manus duarum filiarum eius: et <choice><abbr>q</abbr><expan>quo</expan></choice> parceret <choice><abbr>dns</abbr><expan>dominus</expan></choice> illi. 
+        </ab>
+
+        <ab n="17">
+        Et factum est quando eduxerunt eos foras: et dixerunt saluans salua tuam ipsius animam. Ne respexeris in retrorsum neque steteris in <choice><abbr>oi</abbr><expan>omni</expan></choice> circumregione. In montem saluare: ne forte simul <choice><abbr>comphendaris</abbr><expan>comprehendaris</expan></choice>. 
+        </ab>
+
+        <ab n="18">
+        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>lot</persName> ad eos. queso: <choice><abbr>dne</abbr><expan>domine</expan></choice>
+        </ab>
+
+        <ab n="19">
+        quia inueni puer tuus gratiam coram te: et magnificasti iusticiam tuam: <choice><abbr>q</abbr><expan>quod</expan></choice> facis super me vt viuat anima mea. Ego <choice><abbr>at</abbr><expan>autem</expan></choice> non potero saluari in monte: ne apprehendant me mala et moriar. 
+        </ab>
+
+        <ab n="20">
+        Ecce ciuitas hec iuxta: vt fugiam ego illuc: <choice><abbr>q</abbr><expan>quae</expan></choice> est parua et saluabor. Non parua est: et saluabitur anima mea: 
+        </ab>
+
+        <ab n="21">
+        Et dixit ei ecce admiratus sum tuam faciem. Et in verbo hoc ne euertam ciuitatem: de qua locutus es. 
+        </ab>
+
+        <ab n="22">
+        Festina ergo saluari illic non enim potero facere rem: donec venias tu illuc. <choice><abbr>Propt</abbr><expan>Propter</expan></choice> hoc vocauit nomen ciuitatis illius <placeName>segor</placeName>. 
+        </ab>
+
+        <ab n="23">
+        sol egressus est super terram: et <persName>lot</persName> ingressus est in <persName>segor</persName>. 
+        </ab>
+
+        <ab n="24">
+        Et <choice><abbr>dns</abbr><expan>dominus</expan></choice> pluit super <placeName>sodoma</placeName> et <placeName>gomorram</placeName> sulphur et ignem a <choice><abbr>dno</abbr><expan>domino</expan></choice> de celo. 
+        </ab>
+
+        <ab n="25">
+        et subuertit ciuitates has: et <choice><abbr>oem</abbr><expan>omnem</expan></choice> circa regionem: et omnes habitantes in ciuitatibus: et germinantia super terram. 
+        </ab>
+
+        <ab n="26">
+        Et respexit vxor eius retrorsum: et factum est statua salis. 
+        </ab>
+
+        <ab n="27">
+        manicauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abraam</persName> diluculo in locum vbi steterat coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
+        </ab>
+
+        <ab n="28">
+        Et respexit super faciem <placeName>sodomorum</placeName> et <placeName>gomorrorum</placeName>. Et super faciem circaregionis: et vidit. Et ecce flamma de terra: sicut vapor fornacis. 
+        </ab>
+
+        <ab n="29">
+        Et factum est cum subuerteret deus <choice><abbr>oes</abbr><expan>omnes</expan></choice> ciuitates regionis. Recordatus est <choice><abbr>at</abbr><expan>autem</expan></choice> deus <persName>abraam</persName>. Et emisit <persName>lot</persName> de medio subuersionis cum subuerteret ciuitates in <choice><abbr>qbus</abbr><expan>quibus</expan></choice> habitauit in eis <persName>lot</persName>. 
+        </ab>
+
+        <ab n="30">
+        Egressus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>lot</persName> de <placeName>segor</placeName>. et sedit in monte ipse et due filie eius cum eo. Timuit enim habitare in <placeName>segor</placeName>. Et habitauit in spelunca ipse et due filie eius cum eo. 
+        </ab>
+
+        <ab n="31">
+        Dixit <choice><abbr>at</abbr><expan>autem</expan></choice> senior ad iuniorem. Pater noster senior: et nemo est super terram: <choice><abbr>q</abbr><expan>qui</expan></choice> ingredietur ad nos: sicut conuenit vniuerse terre. 
+        </ab>
+
+        <ab n="32">
+        veni et potemus patrem nostrum vino: et dormiamus cum eo: et suscitemus ex patre nostro semen. 
+        </ab>
+
+        <ab n="33">
+        Potauerunt <choice><abbr>at</abbr><expan>autem</expan></choice> patrem suum vino in nocte illa. Et ingressa senior dormiuit ccum patre suo in nocte illa. et non sciuit cum dormiret ipse et cum resurgeret. 
+        </ab>
+
+        <ab n="34">
+        Factum est <choice><abbr>at</abbr><expan>autem</expan></choice> in crastinum: et dixit senior ad iuniorem. Ecce dormiui heri cum patre <choice><abbr>nro</abbr><expan>nostro</expan></choice>. potemus eum vino et in nocte hac: et ingressa dormi cum eo: et suscitemus ex patre <choice><abbr>nro</abbr><expan>nostro</expan></choice> semen.
+        </ab>
+
+        <ab n="35">
+        Potauerunt <choice><abbr>at</abbr><expan>autem</expan></choice> in nocte illa patrem suum vino. Et ingressa iunior: dormiuit cum patre suo. et non sciuit cum dormiret ipse et resurgeret. 
+        </ab>
+
+        <ab n="36">
+        et conceperunt ex  patre suo due filie <persName>lot</persName>.
+        </ab>
+
+        <ab n="37">
+        et peperit senior filium: vocauit nomen eius <persName>moab</persName>: dicens de patre meo: hic <choice><abbr>pr</abbr><expan>patre</expan></choice> moabitarum vsque in hodiernum diem. 
+        </ab>
+
+        <ab n="38">
+        peperit <choice><abbr>at</abbr><expan>autem</expan></choice> et iunior filium: et vocauit nomen eius ammom. filius generis mei. hic paterammonitarum vsque in hodiernum diem
+        </ab>
+
+
 
         </div>
     </body>

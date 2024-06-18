@@ -860,7 +860,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        Eternium sanguinem animarum vestrarum requiram: de manu cunctarum bestiarum requiram eum: et de manu <choice><abbr>hois</abbr><expan>hominis</expan></choice>: de manu viri qui effuderit sanguinem fratris sui requiram animam hominis. 
+        Etenim sanguinem animarum vestrarum requiram: de manu cunctarum bestiarum requiram eum: et de manu <choice><abbr>hois</abbr><expan>hominis</expan></choice>: de manu viri qui effuderit sanguinem fratris sui requiram animam hominis. 
         </ab>
 
         <ab n="6">
@@ -876,7 +876,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        Ecce ego statuam pactum meum vobiscum et cum filiis <unclear>vris</unclear> post vos: 
+        Ecce ego statuam pactum meum vobiscum et cum filiis <choice><abbr>vris</abbr><expan>vestris</expan></choice> post vos: 
         </ab>
 
         <ab n="10">
@@ -966,7 +966,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="1">
-        <unclear>Ac</unclear> he sunt generationes filiorum <persName>noe</persName>: <persName>sem</persName> et <persName>cham</persName> et <persName>iapheth</persName>: natique sunt eis filii post diluuium. 
+        Et he sunt generationes filiorum <persName>noe</persName>: <persName>sem</persName> et <persName>cham</persName> et <persName>iapheth</persName>: natique sunt eis filii post diluuium. 
         </ab>
 
         <ab n="2">
@@ -982,7 +982,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        Ab his diuise sunt insule gentium in terris suis: vnusquisque <choice><abbr>sm</abbr><expan>secundum</expan></choice> linguam suam <choice><abbr>sm</abbr><expan>secundum</expan></choice> familias suas in <unclear>pplis</unclear> suis. 
+        Ab his diuise sunt insule gentium in terris suis: vnusquisque <choice><abbr>sm</abbr><expan>secundum</expan></choice> linguam suam <choice><abbr>sm</abbr><expan>secundum</expan></choice> familias suas in <choice><abbr>pplis</abbr><expan>populis</expan></choice> suis. 
         </ab>
 
         <ab n="6">
@@ -1344,7 +1344,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="7">
-        <unclear>qr</unclear> erat substantia eorum multa: et non poterant habitare simul. Et facta est <unclear>rica</unclear> inter pastores pecorum <persName>abram</persName> et pastores pecorum <persName>loth</persName>: <persName>chananeus</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> et <persName>pheremeus</persName> tunc habitabant in terra. 
+        <choice><abbr>qr</abbr><expan>quia</expan></choice> erat substantia eorum multa: et non poterant habitare simul. Et facta est <unclear>rita</unclear> inter pastores pecorum <persName>abram</persName> et pastores pecorum <persName>loth</persName>: <persName>chananeus</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> et <persName>pheremeus</persName> tunc habitabant in terra. 
         </ab>
 
         <ab n="8">
@@ -1356,11 +1356,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="10">
-        Et leuauit <persName>loth</persName> oculos suos et vidit omenm planiciem iordanis: <unclear>qr</unclear> tota esset irrigua antequam dispereret <choice><abbr>dns</abbr><expan>dominus</expan></choice> <placeName>sodomam</placeName> et <placeName>gomorram</placeName>: sicut hortus <choice><abbr>dni</abbr><expan>domini</expan></choice> et sicut terra <placeName>egypti</placeName> et introitum <placeName>sogor</placeName>. 
+        Et leuauit <persName>loth</persName> oculos suos et vidit omenm planiciem iordanis: <choice><abbr>qr</abbr><expan>quae</expan></choice> tota esset irrigua antequam dispereret <choice><abbr>dns</abbr><expan>dominus</expan></choice> <placeName>sodomam</placeName> et <placeName>gomorram</placeName>: sicut hortus <choice><abbr>dni</abbr><expan>domini</expan></choice> et sicut terra <placeName>egypti</placeName> et introitum <placeName>sogor</placeName>. 
         </ab>
 
         <ab n="11">
-        Et elegit sibi <persName>loth</persName> omnem planiciem iordanis: et <unclear>profectus</unclear> est <persName>loth</persName> prius: et diuisi sunt vnusquisque a fratre suo. 
+        Et elegit sibi <persName>loth</persName> omnem planiciem iordanis: et profectus est <persName>loth</persName> prius: et diuisi sunt vnusquisque a fratre suo. 
         </ab>
 
         <ab n="12">
@@ -1384,7 +1384,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="17">
-        Surge ambula per terram in longitudine et in latitudine sua: <unclear>qr</unclear> tibi dabo eam. 
+        Surge ambula per terram in longitudine et in latitudine sua: <choice><abbr>qr</abbr><expan>quia</expan></choice> tibi dabo eam. 
         </ab>
 
         <ab n="18">
@@ -1532,11 +1532,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        Et dixit ei. Offer coram me vitulos tres et <unclear>capras</unclear> tres et arietes tres et turturem et filium columbe. 
+        Et dixit ei. Offer coram me vitulos tres et capras tres et arietes tres et turturem et filium columbe. 
         </ab>
 
         <ab n="10">
-        Et obtulit coram eo <choice><abbr>oia</abbr><expan>omnia</expan></choice> hec: et diuisit ea equaliter: et posuit diuisiones <unclear>vnamquamque</unclear> e regione alterius: aues autem non diuisit. 
+        Et obtulit coram eo <choice><abbr>oia</abbr><expan>omnia</expan></choice> hec: et diuisit ea equaliter: et posuit diuisiones vnamquamque e regione alterius: aues autem non diuisit. 
         </ab>
 
         <ab n="11">
@@ -1548,7 +1548,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="13">
-        Et dixit ad <persName>abram</persName>. Sciens scies <unclear>qr</unclear> peregrini erunt filii tui in terra non sua: et seruitutem redigent eos et affligent eos quadringentis annis. 
+        Et dixit ad <persName>abram</persName>. Sciens scies <choice><abbr>qr</abbr><expan>quod</expan></choice> peregrini erunt filii tui in terra non sua: et seruitutem redigent eos et affligent eos quadringentis annis. 
         </ab>
 
         <ab n="14">
@@ -1705,7 +1705,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        Et filius octo dierum circuncidetur in vobis:<choice><abbr>ois</abbr><expan>omnis</expan></choice> masculus in <choice><abbr>gnationibus</abbr><expan>generationibus</expan></choice> <choice><abbr>vxis</abbr><expan>vxoris</expan></choice>: tam natus domi quam emptus argento ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> filiis populorum <choice><abbr>q</abbr><expan>quam</expan></choice> non sunt de filiis tuis. Circumcisione circuncidetur tam natus domi tue <unclear>quod</unclear> emptus argento tuo: 
+        Et filius octo dierum circuncidetur in vobis:<choice><abbr>ois</abbr><expan>omnis</expan></choice> masculus in <choice><abbr>gnationibus</abbr><expan>generationibus</expan></choice> <choice><abbr>vxis</abbr><expan>vxoris</expan></choice>: tam natus domi quam emptus argento ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> filiis populorum <choice><abbr>q</abbr><expan>quam</expan></choice> non sunt de filiis tuis. Circumcisione circuncidetur tam natus domi tue quod emptus argento tuo: 
         </ab>
 
         <ab n="13">
@@ -1729,11 +1729,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="18">
-        Utinam <persName>ismael</persName> perinaneat coram te. 
+        Utinam <persName>ismael</persName> permaneat coram te. 
         </ab>
 
         <ab n="19">
-        Et dixit deus. In veritate <persName>sara</persName> vxor tua pariet tibi filium: et vocabis nomen eius <persName>Isaac</persName>: et statuam pactum meum um eo in pactum eternum et filiis suis post eum. 
+        Et dixit deus. In veritate <persName>sara</persName> vxor tua pariet tibi filium: et vocabis nomen eius <persName>Isaac</persName>: et statuam pactum meum cum eo in pactum eternum et filiis suis post eum. 
         </ab>
 
         <ab n="20">
@@ -1761,7 +1761,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="26">
-        In ipsa die circuncisus est <persName>abraham</persName> et <persName>ismael</persName> filius eius. 
+        In ipsa die circumcisus est <persName>abraham</persName> et <persName>ismael</persName> filius eius. 
         </ab>
 
         <ab n="27">
@@ -1835,7 +1835,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="16">
-        Et surrexerunt inde viri et respexerunt conra faciem <placeName>sodome</placeName>: et <persName>abraham</persName> ibat cum eis vt comitare tureos. 
+        Et surrexerunt inde viri et respexerunt contra faciem <placeName>sodome</placeName>: et <persName>abraham</persName> ibat cum eis vt comitare tureos. 
         </ab>
 
         <ab n="17">
@@ -1851,11 +1851,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        Dixitque <choice><abbr>dns</abbr><expan>dominus</expan></choice>. Clamor <placeName>sodome</placeName> et <placeName>gomore</placeName> <choice><abbr>qr</abbr><expan>quod</expan></choice> multus est et paccatum eorum <choice><abbr>qr</abbr><expan>quae</expan></choice> forte est nimis. 
+        Dixitque <choice><abbr>dns</abbr><expan>dominus</expan></choice>. Clamor <placeName>sodome</placeName> et <placeName>gomore</placeName> <choice><abbr>qr</abbr><expan>quod</expan></choice> multus est et peccatum eorum <choice><abbr>qr</abbr><expan>quae</expan></choice> forte est nimis. 
         </ab>
 
         <ab n="21">
-        Apparebo nunc et diudicabo: vtrum sicut clamor <choice><abbr>q</abbr><expan>qui</expan></choice> venit coram me fecerint: consumabo eos: si non egerint pentitentiam. Si <choice><abbr>aut</abbr><expan>autem</expan></choice> egerint pentitentiam: non vlcisar. 
+        Apparebo nunc et diudicabo: vtrum sicut clamor <choice><abbr>q</abbr><expan>qui</expan></choice> venit coram me fecerint: consumabo eos: si non egerint penitentiam. Si <choice><abbr>aut</abbr><expan>autem</expan></choice> egerint penitentiam: non vlcisar. 
         </ab>
 
         <ab n="22">
@@ -1867,11 +1867,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="24">
-        Si forte sun <choice><abbr>qnquaginta</abbr><expan>quinquaginta</expan></choice> iusti in medio ciuitatis: <unclear>nun</unclear> in furore <unclear>osumes</unclear>: et non dimittes loco <choice><abbr>ppter</abbr><expan>propter</expan></choice> <choice><abbr>qnquaginta</abbr><expan>quinquaginta</expan></choice> iustos <choice><abbr>q</abbr><expan>qui</expan></choice> sunt in me dio eius. 
+        Si forte sunt <choice><abbr>qnquaginta</abbr><expan>quinquaginta</expan></choice> iusti in medio ciuitatis: <choice><abbr>nun</abbr><expan>nunc</expan></choice> in furore <choice><abbr>psumes</abbr><expan>praesumes</expan></choice>: et non dimittes loco <choice><abbr>ppter</abbr><expan>propter</expan></choice> <choice><abbr>qnquaginta</abbr><expan>quinquaginta</expan></choice> iustos <choice><abbr>q</abbr><expan>qui</expan></choice> sunt in me dio eius. 
         </ab>
 
         <ab n="25">
-        Vera sunt iudica tua: ne facias sicut rem hanc: vt consumas iustum cum impio: vt sit iustus sicut impius: vera sunt iudicia tua. Nunquid iudex vniuerse terre non vtique faciet iudicium?
+        Vera sunt iudicia tua: ne facias sicut rem hanc: vt consumas iustum cum impio: vt sit iustus sicut impius: vera sunt iudicia tua. Nunquid iudex vniuerse terre non vtique faciet iudicium?
         </ab>
 
         <ab n="26">
@@ -1924,7 +1924,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="4">
-        <choice><abbr>Priusq</abbr><expan>Priusquam</expan></choice> autem irent cubitum: viri ciuitatis ciri <persName>sodome</persName> vallauerunt domum a puero vsque ad senem omnis populus simul. 
+        <choice><abbr>Priusq</abbr><expan>Priusquam</expan></choice> autem irent cubitum: viri ciuitatis viri <persName>sodome</persName> vallauerunt domum a puero vsque ad senem omnis populus simul. 
         </ab>
 
         <ab n="5">
@@ -1944,7 +1944,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        Et dixerunt. Recede illuc: et dixerunt: vnus venit ad peregrinandum et ecce iudicat iudicium: nunc malefaciemus tibi magis <choice><abbr>q</abbr><expan>quam</expan></choice> eis et <unclear>conpulerunt</unclear> virum <persName>lot</persName> valde: et accesserunt ad confringendam ianuam. 
+        Et dixerunt. Recede illuc: et dixerunt: vnus venit ad peregrinandum et ecce iudicat iudicium: nunc malefaciemus tibi magis <choice><abbr>q</abbr><expan>quam</expan></choice> eis et compulerunt virum <persName>lot</persName> valde: et accesserunt ad confringendam ianuam. 
         </ab>
 
         <ab n="10">
@@ -1952,7 +1952,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="11">
-        Et viros qui erant in porta domus percusserunt cecita te a minimo vsque ad maximum. Defatigatique sunt vt in uenirent portam. 
+        Et viros qui erant in porta domus percusserunt cecitate a minimo vsque ad maximum. Defatigatique sunt vt in uenirent portam. 
         </ab>
 
         <ab n="12">
@@ -1964,7 +1964,103 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="14">
-        Et egressus est <persName>lot</persName>: et locutus est cum generis suis <choice><abbr>q</abbr><expan>qui</expan></choice> accepturi erant filias suas. Et ait. Surgite egredimini de loco isto: 
+        Et egressus est <persName>lot</persName>: et locutus est cum generis suis <choice><abbr>q</abbr><expan>qui</expan></choice> accepturi erant filias suas. Et ait. Surgite egredimini de loco isto: quia disperdet <choice><abbr>dns</abbr><expan>dominus</expan></choice> ciuitatem. Et fuit quasi ridiculum in oculis generorum suorum. 
+        </ab>
+
+        <ab n="15">
+        Et cum ascendisset aurora: et esset mane coegerunt angeli <persName>lot</persName> dicentes. Surge et tolle vxorem tuam et duas filias tuas que inuente sunt fideles tecum: ne forte percutiaris in peccatis ciuitatis. 
+        </ab>
+
+        <ab n="16">
+        Et cum moram fecisset: apprehenderunt viri manus eius manum vxoris eius et manum duarum filiarum eius: et quod misereretur <choice><abbr>dns</abbr><expan>dominus</expan></choice> illius:
+        </ab>
+
+        <ab n="17">
+        et eduxerunt eum et posuerunt eum extra ciuitatem. Et factum est cum eduxissent eos foras: ait. Miserere <choice><abbr>aie</abbr><expan>anime</expan></choice> tue: non respicias post tergum tuum: neque <unclear>stes</unclear> in omni planicie: sed in monte saluum te fac: ne forte pereas. 
+        </ab>
+
+        <ab n="18">
+        Et ait <persName>lot</persName> ad eos. Obsecro nunc domini mei: 
+        </ab>
+
+        <ab n="19">
+        Obsecro nunc domini mei: ecce nunc inuenit seruus tuus misericordiam in oculis tuis: et multiplicasti bonitatem tuam quam fecisti mecum: sustentando animam meam: et ego non possum saluari in monte: ne forte occurrat mihi malum et moriar. 
+        </ab>
+
+        <ab n="20">
+        Ecce nunc ciuitas hec iuxta est ad fugiendum ibi et est parua. Saluabor nunc ibi: nonne parua est: et viuet anima mea. 
+        </ab>
+
+        <ab n="21">
+        Dixitque ei. Ecce suscepi faciem tuam etiam pro hac re: vt non sub uertam ciuitatem pro qua rogasti. 
+        </ab>
+
+        <ab n="22">
+        Sestina saluare ibi quia non possum <unclear>quicquam</unclear> facere donec venias illuc. Propterea vocauit nomen ciuitatis <placeName>sogor</placeName>: 
+        </ab>
+
+        <ab n="23">
+        sol egressus est super terram: et <persName>lot</persName> venit in <placeName>sogor</placeName>. 
+        </ab>
+
+        <ab n="24">
+        Et <choice><abbr>dns</abbr><expan>dominus</expan></choice> pluit super <placeName>sodomam</placeName> et <placeName>gomorra</placeName> sulphur et ignem a facie <choice><abbr>dni</abbr><expan>domini</expan></choice> de celo. 
+        </ab>
+
+        <ab n="25">
+        Et subuertit ciuitates has et omnem planiciem et <choice><abbr>oes</abbr><expan>omnes</expan></choice> habitatiores vrbium et germen terre. 
+        </ab>
+
+        <ab n="26">
+        Et respexit vxor eius post se: et facta est statua salis. 
+        </ab>
+
+        <ab n="27">
+        Et surrexit <persName>abraham</persName> mane ad locum vbi steterat in oratione coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
+        </ab>
+
+        <ab n="28">
+        Et aspexit contra faciem <placeName>sodome</placeName> et <placeName>gomorre</placeName>: et contra faciem terre campestris: et vidit. Et ecce ascenti sumus de terra sicut fumus fornacis. 
+        </ab>
+
+        <ab n="29">
+        Et factum est cum disperderet <choice><abbr>dns</abbr><expan>dominus</expan></choice> ciuitates campestres: recordatus est <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>abrahe</persName> et misit <persName>lot</persName> de medio subuersionis: quando subuertit ciuitates in quibus habitabat <persName>lot</persName>. 
+        </ab>
+
+        <ab n="30">
+        Et ascendit <persName>lot</persName> de <placeName>segor</placeName> et habitauit in monte et due filie eius cum eo: quia timuit habitare in <placeName>sogor</placeName>: et habitauit in spelunca ipse et due filie eius. 
+        </ab>
+
+        <ab n="31">
+        Et dixit maior minori. Pater noster senex est: et non est vir in terra vt ingrediatur ad nos iuxta consuetudinem vniuerse terre. 
+        </ab>
+
+        <ab n="32">
+        Veni potemus patrem nostrum vino: et cubemus cum eo et reseruabimus de patre nostro filios. 
+        </ab>
+
+        <ab n="33">
+        Et potauerunt patrem suum vino in nocte illa. Et ingressa est maior et concubuit cum patre suo. Et nesciuit quando cubuit nec <choice><abbr>qn</abbr><expan>quando</expan></choice> surrexit. 
+        </ab>
+
+        <ab n="34">
+        Et factum est in die sequenti: et dixit maior minori. Ecce precubui heri cum patre meo. Potemus eum vino etiam in hac nocte: et ingredere cuba cum eo: vt reseruemus de patre nostros filios. 
+        </ab>
+
+        <ab n="35">
+        Et potauerunt etiam in nocte illa patrem suum vino et surrexit minor et concubuit cum eo. Et nesciuit quam do cubuit nec quando surrexit.
+        </ab>
+
+        <ab n="36">
+        Et conceperunt due filie <persName>lot</persName> de patre suo. 
+        </ab>
+
+        <ab n="37">
+        Et peperit maior filium: et vocauit nomen eius <persName>moab</persName>: ipse est pater <persName>moabitarum</persName> vsque in diem hanc. 
+        </ab>
+
+        <ab n="38">
+        Et minor etiam ipsa peperit filium et vocauit nomen eius filium populi mei: ipse est pater filiorum <persName>amon</persName> vsque in diem hanc. 
         </ab>
         </div>
 
