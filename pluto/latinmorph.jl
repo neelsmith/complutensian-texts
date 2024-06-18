@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.42
+# v0.19.41
 
 using Markdown
 using InteractiveUtils
@@ -38,7 +38,7 @@ end
 TableOfContents()
 
 # ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
-nbversion = "1.1.0";
+nbversion = "1.2.0";
 
 # ╔═╡ 6048a3e7-abf5-46de-b450-9d6812f915dc
 md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversion CheckBox())"""
@@ -47,6 +47,7 @@ md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversi
 if showversion
 md"""
 
+- **1.2.0**: build parser from source with medieval rules and vocabulary; use 25-character orthography for Vulgate text
 - **1.1.0**: distinguish parsed and unparsed verbs with visual highlighting
 - **1.0.0**: initial release
 """
@@ -83,7 +84,7 @@ md"""> ### Tokenization and parsing"""
 ortho23 = latin23()
 
 # ╔═╡ 2a1cebbe-7594-4eee-bbbe-a1b90705f924
-ortho24 = latin24()
+ortho25 = latin25()
 
 # ╔═╡ 07f9a37b-a39a-452c-a705-3d51d1430c8b
 """True if analysis has a verb form."""
@@ -244,16 +245,16 @@ end |> CitableTextCorpus
 md"""> ### Build parsers"""
 
 # ╔═╡ d8198183-4e97-4f39-9e8e-03a98a939d0a
-p23url = "http://shot.holycross.edu/tabulae/core-lat23-current.cex"
+p23url = "http://shot.holycross.edu/tabulae/medieval-lat23-current.cex"
 
 # ╔═╡ e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
-p24url = "http://shot.holycross.edu/tabulae/core-lat24-current.cex"
+p25url = "http://shot.holycross.edu/tabulae/medieval-lat25-current.cex"
 
 # ╔═╡ 7b96d31c-b45c-4848-ab8f-64900cc2d1d4
 parser23 = tabulaeStringParser(p23url, UrlReader)
 
 # ╔═╡ 8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
-parser24 = tabulaeStringParser(p24url, UrlReader)
+parser25 = tabulaeStringParser(p25url, UrlReader)
 
 # ╔═╡ 97753b65-a272-4620-8469-df6485ca34c3
 md"""> ### User selections"""
@@ -297,7 +298,7 @@ begin
 
 	targumdisplay = "<p><i>Targum</i></p>" * formatpsg(targumpsg, ortho23, parser23)
 	septdisplay = "<p><i>Septuagint</i></p>" * formatpsg(septpsg, ortho23, parser23)
-	vulgatedisplay = "<p><i>Vulgate</i></p>" * formatpsg(vulgatepsg, ortho24, parser24)
+	vulgatedisplay = "<p><i>Vulgate</i></p>" * formatpsg(vulgatepsg, ortho25, parser25)
 	
 	hdr * targumdisplay * septdisplay * vulgatedisplay |> HTML
 end
@@ -324,10 +325,10 @@ end
 t1 = septpsg[1]
 
 # ╔═╡ cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
-tokenize(t1, ortho24)
+tokenize(t1, ortho25)
 
 # ╔═╡ 5150037b-d2b5-41de-b536-5026372ef442
-debug(t1,ortho24, parser24)
+debug(t1,ortho25, parser25)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -363,7 +364,7 @@ Tabulae = "~0.11.1"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.0"
 manifest_format = "2.0"
 project_hash = "acbef897e192a27103ffb7b45f01f31caa0a8bb7"
 
@@ -483,7 +484,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.0.5+1"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -804,7 +805,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+4"
+version = "0.3.23+2"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -1125,9 +1126,9 @@ version = "17.4.0+2"
 # ╟─10d7b498-f9e8-479e-8d61-fe4233b76df0
 # ╟─fff4dd01-fe30-4363-bd21-0c44206be92b
 # ╠═0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-# ╠═d8198183-4e97-4f39-9e8e-03a98a939d0a
-# ╠═e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
-# ╠═7b96d31c-b45c-4848-ab8f-64900cc2d1d4
+# ╟─d8198183-4e97-4f39-9e8e-03a98a939d0a
+# ╟─e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
+# ╟─7b96d31c-b45c-4848-ab8f-64900cc2d1d4
 # ╠═8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
 # ╟─97753b65-a272-4620-8469-df6485ca34c3
 # ╟─a776ad50-892d-4d98-99b7-e7a111934622
