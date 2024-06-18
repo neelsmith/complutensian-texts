@@ -1,13 +1,15 @@
 urn:cts:compnov:bible.genesis:1.1
-
+urn:cts:compnov:bible.genesis:1.2
 urn:cts:compnov:bible.genesis:1.3
 urn:cts:compnov:bible.genesis:1.4
 urn:cts:compnov:bible.genesis:1.5
 urn:cts:compnov:bible.genesis:1.6
 urn:cts:compnov:bible.genesis:1.7
 urn:cts:compnov:bible.genesis:1.8
-
+urn:cts:compnov:bible.genesis:1.9
 urn:cts:compnov:bible.genesis:1.10
+
+urn:cts:compnov:bible.genesis:1.16
 
 urn:cts:compnov:bible.genesis:1.19
 

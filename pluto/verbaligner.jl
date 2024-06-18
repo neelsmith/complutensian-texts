@@ -14,7 +14,7 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 0abfe5ae-2752-11ef-38cf-f984b91b0112
+# ╔═╡ f82ebfde-453c-4e47-bfeb-df73c7633059
 begin
 	# Tabulae must be version 0.10 or higher.
 	using Tabulae
@@ -34,60 +34,61 @@ begin
 	md"""*Unhide this cell to see Julia package versions*."""
 end
 
-# ╔═╡ ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
+# ╔═╡ e4ab310c-a9aa-4ee6-854a-4935c27e6288
 TableOfContents()
 
-# ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
-nbversion = "1.3.0";
+# ╔═╡ 6568f1e0-2da5-11ef-27df-5f07fa823895
+md"""# Align verbs in parallel passages"""
 
-# ╔═╡ 6048a3e7-abf5-46de-b450-9d6812f915dc
-md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversion CheckBox())"""
+# ╔═╡ a04059ac-04d8-4ed8-a476-fd0231323783
+@bind reloadtext Button("Reload text")
 
-# ╔═╡ 64b25989-dd2d-4407-9993-f083529d918f
-if showversion
-md"""
-
-- **1.3.0**: include passage reference in display
-- **1.2.0**: build parser from source with medieval rules and vocabulary; use 25-character orthography for Vulgate text
-- **1.1.0**: distinguish parsed and unparsed verbs with visual highlighting
-- **1.0.0**: initial release
-"""
-
+# ╔═╡ afb29d3a-55f6-40d6-ba47-99765cfe4a7a
+function mdlist(v)
+	join(v, ", ")
 end
 
-# ╔═╡ 2d774dd8-0513-4957-9b6a-5a33fd300199
-md"""# Morphology of Latin verbs in Complutensian Bible"""
-
-# ╔═╡ b8b8224e-ad2e-47e7-b45a-605ad4571af7
-@bind reloadtext Button("Reload editing of glosses")
-
-# ╔═╡ ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
-md"""*Book*: $(@bind book Select(["genesis" => "Genesis"]))"""
-
-# ╔═╡ 459f076a-c991-41aa-97a4-2fb4b8070fd8
-#md"""*Optionally, add a reference for a passage formatted like* `1.1` or a range of passages formatted like `1.1-1.5`: $(@bind verse confirm(TextField()))"""
-md"""*Optionally, add a reference for a passage formatted like* `1.1`: $(@bind verse confirm(TextField()))"""
-
-# ╔═╡ db93c0c9-4848-4b32-a090-8c57c605e633
+# ╔═╡ 2e8e15ae-f0f6-4b22-a963-33570fcc5180
 html"""
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 """
 
-# ╔═╡ 40fce696-fcfe-43b5-a84e-dc670935e6c4
+# ╔═╡ b53c4198-35f0-4f6b-a58e-20b6aee44e98
 md"""> # Things you can skip"""
 
-# ╔═╡ 8b00adaa-4f2d-47a5-b1db-591ac763380e
-md"""> ### Tokenization and parsing"""
+# ╔═╡ 20bcdb8e-27d6-46b1-bedd-1caf625a2e6e
+md"""> ## Skip tokens"""
 
-# ╔═╡ ae699e89-b241-42ee-85ca-bfed095d8037
+# ╔═╡ bad510e7-19be-4e2e-8279-ba6252fe2f9d
+genA = joinpath(pwd() |> dirname, "notes", "verbs-gen1-16.cex") |> read |> String
+
+# ╔═╡ eda291f3-24bf-4865-96f3-6ca470a82624
+genAdatalines = filter(ln -> ! isempty(ln), split(genA,"\n")[2:end])
+
+# ╔═╡ c295820e-7185-447a-82c5-5cc9d07c3369
+	genAskipcol = map(genAdatalines) do ln
+		split(ln,"|")[3]
+	end
+
+# ╔═╡ d478cf0d-d303-4682-b3a9-f1338d2a8dce
+skiplist = filter(ln -> ! isempty(ln), genAskipcol) |> unique
+
+
+# ╔═╡ 713065c4-9d98-4e10-90cf-5f3c62023fa8
+md"""> ## Aligning passages"""
+
+# ╔═╡ ec75a412-68be-42ba-8219-46e6a0dc73ad
+md"""> ## Tokenization and parsing"""
+
+# ╔═╡ 14949ae5-9993-46ea-8f63-28c04fbfa86c
 ortho23 = latin23()
 
-# ╔═╡ 2a1cebbe-7594-4eee-bbbe-a1b90705f924
+# ╔═╡ 300a8a69-049b-45a3-8d5a-d8c6fd6bfcca
 ortho25 = latin25()
 
-# ╔═╡ 07f9a37b-a39a-452c-a705-3d51d1430c8b
+# ╔═╡ 77bde32d-a14a-4528-8e9f-6cbe4c168f8e
 """True if analysis has a verb form."""
 function verbform(a::Analysis)
 	latform = latinForm(a)
@@ -96,82 +97,7 @@ function verbform(a::Analysis)
 	latform isa LMFParticiple 
 end
 
-# ╔═╡ 86022f06-27b8-480c-b2b6-446d2eb059a1
-"""Format a string representing a lexical token for HTML display."""
-function formatlexstring(s, p)
-	parses = parsetoken(s,p)
-	if isempty(parses)
-		"""<span class="unparsed">$(s)</span>"""
-	elseif verbform(parses[1])
-		"""<span class="hilite">$(s)</span>"""
-	else
-		s
-	end
-end
-
-# ╔═╡ 4a9214db-c200-4e3b-944d-45a67a2c85a7
-"""Format a single passage for HTML display"""
-function formatsingle(psg, ortho, p)
-	tlist = ["<p><span class=\"ref\">$(passagecomponent(urn(psg)))</span> "]
-	for t in tokenize(psg, ortho)
-		if tokencategory(t) isa LexicalToken
-			push!(tlist, " " * formatlexstring(t.passage.text, p))
-		else
-			push!(tlist, t.passage.text)
-		end
-	end
-	push!(tlist,"</p>")
-	join(tlist)
-end
-
-# ╔═╡ 15f946b0-6261-4369-900f-aaa6605175d5
-"""Format a vector of citable passages for HTML display.
-"""
-function formatpsg(psgvect, ortho, p)
-	tlist = []
-	for psg in psgvect
-		if ortho == ortho23
-			normedstr1 = replace(psg.text, "v" => "u")
-			normedstr = replace(normedstr1, "j" => "j")
-			
-			normed = CitablePassage(urn(psg),normedstr)
-				
-			
-			push!(tlist, formatsingle(normed, ortho, p))
-		else
-			
-			push!(tlist, formatsingle(psg, ortho, p))
-		end
-	end
-	
-	join(tlist,"\n")
-end
-
-# ╔═╡ 65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
-md"""(NB: CSS for highlighting in following cell.)"""
-
-# ╔═╡ 7b5000d9-7208-4075-8206-dec7b96de23d
-@htl """
-<style>
-	.hilite {
-		background-color: yellow;
-	}
-	.unparsed {
-		color: silver
-	}
-	.ref {
-		color: blue;
-	}
-</style>
-"""
-
-# ╔═╡ c09235c3-f2df-445e-8713-ef68e186f616
-md"""> ### Text passages"""
-
-# ╔═╡ 77cb4e4e-c90b-4ba0-a6a6-42038ce81f2c
-urnbase = "urn:cts:compnov:bible"
-
-# ╔═╡ f72696b9-27ac-479d-a0aa-f2e48064a511
+# ╔═╡ 3576848a-b0b3-4643-928a-5da897fd7265
 """Retrieve texts from corpus."""
 function retrieve(u::CtsUrn, c::CitableTextCorpus)
 	if isrange(u)
@@ -189,150 +115,143 @@ function retrieve(u::CtsUrn, c::CitableTextCorpus)
 	end
 end
 
-# ╔═╡ 2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
-md"""> ### Textcorpus"""
+# ╔═╡ 83ef729d-125c-41d6-9030-dc5d829f8116
+"""Extract verb forms from a passage"""
+function retrieveverbs(psg, corpus, ortho, parser; stoplist = skiplist)
+	psglist = retrieve(psg, corpus)
+	results = []
+	for p in psglist
+		for t in tokenize(p, ortho)	
+			txtval = text(passage(t))
+			if txtval in stoplist
+				# skip it
+			else
+				parses = parsetoken(txtval, parser)
+				if isempty(parses)
+				elseif verbform(parses[1])
+					push!(results, parses[1] |> token)
+				end
+			end
+		end
+	end
+	results
+end
 
-# ╔═╡ ddcfdd60-1d23-4d5a-bf97-ea377a01ecb1
+# ╔═╡ 9294ef16-705b-494e-96e5-f32e4f4d6491
+md"""> ## Text corpus"""
+
+# ╔═╡ 0ab274df-d0d3-4dab-9f87-252bfd71e811
+md"""### Septuagint glossses"""
+
+# ╔═╡ 5b876552-d296-4a12-87fe-65779766bbc4
 repo = dirname(pwd())
 
-# ╔═╡ 962818cf-547c-4e61-a40f-f0dee1b77c28
-md"""#### Septuagint glosses"""
-
-# ╔═╡ 5dffd504-11c2-45ad-8987-6fdfcc7b5a97
+# ╔═╡ 2c583f26-39b3-4e91-8735-698d27c4b468
 septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
 
-# ╔═╡ 5ab1ddb8-24f5-419e-9ccd-0442224f3347
+# ╔═╡ 6e53ea39-55e4-476f-a31e-afbbaae31f92
 septlatinxmlcorpus = begin
 	reloadtext
 	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
 
-# ╔═╡ 938ca51b-2728-484f-9d0c-55d9fdb10a4a
+# ╔═╡ d217a173-5901-4f5d-a542-1494d317a951
 lxxbldr = normalizedbuilder(; versionid = "lxxlatinnormed")
 
-# ╔═╡ f7c78ed2-c6ec-48bc-aac0-fbb1fb0b27fd
+# ╔═╡ 04bede56-1d54-404c-9fce-fda47cb309f2
 septlatin = edited(lxxbldr, septlatinxmlcorpus)
 
-# ╔═╡ e84d9a63-d531-4d27-8c7d-047fc46998f8
-md"""#### Targum glosses"""
+# ╔═╡ bb83b83c-16bb-4fab-a42d-aa5df38e9a53
+psgreff = map(psg -> dropversion(urn(psg)), septlatin.passages)
 
-# ╔═╡ 66078ed5-353e-4a21-8936-f41f6371f8e9
+# ╔═╡ 67ba6669-d248-4224-a29c-16ab450e1978
+md""" ### Targum glosses"""
+
+# ╔═╡ 31b85560-1933-4935-9ab0-a3cc91564c3e
 targumlatinxml =  joinpath(repo, "editions", "targum_latin_genesis.xml")
 
-# ╔═╡ 6973b628-dbc8-4188-9121-09530e7a89fe
+# ╔═╡ e85e45de-5f66-4c6f-a8d4-64c61187f701
 targbldr = normalizedbuilder(; versionid = "targumlatinnormed")
 
-# ╔═╡ 49faad62-3a6f-4d39-a27f-38e67de6406f
+# ╔═╡ 27557198-c030-438a-9f56-cfdecbe0bd4a
 targumlatinxmlcorpus = begin
 	reloadtext
 	readcitable(targumlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
 
-# ╔═╡ 406ec17e-7ede-4bdc-b5e9-86404fbc81bf
+# ╔═╡ 0137579d-0be0-423b-98da-1965c17ae7ca
 targumlatin = edited(targbldr, targumlatinxmlcorpus)
 
-# ╔═╡ ce437209-793f-4daa-80f8-303f6237ee0b
-md"""#### Vulgate"""
+# ╔═╡ fa00482b-fae8-44f6-8012-4a9428a793c2
+md""" ### Vulgate"""
 
-# ╔═╡ 2cf59288-55cf-4f40-a7a8-37ac25435a13
+# ╔═╡ 0f5274c4-5bee-419d-8460-d660670e8ba6
 srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
 
-# ╔═╡ 10d7b498-f9e8-479e-8d61-fe4233b76df0
+# ╔═╡ 800b981e-377d-4466-81bf-0c1bff1776d5
 corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 
-# ╔═╡ fff4dd01-fe30-4363-bd21-0c44206be92b
+# ╔═╡ 2d238610-add6-481c-8594-ab3e3598e3d9
 vulgate = filter(corpus.passages) do psg
 	versionid(psg.urn) == "vulgate"
 end |> CitableTextCorpus
 
-# ╔═╡ 0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-md"""> ### Build parsers"""
+# ╔═╡ beb900e8-326b-4afd-bdbc-b44720af18e7
+md"""> ## Build parsers"""
 
-# ╔═╡ d8198183-4e97-4f39-9e8e-03a98a939d0a
+# ╔═╡ 29b840c3-7976-4e25-955b-cc2f2516d0bd
 p23url = "http://shot.holycross.edu/tabulae/medieval-lat23-current.cex"
 
-# ╔═╡ e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
+# ╔═╡ 264c7e8b-d738-4928-b6e8-670d00152295
 p25url = "http://shot.holycross.edu/tabulae/medieval-lat25-current.cex"
 
-# ╔═╡ 7b96d31c-b45c-4848-ab8f-64900cc2d1d4
+# ╔═╡ cb147cb4-b577-4d2a-967f-2280fa50c3cb
 parser23 = tabulaeStringParser(p23url, UrlReader)
 
-# ╔═╡ 8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
+# ╔═╡ d7dcc396-a176-47c7-afbf-87b9336d2ee2
+testout = retrieveverbs(psgreff[6], septlatin, ortho23, parser23)
+
+# ╔═╡ df3841db-64ff-493d-81ee-1aa9360828b3
 parser25 = tabulaeStringParser(p25url, UrlReader)
 
-# ╔═╡ 97753b65-a272-4620-8469-df6485ca34c3
-md"""> ### User selections"""
-
-# ╔═╡ a776ad50-892d-4d98-99b7-e7a111934622
-"""Find unique list of chapter values for given book in a corpus."""
-function chaptersforbook(corpus, bookid = "genesis")
-	bookpassages = filter(corpus.passages) do psg
-		workid(psg.urn) == bookid
-	end
-	map(bookpassages) do psg
-		collapsePassageTo(psg.urn, 1) |> passagecomponent
-		
-	end |> unique
-		
-end
-
-# ╔═╡ ff99f087-856e-4b35-a63b-e76d7d2d8709
-md"""*Chapter*: $(@bind chapter Select(chaptersforbook(vulgate, book)))"""
-
-# ╔═╡ f9055bda-a0b8-4129-8f38-a379b75f51ad
-u = if isempty(verse)
-	string(urnbase,".",book,":",chapter) |> CtsUrn
-else
-	string(urnbase,".", book, ":", verse) |> CtsUrn
-end
-
-
-# ╔═╡ 2e8c8eab-ca7a-4a80-97a2-45407f70736e
- targumpsg = retrieve(u, targumlatin)
-
-# ╔═╡ 833c6016-42e4-4f61-ad6a-cf7b694c057c
- septpsg = retrieve(u, septlatin)
-
-# ╔═╡ 6d044127-495e-463d-888d-1d67a3faeab9
-vulgatepsg = retrieve(u, vulgate)
-
-# ╔═╡ b01b5ff3-9e46-477b-94bc-3f1140c3f52d
-begin
-	hdr = isempty(verse) ? "<h4><i>$(titlecase(book))</i> $(chapter)</h4>" : "<h4><i>$(titlecase(book))</i> $(verse)</h4>" 
-
-	targumdisplay = "<p><i>Targum</i></p>" * formatpsg(targumpsg, ortho23, parser23)
-	septdisplay = "<p><i>Septuagint</i></p>" * formatpsg(septpsg, ortho23, parser23)
-	vulgatedisplay = "<p><i>Vulgate</i></p>" * formatpsg(vulgatepsg, ortho25, parser25)
+# ╔═╡ 274afe87-7e6d-4884-9503-db08e468ee88
+function verbsets(psgref::CtsUrn)
+	@info("Get verbs for $(psgref)")
+	(
+	septlatin = retrieveverbs(psgref, septlatin, ortho23, parser23),
+	targumlatin = retrieveverbs(psgref, targumlatin, ortho23, parser23),
+	vulgate = retrieveverbs(psgref, vulgate, ortho25, parser25),
 	
-	hdr * targumdisplay * septdisplay * vulgatedisplay |> HTML
+	
+	)
 end
 
-# ╔═╡ aadc9d89-d5dd-4c41-825a-6296dca32fbc
-md"""> Debugging"""
+# ╔═╡ cf1a781b-4be7-43de-9b44-a0dbee1a5bc9
+allverbsets = map(p -> verbsets(p), psgreff)
 
-# ╔═╡ 7f80a08a-a653-4a4a-9048-da7b82113518
-"""Format a single passage for HTML display"""
-function debug(psg, ortho, p)
-	tlist = ["<p>"]
-	for t in tokenize(psg, ortho)
-		if tokencategory(t) isa LexicalToken
-			push!(tlist, " " * formatlexstring(t.passage.text, p))
-		else
-			push!(tlist, t.passage.text)
-		end
+# ╔═╡ 0c6ab1ee-b367-4512-bd7c-e1fdef5e97f6
+begin
+	mdlines = [
+		"|Ref | LXX glosses | Targum glosses | Vulgate | Aligned |",
+		"| --- | --- | --- | --- | --- |"
+		
+	]
+	for (i,vset) in enumerate(allverbsets)
+		ref = psgreff[i] |> passagecomponent
+		aligned = length(vset.septlatin) == length(vset.targumlatin) == length(vset.vulgate)
+		amark = aligned ? "✅" : "❌"
+		
+		data = [ref, mdlist(vset.septlatin), mdlist(vset.targumlatin),mdlist(vset.vulgate), amark]
+		push!(mdlines, "| " * join(data, " | "), " |")
+		
 	end
-	push!(tlist,"</p>")
-	join(tlist)
+
+	join(mdlines,"\n") |> Markdown.parse
+	
 end
 
-# ╔═╡ 8124a305-8f48-44ab-a9dc-1fadbe4d7f13
-t1 = septpsg[1]
-
-# ╔═╡ cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
-tokenize(t1, ortho25)
-
-# ╔═╡ 5150037b-d2b5-41de-b536-5026372ef442
-debug(t1,ortho25, parser25)
+# ╔═╡ 325e8cc2-1df1-4f26-a9bd-d08745a533d9
+allverbsets[2].septlatin
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -650,9 +569,15 @@ version = "1.1.1"
 
 [[deps.InlineStrings]]
 deps = ["Parsers"]
-git-tree-sha1 = "9cc2baf75c6d09f9da536ddf58eb2f29dedaf461"
+git-tree-sha1 = "86356004f30f8e737eff143d57d41bd580e437aa"
 uuid = "842dd82b-1e85-43dc-bf29-5d0ee9dffc48"
-version = "1.4.0"
+version = "1.4.1"
+
+    [deps.InlineStrings.extensions]
+    ArrowTypesExt = "ArrowTypes"
+
+    [deps.InlineStrings.weakdeps]
+    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
 
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
@@ -1084,62 +1009,51 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─0abfe5ae-2752-11ef-38cf-f984b91b0112
-# ╟─ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
-# ╟─a41a17e7-f985-4a5d-8b76-f91f07824242
-# ╟─6048a3e7-abf5-46de-b450-9d6812f915dc
-# ╟─64b25989-dd2d-4407-9993-f083529d918f
-# ╟─2d774dd8-0513-4957-9b6a-5a33fd300199
-# ╟─b8b8224e-ad2e-47e7-b45a-605ad4571af7
-# ╟─ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
-# ╟─ff99f087-856e-4b35-a63b-e76d7d2d8709
-# ╟─459f076a-c991-41aa-97a4-2fb4b8070fd8
-# ╟─b01b5ff3-9e46-477b-94bc-3f1140c3f52d
-# ╟─db93c0c9-4848-4b32-a090-8c57c605e633
-# ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
-# ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
-# ╠═ae699e89-b241-42ee-85ca-bfed095d8037
-# ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
-# ╠═15f946b0-6261-4369-900f-aaa6605175d5
-# ╠═4a9214db-c200-4e3b-944d-45a67a2c85a7
-# ╠═07f9a37b-a39a-452c-a705-3d51d1430c8b
-# ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
-# ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
-# ╠═7b5000d9-7208-4075-8206-dec7b96de23d
-# ╟─c09235c3-f2df-445e-8713-ef68e186f616
-# ╠═77cb4e4e-c90b-4ba0-a6a6-42038ce81f2c
-# ╟─f9055bda-a0b8-4129-8f38-a379b75f51ad
-# ╟─2e8c8eab-ca7a-4a80-97a2-45407f70736e
-# ╟─833c6016-42e4-4f61-ad6a-cf7b694c057c
-# ╟─6d044127-495e-463d-888d-1d67a3faeab9
-# ╟─f72696b9-27ac-479d-a0aa-f2e48064a511
-# ╟─2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
-# ╠═ddcfdd60-1d23-4d5a-bf97-ea377a01ecb1
-# ╟─962818cf-547c-4e61-a40f-f0dee1b77c28
-# ╠═5dffd504-11c2-45ad-8987-6fdfcc7b5a97
-# ╠═5ab1ddb8-24f5-419e-9ccd-0442224f3347
-# ╠═938ca51b-2728-484f-9d0c-55d9fdb10a4a
-# ╠═f7c78ed2-c6ec-48bc-aac0-fbb1fb0b27fd
-# ╟─e84d9a63-d531-4d27-8c7d-047fc46998f8
-# ╠═66078ed5-353e-4a21-8936-f41f6371f8e9
-# ╠═6973b628-dbc8-4188-9121-09530e7a89fe
-# ╠═49faad62-3a6f-4d39-a27f-38e67de6406f
-# ╠═406ec17e-7ede-4bdc-b5e9-86404fbc81bf
-# ╟─ce437209-793f-4daa-80f8-303f6237ee0b
-# ╠═2cf59288-55cf-4f40-a7a8-37ac25435a13
-# ╠═10d7b498-f9e8-479e-8d61-fe4233b76df0
-# ╠═fff4dd01-fe30-4363-bd21-0c44206be92b
-# ╟─0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-# ╠═d8198183-4e97-4f39-9e8e-03a98a939d0a
-# ╟─e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
-# ╠═7b96d31c-b45c-4848-ab8f-64900cc2d1d4
-# ╠═8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
-# ╟─97753b65-a272-4620-8469-df6485ca34c3
-# ╟─a776ad50-892d-4d98-99b7-e7a111934622
-# ╟─aadc9d89-d5dd-4c41-825a-6296dca32fbc
-# ╟─7f80a08a-a653-4a4a-9048-da7b82113518
-# ╠═cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
-# ╠═5150037b-d2b5-41de-b536-5026372ef442
-# ╠═8124a305-8f48-44ab-a9dc-1fadbe4d7f13
+# ╟─f82ebfde-453c-4e47-bfeb-df73c7633059
+# ╟─e4ab310c-a9aa-4ee6-854a-4935c27e6288
+# ╟─6568f1e0-2da5-11ef-27df-5f07fa823895
+# ╟─a04059ac-04d8-4ed8-a476-fd0231323783
+# ╠═0c6ab1ee-b367-4512-bd7c-e1fdef5e97f6
+# ╠═325e8cc2-1df1-4f26-a9bd-d08745a533d9
+# ╠═afb29d3a-55f6-40d6-ba47-99765cfe4a7a
+# ╟─2e8e15ae-f0f6-4b22-a963-33570fcc5180
+# ╟─b53c4198-35f0-4f6b-a58e-20b6aee44e98
+# ╟─20bcdb8e-27d6-46b1-bedd-1caf625a2e6e
+# ╟─bad510e7-19be-4e2e-8279-ba6252fe2f9d
+# ╠═eda291f3-24bf-4865-96f3-6ca470a82624
+# ╟─c295820e-7185-447a-82c5-5cc9d07c3369
+# ╟─d478cf0d-d303-4682-b3a9-f1338d2a8dce
+# ╟─713065c4-9d98-4e10-90cf-5f3c62023fa8
+# ╠═cf1a781b-4be7-43de-9b44-a0dbee1a5bc9
+# ╟─274afe87-7e6d-4884-9503-db08e468ee88
+# ╟─ec75a412-68be-42ba-8219-46e6a0dc73ad
+# ╟─14949ae5-9993-46ea-8f63-28c04fbfa86c
+# ╠═300a8a69-049b-45a3-8d5a-d8c6fd6bfcca
+# ╟─d7dcc396-a176-47c7-afbf-87b9336d2ee2
+# ╟─77bde32d-a14a-4528-8e9f-6cbe4c168f8e
+# ╟─83ef729d-125c-41d6-9030-dc5d829f8116
+# ╟─3576848a-b0b3-4643-928a-5da897fd7265
+# ╟─bb83b83c-16bb-4fab-a42d-aa5df38e9a53
+# ╟─9294ef16-705b-494e-96e5-f32e4f4d6491
+# ╟─0ab274df-d0d3-4dab-9f87-252bfd71e811
+# ╠═5b876552-d296-4a12-87fe-65779766bbc4
+# ╟─2c583f26-39b3-4e91-8735-698d27c4b468
+# ╟─6e53ea39-55e4-476f-a31e-afbbaae31f92
+# ╟─d217a173-5901-4f5d-a542-1494d317a951
+# ╟─04bede56-1d54-404c-9fce-fda47cb309f2
+# ╟─67ba6669-d248-4224-a29c-16ab450e1978
+# ╟─31b85560-1933-4935-9ab0-a3cc91564c3e
+# ╟─e85e45de-5f66-4c6f-a8d4-64c61187f701
+# ╟─27557198-c030-438a-9f56-cfdecbe0bd4a
+# ╟─0137579d-0be0-423b-98da-1965c17ae7ca
+# ╟─fa00482b-fae8-44f6-8012-4a9428a793c2
+# ╟─0f5274c4-5bee-419d-8460-d660670e8ba6
+# ╠═800b981e-377d-4466-81bf-0c1bff1776d5
+# ╟─2d238610-add6-481c-8594-ab3e3598e3d9
+# ╟─beb900e8-326b-4afd-bdbc-b44720af18e7
+# ╟─29b840c3-7976-4e25-955b-cc2f2516d0bd
+# ╟─264c7e8b-d738-4928-b6e8-670d00152295
+# ╠═cb147cb4-b577-4d2a-967f-2280fa50c3cb
+# ╠═df3841db-64ff-493d-81ee-1aa9360828b3
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

@@ -1,24 +1,9 @@
-Passage|Missing verbs|False matches
-urn:cts:compnov:bible.genesis.targumlatin:1.2||
-urn:cts:compnov:bible.genesis.lxxlatin:1.2|ferebatur|
-urn:cts:compnov:bible.genesis.vulgate:1.2|ferebatur|
-
+Passage|Missing verbs|False 
 urn:cts:compnov:bible.genesis.targumlatin:1.5||mane|
 urn:cts:compnov:bible.genesis.lxxlatin:1.5||mane|
 urn:cts:compnov:bible.genesis.vulgate:1.5||mane|
 
 
-
-urn:cts:compnov:bible.genesis.targumlatin:1.9|Congregentur, appareat||
-urn:cts:compnov:bible.genesis.lxxlatin:1.9|congregentur, appareat, congregata, apparuit||
-urn:cts:compnov:bible.genesis.vulgate:1.9|Congregentur, appareat||
-
-
-
-
-urn:cts:compnov:bible.genesis.targumlatin:1.9|||
-urn:cts:compnov:bible.genesis.lxxlatin:1.9|||
-urn:cts:compnov:bible.genesis.vulgate:1.9|||
 
 
 
@@ -35,25 +20,21 @@ urn:cts:compnov:bible.genesis.targumlatin:1.13||mane
 urn:cts:compnov:bible.genesis.lxxlatin:1.13||mane
 urn:cts:compnov:bible.genesis.vulgate:1.13||mane
 
-urn:cts:compnov:bible.genesis.targumlatin:1.14|numerentur||
-urn:cts:compnov:bible.genesis.lxxlatin:1.14|luceant,diuidendum||
+urn:cts:compnov:bible.genesis.targumlatin:1.14||
+urn:cts:compnov:bible.genesis.lxxlatin:1.14|diuidendum||
 urn:cts:compnov:bible.genesis.vulgate:1.14|||
 
 urn:cts:compnov:bible.genesis.targumlatin:1.15|illuminandum||
-urn:cts:compnov:bible.genesis.lxxlatin:1.15|luceant||
-urn:cts:compnov:bible.genesis.vulgate:1.15|lucenat,illuminent||
+urn:cts:compnov:bible.genesis.lxxlatin:1.15|||
+urn:cts:compnov:bible.genesis.vulgate:1.15|||
 
-
-urn:cts:compnov:bible.genesis.targumlatin:1.16|dominaretur||
-urn:cts:compnov:bible.genesis.lxxlatin:1.16|||
-urn:cts:compnov:bible.genesis.vulgate:1.16|||
 
 urn:cts:compnov:bible.genesis.targumlatin:1.17|illuminandum||
-urn:cts:compnov:bible.genesis.lxxlatin:1.17|lucerent||
-urn:cts:compnov:bible.genesis.vulgate:1.17|lucerent||
+urn:cts:compnov:bible.genesis.lxxlatin:1.17|||
+urn:cts:compnov:bible.genesis.vulgate:1.17|||
 
 
-urn:cts:compnov:bible.genesis.targumlatin:1.18|dominarentur||
+urn:cts:compnov:bible.genesis.targumlatin:1.18|||
 urn:cts:compnov:bible.genesis.lxxlatin:1.18|preessent||
 urn:cts:compnov:bible.genesis.vulgate:1.18|||
 
