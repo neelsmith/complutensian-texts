@@ -1,25 +1,117 @@
 Passage|Missing verbs|False matches
-urn:cts:compnov:bible.genesis.targumlatin:1.1|creauit|
-urn:cts:compnov:bible.genesis.lxxlatin:1.1||
-urn:cts:compnov:bible.genesis.vulgate:1.1||
-
 urn:cts:compnov:bible.genesis.targumlatin:1.2||
 urn:cts:compnov:bible.genesis.lxxlatin:1.2|ferebatur|
 urn:cts:compnov:bible.genesis.vulgate:1.2|ferebatur|
 
-urn:cts:compnov:bible.genesis.targumlatin:1.3|sit|
-urn:cts:compnov:bible.genesis.lxxlatin:1.3||
-urn:cts:compnov:bible.genesis.vulgate:1.3|fiat|
+urn:cts:compnov:bible.genesis.targumlatin:1.5||mane|
+urn:cts:compnov:bible.genesis.lxxlatin:1.5||mane|
+urn:cts:compnov:bible.genesis.vulgate:1.5||mane|
 
-urn:cts:compnov:bible.genesis.targumlatin:1.4||
-urn:cts:compnov:bible.genesis.lxxlatin:1.4||
-urn:cts:compnov:bible.genesis.vulgate:1.4||
 
-urn:cts:compnov:bible.genesis.targumlatin:1.5|appellauitque, vocauit|mane|
-urn:cts:compnov:bible.genesis.lxxlatin:1.5|vocauit, vocauit|mane|
-urn:cts:compnov:bible.genesis.vulgate:1.5|Appellavitque, factum|mane|
 
-urn:cts:compnov:bible.genesis.targumlatin:1.6|sit, diuidat|
-urn:cts:compnov:bible.genesis.lxxlatin:1.6|fiat, sit, diuidens|
-urn:cts:compnov:bible.genesis.vulgate:1.6|Dixit, fiat, dividat|
+urn:cts:compnov:bible.genesis.targumlatin:1.9|Congregentur, appareat||
+urn:cts:compnov:bible.genesis.lxxlatin:1.9|congregentur, appareat, congregata, apparuit||
+urn:cts:compnov:bible.genesis.vulgate:1.9|Congregentur, appareat||
 
+
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.9|||
+urn:cts:compnov:bible.genesis.lxxlatin:1.9|||
+urn:cts:compnov:bible.genesis.vulgate:1.9|||
+
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.11|seminat||
+urn:cts:compnov:bible.genesis.lxxlatin:1.11|germinet, seminantem||
+urn:cts:compnov:bible.genesis.vulgate:1.11|Germinet, virentem||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.12|produxit||
+urn:cts:compnov:bible.genesis.lxxlatin:1.12|protulit,seminantem||
+urn:cts:compnov:bible.genesis.vulgate:1.12|protulit,virentem||
+
+urn:cts:compnov:bible.genesis.targumlatin:1.13||mane
+urn:cts:compnov:bible.genesis.lxxlatin:1.13||mane
+urn:cts:compnov:bible.genesis.vulgate:1.13||mane
+
+urn:cts:compnov:bible.genesis.targumlatin:1.14|numerentur||
+urn:cts:compnov:bible.genesis.lxxlatin:1.14|luceant,diuidendum||
+urn:cts:compnov:bible.genesis.vulgate:1.14|||
+
+urn:cts:compnov:bible.genesis.targumlatin:1.15|illuminandum||
+urn:cts:compnov:bible.genesis.lxxlatin:1.15|luceant||
+urn:cts:compnov:bible.genesis.vulgate:1.15|lucenat,illuminent||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.16|dominaretur||
+urn:cts:compnov:bible.genesis.lxxlatin:1.16|||
+urn:cts:compnov:bible.genesis.vulgate:1.16|||
+
+urn:cts:compnov:bible.genesis.targumlatin:1.17|illuminandum||
+urn:cts:compnov:bible.genesis.lxxlatin:1.17|lucerent||
+urn:cts:compnov:bible.genesis.vulgate:1.17|lucerent||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.18|dominarentur||
+urn:cts:compnov:bible.genesis.lxxlatin:1.18|preessent||
+urn:cts:compnov:bible.genesis.vulgate:1.18|||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.20|serpant||
+urn:cts:compnov:bible.genesis.lxxlatin:1.20|producnat||
+urn:cts:compnov:bible.genesis.vulgate:1.20|Producant||
+
+urn:cts:compnov:bible.genesis.targumlatin:1.21|produxerant||
+urn:cts:compnov:bible.genesis.lxxlatin:1.21|produxerunt||
+urn:cts:compnov:bible.genesis.vulgate:1.21|produxerant||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.22|benedixit, replete||
+urn:cts:compnov:bible.genesis.lxxlatin:1.22|benedixit,replete||
+urn:cts:compnov:bible.genesis.vulgate:1.22|Benedixitque,replete||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.24|Producat||
+urn:cts:compnov:bible.genesis.lxxlatin:1.24|producat||
+urn:cts:compnov:bible.genesis.vulgate:1.24|Producat||
+
+urn:cts:compnov:bible.genesis.targumlatin:1.26|dominetor,reptat||
+urn:cts:compnov:bible.genesis.lxxlatin:1.26|presint,reptantibus||
+urn:cts:compnov:bible.genesis.vulgate:1.26|||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.28|benedixit,replete,roboramini,dominamini,reptat||
+urn:cts:compnov:bible.genesis.lxxlatin:1.28|benedixit,replete,dominamini,reptantibus||
+urn:cts:compnov:bible.genesis.vulgate:1.28|Benedixit,ait,replete,subjicite,dominamini,animantibus,moventur||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.29|seminatur,uescendum||
+urn:cts:compnov:bible.genesis.lxxlatin:1.29|seminantem||
+urn:cts:compnov:bible.genesis.vulgate:1.29|sementem||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.30|reptat,uirentem,uescendum||
+urn:cts:compnov:bible.genesis.lxxlatin:1.30|reptanti,uite||
+urn:cts:compnov:bible.genesis.vulgate:1.30|vescendum||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:1.31|||mane
+urn:cts:compnov:bible.genesis.lxxlatin:1.31|||mane
+urn:cts:compnov:bible.genesis.vulgate:1.31|||mane
+
+
+urn:cts:compnov:bible.genesis.targumlatin:2.1|||
+urn:cts:compnov:bible.genesis.lxxlatin:2.1|||ornatus
+urn:cts:compnov:bible.genesis.vulgate:2.1|||ornatus
+
+
+
+urn:cts:compnov:bible.genesis.targumlatin:2.2|delectatus,requieuit||
+urn:cts:compnov:bible.genesis.lxxlatin:2.2|requieuit||
+urn:cts:compnov:bible.genesis.vulgate:2.2|Complevit,requievit,patrarat||
+
+
+urn:cts:compnov:bible.genesis.targumlatin:2.3|benexit,santificauit,requieuit||
+urn:cts:compnov:bible.genesis.lxxlatin:2.3|benedixit, santicauit,cessauit||
+urn:cts:compnov:bible.genesis.vulgate:2.3|benedixit,santificavit,cessaverat||
