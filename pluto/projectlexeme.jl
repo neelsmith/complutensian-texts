@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.41
+# v0.19.42
 
 using Markdown
 using InteractiveUtils
@@ -27,6 +27,8 @@ begin
 
 	using Orthography, LatinOrthography
 
+	using VectorAlignments
+
 	using Downloads
 	using HypertextLiteral
 
@@ -38,7 +40,7 @@ end
 TableOfContents()
 
 # ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
-nbversion = "1.3.0";
+nbversion = "prerelease"
 
 # ╔═╡ 6048a3e7-abf5-46de-b450-9d6812f915dc
 md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversion CheckBox())"""
@@ -47,16 +49,13 @@ md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversi
 if showversion
 md"""
 
-- **1.3.0**: include passage reference in display
-- **1.2.0**: build parser from source with medieval rules and vocabulary; use 25-character orthography for Vulgate text
-- **1.1.0**: distinguish parsed and unparsed verbs with visual highlighting
-- **1.0.0**: initial release
+- not yet released
 """
 
 end
 
 # ╔═╡ 2d774dd8-0513-4957-9b6a-5a33fd300199
-md"""# Morphology of Latin verbs in Complutensian Bible"""
+md"""# Follow verb vocabulary in Complutensian Bible"""
 
 # ╔═╡ b8b8224e-ad2e-47e7-b45a-605ad4571af7
 @bind reloadtext Button("Reload editing of glosses")
@@ -68,23 +67,11 @@ md"""*Book*: $(@bind book Select(["genesis" => "Genesis"]))"""
 #md"""*Optionally, add a reference for a passage formatted like* `1.1` or a range of passages formatted like `1.1-1.5`: $(@bind verse confirm(TextField()))"""
 md"""*Optionally, add a reference for a passage formatted like* `1.1`: $(@bind verse confirm(TextField()))"""
 
+# ╔═╡ 74385b59-a2ee-46f4-8128-f1b51de2c405
+md"""Verbs for passage:"""
+
 # ╔═╡ 90a31437-1ded-42b6-985b-5a1105928a6f
 md"""*Display passage*: $(@bind psgdisplay CheckBox())"""
-
-# ╔═╡ d253b0fc-5d16-4b06-925f-b2ee3ba587dc
-
-
-# ╔═╡ 467a2d0c-68b1-48b9-8548-083babaf1c92
-function lexsearch(lex::LexemeUrn, atc::AnalyzedTokenCollection)
-	filter(atc.analyses) do atkn
-		if isempty(atkn.analyses)
-			false
-		else
-			lexemeurn(atkn.analyses[1]) == lex
-		
-		end
-	end
-end
 
 # ╔═╡ db93c0c9-4848-4b32-a090-8c57c605e633
 html"""
@@ -95,6 +82,61 @@ html"""
 
 # ╔═╡ 40fce696-fcfe-43b5-a84e-dc670935e6c4
 md"""> # Things you can skip"""
+
+# ╔═╡ 2de743e1-3544-447f-8736-5a4afe9c0a23
+md"""> ## Search results"""
+
+# ╔═╡ accc821f-d65f-4e31-99ec-c3322aa34446
+md"""> ## Lexical search and display"""
+
+# ╔═╡ d084d026-1bdf-455c-8a0c-01ba9f8532d4
+"""Create feature matrix for passage occurrences."""
+function overlapmatrix(tlist, slist, vlist)
+	fm = featurematrix(
+		map(u -> dropversion(collapsePassageBy(u, 1)), tlist),
+		map(u -> dropversion(collapsePassageBy(u, 1)), slist),
+		map(u -> dropversion(collapsePassageBy(u, 1)), vlist)
+	)
+	
+end
+
+# ╔═╡ be473efa-30ad-4d81-96a3-1c09a9f5a5b9
+"""Format markdown display of data for a lexeme in a given passage.
+"""
+function formdata(psg, lex, atkns)
+	bk = workid(psg)
+	ref = passagecomponent(psg)
+	tkndata = filter(atkns.analyses) do atkn
+		if isempty(atkn.analyses)
+			false
+		else
+			u = urn(passage(atkn))
+			alex = lexemeurn(atkn.analyses[1])
+			alex == lex &&
+			workid(u) == bk && passagecomponent(collapsePassageBy(u,1)) == ref
+		end
+	end
+	if isempty(tkndata)
+	else
+		
+		txt = tkndata[1] |> passage |> text
+		"*$(titlecase(bk))* $(ref): $(txt) "
+	end
+
+	
+end
+
+# ╔═╡ 467a2d0c-68b1-48b9-8548-083babaf1c92
+"""Find analyzed tokens matching a given lexeme."""
+function lexsearch(lex::LexemeUrn, atc::AnalyzedTokenCollection)
+	filter(atc.analyses) do atkn
+		if isempty(atkn.analyses)
+			false
+		else
+			lexemeurn(atkn.analyses[1]) == lex
+		end
+	end
+end
 
 # ╔═╡ 8b00adaa-4f2d-47a5-b1db-591ac763380e
 md"""> ### Tokenization and parsing"""
@@ -290,20 +332,20 @@ lxxmorphology = parsecorpus(lxxtkncorpus, parser23)
 # ╔═╡ 0790b3ae-df93-4247-b7d2-b67358542089
 targummorphology = parsecorpus(targumtkncorpus, parser23)
 
-# ╔═╡ bbada28b-fda4-49e3-b0f7-f6083a435077
-targummorphology.analyses[3] |> passage
-
-# ╔═╡ 97669747-b334-4bcb-8acb-24444d4da97e
-targummorphology.analyses[3] |> typeof
-
-# ╔═╡ 915533b6-104f-4ceb-9586-c47eefe42570
+# ╔═╡ eadb51d3-7657-40d2-92b9-798f2bc546dc
 lex = targummorphology.analyses[3].analyses[1] |> lexemeurn
 
-# ╔═╡ b5d8427a-9dbe-4276-8620-f7f6ed092c41
-targummorphology |> typeof
+# ╔═╡ 531bc2fe-fb29-4977-ac84-c35129bb0149
+lxxmatches = lexsearch(lex, lxxmorphology)
+
+# ╔═╡ 790f0cf4-9afb-42db-bc23-b64946749fdf
+lxxurns = lxxmatches .|> passage .|> urn
 
 # ╔═╡ 7e39d901-c9ba-4406-9ac8-ca67b8c4b6b4
-lexsearch(lex, targummorphology)
+targmatches = lexsearch(lex, targummorphology)
+
+# ╔═╡ 4fc4c416-d397-4f69-a944-e8065fb98b2b
+targurns = targmatches .|> passage .|> urn
 
 # ╔═╡ 8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
 parser25 = tabulaeStringParser(p25url, UrlReader)
@@ -312,7 +354,35 @@ parser25 = tabulaeStringParser(p25url, UrlReader)
 vulgatemorphology = parsecorpus(vulgatetkncorpus, parser25)
 
 # ╔═╡ f800c5de-ddd4-48c6-88eb-986ff83435fe
-lexsearch(lex, vulgatemorphology)
+vulgmatches = lexsearch(lex, vulgatemorphology)
+
+# ╔═╡ 231f96f0-dfc3-4508-b5f8-7fa2b082eb3d
+vulgurns = vulgmatches .|> passage .|> urn
+
+# ╔═╡ 16633789-9233-485c-a226-fadab84ac55d
+overs = overlapmatrix(targurns, lxxurns, vulgurns)
+
+# ╔═╡ 3ce76567-a503-43d8-89d5-0c1c76c9f37c
+"""Create markdown table for feature matrix."""
+function tabview(fm)
+	mdlines = [
+		"| Targum glosses | Septuagint glosses | Vulgate |",
+		"| --- | --- | --- |"
+	]
+	
+	for r in eachrow(overs)
+		t = isnothing(r[1]) ? "" : formdata(r[1], lex, targummorphology)
+		s = isnothing(r[2]) ? "" : formdata(r[2], lex, lxxmorphology)
+		v = isnothing(r[3]) ? "" : formdata(r[3], lex, vulgatemorphology)
+		#println("$(t) - $(s) - $(v)")
+		push!(mdlines, "| $(t) | $(s) | $(v) |"	)
+	end
+	join(mdlines,"\n")
+	
+end
+
+# ╔═╡ b0b71689-a7dc-433b-9544-c0736f7ac24d
+tabview(overs) |> Markdown.parse
 
 # ╔═╡ 97753b65-a272-4620-8469-df6485ca34c3
 md"""> ### User selections"""
@@ -403,6 +473,7 @@ LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
+VectorAlignments = "137e0234-31ad-43b7-8b27-b236525e28e1"
 
 [compat]
 CitableBase = "~10.4.0"
@@ -416,15 +487,16 @@ LatinOrthography = "~0.7.3"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.59"
 Tabulae = "~0.11.1"
+VectorAlignments = "~0.3.0"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "acbef897e192a27103ffb7b45f01f31caa0a8bb7"
+project_hash = "d0e1d04978dc54e949f2defd5ddfa44a849f710d"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -542,7 +614,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -863,7 +935,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -1099,6 +1171,12 @@ uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 [[deps.Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
+[[deps.VectorAlignments]]
+deps = ["DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
+git-tree-sha1 = "749e1c027969c6cd421c7762bfe764fcfb55f8f7"
+uuid = "137e0234-31ad-43b7-8b27-b236525e28e1"
+version = "0.3.0"
+
 [[deps.WeakRefStrings]]
 deps = ["DataAPI", "InlineStrings", "Parsers"]
 git-tree-sha1 = "b1be2855ed9ed8eac54e5caff2afcdb442d52c23"
@@ -1145,21 +1223,29 @@ version = "17.4.0+2"
 # ╟─64b25989-dd2d-4407-9993-f083529d918f
 # ╟─2d774dd8-0513-4957-9b6a-5a33fd300199
 # ╟─b8b8224e-ad2e-47e7-b45a-605ad4571af7
+# ╟─eadb51d3-7657-40d2-92b9-798f2bc546dc
 # ╟─ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
 # ╟─ff99f087-856e-4b35-a63b-e76d7d2d8709
 # ╟─459f076a-c991-41aa-97a4-2fb4b8070fd8
+# ╟─74385b59-a2ee-46f4-8128-f1b51de2c405
 # ╟─90a31437-1ded-42b6-985b-5a1105928a6f
-# ╠═d253b0fc-5d16-4b06-925f-b2ee3ba587dc
-# ╠═bbada28b-fda4-49e3-b0f7-f6083a435077
-# ╠═97669747-b334-4bcb-8acb-24444d4da97e
-# ╠═915533b6-104f-4ceb-9586-c47eefe42570
-# ╠═b5d8427a-9dbe-4276-8620-f7f6ed092c41
-# ╠═7e39d901-c9ba-4406-9ac8-ca67b8c4b6b4
-# ╠═f800c5de-ddd4-48c6-88eb-986ff83435fe
-# ╠═467a2d0c-68b1-48b9-8548-083babaf1c92
 # ╟─b01b5ff3-9e46-477b-94bc-3f1140c3f52d
+# ╟─b0b71689-a7dc-433b-9544-c0736f7ac24d
 # ╟─db93c0c9-4848-4b32-a090-8c57c605e633
 # ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
+# ╟─2de743e1-3544-447f-8736-5a4afe9c0a23
+# ╠═7e39d901-c9ba-4406-9ac8-ca67b8c4b6b4
+# ╠═531bc2fe-fb29-4977-ac84-c35129bb0149
+# ╠═f800c5de-ddd4-48c6-88eb-986ff83435fe
+# ╠═790f0cf4-9afb-42db-bc23-b64946749fdf
+# ╠═231f96f0-dfc3-4508-b5f8-7fa2b082eb3d
+# ╠═4fc4c416-d397-4f69-a944-e8065fb98b2b
+# ╠═16633789-9233-485c-a226-fadab84ac55d
+# ╟─accc821f-d65f-4e31-99ec-c3322aa34446
+# ╟─d084d026-1bdf-455c-8a0c-01ba9f8532d4
+# ╟─3ce76567-a503-43d8-89d5-0c1c76c9f37c
+# ╟─be473efa-30ad-4d81-96a3-1c09a9f5a5b9
+# ╟─467a2d0c-68b1-48b9-8548-083babaf1c92
 # ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
 # ╟─ae699e89-b241-42ee-85ca-bfed095d8037
 # ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
@@ -1179,12 +1265,12 @@ version = "17.4.0+2"
 # ╟─2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
 # ╠═ddcfdd60-1d23-4d5a-bf97-ea377a01ecb1
 # ╟─962818cf-547c-4e61-a40f-f0dee1b77c28
-# ╠═5dffd504-11c2-45ad-8987-6fdfcc7b5a97
-# ╠═5ab1ddb8-24f5-419e-9ccd-0442224f3347
-# ╠═938ca51b-2728-484f-9d0c-55d9fdb10a4a
-# ╠═f7c78ed2-c6ec-48bc-aac0-fbb1fb0b27fd
-# ╠═447af1de-19d9-4926-8379-5913e6c63b92
-# ╠═eb5bfd46-7cc3-4f83-8c20-606e270ec77b
+# ╟─5dffd504-11c2-45ad-8987-6fdfcc7b5a97
+# ╟─5ab1ddb8-24f5-419e-9ccd-0442224f3347
+# ╟─938ca51b-2728-484f-9d0c-55d9fdb10a4a
+# ╟─f7c78ed2-c6ec-48bc-aac0-fbb1fb0b27fd
+# ╟─447af1de-19d9-4926-8379-5913e6c63b92
+# ╟─eb5bfd46-7cc3-4f83-8c20-606e270ec77b
 # ╟─e84d9a63-d531-4d27-8c7d-047fc46998f8
 # ╠═66078ed5-353e-4a21-8936-f41f6371f8e9
 # ╠═6973b628-dbc8-4188-9121-09530e7a89fe
@@ -1193,22 +1279,22 @@ version = "17.4.0+2"
 # ╠═b8b1ed2a-a60d-4c86-91fe-f256c0296c53
 # ╟─0790b3ae-df93-4247-b7d2-b67358542089
 # ╟─ce437209-793f-4daa-80f8-303f6237ee0b
-# ╠═2cf59288-55cf-4f40-a7a8-37ac25435a13
-# ╠═10d7b498-f9e8-479e-8d61-fe4233b76df0
-# ╠═fff4dd01-fe30-4363-bd21-0c44206be92b
-# ╠═e672b6ab-97a4-41d9-a4f2-be332f5555ae
-# ╠═9a994c87-3323-45bc-94be-0ecbe0e525bd
+# ╟─2cf59288-55cf-4f40-a7a8-37ac25435a13
+# ╟─10d7b498-f9e8-479e-8d61-fe4233b76df0
+# ╟─fff4dd01-fe30-4363-bd21-0c44206be92b
+# ╟─e672b6ab-97a4-41d9-a4f2-be332f5555ae
+# ╟─9a994c87-3323-45bc-94be-0ecbe0e525bd
 # ╟─0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-# ╠═d8198183-4e97-4f39-9e8e-03a98a939d0a
+# ╟─d8198183-4e97-4f39-9e8e-03a98a939d0a
 # ╟─e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
-# ╠═7b96d31c-b45c-4848-ab8f-64900cc2d1d4
-# ╠═8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
+# ╟─7b96d31c-b45c-4848-ab8f-64900cc2d1d4
+# ╟─8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
 # ╟─97753b65-a272-4620-8469-df6485ca34c3
 # ╟─a776ad50-892d-4d98-99b7-e7a111934622
 # ╟─aadc9d89-d5dd-4c41-825a-6296dca32fbc
 # ╟─7f80a08a-a653-4a4a-9048-da7b82113518
-# ╠═cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
-# ╠═5150037b-d2b5-41de-b536-5026372ef442
-# ╠═8124a305-8f48-44ab-a9dc-1fadbe4d7f13
+# ╟─cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
+# ╟─5150037b-d2b5-41de-b536-5026372ef442
+# ╟─8124a305-8f48-44ab-a9dc-1fadbe4d7f13
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
