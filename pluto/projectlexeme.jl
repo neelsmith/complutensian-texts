@@ -40,7 +40,7 @@ end
 TableOfContents()
 
 # ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
-nbversion = "prerelease"
+nbversion = "1.0.0";
 
 # ╔═╡ 6048a3e7-abf5-46de-b450-9d6812f915dc
 md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversion CheckBox())"""
@@ -49,7 +49,7 @@ md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversi
 if showversion
 md"""
 
-- not yet released
+- **1.0.0**: initial release
 """
 
 end
@@ -67,11 +67,11 @@ md"""*Book*: $(@bind book Select(["genesis" => "Genesis"]))"""
 #md"""*Optionally, add a reference for a passage formatted like* `1.1` or a range of passages formatted like `1.1-1.5`: $(@bind verse confirm(TextField()))"""
 md"""*Optionally, add a reference for a passage formatted like* `1.1`: $(@bind verse confirm(TextField()))"""
 
-# ╔═╡ 74385b59-a2ee-46f4-8128-f1b51de2c405
-md"""Verbs for passage:"""
-
 # ╔═╡ 90a31437-1ded-42b6-985b-5a1105928a6f
 md"""*Display passage*: $(@bind psgdisplay CheckBox())"""
+
+# ╔═╡ 14b9672c-c3c9-410a-bcfb-031a5cbfc448
+md"""*Limit results to Genesis*: $(@bind genesisonly CheckBox(true))"""
 
 # ╔═╡ db93c0c9-4848-4b32-a090-8c57c605e633
 html"""
@@ -82,6 +82,12 @@ html"""
 
 # ╔═╡ 40fce696-fcfe-43b5-a84e-dc670935e6c4
 md"""> # Things you can skip"""
+
+# ╔═╡ bdabd75a-0476-4dce-9950-a23c94644021
+md"""> ## Extracting verbs"""
+
+# ╔═╡ de48c082-70cf-43d3-be1f-7131658a340e
+skiplist = ["mane"]
 
 # ╔═╡ 2de743e1-3544-447f-8736-5a4afe9c0a23
 md"""> ## Search results"""
@@ -249,6 +255,28 @@ function retrieve(u::CtsUrn, c::CitableTextCorpus)
 	end
 end
 
+# ╔═╡ c7cf0cdf-9c00-4ad0-9fe6-fa64e9b3cb01
+"""Extract verb forms from a passage"""
+function retrieveverbs(psg, corpus, ortho, parser; stoplist = skiplist)
+	psglist = retrieve(psg, corpus)
+	results = []
+	for p in psglist
+		for t in tokenize(p, ortho)	
+			txtval = text(passage(t))
+			if txtval in stoplist
+				# skip it
+			else
+				parses = parsetoken(txtval, parser)
+				if isempty(parses)
+				elseif verbform(parses[1])
+					push!(results, parses[1] |> token)
+				end
+			end
+		end
+	end
+	results
+end
+
 # ╔═╡ 2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
 md"""> ### Textcorpus"""
 
@@ -307,12 +335,33 @@ srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compno
 corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 
 # ╔═╡ fff4dd01-fe30-4363-bd21-0c44206be92b
-vulgate = filter(corpus.passages) do psg
-	versionid(psg.urn) == "vulgate"
+vulgateall = filter(corpus.passages) do psg
+			versionid(psg.urn) == "vulgate"
 end |> CitableTextCorpus
 
+# ╔═╡ f9870dc1-273d-4f78-b3ed-a3e09f31ed12
+genesisvulgate = filter(corpus.passages) do psg
+			versionid(psg.urn) == "vulgate" && 
+			workid(psg.urn) == "genesis"
+end |> CitableTextCorpus
+
+# ╔═╡ c9c1d57c-6739-4640-8297-3a18d54d5b2f
+vulgate = genesisonly ? genesisvulgate : vulgateall
+
+# ╔═╡ 7f0bbcd8-0f85-4ae4-a796-64fc5a64a4f7
+md"""Tokenized:"""
+
 # ╔═╡ e672b6ab-97a4-41d9-a4f2-be332f5555ae
-vulgatetkncorpus = tokenizedcorpus(vulgate, ortho23)
+vulgatealltkncorpus = tokenizedcorpus(vulgate, ortho25)
+
+# ╔═╡ 88b41b9b-afba-4c20-a2fe-f5da9c1a5044
+vulgategenesistkncorpus =  tokenizedcorpus(genesisvulgate, ortho25)
+
+# ╔═╡ 6e795a5d-8f85-4c2e-80fe-9c2b928dd633
+vulgatetkncorpus = genesisonly ? vulgategenesistkncorpus : vulgatealltkncorpus
+
+# ╔═╡ 97f8525f-6be5-4c5e-b041-39e6f7a3e738
+md"""Morphologically parsed:"""
 
 # ╔═╡ 0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
 md"""> ### Build parsers"""
@@ -332,57 +381,20 @@ lxxmorphology = parsecorpus(lxxtkncorpus, parser23)
 # ╔═╡ 0790b3ae-df93-4247-b7d2-b67358542089
 targummorphology = parsecorpus(targumtkncorpus, parser23)
 
-# ╔═╡ eadb51d3-7657-40d2-92b9-798f2bc546dc
-lex = targummorphology.analyses[3].analyses[1] |> lexemeurn
-
-# ╔═╡ 531bc2fe-fb29-4977-ac84-c35129bb0149
-lxxmatches = lexsearch(lex, lxxmorphology)
-
-# ╔═╡ 790f0cf4-9afb-42db-bc23-b64946749fdf
-lxxurns = lxxmatches .|> passage .|> urn
-
-# ╔═╡ 7e39d901-c9ba-4406-9ac8-ca67b8c4b6b4
-targmatches = lexsearch(lex, targummorphology)
-
-# ╔═╡ 4fc4c416-d397-4f69-a944-e8065fb98b2b
-targurns = targmatches .|> passage .|> urn
+# ╔═╡ 6d6ddbf4-427f-4639-9ff1-8c63ea2e9be6
+targummorphology.analyses[1] |> passage |> urn
 
 # ╔═╡ 8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
 parser25 = tabulaeStringParser(p25url, UrlReader)
 
+# ╔═╡ a1567847-562f-40cc-b6f0-05d0da1fadeb
+vulgategenmorphology = parsecorpus(vulgategenesistkncorpus, parser25)
+
+# ╔═╡ badcdba4-418f-4484-bf54-8fe60735398f
+vulgateallmorphology = parsecorpus(vulgatealltkncorpus, parser25)
+
 # ╔═╡ 9a994c87-3323-45bc-94be-0ecbe0e525bd
-vulgatemorphology = parsecorpus(vulgatetkncorpus, parser25)
-
-# ╔═╡ f800c5de-ddd4-48c6-88eb-986ff83435fe
-vulgmatches = lexsearch(lex, vulgatemorphology)
-
-# ╔═╡ 231f96f0-dfc3-4508-b5f8-7fa2b082eb3d
-vulgurns = vulgmatches .|> passage .|> urn
-
-# ╔═╡ 16633789-9233-485c-a226-fadab84ac55d
-overs = overlapmatrix(targurns, lxxurns, vulgurns)
-
-# ╔═╡ 3ce76567-a503-43d8-89d5-0c1c76c9f37c
-"""Create markdown table for feature matrix."""
-function tabview(fm)
-	mdlines = [
-		"| Targum glosses | Septuagint glosses | Vulgate |",
-		"| --- | --- | --- |"
-	]
-	
-	for r in eachrow(overs)
-		t = isnothing(r[1]) ? "" : formdata(r[1], lex, targummorphology)
-		s = isnothing(r[2]) ? "" : formdata(r[2], lex, lxxmorphology)
-		v = isnothing(r[3]) ? "" : formdata(r[3], lex, vulgatemorphology)
-		#println("$(t) - $(s) - $(v)")
-		push!(mdlines, "| $(t) | $(s) | $(v) |"	)
-	end
-	join(mdlines,"\n")
-	
-end
-
-# ╔═╡ b0b71689-a7dc-433b-9544-c0736f7ac24d
-tabview(overs) |> Markdown.parse
+vulgatemorphology = genesisonly ? vulgategenmorphology : vulgateallmorphology #parsecorpus(vulgatetkncorpus, parser25)
 
 # ╔═╡ 97753b65-a272-4620-8469-df6485ca34c3
 md"""> ### User selections"""
@@ -402,6 +414,107 @@ end
 
 # ╔═╡ ff99f087-856e-4b35-a63b-e76d7d2d8709
 md"""*Chapter*: $(@bind chapter Select(chaptersforbook(vulgate, book)))"""
+
+# ╔═╡ ebb5eda5-09e9-4d3c-8212-8baafa795d0e
+userpsg = isempty(verse) ? chapter : verse
+
+# ╔═╡ 74385b59-a2ee-46f4-8128-f1b51de2c405
+md"""Verbs for passage: $(book) $(userpsg)"""
+
+# ╔═╡ e1a94885-0ae1-4873-b2cc-37d1ccae6243
+userurn = "urn:cts:compnov:bible.genesis.$(book):$(userpsg)" |> CtsUrn
+
+# ╔═╡ 83488aaf-8ae4-40fb-a8ed-f45bacc25741
+function verbtokensfind(atkncoll)
+	vbtokens = filter(atkncoll.analyses) do atkn
+		u = urn(passage(atkn))
+		if isempty(atkn.analyses)
+			false
+		else
+			verbform(atkn.analyses[1]) && 
+			workid(u) == book && passagecomponent(collapsePassageBy(u,1)) == userpsg 
+		end
+	end
+	map(vbtokens) do atkn
+		disp =  string(lexemeurn(atkn.analyses[1]), " (", token(atkn.analyses[1]), ")")
+		(lexemeurn(atkn.analyses[1]) => disp )
+	end
+end
+
+# ╔═╡ 7f9fe7be-81b5-49cf-94a6-39f8d60c9239
+verbtokensfind(targummorphology)
+
+# ╔═╡ c11062a9-6823-4ea9-94fe-be48cb3f4040
+"""Compose menu of verb forms for selected passage"""
+function verbmenu()
+	leader = [nothing => ""]
+	targpsgverbs = verbtokensfind(targummorphology)
+	lxxpsgverbs = verbtokensfind(lxxmorphology)
+	vulgpsgverbs = verbtokensfind(vulgatemorphology)
+	vcat(leader, targpsgverbs, lxxpsgverbs, vulgpsgverbs)
+	
+		#=begin
+		tpverbs = filter(targummorphology.analyses) do atkn
+			u = urn(passage(atkn))
+			if isempty(atkn.analyses)
+				false
+			else
+				verbform(atkn.analyses[1]) && 
+				workid(u) == book && passagecomponent(collapsePassageBy(u,1)) == userpsg 
+			end
+		end
+		map(tpverbs) do atkn
+			disp =  string(lexemeurn(atkn.analyses[1]), " (", token(atkn.analyses[1]), ")")
+			(lexemeurn(atkn.analyses[1]) => disp )
+		end
+	end =#
+end
+
+# ╔═╡ 0785a0f6-ef5a-4481-a8a0-8cbdac80e293
+md"""*Choose a verb from the selected passage*: $(@bind theverb Select(verbmenu()))"""
+
+# ╔═╡ 7e39d901-c9ba-4406-9ac8-ca67b8c4b6b4
+targmatches = isnothing(theverb) ? [] : lexsearch(theverb, targummorphology)
+
+# ╔═╡ 4fc4c416-d397-4f69-a944-e8065fb98b2b
+targurns = targmatches .|> passage .|> urn
+
+# ╔═╡ 531bc2fe-fb29-4977-ac84-c35129bb0149
+lxxmatches = isnothing(theverb) ? [] : lexsearch(theverb, lxxmorphology)
+
+# ╔═╡ 790f0cf4-9afb-42db-bc23-b64946749fdf
+lxxurns = lxxmatches .|> passage .|> urn
+
+# ╔═╡ f800c5de-ddd4-48c6-88eb-986ff83435fe
+vulgmatches = isnothing(theverb) ? [] : lexsearch(theverb, vulgatemorphology)
+
+# ╔═╡ 231f96f0-dfc3-4508-b5f8-7fa2b082eb3d
+vulgurns = vulgmatches .|> passage .|> urn
+
+# ╔═╡ 16633789-9233-485c-a226-fadab84ac55d
+overs = isnothing(theverb) ? nothing : overlapmatrix(targurns, lxxurns, vulgurns)
+
+# ╔═╡ 3ce76567-a503-43d8-89d5-0c1c76c9f37c
+"""Create markdown table for feature matrix."""
+function tabview(fm)
+	mdlines = [
+		"| Targum glosses | Septuagint glosses | Vulgate |",
+		"| --- | --- | --- |"
+	]
+	
+	for r in eachrow(overs)
+		t = isnothing(r[1]) ? "" : formdata(r[1], theverb, targummorphology)
+		s = isnothing(r[2]) ? "" : formdata(r[2], theverb, lxxmorphology)
+		v = isnothing(r[3]) ? "" : formdata(r[3], theverb, vulgatemorphology)
+		#println("$(t) - $(s) - $(v)")
+		push!(mdlines, "| $(t) | $(s) | $(v) |"	)
+	end
+	join(mdlines,"\n")
+	
+end
+
+# ╔═╡ b0b71689-a7dc-433b-9544-c0736f7ac24d
+isnothing(theverb) ? nothing : (tabview(overs) |> Markdown.parse)
 
 # ╔═╡ f9055bda-a0b8-4129-8f38-a379b75f51ad
 u = if isempty(verse)
@@ -1223,16 +1336,26 @@ version = "17.4.0+2"
 # ╟─64b25989-dd2d-4407-9993-f083529d918f
 # ╟─2d774dd8-0513-4957-9b6a-5a33fd300199
 # ╟─b8b8224e-ad2e-47e7-b45a-605ad4571af7
-# ╟─eadb51d3-7657-40d2-92b9-798f2bc546dc
 # ╟─ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
 # ╟─ff99f087-856e-4b35-a63b-e76d7d2d8709
 # ╟─459f076a-c991-41aa-97a4-2fb4b8070fd8
+# ╟─0785a0f6-ef5a-4481-a8a0-8cbdac80e293
 # ╟─74385b59-a2ee-46f4-8128-f1b51de2c405
 # ╟─90a31437-1ded-42b6-985b-5a1105928a6f
 # ╟─b01b5ff3-9e46-477b-94bc-3f1140c3f52d
+# ╟─14b9672c-c3c9-410a-bcfb-031a5cbfc448
 # ╟─b0b71689-a7dc-433b-9544-c0736f7ac24d
 # ╟─db93c0c9-4848-4b32-a090-8c57c605e633
 # ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
+# ╟─bdabd75a-0476-4dce-9950-a23c94644021
+# ╟─ebb5eda5-09e9-4d3c-8212-8baafa795d0e
+# ╟─e1a94885-0ae1-4873-b2cc-37d1ccae6243
+# ╠═6d6ddbf4-427f-4639-9ff1-8c63ea2e9be6
+# ╟─83488aaf-8ae4-40fb-a8ed-f45bacc25741
+# ╠═7f9fe7be-81b5-49cf-94a6-39f8d60c9239
+# ╟─c11062a9-6823-4ea9-94fe-be48cb3f4040
+# ╠═de48c082-70cf-43d3-be1f-7131658a340e
+# ╟─c7cf0cdf-9c00-4ad0-9fe6-fa64e9b3cb01
 # ╟─2de743e1-3544-447f-8736-5a4afe9c0a23
 # ╠═7e39d901-c9ba-4406-9ac8-ca67b8c4b6b4
 # ╠═531bc2fe-fb29-4977-ac84-c35129bb0149
@@ -1243,7 +1366,7 @@ version = "17.4.0+2"
 # ╠═16633789-9233-485c-a226-fadab84ac55d
 # ╟─accc821f-d65f-4e31-99ec-c3322aa34446
 # ╟─d084d026-1bdf-455c-8a0c-01ba9f8532d4
-# ╟─3ce76567-a503-43d8-89d5-0c1c76c9f37c
+# ╠═3ce76567-a503-43d8-89d5-0c1c76c9f37c
 # ╟─be473efa-30ad-4d81-96a3-1c09a9f5a5b9
 # ╟─467a2d0c-68b1-48b9-8548-083babaf1c92
 # ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
@@ -1251,7 +1374,7 @@ version = "17.4.0+2"
 # ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
 # ╟─15f946b0-6261-4369-900f-aaa6605175d5
 # ╟─4a9214db-c200-4e3b-944d-45a67a2c85a7
-# ╟─07f9a37b-a39a-452c-a705-3d51d1430c8b
+# ╠═07f9a37b-a39a-452c-a705-3d51d1430c8b
 # ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
 # ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
 # ╠═7b5000d9-7208-4075-8206-dec7b96de23d
@@ -1261,7 +1384,7 @@ version = "17.4.0+2"
 # ╟─2e8c8eab-ca7a-4a80-97a2-45407f70736e
 # ╟─833c6016-42e4-4f61-ad6a-cf7b694c057c
 # ╟─6d044127-495e-463d-888d-1d67a3faeab9
-# ╟─f72696b9-27ac-479d-a0aa-f2e48064a511
+# ╠═f72696b9-27ac-479d-a0aa-f2e48064a511
 # ╟─2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
 # ╠═ddcfdd60-1d23-4d5a-bf97-ea377a01ecb1
 # ╟─962818cf-547c-4e61-a40f-f0dee1b77c28
@@ -1281,9 +1404,17 @@ version = "17.4.0+2"
 # ╟─ce437209-793f-4daa-80f8-303f6237ee0b
 # ╟─2cf59288-55cf-4f40-a7a8-37ac25435a13
 # ╟─10d7b498-f9e8-479e-8d61-fe4233b76df0
-# ╟─fff4dd01-fe30-4363-bd21-0c44206be92b
-# ╟─e672b6ab-97a4-41d9-a4f2-be332f5555ae
-# ╟─9a994c87-3323-45bc-94be-0ecbe0e525bd
+# ╠═fff4dd01-fe30-4363-bd21-0c44206be92b
+# ╠═f9870dc1-273d-4f78-b3ed-a3e09f31ed12
+# ╠═c9c1d57c-6739-4640-8297-3a18d54d5b2f
+# ╟─7f0bbcd8-0f85-4ae4-a796-64fc5a64a4f7
+# ╠═e672b6ab-97a4-41d9-a4f2-be332f5555ae
+# ╠═88b41b9b-afba-4c20-a2fe-f5da9c1a5044
+# ╠═6e795a5d-8f85-4c2e-80fe-9c2b928dd633
+# ╟─97f8525f-6be5-4c5e-b041-39e6f7a3e738
+# ╠═a1567847-562f-40cc-b6f0-05d0da1fadeb
+# ╠═badcdba4-418f-4484-bf54-8fe60735398f
+# ╠═9a994c87-3323-45bc-94be-0ecbe0e525bd
 # ╟─0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
 # ╟─d8198183-4e97-4f39-9e8e-03a98a939d0a
 # ╟─e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
