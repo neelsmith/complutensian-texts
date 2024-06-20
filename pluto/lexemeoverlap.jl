@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.42
+# v0.19.41
 
 using Markdown
 using InteractiveUtils
@@ -38,7 +38,7 @@ end
 TableOfContents()
 
 # ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
-nbversion = "1.3.0";
+nbversion = "prerelease";
 
 # ╔═╡ 6048a3e7-abf5-46de-b450-9d6812f915dc
 md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversion CheckBox())"""
@@ -47,16 +47,13 @@ md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversi
 if showversion
 md"""
 
-- **1.3.0**: include passage reference in display
-- **1.2.0**: build parser from source with medieval rules and vocabulary; use 25-character orthography for Vulgate text
-- **1.1.0**: distinguish parsed and unparsed verbs with visual highlighting
-- **1.0.0**: initial release
+- not yet released
 """
 
 end
 
 # ╔═╡ 2d774dd8-0513-4957-9b6a-5a33fd300199
-md"""# Morphology of Latin verbs in Complutensian Bible"""
+md"""# Overlapping lexemes in Latin documents of Complutensian Bible"""
 
 # ╔═╡ b8b8224e-ad2e-47e7-b45a-605ad4571af7
 @bind reloadtext Button("Reload editing of glosses")
@@ -68,6 +65,9 @@ md"""*Book*: $(@bind book Select(["genesis" => "Genesis"]))"""
 #md"""*Optionally, add a reference for a passage formatted like* `1.1` or a range of passages formatted like `1.1-1.5`: $(@bind verse confirm(TextField()))"""
 md"""*Optionally, add a reference for a passage formatted like* `1.1`: $(@bind verse confirm(TextField()))"""
 
+# ╔═╡ 07ebab5e-f728-4167-b8de-df99a70a1545
+
+
 # ╔═╡ db93c0c9-4848-4b32-a090-8c57c605e633
 html"""
 <br/><br/><br/><br/><br/>
@@ -77,6 +77,9 @@ html"""
 
 # ╔═╡ 40fce696-fcfe-43b5-a84e-dc670935e6c4
 md"""> # Things you can skip"""
+
+# ╔═╡ 05c1af16-fea5-429b-b9ae-3fbd12d11094
+
 
 # ╔═╡ 8b00adaa-4f2d-47a5-b1db-591ac763380e
 md"""> ### Tokenization and parsing"""
@@ -96,6 +99,54 @@ function verbform(a::Analysis)
 	latform isa LMFParticiple 
 end
 
+# ╔═╡ 4a9214db-c200-4e3b-944d-45a67a2c85a7
+"""
+"""
+function singlelexemes(psg, ortho, p)
+	vlist = []
+	tlist = ["<p><span class=\"ref\">$(passagecomponent(urn(psg)))</span> "]
+	for t in tokenize(psg, ortho)
+		if tokencategory(t) isa LexicalToken
+			parses = parsetoken(t.passage.text,p)
+			if ! isempty(parses)
+				if verbform(parses[1])
+					parse1 = parses[1]
+					tkn = token(parse1)
+					lex = lexemeurn(parse1)
+					push!(vlist, (token = tkn, lexeme = lex))
+				end
+			end
+		end	
+	end
+	push!(tlist,"</p>")
+	join(tlist)
+	vlist
+end
+
+# ╔═╡ 15f946b0-6261-4369-900f-aaa6605175d5
+""".
+"""
+function passagelexemes(psgvect, ortho, p)
+	tlist = []
+	for psg in psgvect
+		if ortho == ortho23
+			normedstr1 = replace(psg.text, "v" => "u")
+			normedstr = replace(normedstr1, "j" => "j")
+			
+			normed = CitablePassage(urn(psg),normedstr)
+				
+			
+			push!(tlist, singlelexemes(normed, ortho, p))
+		else
+			
+			push!(tlist, singlelexemes(psg, ortho, p))
+		end
+	end
+	
+	#join(tlist,"\n")
+	tlist
+end
+
 # ╔═╡ 86022f06-27b8-480c-b2b6-446d2eb059a1
 """Format a string representing a lexical token for HTML display."""
 function formatlexstring(s, p)
@@ -107,44 +158,6 @@ function formatlexstring(s, p)
 	else
 		s
 	end
-end
-
-# ╔═╡ 4a9214db-c200-4e3b-944d-45a67a2c85a7
-"""Format a single passage for HTML display"""
-function formatsingle(psg, ortho, p)
-	tlist = ["<p><span class=\"ref\">$(passagecomponent(urn(psg)))</span> "]
-	for t in tokenize(psg, ortho)
-		if tokencategory(t) isa LexicalToken
-			push!(tlist, " " * formatlexstring(t.passage.text, p))
-		else
-			push!(tlist, t.passage.text)
-		end
-	end
-	push!(tlist,"</p>")
-	join(tlist)
-end
-
-# ╔═╡ 15f946b0-6261-4369-900f-aaa6605175d5
-"""Format a vector of citable passages for HTML display.
-"""
-function formatpsg(psgvect, ortho, p)
-	tlist = []
-	for psg in psgvect
-		if ortho == ortho23
-			normedstr1 = replace(psg.text, "v" => "u")
-			normedstr = replace(normedstr1, "j" => "j")
-			
-			normed = CitablePassage(urn(psg),normedstr)
-				
-			
-			push!(tlist, formatsingle(normed, ortho, p))
-		else
-			
-			push!(tlist, formatsingle(psg, ortho, p))
-		end
-	end
-	
-	join(tlist,"\n")
 end
 
 # ╔═╡ 65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
@@ -172,7 +185,7 @@ md"""> ### Text passages"""
 urnbase = "urn:cts:compnov:bible"
 
 # ╔═╡ f72696b9-27ac-479d-a0aa-f2e48064a511
-"""Retrieve texts from corpus."""
+"""Retrieve texts from corpus, omitting title elements."""
 function retrieve(u::CtsUrn, c::CitableTextCorpus)
 	if isrange(u)
 		"Not handling rnges yet."
@@ -180,11 +193,14 @@ function retrieve(u::CtsUrn, c::CitableTextCorpus)
 		psgref = passagecomponent(u)
 		dotted = psgref * "."
 		
-		filter(c.passages) do psg
+		psglist = filter(c.passages) do psg
 			checkref = passagecomponent(psg.urn) 
 			groupid(psg.urn) == groupid(u) &&
 			workid(psg.urn) == workid(u) &&
 			(psgref == checkref || startswith(checkref, dotted) )
+		end
+		filter(psglist) do psg
+			! endswith(passagecomponent(urn(psg)), "title")
 		end
 	end
 end
@@ -290,6 +306,11 @@ end
 # ╔═╡ 2e8c8eab-ca7a-4a80-97a2-45407f70736e
  targumpsg = retrieve(u, targumlatin)
 
+# ╔═╡ cba6ce0f-dc74-4b47-b718-03ef3d3a61c8
+ map(passagelexemes(targumpsg, ortho23, parser23)[1]) do pr
+	 pr.lexeme
+ end .|> string |> Set
+
 # ╔═╡ 833c6016-42e4-4f61-ad6a-cf7b694c057c
  septpsg = retrieve(u, septlatin)
 
@@ -298,13 +319,57 @@ vulgatepsg = retrieve(u, vulgate)
 
 # ╔═╡ b01b5ff3-9e46-477b-94bc-3f1140c3f52d
 begin
-	hdr = isempty(verse) ? "<h4><i>$(titlecase(book))</i> $(chapter)</h4>" : "<h4><i>$(titlecase(book))</i> $(verse)</h4>" 
+	hdr = isempty(verse) ? "#### *$(titlecase(book))* $(chapter)" : "#### *$(titlecase(book))* $(verse)" 
 
-	targumdisplay = "<p><i>Targum</i></p>" * formatpsg(targumpsg, ortho23, parser23)
-	septdisplay = "<p><i>Septuagint</i></p>" * formatpsg(septpsg, ortho23, parser23)
-	vulgatedisplay = "<p><i>Vulgate</i></p>" * formatpsg(vulgatepsg, ortho25, parser25)
+	reff = targumpsg .|> urn .|> passagecomponent
+
+
 	
-	hdr * targumdisplay * septdisplay * vulgatedisplay |> HTML
+	targ = passagelexemes(targumpsg, ortho23, parser23)
+	sept = passagelexemes(septpsg, ortho23, parser23) 
+	vulg = passagelexemes(vulgatepsg, ortho25, parser25) 
+	
+	mdlines = [hdr, "",
+		"| Passage | Targum gloss | Septuagint gloss | Vulgate |",
+		"| --- | --- | --- | --- |"
+	
+	]
+
+	for (i, tpsg) in enumerate(targ)
+		
+		tlex = map(pr -> pr.lexeme, tpsg) .|> string .|> Set
+		slex = map(pr -> pr.lexeme, sept[i]) .|> string .|> Set
+		vlex = map(pr -> pr.lexeme, vulg[i]) .|> string .|> Set
+
+		matched = tlex == slex == vlex
+		if matched
+			push!(mdlines, "| MATCHED! | |||" )
+		else
+			push!(mdlines, "| no match | |||" )
+		end
+		#tlist = join(tpsg .|> token, ", ") 
+		#=
+		
+		
+		slist = if length(sept) >= i
+			join( (sept[i] .|> token), ", ")
+		else
+			"???"
+		end
+		vlist = if length(vulg) >= i
+			join( (vulg[i] .|> token), ", ")
+		else
+			"???"
+		end
+			#length(sept) >= i) ? join( (sept[i] .|> token), ", ") : "???"
+		#vlist = length(vulg) >= i) ? join(vulg[i] .|> token, ", ")  : "???"
+		row = "| $(reff[i]) | $(tlist) | $(slist) | $(vlist) |"
+		push!(mdlines,row)
+		=#
+	end
+
+	join(mdlines, "\n") |> Markdown.parse
+	
 end
 
 # ╔═╡ aadc9d89-d5dd-4c41-825a-6296dca32fbc
@@ -368,7 +433,7 @@ Tabulae = "~0.11.1"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.0"
 manifest_format = "2.0"
 project_hash = "acbef897e192a27103ffb7b45f01f31caa0a8bb7"
 
@@ -488,7 +553,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.0.5+1"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -809,7 +874,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+4"
+version = "0.3.23+2"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -1095,24 +1160,27 @@ version = "17.4.0+2"
 # ╟─ff99f087-856e-4b35-a63b-e76d7d2d8709
 # ╟─459f076a-c991-41aa-97a4-2fb4b8070fd8
 # ╟─b01b5ff3-9e46-477b-94bc-3f1140c3f52d
+# ╠═cba6ce0f-dc74-4b47-b718-03ef3d3a61c8
+# ╠═07ebab5e-f728-4167-b8de-df99a70a1545
 # ╟─db93c0c9-4848-4b32-a090-8c57c605e633
 # ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
+# ╠═05c1af16-fea5-429b-b9ae-3fbd12d11094
 # ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
-# ╠═ae699e89-b241-42ee-85ca-bfed095d8037
+# ╟─ae699e89-b241-42ee-85ca-bfed095d8037
 # ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
 # ╠═15f946b0-6261-4369-900f-aaa6605175d5
 # ╠═4a9214db-c200-4e3b-944d-45a67a2c85a7
-# ╠═07f9a37b-a39a-452c-a705-3d51d1430c8b
+# ╟─07f9a37b-a39a-452c-a705-3d51d1430c8b
 # ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
 # ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
 # ╠═7b5000d9-7208-4075-8206-dec7b96de23d
 # ╟─c09235c3-f2df-445e-8713-ef68e186f616
 # ╠═77cb4e4e-c90b-4ba0-a6a6-42038ce81f2c
 # ╟─f9055bda-a0b8-4129-8f38-a379b75f51ad
-# ╟─2e8c8eab-ca7a-4a80-97a2-45407f70736e
+# ╠═2e8c8eab-ca7a-4a80-97a2-45407f70736e
 # ╟─833c6016-42e4-4f61-ad6a-cf7b694c057c
 # ╟─6d044127-495e-463d-888d-1d67a3faeab9
-# ╟─f72696b9-27ac-479d-a0aa-f2e48064a511
+# ╠═f72696b9-27ac-479d-a0aa-f2e48064a511
 # ╟─2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
 # ╠═ddcfdd60-1d23-4d5a-bf97-ea377a01ecb1
 # ╟─962818cf-547c-4e61-a40f-f0dee1b77c28

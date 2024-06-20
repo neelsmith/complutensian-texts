@@ -27,6 +27,8 @@ begin
 
 	using Orthography, LatinOrthography
 
+	using VectorAlignments
+
 	using Downloads
 	using HypertextLiteral
 
@@ -38,7 +40,7 @@ end
 TableOfContents()
 
 # ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
-nbversion = "1.3.0";
+nbversion = "1.0.0";
 
 # ╔═╡ 6048a3e7-abf5-46de-b450-9d6812f915dc
 md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversion CheckBox())"""
@@ -47,16 +49,13 @@ md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversi
 if showversion
 md"""
 
-- **1.3.0**: include passage reference in display
-- **1.2.0**: build parser from source with medieval rules and vocabulary; use 25-character orthography for Vulgate text
-- **1.1.0**: distinguish parsed and unparsed verbs with visual highlighting
 - **1.0.0**: initial release
 """
 
 end
 
 # ╔═╡ 2d774dd8-0513-4957-9b6a-5a33fd300199
-md"""# Morphology of Latin verbs in Complutensian Bible"""
+md"""# Follow verb vocabulary in Complutensian Bible"""
 
 # ╔═╡ b8b8224e-ad2e-47e7-b45a-605ad4571af7
 @bind reloadtext Button("Reload editing of glosses")
@@ -68,6 +67,12 @@ md"""*Book*: $(@bind book Select(["genesis" => "Genesis"]))"""
 #md"""*Optionally, add a reference for a passage formatted like* `1.1` or a range of passages formatted like `1.1-1.5`: $(@bind verse confirm(TextField()))"""
 md"""*Optionally, add a reference for a passage formatted like* `1.1`: $(@bind verse confirm(TextField()))"""
 
+# ╔═╡ 90a31437-1ded-42b6-985b-5a1105928a6f
+md"""*Display passage*: $(@bind psgdisplay CheckBox())"""
+
+# ╔═╡ 14b9672c-c3c9-410a-bcfb-031a5cbfc448
+md"""*Limit results to Genesis*: $(@bind genesisonly CheckBox(true))"""
+
 # ╔═╡ db93c0c9-4848-4b32-a090-8c57c605e633
 html"""
 <br/><br/><br/><br/><br/>
@@ -77,6 +82,67 @@ html"""
 
 # ╔═╡ 40fce696-fcfe-43b5-a84e-dc670935e6c4
 md"""> # Things you can skip"""
+
+# ╔═╡ bdabd75a-0476-4dce-9950-a23c94644021
+md"""> ## Extracting verbs"""
+
+# ╔═╡ de48c082-70cf-43d3-be1f-7131658a340e
+skiplist = ["mane"]
+
+# ╔═╡ 2de743e1-3544-447f-8736-5a4afe9c0a23
+md"""> ## Search results"""
+
+# ╔═╡ accc821f-d65f-4e31-99ec-c3322aa34446
+md"""> ## Lexical search and display"""
+
+# ╔═╡ d084d026-1bdf-455c-8a0c-01ba9f8532d4
+"""Create feature matrix for passage occurrences."""
+function overlapmatrix(tlist, slist, vlist)
+	fm = featurematrix(
+		map(u -> dropversion(collapsePassageBy(u, 1)), tlist),
+		map(u -> dropversion(collapsePassageBy(u, 1)), slist),
+		map(u -> dropversion(collapsePassageBy(u, 1)), vlist)
+	)
+	
+end
+
+# ╔═╡ be473efa-30ad-4d81-96a3-1c09a9f5a5b9
+"""Format markdown display of data for a lexeme in a given passage.
+"""
+function formdata(psg, lex, atkns)
+	bk = workid(psg)
+	ref = passagecomponent(psg)
+	tkndata = filter(atkns.analyses) do atkn
+		if isempty(atkn.analyses)
+			false
+		else
+			u = urn(passage(atkn))
+			alex = lexemeurn(atkn.analyses[1])
+			alex == lex &&
+			workid(u) == bk && passagecomponent(collapsePassageBy(u,1)) == ref
+		end
+	end
+	if isempty(tkndata)
+	else
+		
+		txt = tkndata[1] |> passage |> text
+		"*$(titlecase(bk))* $(ref): $(txt) "
+	end
+
+	
+end
+
+# ╔═╡ 467a2d0c-68b1-48b9-8548-083babaf1c92
+"""Find analyzed tokens matching a given lexeme."""
+function lexsearch(lex::LexemeUrn, atc::AnalyzedTokenCollection)
+	filter(atc.analyses) do atkn
+		if isempty(atkn.analyses)
+			false
+		else
+			lexemeurn(atkn.analyses[1]) == lex
+		end
+	end
+end
 
 # ╔═╡ 8b00adaa-4f2d-47a5-b1db-591ac763380e
 md"""> ### Tokenization and parsing"""
@@ -189,6 +255,28 @@ function retrieve(u::CtsUrn, c::CitableTextCorpus)
 	end
 end
 
+# ╔═╡ c7cf0cdf-9c00-4ad0-9fe6-fa64e9b3cb01
+"""Extract verb forms from a passage"""
+function retrieveverbs(psg, corpus, ortho, parser; stoplist = skiplist)
+	psglist = retrieve(psg, corpus)
+	results = []
+	for p in psglist
+		for t in tokenize(p, ortho)	
+			txtval = text(passage(t))
+			if txtval in stoplist
+				# skip it
+			else
+				parses = parsetoken(txtval, parser)
+				if isempty(parses)
+				elseif verbform(parses[1])
+					push!(results, parses[1] |> token)
+				end
+			end
+		end
+	end
+	results
+end
+
 # ╔═╡ 2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
 md"""> ### Textcorpus"""
 
@@ -213,6 +301,9 @@ lxxbldr = normalizedbuilder(; versionid = "lxxlatinnormed")
 # ╔═╡ f7c78ed2-c6ec-48bc-aac0-fbb1fb0b27fd
 septlatin = edited(lxxbldr, septlatinxmlcorpus)
 
+# ╔═╡ 447af1de-19d9-4926-8379-5913e6c63b92
+lxxtkncorpus = tokenizedcorpus(septlatin, ortho23)
+
 # ╔═╡ e84d9a63-d531-4d27-8c7d-047fc46998f8
 md"""#### Targum glosses"""
 
@@ -231,6 +322,9 @@ end
 # ╔═╡ 406ec17e-7ede-4bdc-b5e9-86404fbc81bf
 targumlatin = edited(targbldr, targumlatinxmlcorpus)
 
+# ╔═╡ b8b1ed2a-a60d-4c86-91fe-f256c0296c53
+targumtkncorpus = tokenizedcorpus(targumlatin, ortho23)
+
 # ╔═╡ ce437209-793f-4daa-80f8-303f6237ee0b
 md"""#### Vulgate"""
 
@@ -241,9 +335,33 @@ srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compno
 corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 
 # ╔═╡ fff4dd01-fe30-4363-bd21-0c44206be92b
-vulgate = filter(corpus.passages) do psg
-	versionid(psg.urn) == "vulgate"
+vulgateall = filter(corpus.passages) do psg
+			versionid(psg.urn) == "vulgate"
 end |> CitableTextCorpus
+
+# ╔═╡ f9870dc1-273d-4f78-b3ed-a3e09f31ed12
+genesisvulgate = filter(corpus.passages) do psg
+			versionid(psg.urn) == "vulgate" && 
+			workid(psg.urn) == "genesis"
+end |> CitableTextCorpus
+
+# ╔═╡ c9c1d57c-6739-4640-8297-3a18d54d5b2f
+vulgate = genesisonly ? genesisvulgate : vulgateall
+
+# ╔═╡ 7f0bbcd8-0f85-4ae4-a796-64fc5a64a4f7
+md"""Tokenized:"""
+
+# ╔═╡ e672b6ab-97a4-41d9-a4f2-be332f5555ae
+vulgatealltkncorpus = tokenizedcorpus(vulgate, ortho25)
+
+# ╔═╡ 88b41b9b-afba-4c20-a2fe-f5da9c1a5044
+vulgategenesistkncorpus =  tokenizedcorpus(genesisvulgate, ortho25)
+
+# ╔═╡ 6e795a5d-8f85-4c2e-80fe-9c2b928dd633
+vulgatetkncorpus = genesisonly ? vulgategenesistkncorpus : vulgatealltkncorpus
+
+# ╔═╡ 97f8525f-6be5-4c5e-b041-39e6f7a3e738
+md"""Morphologically parsed:"""
 
 # ╔═╡ 0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
 md"""> ### Build parsers"""
@@ -257,8 +375,26 @@ p25url = "http://shot.holycross.edu/tabulae/medieval-lat25-current.cex"
 # ╔═╡ 7b96d31c-b45c-4848-ab8f-64900cc2d1d4
 parser23 = tabulaeStringParser(p23url, UrlReader)
 
+# ╔═╡ eb5bfd46-7cc3-4f83-8c20-606e270ec77b
+lxxmorphology = parsecorpus(lxxtkncorpus, parser23)
+
+# ╔═╡ 0790b3ae-df93-4247-b7d2-b67358542089
+targummorphology = parsecorpus(targumtkncorpus, parser23)
+
+# ╔═╡ 6d6ddbf4-427f-4639-9ff1-8c63ea2e9be6
+targummorphology.analyses[1] |> passage |> urn
+
 # ╔═╡ 8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
 parser25 = tabulaeStringParser(p25url, UrlReader)
+
+# ╔═╡ a1567847-562f-40cc-b6f0-05d0da1fadeb
+vulgategenmorphology = parsecorpus(vulgategenesistkncorpus, parser25)
+
+# ╔═╡ badcdba4-418f-4484-bf54-8fe60735398f
+vulgateallmorphology = parsecorpus(vulgatealltkncorpus, parser25)
+
+# ╔═╡ 9a994c87-3323-45bc-94be-0ecbe0e525bd
+vulgatemorphology = genesisonly ? vulgategenmorphology : vulgateallmorphology #parsecorpus(vulgatetkncorpus, parser25)
 
 # ╔═╡ 97753b65-a272-4620-8469-df6485ca34c3
 md"""> ### User selections"""
@@ -279,6 +415,107 @@ end
 # ╔═╡ ff99f087-856e-4b35-a63b-e76d7d2d8709
 md"""*Chapter*: $(@bind chapter Select(chaptersforbook(vulgate, book)))"""
 
+# ╔═╡ ebb5eda5-09e9-4d3c-8212-8baafa795d0e
+userpsg = isempty(verse) ? chapter : verse
+
+# ╔═╡ 74385b59-a2ee-46f4-8128-f1b51de2c405
+md"""Verbs for passage: $(book) $(userpsg)"""
+
+# ╔═╡ e1a94885-0ae1-4873-b2cc-37d1ccae6243
+userurn = "urn:cts:compnov:bible.genesis.$(book):$(userpsg)" |> CtsUrn
+
+# ╔═╡ 83488aaf-8ae4-40fb-a8ed-f45bacc25741
+function verbtokensfind(atkncoll)
+	vbtokens = filter(atkncoll.analyses) do atkn
+		u = urn(passage(atkn))
+		if isempty(atkn.analyses)
+			false
+		else
+			verbform(atkn.analyses[1]) && 
+			workid(u) == book && passagecomponent(collapsePassageBy(u,1)) == userpsg 
+		end
+	end
+	map(vbtokens) do atkn
+		disp =  string(lexemeurn(atkn.analyses[1]), " (", token(atkn.analyses[1]), ")")
+		(lexemeurn(atkn.analyses[1]) => disp )
+	end
+end
+
+# ╔═╡ 7f9fe7be-81b5-49cf-94a6-39f8d60c9239
+verbtokensfind(targummorphology)
+
+# ╔═╡ c11062a9-6823-4ea9-94fe-be48cb3f4040
+"""Compose menu of verb forms for selected passage"""
+function verbmenu()
+	leader = [nothing => ""]
+	targpsgverbs = verbtokensfind(targummorphology)
+	lxxpsgverbs = verbtokensfind(lxxmorphology)
+	vulgpsgverbs = verbtokensfind(vulgatemorphology)
+	vcat(leader, targpsgverbs, lxxpsgverbs, vulgpsgverbs)
+	
+		#=begin
+		tpverbs = filter(targummorphology.analyses) do atkn
+			u = urn(passage(atkn))
+			if isempty(atkn.analyses)
+				false
+			else
+				verbform(atkn.analyses[1]) && 
+				workid(u) == book && passagecomponent(collapsePassageBy(u,1)) == userpsg 
+			end
+		end
+		map(tpverbs) do atkn
+			disp =  string(lexemeurn(atkn.analyses[1]), " (", token(atkn.analyses[1]), ")")
+			(lexemeurn(atkn.analyses[1]) => disp )
+		end
+	end =#
+end
+
+# ╔═╡ 0785a0f6-ef5a-4481-a8a0-8cbdac80e293
+md"""*Choose a verb from the selected passage*: $(@bind theverb Select(verbmenu()))"""
+
+# ╔═╡ 7e39d901-c9ba-4406-9ac8-ca67b8c4b6b4
+targmatches = isnothing(theverb) ? [] : lexsearch(theverb, targummorphology)
+
+# ╔═╡ 4fc4c416-d397-4f69-a944-e8065fb98b2b
+targurns = targmatches .|> passage .|> urn
+
+# ╔═╡ 531bc2fe-fb29-4977-ac84-c35129bb0149
+lxxmatches = isnothing(theverb) ? [] : lexsearch(theverb, lxxmorphology)
+
+# ╔═╡ 790f0cf4-9afb-42db-bc23-b64946749fdf
+lxxurns = lxxmatches .|> passage .|> urn
+
+# ╔═╡ f800c5de-ddd4-48c6-88eb-986ff83435fe
+vulgmatches = isnothing(theverb) ? [] : lexsearch(theverb, vulgatemorphology)
+
+# ╔═╡ 231f96f0-dfc3-4508-b5f8-7fa2b082eb3d
+vulgurns = vulgmatches .|> passage .|> urn
+
+# ╔═╡ 16633789-9233-485c-a226-fadab84ac55d
+overs = isnothing(theverb) ? nothing : overlapmatrix(targurns, lxxurns, vulgurns)
+
+# ╔═╡ 3ce76567-a503-43d8-89d5-0c1c76c9f37c
+"""Create markdown table for feature matrix."""
+function tabview(fm)
+	mdlines = [
+		"| Targum glosses | Septuagint glosses | Vulgate |",
+		"| --- | --- | --- |"
+	]
+	
+	for r in eachrow(overs)
+		t = isnothing(r[1]) ? "" : formdata(r[1], theverb, targummorphology)
+		s = isnothing(r[2]) ? "" : formdata(r[2], theverb, lxxmorphology)
+		v = isnothing(r[3]) ? "" : formdata(r[3], theverb, vulgatemorphology)
+		#println("$(t) - $(s) - $(v)")
+		push!(mdlines, "| $(t) | $(s) | $(v) |"	)
+	end
+	join(mdlines,"\n")
+	
+end
+
+# ╔═╡ b0b71689-a7dc-433b-9544-c0736f7ac24d
+isnothing(theverb) ? nothing : (tabview(overs) |> Markdown.parse)
+
 # ╔═╡ f9055bda-a0b8-4129-8f38-a379b75f51ad
 u = if isempty(verse)
 	string(urnbase,".",book,":",chapter) |> CtsUrn
@@ -297,7 +534,7 @@ end
 vulgatepsg = retrieve(u, vulgate)
 
 # ╔═╡ b01b5ff3-9e46-477b-94bc-3f1140c3f52d
-begin
+if psgdisplay
 	hdr = isempty(verse) ? "<h4><i>$(titlecase(book))</i> $(chapter)</h4>" : "<h4><i>$(titlecase(book))</i> $(verse)</h4>" 
 
 	targumdisplay = "<p><i>Targum</i></p>" * formatpsg(targumpsg, ortho23, parser23)
@@ -349,6 +586,7 @@ LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
+VectorAlignments = "137e0234-31ad-43b7-8b27-b236525e28e1"
 
 [compat]
 CitableBase = "~10.4.0"
@@ -362,6 +600,7 @@ LatinOrthography = "~0.7.3"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.59"
 Tabulae = "~0.11.1"
+VectorAlignments = "~0.3.0"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -370,7 +609,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "acbef897e192a27103ffb7b45f01f31caa0a8bb7"
+project_hash = "d0e1d04978dc54e949f2defd5ddfa44a849f710d"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1045,6 +1284,12 @@ uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 [[deps.Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
+[[deps.VectorAlignments]]
+deps = ["DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
+git-tree-sha1 = "749e1c027969c6cd421c7762bfe764fcfb55f8f7"
+uuid = "137e0234-31ad-43b7-8b27-b236525e28e1"
+version = "0.3.0"
+
 [[deps.WeakRefStrings]]
 deps = ["DataAPI", "InlineStrings", "Parsers"]
 git-tree-sha1 = "b1be2855ed9ed8eac54e5caff2afcdb442d52c23"
@@ -1094,14 +1339,41 @@ version = "17.4.0+2"
 # ╟─ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
 # ╟─ff99f087-856e-4b35-a63b-e76d7d2d8709
 # ╟─459f076a-c991-41aa-97a4-2fb4b8070fd8
+# ╟─0785a0f6-ef5a-4481-a8a0-8cbdac80e293
+# ╟─74385b59-a2ee-46f4-8128-f1b51de2c405
+# ╟─90a31437-1ded-42b6-985b-5a1105928a6f
 # ╟─b01b5ff3-9e46-477b-94bc-3f1140c3f52d
+# ╟─14b9672c-c3c9-410a-bcfb-031a5cbfc448
+# ╟─b0b71689-a7dc-433b-9544-c0736f7ac24d
 # ╟─db93c0c9-4848-4b32-a090-8c57c605e633
 # ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
+# ╟─bdabd75a-0476-4dce-9950-a23c94644021
+# ╟─ebb5eda5-09e9-4d3c-8212-8baafa795d0e
+# ╟─e1a94885-0ae1-4873-b2cc-37d1ccae6243
+# ╠═6d6ddbf4-427f-4639-9ff1-8c63ea2e9be6
+# ╟─83488aaf-8ae4-40fb-a8ed-f45bacc25741
+# ╠═7f9fe7be-81b5-49cf-94a6-39f8d60c9239
+# ╟─c11062a9-6823-4ea9-94fe-be48cb3f4040
+# ╠═de48c082-70cf-43d3-be1f-7131658a340e
+# ╟─c7cf0cdf-9c00-4ad0-9fe6-fa64e9b3cb01
+# ╟─2de743e1-3544-447f-8736-5a4afe9c0a23
+# ╠═7e39d901-c9ba-4406-9ac8-ca67b8c4b6b4
+# ╠═531bc2fe-fb29-4977-ac84-c35129bb0149
+# ╠═f800c5de-ddd4-48c6-88eb-986ff83435fe
+# ╠═790f0cf4-9afb-42db-bc23-b64946749fdf
+# ╠═231f96f0-dfc3-4508-b5f8-7fa2b082eb3d
+# ╠═4fc4c416-d397-4f69-a944-e8065fb98b2b
+# ╠═16633789-9233-485c-a226-fadab84ac55d
+# ╟─accc821f-d65f-4e31-99ec-c3322aa34446
+# ╟─d084d026-1bdf-455c-8a0c-01ba9f8532d4
+# ╠═3ce76567-a503-43d8-89d5-0c1c76c9f37c
+# ╟─be473efa-30ad-4d81-96a3-1c09a9f5a5b9
+# ╟─467a2d0c-68b1-48b9-8548-083babaf1c92
 # ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
-# ╠═ae699e89-b241-42ee-85ca-bfed095d8037
+# ╟─ae699e89-b241-42ee-85ca-bfed095d8037
 # ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
-# ╠═15f946b0-6261-4369-900f-aaa6605175d5
-# ╠═4a9214db-c200-4e3b-944d-45a67a2c85a7
+# ╟─15f946b0-6261-4369-900f-aaa6605175d5
+# ╟─4a9214db-c200-4e3b-944d-45a67a2c85a7
 # ╠═07f9a37b-a39a-452c-a705-3d51d1430c8b
 # ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
 # ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
@@ -1112,34 +1384,48 @@ version = "17.4.0+2"
 # ╟─2e8c8eab-ca7a-4a80-97a2-45407f70736e
 # ╟─833c6016-42e4-4f61-ad6a-cf7b694c057c
 # ╟─6d044127-495e-463d-888d-1d67a3faeab9
-# ╟─f72696b9-27ac-479d-a0aa-f2e48064a511
+# ╠═f72696b9-27ac-479d-a0aa-f2e48064a511
 # ╟─2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
 # ╠═ddcfdd60-1d23-4d5a-bf97-ea377a01ecb1
 # ╟─962818cf-547c-4e61-a40f-f0dee1b77c28
-# ╠═5dffd504-11c2-45ad-8987-6fdfcc7b5a97
-# ╠═5ab1ddb8-24f5-419e-9ccd-0442224f3347
-# ╠═938ca51b-2728-484f-9d0c-55d9fdb10a4a
-# ╠═f7c78ed2-c6ec-48bc-aac0-fbb1fb0b27fd
+# ╟─5dffd504-11c2-45ad-8987-6fdfcc7b5a97
+# ╟─5ab1ddb8-24f5-419e-9ccd-0442224f3347
+# ╟─938ca51b-2728-484f-9d0c-55d9fdb10a4a
+# ╟─f7c78ed2-c6ec-48bc-aac0-fbb1fb0b27fd
+# ╠═447af1de-19d9-4926-8379-5913e6c63b92
+# ╟─eb5bfd46-7cc3-4f83-8c20-606e270ec77b
 # ╟─e84d9a63-d531-4d27-8c7d-047fc46998f8
 # ╠═66078ed5-353e-4a21-8936-f41f6371f8e9
 # ╠═6973b628-dbc8-4188-9121-09530e7a89fe
 # ╠═49faad62-3a6f-4d39-a27f-38e67de6406f
 # ╠═406ec17e-7ede-4bdc-b5e9-86404fbc81bf
+# ╠═b8b1ed2a-a60d-4c86-91fe-f256c0296c53
+# ╟─0790b3ae-df93-4247-b7d2-b67358542089
 # ╟─ce437209-793f-4daa-80f8-303f6237ee0b
-# ╠═2cf59288-55cf-4f40-a7a8-37ac25435a13
-# ╠═10d7b498-f9e8-479e-8d61-fe4233b76df0
+# ╟─2cf59288-55cf-4f40-a7a8-37ac25435a13
+# ╟─10d7b498-f9e8-479e-8d61-fe4233b76df0
 # ╠═fff4dd01-fe30-4363-bd21-0c44206be92b
+# ╠═f9870dc1-273d-4f78-b3ed-a3e09f31ed12
+# ╠═c9c1d57c-6739-4640-8297-3a18d54d5b2f
+# ╟─7f0bbcd8-0f85-4ae4-a796-64fc5a64a4f7
+# ╠═e672b6ab-97a4-41d9-a4f2-be332f5555ae
+# ╠═88b41b9b-afba-4c20-a2fe-f5da9c1a5044
+# ╠═6e795a5d-8f85-4c2e-80fe-9c2b928dd633
+# ╟─97f8525f-6be5-4c5e-b041-39e6f7a3e738
+# ╠═a1567847-562f-40cc-b6f0-05d0da1fadeb
+# ╠═badcdba4-418f-4484-bf54-8fe60735398f
+# ╠═9a994c87-3323-45bc-94be-0ecbe0e525bd
 # ╟─0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-# ╠═d8198183-4e97-4f39-9e8e-03a98a939d0a
+# ╟─d8198183-4e97-4f39-9e8e-03a98a939d0a
 # ╟─e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
-# ╠═7b96d31c-b45c-4848-ab8f-64900cc2d1d4
-# ╠═8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
+# ╟─7b96d31c-b45c-4848-ab8f-64900cc2d1d4
+# ╟─8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
 # ╟─97753b65-a272-4620-8469-df6485ca34c3
 # ╟─a776ad50-892d-4d98-99b7-e7a111934622
 # ╟─aadc9d89-d5dd-4c41-825a-6296dca32fbc
 # ╟─7f80a08a-a653-4a4a-9048-da7b82113518
-# ╠═cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
-# ╠═5150037b-d2b5-41de-b536-5026372ef442
-# ╠═8124a305-8f48-44ab-a9dc-1fadbe4d7f13
+# ╟─cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
+# ╟─5150037b-d2b5-41de-b536-5026372ef442
+# ╟─8124a305-8f48-44ab-a9dc-1fadbe4d7f13
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
