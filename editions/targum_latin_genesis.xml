@@ -1996,7 +1996,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="22">
-        Sestina saluare ibi quia non possum <unclear>quicquam</unclear> facere donec venias illuc. Propterea vocauit nomen ciuitatis <placeName>sogor</placeName>: 
+        Festina saluare ibi quia non possum <unclear>quicquam</unclear> facere donec venias illuc. Propterea vocauit nomen ciuitatis <placeName>sogor</placeName>: 
         </ab>
 
         <ab n="23">
@@ -2004,7 +2004,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="24">
-        Et <choice><abbr>dns</abbr><expan>dominus</expan></choice> pluit super <placeName>sodomam</placeName> et <placeName>gomorra</placeName> sulphur et ignem a facie <choice><abbr>dni</abbr><expan>domini</expan></choice> de celo. 
+        Et <choice><abbr>dns</abbr><expan>dominus</expan></choice> pluit super <placeName>sodomam</placeName> et <placeName>gomorram</placeName> sulphur et ignem a facie <choice><abbr>dni</abbr><expan>domini</expan></choice> de celo. 
         </ab>
 
         <ab n="25">
@@ -2048,7 +2048,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="35">
-        Et potauerunt etiam in nocte illa patrem suum vino et surrexit minor et concubuit cum eo. Et nesciuit quam do cubuit nec quando surrexit.
+        Et potauerunt etiam in nocte illa patrem suum vino et surrexit minor et concubuit cum eo. Et nesciuit quando cubuit nec quando surrexit.
         </ab>
 
         <ab n="36">
@@ -2061,6 +2061,83 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         <ab n="38">
         Et minor etiam ipsa peperit filium et vocauit nomen eius filium populi mei: ipse est pater filiorum <persName>amon</persName> vsque in diem hanc. 
+        </ab>
+        </div>
+
+        <div n="20">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="20" type="ordinal">20.</num>
+        </ab>
+
+        <ab n="1">
+        Et profectus est inde <persName>abraham</persName> in terram <placeName>australem</placeName> et habitauit inter <placeName>recam</placeName> et <placeName>agara</placeName>: et peregri natus est in <placeName>gerar</placeName>. 
+        </ab>
+
+        <ab n="2">
+        Et dixit <persName>abraham</persName> de <persName>sara</persName> vxore sua: soror mea est. Et misit <persName>abimelech</persName> rex <placeName>gerar</placeName>: et tulit <persName>saram</persName>. 
+        </ab>
+
+        <ab n="3">
+        Et venit verbum a facie dei ad <persName>abimelech</persName> in visione noctis: et ait illi. En tu morieris propter mulierem quam tulisti: est enim vxor viri. 
+        </ab>
+
+        <ab n="4">
+        Et <persName>abimelech</persName> non accessit ad eam. Et ait. Domine nunquid gentem etiam iustam interficies?
+        </ab>
+
+        <ab n="5">
+        Ronne ipse dixit mihi soror mea est: et ipsa quoque ait frater meus est? In rectitudine cordis mei: et in munditia manuum mearum feci hoc. 
+        </ab>
+
+        <ab n="6">
+        Et ait illi deus per somnium. Manifestum est etiam coram me quod in rectitudine cordis tui fecisti hoc: et prehibui quoque ego te ne peccares coram me. Propterea non dimisi te vt accederes ad eam. 
+        </ab>
+
+        <ab n="7">
+        Et nunc redde vxorem viro: <choice><abbr>q</abbr><expan>quia</expan></choice> propheta est: et orabit pro te et viues: et si nolueris reddere: scito quod morte morieris tu et <choice><abbr>oia</abbr><expan>omnia</expan></choice> que tua sunt.
+        </ab>
+
+        <ab n="8">
+        Et surrexit abimelech mane et vocauit <choice><abbr>oes</abbr><expan>omnes</expan></choice> seruos suos: et locutus est vniuersa verba hec coram eis: et timuerunt viri valde. 
+        </ab>
+
+        <ab n="9">
+        Et vocauit <persName>abimelech</persName> <persName>abraham</persName>. et dixit ei. Quid fecisti nobis et <choice><abbr>qd</abbr><expan>quod</expan></choice> peccaui tibi: <choice><abbr>q</abbr><expan>quia</expan></choice> induxisti super me: et super regnum meum peccatum grande. opera que non erant digna fieri: fecisti mecum. 
+        </ab>
+
+        <ab n="10">
+        Et ait <persName>abimelech</persName> ad abraham. Quid vidisti quod fecisti rem hanc. 
+        </ab>
+
+        <ab n="11">
+        Dixitque <persName>abraham</persName>. Quia dixi forte non est timor dei in loco isto: et interficient me propter vxorem meam. 
+        </ab>
+
+        <ab n="12">
+        Sed et in veritate soror mea est filia patris mei: sed non filia matris mee: et fuit mihi in vxorem. 
+        </ab>
+
+        <ab n="13">
+        Et factum est cum aberrassent populi post opera manuum suarum: me applicauit dominus ad timorem suum ex domo patris mei. Et dixi ei. Hec est misericordia tua quam facies mecum: in omni loco in quem ingrediemur: dic de me frater meus est. 
+        </ab>
+
+        <ab n="14">
+        Et tulit <persName>abimelech</persName> oues et boues et seruos et ancillas et dedit <persName>abrahe</persName>: et reddidit ei <persName>saram</persName> vxorem suam. 
+        </ab>
+
+        <ab n="15">
+        Dixitque <persName>abimelech</persName>. Ecce terra mea coram te est: vbicumque placuerit oculis tuis habita. 
+        </ab>
+
+        <ab n="16">
+        <persName>Sare</persName> autem dixit. Ecce dedi mille siclos argenti fratri tuo. Ecce illud est tibi velamen honoris: pro eo <choice><abbr>q</abbr><expan>qui</expan></choice> miserim tollere te: et viderim te et omnia que tecum sunt: et super omnia que dixisti: estoque <unclear>reprehensa</unclear>. 
+        </ab>
+
+        <ab n="17">
+        Et orauit <persName>abraham</persName> coram deo: et sanauit deus <persName>abimelech</persName> et vxorem eius ancillasque eius et refrigerati sunt. 
+        </ab>
+
+        <ab n="18">
+        <choice><abbr>Qm</abbr><expan>Quam</expan></choice> concludens concluserat at <choice><abbr>dns</abbr><expan>dominus</expan></choice> <choice><abbr>oem</abbr><expan>omnem</expan></choice> aperturam vulue domus <persName>abimelech</persName> propter <persName>saram</persName> vxorem abraham. 
         </ab>
         </div>
 
