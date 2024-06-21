@@ -158,3 +158,6 @@ function populatettable(urnlist, tverbs, sverbs, vverbs)
 end
 
 @time t = populatettable(reflist, targverbs, septverbs, vulgverbs)
+
+pwd()
+CSV.write("verblexemes.csv", t)
