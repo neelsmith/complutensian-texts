@@ -2311,7 +2311,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="7">
-        Aitque <persName>isaac</persName> ad <persName>abraham</persName> patrem suum dicens. Pater mi. Et ait ecce ego filli mi. Et ait. Ecce ignis et ligna: vbi ergo est agnus in holocaustum?
+        Aitque <persName>isaac</persName> ad <persName>abraham</persName> patrem suum dicens. Pater mi. Et ait ecce ego fili mi. Et ait. Ecce ignis et ligna: vbi ergo est agnus in holocaustum?
         </ab>
 
         <ab n="8">
@@ -2319,7 +2319,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        Et abierunt ambo simul: et venerunt ad locum quem dixerat ei deus. et edificauit ibi <persName>abraham</persName> altare et ordinauit ligna: et ligauit <persName>isaac</persName> filium suum: et posuit eum super altare desuper ligna. 
+        et venerunt ad locum quem dixerat ei deus. et edificauit ibi <persName>abraham</persName> altare et ordinauit ligna: et ligauit <persName>isaac</persName> filium suum: et posuit eum super altare desuper ligna. 
         </ab>
 
         <ab n="10">
@@ -2327,11 +2327,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="11">
-        Et vocauit cum angelus domini de celo: et dixit. <persName>Abraham</persName>: <persName>abraham</persName>. Et ait. ecce ego. 
+        Et vocauit eum angelus domini de celo: et dixit. <persName>Abraham</persName>: <persName>abraham</persName>. Et ait. ecce ego. 
         </ab>
 
         <ab n="12">
-        Et dixit. He extendans manum tuam tuam ad puerum: neque facias illi <choice><abbr>quicumq</abbr><expan>quicumquam</expan></choice>: nunc enim scio <choice><abbr>q</abbr><expan>quod</expan></choice> timens deum tu es: et non pepercisti filio tuo
+        Et dixit. He extendans manum tuam ad puerum: neque facias illi <choice><abbr>quicumq</abbr><expan>quicumquam</expan></choice>: nunc enim scio <choice><abbr>q</abbr><expan>quod</expan></choice> timens deum tu es: et non pepercisti filio tuo vnico propter me. 
         </ab>
 
         <ab n="13">
@@ -2339,7 +2339,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="14">
-        Et orauit atque immolauit <persName>abraham</persName> in loco illo. Et dixit coram <choice><abbr>dno</abbr><expan>domino</expan></choice>: hic erunt sermentes <choice><abbr>gnationes</abbr><expan>generationes</expan></choice>. Propterea dicabatur in die hac in monte isto <persName>abraham</persName> coram <choice><abbr>dno</abbr><expan>domino</expan></choice> immolauit. 
+        Et orauit atque immolauit <persName>abraham</persName> in loco illo. Et dixit coram <choice><abbr>dno</abbr><expan>domino</expan></choice>: hic erunt sermentes <choice><abbr>gnationes</abbr><expan>generationes</expan></choice>. Propterea dicebatur in die hac in monte isto <persName>abraham</persName> coram <choice><abbr>dno</abbr><expan>domino</expan></choice> immolauit. 
         </ab>
 
         <ab n="15">
@@ -2380,6 +2380,91 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         <ab n="24">
         Concubina <choice><abbr>aut</abbr><expan>autem</expan></choice> eius cuius nomen <persName>roma</persName> ipsa <unclear>qque</unclear> peperit <persName>thabee</persName> et <persName>gaam</persName> et <persName>thaas</persName> et <persName>maacha</persName>. 
+        </ab>
+        </div>
+
+        <div n="23">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="23" type="ordinal">23.</num>
+        </ab>
+
+        <ab n="1">
+        Et Ait <choice><abbr>aut</abbr><expan>autem</expan></choice> vita <persName>sare</persName> centum et viginti et septem annorum: <unclear>q</unclear> fuerunt anni vite <persName>sare</persName>. 
+        </ab>
+
+        <ab n="2">
+        Et mortua est <persName>sara</persName> in <placeName>cariatharbe</placeName>: ipsa est <placeName>hebrom</placeName> in terra <placeName>chanaam</placeName>. Et venit <persName>abraham</persName> vt lugeret <persName>saram</persName> et fleret eam. 
+        </ab>
+
+        <ab n="3">
+        Et surrexit <persName>abraham</persName> a conspectu mortui sui. Et locutus est cum filiis <persName>heth</persName> dicens. 
+        </ab>
+
+        <ab n="4">
+        Aduena et peregrinus ego sum vobiscum: da te mihi possessionem sepulchri vobiscum: vt <unclear>sepeliam</unclear> mortuum meum a facie mea. 
+        </ab>
+
+        <ab n="5">
+        Et <unclear>renederunt</unclear> filii <persName>heth</persName> ad <persName>abraham</persName> dicendo ei. 
+        </ab>
+
+        <ab n="6">
+        Acquiesce nobis <choice><abbr>dne</abbr><expan>domine</expan></choice> <choice><abbr>nr</abbr><expan>nostrum</expan></choice>: princeps coram deo tu es inter nos: in meliori sepulchrorum <choice><abbr>nrorum</abbr><expan>nostrorum</expan></choice> sepeli mortuum tuum. Non prohibebit vir ex nobis sepulchrum suum a te: quin sepelias mortuum tuum. 
+        </ab>
+
+        <ab n="7">
+        Et surrexit <persName>abraham</persName> et adorauit <choice><abbr>pplm</abbr><expan>populum</expan></choice> terre filios <unclear>videlem</unclear> <persName>heth</persName>. 
+        </ab>
+
+        <ab n="8">
+        Locutus  que est cum eis dicens. Si est <unclear>voluntas</unclear> anime vestre vt <unclear>se peliam</unclear> mortuum meum a facie mea: acquiescite mihi: et rogate pro me <persName>efron</persName> filium <persName>seor</persName>: 
+        </ab>
+
+        <ab n="9">
+        vt dei mihi sepluncam duplicem suam que est in latere agri sui: pecunia digna tradat eam mihi inter vos in possessionem sepulchri. <persName>Efron</persName> autem stabat in medio filiorum <persName>heth</persName>. 
+        </ab>
+
+        <ab n="10">
+        Et respondit <persName>esron</persName> <persName>etheus</persName> ad <persName>abraham</persName> coram filiis <persName>heth</persName> ingredientibus portam ciuitatis illius: dicens. 
+        </ab>
+
+        <ab n="11">
+        Nequaquam <choice><abbr>dne</abbr><expan>domine</expan></choice> mi: sed <choice><abbr>acquesce</abbr><expan>acquiesce</expan></choice> mihi. Agrum dabo tibi: et speluncam <unclear><choice><abbr>q</abbr><expan>quam</expan></choice></unclear> in eo est tibi dabo: coram filiis <choice><abbr>ppli</abbr><expan>populi</expan></choice> mei <unclear>tradam</unclear> eam tibi: sepeli mortuum tuum. 
+        </ab>
+
+        <ab n="12">
+        Et adorauit <persName>abraham</persName> coram populo terre: 
+        </ab>
+
+        <ab n="13">
+        et locutus est cum <persName>efron</persName> coram <choice><abbr>pplo</abbr><expan>populo</expan></choice> terre dicens. Si tu vtique facis mecum <unclear>miam</unclear>: <choice><abbr>acquesce</abbr><expan>acquiesce</expan></choice> mihi: dabo pecuniam pro agro: accipe illam a me: vt sepeliam ibi mortuum meum: 
+        </ab>
+
+        <ab n="14">
+        <unclear>Rnditque</unclear> <persName>efron</persName> ad <persName>abraham</persName>: dicens ei. 
+        </ab>
+
+        <ab n="15">
+        <choice><abbr>Dne</abbr><expan>Domine</expan></choice> <unclear>mi</unclear> <choice><abbr>acquesce</abbr><expan>acquiesce</expan></choice> mihi: terra <unclear>q</unclear> valet <choice><abbr>qdringentos</abbr><expan>quadringentos</expan></choice> siclos argenti inter me et te <unclear>q</unclear> est? et mortuum tuum sepeli. 
+        </ab>
+
+        <ab n="16">
+        Et acquieuit <persName>abraham</persName> <persName>efron</persName>: et appendit <persName>abraham</persName> argentum <choice><abbr>qd</abbr><expan>quod</expan></choice> <persName>efron</persName> locutus fuerat coram filiis <persName>heth</persName> <choice><abbr>qdringentos</abbr><expan>quadrigentos</expan></choice> siclos argenti: <choice><abbr>qd</abbr><expan>quod</expan></choice> recipiebatur pro mercimoniis in vnaquaque prouincia. 
+        </ab>
+
+        <ab n="17">
+        Et confirmatus est <persName>ager</persName> <persName>efron</persName> in quo est spelunca duplex <unclear>q</unclear> est ante <persName>mamre</persName>: tam ager <choice><abbr>q</abbr><expan>quod</expan></choice> spelunca <unclear>q</unclear> in ea est et <choice><abbr>oes</abbr><expan>omnes</expan></choice> arbores <unclear>q</unclear> sunt in agro et in omni termino eius per circuitum:
+        </ab>
+
+        <ab n="18">
+        <persName>abrahe</persName> in emptionem videntibus <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> filiis <persName>heth</persName> <unclear>q</unclear> intrabant portam ciuitatis illius. 
+        </ab>
+
+        <ab n="19">
+        Et post hec sepeliuit <persName>abraham</persName> <persName>saram</persName> vxorem suam in spelunca duplici: in agro qui est contra faciem <persName>mamre</persName>: ipsa est <persName>hebron</persName> in terra <placeName>chanaan</placeName>.
+        </ab>
+
+        <ab n="20">
+        confirmatusque est <persName>ager</persName> et spelunca que in eo est <persName>abrahe</persName> in possesionem sepulchri a filiis <persName>heth</persName>.
         </ab>
         </div>
 

@@ -2434,12 +2434,99 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="23">
-        et <persName>bathuel</persName>. et <persName>bathuel</persName> genuit <persName>rebeccam</persName>. octo isti filii: quos peperit <persName>melcha</persName>
+        et <persName>bathuel</persName>. et <persName>bathuel</persName> genuit <persName>rebeccam</persName>. octo isti filii: quos peperit <persName>melcha</persName> <persName>nachor</persName> fratri <persName>abraam</persName>. 
         </ab>
 
         <ab n="24">
         et concubina illius: cui nomen <persName>roma</persName>: peperit et ipsa <persName>tabee</persName>: et <persName>gaon</persName>: et <persName>thaas</persName>: et <persName>maacha</persName>. 
         </ab>
+        </div>
+
+        <div n="23">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="23" type="ordinal">23.</num></ab>
+
+        <ab n="1">
+        Et Ait <choice><abbr>aut</abbr><expan>autem</expan></choice> vita <persName>sarre</persName> anni centum viginti septem. 
+        </ab>
+
+        <ab n="2">
+        et mortua est <persName>sarra</persName> in ciuitate <placeName>arboc</placeName>. <choice><abbr>q</abbr><expan>quae</expan></choice> est in conualle: hec est <placeName>chebrom</placeName> in terra <placeName>chanaan</placeName>. venit <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>abraam</persName> plangere <persName>sarram</persName> et flere. 
+        </ab>
+
+        <ab n="3">
+        et surrexit <persName>abraam</persName> a mortuo. et dixit filiis <persName>het</persName>: dicens: 
+        </ab>
+
+        <ab n="4">
+        aduena et peregrinus ego sum vobiscum. date ergo mihi possessionem vobiscum. et sepeliam mortuum meum a me. 
+        </ab>
+
+        <ab n="5">
+        responderunt <choice><abbr>aut</abbr><expan>autem</expan></choice> filii <persName>het</persName> ad <persName>abraam</persName>: dicentes: non <choice><abbr>dne</abbr><expan>domine</expan></choice>. 
+        </ab>
+
+        <ab n="6">
+        audi <choice><abbr>at</abbr><expan>autem</expan></choice> nos. rex a deo es tu in nobis. in electis sepulchris nostris sepeli mortuum tuum. nullus enim <choice><abbr>nrm</abbr><expan>nostrum</expan></choice> non prohibebit sepulchrum suum a te: vt sepelias mortuum tuum illic. 
+        </ab>
+
+        <ab n="7">
+        surgens <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>abraam</persName> adorauit <choice><abbr>pplm</abbr><expan>populum</expan></choice> terre: filios <persName>het</persName>. 
+        </ab>
+
+        <ab n="8">
+        et locutus est ad eos <persName>abraam</persName>: dicens: si habetis in <choice><abbr>aia</abbr><expan>anima</expan></choice> <choice><abbr>vra</abbr><expan>vestra</expan></choice>: vt sepeliam mortuum meum a facie mea: audite me: loquimini pro me <persName>ephrom</persName> filio <persName>saar</persName>. 
+        </ab>
+
+        <ab n="9">
+        et det mihi speluncam duplicem: que est eius: <unclear><choice><abbr>exntem</abbr><expan></expan></choice></unclear> in <unclear>prete</unclear> agri sui. argento digno det mihi illam in vobis in possessio nem sepulchri. 
+        </ab>
+
+        <ab n="10">
+        <persName>ephron</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> sedebat in medio filiorum <persName>het</persName>. respondens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>ephron</persName> <persName>hetteus</persName> ad <persName>abraam</persName>: dixit: audientibus filiis <persName>het</persName>: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> <unclear>ingredieniibus</unclear> in ciuitatem: dicens: 
+        </ab>
+
+        <ab n="11">
+        apud me esto <choice><abbr>dne</abbr><expan>domine</expan></choice>. et audi me. agrum et speluncam <unclear>q</unclear> in eo: tibi do. coram <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> ciuibus meis dedi tibi. sepeli mortuum tuum. 
+        </ab>
+
+        <ab n="12">
+        et adorauit <persName>abraam</persName> coram <unclear><choice><abbr>pplo</abbr><expan>populo</expan></choice></unclear> terre. 
+        </ab>
+
+        <ab n="13">
+        et dixit <persName>ephron</persName> in aures coram populo terre. <unclear><choice><abbr>qm</abbr><expan>quam</expan></choice></unclear> apud me es: audi me. argentum agri accipe a me: et sepeliam mortuum meum illic. 
+        </ab>
+
+        <ab n="14">
+        respondit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>ephron</persName> <persName>abraam</persName>: dicens: 
+        </ab>
+
+        <ab n="15">
+        <choice><abbr>nequaq</abbr><expan>nequaquam</expan></choice> <choice><abbr>dne</abbr><expan>domine</expan></choice>. audiui enim quadrigentarum <unclear>didrachmarum</unclear> argenti. sed <choice><abbr>qd</abbr><expan>quod</expan></choice> vtique esset hoc inter me et te? tu <choice><abbr>at</abbr><expan>autem</expan></choice> mortuum tuum sepeli. 
+        </ab>
+
+        <ab n="16">
+        et audiuit <persName>abraam</persName> <persName>ephron</persName>. et restituit <persName>abraam</persName> <persName>ephron</persName> argentum: <unclear>qd</unclear> locutus est in aures filiorum <persName>het</persName>: quadringentas <persName>didrachmas</persName> argenti probati mercatoribus. 
+        </ab>
+
+        <ab n="17">
+        et stetit <persName>ager</persName> <persName>ephron</persName>: <unclear><choice><abbr>q</abbr><expan>quia</expan></choice></unclear> est <choice><abbr>sm</abbr><expan>secundum</expan></choice> faciem <persName>mambre</persName>: <persName>ager</persName> et spelunca <choice><abbr>q</abbr><expan>qui</expan></choice> erat in eo: et <choice><abbr>ois</abbr><expan>omnis</expan></choice> arbor: <choice><abbr>q</abbr><expan>qui</expan></choice> est in terminis eius in circuitu 
+        </ab>
+
+        <ab n="18">
+        <persName>abraam</persName> in possessionem coram filiis <persName>het</persName>: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> ingredientibus in ciuitatem: 
+        </ab>
+
+        <ab n="19">
+        post <choice><abbr>at</abbr><expan>autem</expan></choice> hec sepeliuit <persName>abraam</persName> <persName>sarram</persName> vxorem suam in spelunca agri duplici: <choice><abbr>q</abbr><expan>qui</expan></choice> est coram <persName>mambre</persName>. hec est <persName>hebron</persName> in terra <placeName>chanaan</placeName>.
+        </ab>
+
+        <ab n="20">
+        et confirmatus est <persName>ager</persName> et spelunca <unclear>q</unclear> in eo <persName>abraam</persName> in possessionem sepulchri. a filiis <persName>het</persName>.
+        </ab>
+
+
+
         </div>
     </body>
     </text>
