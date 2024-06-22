@@ -22,17 +22,6 @@ TableOfContents()
 # ╔═╡ dc38efac-3082-11ef-3f55-01dab0c1e1dc
 md"""# Verb vocabulary in Latin texts of the Complutensian Bible"""
 
-# ╔═╡ 76978cd6-021c-4d22-9c4c-20c36c241146
-lblurl = "http://shot.holycross.edu/complutensian/labels.cex"
-
-# ╔═╡ 906ac4ef-f20f-4f3e-97a9-b786d6e5d362
-begin
-	tmplbls = Downloads.download(lblurl)
-	lns = readlines(tmplbls)
-	rm(tmplbls)
-	lns
-end
-
 # ╔═╡ dec7092c-a502-4744-8fe3-47b0fa9a5d7a
 html"""
 <br/><br/><br/><br/><br/>
@@ -43,6 +32,37 @@ html"""
 
 # ╔═╡ 935d0425-fda9-4c63-ae62-fedc1062dc80
 md"""> # Mechanics"""
+
+# ╔═╡ 79f0006b-d4e9-4408-aaa9-19e97794721d
+md"""> ## Labels"""
+
+# ╔═╡ 76978cd6-021c-4d22-9c4c-20c36c241146
+lblurl = "http://shot.holycross.edu/complutensian/labels.cex"
+
+# ╔═╡ 949f45b5-f5a4-40df-905d-5776aa745194
+function loadlabels(lblurl)
+	tmplbls = Downloads.download(lblurl)
+	lns = readlines(tmplbls)
+	rm(tmplbls)
+	dict = Dict()
+	for ln in lns
+		parts = split(ln, "|")
+		dict[parts[1]] = string(parts[1], " (", parts[2], ")")
+	end
+	dict
+end
+
+# ╔═╡ 906ac4ef-f20f-4f3e-97a9-b786d6e5d362
+labelsdict = loadlabels(lblurl)
+
+# ╔═╡ d02b374f-eae6-4b8c-85dd-f94a862e8c03
+function labelverb(v, dict = labelsdict)
+	if haskey(dict, v)
+		dict[v]
+	else
+		string(v, " (?)")
+	end
+end
 
 # ╔═╡ f21c6986-665b-455f-bd56-420368e96985
 md"""> ## Analyses"""
@@ -86,15 +106,20 @@ function scorecooccurs(v, tbl::Table)
 	docids = ["septuagint", "targum", "vulgate"]
 	allalignments = []
 	psgs = verboccurrences(v, tbl)
+	
 	for psg in psgs
 		records = filter(r -> r.sequence == psg, tbl)
 		appearsin = documentsforverb(v, records)
 		missingdocs = filter(r -> (r.document in appearsin) == false, records)
 		otherlexx = map(r -> r.lexeme, missingdocs)
-		push!(allalignments, otherlexx)
+		for l in otherlexx
+			push!(allalignments, l)
+		end
 	end
-	dict = allalignments |> Iterators.flatten |> collect |> countmap |> OrderedDict
+	
+	dict = allalignments |> countmap |> OrderedDict
 	sort(dict, byvalue=true, rev=true)
+	
 end
 
 # ╔═╡ 1c504827-acd9-4e10-ba6b-cd687ead5fde
@@ -189,8 +214,28 @@ slashes = map(v -> slashline(v, data), verblist)
 # ╔═╡ a043feef-54a9-4e14-99e0-ac16ca05453e
 perfectthrees = filter(v -> v[5] == v[4], slashes)
 
+# ╔═╡ 518e21c9-1128-4b52-b5ab-5c35d5daf8a1
+scorecooccurs("ls.n13804", data)
+
+# ╔═╡ 849b211e-2fdf-4c2c-9f76-c88151eb9f25
+function scoreall()
+	allscores = Dict() 
+	for v in verblist
+		verbscore = scorecooccurs(v,data)
+		allscores[v] = verbscore
+	end
+	allscores
+end
+	
+
+# ╔═╡ b27cf89d-0953-416c-958b-4fa9e73b758b
+allscores = scoreall()
+
 # ╔═╡ 9bc025ed-ad8d-41d1-adb7-c88429d9e7c2
 verbscores = map(v -> scorecooccurs(v,data), verblist)
+
+# ╔═╡ 5a0acb01-0299-4d00-8c90-eed19cf95e69
+verbscores |> keys |> collect
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -214,7 +259,7 @@ TypedTables = "~1.4.6"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
 project_hash = "69b141edf15cdc5adcf1191f74737b7180c26a27"
 
@@ -277,7 +322,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.DataAPI]]
 git-tree-sha1 = "abe83f3a2f1b857aac70ef8b269080af17764bbe"
@@ -474,7 +519,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OrderedCollections]]
 git-tree-sha1 = "dfdf5519f235516220579f949664f1bf44e741c5"
@@ -688,10 +733,14 @@ version = "17.4.0+2"
 # ╟─ba8551dd-cab7-41a1-a2da-0a0bc40d5a5d
 # ╟─63c8604f-f7a5-45c5-97ef-166c0d2e991d
 # ╟─dc38efac-3082-11ef-3f55-01dab0c1e1dc
-# ╠═76978cd6-021c-4d22-9c4c-20c36c241146
-# ╠═906ac4ef-f20f-4f3e-97a9-b786d6e5d362
+# ╠═5a0acb01-0299-4d00-8c90-eed19cf95e69
 # ╟─dec7092c-a502-4744-8fe3-47b0fa9a5d7a
 # ╟─935d0425-fda9-4c63-ae62-fedc1062dc80
+# ╟─79f0006b-d4e9-4408-aaa9-19e97794721d
+# ╟─d02b374f-eae6-4b8c-85dd-f94a862e8c03
+# ╟─906ac4ef-f20f-4f3e-97a9-b786d6e5d362
+# ╟─76978cd6-021c-4d22-9c4c-20c36c241146
+# ╟─949f45b5-f5a4-40df-905d-5776aa745194
 # ╟─f21c6986-665b-455f-bd56-420368e96985
 # ╟─69787159-9b22-49e7-a112-f48455978f27
 # ╟─95a015ef-431c-4907-9047-d120deae6c05
@@ -702,8 +751,11 @@ version = "17.4.0+2"
 # ╟─724d24ea-434d-4df6-8432-b8a96bf8f981
 # ╟─40e4d8af-d892-4f7e-a14d-3b34556b3340
 # ╟─a043feef-54a9-4e14-99e0-ac16ca05453e
+# ╠═518e21c9-1128-4b52-b5ab-5c35d5daf8a1
+# ╠═849b211e-2fdf-4c2c-9f76-c88151eb9f25
+# ╠═b27cf89d-0953-416c-958b-4fa9e73b758b
 # ╟─c275a0ec-505c-4707-98cb-65b3748ade01
-# ╟─9bc025ed-ad8d-41d1-adb7-c88429d9e7c2
+# ╠═9bc025ed-ad8d-41d1-adb7-c88429d9e7c2
 # ╟─0fa58f27-19ee-49b6-9ea7-e7670522ef75
 # ╟─f32b2688-2f99-42d2-92f0-d5790a41e337
 # ╟─96013e87-36c4-4125-8be0-92731e8a4a85
