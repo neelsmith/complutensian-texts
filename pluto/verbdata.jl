@@ -11,11 +11,27 @@ begin
 	using OrderedCollections
 	using StatsBase
 	using Downloads
+
+	using PlutoUI
 	md"""*Unhide this cell to see the Julia environment*."""
 end
 
+# ╔═╡ 63c8604f-f7a5-45c5-97ef-166c0d2e991d
+TableOfContents()
+
 # ╔═╡ dc38efac-3082-11ef-3f55-01dab0c1e1dc
 md"""# Verb vocabulary in Latin texts of the Complutensian Bible"""
+
+# ╔═╡ 76978cd6-021c-4d22-9c4c-20c36c241146
+lblurl = "http://shot.holycross.edu/complutensian/labels.cex"
+
+# ╔═╡ 906ac4ef-f20f-4f3e-97a9-b786d6e5d362
+begin
+	tmplbls = Downloads.download(lblurl)
+	lns = readlines(tmplbls)
+	rm(tmplbls)
+	lns
+end
 
 # ╔═╡ dec7092c-a502-4744-8fe3-47b0fa9a5d7a
 html"""
@@ -25,6 +41,9 @@ html"""
 <hr/>
 """
 
+# ╔═╡ 935d0425-fda9-4c63-ae62-fedc1062dc80
+md"""> # Mechanics"""
+
 # ╔═╡ f21c6986-665b-455f-bd56-420368e96985
 md"""> ## Analyses"""
 
@@ -32,7 +51,7 @@ md"""> ## Analyses"""
 md"""> ### Basic analysis structures"""
 
 # ╔═╡ 724d24ea-434d-4df6-8432-b8a96bf8f981
-
+md"""> ## Scoring a verb"""
 
 # ╔═╡ 0fa58f27-19ee-49b6-9ea7-e7670522ef75
 md"""> ### Organizing functions"""
@@ -53,11 +72,33 @@ function lexemesforpsg(seq::Int, tbl::Table)
 	end |> unique
 end
 
+# ╔═╡ efb0cd24-f3d5-4cd4-aa09-09b326cbbc90
+"""Get set of documents where verb appears in passage seq."""
+function documentsforverb(vrb, tbl::Table)
+	map(filter(r -> r.lexeme == vrb, tbl)) do r
+		r.document
+	end |> unique
+end
+
+# ╔═╡ c275a0ec-505c-4707-98cb-65b3748ade01
+"""Count occurrences of other verbs in documents where a verb found in one or two documents does not appear."""
+function scorecooccurs(v, tbl::Table)
+	docids = ["septuagint", "targum", "vulgate"]
+	allalignments = []
+	psgs = verboccurrences(v, tbl)
+	for psg in psgs
+		records = filter(r -> r.sequence == psg, tbl)
+		appearsin = documentsforverb(v, records)
+		missingdocs = filter(r -> (r.document in appearsin) == false, records)
+		otherlexx = map(r -> r.lexeme, missingdocs)
+		push!(allalignments, otherlexx)
+	end
+	dict = allalignments |> Iterators.flatten |> collect |> countmap |> OrderedDict
+	sort(dict, byvalue=true, rev=true)
+end
+
 # ╔═╡ 1c504827-acd9-4e10-ba6b-cd687ead5fde
 md"""> ## Messing around"""
-
-# ╔═╡ 0133b65e-f49b-4707-9614-5f2e10aa166f
-demov = "ls.n17516"
 
 # ╔═╡ 57b55606-9de0-4b70-b7f9-f1a284e85122
 md"""> ## Data"""
@@ -93,13 +134,6 @@ function occurrencesbypsg(tbl::Table, psgs = psglist)
 	sort(OrderedDict(counts))
 end
 
-# ╔═╡ 581946fc-55dc-4008-a2cb-d0961553f99e
-function profileverb(vrb, tbl)
-	dict = occurrencesbypsg(tbl)
-	subdicts = values(dict) |> collect
-	filter(d -> haskey(d, vrb), subdicts)
-end
-
 # ╔═╡ 9567d52f-9935-445c-ab7c-65aa45730cb0
 verblist = map(r -> r.lexeme, data) |> unique
 
@@ -127,6 +161,7 @@ psgverbdict = occurrencesbypsg(data, psglist)
 verbpsgdict = occurrencesbyverb(data, verblist)
 
 # ╔═╡ 04395ebe-0fe3-489e-9fa2-08ef36766d78
+"""Compute numbers of singletons, doubles and triples for a verb."""
 function slashline(vrb,tbl::Table)
 	occrncs =  verboccurrences(vrb, tbl)
 	psgcounts = verbpsgdict[vrb]
@@ -139,7 +174,8 @@ function slashline(vrb,tbl::Table)
 	singles = filter(occrncs) do seq
 		psgcounts[seq] == 1
 	end
-	[length(triples), length(doubles), length(singles), length(occrncs)]
+	[vrb, length(triples), length(doubles), length(singles), length(occrncs)]
+
 end
 
 # ╔═╡ 3d490270-d40d-417d-b842-60c64859383c
@@ -147,8 +183,14 @@ slashlines = map(verblist) do v
 	slashline(v, data)
 end
 
-# ╔═╡ d84f12a8-39f8-45f2-8c67-04bcc031fb94
-profileverb(verblist[1], data)
+# ╔═╡ 40e4d8af-d892-4f7e-a14d-3b34556b3340
+slashes = map(v -> slashline(v, data), verblist)
+
+# ╔═╡ a043feef-54a9-4e14-99e0-ac16ca05453e
+perfectthrees = filter(v -> v[5] == v[4], slashes)
+
+# ╔═╡ 9bc025ed-ad8d-41d1-adb7-c88429d9e7c2
+verbscores = map(v -> scorecooccurs(v,data), verblist)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -156,12 +198,14 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 TypedTables = "9d95f2ec-7b3d-5a63-8d20-e2491e220bb9"
 
 [compat]
 CSV = "~0.10.14"
 OrderedCollections = "~1.6.3"
+PlutoUI = "~0.7.59"
 StatsBase = "~0.34.3"
 TypedTables = "~1.4.6"
 """
@@ -172,7 +216,13 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "2cbefc3e6cb391d9f49acca7447b66c762a9d124"
+project_hash = "69b141edf15cdc5adcf1191f74737b7180c26a27"
+
+[[deps.AbstractPlutoDingetjes]]
+deps = ["Pkg"]
+git-tree-sha1 = "6e1d2a35f2f90a4bc7c2ed98079b2ba09c35b83a"
+uuid = "6e696c72-6542-2067-7265-42206c756150"
+version = "1.3.2"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra", "Requires"]
@@ -207,6 +257,12 @@ deps = ["TranscodingStreams", "Zlib_jll"]
 git-tree-sha1 = "59939d8a997469ee05c4b4944560a820f9ba0d73"
 uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
 version = "0.7.4"
+
+[[deps.ColorTypes]]
+deps = ["FixedPointNumbers", "Random"]
+git-tree-sha1 = "b10d0b65641d57b8b4d5e234446582de5047050d"
+uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
+version = "0.11.5"
 
 [[deps.Compat]]
 deps = ["TOML", "UUIDs"]
@@ -269,9 +325,33 @@ version = "0.9.21"
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
+[[deps.FixedPointNumbers]]
+deps = ["Statistics"]
+git-tree-sha1 = "05882d6995ae5c12bb5f36dd2ed3f61c98cbb172"
+uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
+version = "0.8.5"
+
 [[deps.Future]]
 deps = ["Random"]
 uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
+
+[[deps.Hyperscript]]
+deps = ["Test"]
+git-tree-sha1 = "179267cfa5e712760cd43dcae385d7ea90cc25a4"
+uuid = "47d2ed2b-36de-50cf-bf87-49c2cf4b8b91"
+version = "0.0.5"
+
+[[deps.HypertextLiteral]]
+deps = ["Tricks"]
+git-tree-sha1 = "7134810b1afce04bbc1045ca1985fbe81ce17653"
+uuid = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
+version = "0.9.5"
+
+[[deps.IOCapture]]
+deps = ["Logging", "Random"]
+git-tree-sha1 = "b6d6bfdd7ce25b0f9b2f6b3dd56b2673a66c8770"
+uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
+version = "0.2.5"
 
 [[deps.Indexing]]
 git-tree-sha1 = "ce1566720fd6b19ff3411404d4b977acd4814f9f"
@@ -303,6 +383,12 @@ version = "0.2.2"
 git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
 uuid = "82899510-4779-5014-852e-03e436cf321d"
 version = "1.0.0"
+
+[[deps.JSON]]
+deps = ["Dates", "Mmap", "Parsers", "Unicode"]
+git-tree-sha1 = "31e996f0a15c7b280ba9f76636b3ff9e2ae58c9a"
+uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+version = "0.21.4"
 
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
@@ -354,6 +440,11 @@ version = "0.3.28"
 [[deps.Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
+[[deps.MIMEs]]
+git-tree-sha1 = "65f28ad4b594aebe22157d6fac869786a255b7eb"
+uuid = "6c6e2e6c-3030-632d-7369-2d6c69616d65"
+version = "0.1.4"
+
 [[deps.Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
@@ -396,6 +487,17 @@ git-tree-sha1 = "8489905bcdbcfac64d1daa51ca07c0d8f0283821"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
 version = "2.8.1"
 
+[[deps.Pkg]]
+deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
+uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+version = "1.10.0"
+
+[[deps.PlutoUI]]
+deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
+git-tree-sha1 = "ab55ee1510ad2af0ff674dbcced5e94921f867a9"
+uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+version = "0.7.59"
+
 [[deps.PooledArrays]]
 deps = ["DataAPI", "Future"]
 git-tree-sha1 = "36d8b4b899628fb92c2749eb488d884a926614d3"
@@ -418,9 +520,18 @@ version = "1.4.3"
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
+[[deps.REPL]]
+deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
+uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
+
 [[deps.Random]]
 deps = ["SHA"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[[deps.Reexport]]
+git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
+uuid = "189a3867-3050-52da-a836-e630ba90ab69"
+version = "1.2.2"
 
 [[deps.Requires]]
 deps = ["UUIDs"]
@@ -440,6 +551,9 @@ version = "1.4.3"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+
+[[deps.Sockets]]
+uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 
 [[deps.SortingAlgorithms]]
 deps = ["DataStructures"]
@@ -497,6 +611,11 @@ git-tree-sha1 = "cb76cf677714c095e535e3501ac7954732aeea2d"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 version = "1.11.1"
 
+[[deps.Tar]]
+deps = ["ArgTools", "SHA"]
+uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
+version = "1.10.0"
+
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
@@ -510,11 +629,21 @@ weakdeps = ["Random", "Test"]
     [deps.TranscodingStreams.extensions]
     TestExt = ["Test", "Random"]
 
+[[deps.Tricks]]
+git-tree-sha1 = "eae1bb484cd63b36999ee58be2de6c178105112f"
+uuid = "410a4b4d-49e4-4fbc-ab6d-cb71b17b3775"
+version = "0.1.8"
+
 [[deps.TypedTables]]
 deps = ["Adapt", "Dictionaries", "Indexing", "SplitApplyCombine", "Tables", "Unicode"]
 git-tree-sha1 = "84fd7dadde577e01eb4323b7e7b9cb51c62c60d4"
 uuid = "9d95f2ec-7b3d-5a63-8d20-e2491e220bb9"
 version = "1.4.6"
+
+[[deps.URIs]]
+git-tree-sha1 = "67db6cc7b3821e19ebe75791a9dd19c9b1188f2b"
+uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
+version = "1.5.1"
 
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
@@ -548,12 +677,21 @@ version = "5.8.0+1"
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
 version = "1.52.0+1"
+
+[[deps.p7zip_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
+version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
 # ╟─ba8551dd-cab7-41a1-a2da-0a0bc40d5a5d
+# ╟─63c8604f-f7a5-45c5-97ef-166c0d2e991d
 # ╟─dc38efac-3082-11ef-3f55-01dab0c1e1dc
+# ╠═76978cd6-021c-4d22-9c4c-20c36c241146
+# ╠═906ac4ef-f20f-4f3e-97a9-b786d6e5d362
 # ╟─dec7092c-a502-4744-8fe3-47b0fa9a5d7a
+# ╟─935d0425-fda9-4c63-ae62-fedc1062dc80
 # ╟─f21c6986-665b-455f-bd56-420368e96985
 # ╟─69787159-9b22-49e7-a112-f48455978f27
 # ╟─95a015ef-431c-4907-9047-d120deae6c05
@@ -561,17 +699,19 @@ version = "1.52.0+1"
 # ╟─e13a4f41-5bd9-41dc-8b10-ed388c28142a
 # ╟─2acf348c-66e4-4abd-a1a5-6cfe21e3278d
 # ╟─3d490270-d40d-417d-b842-60c64859383c
-# ╠═724d24ea-434d-4df6-8432-b8a96bf8f981
+# ╟─724d24ea-434d-4df6-8432-b8a96bf8f981
+# ╟─40e4d8af-d892-4f7e-a14d-3b34556b3340
+# ╟─a043feef-54a9-4e14-99e0-ac16ca05453e
+# ╟─c275a0ec-505c-4707-98cb-65b3748ade01
+# ╟─9bc025ed-ad8d-41d1-adb7-c88429d9e7c2
 # ╟─0fa58f27-19ee-49b6-9ea7-e7670522ef75
 # ╟─f32b2688-2f99-42d2-92f0-d5790a41e337
 # ╟─96013e87-36c4-4125-8be0-92731e8a4a85
 # ╟─0889e4be-6ef2-494e-a89b-2cfe70de0aba
 # ╟─40d731db-1a85-41c0-be16-a6d37d505fef
-# ╠═04395ebe-0fe3-489e-9fa2-08ef36766d78
+# ╟─efb0cd24-f3d5-4cd4-aa09-09b326cbbc90
+# ╟─04395ebe-0fe3-489e-9fa2-08ef36766d78
 # ╟─1c504827-acd9-4e10-ba6b-cd687ead5fde
-# ╠═0133b65e-f49b-4707-9614-5f2e10aa166f
-# ╠═d84f12a8-39f8-45f2-8c67-04bcc031fb94
-# ╠═581946fc-55dc-4008-a2cb-d0961553f99e
 # ╟─57b55606-9de0-4b70-b7f9-f1a284e85122
 # ╟─8f8bc7bf-a429-4e4f-aef6-47989cfa8d14
 # ╟─99296753-8af1-4d7a-be93-39856b80977a
