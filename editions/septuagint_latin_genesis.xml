@@ -2525,8 +2525,22 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         et confirmatus est <persName>ager</persName> et spelunca <unclear>q</unclear> in eo <persName>abraam</persName> in possessionem sepulchri. a filiis <persName>het</persName>.
         </ab>
 
+        </div>
 
+        <div n="24">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="24" type="ordinal">24.</num></ab>
 
+        <ab n="1">
+        Et <persName>abraam</persName> erat senior prouectus diebus. et <choice><abbr>dns</abbr><expan>dominus</expan></choice> <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> <persName>abraam</persName> per <choice><abbr>oia</abbr><expan>omnia</expan></choice>.
+        </ab>
+
+        <ab n="2">
+        et dixit <persName>abraam</persName> seruo suo seniori domus sue principi suorum <choice><abbr>oim</abbr><expan>omnium</expan></choice>: pone manum tuam subter semur meum. 
+        </ab>
+
+        <ab n="3">
+        et adiurabo te <choice><abbr>dnm</abbr><expan>dominum</expan></choice> deum celi et deum terre: vt non accipias vxorem <persName>isaac</persName> filio meo de filiabus <placeName>chananeorum</placeName>: cum <choice><abbr>qbus</abbr><expan>quibus</expan></choice> ego habito iter ipsos: 
+        </ab>
         </div>
     </body>
     </text>

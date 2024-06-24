@@ -2468,6 +2468,51 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
         </div>
 
+        <div n="24">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="24" type="ordinal">24.</num>
+        </ab>
+
+        <ab n="1">
+        Et <persName>abraham</persName> erat senex prouecteque etatis: et dominus benedixit <persName>abraham</persName> in omnibus.
+        </ab>
+
+        <ab n="2">
+        Dixitque <persName>abraham</persName> seruo suo seniori domus sue: qui preerat omnibus que habebat: pone nunc manum tuam subter semur meum. 
+        </ab>
+
+        <ab n="3">
+        et adiurabo te per verbum domini dei celi et dei terre: <choice><abbr>q</abbr><expan>quod</expan></choice> non accipias vxorem filio meo de filiabus <placeName>chananeorum</placeName>: inter quos ego habito:
+        </ab>
+
+        <ab n="4">
+        sed ad terram meam et ad generationem meam ibis: et accipies vxorem filio meo <persName>isaac</persName>. 
+        </ab>
+
+        <ab n="5">
+        Dixitque ei seruus. Forte nolet mulier venire post me in terram hanc: nunquid reducens reducam filium tuum ad terram de qua egressus es?
+        </ab>
+
+        <ab n="6">
+        Et dixit ei <persName>abraham</persName>. <unclear>Caue</unclear> ne forte reducas filium meum illuc. 
+        </ab>
+
+        <ab n="7">
+        Dominus deus celi qui tulit me de domo patris mei et terra natiuitatis mee: et qui locutus est mihi: et qui iurauit mihi dicens. Filiis tuis dabo terram hanc: ipse mittet angelum suum coram et: et accipies vxorem filio meo inde. 
+        </ab>
+
+        <ab n="8">
+        Et si noluerit mulier venire post te: eris innocens a maledictione mea hac: tantummodo filium meum ne reducas illuc. 
+        </ab>
+
+        <ab n="9">
+        Et posuit seruus manum suam sub femore <persName>abraham</persName> domini sui: et iurauit illi super verbo hoc. 
+        </ab>
+
+        <ab n="10">
+        Et tulit
+        </ab>
+        </div>
+
         
 
     </body>
