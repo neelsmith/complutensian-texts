@@ -32,7 +32,20 @@ begin
 end
 
 # ╔═╡ 34e2e4d6-ba9e-4652-9d1c-be7a80386978
-pwd()
+nbversion = "0.1.0";
+
+# ╔═╡ 6afc33e1-0a59-4162-b2d3-b81e52ba1192
+md"""*Notebook version*: **$(nbversion)** *See release notes*: $(@bind releaseinfo CheckBox())"""
+
+# ╔═╡ 223d76fd-5f1d-46f4-954d-c3d2c526d947
+if releaseinfo
+md"""
+- version **0.1.0**: initial release
+"""
+end
+
+# ╔═╡ ee7b33a1-e02c-459a-b9f5-3fb8b855bf1d
+md"""# Explore automated verb alignments"""
 
 # ╔═╡ d81c5cfd-8ebb-492d-a45c-44163e333379
 html"""
@@ -165,8 +178,11 @@ length(allverbs)
 eo in allverbs
 
 # ╔═╡ Cell order:
-# ╠═34e2e4d6-ba9e-4652-9d1c-be7a80386978
+# ╟─34e2e4d6-ba9e-4652-9d1c-be7a80386978
 # ╟─6cd35fe4-32f3-11ef-23a7-25b03dbd4a6a
+# ╟─6afc33e1-0a59-4162-b2d3-b81e52ba1192
+# ╟─223d76fd-5f1d-46f4-954d-c3d2c526d947
+# ╟─ee7b33a1-e02c-459a-b9f5-3fb8b855bf1d
 # ╟─b2d023e3-a79a-4830-b276-b54525e8c0b7
 # ╟─08c0ab69-4b06-4243-ba87-b0d880e490cb
 # ╟─f61455da-0d8f-48b6-b5ab-9e14186281cf
