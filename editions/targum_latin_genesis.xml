@@ -2509,8 +2509,137 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="10">
-        Et tulit
+        Et tulit seruus decem camelos de camelis <choice><abbr>dni</abbr><expan>domini</expan></choice> sui: et abiit: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> optima <choice><abbr>dni</abbr><expan>domini</expan></choice> sui portans in manu sua. et surrexit et abiit in <placeName>syraim</placeName>: <unclear><choice><abbr>q</abbr><expan></expan></choice></unclear> est iuxta <placeName>euphratem</placeName>: in ciuitatem <persName>nachor</persName>.
         </ab>
+
+        <ab n="11">
+        Et <unclear>accunbere</unclear> fecit camelos extra ciuitatem iuxta puteum <choice><abbr>aq</abbr><expan>aquam</expan></choice> in <choice><abbr>tpe</abbr><expan>tempore</expan></choice> vespertino: in <choice><abbr>q</abbr><expan>quo</expan></choice> mulieres egrediuntur ad hauriendam aquam. Et ait. 
+        </ab>
+
+        <ab n="12">
+        <choice><abbr>Dne</abbr><expan>Domine</expan></choice> deus <choice><abbr>dni</abbr><expan>domini</expan></choice> mei <persName>abraham</persName> occurre obsecro mihi hodie: et fac <unclear>minam</unclear> cum <choice><abbr>dno</abbr><expan>domino</expan></choice> meo <persName>abraham</persName>.
+        </ab>
+
+        <ab n="13">
+        Ecce ego sto prope fontem aque: et filie <choice><abbr>hoim</abbr><expan>hominem</expan></choice> ciuitati egrediuntur ad hauriendam aquam. 
+        </ab>
+
+        <ab n="14">
+        Et erit puella cui dixero: inclina obsecro hydriam tuam vt bibam: et dixerit: bibe et camelos quoque tuos <unclear>adaqbo</unclear>: ipsam <unclear>pparasti</unclear> seruo tuo <persName>isaac</persName>: et in hoc sciam <choice><abbr>q</abbr><expan>quod</expan></choice> fecisti <unclear>minam</unclear> cum <choice><abbr>dno</abbr><expan>domino</expan></choice> meo. 
+        </ab>
+
+        <ab n="15">
+        Et factum est <choice><abbr>anteq</abbr><expan>antequam</expan></choice> ille cessasset <unclear>loqum</unclear>: ecce <persName>rebeca</persName> egrediebatur: <unclear><choice><abbr>q</abbr><expan>quod</expan></choice></unclear> nata est <persName>batuel</persName> filio <persName>melche</persName> vxoris <persName>nachor</persName> <choice><abbr>fris</abbr><expan>fratris</expan></choice> abrahe et hydria sua super humerum eius. 
+        </ab>
+
+        <ab n="16">
+        Et puella erat pulchra aspectu valde: virgo et vir non cognouerat eam: et descendit ad fontem: et impleuit hydriam suam: et ascendit. 
+        </ab>
+
+        <ab n="17">
+        Et cucurrit serus in occursum eius: et ait. Fac me gustare obsecro paululum <choice><abbr>aq</abbr><expan>aquam</expan></choice> de hydria tua. 
+        </ab>
+
+        <ab n="18">
+        Et ait. Bibe <choice><abbr>dne</abbr><expan>domine</expan></choice> mi. Et sestinauit et deposuit hydriam super manum suam: et dedi ei bibere. 
+        </ab>
+
+        <ab n="19">
+        Et cum cessasset bibere dixit. etiam camelis tuis hauriam: donec cessent bibere. 
+        </ab>
+
+        <ab n="20">
+        Et sestinauit et effudit hydriam suam in canali: et cucurrit iterum ad puteum ad hauriendum: et hausit <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> camelis eius. 
+        </ab>
+
+        <ab n="21">
+        Vir autem admirabatur eam tacitus contemplando: vt sciret vtrum prosperasset <choice><abbr>dns</abbr><expan>dominus</expan></choice> viam suam: an non. 
+        </ab>
+
+        <ab n="22">
+        Et factum est quando cessauerunt bibere cameli: tulit vir inaurem auream appendentem siclum vnum: et duas armillas super manus eius appendentes decem siclos auri. 
+        </ab>
+
+        <ab n="23">
+        Et ait. Cuius filias es tu: indica obsecro mihi si est in domo patris tui locus sufficiens nobis ad manendum. 
+        </ab>
+
+        <ab n="24">
+        Et dixit ei filia <persName>bathuelis</persName> ego sum filii <persName>melche</persName> quem peperit de <persName>nachor</persName>.
+        </ab>
+
+        <ab n="25">
+        Et ait ei. Etiam palearum et pabuli multum est apud nos: locus quoque sufficiens ad manendum. 
+        </ab>
+
+        <ab n="26">
+        Et flexit vir genua sua: et adorauit coram <choice><abbr>dno</abbr><expan>domino</expan></choice>:
+        </ab>
+
+        <ab n="27">
+        Benedictus <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus <choice><abbr>dni</abbr><expan>domini</expan></choice> mei <persName>abraham</persName>: qui non dimisit misericordiam suam et veritatem <unclear>suam</unclear> a <choice><abbr>dno</abbr><expan>domino</expan></choice> meo: et recta via duxit me <choice><abbr>dns</abbr><expan>dominus</expan></choice> in domum fratris <choice><abbr>dni</abbr><expan>domini</expan></choice> mei. 
+        </ab>
+
+        <ab n="28">
+        Et cucurrit puella: et nunciauit in domo matris sue verba hec. 
+        </ab>
+
+        <ab n="29">
+        Erat autem <persName>rebecce</persName> frater et nomen eius <persName>laban</persName>: et cucurrit <persName>laban</persName> ad virum foras ad fontem. 
+        </ab>
+
+        <ab n="30">
+        Et factum est cum vidisset inaurem et armillas in manibus sororis sue: et cum audisset <expan><choice><abbr>vba</abbr><expan>verba</expan></choice></expan> <persName>rebecce</persName> sororis sue dicentis hec locutus est mecum vir: venitque ad virum: et ecce stabat iuxta camelos prope fontem. 
+        </ab>
+
+        <ab n="31">
+        Et ait. Ingredere benedicte <choice><abbr>dni</abbr><expan>domini</expan></choice>: cur stas foris: ego <choice><abbr>aut</abbr><expan>autem</expan></choice> preparaui domum: et locum aptum camelis. 
+        </ab>
+
+        <ab n="32">
+        Et ingressus est vir in domum: et soluit camelos et dedis paleas et pabulum camelis: et aquam ad lauandos pedes eius et pedes virorum qui erant cum eo: 
+        </ab>
+
+        <ab n="33">
+        et posuerunt coram eo cibum: et ait. Non comedam donec loquar sermones meos. Et dixit. Loquere. 
+        </ab>
+
+        <ab n="34">
+        Et ait. Seruus <persName>abrahe</persName> ego sum: 
+        </ab>
+
+        <ab n="35">
+        et <choice><abbr>dns</abbr><expan>dominus</expan></choice> benedixit <choice><abbr>dno</abbr><expan>domino</expan></choice> meo valde: et magnificatus est: et dedit ei oues et boues: et argentum et aurum: et seruos et ancillas: et camelos et assinos. 
+        </ab>
+
+        <ab n="36">
+        Et peperit <persName>sara</persName> vxor <choice><abbr>dni</abbr><expan>domini</expan></choice> mei filium <choice><abbr>dno</abbr><expan>domino</expan></choice> meo <choice><abbr>postq</abbr><expan>postquam</expan></choice> senuit: deditque illi <choice><abbr>oia</abbr><expan>omnia</expan></choice> que habebat. 
+        </ab>
+
+        <ab n="37">
+        Et adiurauit me <choice><abbr>dns</abbr><expan>dominus</expan></choice> meus dicens. Non accipies vxorem filio meo de filiabus <placeName>chananeorum</placeName>: in <choice><abbr>quo</abbr><expan>quorum</expan></choice> <choice><abbr>tra</abbr><expan>terra</expan></choice> ego habito. 
+        </ab>
+
+        <ab n="38">
+        Sed ad domum <choice><abbr>pris</abbr><expan>patris</expan></choice> mei ibis: et ad cognationem meam: et accipies vxorem filio meo. 
+        </ab>
+
+        <ab n="39">
+        E dixi <choice><abbr>dno</abbr><expan>domino</expan></choice> meo. forte non veniet mulier post me. 
+        </ab>
+
+        <ab n="40">
+        Et dixit mihi. <choice><abbr>Dns</abbr><expan>Dominus</expan></choice> in cuius conspectu ego seruio mittet angelum suum tecum: et diriget viam tuam: et accipies vxorem filio meo de cognatione mea et de domo patris mei. 
+        </ab>
+
+        <ab n="41">
+        Nunc eris innocens a maledictione mea: quando <unclear>ieris</unclear> ad cognationem meam: et si non dederint tibi: eris innocens a maledictione mea.
+        </ab>
+
+        <ab n="42">
+         Et veni hodie ad fontem: et dixi domine deus
+        </ab>
+
         </div>
 
         
