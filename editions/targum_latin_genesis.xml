@@ -2637,7 +2637,83 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="42">
-         Et veni hodie ad fontem: et dixi domine deus
+         Et veni hodie ad fontem: et dixi domine deus <choice><abbr>dni</abbr><expan>domini</expan></choice> mei <persName>abraham</persName>: si est voluntas coram te: vt dirigas viam meam in qua nunc ego ambulo: 
+        </ab>
+
+        <ab n="43">
+        ecce ego sto iuxta fontem aque: et erit puella que egressa fuerit ad hauriendum: et dixero ei da mihi obsecro paululum aque ad bibendum de hydria tua: 
+        </ab>
+
+        <ab n="44">
+        et dixerit mihi: tu quoque bibe et etiam  camelis tuis hauriam: ipsa est mulier quam preparauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> filio <choice><abbr>dni</abbr><expan>domini</expan></choice> mei. 
+        </ab>
+
+        <ab n="45">
+        <choice><abbr>Anteq</abbr><expan>Antequam</expan></choice> cessarem loqui cum corde meo: ecce <persName>rebecca</persName> egrediebatur et hydria sua super humerum eius erat: descenditque ad fontem et impleuit illam. Et dixit ei. Da mihi bibere obsecro: 
+        </ab>
+
+        <ab n="46">
+        et sestinauit: et deposuit hydriam suam desuper se: et dixit. Bibe: et etiam camelis tuis potum dabo: Et bibi: camelos quoque adaquauit. 
+        </ab>
+
+        <ab n="47">
+        Et bibi: camelos quoque adaquauit. Et interrogaui eam: et dixi. Cuius filia es tu? Et ait. Filia bathuelis filii <persName>nachor</persName> quem peperit ei <persName>melcha</persName>. et posui inaurem super faciem eius: et armillas super manus eius. 
+        </ab>
+
+        <ab n="48">
+        et flexi genua et adoraui coram <choice><abbr>dno</abbr><expan>domino</expan></choice>: et benedixi <choice><abbr>dno</abbr><expan>domino</expan></choice> deo <choice><abbr>dni</abbr><expan>domini</expan></choice> mei <persName>abraham</persName>: qui duxit me in viam rectam: vt acciperem filiam fratris <choice><abbr>dni</abbr><expan>domini</expan></choice> mei filio suo. 
+        </ab>
+
+        <ab n="49">
+        Et nunc si vos facitis miseri cordiam et veritatem cum <choice><abbr>dno</abbr><expan>domino</expan></choice> meo: annunciate mihi. si autem non: indicate mihi: et diuertam ad dexteram aut ad sinistram. 
+        </ab>
+
+        <ab n="50">
+        Responditque <persName>labam</persName> et <persName>bathuel</persName>: et dixerunt. A facie domini egressus est sermo: non possumus nos loqui tecum malum aut bonum. 
+        </ab>
+
+        <ab n="51">
+        Ecce <persName>rebecca</persName> coram te est: tolle eam et vade: et fit vxor filio <choice><abbr>dni</abbr><expan>domini</expan></choice> tui: sicut locutus est <choice><abbr>dns</abbr><expan>dominus</expan></choice>. 
+        </ab>
+
+        <ab n="52">
+        Et factum est cum audisset seruus <persName>abrahe</persName> verba eorum: adorauit in terra coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
+        </ab>
+
+        <ab n="53">
+        Et protulit seruus vasa argentea et vasa aurea et vestes: et dedit <persName>rebecce</persName>: et munera dedit fratri eius et matri. 
+        </ab>
+
+        <ab n="54">
+        Et comederunt et biberunt ille et viri qui erant cum eo: et dormierunt: et surrexerunt mane. Et dixit. Mittite me ad <choice><abbr>dnm</abbr><expan>dominem</expan></choice> meum. 
+        </ab>
+
+        <ab n="55">
+        Et dixit frater eius et mater. Maneat puella nobiscum aliquo tempore: aut decem mensibus: et postea ibit. Et dixit eis. 
+        </ab>
+
+        <ab n="56">
+        Ne retineatis me: <choice><abbr>dns</abbr><expan>dominus</expan></choice> autem direxit viam meam: dimittite me vt vad <persName>adam</persName> <choice><abbr>dnm</abbr><expan>dominum</expan></choice> meum. 
+        </ab>
+
+        <ab n="57">
+        Dixeruntque vocemus puellam: et audiamus quid ipsa dicat. 
+        </ab>
+
+        <ab n="58">
+        Vocaueruntque <persName>rebeccam</persName>: et dixerunt ei. Nunquid ibis cum viro isto? Et dixit: vadam. 
+        </ab>
+
+        <ab n="59">
+        Dimiseruntque <persName>rebeccam</persName> sororem suam et nutricem eius: et seruum <persName>abrahe</persName> et viros eius. 
+        </ab>
+
+        <ab n="60">
+        Et benedixerunt <persName>rebecca</persName> atque dixerunt ei. Soror nostra tu sis in millia millium: et possideant filii tui ciuitates inimi corum suorum. 
+        </ab>
+
+        <ab n="61">
+        Et surrexit <persName>rebecca</persName> et puelle eius: et ascenderunt super camelos: et ibant post virum. et tulit seruus <persName>rebeccam</persName>: et abiit
         </ab>
 
         </div>

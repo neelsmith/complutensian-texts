@@ -2727,10 +2727,104 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="50">
-        respondentes <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>laban</persName> et <persName>bathuel</persName>: dixerunt. a <choice><abbr>dno</abbr><expan>domino</expan></choice> egressa est
+        respondentes <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>laban</persName> et <persName>bathuel</persName>: dixerunt. a <choice><abbr>dno</abbr><expan>domino</expan></choice> egressa est res hec. non poterimus tibi res hec. non poterimus tibi <unclear>pdicere</unclear> malum aut bonum. 
         </ab>
 
+        <ab n="51">
+        ecce <persName>rebecca</persName> coram te: tollens reuertere. et fit vxor filio <choice><abbr>dni</abbr><expan>domini</expan></choice> tui: sicut locutus est <choice><abbr>dns</abbr><expan>dominus</expan></choice>: 
+        </ab>
 
+        <ab n="52">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> cum audiret puer <persName>abram</persName> verba corum: adorauit super terram <choice><abbr>dnm</abbr><expan>dominum</expan></choice>. 
+        </ab>
+
+        <ab n="53">
+        et proferens seruus vasa argent4ea et aurea et vestem: dedit <persName>rebecce</persName>. et dona dedit fratri eius: et matri eius. 
+        </ab>
+
+        <ab n="54">
+        et comederunt et biberunt ipse et viri cum eo <unclear><choice><abbr>exntes</abbr><expan>exentes</expan></choice></unclear>: et domierunt. et surgens puer: mane: dixit. dimittite me: vt vadam ad <choice><abbr>dnm</abbr><expan>dominum</expan></choice> meum. 
+        </ab>
+
+        <ab n="55">
+        <choice><abbr>dixert</abbr><expan>dixerunt</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> fratres eius et mater: maneat virgo nobiscum dies quasi decem. et post hoc proficiscetur. 
+        </ab>
+
+        <ab n="56">
+        ille <choice><abbr>at</abbr><expan>autem</expan></choice> dixit ad eos: ne detineatis me. et <choice><abbr>dns</abbr><expan>dominus</expan></choice> prosperauit viam meam: dimittite me: vt pergam ad <choice><abbr>dnm</abbr><expan>dominum</expan></choice> meum. 
+        </ab>
+
+        <ab n="57">
+        <choice><abbr>dixert</abbr><expan>dixerunt</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice>: vocemus puellam: interrogemus os eius. 
+        </ab>
+
+        <ab n="58">
+        et <choice><abbr>vocauert</abbr><expan>vocauerunt</expan></choice> <persName>rebeccam</persName>: et <choice><abbr>dixert</abbr><expan>dixerunt</expan></choice> ei. ibis cum <choice><abbr>hoie</abbr><expan>homine</expan></choice> isto? illa <choice><abbr>at</abbr><expan>autem</expan></choice> dixit vadam. 
+        </ab>
+
+        <ab n="59">
+        et dimiserunt <persName>rebeccam</persName> sororem eorum: et substantiam eius: et seruum <persName>abraam</persName>: et eos <unclear><choice><abbr>q</abbr><expan></expan></choice></unclear> cum eo. 
+        </ab>
+
+        <ab n="60">
+        et <choice><abbr>bndixerunt</abbr><expan>benedixerunt</expan></choice> <persName>rebeccam</persName> sororem eorum: et dixerunt ei: soror <choice><abbr>nra</abbr><expan>nostra</expan></choice> es. fias in milia decem milium et hereditet semen tuum ciuitates aduersariorum. 
+        </ab>
+
+        <ab n="61">
+        surgens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rebecca</persName> et ancille eius: ascenderunt super camelos: et abierunt cum <choice><abbr>hoie</abbr><expan>homine</expan></choice>. et accipiens puer <persName>rebeccam</persName>: abiit
+        </ab>
+
+        <ab n="62">
+        <persName>isaac</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> ambulabat pro desertum iuxta puteum visionis. ipse <choice><abbr>at</abbr><expan>autem</expan></choice> habitabat in terra ad aphicum. 
+        </ab>
+
+        <ab n="63">
+        egressus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> exerceri in agro ad meridiem. et respiciens oculis: vidit camelos venientes. 
+        </ab>
+
+        <ab n="64">
+        et respiciens <persName>rebecca</persName> oculis: vidit <persName>isaac</persName>. et difiliit a camelo. 
+        </ab>
+
+        <ab n="65">
+        et dixit puero: <choice><abbr>qs</abbr><expan>quas</expan></choice> est homo ille qui venit in agro in occursum <choice><abbr>nrm</abbr><expan>nostrum</expan></choice>. dixit <choice><abbr>at</abbr><expan>autem</expan></choice> puer: hic <choice><abbr>dns</abbr><expan>dominus</expan></choice> meus. at illa accipiens pallium cooperuit se. 
+        </ab>
+
+        <ab n="66">
+        et narrauit serus <persName>isaac</persName> cuncta verba <unclear><choice><abbr>q</abbr><expan></expan></choice></unclear> fecit. 
+        </ab>
+
+        <ab n="67">
+        intrauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> in domum <choice><abbr>mris</abbr><expan>matris</expan></choice> sue. et accepit <persName>rebeccam</persName>. et fui illius vxor. et dilexit eam. et consolatus est <persName>isaac</persName> de <persName>sarra</persName> matre sua. 
+        </ab>
+
+        </div>
+
+        <div n="25">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="25" type="ordinal">25.</num></ab>
+        <ab n="1">
+        Et Duciens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abraam</persName>: accepit vxorem. cui nomen <persName>cethura</persName>. 
+        </ab>
+
+        <ab n="2">
+        peperit <choice><abbr>at</abbr><expan>autem</expan></choice> illi <persName>zambran</persName>. et <persName>iectan</persName>. et <persName>madal</persName>. et <persName>madian</persName>. et <persName>iesboc</persName>. et <persName>sobe</persName>.
+        </ab>
+
+        <ab n="3">
+        iectam <choice><abbr>at</abbr><expan>autem</expan></choice> genuit <persName>saba</persName>. et dedan. filii <persName>dedan</persName> fuerunt <persName>assurim</persName>. et <persName>lattusim</persName>. et <persName>laomim</persName>.
+        </ab>
+
+        <ab n="4">
+        filii <choice><abbr>at</abbr><expan>autem</expan></choice> madiam: <persName>gephar</persName>. et <persName>apher</persName>. et <persName>enoch</persName>. et <persName>abida</persName>. et <persName>raga</persName>. <choice><abbr>oes</abbr><expan>omnes</expan></choice> isti fuerunt filii <persName>cheture</persName>.
+        </ab>
+
+        <ab n="5">
+        dedit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abraam</persName> omnem substantiam suam <persName>isaac</persName> filio suo. 
+        </ab>
+
+        <ab n="6">
+        et filiis concubinarum suarum dedit <persName>abraam</persName> munera. et misit eos ab <persName>isaac</persName> filio suo: adhuc viuente ipso: ad orientem in
+        </ab>
         </div>
     </body>
     </text>
