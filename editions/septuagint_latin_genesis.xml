@@ -2510,7 +2510,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="17">
-        et stetit <persName>ager</persName> <persName>ephron</persName>: <unclear><choice><abbr>q</abbr><expan>quia</expan></choice></unclear> est <choice><abbr>sm</abbr><expan>secundum</expan></choice> faciem <persName>mambre</persName>: <persName>ager</persName> et spelunca <choice><abbr>q</abbr><expan>qui</expan></choice> erat in eo: et <choice><abbr>ois</abbr><expan>omnis</expan></choice> arbor: <choice><abbr>q</abbr><expan>qui</expan></choice> est in terminis eius in circuitu 
+        et stetit <persName>ager</persName> <persName>ephron</persName>: <unclear><choice><abbr>q</abbr><expan>quia</expan></choice></unclear> erat in spelunca duplici: <unclear><choice><abbr>q</abbr><expan>quia</expan></choice></unclear> est <choice><abbr>sm</abbr><expan>secundum</expan></choice> faciem <persName>mambre</persName>: <persName>ager</persName> et spelunca <choice><abbr>q</abbr><expan>qui</expan></choice> erat in eo: et <choice><abbr>ois</abbr><expan>omnis</expan></choice> arbor: <choice><abbr>q</abbr><expan>qui</expan></choice> est in terminis eius in circuitu 
         </ab>
 
         <ab n="18">
@@ -2551,7 +2551,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="6">
-        dixiet <choice><abbr>at</abbr><expan>ad</expan></choice> eum <persName>abraam</persName>. caue tibi ne reducas filium meum illuc. 
+        dixit <choice><abbr>at</abbr><expan>ad</expan></choice> eum <persName>abraam</persName>. caue tibi ne reducas filium meum illuc. 
         </ab>
 
         <ab n="7">
@@ -2567,11 +2567,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="10">
-        et accepit serum decem camelos de camelis <choice><abbr>dni</abbr><expan>domini</expan></choice> sui: et de <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bonis <choice><abbr>dni</abbr><expan>domini</expan></choice> sui cum ipso. et surgens abiit in mesopotamiam in ciuitatem <persName>nachor</persName>. 
+        et accepit serus decem camelos de camelis <choice><abbr>dni</abbr><expan>domini</expan></choice> sui: et de <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> bonis <choice><abbr>dni</abbr><expan>domini</expan></choice> sui cum ipso. et surgens abiit in mesopotamiam in ciuitatem <persName>nachor</persName>. 
         </ab>
 
         <ab n="11">
-        et fecit quiescere camelos extra ciuitates tem <choice><abbr>apd</abbr><expan>apud</expan></choice> puteum aque ad vesperum. <choice><abbr>qn</abbr><expan>quando</expan></choice> egrediuntur aquatrices. 
+        et fecit quiescere camelos extra ciuitatem <choice><abbr>apd</abbr><expan>apud</expan></choice> puteum aque ad vesperum. <choice><abbr>qn</abbr><expan>quando</expan></choice> egrediuntur aquatrices. 
         </ab>
 
         <ab n="12">
@@ -2587,7 +2587,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="15">
-        et factum est <choice><abbr>anteq</abbr><expan>antequam</expan></choice> perficeret ipse loquens in mente. et ecce <persName>rebecca</persName> egrediebatur gentia <persName>bathuel</persName> filio <persName>mekhe</persName> vxoris <persName>nachor</persName> fratris <persName>abraam</persName>: habens hydriam super humeros. 
+        et factum est <choice><abbr>anteq</abbr><expan>antequam</expan></choice> perficeret ipse loquens in mente. et ecce <persName>rebecca</persName> egrediebatur genita <persName>bathuel</persName> filio <persName>mekhe</persName> vxoris <persName>nachor</persName> fratris <persName>abraam</persName>: habens hydriam super humeros. 
         </ab>
 
         <ab n="16">
@@ -2607,7 +2607,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        et sestinauit et euacuauit hydriam in adaquatorium. et cucurrit iterum ad puteum vt hauriret. et hausit aquam <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> camelis. 
+        et sestinauit et euacuauit hydriam in adaquatorium. et cucurrit iterum ad puteum vt hauriret et. et hausit aquam <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> camelis. 
         </ab>
 
         <ab n="21">
@@ -2655,7 +2655,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="32">
-        ingressus est <choice><abbr>at</abbr><expan>autem</expan></choice> homo in domum et destrauit camelos: et dedit paleas et pabula camelis: et aquam pedibus ipsius: et pedibus virorum qui cum eo.
+        ingressus est <choice><abbr>at</abbr><expan>autem</expan></choice> homo in domum. et destrauit camelos. et dedit paleas et pabula camelis: et aquam pedibus ipsius: et pedibus virorum qui cum eo.
         </ab>
 
         <ab n="33">
@@ -2739,7 +2739,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="53">
-        et proferens seruus vasa argent4ea et aurea et vestem: dedit <persName>rebecce</persName>. et dona dedit fratri eius: et matri eius. 
+        et proferens seruus vasa argentea et aurea et vestem: dedit <persName>rebecce</persName>. et dona dedit fratri eius: et matri eius. 
         </ab>
 
         <ab n="54">
@@ -2795,7 +2795,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="67">
-        intrauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> in domum <choice><abbr>mris</abbr><expan>matris</expan></choice> sue. et accepit <persName>rebeccam</persName>. et fui illius vxor. et dilexit eam. et consolatus est <persName>isaac</persName> de <persName>sarra</persName> matre sua. 
+        intrauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> in domum <choice><abbr>mris</abbr><expan>matris</expan></choice> sue. et accepit <persName>rebeccam</persName>. et fuit illius vxor. et dilexit eam. et consolatus est <persName>isaac</persName> de <persName>sarra</persName> matre sua. 
         </ab>
 
         </div>
@@ -2823,8 +2823,123 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="6">
-        et filiis concubinarum suarum dedit <persName>abraam</persName> munera. et misit eos ab <persName>isaac</persName> filio suo: adhuc viuente ipso: ad orientem in
+        et filiis concubinarum suarum dedit <persName>abraam</persName> munera. et misit eos ab <persName>isaac</persName> filio suo: adhuc viuente ipso: ad orientem in terram orientis. 
         </ab>
+
+        <ab n="7">
+        isti <choice><abbr>at</abbr><expan>autem</expan></choice>
+        anni dierum vite <persName>abraam</persName> quos vixit: centum septuaginta quinque anni
+        </ab> 
+        
+
+        <ab n="8">
+        et deficiens mortuus est <persName>abraam</persName> in senectute bona senex et plenus dierum. et appositus est ad populum suum. 
+        </ab>
+
+        <ab n="9">
+        et sepelierunt eum <persName>isaac</persName> et <persName>ismael</persName> filii eius in spelunca duplici: in agro <persName>ephron</persName> <persName>saar</persName> <persName>ethei</persName>. qui est e regione <persName>mambre</persName>.
+        </ab>
+
+        <ab n="10">
+        agro et speluncam: quam possedit <persName>abraam</persName> a filiis <persName>het</persName>. illic <choice><abbr>sepelier</abbr><expan>sepelierunt</expan></choice> <persName>abraam</persName> et <persName>sarram</persName> vxorem suam. 
+        </ab>
+
+        <ab n="11">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>postq</abbr><expan>postquam</expan></choice> mortuus est <persName>abraam</persName>: <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> deus <persName>isaac</persName> filio eius. et habitauit <persName>isaaac</persName> iuxta puteum visionis. 
+        </ab>
+
+        <ab n="12">
+        he <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>gnatioes</abbr><expan>generationes</expan></choice> <persName>ismael</persName> filii <persName>abraam</persName>: quem peperit <persName>agar</persName> <placeName>egyptia</placeName> samula <persName>sarre</persName> <persName>abraam</persName>. 
+        </ab>
+
+        <ab n="13">
+        et hec nomina filiorum <persName>ismael</persName>: et nomina <choice><abbr>gnationum</abbr><expan>generationum</expan></choice> eius. <choice><abbr>sm</abbr><expan>secundum</expan></choice> nomen <choice><abbr>gnationum</abbr><expan>generationum</expan></choice> eius primogenitus <persName>ismael</persName>. <persName>nabaioth</persName>. et <persName>cedar</persName>. et <persName>nabdehel</persName>. et <persName>massam</persName>. 
+        </ab>
+
+        <ab n="14">
+        et <persName>masman</persName>. et <persName>iduma</persName>. et <persName>masse</persName>. 
+        </ab>
+
+        <ab n="15">
+        et <persName>adad</persName>. et <persName>therman</persName>. et <persName>iatur</persName>. et <persName>naphes</persName>. et <persName>cedma</persName>. 
+        </ab>
+
+        <ab n="16">
+        isti sunt filii <persName>ismael</persName>. et hec nomina eorum in mansionibus eorum et in tabernaculis eorum. duodecim principes <choice><abbr>sm</abbr><expan>secundum</expan></choice> gentes eorum. 
+        </ab>
+
+        <ab n="17">
+        et isti anni vite <persName>ismael</persName>: centum triginta septem anni. et deficiens mortuus est. et appositus est ad genus suum. 
+        </ab>
+
+        <ab n="18">
+        habitauit <choice><abbr>at</abbr><expan>autem</expan></choice> ab <persName>euila</persName> vsque ad <persName>sur</persName>. <choice><abbr>q</abbr><expan>quae</expan></choice> est ante faciem <placeName>egypti</placeName> donec veniatur ad <placeName>assyrios</placeName>. ante faciem <choice><abbr>oim</abbr><expan>omnium</expan></choice> fratrum suorum habitauit. 
+        </ab>
+
+        <ab n="19">
+        et he <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> <persName>isaac</persName> filii <persName>abraam</persName>. <persName>abraam</persName> genuit <persName>isaac</persName>.
+        </ab>
+
+        <ab n="20">
+        erat <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> annorum quadraginta: <choice><abbr>qn</abbr><expan>quando</expan></choice> accepit <persName>rebeccam</persName>: filiam <persName>bathuel</persName> <placeName>syri</placeName> sibi vxorem. 
+        </ab>
+
+        <ab n="21">
+        <choice><abbr>depcatus</abbr><expan>deprecatus</expan></choice> est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> pro rebecca vxore sua <choice><abbr>dnm</abbr><expan>dominum</expan></choice>. <choice><abbr>q</abbr><expan>quia</expan></choice> erat sterilis. exaudiuit <choice><abbr>at</abbr><expan>autem</expan></choice> eum deus. et concepit <persName>rebecca</persName> in vtero vxor eius. 
+        </ab>
+
+        <ab n="22">
+        saltabant <choice><abbr>at</abbr><expan>autem</expan></choice> pueruli in ea. dixit <choice><abbr>at</abbr><expan>autem</expan></choice> si sic mihi futurum est fieri: quare mihi hoc? abiit <choice><abbr>at</abbr><expan>autem</expan></choice> interrogare a <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
+        </ab>
+
+        <ab n="23">
+        et ait <choice><abbr>dns</abbr><expan>dominus</expan></choice> illi. due gentes in vtero tuo sunt. et duo <choice><abbr>ppli</abbr><expan>populi</expan></choice> ex ventre tuo diuidentur. et <choice><abbr>ppls</abbr><expan>populis</expan></choice> <choice><abbr>pplm</abbr><expan>populum</expan></choice> superabit. et maior seruiet minori. 
+        </ab>
+
+        <ab n="24">
+        et impleti sunt dies vt pareret ipsa. et huic erant gemini in vtero eius. 
+        </ab>
+
+        <ab n="25">
+        egressus est <choice><abbr>at</abbr><expan>autem</expan></choice> primogenitus ruffus totus: et sicut pellis: hispidus. vocauit <choice><abbr>at</abbr><expan>autem</expan></choice> nomen eius <persName>esau</persName>. et post hoc egressus est frater eius. et manus eius apprehendens calcauneum <persName>esau</persName>. et vocauit nomen eius <persName>iacob</persName>. 
+        </ab>
+
+        <ab n="26">
+        <persName>isaac</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> erat annorum sexaginta: <choice><abbr>qn</abbr><expan>quando</expan></choice> peperit eos <persName>rebecca</persName>.
+        </ab>
+
+        <ab n="27">
+        creuerunt <choice><abbr>at</abbr><expan>autem</expan></choice> iuuenes. et fuit <persName>esau</persName> homo sciens venari rusticus. <persName>iacob</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> fuit homo simplex: habitans domum. 
+        </ab>
+
+        <ab n="28">
+        dilexit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> <persName>esau</persName>: <choice><abbr>q</abbr><expan>quia</expan></choice> venatio illius cibus ei. <persName>rebecca</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> diligebat <persName>iacob</persName>.
+        </ab>
+
+        <ab n="29">
+        coxit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> coctionem lentis <unclear></unclear> venit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> de agro deficiens. 
+        </ab>
+
+        <ab n="30">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> <persName>iacob</persName>. ciba me de coctione tua ruffa hac. <choice><abbr>q</abbr><expan>quia</expan></choice> deficio. <choice><abbr>propt</abbr><expan>propter</expan></choice> hoc vocatum est nomen eius <persName>edom</persName>. 
+        </ab>
+
+        <ab n="31">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> <persName>esau</persName>: vende mihi hodie primogenita tua. 
+        </ab>
+
+        <ab n="32">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName>: ecce ego vado mori. et vt <choice><abbr>qd</abbr><expan>quod</expan></choice> mihi ista primogenita. 
+        </ab>
+
+        <ab n="33">
+        et dixit ei <persName>iacob</persName>. iura mihi hodie. et iurauit ei. vendidit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> primogenita sua. 
+        </ab>
+
+        <ab n="34">
+        <persName>iacob</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> dedit <persName>esau</persName> panem et conctionem lentis. et comedit et bibit: et surgens abiit. et vilipendit <persName>esau</persName> primogenita sua. 
+        </ab>
+
         </div>
     </body>
     </text>

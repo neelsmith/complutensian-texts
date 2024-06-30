@@ -2416,11 +2416,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="8">
-        Locutus  que est cum eis dicens. Si est <unclear>voluntas</unclear> anime vestre vt <unclear>se peliam</unclear> mortuum meum a facie mea: acquiescite mihi: et rogate pro me <persName>efron</persName> filium <persName>seor</persName>: 
+        Locutus  que est cum eis dicens. Si est <unclear>voluntas</unclear> anime vestre vt sepeliam mortuum meum a facie mea: acquiescite mihi: et rogate pro me <persName>efron</persName> filium <persName>seor</persName>: 
         </ab>
 
         <ab n="9">
-        vt dei mihi sepluncam duplicem suam que est in latere agri sui: pecunia digna tradat eam mihi inter vos in possessionem sepulchri. <persName>Efron</persName> autem stabat in medio filiorum <persName>heth</persName>. 
+        vt <unclear>dei</unclear> mihi sepluncam duplicem suam que est in latere agri sui: pecunia digna tradat eam mihi inter vos in possessionem sepulchri. <persName>Efron</persName> autem stabat in medio filiorum <persName>heth</persName>. 
         </ab>
 
         <ab n="10">
@@ -2452,7 +2452,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="17">
-        Et confirmatus est <persName>ager</persName> <persName>efron</persName> in quo est spelunca duplex <unclear>q</unclear> est ante <persName>mamre</persName>: tam ager <choice><abbr>q</abbr><expan>quod</expan></choice> spelunca <unclear>q</unclear> in ea est et <choice><abbr>oes</abbr><expan>omnes</expan></choice> arbores <unclear>q</unclear> sunt in agro et in omni termino eius per circuitum:
+        Et confirmatus est <persName>ager</persName> <persName>efron</persName> in quo est spelunca duplex <unclear>q</unclear> est ante <persName>mamre</persName>: tam ager <choice><abbr>q</abbr><expan>quod</expan></choice> spelunca <unclear>q</unclear> in eo est et <choice><abbr>oes</abbr><expan>omnes</expan></choice> arbores <unclear>q</unclear> sunt in agro et in omni termino eius per circuitum:
         </ab>
 
         <ab n="18">
@@ -2497,7 +2497,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="7">
-        Dominus deus celi qui tulit me de domo patris mei et terra natiuitatis mee: et qui locutus est mihi: et qui iurauit mihi dicens. Filiis tuis dabo terram hanc: ipse mittet angelum suum coram et: et accipies vxorem filio meo inde. 
+        Dominus deus celi qui tulit me de domo patris mei et terra natiuitatis mee: et qui locutus est mihi: et qui iurauit mihi dicens. Filiis tuis dabo terram hanc: ipse mittet angelum suum coram te: et accipies vxorem filio meo inde. 
         </ab>
 
         <ab n="8">
@@ -2561,7 +2561,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="23">
-        Et ait. Cuius filias es tu: indica obsecro mihi si est in domo patris tui locus sufficiens nobis ad manendum. 
+        Et ait. Cuius filia es tu: indica obsecro mihi si est in domo patris tui locus sufficiens nobis ad manendum. 
         </ab>
 
         <ab n="24">
@@ -2573,7 +2573,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="26">
-        Et flexit vir genua sua: et adorauit coram <choice><abbr>dno</abbr><expan>domino</expan></choice>:
+        Et flexit vir genua sua: et adorauit coram <choice><abbr>dno</abbr><expan>domino</expan></choice>: et ait. 
         </ab>
 
         <ab n="27">
@@ -2609,7 +2609,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="35">
-        et <choice><abbr>dns</abbr><expan>dominus</expan></choice> benedixit <choice><abbr>dno</abbr><expan>domino</expan></choice> meo valde: et magnificatus est: et dedit ei oues et boues: et argentum et aurum: et seruos et ancillas: et camelos et assinos. 
+        et <choice><abbr>dns</abbr><expan>dominus</expan></choice> benedixit <choice><abbr>dno</abbr><expan>domino</expan></choice> meo valde: et magnificatus est: et dedit ei oues et boues: et argentum et aurum: et seruos et ancillas: et camelos et asinos. 
         </ab>
 
         <ab n="36">
@@ -2633,7 +2633,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="41">
-        Nunc eris innocens a maledictione mea: quando <unclear>ieris</unclear> ad cognationem meam: et si non dederint tibi: eris innocens a maledictione mea.
+        Tunc eris innocens a maledictione mea: quando <unclear>ieris</unclear> ad cognationem meam: et si non dederint tibi: eris innocens a maledictione mea.
         </ab>
 
         <ab n="42">
@@ -2673,7 +2673,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="51">
-        Ecce <persName>rebecca</persName> coram te est: tolle eam et vade: et fit vxor filio <choice><abbr>dni</abbr><expan>domini</expan></choice> tui: sicut locutus est <choice><abbr>dns</abbr><expan>dominus</expan></choice>. 
+        Ecce <persName>rebecca</persName> coram te est: tolle eam et vade: et sit vxor filio <choice><abbr>dni</abbr><expan>domini</expan></choice> tui: sicut locutus est <choice><abbr>dns</abbr><expan>dominus</expan></choice>. 
         </ab>
 
         <ab n="52">
@@ -2714,6 +2714,172 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         <ab n="61">
         Et surrexit <persName>rebecca</persName> et puelle eius: et ascenderunt super camelos: et ibant post virum. et tulit seruus <persName>rebeccam</persName>: et abiit
+        </ab>
+
+        <ab n="62">
+        <persName>Isaac</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> veniebat de puteo super quo angelus vite apparuit: et ipse habitabat in terra <placeName>australi</placeName>.
+        </ab>
+
+        <ab n="63">
+        Et egressus est <persName>isaac</persName> ad orandum in agro in tempore vespertino: et leuauit oculos suos et vidit: et ecce cameli veniebant. 
+        </ab>
+
+        <ab n="64">
+        Et leuauit oculos suos <persName>rebecca</persName>: et vidit <persName>isaac</persName>: et inclinauit se super camelum: 
+        </ab>
+
+        <ab n="65">
+        et ait seruo. Quis est vir ille qui ambulat in agro in occursum nostrum. Et ait serus. Ipse est dominus meus: et tulit pallium et operuit se. 
+        </ab>
+
+        <ab n="66">
+        Et narrauit seruus <persName>isaac</persName> omnia que fecerat. 
+        </ab>
+
+        <ab n="67">
+        et introduxit eam <persName>isaac</persName> in tabernaculum. et vidit et ecce opera eius recta erant: sicut opera <persName>sare</persName> matris sue. Et accepit <persName>rebecca</persName>: et fuit ei in vxorem: et dilexit eam: et consolatus est <persName>isaac</persName> <choice><abbr>postq</abbr><expan>postquam</expan></choice> mortua est <choice><abbr>mr</abbr><expan>matrem</expan></choice> eius.
+        </ab>
+
+        </div>
+
+        <div n="25">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="25" type="ordinal">25.</num>
+        </ab>
+
+        <ab n="1">
+        Et addidit <persName>abraham</persName> et accepit vxorem: et nomen eius <persName>cethura</persName>. 
+        </ab>
+
+        <ab n="2">
+        Et peperit ei <persName>zamran</persName>: et <persName>iecsan</persName>: et <persName>madan</persName> et <persName>madian</persName>: et <persName>iesboth</persName>: et <persName>sue</persName>.
+        </ab>
+
+        <ab n="3">
+        <persName>Jecsan</persName> autem genuit <persName>saba</persName> et <persName>dadan</persName>. Filii autem <persName>dadan</persName> fuerunt in castris et in tabernaculis et in insulis. 
+        </ab>
+
+        <ab n="4">
+        Et filii <persName>madiam <persName>epha</persName></persName> et <persName>epher</persName>: et <persName>enoch</persName> et <persName>abida</persName> et <persName>heldaa</persName>. Omnes hi filii <persName>cethure</persName>. 
+        </ab>
+
+        <ab n="5">
+        Et dedit <persName>abraham</persName> omnia sua <persName>isaac</persName>.
+        </ab>
+
+        <ab n="6">
+        Filiis autem concubine <persName>abrahe</persName> dedit <persName>abraham</persName> munera: et misit eos ab <persName>isaac</persName> filio suo: dum adhuc ipse viueret ad orientem in terram filiorum orientis. 
+        </ab>
+
+        <ab n="7">
+        Et hi sunt dies annorum vite <persName>abrahe</persName> quibus vixit centum et septuaginta et quinque anni: 
+        </ab>
+
+        <ab n="8">
+        et defecit et mortuus est <persName>abraham</persName> in senectute bona senex et plenus dierum: congregatusque est ad populum suum. 
+        </ab>
+
+        <ab n="9">
+        Et sepelierunt eum <persName>isaac</persName> et <persName>ismael</persName> filii sui in spelunca duplici in agro <persName>efron</persName> filii <persName>seor</persName> <persName>ethei</persName>. e regione <persName>mamre</persName>:
+        </ab>
+
+        <ab n="10">
+        quem agrum emit <persName>abraham</persName> a filiis <persName>heth</persName>. Ibi sepultus est <persName>abraham</persName> et <unclear></unclear> vxor eius. 
+        </ab>
+
+        <ab n="11">
+        Factumque est <choice><abbr>postq</abbr><expan>postquam</expan></choice> mortuus est <persName>abraham</persName>: et benedixit deus <persName>isaac</persName> filio eius: et habitauit <persName>isaac</persName> iuxta puteum super quo apparuit angelus vite. 
+        </ab>
+
+        <ab n="12">
+        Et he sunt generationes <persName>ismael</persName> filii <persName>abraham</persName>: quem peperit <persName>agar</persName> egyptia ancilla <persName>sare</persName> <persName>abrahe</persName>. 
+        </ab>
+
+        <ab n="13">
+        Et hec sunt <choice><abbr>noia</abbr><expan>nomina</expan></choice> filiorum <persName>ismael</persName> pro nomina sua in <choice><abbr>gnationibus</abbr><expan>generationibus</expan></choice> suis. Primogenitus <persName>ismael</persName> <persName>nabaioth</persName>: et <persName>cedar</persName> et <persName>adbeel</persName> et <persName>mabsam</persName>
+        </ab>
+
+        <ab n="14">
+        et <persName>masina</persName> et <persName>duma</persName> et <persName>massa</persName>: 
+        </ab>
+
+        <ab n="15">
+        <persName>adad</persName> et <persName>thema</persName>. <persName>iethur</persName>: <persName>naphis</persName> et <persName>cedma</persName>.
+        </ab>
+
+        <ab n="16">
+        Hi sunt filii <persName>ismael</persName>: et hec nomina eorum in villis suis et in ciuitatibus suis: duodecim principes per nationes suas. 
+        </ab>
+
+        <ab n="17">
+        Et hi sunt anni vite <persName>ismaelis</persName> centum et triginta et septem anni. Et defecit et mortuus est: et congregatus est ad populum suum. 
+        </ab>
+
+        <ab n="18">
+        Et habitauerunt ab <persName>euila</persName> vsque <persName>agara</persName>: que est e regione <placeName>egypti</placeName> pertingens vsque ad <placeName>assyriam</placeName>: e regione omnium fratrum suorum habitauit. 
+        </ab>
+
+        <ab n="19">
+        Et he sunt generationes <persName>isaac</persName> filii <persName>abrahe</persName>. 
+        </ab>
+
+        <ab n="20">
+        Erat autem <persName>isaac</persName> quadraginta annorum etatis: quando accepit sibi <persName>rebeccam</persName> filiam <persName>bathuelis</persName> <placeName>syri</placeName> de mespotamia <placeName>syrie</placeName> sororem <persName>laban</persName> <persName>syri</persName> in vxorem. 
+        </ab>
+
+        <ab n="21">
+        Orauitque <persName>isaac</persName> coram <choice><abbr>dno</abbr><expan>domino</expan></choice> pro vxore sua: quoniam sterilis erat: et suscepit <choice><abbr>dns</abbr><expan>dominus</expan></choice> orationem eius: et concepit <persName>rebecca</persName> vxor eius. 
+        </ab>
+
+        <ab n="22">
+        Et collidebantur filii vtero eius. Et ait. Si sic mihi futurum erat ad <choice><abbr>qd</abbr><expan>quod</expan></choice> ego concepi: et abiit vt quereret oraculum a facie <choice><abbr>dni</abbr><expan>domini</expan></choice>. 
+        </ab>
+
+        <ab n="23">
+        Et ait ei <choice><abbr>dns</abbr><expan>dominus</expan></choice>. Duo populi sunt in visceribus tuis: et duo regna de vtero tuo diuidentur: et regnum regno fortius erit: et maior seruiet minori. 
+        </ab>
+
+        <ab n="24">
+        Et impleti sunt dies eius vt pareret: et ecce gemini in vtero eius erant. 
+        </ab>
+
+        <ab n="25">
+        Et egressus est primus ruffus totus quasi pallium hispidum: et vocauerunt nomen eius <persName>esau</persName>. Et postea egressus est frater eius: et manus eius tenebat plantam <persName>esau</persName>. Et vocauit nomen eius <persName>iacob</persName>.
+        </ab>
+
+        <ab n="26">
+        <persName>Isaac</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> erat sexaginta annorum etatis <choice><abbr>qn</abbr><expan>quando</expan></choice> genuit eos. 
+        </ab>
+
+        <ab n="27">
+        Et creuerunt pueri: et fuit <persName>esau</persName> vir venator: vir egrediens in agrum. <persName>Jacob</persName> autem erat vir perfectus: minister domus doctrine. 
+        </ab>
+
+        <ab n="28">
+        Et dilexit <persName>isaac</persName> <persName>esau</persName>: <choice><abbr>q</abbr><expan>quia</expan></choice> de venatione eius edebat: et <persName>rebecca</persName> diligebat <persName>iacob</persName>.
+        </ab>
+
+        <ab n="29">
+        Et coxit <persName>iacob</persName> pulmentum: et venit <persName>esau</persName> de agro et ipse erat lassus. 
+        </ab>
+
+        <ab n="30">
+        Et dixit <persName>esau</persName> ad <persName>iacob</persName>. Da mihi de conctione hac ruffa quia lassus sum ego: propterea vocatum est nomen eius <persName>edom</persName>.
+        </ab>
+
+        <ab n="31">
+        Et ait <persName>iacob</persName>. Vende mihi hodie primogenita tua. Et dixit <persName>esau</persName>. 
+        </ab>
+
+        <ab n="32">
+        Ecce ego vado ad mortem: et ad quid mihi primogenita? 
+        </ab>
+
+        <ab n="33">
+        Et dixit <persName>iacob</persName>. Jura mihi hodie. Et iurauit ei: et vendidit <choice><abbr>pmogenit</abbr><expan>primogenita</expan></choice> sua <persName>iacob</persName>. 
+        </ab>
+
+        <ab n="34">
+        <persName>Jacob</persName> autem dedit <persName>esau</persName> panem et edulium lentium: et comedit et bibit: et surrexit et abiit: et paruipendit <persName>esau</persName> primogenita. 
         </ab>
 
         </div>
