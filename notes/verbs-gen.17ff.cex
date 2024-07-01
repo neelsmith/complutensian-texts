@@ -111,7 +111,7 @@ urn:cts:compnov:bible.genesis.targumlatin:18.1|apparuit, debat, incaluisset|
 urn:cts:compnov:bible.genesis.lxxlatin:18.1|Apparuit, sedente|
 urn:cts:compnov:bible.genesis.vulgate:18.1|Apparuit, sedenti|
 
-urn:cts:compnov:bible.genesis.targumlatin:18.2|leuauit, iuxta, cucurrit, occursum, adorauit|
+urn:cts:compnov:bible.genesis.targumlatin:18.2|leuauit, cucurrit, occursum, adorauit|
 urn:cts:compnov:bible.genesis.lxxlatin:18.2|Suspiciens, steterunt, cucurrit, occursum, adorauit|
 urn:cts:compnov:bible.genesis.vulgate:18.2|elevasset, apparuerunt, stantes, cucurrit, occursum, adoravit|
 
@@ -135,7 +135,7 @@ urn:cts:compnov:bible.genesis.targumlatin:18.7|concurrit, tulit, dedit, sestinau
 urn:cts:compnov:bible.genesis.lxxlatin:18.7|cucurrit, tulit, dedit, festinauit, facere|
 urn:cts:compnov:bible.genesis.vulgate:18.7|cucurrit, tulit, deditque, festinavit, coxit|
 
-urn:cts:compnov:bible.genesis.targumlatin:18.8|coxerat, ministrabat, iuxta, comederunt|
+urn:cts:compnov:bible.genesis.targumlatin:18.8|coxerat, ministrabat, comederunt|
 urn:cts:compnov:bible.genesis.lxxlatin:18.8|apposuit, comederunt, astabat|
 urn:cts:compnov:bible.genesis.vulgate:18.8|coxerat, stabajuxta|
 
@@ -315,9 +315,9 @@ urn:cts:compnov:bible.genesis.targumlatin:19.19|Obsecro, multiplicasti, sustenta
 urn:cts:compnov:bible.genesis.lxxlatin:19.19|magnificasti, facis, saluari, apprehendant|
 urn:cts:compnov:bible.genesis.vulgate:19.19|magnificasti, salvares, salvarri, apprehendat|
 
-urn:cts:compnov:bible.genesis.targumlatin:19.20|iuxta, fugiendum, Saluabor|
-urn:cts:compnov:bible.genesis.lxxlatin:19.20|iuxta, saluabor, saluabitur|
-urn:cts:compnov:bible.genesis.vulgate:19.20|juxta, salvabor, modica|
+urn:cts:compnov:bible.genesis.targumlatin:19.20|fugiendum, Saluabor|
+urn:cts:compnov:bible.genesis.lxxlatin:19.20|saluabor, saluabitur|
+urn:cts:compnov:bible.genesis.vulgate:19.20|salvabor, modica|
 
 urn:cts:compnov:bible.genesis.targumlatin:19.21|suscepi, rogasti|
 urn:cts:compnov:bible.genesis.lxxlatin:19.21|admiratus, euertam|
@@ -552,7 +552,7 @@ urn:cts:compnov:bible.genesis.targumlatin:21.22|exercitus|
 urn:cts:compnov:bible.genesis.lxxlatin:21.22|exercitus|
 urn:cts:compnov:bible.genesis.vulgate:21.22|exercitus|
 
-urn:cts:compnov:bible.genesis.targumlatin:21.23|iuxta, peregrinatus|
+urn:cts:compnov:bible.genesis.targumlatin:21.23|peregrinatus|
 urn:cts:compnov:bible.genesis.lxxlatin:21.23|habitasti|
 urn:cts:compnov:bible.genesis.vulgate:21.23|posteris, juxta, versatus|
 
@@ -665,7 +665,7 @@ urn:cts:compnov:bible.genesis.lxxlatin:22.16|pepercisti|
 urn:cts:compnov:bible.genesis.vulgate:22.16|pepercisti|
 
 urn:cts:compnov:bible.genesis.targumlatin:22.17|benedicam, hereditabunt|
-urn:cts:compnov:bible.genesis.lxxlatin:22.17|benedicens, benedicam, iuxta, hereditabit|
+urn:cts:compnov:bible.genesis.lxxlatin:22.17|benedicens, benedicam, hereditabit|
 urn:cts:compnov:bible.genesis.vulgate:22.17|benedicam|
 
 urn:cts:compnov:bible.genesis.targumlatin:22.18|benedicentur, obedisti|
@@ -772,42 +772,411 @@ urn:cts:compnov:bible.genesis.targumlatin:23.20|confirmatusque|
 urn:cts:compnov:bible.genesis.lxxlatin:23.20|confirmatus|
 urn:cts:compnov:bible.genesis.vulgate:23.20|confirmatus|
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.1|benedixit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.1|benedixit|
+urn:cts:compnov:bible.genesis.vulgate:24.1|benedixerat|
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.2|preerat|seruo|
+urn:cts:compnov:bible.genesis.lxxlatin:24.2||seruo|
+urn:cts:compnov:bible.genesis.vulgate:24.2||
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.3|adiurabo|
+urn:cts:compnov:bible.genesis.lxxlatin:24.3|adiurabo|
+urn:cts:compnov:bible.genesis.vulgate:24.3||
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.4||
+urn:cts:compnov:bible.genesis.lxxlatin:24.4||
+urn:cts:compnov:bible.genesis.vulgate:24.4||
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.5|reducens, reducam, egressus|
+urn:cts:compnov:bible.genesis.lxxlatin:24.5|igitur, reducam, egressus|
+urn:cts:compnov:bible.genesis.vulgate:24.5|egressus|
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.6|reducas|
+urn:cts:compnov:bible.genesis.lxxlatin:24.6|reducas|
+urn:cts:compnov:bible.genesis.vulgate:24.6|reducas|
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.7||
+urn:cts:compnov:bible.genesis.lxxlatin:24.7||
+urn:cts:compnov:bible.genesis.vulgate:24.7||
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.8|reducas|
+urn:cts:compnov:bible.genesis.lxxlatin:24.8|reducas|
+urn:cts:compnov:bible.genesis.vulgate:24.8|reducas|
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.9||
+urn:cts:compnov:bible.genesis.lxxlatin:24.9||
+urn:cts:compnov:bible.genesis.vulgate:24.9||
 
-urn:cts:compnov:bible.genesis.targumlatin:24.1||
-urn:cts:compnov:bible.genesis.lxxlatin:24.1|
-urn:cts:compnov:bible.genesis.vulgate:24.1||
+urn:cts:compnov:bible.genesis.targumlatin:24.10|abiit, portans, surrexit, abiit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.10|surgens, abiit|
+urn:cts:compnov:bible.genesis.vulgate:24.10|abiit, portans, perrexit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.11|egediuntur, ait|
+urn:cts:compnov:bible.genesis.lxxlatin:24.11|quiescere, egrediuntur|
+urn:cts:compnov:bible.genesis.vulgate:24.11|accumbere, egredi|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.12|occurre, fac|
+urn:cts:compnov:bible.genesis.lxxlatin:24.12|fac, fac|
+urn:cts:compnov:bible.genesis.vulgate:24.12|occurre, obsecro, fac|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.13|egrediuntur|
+urn:cts:compnov:bible.genesis.lxxlatin:24.13|egrediuntur|
+urn:cts:compnov:bible.genesis.vulgate:24.13|egrediuntur|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.14|inclina, adaqbo, pparasti|
+urn:cts:compnov:bible.genesis.lxxlatin:24.14|potabo, preparasti|
+urn:cts:compnov:bible.genesis.vulgate:24.14|Igitur, Inclina, praeparasti|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.15|egrediebatur|
+urn:cts:compnov:bible.genesis.lxxlatin:24.15|egrediebatur|
+urn:cts:compnov:bible.genesis.vulgate:24.15|compleverat, egrediebatur|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.16|aspectu, descendit, impleuit, ascendit|eam|
+urn:cts:compnov:bible.genesis.lxxlatin:24.16|descendens, impleuit, ascendit|eam|
+urn:cts:compnov:bible.genesis.vulgate:24.16|descenderat, impleverat, revertebatur|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.17|cuccurrit, occursum, ait, fac, gustare, obsecro|
+urn:cts:compnov:bible.genesis.lxxlatin:24.17|cucurrit, pota|
+urn:cts:compnov:bible.genesis.vulgate:24.17|Occurritque, ait, bibendum|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.18|ait, sestinauit, deposuit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.18|sestinauit, deposuit, potauit|
+urn:cts:compnov:bible.genesis.vulgate:24.18|deposuit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.19||
+urn:cts:compnov:bible.genesis.lxxlatin:24.19||
+urn:cts:compnov:bible.genesis.vulgate:24.19||
+
+urn:cts:compnov:bible.genesis.targumlatin:24.20|sestinauit, cucurrit, hausit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.20|sestinauit, euacuauit, cucurrit, hauriret, hausit|
+urn:cts:compnov:bible.genesis.vulgate:24.20|recurrit, hauriret, haustam|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.21|admirabatur, contemplando, prosperasset|eam|
+urn:cts:compnov:bible.genesis.lxxlatin:24.21|considerabat, tacebat, prosperam|eam|
+urn:cts:compnov:bible.genesis.vulgate:24.21|contemplabatur, volens, prosperum|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.22|appendentem, appendentes|
+urn:cts:compnov:bible.genesis.lxxlatin:24.22||
+urn:cts:compnov:bible.genesis.vulgate:24.22|protulit, appendentes|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.23|ait, obsecro, manendum|
+urn:cts:compnov:bible.genesis.lxxlatin:24.23|interrogauit, manendum|eam|
+urn:cts:compnov:bible.genesis.vulgate:24.23|manendum|eam|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.24||
+urn:cts:compnov:bible.genesis.lxxlatin:24.24||
+urn:cts:compnov:bible.genesis.vulgate:24.24||
+
+urn:cts:compnov:bible.genesis.targumlatin:24.25|ait, manendum|
+urn:cts:compnov:bible.genesis.lxxlatin:24.25|manendum|
+urn:cts:compnov:bible.genesis.vulgate:24.25|addidit, manendum|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.26|adorauit, ait|
+urn:cts:compnov:bible.genesis.lxxlatin:24.26|conplacens, adorauit|
+urn:cts:compnov:bible.genesis.vulgate:24.26|Inclinavit, adoravit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.27|Benedictus, recta|
+urn:cts:compnov:bible.genesis.lxxlatin:24.27|benedictus, reliquisti, accipendam|
+urn:cts:compnov:bible.genesis.vulgate:24.27|Benedictus, abstulit, perduxit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.29|cucurrit, nunciauit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.29|nunciauit|
+urn:cts:compnov:bible.genesis.vulgate:24.29|Cucurrit, audierat|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.29|cucurrit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.29|cucurrit|
+urn:cts:compnov:bible.genesis.vulgate:24.29|egressus|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.30|audisset|
+urn:cts:compnov:bible.genesis.lxxlatin:24.30|audiuit|
+urn:cts:compnov:bible.genesis.vulgate:24.30|audisset|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.31|ait, Ingredere, preparauit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.31|inredere, preparaui|
+urn:cts:compnov:bible.genesis.vulgate:24.31|Ingredere, praeparavi|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.32|ingressus, lauandos|eo|
+urn:cts:compnov:bible.genesis.lxxlatin:24.32|ingressus, destrauit|
+urn:cts:compnov:bible.genesis.vulgate:24.32|introduxit, destravit, lavandos|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.33|ait, comedam|eo|
+urn:cts:compnov:bible.genesis.lxxlatin:24.33|apposuit, comedendum, comedam|
+urn:cts:compnov:bible.genesis.vulgate:24.33|appositus, ait, comedam|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.34|ait|
+urn:cts:compnov:bible.genesis.lxxlatin:24.34||
+urn:cts:compnov:bible.genesis.vulgate:24.34||
+
+urn:cts:compnov:bible.genesis.targumlatin:24.35|benedixit, magnificatus|
+urn:cts:compnov:bible.genesis.lxxlatin:24.35|benedixit, exaltatus|
+urn:cts:compnov:bible.genesis.vulgate:24.35|benedixit, magnificatusque|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.36|senuit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.36|consenuit|
+urn:cts:compnov:bible.genesis.vulgate:24.36||
+
+urn:cts:compnov:bible.genesis.targumlatin:24.37|adiurauit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.37|adiurauit|
+urn:cts:compnov:bible.genesis.vulgate:24.37|adjuravit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.38||
+urn:cts:compnov:bible.genesis.lxxlatin:24.38|perges|
+urn:cts:compnov:bible.genesis.vulgate:24.38|perges|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.39||
+urn:cts:compnov:bible.genesis.lxxlatin:24.39||
+urn:cts:compnov:bible.genesis.vulgate:24.39||
+
+urn:cts:compnov:bible.genesis.targumlatin:24.40|diriget|
+urn:cts:compnov:bible.genesis.lxxlatin:24.40|conplacui, prosperabit|
+urn:cts:compnov:bible.genesis.vulgate:24.40|ambulo, diriget|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.41||
+urn:cts:compnov:bible.genesis.lxxlatin:24.41||
+urn:cts:compnov:bible.genesis.vulgate:24.41||
+
+urn:cts:compnov:bible.genesis.targumlatin:24.42|dirigas, ambulo|
+urn:cts:compnov:bible.genesis.lxxlatin:24.42|prosperam, ambulo|
+urn:cts:compnov:bible.genesis.vulgate:24.42|direxisti, ambulo|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.43|egressa, hauriendum, obsecro, bibendum|
+urn:cts:compnov:bible.genesis.lxxlatin:24.43|egrediuntur, hauriendum, pota|
+urn:cts:compnov:bible.genesis.vulgate:24.43|egredietur, hauriendum, audierit, bibendum|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.44|hauriam, preparauit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.44|hauriam, praeparauit|
+urn:cts:compnov:bible.genesis.vulgate:24.44|hauriam, praeparavit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.45|egrediebatur, descenditque, impleuit, obsecro|
+urn:cts:compnov:bible.genesis.lxxlatin:24.45|egressa, descendit, hausit, pota|
+urn:cts:compnov:bible.genesis.vulgate:24.45|volverem, portabat, descenditque, hausit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.46|sestinauit, deposuit, adaquauit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.46|sestinans, deposuit, adaquauit|
+urn:cts:compnov:bible.genesis.vulgate:24.46|festinans, deposuit, adaquavit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.47|adaquauit, interrogaui, ait|
+urn:cts:compnov:bible.genesis.lxxlatin:24.47|interrogaui|
+urn:cts:compnov:bible.genesis.vulgate:24.47|Interrogavique, Suspendi, ornandam|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.48|adoraui, benedixi|
+urn:cts:compnov:bible.genesis.lxxlatin:24.48|complacens, adorauit, benedixi, prosperauit|
+urn:cts:compnov:bible.genesis.vulgate:24.48|adoravi, benedicens, perduxit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.49|annunciate, diuertam|
+urn:cts:compnov:bible.genesis.lxxlatin:24.49|nunciate, nunciate, reuertar|
+urn:cts:compnov:bible.genesis.vulgate:24.49||
+
+urn:cts:compnov:bible.genesis.targumlatin:24.50|egressus|
+urn:cts:compnov:bible.genesis.lxxlatin:24.50|egressa, pdicere|
+urn:cts:compnov:bible.genesis.vulgate:24.50|egressus|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.51|tolle|
+urn:cts:compnov:bible.genesis.lxxlatin:24.51|tollens, reuertere|
+urn:cts:compnov:bible.genesis.vulgate:24.51||eam|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.52|audisset, adorauit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.52|adorauit|
+urn:cts:compnov:bible.genesis.vulgate:24.52|audisset, procidens, adoravit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.53|protulit|uasa, uasa|
+urn:cts:compnov:bible.genesis.lxxlatin:24.53|proferens|uasa|
+urn:cts:compnov:bible.genesis.vulgate:24.53|Prolatisque, obtulit|vasis|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.54|comederunt, dormierunt, surrexerunt|eo|
+urn:cts:compnov:bible.genesis.lxxlatin:24.54|comederunt, exentes, domierunt, surgens|eo|
+urn:cts:compnov:bible.genesis.vulgate:24.54|convivio, vescentes, Surgens|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.55||
+urn:cts:compnov:bible.genesis.lxxlatin:24.55||
+urn:cts:compnov:bible.genesis.vulgate:24.55||
+
+urn:cts:compnov:bible.genesis.targumlatin:24.56|netineatis, direxit, uad|
+urn:cts:compnov:bible.genesis.lxxlatin:24.56|detineatis, prosperauit, pergam|
+urn:cts:compnov:bible.genesis.vulgate:24.56|Nolite, ait, retinere, direxit, pergam|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.57||
+urn:cts:compnov:bible.genesis.lxxlatin:24.57|interrogemus|
+urn:cts:compnov:bible.genesis.vulgate:24.57|Vocemus|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.58|Vocaueruntque|
+urn:cts:compnov:bible.genesis.lxxlatin:24.58||
+urn:cts:compnov:bible.genesis.vulgate:24.58|vocata, ait|Vis|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.59||
+urn:cts:compnov:bible.genesis.lxxlatin:24.59||
+urn:cts:compnov:bible.genesis.vulgate:24.59||
+
+urn:cts:compnov:bible.genesis.targumlatin:24.60|benedixerunt|
+urn:cts:compnov:bible.genesis.lxxlatin:24.60|benedixerunt, hereditet|
+urn:cts:compnov:bible.genesis.vulgate:24.60|imprecantes|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.61|surrexit, ascenderunt, abiit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.61|surgens, ascenderunt, abierunt, abiit|
+urn:cts:compnov:bible.genesis.vulgate:24.61|ascensis, revertebatur|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.62||
+urn:cts:compnov:bible.genesis.lxxlatin:24.62|ambulabat|
+urn:cts:compnov:bible.genesis.vulgate:24.62|deambulabat|Eo|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.63|egressus, orandum, leuauit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.63|egressus, exerceri, respiciens|
+urn:cts:compnov:bible.genesis.vulgate:24.63|egressus, meditandum, inclinata, elevasset|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.64|leuauit, inclinauit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.64|respiciens, defiliit|
+urn:cts:compnov:bible.genesis.vulgate:24.64|conspecto, descendit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.65|ait, ambulat, ait, operuit|seruo|
+urn:cts:compnov:bible.genesis.lxxlatin:24.65|cooperuit|
+urn:cts:compnov:bible.genesis.vulgate:24.65|ait, tollens, operuit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.66|narrauit|
+urn:cts:compnov:bible.genesis.lxxlatin:24.66|narrauit|
+urn:cts:compnov:bible.genesis.vulgate:24.66|narravit|
+
+urn:cts:compnov:bible.genesis.targumlatin:24.67|introduxit, dilexit, consolatus|eam|
+urn:cts:compnov:bible.genesis.lxxlatin:24.67|intrauit, dilexit, consolatus|eam|
+urn:cts:compnov:bible.genesis.vulgate:24.67|introduxit, dilexit, dolorem, acciderat, temperaret|eam|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.1|addidit|
+urn:cts:compnov:bible.genesis.lxxlatin:25.1|Duciens|
+urn:cts:compnov:bible.genesis.vulgate:25.1||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.2||
+urn:cts:compnov:bible.genesis.lxxlatin:25.2||
+urn:cts:compnov:bible.genesis.vulgate:25.2||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.3||
+urn:cts:compnov:bible.genesis.lxxlatin:25.3||
+urn:cts:compnov:bible.genesis.vulgate:25.3||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.4||
+urn:cts:compnov:bible.genesis.lxxlatin:25.4||
+urn:cts:compnov:bible.genesis.vulgate:25.4||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.5||
+urn:cts:compnov:bible.genesis.lxxlatin:25.5||
+urn:cts:compnov:bible.genesis.vulgate:25.5||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.6||
+urn:cts:compnov:bible.genesis.lxxlatin:25.6||
+urn:cts:compnov:bible.genesis.vulgate:25.6|largitus, separavit|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.7||
+urn:cts:compnov:bible.genesis.lxxlatin:25.7||
+urn:cts:compnov:bible.genesis.vulgate:25.7||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.8|defecit|
+urn:cts:compnov:bible.genesis.lxxlatin:25.8|deficiens, appositus|
+urn:cts:compnov:bible.genesis.vulgate:25.8|deficiens, provectae|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.9||
+urn:cts:compnov:bible.genesis.lxxlatin:25.9||
+urn:cts:compnov:bible.genesis.vulgate:25.9||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.10|emit|
+urn:cts:compnov:bible.genesis.lxxlatin:25.10||
+urn:cts:compnov:bible.genesis.vulgate:25.10|emerat|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.11|benedixit|
+urn:cts:compnov:bible.genesis.lxxlatin:25.11|benedixit|
+urn:cts:compnov:bible.genesis.vulgate:25.11|benedixit|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.12||
+urn:cts:compnov:bible.genesis.lxxlatin:25.12||
+urn:cts:compnov:bible.genesis.vulgate:25.12||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.13||nomina, cedar|
+urn:cts:compnov:bible.genesis.lxxlatin:25.13||nomina, cedar|
+urn:cts:compnov:bible.genesis.vulgate:25.13||nomina, Cedar|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.14||
+urn:cts:compnov:bible.genesis.lxxlatin:25.14||
+urn:cts:compnov:bible.genesis.vulgate:25.14||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.15||
+urn:cts:compnov:bible.genesis.lxxlatin:25.15||
+urn:cts:compnov:bible.genesis.vulgate:25.15||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.16||nomina|
+urn:cts:compnov:bible.genesis.lxxlatin:25.16||nomina|
+urn:cts:compnov:bible.genesis.vulgate:25.16||nomina|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.17|defecit|
+urn:cts:compnov:bible.genesis.lxxlatin:25.17|isti, deficiens, appositus|
+urn:cts:compnov:bible.genesis.vulgate:25.17|deficiensque, appositus|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.18|pertingens|
+urn:cts:compnov:bible.genesis.lxxlatin:25.18||
+urn:cts:compnov:bible.genesis.vulgate:25.18|respicit, obiit|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.19||
+urn:cts:compnov:bible.genesis.lxxlatin:25.19||
+urn:cts:compnov:bible.genesis.vulgate:25.19||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.20|etatis|
+urn:cts:compnov:bible.genesis.lxxlatin:25.20||
+urn:cts:compnov:bible.genesis.vulgate:25.20||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.21|Orauitque, suscepit, concepit|
+urn:cts:compnov:bible.genesis.lxxlatin:25.21|exaudiuit, concepit|
+urn:cts:compnov:bible.genesis.vulgate:25.21|exaudivit|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.22|collidebantur, ait, futurum, concepi, abiit|
+urn:cts:compnov:bible.genesis.lxxlatin:25.22|saltabant, futurum, abiit, interrogare|
+urn:cts:compnov:bible.genesis.vulgate:25.22|collidebantur, ait, futurum, concipere, perrexitque, consuleret|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.23|ait|
+urn:cts:compnov:bible.genesis.lxxlatin:25.23|ait|
+urn:cts:compnov:bible.genesis.vulgate:25.23|ait|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.24|impleti|
+urn:cts:compnov:bible.genesis.lxxlatin:25.24|impleti|
+urn:cts:compnov:bible.genesis.vulgate:25.24|pariendi, advenerat, reperti|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.25|egressus, egressus|
+urn:cts:compnov:bible.genesis.lxxlatin:25.25|egressus, egressus, apprehendens|
+urn:cts:compnov:bible.genesis.vulgate:25.25|egressus, vocatumque, egrediens|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.26||
+urn:cts:compnov:bible.genesis.lxxlatin:25.26||
+urn:cts:compnov:bible.genesis.vulgate:25.26||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.27|egrediens|
+urn:cts:compnov:bible.genesis.lxxlatin:25.27||
+urn:cts:compnov:bible.genesis.vulgate:25.27|venandi|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.28|dilexit, diligebat|
+urn:cts:compnov:bible.genesis.lxxlatin:25.28|dilexit, diligebat|
+urn:cts:compnov:bible.genesis.vulgate:25.28|vesceretur, diligebat|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.29|coxit|
+urn:cts:compnov:bible.genesis.lxxlatin:25.29|coxit, deficiens|
+urn:cts:compnov:bible.genesis.vulgate:25.29|Coxit|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.30||
+urn:cts:compnov:bible.genesis.lxxlatin:25.30|deficio|
+urn:cts:compnov:bible.genesis.vulgate:25.30|vocatum|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.31|ait|
+urn:cts:compnov:bible.genesis.lxxlatin:25.31||
+urn:cts:compnov:bible.genesis.vulgate:25.31||
+
+urn:cts:compnov:bible.genesis.targumlatin:25.32||
+urn:cts:compnov:bible.genesis.lxxlatin:25.32||
+urn:cts:compnov:bible.genesis.vulgate:25.32|proderunt|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.33||
+urn:cts:compnov:bible.genesis.lxxlatin:25.33||
+urn:cts:compnov:bible.genesis.vulgate:25.33|Ait|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.34|comedit, surrexit, abiit, paruipendit|
+urn:cts:compnov:bible.genesis.lxxlatin:25.34|comedit, surgens, abiit, uilipendit|
+urn:cts:compnov:bible.genesis.vulgate:25.34|comedit, abiit, parvipendens|
+
+urn:cts:compnov:bible.genesis.targumlatin:25.30||
+urn:cts:compnov:bible.genesis.lxxlatin:25.30||
+urn:cts:compnov:bible.genesis.vulgate:25.30||
+

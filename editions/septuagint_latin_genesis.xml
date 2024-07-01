@@ -2783,7 +2783,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="64">
-        et respiciens <persName>rebecca</persName> oculis: vidit <persName>isaac</persName>. et difiliit a camelo. 
+        et respiciens <persName>rebecca</persName> oculis: vidit <persName>isaac</persName>. et defiliit a camelo. 
         </ab>
 
         <ab n="65">
@@ -2938,6 +2938,119 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         <ab n="34">
         <persName>iacob</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> dedit <persName>esau</persName> panem et conctionem lentis. et comedit et bibit: et surgens abiit. et vilipendit <persName>esau</persName> primogenita sua. 
+        </ab>
+
+        </div>
+
+        <div n="26">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="26" type="ordinal">26.</num></ab>
+
+        <ab n="1">
+        FActa est <choice><abbr>at</abbr><expan>autem</expan></choice> fames super <choice><abbr>tra</abbr><expan>terram</expan></choice> <unclear>absque</unclear> fame priore: que fuit in tempore <persName>abraam</persName>. et abiit <persName>isaac</persName> ad <persName>abimelech</persName> regem <persName>phylistiim</persName> in <placeName>gerara</placeName>.
+        </ab>
+
+        <ab n="2">
+        apparuit <choice><abbr>at</abbr><expan>autem</expan></choice> ei <choice><abbr>dns</abbr><expan>dominus</expan></choice>. et dixit ne nescendas in <placeName>egyptum</placeName>. habita <choice><abbr>at</abbr><expan>autem</expan></choice> in <choice><abbr>tra</abbr><expan>terra</expan></choice>: quam tibi dixero. 
+        </ab>
+
+        <ab n="3">
+        et habita in terra hac. et ero tecum: et benedicam tibi. tibi enim et semini tuo dabo terram hanc. et statuam iura mentum meum: <choice><abbr>q</abbr><expan>quod</expan></choice> iurauit <persName>abraam</persName> patri tuo. 
+        </ab>
+
+        <ab n="4">
+        et <unclear><choice><abbr>mitiplicabo</abbr><expan>multiplicabo</expan></choice></unclear> semen tuum: sicut stellas celi. et dabo semini tuo <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram hanc. et benedicentur in semine tuo <choice><abbr>oes</abbr><expan>omnes</expan></choice> terram hanc. et benedicentur semine tuo <choice><abbr>oes</abbr><expan>omnes</expan></choice> gentes terre. 
+        </ab>
+
+        <ab n="5">
+        eo <choice><abbr>q</abbr><expan>quorum</expan></choice> obediuit <persName>abraam</persName> pater tuus mee voci: et custodiuit <choice><abbr>oia</abbr><expan>omnia</expan></choice> precepta mea: et mandata mea: et iustificationes meas: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> legitima mea. 
+        </ab>
+
+        <ab n="6">
+        habitauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> in <persName>geraris</persName>. 
+        </ab>
+
+        <ab n="7">
+        Et interrogauerunt viri loci de <persName>rebecca</persName> vxore sua. et dixit soror mea est. timuit enim dicere <choice><abbr>q</abbr><expan>quod</expan></choice> vxor mea est: ne forte interficerent eum viri loci pro <persName>rebecca</persName>. <choice><abbr>q</abbr><expan>quia</expan></choice> erat pulchra aspectu. 
+        </ab>
+
+        <ab n="8">
+        fuit <choice><abbr>aut</abbr><expan>autem</expan></choice> multo tempore illic. prospiciens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abimelech</persName> rex per senestram: vidit <persName>isaac</persName> ludentem cum <persName>rebecca</persName> vxore sua. 
+        </ab>
+
+        <ab n="9">
+        vocauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abimelech</persName> <persName>isaac</persName>: et dixit ei: vtique vxor tua est. cur dixisti: <choice><abbr>q</abbr><expan>quod</expan></choice> soror mea <unclear>e</unclear>? dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ei <persName>isaac</persName>. dixi enim ne forte moriar propter illam. 
+        </ab>
+
+        <ab n="10">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> illi <persName>abimelech</persName>: <choice><abbr>qd</abbr><expan>quod</expan></choice> hoc fecisti nobis. fere <choice><abbr>qs</abbr><expan>quas</expan></choice> dormiuisset ex genere meo cum vxore tua: et induxisses super nos ignorantiam. precepit <choice><abbr>at</abbr><expan>abimelech</expan></choice> <choice><abbr>oi</abbr><expan>omni</expan></choice> <choice><abbr>pplo</abbr><expan>populo</expan></choice> suo: dicens: 
+        </ab>
+
+        <ab n="11">
+        <choice><abbr>ois</abbr><expan>omnis</expan></choice> qui tetigerit hominem hunc et vxorem eius: mortis reus erit. 
+        </ab>
+
+        <ab n="12">
+        seminauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> in terra illa. et inuenit in anno illo centuplicatum ordeum. benedixit <choice><abbr>at</abbr><expan>autem</expan></choice> ei dominus. 
+        </ab>
+
+        <ab n="13">
+        et exaltus est homo. et proficiens: maior factus est: donec magnus factus est valde. 
+        </ab>
+
+        <ab n="14">
+        fuerunt <choice><abbr>at</abbr><expan>autem</expan></choice> ei armenta ouium: et armenta boum: et agricolationes multe. inuiderunt <choice><abbr>at</abbr><expan>autem</expan></choice> ei <persName>phylistiim</persName>. 
+        </ab>
+
+        <ab n="15">
+        et <choice><abbr>oes</abbr><expan>omnes</expan></choice> puteos: quos foderant serui patris sui: obstruxerunt eos in tempore patris sui <persName>phylistiim</persName>: et impleuerunt eos terra. 
+        </ab>
+
+        <ab n="16">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abimelech</persName> ad <persName>isaac</persName>: recede a nobis. <choice><abbr>qm</abbr><expan>quam</expan></choice> potentior nobis factus es valde. 
+        </ab>
+
+        <ab n="17">
+        et discessit <persName>isaac</persName>. inde. et mansit in valle gerarorum: et habitauit illic. 
+        </ab>
+
+        <ab n="18">
+        et rursus <persName>isaac</persName> fodit puteos aque. quod foderunt serui <persName>abraam</persName> patris sui. et obstruxerunt eos <persName>phylistiim</persName>: <choice><abbr>postq</abbr><expan>postquam</expan></choice> mortuus est <persName>abraam</persName> pater eius. et cognominauit eis nomina <choice><abbr>sm</abbr><expan>secundum</expan></choice> nomina <choice><abbr>q</abbr><expan>quae</expan></choice> nominauit pater eius. 
+        </ab>
+
+        <ab n="19">
+        et foderunt serui <persName>isaac</persName> in valle gerarorum. et inuenit illic puteum aque viuentis. 
+        </ab>
+
+        <ab n="20">
+        et pugnauerunt pastores gerarorum cum pastoribus <persName>isaac</persName>: dicentes suam esse aquam. et vocauerunt nomen loci illius <unclear>iniustitia</unclear>. <unclear>iniustitia</unclear> affecerunt <choice><abbr>n</abbr><expan>enim</expan></choice> eum. 
+        </ab>
+
+        <ab n="21">
+        profectus <choice><abbr>at</abbr><expan>autem</expan></choice> inde: fodit puteum alterum. rixati sunt <choice><abbr>autem</abbr></choice> et de illo. et vocauit nomen loci illius inimicitie. 
+        </ab>
+
+        <ab n="22">
+        profectus <choice><abbr>at</abbr><expan>autem</expan></choice> inde fodit puteum alterum. et non pugna uerunt pro eo: et vocauit nomen eius latitudo. dicens: <choice><abbr>q</abbr><expan>quia</expan></choice> nunc dilatauit <choice><abbr>dns</abbr><expan>dominus</expan></choice> nobis: et auxit nos super terram. 
+        </ab>
+
+        <ab n="23">
+        ascendit <choice><abbr>at</abbr><expan>autem</expan></choice> inde ad puteum iuramenti. 
+        </ab>
+
+        <ab n="24">
+        et apparuit illi <choice><abbr>dns</abbr><expan>dominus</expan></choice> in nocte illa. et dixit: ego sum deus <persName>abraam</persName> patris tui. ne timeas. tecum enim sum. et benedicam tibi: et multiplicabo semen tuum: <choice><abbr>propt</abbr><expan>propter</expan></choice> <persName>abraam</persName> patrem tuum. 
+        </ab>
+
+        <ab n="25">
+        et edificauit ibi altare. et inuocauit nomen <choice><abbr>dni</abbr><expan>domini</expan></choice>. et fixit illic tabernaculum suum. foderunt <choice><abbr>at</abbr><expan>autem</expan></choice> ibi serui <persName>isaac</persName> puteum in valle <placeName>gerarorum</placeName>.
+        </ab>
+
+        <ab n="26">
+        et <persName>abimelech</persName> iuit ad eum de <placeName>geraris</placeName>: et hochozat pronubus eius: et <persName>phichol</persName> dux exercitus eius. 
+        </ab>
+
+        <ab n="27">
+        et dixit eis: 
         </ab>
 
         </div>

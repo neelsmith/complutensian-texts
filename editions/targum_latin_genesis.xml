@@ -2513,7 +2513,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="11">
-        Et <unclear>accunbere</unclear> fecit camelos extra ciuitatem iuxta puteum <choice><abbr>aq</abbr><expan>aquam</expan></choice> in <choice><abbr>tpe</abbr><expan>tempore</expan></choice> vespertino: in <choice><abbr>q</abbr><expan>quo</expan></choice> mulieres egrediuntur ad hauriendam aquam. Et ait. 
+        Et accumbere fecit camelos extra ciuitatem iuxta puteum <choice><abbr>aq</abbr><expan>aquam</expan></choice> in <choice><abbr>tpe</abbr><expan>tempore</expan></choice> vespertino: in <choice><abbr>q</abbr><expan>quo</expan></choice> mulieres egrediuntur ad hauriendam aquam. Et ait. 
         </ab>
 
         <ab n="12">
@@ -2883,6 +2883,113 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         </div>
+
+        <div n="26">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="26" type="ordinal">26.</num>
+        </ab>
+
+        <ab n="1">
+        Et fuit fames in terra preter famen priore que fuit in diebus <persName>abrahe</persName>: et abiit <persName>isaac</persName> ad abimelech regem <persName>philistinorum</persName> in <placeName>gerara</placeName>. 
+        </ab>
+
+        <ab n="2">
+        Et apparuit ei <choice><abbr>dns</abbr><expan>dominus</expan></choice>: et dixit ei. He descendas in <placeName>egyptum</placeName>: sed morare in terra quam dixero tibi. 
+        </ab>
+
+        <ab n="3">
+        habita in terra hac: et erit verbum meum in adiutorium tibi: et benedicam tibi: quia tibi et filiis tuis dabo vniuersas terras has: et confirmabo iuramentum quod iuraui <persName>abrahe</persName> patri tuo: 
+        </ab>
+
+        <ab n="4">
+        et multiplicabo filios tuos sicut stellas celi: et dabo filiis tuis vniuersas terras has: et benedicentur propter filios omnes populi terre: 
+        </ab>
+
+        <ab n="5">
+        eo <choice><abbr>q</abbr><expan>quod</expan></choice> obediuit <persName>abraham</persName> verbo meo: custodiuit custodiam verbi mei: precepta mea: pacta mea et leges meas. 
+        </ab>
+
+        <ab n="6">
+        Habitauitque <persName>isaac</persName> in geraris:
+        </ab>
+
+        <ab n="7">
+        et interrogauerunt viri loci super vxore sua. Et ait. Soror mea est: quoniam timuit dicere vxor mea est: ne forte interficerent eum viri loci illius propter <persName>rebeccam</persName>: quoniam pulchra aspectu ipsa erat. 
+        </ab>
+
+        <ab n="8">
+        Et factum est cum multis diebus ibi moraretur. Prospexit <persName>abimelech</persName> rex <persName>philistinorum</persName> per senestram: et vidit: et ecce <persName>isaac</persName> ludebat cum <persName>rebecca</persName> vxore sua. 
+        </ab>
+
+        <ab n="9">
+        Et vocauit <persName>abimelech</persName> <persName>isaac</persName>: et ait. Ecce vtique vxor tua est: quomodo ergo dixisti soror mea est. Et dixit ei <persName>isaac</persName>. Quia dixi: ne forte moriar propter eam. 
+        </ab>
+
+        <ab n="10">
+        Et ait <persName>abimelech</persName>. Quid est hoc quod fecisti nobis? parum affuit quin dormisset vnus de populo cum vxore tua: et induxisses super nos peccatum. Et precepit <persName>abimelech</persName> omni populo dicens: 
+        </ab>
+
+        <ab n="11">
+        qui nocuerit huic viro et vxori sue morte morietur. 
+        </ab>
+
+        <ab n="12">
+        Et seminauit <persName>isaac</persName> in terra illa: et inuenit in anno illo centuplum <choice><abbr>q</abbr><expan>quam</expan></choice> estimauerat: et benedixit ei <choice><abbr>dns</abbr><expan>dominus</expan></choice>. 
+        </ab>
+
+        <ab n="13">
+        Et creuit vir: et ibat multiplicans et crescens: donec creuit vehementer. 
+        </ab>
+
+        <ab n="14">
+        Et fuerunt ei greges ouium et greges boum et familia magna: et in uidebant ei <persName>palestini</persName>. 
+        </ab>
+
+        <ab n="15">
+        Et omnes puteos quos foderunt serui patris sui in diebus <persName>abrahe</persName> patris sui obturauerunt <persName>palestini</persName>: et impleuerunt eos puluere. 
+        </ab>
+
+        <ab n="16">
+        Et ait <persName>abimelech</persName> ab <persName>isaac</persName>. Recede a nobis: quoniam fortior nobis factus es valde. 
+        </ab>
+
+        <ab n="17">
+        Et abiit inde <persName>isaac</persName>: et habitauit iuxta torrentem <placeName>gerare</placeName>: et moratus est ibi. 
+        </ab>
+
+        <ab n="18">
+        Et reuersus est <persName>isaac</persName>: et fodit puteos aquarum quos foderant in diebus <persName>abrahe</persName> <choice><abbr>pris</abbr><expan>patris</expan></choice> sui: et obturauerant eos <persName>philistiim</persName> <choice><abbr>postq</abbr><expan>postquam</expan></choice> mortuus est <persName>abraham</persName>: appellauitque eos <unclear>eisdem</unclear> <choice><abbr>noibus</abbr><expan>nominibus</expan></choice> <choice><abbr>qbus</abbr><expan>quibus</expan></choice> vocabat eos pater eius. 
+        </ab>
+
+        <ab n="19">
+        Et foderunt serui <persName>isaac</persName> in torrente: et inuenerunt ibi puteum aquarum <unclear>mananntium</unclear>. 
+        </ab>
+
+        <ab n="20">
+        Et rixati sunt pastores gerare cum pastoribus <persName>isaac</persName>: dicentes. Nostra est aqua: et vocauit nomen putei litigium: eo <choice><abbr>q</abbr><expan>quod</expan></choice> litigauerunt cum eo. 
+        </ab>
+
+        <ab n="21">
+        Et foderunt alium puteum: et super eum quoque rixati sunt: et vocauit nomen eius aduersarium. 
+        </ab>
+
+        <ab n="22">
+        Et ascendit inde: et fodit puteum alium: et non sunt rixati super eum: et vocauit nomen eius <persName>rooboth</persName>: et ait: <choice><abbr>qm</abbr><expan>quam</expan></choice> nunc dilatabit nos <choice><abbr>dns</abbr><expan>dominus</expan></choice>: et crescere nos faciet super teram. 
+        </ab>
+
+        <ab n="23">
+        Et ascendit inde in <persName>bersabee</persName>:
+        </ab>
+
+        <ab n="24">
+        et apparuit ei <choice><abbr>dns</abbr><expan>dominus</expan></choice> in nocte illa: et ait. Ego deus <persName>abraham</persName> patris tui: ne timeas <choice><abbr>q</abbr><expan>quia</expan></choice> in adiutorium tuum erit verbum meum: et <choice><abbr>bndicam</abbr><expan>benedicam</expan></choice> tibi. et multiplicabo filios tuos propter <persName>abraham</persName> seruum meum. 
+        </ab>
+
+        <ab n="25">
+        Et edificauit ibi altare: et orauit in <choice><abbr>noie</abbr><ex>nomine</ex></choice> <choice><abbr>dni</abbr><expan>domini</expan></choice>: et te tendit ibi tabernaculum suum: et foderunt ibi serui <persName>isaac</persName> puteum. 
+        </ab>
+
+        </div>
+
 
         
 
