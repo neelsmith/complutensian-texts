@@ -2950,15 +2950,15 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="2">
-        apparuit <choice><abbr>at</abbr><expan>autem</expan></choice> ei <choice><abbr>dns</abbr><expan>dominus</expan></choice>. et dixit ne nescendas in <placeName>egyptum</placeName>. habita <choice><abbr>at</abbr><expan>autem</expan></choice> in <choice><abbr>tra</abbr><expan>terra</expan></choice>: quam tibi dixero. 
+        apparuit <choice><abbr>at</abbr><expan>autem</expan></choice> ei <choice><abbr>dns</abbr><expan>dominus</expan></choice>. et dixit ne descendas in <placeName>egyptum</placeName>. habita <choice><abbr>at</abbr><expan>autem</expan></choice> in <choice><abbr>tra</abbr><expan>terra</expan></choice>: quam tibi dixero. 
         </ab>
 
         <ab n="3">
-        et habita in terra hac. et ero tecum: et benedicam tibi. tibi enim et semini tuo dabo terram hanc. et statuam iura mentum meum: <choice><abbr>q</abbr><expan>quod</expan></choice> iurauit <persName>abraam</persName> patri tuo. 
+        et habita in terra hac. et ero tecum: et benedicam tibi. tibi enim et semini tuo dabo terram hanc. et statuam iura mentum meum: <choice><abbr>q</abbr><expan>quod</expan></choice> iuraui <persName>abraam</persName> patri tuo. 
         </ab>
 
         <ab n="4">
-        et <unclear><choice><abbr>mitiplicabo</abbr><expan>multiplicabo</expan></choice></unclear> semen tuum: sicut stellas celi. et dabo semini tuo <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram hanc. et benedicentur in semine tuo <choice><abbr>oes</abbr><expan>omnes</expan></choice> terram hanc. et benedicentur semine tuo <choice><abbr>oes</abbr><expan>omnes</expan></choice> gentes terre. 
+        et <unclear><choice><abbr>mitiplicabo</abbr><expan>multiplicabo</expan></choice></unclear> semen tuum: sicut stellas celi. et dabo semini tuo <choice><abbr>oem</abbr><expan>omnem</expan></choice> terram hanc. et benedicentur in semine tuo <choice><abbr>oes</abbr><expan>omnes</expan></choice> gentes terre. 
         </ab>
 
         <ab n="5">
@@ -2982,7 +2982,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="10">
-        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> illi <persName>abimelech</persName>: <choice><abbr>qd</abbr><expan>quod</expan></choice> hoc fecisti nobis. fere <choice><abbr>qs</abbr><expan>quas</expan></choice> dormiuisset ex genere meo cum vxore tua: et induxisses super nos ignorantiam. precepit <choice><abbr>at</abbr><expan>abimelech</expan></choice> <choice><abbr>oi</abbr><expan>omni</expan></choice> <choice><abbr>pplo</abbr><expan>populo</expan></choice> suo: dicens: 
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> illi <persName>abimelech</persName>: <choice><abbr>qd</abbr><expan>quod</expan></choice> hoc fecisti nobis. fere <choice><abbr>qs</abbr><expan>quas</expan></choice> dormiuisset ex genere meo cum vxore tua: et induxisses super nos ignorantiam. precepit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>abimelech</persName> <choice><abbr>oi</abbr><expan>omni</expan></choice> <choice><abbr>pplo</abbr><expan>populo</expan></choice> suo: dicens: 
         </ab>
 
         <ab n="11">
@@ -3026,7 +3026,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="21">
-        profectus <choice><abbr>at</abbr><expan>autem</expan></choice> inde: fodit puteum alterum. rixati sunt <choice><abbr>autem</abbr></choice> et de illo. et vocauit nomen loci illius inimicitie. 
+        profectus <choice><abbr>at</abbr><expan>autem</expan></choice> inde: fodit puteum alterum. rixati sunt <choice><abbr>at</abbr><expan>autem</expan></choice> et de illo. et vocauit nomen loci illius inimicitie. 
         </ab>
 
         <ab n="22">
@@ -3050,8 +3050,194 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="27">
-        et dixit eis: 
+        et dixit eis: <persName>isaac</persName>. vt <choice><abbr>qd</abbr><expan>quod</expan></choice> venistis ad me. vos <choice><abbr>at</abbr><expan>autem</expan></choice> odistis me: et expulistis me a vobis. 
         </ab>
+
+        <ab n="28">
+        et dixerunt ei videntes vidimus: <choice><abbr>q</abbr><expan>quia</expan></choice> <choice><abbr>dns</abbr><expan>dominus</expan></choice> erat tecum et diximus sit imprecatio inter te et inter nos et disponemus tecum fedus: 
+        </ab>
+
+        <ab n="29">
+        non facere nobiscum malum: sicut non abominati sumus te nos. et <unclear>quemadmodum</unclear>  vsi sumus te bene. et dimisimus te cum pace. et nunc benedictus tu a <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
+        </ab>
+
+        <ab n="30">
+        et fecis eis conuiuium. et comederunt et biberunt. 
+        </ab>
+
+        <ab n="31">
+        et surgentes mane: iurauit vnusquisque proximo: et dimisit eos <persName>isaac</persName>. et discesserunt ab eo cum salute. 
+        </ab>
+
+        <ab n="32">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> in die illa. et venientes serui <persName>isaac</persName> nunciauerunt ei de puteo quem foderunt. et dixerunt ei. inuenimus aquam. 
+        </ab>
+
+        <ab n="33">
+        et vocauit eum iuramentum. <choice><abbr>propt</abbr><expan>propter</expan></choice> hoc vocauit nomen ciuitati ilii puteus iuramenti vsque in hodiernum diem. 
+        </ab>
+
+        <ab n="34">
+        erat <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> annorum quadraginta. et accepit vxorem <persName>iudith</persName>: filiam <persName>beor</persName> <persName>ethei</persName>. et <persName>basemath</persName>: filiam <persName>elom</persName> <persName>ethei</persName>. 
+        </ab>
+
+        <ab n="35">
+        et erant contendentes cum <persName>isaac</persName> et <persName>rebecca</persName>. 
+        </ab>
+
+
+        </div>
+
+        <div n="27">
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="27" type="ordinal">27.</num></ab>
+
+         <ab n="1">
+         FActum est <choice><abbr>at</abbr><expan>autem</expan></choice> cum senuisset <persName>isaac</persName> hebetati sunt oculi eius ad videndum. et vocauit <persName>esau</persName> filium suum seniorem: et dixit: fili. et dixit: ecce ego. 
+         </ab>
+
+         <ab n="2">
+         et dixit: ecce consenui: et non scio diem mortis mee. 
+         </ab>
+
+         <ab n="3">
+         nunc ergo sume apparatum tuum: et pharetram et arcum: et egredere in agrum: et venare mihi venatonem:
+         </ab>
+
+         <ab n="4">
+         et fac mihi edulia: sicut amo ego. et affer mihi: vt comedam: et <choice><abbr>bndicat</abbr><expan>benedicat</expan></choice> tibi <choice><abbr>aia</abbr><expan>anima</expan></choice> mea: <choice><abbr>anteq</abbr><expan>antequam</expan></choice> moriar ego. 
+         </ab>
+
+         <ab n="5">
+         <persName>rebecca</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> audiuit loquentem <persName>isaac</persName> ad <persName>esau</persName> filium suum. abiit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> in agrum ad venandum venationem patri suo. 
+         </ab>
+
+         <ab n="6">
+         et <persName>rebecca</persName> dixit ad <persName>iacob</persName> filium suum iuniorem. vide: ego audiui loquentem patrem tuum ad <persName>esau</persName> fratrem tuum: dicentem: 
+         </ab>
+
+         <ab n="7">
+         venare mihi venatonem: et fac mihi edulia: et comedens <choice><abbr>bndicam</abbr><expan>benedicam</expan></choice> tibi coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. 
+         </ab>
+
+         <ab n="8">
+         nunc ergo fili mi audi me: sicut ego tibi precipio. 
+         </ab>
+
+         <ab n="9">
+         et abiens ad oues: accipe mihi inde duos hedos teneros et pulchros. et faciam edulia patri tuo: sicut amat. 
+         </ab>
+
+         <ab n="10">
+         et inferes patri tuo: et comedet: vt benedicat tibi pater tuus <choice><abbr>anteq</abbr><expan>antequam</expan></choice> moriatur. 
+         </ab>
+
+         <ab n="11">
+         dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> ad <persName>rebeccam</persName> matrem suam: est frater meus vir pilosus. ego <choice><abbr>at</abbr><expan>autem</expan></choice> vir leuis. 
+         </ab>
+
+         <ab n="12">
+         ne forte ergo attractet me pater meus: et ero coram eo sicut despiciens. et inducam super me maledictionem et non <choice><abbr>bndictionem</abbr><expan>benedictionem</expan></choice>. 
+         </ab>
+
+         <ab n="13">
+         dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ei mater: super me maledictio tua fili. solum exaudi vocem meam. et pergens affer mihi. 
+         </ab>
+
+         <ab n="14">
+         abiens <choice><abbr>at</abbr><expan>autem</expan></choice> accepit et attulit matri. et fecit mater eius edulia: sicut amabat pater eius. 
+         </ab>
+
+         <ab n="15">
+         et accipiens <persName>rebecca</persName> vestem <persName>esau</persName> filii sui senioris pulchram: <choice><abbr>q</abbr><expan>quae</expan></choice> erat <choice><abbr>apd</abbr><expan>apud</expan></choice> ipsam in domo: induit eam <persName>iacob</persName> filium suum iuniorem. 
+         </ab>
+
+         <ab n="16">
+         et pelles hedorum circumposuit circum brachia eius: et circa nuda colli eius. 
+         </ab>
+
+         <ab n="17">
+         et dedit edulia et panes quos fecit in manus <persName>iacob</persName> filii sui. 
+         </ab>
+
+         <ab n="18">
+         et intulit patri suo. et dixit: pater. ille <choice><abbr>at</abbr><expan>autem</expan></choice> dixit: ecce ego. <choice><abbr>qs</abbr><expan>quas</expan></choice> es tu fili. 
+         </ab>
+
+         <ab n="19">
+         et dixit <persName>iacob</persName> patri suo: ego <persName>esau</persName> primogenitus tuus. feci sicut locutus es mihi. surgens sede: et comede de venatione mea: vt <choice><abbr>bndicat</abbr><expan>benedicat</expan></choice> mihi <choice><abbr>aia</abbr><expan>anima</expan></choice> tua
+         </ab>
+
+         <ab n="20">
+         dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> filio suo. <choice><abbr>qd</abbr><expan>quod</expan></choice> hoc <choice><abbr>qd</abbr><expan>qui</expan></choice> cito inuenisti fili. ille <choice><abbr>at</abbr><expan>autem</expan></choice> dixit <choice><abbr>q</abbr><expan>qui</expan></choice> tradidit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus tuus coram me. 
+         </ab>
+
+         <ab n="21">
+         appropinqua mihi contrectabo te fili: si tu es filius meus <persName>esau</persName> an non. 
+         </ab>
+
+         <ab n="22">
+         <unclear>appropinquit</unclear> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> ad <persName>isaac</persName> patrem suum. et contrectauit eum et dixit: ipsa <choice><abbr>qd</abbr><expan>quod</expan></choice> est vox: vox <persName>iacob</persName>. at manus: manus <persName>esau</persName>.
+         </ab>
+
+         <ab n="23">
+         et non cognouit eum erant. <choice><abbr>n</abbr><expan>enim</expan></choice> manus eius: sicut manus <persName>esau</persName> fratris eius pilose. et <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> ei. 
+         </ab>
+
+         <ab n="24">
+         et dixit tu es filius meus <persName>esau</persName>? ille <choice><abbr>at</abbr><expan>autem</expan></choice> dixit: ego. 
+         </ab>
+
+         <ab n="25">
+         et dixit affer mihi comedam de venationem tua fili: vt <choice><abbr>bndicat</abbr><expan>benedicat</expan></choice> tibi <choice><abbr>aia</abbr><expan>anima</expan></choice> mea. et attulit ei: et ccomedit. et obtulit ei vinum: et bibit. 
+         </ab>
+
+         <ab n="26">
+         et dixit et pater eius <persName>isaac</persName>. <unclear>appropinq</unclear> mihi et osculare me fili. 
+         </ab>
+
+         <ab n="27">
+         et appropinquans osculatus est eum. et odoratus est odorem vestimentorum eius. et <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> ei. et dixit: ecce odor filii mei: sicut odor agri pleni: cui <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> <choice><abbr>dns</abbr><expan>dominus</expan></choice>. 
+         </ab>
+
+         <ab n="28">
+         et dabis tibi deus de rore celi: et de pinguedine terr <unclear>mltitudinem</unclear> frumenti et vini. 
+         </ab>
+
+         <ab n="29">
+         e seruiant tibi gentes. et adorabunt te principes. et esto <choice><abbr>dns</abbr><expan>dominus</expan></choice> fratris tui. et adorabunt te filii <choice><abbr>pris</abbr><expan>patris</expan></choice> tui. <choice><abbr>q</abbr><expan>qui</expan></choice> maledixerit tibi: maledictus. at <choice><abbr>bndicens</abbr><expan>benedicens</expan></choice> tibi: <choice><abbr>bndictus</abbr><expan>benedictus</expan></choice>. 
+         </ab>
+
+         <ab n="30">
+         et factum est <choice><abbr>postq</abbr><expan>postquam</expan></choice> cessauit <persName>isaac</persName> <choice><abbr>bndicens</abbr><expan>benedicens</expan></choice> <persName>iacob</persName> filio suo: et factum est vt egressus est <persName>iacob</persName> a facie <persName>isaac</persName> <choice><abbr>pris</abbr><expan>patris</expan></choice> sui: et <persName>esau</persName> frater eius venit de venatione. 
+         </ab>
+
+         <ab n="31">
+         et fecit et ipse edulia: et obtulit patri suo. et dixit: surgat pater meus: et comedat de venatione filii sui. vt <choice><abbr>bndicat</abbr><expan>benedicat</expan></choice> mihi <choice><abbr>aia</abbr><expan>anima</expan></choice> tua. 
+         </ab>
+
+         <ab n="32">
+         et  dixit illi <persName>isaac</persName> <choice><abbr>pr</abbr><expan>patrem</expan></choice> eius: <choice><abbr>qs</abbr><expan>quas</expan></choice> es tu? ille <choice><abbr>at</abbr><expan>autem</expan></choice> dixit: ego sum filius tuus primogenitus <persName>esau</persName>.
+         </ab>
+
+         <ab n="33">
+         expauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> stupore magno valde. et dixit: <choice><abbr>qs</abbr><expan>quas</expan></choice> igitur <choice><abbr>q</abbr><expan>qui</expan></choice> venatus est mihi venationem: et intulit mihi: et comedi de <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> <choice><abbr>anteq</abbr><expan>antequam</expan></choice> tu venires> et <choice><abbr>bndixi</abbr><expan>benedixi</expan></choice> ei. et <choice><abbr>bndictus</abbr><expan>benedictus</expan></choice> erit. 
+         </ab>
+
+         <ab n="34">
+         factum est <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>qn</abbr><expan>quando</expan></choice> audiuit <persName>esau</persName> verba <persName>isaac</persName> <choice><abbr>pris</abbr><expan>patris</expan></choice> sui. et clamauit voce magna et amara valde. et ait: benedic et mihi <choice><abbr>pr</abbr><expan>patrem</expan></choice>. 
+         </ab>
+
+         <ab n="35">
+         ait <choice><abbr>at</abbr><expan>autem</expan></choice> illi: veniens frater tuus cum dolo: accepit <choice><abbr>bndictionem</abbr><expan>benedictionem</expan></choice> tuam. 
+         </ab>
+
+         <ab n="36">
+         et dixit: iuste vocatum est nomen eius <persName>iacob</persName>. 
+         </ab>
+
+
+
+
 
         </div>
     </body>
