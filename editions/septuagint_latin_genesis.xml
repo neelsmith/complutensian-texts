@@ -3232,9 +3232,141 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="36">
-         et dixit: iuste vocatum est nomen eius <persName>iacob</persName>. 
+         et dixit: iuste vocatum est nomen eius <persName>iacob</persName>. supplantauit enim me iam secundo: et primogenita mea tulit. et nunc accepit <choice><abbr>bndictionem</abbr><expan>benedictionem</expan></choice> meam. et dixit <persName>esau</persName> <choice><abbr>pri</abbr><expan>patri</expan></choice> suo. non relicta est mihi <choice><abbr>bndictio</abbr><expan>benedictio</expan></choice> <choice><abbr>pr</abbr><expan>patrem</expan></choice>?
          </ab>
 
+         <ab n="37">
+         <choice><abbr>rndens</abbr><expan>respondens</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> dixit <persName>esau</persName>. si <choice><abbr>dnm</abbr><expan>dominum</expan></choice> illum feci tuum: et <choice><abbr>oes</abbr><expan>omnes</expan></choice> fratres eius seruos. frumento et vino stabiliui eum. tibi <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>qd</abbr><expan>quod</expan></choice> faciam fili. 
+         </ab>
+
+         <ab n="38">
+         dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> ad patrem suum. num <choice><abbr>bndictio</abbr><expan>benedictio</expan></choice> vna tibi est <choice><abbr>pr</abbr><expan>patrem</expan></choice>. <unclear>comperuncto</unclear> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName>: ex clamauit voce <persName>esau</persName>: et fleuit. 
+         </ab>
+
+         <ab n="39">
+         <choice><abbr>rndens</abbr><expan>respondens</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> <choice><abbr>pr</abbr><expan>[patrem</expan></choice> eius: dixit ei: eccce de pinguedine terre erit habitatio tua: et de rore celi de super. 
+         </ab>
+
+         <ab n="40">
+         et in gladio tuo viues. et fratri tuo seruies. erit <choice><abbr>at</abbr><expan>autem</expan></choice> quando deponas et detrahas iugum eius de collo tuo. 
+         </ab>
+
+         <ab n="41">
+         et iratus est <persName>esau</persName> <persName>iacob</persName> pro <choice><abbr>bndictione</abbr><expan>benedictione</expan></choice> <choice><abbr>q</abbr><expan>cuius</expan></choice> <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> ei <choice><abbr>pr</abbr><expan>patrem</expan></choice> eius. dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esan</persName> in mente sua: appropinquent dies luctus <choice><abbr>pris</abbr><expan>patris</expan></choice> mei: vt occidam <persName>iacob</persName> fratrem meum. 
+         </ab>
+
+         <ab n="42">
+         nunciata sunt <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rebecce</persName> verba <persName>esau</persName> filii sui senioris. et mittens: vocauit <persName>iacob</persName> filium suum iuniorem: et dixit ei: ecce <persName>esau</persName> frater tuus minatur tibi occidere te. 
+         </ab>
+
+         <ab n="43">
+         nunc ergo o filio audi meam vocem: et surgens fuge in <placeName>mesopotamiam</placeName> ad <placeName>laban</placeName> fratrem meum in <placeName>charram</placeName>: 
+         </ab>
+
+         <ab n="44">
+         et habita cum eo dies aliquot: donec auertatur furor
+         </ab>
+
+         <ab n="45">
+         et ira fratris tui a te: et obliuiscatur <choice><abbr>q</abbr><expan>quae</expan></choice> fecisti ei. et mitten accersam te inde: ne forte orber a duobus vobis in die vna. 
+         </ab>
+
+         <ab n="46">
+         dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rebecca</persName> ad <persName>isaac</persName> infensa sum vite mee <choice><abbr>propt</abbr><expan>propter</expan></choice> filias filiorum <persName>het</persName>. si accepero <persName>iacob</persName> vxorem de filiabus terrre huius: vt quid mihi viuere. 
+         </ab>
+
+        </div>
+
+        <div n="28">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="28" type="ordinal">28.</num></ab>
+
+        <ab n="1">
+        ADuocans <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> <persName>iacob</persName>: benedixit ei. et precepit ei: dicens: non accipies vxorem de filiabus <placeName>chananeorum</placeName>. 
+        </ab>
+
+        <ab n="2">
+        surgens fuge in <placeName>mesopotamiam</placeName>: in domum <persName>bathuel</persName> <choice><abbr>pris</abbr><expan>patris</expan></choice> <choice><abbr>mris</abbr><expan>matris</expan></choice> tue. et accipe tibi ipsi vxorem de filiabus <persName>laban</persName> fratris <choice><abbr>mris</abbr><expan>matris</expan></choice> tue. 
+        </ab>
+
+        <ab n="3">
+        at deus meus <choice><abbr>bndicat</abbr><expan>benedicat</expan></choice> tibi fili: et multiplicet te: et eris in congregationem gentium. 
+        </ab>
+
+        <ab n="4">
+        et dabit tibi <choice><abbr>bndictionem</abbr><expan>benedictionem</expan></choice> <persName>abraam</persName> <choice><abbr>pris</abbr><expan>patris</expan></choice> mei tibi: et semini tuo post te: ad hereditandum terram incolatus tui. quam dedit deus <persName>abraam</persName>. 
+        </ab>
+
+        <ab n="5">
+        et abiit in <placeName>mespotamiam</placeName>: ad <placeName>laban</placeName> filium <persName>bathuel</persName> <placeName>syri</placeName>: fratrem <persName>rebecce</persName> <choice><abbr>mris</abbr><expan>matris</expan></choice> <persName>iacob</persName> et <persName>esau</persName>. 
+        </ab>
+
+        <ab n="6">
+        vidit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> <choice><abbr>q</abbr><expan>quod</expan></choice> <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> <persName>isaac</persName> <persName>iacob</persName>: et misit in <placeName>mesopotamiam</placeName> <placeName>syrie</placeName>: accipere sibi vxorem inde cum <choice><abbr>bndiceret</abbr><expan>benediceret</expan></choice> ei. et precepit ei: dicens: non accipies vxorem de filiabus <placeName>chananeorum</placeName>. 
+        </ab>
+
+        <ab n="7">
+        et audiuit <persName>iacob</persName> <choice><abbr>prem</abbr><expan>patrem</expan></choice> et <choice><abbr>mrem</abbr><expan>matrem</expan></choice> suam. et profectus est in <placeName>mesopotamiam</placeName>. 
+        </ab>
+
+        <ab n="8">
+        et vidit <persName>esau</persName>: <choice><abbr>q</abbr><expan>quod</expan></choice> male sunt filie <placeName>chanaan</placeName> coram <persName>isaac</persName> <choice><abbr>pre</abbr><expan>patre</expan></choice> suo. 
+        </ab>
+
+        <ab n="9">
+        et abiit <persName>esau</persName> ad <persName>ismael</persName>. et accepit <persName>maeleth</persName> filiam <persName>ismael</persName> filii <persName>abraam</persName>: sororem <persName>nabeoth</persName> ad vxores suas vxorem. 
+        </ab>
+
+        <ab n="10">
+        et egressus est <persName>iacob</persName> de puteo iuramenti. et abiit in <placeName>charram</placeName>. 
+        </ab>
+
+        <ab n="11">
+        et occurrit loco. et mormiuit ibi. occiderat <choice><abbr>n</abbr><expan>enim</expan></choice> sol. et tulit de lapidibus loci: et posuit ad caput suum. et dormiuit in loco illo. 
+        </ab>
+
+        <ab n="12">
+        et somniauit. et ecce scala firmata in terra: cuius caput perueniebat in celum. et angeli dei ascendebant et descendebant super eam. 
+        </ab>
+
+        <ab n="13">
+        at <choice><abbr>dns</abbr><expan>dominus</expan></choice> firmatus erat super eam. et dixit: ego deus patris tui <persName>abraam</persName>: et deus <persName>isaac</persName>. ne timeas. terra in <choice><abbr>q</abbr><expan>quae</expan></choice> tu dormis super eam: tibi dabo eam: et semini tuo. 
+        </ab>
+
+        <ab n="14">
+        et erit semen tuum sicut arena terre. et dilatabitur ad mare: et austrum: et ad aquilonem: et ad orientem. et benedicentur in te <choice><abbr>oes</abbr><expan>omnes</expan></choice> tribus terre: et in semine tuo. 
+        </ab>
+
+        <ab n="15">
+        et ecce ego tecum custodiens te in terra <choice><abbr>oi</abbr><expan>omni</expan></choice> quocumque perrexeris. et reducam te in terram hanc. <choice><abbr>q</abbr><expan>quia</expan></choice> non te derelinquam: donec faciam ego <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> locutus sum tibi. 
+        </ab>
+
+        <ab n="16">
+        et surrexit <persName>iacob</persName> de somno suo. et dixit <choice><abbr>q</abbr><expan>quia</expan></choice> est dominus in loco isto: ego <choice><abbr>at</abbr><expan>autem</expan></choice> non sciebam. 
+        </ab>
+
+        <ab n="17">
+        et timuit. et dixit: <choice><abbr>q</abbr><expan>quod</expan></choice> terribilis locus iste. non est hoc nisi domus dei. et hec porta celi. 
+        </ab>
+
+        <ab n="18">
+        et surrexit <persName>iacob</persName> mane: et tulit lapidem: quem super posuit illic ad caput suum: et statuit eum titulum: et effudit oleum super summitatem eius. 
+        </ab>
+
+        <ab n="19">
+        et vocauit nomen loci illius: domus dei. et lammaus erat nomen ciuitati prius: 
+        </ab>
+
+        <ab n="20">
+        et vouit <persName>iacob</persName> votum: dicens: si fuerit <choice><abbr>dns</abbr><expan>dominus</expan></choice> deus mecum: et custodierit me in via hac: qua ego ambulabo: et dederit mihi panem ad comedendum: et vestimentum ad induendum: 
+        </ab>
+
+        <ab n="21">
+        et reuersus fuero cu salute in domum patris mei? et erit mihi dominus in deum: 
+        </ab>
+
+        <ab n="22">
+        et lapis iste quem statui titulum: erit mihi domus dei: et <choice><abbr>oim</abbr><expan>omnium</expan></choice> que mihi dederis decima decimabo ea tibi. 
+        </ab>
 
 
 
