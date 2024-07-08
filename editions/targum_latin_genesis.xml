@@ -3063,7 +3063,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="8">
-        Et nunc fili mim acquiesce verbo meo: quod ego precipio tibi: 
+        Et nunc fili mi acquiesce verbo meo: quod ego precipio tibi: 
         </ab>
 
         <ab n="9">
@@ -3079,7 +3079,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        Forte contrectabit me pater meus: et ero in oculis suis quasi illudens: et inducam super me maledictiones et non <choice><abbr>bndictiones</abbr></choice>. 
+        Forte contrectabit me pater meus: et ero in oculis suis quasi illudens: et inducam super me maledictiones et non <choice><abbr>bndictiones</abbr><expan>benedictiones</expan></choice>. 
         </ab>
 
         <ab n="13">
@@ -3103,7 +3103,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="18">
-        Et ingresus est ad patrem suum: et ait. Pater mi. Et dixit: ecce ego. Quis es tu fili mi. 
+        Et ingressus est ad patrem suum: et ait. Pater mi. Et dixit: ecce ego. Quis es tu fili mi. 
         </ab>
 
         <ab n="19">
@@ -3131,7 +3131,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="25">
-        Accede coram me et comedam de venatione filii mei: vt benedicat tibi anima mea. Et obtulit ei et comedit: et attulit ei vinum et bibit. 
+        Et ait. Accede coram me et comedam de venatione filii mei: vt benedicat tibi anima mea. Et obtulit ei et comedit: et attulit ei vinum et bibit. 
         </ab>
 
         <ab n="26">
@@ -3147,7 +3147,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="29">
-        Seruiant tibi populi: et subiiciantur tibi regna: esto princeps fratribus tuis: et adorabunt te filii matris tue: maledicentes tibi erunt maledicti: et <choice><abbr>bndicentes</abbr><expan>benedicenttes</expan></choice> tibi erunt benedicti. 
+        Seruiant tibi populi: et subiiciantur tibi regna: esto princeps fratribus tuis: et adorabunt te filii matris tue: maledicentes tibi erunt maledicti: et <choice><abbr>bndicentes</abbr><expan>benedicentes</expan></choice> tibi erunt benedicti. 
         </ab>
 
         <ab n="30">
@@ -3167,7 +3167,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="34">
-        <choice><abbr>Qn</abbr><expan>Quando</expan></choice> audiuit <persName>esau</persName> <unclear>ba</unclear> <choice><abbr>pris</abbr><expan>patri</expan></choice> suo. <choice><abbr>Bndic</abbr><expan>Benedic</expan></choice> <unclear>et</unclear> mihi <choice><abbr>pr</abbr><expan>patrem</expan></choice> mi. 
+        <choice><abbr>Qn</abbr><expan>Quando</expan></choice> audiuit <persName>esau</persName> <choice><abbr>vba</abbr><expan>verba</expan></choice> <choice><abbr>pris</abbr><expan>patri</expan></choice> sui: clamauit clamore magno et amaro vsque nimis: et dixit <choice><abbr>pri</abbr><expan>patri</expan></choice> suo. <choice><abbr>Bndic</abbr><expan>Benedic</expan></choice> <unclear>et</unclear> mihi <choice><abbr>pr</abbr><expan>patrem</expan></choice> mi. 
         </ab>
 
         <ab n="35">
@@ -3191,7 +3191,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="40">
-        et in gladio tuo viues: et fratri tuo seruies: et eriat <choice><abbr>qn</abbr><expan>quando</expan></choice> transgredientur filii eius verba legis: auferes iugum eius de ceruicibus tuis. 
+        et in gladio tuo viues: et fratri tuo seruies: et erit <choice><abbr>qn</abbr><expan>quando</expan></choice> transgredientur filii eius verba legis: auferes iugum eius de ceruicibus tuis. 
         </ab>
 
         <ab n="41">
@@ -3203,7 +3203,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
         
         <ab n="43">
-        Et nunc fili mi <choice><abbr>acquesce</abbr><expan>acquiesce</expan></choice> mihi: et surge vade ad <placeName>laban</placeName> <choice><abbr>frem</abbr><expan>fratrem</expan></choice> meum in <placeName>aran</placeName>: 
+        Et nunc fili mi <choice><abbr>acqesce</abbr><expan>acquiesce</expan></choice> mihi: et surge vade ad <placeName>laban</placeName> <choice><abbr>frem</abbr><expan>fratrem</expan></choice> meum in <placeName>aran</placeName>: 
         </ab>
 
         <ab n="44">
@@ -3238,7 +3238,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="4">
-        et det tibi benedictionem abrahe et filiis tuis tecum: vt possideas terram habitationis tue: quaam dedit deus <persName>abrahe</persName>. 
+        et det tibi benedictionem abrahe et filiis tuis tecum: vt possideas terram habitationis tue: quam dedit deus <persName>abrahe</persName>. 
         </ab>
 
         <ab n="5">
@@ -3254,11 +3254,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="8">
-        Videns igitur <persName>esau</persName> <choice><abbr>q</abbr><expan>quod</expan></choice> displicuissent filie <placeName>chanaam</placeName> in oculis <persName>saac patris sui: </persName>
+        Videns igitur <persName>esau</persName> <choice><abbr>q</abbr><expan>quod</expan></choice> displicuissent filie <placeName>chanaam</placeName> in oculis <persName>isaac</persName> patris sui: 
         </ab>
 
         <ab n="9">
-        <persName>ismael</persName>: et accepit <persName>maalath</persName> filiam <persName>ismaelis</persName> filii <persName>abraham</persName> sororem <persName>nabaioth</persName> sibi in vxorem super vxores suas. 
+        abiit quoque <persName>esau</persName> ad <persName>ismael</persName>: et accepit <persName>maalath</persName> filiam <persName>ismaelis</persName> filii <persName>abraham</persName> sororem <persName>nabaioth</persName> sibi in vxorem super vxores suas. 
         </ab>
 
         <ab n="10">
@@ -3294,7 +3294,23 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="18">
-        Et surrexit iacob mane: et tulit
+        Et surrexit iacob mane: et tulit lapidem quem supposuerat capiti suo: et statuit eum in titulum: et effudit oleum super caput eius. 
+        </ab>
+
+        <ab n="19">
+        Et vocauit nomen loci illius <persName>bethel</persName>: nomen <choice><abbr>aut</abbr><expan>autem</expan></choice> ciuitatis <unclear>lum</unclear> prius vocabatur. 
+        </ab>
+
+        <ab n="20">
+        Et vouit <persName>iacob</persName> votum dicens. Si fuerit verbum dei in adiutorium meum: et custodierit me in via hac in qua ego ambulo: et dederit mihi panem ad vescendem: et vestimentum ad induendum: 
+        </ab>
+
+        <ab n="21">
+        et reuersus fuero in pace in domum patris mei: et erit mihi verbum domini in deum: 
+        </ab>
+
+        <ab n="22">
+        et lapis iste quem posui in titulum: erit super quem seruiam coram domino. et omnium que dederis mihi vnum ex decem separabo coram te. 
         </ab>
 
         </div>

@@ -3188,7 +3188,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="25">
-         et dixit affer mihi comedam de venationem tua fili: vt <choice><abbr>bndicat</abbr><expan>benedicat</expan></choice> tibi <choice><abbr>aia</abbr><expan>anima</expan></choice> mea. et attulit ei: et ccomedit. et obtulit ei vinum: et bibit. 
+         et dixit affer mihi comedam de venationem tua fili: vt <choice><abbr>bndicat</abbr><expan>benedicat</expan></choice> tibi <choice><abbr>aia</abbr><expan>anima</expan></choice> mea. et attulit ei: et comedit. et obtulit ei vinum: et bibit. 
          </ab>
 
          <ab n="26">
@@ -3200,11 +3200,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="28">
-         et dabis tibi deus de rore celi: et de pinguedine terr <unclear>mltitudinem</unclear> frumenti et vini. 
+         et dabis tibi deus de rore celi: et de pinguedine terre <unclear>mltitudinem</unclear> frumenti et vini. 
          </ab>
 
          <ab n="29">
-         e seruiant tibi gentes. et adorabunt te principes. et esto <choice><abbr>dns</abbr><expan>dominus</expan></choice> fratris tui. et adorabunt te filii <choice><abbr>pris</abbr><expan>patris</expan></choice> tui. <choice><abbr>q</abbr><expan>qui</expan></choice> maledixerit tibi: maledictus. at <choice><abbr>bndicens</abbr><expan>benedicens</expan></choice> tibi: <choice><abbr>bndictus</abbr><expan>benedictus</expan></choice>. 
+         et seruiant tibi gentes. et adorabunt te principes. et esto <choice><abbr>dns</abbr><expan>dominus</expan></choice> fratris tui. et adorabunt te filii <choice><abbr>pris</abbr><expan>patris</expan></choice> tui. <choice><abbr>q</abbr><expan>qui</expan></choice> maledixerit tibi: maledictus. at <choice><abbr>bndicens</abbr><expan>benedicens</expan></choice> tibi: <choice><abbr>bndictus</abbr><expan>benedictus</expan></choice>. 
          </ab>
 
          <ab n="30">
@@ -3220,7 +3220,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="33">
-         expauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> stupore magno valde. et dixit: <choice><abbr>qs</abbr><expan>quas</expan></choice> igitur <choice><abbr>q</abbr><expan>qui</expan></choice> venatus est mihi venationem: et intulit mihi: et comedi de <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> <choice><abbr>anteq</abbr><expan>antequam</expan></choice> tu venires> et <choice><abbr>bndixi</abbr><expan>benedixi</expan></choice> ei. et <choice><abbr>bndictus</abbr><expan>benedictus</expan></choice> erit. 
+         expauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> stupore magno valde. et dixit: <choice><abbr>qs</abbr><expan>quas</expan></choice> igitur <choice><abbr>q</abbr><expan>qui</expan></choice> venatus est mihi venationem: et intulit mihi: et comedi de <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> <choice><abbr>anteq</abbr><expan>antequam</expan></choice> tu venires. et <choice><abbr>bndixi</abbr><expan>benedixi</expan></choice> ei. et <choice><abbr>bndictus</abbr><expan>benedictus</expan></choice> erit. 
          </ab>
 
          <ab n="34">
@@ -3240,11 +3240,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="38">
-         dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> ad patrem suum. num <choice><abbr>bndictio</abbr><expan>benedictio</expan></choice> vna tibi est <choice><abbr>pr</abbr><expan>patrem</expan></choice>. <unclear>comperuncto</unclear> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName>: ex clamauit voce <persName>esau</persName>: et fleuit. 
+         dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> ad patrem suum. num <choice><abbr>bndictio</abbr><expan>benedictio</expan></choice> vna tibi est <choice><abbr>pr</abbr><expan>patrem</expan></choice>? <choice><abbr>bndic</abbr><expan>benedic</expan></choice> et mihi <choice><abbr>pr</abbr><expan>patrem</expan></choice>. <unclear>comperuncto</unclear> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName>: exclamauit voce <persName>esau</persName>: et fleuit. 
          </ab>
 
          <ab n="39">
-         <choice><abbr>rndens</abbr><expan>respondens</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> <choice><abbr>pr</abbr><expan>[patrem</expan></choice> eius: dixit ei: eccce de pinguedine terre erit habitatio tua: et de rore celi de super. 
+         <choice><abbr>rndens</abbr><expan>respondens</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>isaac</persName> <choice><abbr>pr</abbr><expan>patrem</expan></choice> eius: dixit ei: ecce de pinguedine terre erit habitatio tua: et de rore celi de super. 
          </ab>
 
          <ab n="40">
@@ -3268,11 +3268,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
          </ab>
 
          <ab n="45">
-         et ira fratris tui a te: et obliuiscatur <choice><abbr>q</abbr><expan>quae</expan></choice> fecisti ei. et mitten accersam te inde: ne forte orber a duobus vobis in die vna. 
+         et ira fratris tui a te: et obliuiscatur <choice><abbr>q</abbr><expan>quae</expan></choice> fecisti ei. et mittens accersam te inde: ne forte orber a duobus vobis in die vna. 
          </ab>
 
          <ab n="46">
-         dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rebecca</persName> ad <persName>isaac</persName> infensa sum vite mee <choice><abbr>propt</abbr><expan>propter</expan></choice> filias filiorum <persName>het</persName>. si accepero <persName>iacob</persName> vxorem de filiabus terrre huius: vt quid mihi viuere. 
+         dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rebecca</persName> ad <persName>isaac</persName> infensa sum vite mee <choice><abbr>propt</abbr><expan>propter</expan></choice> filias filiorum <persName>het</persName>. si accepero <persName>iacob</persName> vxorem de filiabus terre huius: vt quid mihi viuere. 
          </ab>
 
         </div>
@@ -3321,7 +3321,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="11">
-        et occurrit loco. et mormiuit ibi. occiderat <choice><abbr>n</abbr><expan>enim</expan></choice> sol. et tulit de lapidibus loci: et posuit ad caput suum. et dormiuit in loco illo. 
+        et occurrit loco. et dormiuit ibi. occiderat <choice><abbr>n</abbr><expan>enim</expan></choice> sol. et tulit de lapidibus loci: et posuit ad caput suum. et dormiuit in loco illo. 
         </ab>
 
         <ab n="12">
@@ -3341,7 +3341,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="16">
-        et surrexit <persName>iacob</persName> de somno suo. et dixit <choice><abbr>q</abbr><expan>quia</expan></choice> est dominus in loco isto: ego <choice><abbr>at</abbr><expan>autem</expan></choice> non sciebam. 
+        et surrexit <persName>iacob</persName> de somno suo. et dixit: <choice><abbr>q</abbr><expan>quia</expan></choice> est dominus in loco isto: ego <choice><abbr>at</abbr><expan>autem</expan></choice> non sciebam. 
         </ab>
 
         <ab n="17">
@@ -3361,7 +3361,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="21">
-        et reuersus fuero cu salute in domum patris mei? et erit mihi dominus in deum: 
+        et reuersus fuero cum salute in domum patris mei? et erit mihi dominus in deum: 
         </ab>
 
         <ab n="22">
