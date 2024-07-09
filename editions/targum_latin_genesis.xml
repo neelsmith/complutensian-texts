@@ -3315,6 +3315,154 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="29">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="29" type="ordinal">29.</num>
+        </ab>
+
+        <ab n="1">
+        Et leuauit <persName>iacob</persName> pedes suos: et abiit in terram filiorum orientis. 
+        </ab>
+
+        <ab n="2">
+        et vidit. Et ecce puteus in agro: et ecce ibi tres greges ouium accubantes iuxta eum: quia de puteo illo adaquabantur greges: et lapis grandis erat super os putei. 
+        </ab>
+
+        <ab n="3">
+        Et congregabantur ibi <choice><abbr>oes</abbr><expan>omnes</expan></choice> greges: et deuoluebant lapidem ab ore putei: et adaquabant oues: et reducebant lapidem super os putei in locum suum. 
+        </ab>
+
+        <ab n="4">
+        Dixitque eis <persName>iacob</persName>. Fratres mei vnde estis? et dixerunt. De <persName>aran</persName> nos sumus. 
+        </ab>
+
+        <ab n="5">
+        et dixit eis. Nunquid nostis <persName>laban</persName> filium <persName>nachor</persName>. et dixerunt. Nouimus. 
+        </ab>
+
+        <ab n="6">
+        Et dixit eis. Nunquid pax est ei. et dixerunt. Pax. Et ecce <persName>rachel</persName> filia eius veniebat cum ouibus. 
+        </ab>
+
+        <ab n="7">
+        Et ait. Ecce adhuc multum diei super est: non est tempus vt colligantur pecora: adaquate oues et ite ad pastum. 
+        </ab>
+
+        <ab n="8">
+        Et dixerunt. Non possumus: donec congregentur <choice><abbr>oes</abbr><expan>omnes</expan></choice> greges et deuoluant lapidem ab ore putei: et potum demus ouibus. 
+        </ab>
+
+        <ab n="9">
+        <unclear>Abhuc</unclear> ille <choice><abbr>loqbatur</abbr><expan>loquebatur</expan></choice> cum eis: et <persName>rachel</persName> venit cum ouibus patris sui: nam oues ipsa pascebat. 
+        </ab>
+
+        <ab n="10">
+        Et factum est cum vidisset <persName>iacob</persName> <persName>rachel</persName> filiam <persName>laban</persName> fratris matris sue: et oues <persName>laban</persName> fratris matris sue: 
+        </ab>
+
+        <ab n="11">
+        accessit <persName>iacob</persName> et reuoluit lapidem ab ore putei: et <choice><abbr>adaquit</abbr><expan>adaquauit</expan></choice> oues <persName>laban</persName> fratris matris sue. Et osculatus est <persName>iacob</persName> <persName>rachel</persName>: et leuauit vocem suam et fleuit. 
+        </ab>
+
+        <ab n="12">
+        Et narrauit <persName>iacob</persName> <persName>rachel</persName> <choice><abbr>q</abbr><expan>quod</expan></choice> filius sororis <choice><abbr>pris</abbr><expan>patris</expan></choice> sui ipse esset: et <choice><abbr>q</abbr><expan>quod</expan></choice> filius <persName>rebecce</persName> esset: et cucurrit et nunciauit patri suo. 
+        </ab>
+
+        <ab n="13">
+        Et factum est cum audisset <persName>labam</persName> rumorem de <persName>iacob</persName> filio sororis sue: cucurrit in occursum eius: et amplexatus est eum: et osculatus est eum: et introduxit eum in domum suam: et narrauit <persName>labam</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice> verba hec. 
+        </ab>
+
+        <ab n="14">
+        Et ait ei <persName>laban</persName>. Utique consanguineus meus et caro mea tu es: et habitauit cum eo mensem dierum. 
+        </ab>
+
+        <ab n="15">
+        Et dixit <persName>laban</persName> ad <persName>iacob</persName>. <choice><abbr>Nunqd</abbr><expan>Nunquid</expan></choice> <choice><abbr>q</abbr><expan>quia</expan></choice> <choice><abbr>fr</abbr><expan>fratrem</expan></choice> meus es seruies mihi gratias? indica mihi <choice><abbr>q</abbr><expan>quod</expan></choice> erit merces tua. 
+        </ab>
+
+        <ab n="16">
+        Habebat autem <persName>laban</persName> duas filias: nomen maioris <persName>lia</persName> et nomen minoris <persName>rachel</persName>. 
+        </ab>
+
+        <ab n="17">
+        Oculia <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>lie</persName> erant pulchri: et <persName>rachel</persName> erat decora forma et decora aspectu. 
+        </ab>
+
+        <ab n="18">
+        Et dilexit <persName>iacob</persName> <persName>rachel</persName>: et ait. Seruiam tibi septem annis pro <persName>rachel</persName> filia tua minori. 
+        </ab>
+
+        <ab n="19">
+        Et dixit <persName>laban</persName>: melius est vt dem eam tibi: quam vt tradam viro alteri: habita mecum. 
+        </ab>
+
+        <ab n="20">
+        Et seruiuit <persName>iacob</persName> pro <persName>rachel</persName> septem annis: et fuerunt in oculis eius quasi dies pauci: et <choice><abbr>q</abbr><expan>quod</expan></choice> diligebat eam. 
+        </ab>
+
+        <ab n="21">
+        Et dixit <persName>iacob</persName> ad <persName>laban</persName>. Da mihi vxorem meam: quoniam impleti sunt dies seruitutis mee: et ingrediar ad illam. 
+        </ab>
+
+        <ab n="22">
+        Congregauitque <persName>laban</persName> <choice><abbr>oes</abbr><expan>omnes</expan></choice> viros loci: et fecit conuiuium. 
+        </ab>
+
+        <ab n="23">
+        et facto vespere tulit <persName>liam</persName> filiam suam: et introduxit eam ad eum: 
+        </ab>
+
+        <ab n="24">
+        et ingressus est ad eam. et dedit <persName>laban</persName> <persName>zelpham</persName> ancillam suam <persName>lie</persName> filie sue in famulam. 
+        </ab>
+
+        <ab n="25">
+        Et facto mane ecce ipsa erat <persName>lia</persName>: et dixit ad laban. Quid est hoc <choice><abbr>qd</abbr><expan>quod</expan></choice> fecisti mihi? nonne pro <persName>rachel</persName> seruiui apud te? quare ergo mentitus es mihi?
+        </ab>
+
+        <ab n="26">
+        Et ait <persName>laban</persName>. Non solet fieri hoc in loco nostro: vt detur minor antequam maior. 
+        </ab>
+
+        <ab n="27">
+        Imple hebdomadam huius: et dabimus tibi etiam hanc: pro seruitute qua seruies mihi adhuc septem annis aliis. 
+        </ab>
+
+        <ab n="28">
+        Et fecit <persName>iacob</persName> sicut dierat: et impleuit hebdomadam huius. Et dedit ei <persName>rachel</persName> filiam suam in vxorem. 
+        </ab>
+
+        <ab n="29">
+        Et dedit <persName>laban</persName> <persName>rachel</persName> filie sue balam ancillam suam in famulam. 
+        </ab>
+
+        <ab n="30">
+        Et ingressus est etiam ad <persName>rachel</persName>: dilexit et <persName>rachel</persName> magis <choice><abbr>q</abbr><expan>quam</expan></choice> <persName>liam</persName>. Et seruiuit apud eum rursus aliis septem annis:
+        </ab>
+
+        <ab n="31">
+        et manifestum fuit coram <choice><abbr>dno</abbr><expan>domino</expan></choice> <choice><abbr>q</abbr><expan>quod</expan></choice> odiosa esset <persName>lia</persName>: et dedit ei vt conciperet: et <persName>rachel</persName> erat sterilis. 
+        </ab>
+
+        <ab n="32">
+        Et concepit <persName>lia</persName> et peperit filium: et vocauit nomen eius <persName>ruben</persName>: quia dixit <choice><abbr>qm</abbr><expan>quam</expan></choice> manifesta fuit coram <choice><abbr>dno</abbr><expan>domino</expan></choice> iniuriia mea: nunc enim diliget me maritus meus: 
+        </ab>
+
+        <ab n="33">
+        et concepit rursus et peperit filium: et ait. Quia auditum est coram <choice><abbr>dno</abbr><expan>domino</expan></choice> quoniam odio habita essem ego: et dedit mihi etiam hunc: et vocauit nomen eius <persName>simeon</persName>. 
+        </ab>
+
+        <ab n="34">
+        Concepitque iterum et peperit filium: et ait. Nunc hac vice copulabitur mihi maritus meus: <choice><abbr>q</abbr><expan>quia</expan></choice> peperi ei tres filios: propterea vocauit nomen eius <persName>leui</persName>. 
+        </ab>
+
+        <ab n="35">
+        Et concepit vltra et peperit filium: et ait. Hac vice confitebor coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. Propterea vocauit nomen eius iuda. cessauitque parere. 
+        </ab>
+
+
+
+        </div>
+
     </body>
     </text>
 </TEI>
