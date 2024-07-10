@@ -23,10 +23,17 @@ p25url = "http://shot.holycross.edu/tabulae/medieval-lat25-current.cex"
 parser25 = tabulaeStringParser(p25url, UrlReader)
 
 greekortho = literaryGreek()
-greekurl = ""
-greekparser = ""
+greekurl = "http://shot.holycross.edu/morphology/attic_core_current.cex"
+greekparser = fromcex(greekurl, KanonesStringParser, UrlReader)
 
 # text reading functions
+function readgreek()
+	srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
+	corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
+	vulgate = filter(corpus.passages) do psg
+		versionid(psg.urn) == "septuagint"
+	end |> CitableTextCorpus
+end
 function readvulgate()
 	srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
 	corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
@@ -47,12 +54,18 @@ function readtargum(basedir)
 	targumlatin = edited(targbldr, targumlatinxmlcorpus)
 end
 
+
 # texts
+greek = readgreek()
+
 septlatin = readseptuagint(repo)
 targumlatin = readtargum(repo)
 vulgate = readvulgate()
 
 ## Parsed texts
+greektkns = tokenizedcorpus(greek, greekortho)
+greekparses = parsecorpus(greektkns, greekparser) 
+
 targtkns = tokenizedcorpus(targumlatin, ortho23)
 targparses = parsecorpus(targtkns, parser23)
 septtkns = tokenizedcorpus(septlatin, ortho23)
@@ -61,9 +74,8 @@ vulgtkns = tokenizedcorpus(vulgate, ortho25)
 vulgparses = parsecorpus(vulgtkns, parser25)
 
 
-
 ## Analysis
-"""True if analysis has a verb form."""
+"""True if analysis has a Latin verb form."""
 function verbform(a::Analysis)
 	latform = latinForm(a)
 	latform isa LMFFiniteVerb ||
@@ -78,6 +90,19 @@ targverbs = filter(targparses.analyses) do a
 end
 vulgverbs = filter(vulgparses.analyses) do a
 	! isempty(a.analyses) && verbform(a.analyses[1])
+end
+
+
+"""True if analysis has a Greek verb form."""
+function greekverb(a::Analysis)
+	gkform = greekForm(a)
+	gkform isa GMFFiniteVerb ||
+	gkform isa GMFInfinitive ||
+	gkform isa GMFParticiple ||
+	gkform isa GMFVerbalAdjective
+end
+greekverbs = filter(greekparses.analyses) do a
+	! isempty(a.analyses) && greekverb(a.analyses[1])
 end
 
 
@@ -126,13 +151,15 @@ function vocab()
 	tlex = targverbs .|> alex .|> string
 	slex = septverbs .|> alex .|> string
 	vlex = vulgverbs .|> alex .|> string
-	vcat(tlex, slex, vlex) |> unique
+	glex = greekverbs .|> alex .|> string
+	vcat(tlex, slex, vlex, glex) |> unique
 end
 verbinventory = vocab()
 
 
+
 """Compose a TypedTable for our data."""
-function populatettable(urnlist, tverbs, sverbs, vverbs)	
+function populatettable(urnlist, gkverbs, tverbs, sverbs, vverbs)	
 	seq = []
 	urns = []
 	docs = []
@@ -141,6 +168,14 @@ function populatettable(urnlist, tverbs, sverbs, vverbs)
 		if i % 5 == 0
 			@info("Passage $(i)/$(length(urnlist))...")
 		end
+		for lex in passagelexstrings(u, gkverbs)
+			push!(seq, i)
+			push!(urns, u)
+			push!(docs,"greek")
+			push!(lexemes, lex)
+		end
+
+
 		for lex in passagelexstrings(u, vverbs)
 			push!(seq, i)
 			push!(urns, u)
@@ -159,11 +194,25 @@ function populatettable(urnlist, tverbs, sverbs, vverbs)
 			push!(docs,"septuagint")
 			push!(lexemes, lex)
 		end
+		
 	end
     Table(sequence = seq, urn = urns, document = docs, lexeme = lexemes)
 end
 
-@time t = populatettable(reflist, targverbs, septverbs, vulgverbs)
+@time t = populatettable(reflist, greekverbs, targverbs, septverbs, vulgverbs)
 
-pwd()
-CSV.write("verblexemes.csv", t)
+
+
+using Dates
+datesrc = now() 
+yr = datesrc |> year
+mo = datesrc |> month
+monthday = datesrc |> day
+datestr = join([yr,mo,monthday], "-")
+
+outfile1 = joinpath(pwd(), "scratch", "verblexemes-$(datestr).csv")
+outfile2 = joinpath(pwd(), "scratch", "verblexemes-current.csv")
+
+
+CSV.write(outfile1, t)
+CSV.write(outfile2, t)
