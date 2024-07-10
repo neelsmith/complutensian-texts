@@ -13,6 +13,8 @@ begin
 
 	using StatsBase, OrderedCollections
 	using EzXML
+
+	using PlutoPlotly
 	using PlutoUI
 
 	md"""*Unhide this cell to see the Julia environment.*"""
@@ -26,16 +28,10 @@ TableOfContents()
 md"""# Analyzing abbreviations"""
 
 # ╔═╡ 07b79a8a-b569-4ced-a495-f0528d3e6024
-md"""Expansions in the Targum glosses:"""
+md"""### Targum glosses"""
 
-# ╔═╡ dacee302-05b6-4ae1-b56f-a724c81d283a
-md"""Abbreviations in the Targum glosses:"""
-
-# ╔═╡ 5c04755e-b3e6-47d3-90bf-e81a14b33048
-md"""Expansions in the LXX glosses:"""
-
-# ╔═╡ 304d6ef0-8d10-43c4-8553-302efc2db69c
-md"""Abbreviations in the LXX glosses"""
+# ╔═╡ 98175044-9e89-45a9-8016-7cdf137eb050
+md""" ### Septuagint glosses"""
 
 # ╔═╡ cf50160a-3fd8-43c6-8f84-3a489f510a01
 html"""
@@ -47,6 +43,12 @@ html"""
 
 # ╔═╡ ce7417e4-a6b5-40fa-934f-5a7790299817
 md"""> # Mechanics"""
+
+# ╔═╡ 97ffa639-474e-4cdd-980b-f15eafddbc76
+md"""## Plotting data"""
+
+# ╔═╡ ad428771-b930-41a6-ab3c-8344cf2fec98
+md"""## Texts"""
 
 # ╔═╡ 7d856b1e-9e60-4242-81a0-1695aa4c8ee0
 targumlatinxmlcorpus = begin
@@ -65,9 +67,6 @@ srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compno
 
 # ╔═╡ d76fee5c-7adf-4799-84da-5195de6fdae1
 corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
-
-# ╔═╡ ad428771-b930-41a6-ab3c-8344cf2fec98
-md"""## Texts"""
 
 # ╔═╡ de29c0ec-1f77-40dd-bc38-a5ba34d352b3
 repo = dirname(pwd())
@@ -139,8 +138,19 @@ targumabbrcounts = countmap(targumabbrs) |> OrderedDict
 # ╔═╡ b48a3dd8-03a4-42d7-b1bb-aca821746a66
 targumabbrsorted = sort(targumabbrcounts, byvalue = true, rev = true)
 
-# ╔═╡ 7eff0042-3268-4e6c-9bf2-57f6ca41d518
-targumabbrsorted
+# ╔═╡ f01aa87d-74fb-4e0f-93a1-79a14ad1be27
+plt2x = collect(keys(targumabbrsorted))
+
+# ╔═╡ 20b9e83f-e238-4628-9dac-0547e47a6a37
+ plt2y = collect(values(targumabbrsorted))
+
+# ╔═╡ 6cb6923f-de62-43fe-8be2-4babf3a41ab2
+let
+	layout2 = Layout(title = "Targum glosses: abbreviations")
+	plt2 = bar(x = plt2x, y = plt2y)
+	plot(plt2, layout2)
+end
+	
 
 # ╔═╡ c17923cc-e839-4f9a-8fa5-70816d35b7b6
 targumexpans = map(pr -> pr[2], targumpairs)
@@ -151,8 +161,19 @@ targumexpancounts = countmap(targumexpans) |> OrderedDict
 # ╔═╡ aa917ed9-5af5-49db-8787-a4022e601ba7
 targumexpansorted = sort(targumexpancounts, byvalue = true, rev = true)
 
-# ╔═╡ 26170845-149f-4794-81a1-82543ae39b2a
-targumexpansorted
+# ╔═╡ 841b9826-ebed-4330-8a3f-2f0e0b7f20d8
+plt1x = collect(keys(targumexpansorted))
+
+# ╔═╡ 1b33e0ec-ca70-4755-aeb9-019e96808949
+ plt1y = collect(values(targumexpansorted))
+
+# ╔═╡ 5a62bf6d-1d4b-402e-99e6-bddc910bcb0e
+let
+	layout1 = Layout(title = "Targum glosses: expansions")
+	plt1 = bar(x = plt1x,y = plt1y)
+	plot(plt1, layout1)
+end
+	
 
 # ╔═╡ 576b1e5a-bd3b-49d9-9550-7596dfd50ff0
 md"""### Septuagint glosses"""
@@ -186,8 +207,18 @@ lxxabbrcounts = countmap(lxxabbrs) |> OrderedDict
 # ╔═╡ 4512873c-e691-4f7b-85ef-1f3a1260718d
 lxxabbrsorted = sort(lxxabbrcounts, byvalue = true, rev = true)
 
+# ╔═╡ 673cf918-068b-4008-b235-8a41b0147963
+plt4x = collect(keys(lxxabbrsorted))
+
+# ╔═╡ 7a38df63-a823-46de-9a4a-4b3ec62a0d6c
+plt4y = collect(values(lxxabbrsorted))
+
 # ╔═╡ 30fad1b5-77ed-4918-95ec-7d29aa364caf
-lxxabbrsorted
+let
+	layout4 = Layout(title = "Septuagint glosses: abbreviations")
+	plt4= bar(x = plt4x, y = plt4y)
+	plot(plt4, layout4)
+end
 
 # ╔═╡ 11b7460e-6383-4289-bd7c-8b68ae99d27a
 lxxexpans = map(pr -> pr[2], lxxpairs)
@@ -198,8 +229,18 @@ lxxexpancounts = countmap(lxxexpans) |> OrderedDict
 # ╔═╡ 7b5afba5-07a6-441a-874e-bd6e8939fc52
 lxxexpansorted = sort(lxxexpancounts, byvalue = true, rev = true)
 
-# ╔═╡ f1327ca6-c7ca-401c-8f79-a8e137ee5f71
-lxxexpansorted
+# ╔═╡ a23d6ebc-43c8-42c4-9d14-11f230475af1
+plt3x = collect(keys(lxxexpansorted))  
+
+# ╔═╡ 98f76ed0-57f8-4bc1-8c22-f0d4cfcc4c5e
+plt3y = collect(values(lxxexpansorted))  
+
+# ╔═╡ 8ead7286-3a7e-486d-8505-7b6651d577f1
+let
+	layout3 = Layout(title = "Septuagint glosses: expansions")
+	plt3= bar(x = plt3x, y = plt3y)
+	plot(plt3, layout3)
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -212,6 +253,7 @@ EzXML = "8f5d6c58-4d21-5cfd-889c-e3ad7ee6a615"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
+PlutoPlotly = "8e989ff0-3d88-8e9f-f020-2b208a939ff0"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
@@ -224,6 +266,7 @@ EzXML = "~1.2.0"
 LatinOrthography = "~0.7.3"
 OrderedCollections = "~1.6.3"
 Orthography = "~0.22.0"
+PlutoPlotly = "~0.4.6"
 PlutoUI = "~0.7.59"
 StatsBase = "~0.34.3"
 """
@@ -232,9 +275,9 @@ StatsBase = "~0.34.3"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "bce3411fd06b791c21f30735227842d7a21401bf"
+project_hash = "6f793f8c62d47b188c332279510c5f1f436bd5bb"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -273,6 +316,11 @@ uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+
+[[deps.BaseDirs]]
+git-tree-sha1 = "cb25e4b105cc927052c2314f8291854ea59bf70a"
+uuid = "18cc8868-cbac-4acf-b575-c8ff214dc66f"
+version = "1.2.4"
 
 [[deps.BitFlags]]
 git-tree-sha1 = "0691e34b3bb8be9307330f88d1a3c3f25466c24d"
@@ -321,11 +369,35 @@ git-tree-sha1 = "b8fe8546d52ca154ac556809e10c75e6e7430ac8"
 uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
 version = "0.7.5"
 
+[[deps.ColorSchemes]]
+deps = ["ColorTypes", "ColorVectorSpace", "Colors", "FixedPointNumbers", "PrecompileTools", "Random"]
+git-tree-sha1 = "4b270d6465eb21ae89b732182c20dc165f8bf9f2"
+uuid = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
+version = "3.25.0"
+
 [[deps.ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
 git-tree-sha1 = "b10d0b65641d57b8b4d5e234446582de5047050d"
 uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
 version = "0.11.5"
+
+[[deps.ColorVectorSpace]]
+deps = ["ColorTypes", "FixedPointNumbers", "LinearAlgebra", "Requires", "Statistics", "TensorCore"]
+git-tree-sha1 = "a1f44953f2382ebb937d60dafbe2deea4bd23249"
+uuid = "c3611d14-8923-5661-9e6a-0046d554d3a4"
+version = "0.10.0"
+
+    [deps.ColorVectorSpace.extensions]
+    SpecialFunctionsExt = "SpecialFunctions"
+
+    [deps.ColorVectorSpace.weakdeps]
+    SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
+
+[[deps.Colors]]
+deps = ["ColorTypes", "FixedPointNumbers", "Reexport"]
+git-tree-sha1 = "362a287c3aa50601b0bc359053d5c2468f0e7ce0"
+uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
+version = "0.12.11"
 
 [[deps.Compat]]
 deps = ["TOML", "UUIDs"]
@@ -340,7 +412,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -372,6 +444,12 @@ uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 git-tree-sha1 = "9824894295b62a6a4ab6adf1c7bf337b3a9ca34c"
 uuid = "ab62b9b5-e342-54a8-a765-a90f495de1a6"
 version = "1.2.0"
+
+[[deps.DelimitedFiles]]
+deps = ["Mmap"]
+git-tree-sha1 = "9e2f36d3c96a820c678f2f1f1782582fcf685bae"
+uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+version = "1.9.1"
 
 [[deps.Dictionaries]]
 deps = ["Indexing", "Random", "Serialization"]
@@ -516,6 +594,11 @@ git-tree-sha1 = "31e996f0a15c7b280ba9f76636b3ff9e2ae58c9a"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "0.21.4"
 
+[[deps.LaTeXStrings]]
+git-tree-sha1 = "50901ebc375ed41dbf8058da26f9de442febbbec"
+uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
+version = "1.3.1"
+
 [[deps.LatinOrthography]]
 deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "Orthography", "Test"]
 git-tree-sha1 = "b1578be26f15a1864afd88540babb3c53f3766fc"
@@ -635,7 +718,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -665,6 +748,12 @@ deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
 version = "10.42.0+1"
 
+[[deps.Parameters]]
+deps = ["OrderedCollections", "UnPack"]
+git-tree-sha1 = "34c0e9ad262e5f7fc75b10a9952ca7692cfc5fbe"
+uuid = "d96e819e-fc66-5662-9728-84c9c7592b0a"
+version = "0.12.3"
+
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
 git-tree-sha1 = "8489905bcdbcfac64d1daa51ca07c0d8f0283821"
@@ -675,6 +764,26 @@ version = "2.8.1"
 deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 version = "1.10.0"
+
+[[deps.PlotlyBase]]
+deps = ["ColorSchemes", "Dates", "DelimitedFiles", "DocStringExtensions", "JSON", "LaTeXStrings", "Logging", "Parameters", "Pkg", "REPL", "Requires", "Statistics", "UUIDs"]
+git-tree-sha1 = "56baf69781fc5e61607c3e46227ab17f7040ffa2"
+uuid = "a03496cd-edff-5a9b-9e67-9cda94a718b5"
+version = "0.8.19"
+
+[[deps.PlutoPlotly]]
+deps = ["AbstractPlutoDingetjes", "BaseDirs", "Colors", "Dates", "Downloads", "HypertextLiteral", "InteractiveUtils", "LaTeXStrings", "Markdown", "Pkg", "PlotlyBase", "Reexport", "TOML"]
+git-tree-sha1 = "1ae939782a5ce9a004484eab5416411c7190d3ce"
+uuid = "8e989ff0-3d88-8e9f-f020-2b208a939ff0"
+version = "0.4.6"
+
+    [deps.PlutoPlotly.extensions]
+    PlotlyKaleidoExt = "PlotlyKaleido"
+    UnitfulExt = "Unitful"
+
+    [deps.PlutoPlotly.weakdeps]
+    PlotlyKaleido = "f2990250-8cf9-495f-b13a-cce12b45703c"
+    Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
@@ -811,6 +920,12 @@ deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
 version = "1.10.0"
 
+[[deps.TensorCore]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "1feb45f88d133a655e001435632f019a9a1bcdb6"
+uuid = "62fd8b95-f654-4bbd-a8a5-9c27f68ccd50"
+version = "0.1.1"
+
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
@@ -849,6 +964,11 @@ version = "1.5.1"
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
 uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+
+[[deps.UnPack]]
+git-tree-sha1 = "387c1f73762231e86e0c9c5443ce3b4a0a9a0c2b"
+uuid = "3a884ed6-31ef-47d7-9d2a-63182c4928ed"
+version = "1.0.2"
 
 [[deps.Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
@@ -896,20 +1016,27 @@ version = "17.4.0+2"
 # ╟─c042965c-5de9-4675-8852-703c49f6b8d5
 # ╟─3e8ef72a-be16-40d4-8a84-9391e3eca5b8
 # ╟─07b79a8a-b569-4ced-a495-f0528d3e6024
-# ╟─26170845-149f-4794-81a1-82543ae39b2a
-# ╟─dacee302-05b6-4ae1-b56f-a724c81d283a
-# ╟─7eff0042-3268-4e6c-9bf2-57f6ca41d518
-# ╟─5c04755e-b3e6-47d3-90bf-e81a14b33048
-# ╟─f1327ca6-c7ca-401c-8f79-a8e137ee5f71
-# ╟─304d6ef0-8d10-43c4-8553-302efc2db69c
+# ╟─6cb6923f-de62-43fe-8be2-4babf3a41ab2
+# ╟─5a62bf6d-1d4b-402e-99e6-bddc910bcb0e
+# ╟─98175044-9e89-45a9-8016-7cdf137eb050
+# ╟─8ead7286-3a7e-486d-8505-7b6651d577f1
 # ╟─30fad1b5-77ed-4918-95ec-7d29aa364caf
 # ╟─cf50160a-3fd8-43c6-8f84-3a489f510a01
 # ╟─ce7417e4-a6b5-40fa-934f-5a7790299817
+# ╟─97ffa639-474e-4cdd-980b-f15eafddbc76
+# ╠═841b9826-ebed-4330-8a3f-2f0e0b7f20d8
+# ╠═1b33e0ec-ca70-4755-aeb9-019e96808949
+# ╟─f01aa87d-74fb-4e0f-93a1-79a14ad1be27
+# ╠═20b9e83f-e238-4628-9dac-0547e47a6a37
+# ╠═a23d6ebc-43c8-42c4-9d14-11f230475af1
+# ╠═98f76ed0-57f8-4bc1-8c22-f0d4cfcc4c5e
+# ╠═673cf918-068b-4008-b235-8a41b0147963
+# ╠═7a38df63-a823-46de-9a4a-4b3ec62a0d6c
+# ╟─ad428771-b930-41a6-ab3c-8344cf2fec98
 # ╟─7d856b1e-9e60-4242-81a0-1695aa4c8ee0
 # ╟─f1245ada-c035-4910-9b4a-26c06bbc6689
 # ╟─d7f8ef2e-2297-49a2-a77a-4d94877edca0
 # ╟─d76fee5c-7adf-4799-84da-5195de6fdae1
-# ╟─ad428771-b930-41a6-ab3c-8344cf2fec98
 # ╟─de29c0ec-1f77-40dd-bc38-a5ba34d352b3
 # ╟─cec7d5b0-df32-4924-94fd-05bf8b1e3b0f
 # ╟─d36b5b5f-88e2-4d2a-b448-63fb6ab9a433
