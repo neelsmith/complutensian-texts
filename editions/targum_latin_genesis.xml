@@ -3396,7 +3396,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        Et seruiuit <persName>iacob</persName> pro <persName>rachel</persName> septem annis: et fuerunt in oculis eius quasi dies pauci: et <choice><abbr>q</abbr><expan>quod</expan></choice> diligebat eam. 
+        Et seruiuit <persName>iacob</persName> pro <persName>rachel</persName> septem annis: et fuerunt in oculis eius quasi dies pauci: eo <choice><abbr>q</abbr><expan>quod</expan></choice> diligebat eam. 
         </ab>
 
         <ab n="21">
@@ -3444,7 +3444,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="32">
-        Et concepit <persName>lia</persName> et peperit filium: et vocauit nomen eius <persName>ruben</persName>: quia dixit <choice><abbr>qm</abbr><expan>quam</expan></choice> manifesta fuit coram <choice><abbr>dno</abbr><expan>domino</expan></choice> iniuriia mea: nunc enim diliget me maritus meus: 
+        Et concepit <persName>lia</persName> et peperit filium: et vocauit nomen eius <persName>ruben</persName>: quia dixit <choice><abbr>qm</abbr><expan>quam</expan></choice> manifesta fuit coram <choice><abbr>dno</abbr><expan>domino</expan></choice> iniuria mea: nunc enim diliget me maritus meus: 
         </ab>
 
         <ab n="33">
@@ -3459,6 +3459,131 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         Et concepit vltra et peperit filium: et ait. Hac vice confitebor coram <choice><abbr>dno</abbr><expan>domino</expan></choice>. Propterea vocauit nomen eius iuda. cessauitque parere. 
         </ab>
 
+        </div>
+
+        <div n="30">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="30" type="ordinal">30.</num>
+        </ab>
+
+        <ab n="1">
+        Et vidit <persName>rachel</persName> <choice><abbr>q</abbr><expan>quod</expan></choice> non peperat ex <persName>iacob</persName>: et inuidit <persName>rachel</persName> sorori sue: et dixit ad <persName>iacob</persName>. Da mihi filios: alioquin moriar. 
+        </ab>
+
+        <ab n="2">
+        Et iratus est furor <persName>iacob</persName> in <persName>rachel</persName>: et ait. Nunquid a me tu petis filios? nonne a facie domini debuisses petere: qui prohibuit a te generationem ventris tui? 
+        </ab>
+
+        <ab n="3">
+        Ecce ancilla mea <persName>bala</persName>: ingredere ad eam: vt pariat: et ego ero nutrix: et suscipiam quoque ego filios ex ea. 
+        </ab>
+
+        <ab n="4">
+        Et dedit ei <persName>balam</persName> ancillam suam in vxorem. et ingressus est ad eam <persName>iacob</persName>: 
+        </ab>
+
+        <ab n="5">
+        et concepit <persName>bala</persName> et peperit filium <persName>iacob</persName>: et ait <persName>rachel</persName>.
+        </ab>
+
+        <ab n="6">
+        Judicauit me deus: et suscepit orationem meam: et dedit mihi filium: idcirco vocauit nomen eius <persName>dan</persName>. 
+        </ab>
+
+        <ab n="7">
+        concepitque rursus et peperit <persName>bala</persName> ancilla <persName>rachel</persName> filium <choice><abbr>sm</abbr><expan>secundum</expan></choice> <persName>iacob</persName>. 
+        </ab>
+
+        <ab n="8">
+        Et ait <persName>rachel</persName>. Suscepit deus deprecationem meam cum cum deprecata sum in oratione mea: concupiui vt esset mihi filius sicut sorori mee: <choice><abbr>q</abbr><expan>quod</expan></choice> vtique concessum est mihi. Et vocauit nomen eius <persName>neptali</persName>. 
+        </ab>
+
+        <ab n="9">
+        Et vidit <persName>lia</persName> <choice><abbr>q</abbr><expan>quod</expan></choice> cessasset parere: et tulit <persName>zelpham</persName> ancillam suam: et dedit eam <persName>iacob</persName> in vxorem. 
+        </ab>
+
+        <ab n="10">
+        et peperit <persName>zelpha</persName> ancilla <persName>lie</persName> <persName>iacob</persName> filium:
+        </ab>
+
+        <ab n="11">
+        et dixit <persName>lia</persName> venit felicitas: et vocauit nomen eius <persName>gad</persName>. 
+        </ab>
+
+        <ab n="12">
+        Et peperit <persName>zelpha</persName> ancilla <persName>lie</persName> filium <choice><abbr>sm</abbr><expan>secundum</expan></choice> <persName>iacob</persName>. 
+        </ab>
+
+        <ab n="13">
+        Et ait <persName>lia</persName>. Laus erit mihi: <choice><abbr>qm</abbr><expan>quam</expan></choice> nunc laudabunt me mulieres: et vocauit nomen eius <persName>aser</persName>. 
+        </ab>
+
+        <ab n="14">
+        Et abiit <persName>ruben</persName> in diebus messis tritici et inuenit mandragoras in agro: et attulit eas <persName>lie</persName> matri sue. Et dixit <persName>rachel</persName> ad <persName>liam</persName>. Da mihi obsecro de mandragoris filii tui. 
+        </ab>
+
+        <ab n="15">
+        Da mihi obsecro de mandragoris filii tui. et ait ei. Nunquid parum est quod tulisti maritum meum. nisi <choice><abbr>q</abbr><expan>quod</expan></choice> accipias etiam mandragoras filii mei? Et ait <persName>rachel</persName>. Propterea cubabit tecum hac nocte pro mandragoris filii tui. 
+        </ab>
+
+        <ab n="16">
+        Et venit <persName>iacob</persName> de agro vespere: et egressa est <persName>lia</persName> in occursum eius: et ait. Ad me ingredere: quoniam mercede conduxi te pro mandragoris filii mei. Et cubuit cum ea nocte illa: 
+        </ab>
+
+        <ab n="17">
+        et suscepit deus orationem <persName>lie</persName>: et concepit et peperit filium quintum <persName>iacob</persName>. 
+        </ab>
+
+        <ab n="18">
+        Et ait <persName>lia</persName>. Dedit deus mercedem meam: <choice><abbr>q</abbr><expan>quia</expan></choice> dedi ancillam meam marito meo: et vocauit nomen eius <persName>isachar</persName>. 
+        </ab>
+
+        <ab n="19">
+        Et concepit rursus <persName>lia</persName>: et peperit filium sextum <persName>iacob</persName>. 
+        </ab>
+
+        <ab n="20">
+        Et ait <persName>lia</persName>. Dedit mihi deus optimam partem: hac vice erit habitatio mariti mei <choice><abbr>apd</abbr><expan>apud</expan></choice> me: <choice><abbr>qm</abbr><expan>quam</expan></choice> peperi ei sex filios: et vocauit nomen eius <persName>zabulon</persName>. 
+        </ab>
+
+        <ab n="21">
+        Et postea peperit filiam: et vocauit nomen eius <persName>dinam</persName>. 
+        </ab>
+
+        <ab n="22">
+        Et venit memoria <persName>rachelis</persName> in conspectu dei: et suscepit deus orationem eius: 
+        </ab>
+
+        <ab n="23">
+        et dedit ei vt concepieret. Et concepit et peperit filium: et ait. Abstulit deus opprobrium meum: 
+        </ab>
+
+        <ab n="24">
+        et vocauit nomen eius <persName>ioseph</persName>: dicens. Addat mihi <choice><abbr>dns</abbr><expan>dominus</expan></choice> filium alterum. 
+        </ab>
+
+        <ab n="25">
+        Et factum est cum peperisset <persName>rachel</persName> <persName>ioseph</persName>: et dixit <persName>iacob</persName> ad <persName>laban</persName>. Dimitte me: vt vadam in locum meum et in terram meam.
+        </ab>
+
+        <ab n="26">
+        da mihi vxores meas et filios meos: pro <choice><abbr>qbus</abbr><expan>quibus</expan></choice> seruiui tibi: vt vadam. <choice><abbr>qm</abbr><expan>quam</expan></choice> tu nosti seruitutem meam qua seruiui tibi. 
+        </ab>
+
+        <ab n="27">
+        Et dixit ei <persName>laban</persName>. Si nunc inueni gratiam in oculis tuis: ex <unclear>pertus</unclear> sum <choice><abbr>q</abbr><expan>quod</expan></choice> benedixerit mhi deus propter te. 
+        </ab>
+
+        <ab n="28">
+        Et ait. constitue mercedem tuam mihi: et dabo tibi. 
+        </ab>
+
+        <ab n="29">
+        et dixit ei. Tu nostri <unclear>quom</unclear>  seruierim tibi: et <choice><abbr>q</abbr><expan>quuam</expan></choice> <unclear>ta</unclear> erant pecora tua <choice><abbr>apd</abbr><expan>apud</expan></choice> me. 
+        </ab>
+
+        <ab n="30">
+        quoniam pauca <choice><abbr>q</abbr><expan>quae</expan></choice> erant tibi coram me creuerunt in multitudinem. Et <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> tibi <choice><abbr>dns</abbr><expan>dominus</expan></choice> propter me: et nunc <choice><abbr>qn</abbr><expan>quando</expan></choice> faciam etiam ego pro domo mea. 
+        </ab>
 
 
         </div>
