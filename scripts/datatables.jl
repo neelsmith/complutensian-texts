@@ -1,8 +1,10 @@
 # Build data tables from texts
 using CitableBase, CitableText, CitableCorpus
 using Tabulae
+using Kanones
 using CitableParserBuilder
 using Orthography, LatinOrthography
+using PolytonicGreek
 using CitableTeiReaders
 using EditionBuilders
 #using StatsBase, OrderedCollections
@@ -19,6 +21,10 @@ p23url = "http://shot.holycross.edu/tabulae/medieval-lat23-current.cex"
 parser23 = tabulaeStringParser(p23url, UrlReader)
 p25url = "http://shot.holycross.edu/tabulae/medieval-lat25-current.cex"
 parser25 = tabulaeStringParser(p25url, UrlReader)
+
+greekortho = literaryGreek()
+greekurl = ""
+greekparser = ""
 
 # text reading functions
 function readvulgate()
