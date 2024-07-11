@@ -3543,7 +3543,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="7">
-        et concepit adhuc <persName>balla</persName> ancilla <persName>rachel</persName>. et peperit filium <choice><abbr>scdm0</abbr><expan>secundum</expan></choice> <persName>iacob</persName>. 
+        et concepit adhuc <persName>balla</persName> ancilla <persName>rachel</persName>. et peperit filium <choice><abbr>scdm</abbr><expan>secundum</expan></choice> <persName>iacob</persName>. 
         </ab>
 
         <ab n="8">
@@ -3575,7 +3575,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="15">
-        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>lia</persName>: non satis tibi: <choice><abbr>q</abbr><expan>quod</expan></choice> accepisti virum meum? <choice><abbr>nunqd</abbr><expan>nunquid</expan></choice> et mandragoras filii mi accipies? dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rachel</persName>: non sic: dormiat tecum nocte ista pro mandragoris filii tui. 
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>lia</persName>: non satis tibi: <choice><abbr>q</abbr><expan>quod</expan></choice> accepisti virum meum? <choice><abbr>nunqd</abbr><expan>nunquid</expan></choice> et mandragoras filii mei accipies? dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rachel</persName>: non sic: dormiat tecum nocte ista pro mandragoris filii tui. 
         </ab>
 
         <ab n="16">
@@ -3603,7 +3603,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="22">
-        recordatus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rachel</persName>: et exaudiuit eam deus. et aperuit eius vuluam. 
+        recordatus est <choice><abbr>at</abbr><expan>autem</expan></choice> deus <persName>rachel</persName>: et exaudiuit eam deus. et aperuit eius vuluam. 
         </ab>
 
         <ab n="23">
@@ -3623,7 +3623,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="27">
-        et abido. tu enim scis seruitutem quam seruiui tibi. dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ei <persName>laban</persName>: si inueni <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram te: augurarer vtique. <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> me deus tuo ingressu. 
+        et abibo. tu enim scis seruitutem quam seruiui tibi. dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ei <persName>laban</persName>: si inueni <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram te: augurarer vtique. <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> me deus tuo ingressu. 
         </ab>
 
         <ab n="28">
@@ -3639,7 +3639,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="31">
-        et dixit <persName>laban</persName> illi: <choice><abbr>qd</abbr><expan>quod</expan></choice> tibi dabo? ait <choice><abbr>at</abbr><expan>autem</expan></choice> illi <persName>iacob</persName>: non dabis mihi nihil. si fecceris mihi verbum hoc: iterum pascam oues tuas: et custodiam. 
+        et dixit <persName>laban</persName> illi: <choice><abbr>qd</abbr><expan>quod</expan></choice> tibi dabo? ait <choice><abbr>at</abbr><expan>autem</expan></choice> illi <persName>iacob</persName>: non dabis mihi nihil. si feceris mihi verbum hoc: iterum pascam oues tuas: et custodiam. 
         </ab>
 
         <ab n="32">
@@ -3667,10 +3667,28 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="38">
-        et apposuit virgas: <choice><abbr>qs</abbr><expan>quas</expan></choice> decorticauit in canalibus concharum aque: vt cum venirent oues ad bibendum: in conspectu virgarum
+        et apposuit virgas: <choice><abbr>qs</abbr><expan>quas</expan></choice> decorticauit in canalibus concharum aque: vt cum venirent oues ad bibendum: in conspectu virgarum venientibus ipsis ad bibendum: conciperent oues in virgas. 
         </ab>
 
+        <ab n="39">
+        et pepererunt oues sub albas et varias et cineratas sparsas. 
+        </ab>
 
+        <ab n="40">
+        at agnos seperauit <persName>iacob</persName>: et posuit coram ouibus arietem sub album: et <choice><abbr>oe</abbr><expan>omnem</expan></choice> varium in agnis et separauit sibi greges per seipsum: et nomiscuit eos ad ous <persName>laban</persName>. 
+        </ab>
+
+        <ab n="41">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> in tempore quo conceperunt oues in vtero accipientes: posuit <persName>iacob</persName> virgas coram ouibus in canalibus: vt conciperent ipse <choice><abbr>scdm</abbr><expan>secundum</expan></choice> virgas: 
+        </ab>
+
+        <ab n="42">
+        <choice><abbr>qn</abbr><expan>quando</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice>pariebant oues non ponebat: facta sunt <choice><abbr>at</abbr><expan>autem</expan></choice> non signata <persName>laban</persName>: at signata <persName>iacob</persName>.
+        </ab>
+
+        <ab n="43">
+        et ditatus est <choice><abbr>ho</abbr><expan>homo</expan></choice> valde nimis. et suerunt ei pecora multa: et boues: et serui: et ancille: et cameli et asini: et multi. 
+        </ab>
 
 
 

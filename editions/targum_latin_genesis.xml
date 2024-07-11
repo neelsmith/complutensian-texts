@@ -3466,7 +3466,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="1">
-        Et vidit <persName>rachel</persName> <choice><abbr>q</abbr><expan>quod</expan></choice> non peperat ex <persName>iacob</persName>: et inuidit <persName>rachel</persName> sorori sue: et dixit ad <persName>iacob</persName>. Da mihi filios: alioquin moriar. 
+        Et vidit <persName>rachel</persName> <choice><abbr>q</abbr><expan>quod</expan></choice> non pepererat ex <persName>iacob</persName>: et inuidit <persName>rachel</persName> sorori sue: et dixit ad <persName>iacob</persName>. Da mihi filios: alioquin moriar. 
         </ab>
 
         <ab n="2">
@@ -3494,7 +3494,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="8">
-        Et ait <persName>rachel</persName>. Suscepit deus deprecationem meam cum cum deprecata sum in oratione mea: concupiui vt esset mihi filius sicut sorori mee: <choice><abbr>q</abbr><expan>quod</expan></choice> vtique concessum est mihi. Et vocauit nomen eius <persName>neptali</persName>. 
+        Et ait <persName>rachel</persName>. Suscepit deus deprecationem meam cum deprecata sum in oratione mea: concupiui vt esset mihi filius sicut sorori mee: <choice><abbr>q</abbr><expan>quod</expan></choice> vtique concessum est mihi. Et vocauit nomen eius <persName>neptali</persName>. 
         </ab>
 
         <ab n="9">
@@ -3570,7 +3570,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="27">
-        Et dixit ei <persName>laban</persName>. Si nunc inueni gratiam in oculis tuis: ex <unclear>pertus</unclear> sum <choice><abbr>q</abbr><expan>quod</expan></choice> benedixerit mhi deus propter te. 
+        Et dixit ei <persName>laban</persName>. Si nunc inueni gratiam in oculis tuis: ex <unclear>pertus</unclear> sum <choice><abbr>q</abbr><expan>quod</expan></choice> benedixerit mihi deus propter te. 
         </ab>
 
         <ab n="28">
@@ -3578,11 +3578,63 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="29">
-        et dixit ei. Tu nostri <unclear>quom</unclear>  seruierim tibi: et <choice><abbr>q</abbr><expan>quuam</expan></choice> <unclear>ta</unclear> erant pecora tua <choice><abbr>apd</abbr><expan>apud</expan></choice> me. 
+        et dixit ei. Tu nostri <unclear>quom</unclear>  seruierim tibi: et <choice><abbr>q</abbr><expan>quam</expan></choice> <unclear>ta</unclear> erant pecora tua <choice><abbr>apd</abbr><expan>apud</expan></choice> me. 
         </ab>
 
         <ab n="30">
         quoniam pauca <choice><abbr>q</abbr><expan>quae</expan></choice> erant tibi coram me creuerunt in multitudinem. Et <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> tibi <choice><abbr>dns</abbr><expan>dominus</expan></choice> propter me: et nunc <choice><abbr>qn</abbr><expan>quando</expan></choice> faciam etiam ego pro domo mea. 
+        </ab>
+
+        <ab n="31">
+        et dixit. Quid dabo tibi. Et ait <persName>iacob</persName>. Non dabis mihi <expan>quicq</expan>: sed si feceris mihi <choice><abbr>vbum</abbr><expan>verbum</expan></choice> hoc: reuertar et pascam oues tuas: et custodiam eas. 
+        </ab>
+
+        <ab n="32">
+        Transibo per vniuersas oues tuas hodie. Aufer inde <choice><abbr>oem</abbr><expan>omnem</expan></choice> agnum varium et sparso vellere et <choice><abbr>oem</abbr><expan>omnem</expan></choice> agnum nigrum in agnis: et sparsum et masculosum in capris: et hoc erit merces mea. 
+        </ab>
+
+        <ab n="33">
+        Et testificabitur mihi iusticia mea in die crastino: <choice><abbr>qn</abbr><expan>quando</expan></choice> veneris super mercedem meam: <choice><abbr>q</abbr><expan>quae</expan></choice> erit coram te. omne <choice><abbr>q</abbr><expan>quod</expan></choice> non fuerit maculosum et respersum in capris: et nigrum in agnis furto sublatum est apud me. 
+        </ab>
+
+        <ab n="34">
+        Et dixit <persName>laban</persName> vtinam esset sicut verbum tuum. 
+        </ab>
+
+        <ab n="35">
+        Et separauit in die illa <choice><abbr>oes</abbr><expan>omnes</expan></choice> hircos varios pedibus et respersos vellere: et <choice><abbr>oes</abbr><expan>omnes</expan></choice> capras maculosas et respersas: omne in quo erat mascula alba: et <choice><abbr>oe</abbr><expan>omnem</expan></choice> <choice><abbr>qd</abbr><expan>quod</expan></choice> erat nigrum in agnis: et tradidit in manu filiorum suorum. 
+        </ab>
+
+        <ab n="36">
+        Et posuit spacium trium dierit inter se et inter <persName>iacob</persName>. <persName>Iacob</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> pascebat oues <persName>laban</persName> <choice><abbr>q</abbr><expan>qui</expan></choice> remanserant. 
+        </ab>
+
+        <ab n="37">
+        Et tulit sibi <persName>iacob</persName> <choice><abbr>vgas</abbr><expan>virgas</expan></choice> populeas et ex amygdalo et ex platano. Et decorticauit in eis decorticationem est: et vbi detracte sunt cortices apparuit album <choice><abbr>q</abbr><expan>quod</expan></choice> erat in virgis. 
+        </ab>
+
+        <ab n="38">
+        et defixit virgas quas decorticauerat in canalibus in loco adaquationis aquarum: quo veniebant oues ad bibendum: vt contra oues oues essent virge: et calefierent cum venirent ad bibendum. 
+        </ab>
+
+        <ab n="39">
+        calefiebantque oues ante virgas: et pariebant oues varia maculosa atque respersa. 
+        </ab>
+
+        <ab n="40">
+        Agnos autem separauit <persName>iacob</persName>: et posuit ante oues <choice><abbr>ome</abbr><expan>omne</expan></choice> <choice><abbr>qd</abbr><expan>quod</expan></choice> erat maculosum et omne <choice><abbr>q</abbr><expan>quod</expan></choice> erat nigrum in ouibus <persName>laban</persName>. Et posuit sibi greges seorsum: et non miscuit eos cum ouibus <persName>laban</persName>. 
+        </ab>
+
+        <ab n="41">
+        Et factum est in omni tempore quo calefiebant oues temporance: ponebat <persName>iacob</persName> virgas in conspectu ouium in canalibus: vt calefierent ante virgas. 
+        </ab>
+
+        <ab n="42">
+        et <choice><abbr>qn</abbr><expan>quando</expan></choice> oues erant serotine non ponebat. Erantque serotine <persName>laban</persName>: et temporanee <persName>iacob</persName>. 
+        </ab>
+
+        <ab n="43">
+        Et creuit vir valde nimis: et habuit oues multas et <unclear>suos</unclear> et ancillas et camelos et asinos. 
         </ab>
 
 
