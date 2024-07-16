@@ -3696,7 +3696,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="31" type="ordinal">31.</num></ab>
 
         <ab n="1">
-        Adiuit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> verba filiorum <persName>laban</persName>: dicenium: tulit <persName>iacob</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> <choice><abbr>pris</abbr><expan>patris</expan></choice> nostri: et de <unclear>hiis</unclear> <choice><abbr>q</abbr><expan>qui</expan></choice> <choice><abbr>pris</abbr><expan>patris</expan></choice> <choice><abbr>nri</abbr><expan>nostri</expan></choice> fecit <choice><abbr>oem</abbr><expan>omnem</expan></choice> gloriam hanc. 
+        Addiuit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> verba filiorum <persName>laban</persName>: dicentium: tulit <persName>iacob</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> <choice><abbr>pris</abbr><expan>patris</expan></choice> nostri: et de <unclear>hiis</unclear> <choice><abbr>q</abbr><expan>qui</expan></choice> <choice><abbr>pris</abbr><expan>patris</expan></choice> <choice><abbr>nri</abbr><expan>nostri</expan></choice> fecit <choice><abbr>oem</abbr><expan>omnem</expan></choice> gloriam hanc. 
         </ab>
 
         <ab n="2">
@@ -3712,7 +3712,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        video ego faciem patris vestri: <choice><abbr>qd</abbr><expan>quod</expan></choice> non est erga me: sicut heri et tertia die. patris mei fuit mecum. 
+        video ego faciem patris vestri: <choice><abbr>qd</abbr><expan>quod</expan></choice> non est erga me: sicut heri et tertia die. at deus patris mei fuit mecum. 
         </ab>
 
         <ab n="6">
@@ -3724,7 +3724,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="8">
-        si sic diceret: varia erunt tua merces: et parient <choice><abbr>oes</abbr><expan>omnes</expan></choice> oues varia. si <choice><abbr>at</abbr><expan>autem</expan></choice> dicerent: alba eruntt tua merces: et parient <choice><abbr>oes</abbr><expan>omnes</expan></choice> oues alba. 
+        si sic diceret: varia erunt tua merces: et parient <choice><abbr>oes</abbr><expan>omnes</expan></choice> oues varia. si <choice><abbr>at</abbr><expan>autem</expan></choice> dicerent: alba erunt tua merces: et parient <choice><abbr>oes</abbr><expan>omnes</expan></choice> oues alba. 
         </ab>
 
         <ab n="9">
@@ -3820,7 +3820,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="32">
-        cognosce ergo <choice><abbr>qd</abbr><expan>quod</expan></choice> est tuorum apud me: et acccipe. et non cognouit <choice><abbr>apd</abbr><expan>apud</expan></choice> eum nihil et dixit <persName>iacob</persName> <choice><abbr>apd</abbr><expan>apud</expan></choice> quem inuenti fuerint dei tui: non viuet ccoram fratribus <choice><abbr>nris</abbr><expan>nostris</expan></choice>. nesciebat <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName>: <choice><abbr>q</abbr><expan>quod</expan></choice> <persName>rachel</persName> vxor eius furata est eos. 
+        cognosce ergo <choice><abbr>qd</abbr><expan>quod</expan></choice> est tuorum apud me: et accipe. et non cognouit <choice><abbr>apd</abbr><expan>apud</expan></choice> eum nihil et dixit <persName>iacob</persName> <choice><abbr>apd</abbr><expan>apud</expan></choice> quem inuenti fuerint dei tui: non viuet coram fratribus <choice><abbr>nris</abbr><expan>nostris</expan></choice>. nesciebat <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName>: <choice><abbr>q</abbr><expan>quod</expan></choice> <persName>rachel</persName> vxor eius furata est eos. 
         </ab>
 
         <ab n="33">
@@ -3840,7 +3840,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="37">
-        et <choice><abbr>q</abbr><expan>quod</expan></choice> serutatus es <choice><abbr>oia</abbr><expan>omnia</expan></choice> vasa domus mee? <choice><abbr>qd</abbr><expan>quod</expan></choice> inueuisti de <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> vasibus tuis? <unclear>poe</unclear> hic coram fratribus tuis et fratribus meis: et arguant inter duos nos. 
+        et <choice><abbr>q</abbr><expan>quod</expan></choice> serutatus es <choice><abbr>oia</abbr><expan>omnia</expan></choice> vasa domus mee? <choice><abbr>qd</abbr><expan>quod</expan></choice> inueuisti de <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> vasibus tuis? pone hic coram fratribus tuis et fratribus meis: et arguant inter duos nos. 
         </ab>
 
         <ab n="38">
@@ -3852,7 +3852,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="40">
-        fui combustus estu diei: et glacie noctis. et fugiebat sonus ab oculis meis.
+        fui combustus estu diei: et glacie noctis. et fugiebat somnus ab oculis meis.
         </ab>
 
         <ab n="41">
@@ -3871,7 +3871,93 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         nunc ergo veni <unclear>disponahius</unclear> fedus ego et tu. et erit in testimonium inter me et te. 
         </ab>
 
+        <ab n="45">
+        accipiens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> lapidem: statuit eum titulum. 
+        </ab>
+
+        <ab n="46">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> fratribus suis. colligite lapides: et collegerunt lapides: et fecerunt collem. et <choice><abbr>comedert</abbr><expan>comederunt</expan></choice> illic super collem: et biberunt
+        </ab>
+
+        <ab n="47">
+        et vocauit eum <persName>laban</persName>: collis testimonii. at <persName>iacob</persName> vocauit eum: collis testis. 
+        </ab>
+
+        <ab n="48">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>laban</persName>: tumulus iste testis est inter me et te hodie. propter hoc vocatum est nomen loci: collis testifactur:
+        </ab>
+
+        <ab n="49">
+        et visio quam dixit. respiciat deus inter me et te. <choice><abbr>q</abbr><expan>quod</expan></choice> discedemus alter ab altero: 
+        </ab>
+
+        <ab n="50">
+        si humiliaueris filias meas: si acceperis vxores super filias meas: vide: nullus nobiscum est deus testis inter me et te. 
+        </ab>
+
+        <ab n="51">
+        et dixit <persName>laban</persName> <persName>iacob</persName>: ecce tumulus iste et titulus quem statui inter me et te: 
+        </ab>
+
+        <ab n="52">
+        testis est. tumulus iste et titulus: quem statui hic testis est. si enim transgrediar ego ad te: neque tu transgrediaris ad me collem istum et titulum istum in malitia. 
+        </ab>
+
+        <ab n="53">
+        deus <persName>abraam</persName> et deus <persName>nachor</persName> iudicabit inter nos. et iurauit iacob per timorem <persName>isaac</persName> patris sui. et sacrificauit sacrificium in monte. 
+        </ab>
+
+        <ab n="54">
+        et sacrificauit sacrificium in monte. et vocauit fratres suos: et <choice><abbr>comedert</abbr><expan>comederunt</expan></choice> et biberunt: et dormierunt in monte. surgens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>laban</persName> mane: osculatus est filios et filias suas: et benedixit eis: et abiit. et reuersus est <persName>laban</persName> in locum suum.
+        </ab>
+
         </div>
+
+        <div n="32">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="32" type="ordinal">32.</num></ab>
+
+        <ab n="1">
+        Et <persName>iacob</persName> abiit viam suam. et respiciens: vidit castra dei castrametata. et obuiauerunt ei angeli dei. 
+        </ab>
+
+        <ab n="2">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName>: <choice><abbr>qn</abbr><expan>quando</expan></choice> vidit eos: castra dei ista. et vocauit nomen loci illius: castra.
+        </ab>
+
+        <ab n="3">
+        misit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> ante ad <persName>esau</persName> fratrem suum in terram seir: in regionem <placeName>edom</placeName>. 
+        </ab>
+
+        <ab n="4">
+        et precepit eis: dicens: sic dicetis <choice><abbr>dno</abbr><expan>domino</expan></choice> meo <persName>esau</persName>: sic dicit seruus tuus <persName>iacob</persName>: cum <persName>laban</persName> <choice><abbr>hitaui</abbr><expan>habitaui</expan></choice>: et moratus sum vsque nunc: 
+        </ab>
+
+        <ab n="5">
+        et fuerunt mihi boues: et asini: et oues: et serui: et ancille. et misi <choice><abbr>dno</abbr><expan>domino</expan></choice> meo <persName>esau</persName> nunciare: vt inueniat <unclear>suus</unclear> tuus <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram te. 
+        </ab>
+
+        <ab n="6">
+        et reuersi sunt nuncii ad <persName>iacob</persName>: dicentes: venimus ad fratrem tuum <persName>esau</persName>. et ecce ipse venit in occursum tuum: et quadringenti viri cum eo. 
+        </ab>
+
+        <ab n="7">
+        timuit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> valde: et dubitauit. et diuisit <choice><abbr>pplm</abbr><expan>populum</expan></choice> <unclear><choice><abbr>q</abbr><expan></expan></choice></unclear> cum eo: et boues: et oues in duas turmas. 
+        </ab>
+
+        <ab n="8">
+        et dixit <persName>iacob</persName>: si venerit <persName>esau</persName> ad turmam vnam: et percusserit eam: erit turma secunda vt saluetur. 
+        </ab>
+
+        <ab n="9">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName>: deus patris mei <persName>abraam</persName>: et deus <choice><abbr>pris</abbr><expan>patris</expan></choice> mei <persName>isaac</persName>: <choice><abbr>dne</abbr><expan>domine</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> dixisti mihi reuertere in terram natiuitatis tue: et <choice><abbr>bn</abbr><expan>bene</expan></choice> tibi faciam: 
+        </ab>
+
+        <ab n="10">
+        sufficiat mihi ab <choice><abbr>oi</abbr><expan>omni</expan></choice> iusticia: et ab <choice><abbr>oi</abbr><expan>omni</expan></choice> veritate: quam fecisti seruo tuo. in enim virga mea hac transiui iordanem hunc. nunc <choice><abbr>at</abbr><expan>autem</expan></choice> factus sum in duas turmas. 
+        </ab>
+
+        </div>
+
 
     </body>
     </text>

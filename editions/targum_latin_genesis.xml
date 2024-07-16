@@ -3644,7 +3644,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="31" type="ordinal">31.</num></ab>
 
         <ab n="1">
-        Et audiuit verba filiorum <persName>laban</persName>: qui dicebant. Tulit <persName>iacob</persName> vniuerrsa <choice><abbr>q</abbr><expan>quae</expan></choice> erant patris nostri: et de his que erant <choice><abbr>pris</abbr><expan>patris</expan></choice> <choice><abbr>nri</abbr><expan>nostri</expan></choice>: et de his que erant <choice><abbr>pris</abbr><expan>patris</expan></choice> <choice><abbr>nri</abbr><expan>nostri</expan></choice> <choice><abbr>acqsiuit</abbr><expan>acquiesiuit</expan></choice> <choice><abbr>oem</abbr><expan>omnem</expan></choice> substantiam istam. 
+        Et audiuit verba filiorum <persName>laban</persName>: qui dicebant. Tulit <persName>iacob</persName> vniuersa <choice><abbr>q</abbr><expan>quae</expan></choice> erant patris nostri: et de his que erant <choice><abbr>pris</abbr><expan>patris</expan></choice> <choice><abbr>nri</abbr><expan>nostri</expan></choice>:<choice><abbr>acqsiuit</abbr><expan>acquiesiuit</expan></choice> <choice><abbr>oem</abbr><expan>omnem</expan></choice> substantiam istam. 
         </ab>
 
         <ab n="2">
@@ -3660,7 +3660,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        Et dixit eis. Video ego aspectum vultus patris vestri <choice><abbr>q</abbr><expan>quod</expan></choice> non est me cum sicut herri et nudiustertius: et verbum dei patris mei fuit in adiutorium meum. 
+        Et dixit eis. Video ego aspectum vultus patris vestri <choice><abbr>q</abbr><expan>quod</expan></choice> non est me cum sicut heri et nudiustertius: et verbum dei patris mei fuit in adiutorium meum. 
         </ab>
 
         <ab n="6">
@@ -3688,7 +3688,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        et ait. Leu<persName></persName>a nunc oculos tuos et vide <choice><abbr>oes</abbr><expan>omnes</expan></choice> arietes qui ascendunt super oues maculosos varios atque respersos: <choice><abbr>qm</abbr><expan>quam</expan></choice> manifestum est coram me omne <choice><abbr>q</abbr><expan>quod</expan></choice> facit tibi <persName>laban</persName>. 
+        et ait. <persName>Leua</persName> nunc oculos tuos et vide <choice><abbr>oes</abbr><expan>omnes</expan></choice> arietes qui ascendunt super oues maculosos varios atque respersos: <choice><abbr>qm</abbr><expan>quam</expan></choice> manifestum est coram me omne <choice><abbr>q</abbr><expan>quod</expan></choice> facit tibi <persName>laban</persName>. 
         </ab>
 
         <ab n="13">
@@ -3696,7 +3696,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="14">
-        Et responderunt <persName>rachel</persName> et <persName>lia</persName> atque dixerunt ei. Nunquid adhuc est nobis pars et heredditas in domo patris nostri?
+        Et responderunt <persName>rachel</persName> et <persName>lia</persName> atque dixerunt ei. Nunquid adhuc est nobis pars et hereditas in domo patris nostri?
         </ab>
 
         <ab n="15">
@@ -3704,7 +3704,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="16">
-        Quoniam <choice><abbr>oes</abbr><expan>omnes</expan></choice> diuitie quas abstulit deus ex patre <choice><abbr>nro</abbr><expan>nostro</expan></choice>: <choice><abbr>nro</abbr><expan>nostro</expan></choice>: <choice><abbr>nro</abbr><expan>nostro</expan></choice> sunt et filiorum <choice><abbr>nrorum</abbr><expan>nostrorum</expan></choice>. Et nunc <choice><abbr>qd</abbr><expan>quod</expan></choice> cumque dixerit tibit deus fac. 
+        Quoniam <choice><abbr>oes</abbr><expan>omnes</expan></choice> diuitie quas abstulit deus ex patre <choice><abbr>nro</abbr><expan>nostro</expan></choice>:  <choice><abbr>nre</abbr><expan>nostre</expan></choice> sunt et filiorum <choice><abbr>nrorum</abbr><expan>nostrorum</expan></choice>. Et nunc <choice><abbr>qd</abbr><expan>quod</expan></choice> cumque dixerit tibit deus fac. 
         </ab>
 
         <ab n="17">
@@ -3712,7 +3712,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="18">
-        et duxit vniuersa pecoraw sua et omnem substantiam suam quam acquisierat in <placeName>mesopotamia</placeName> <placeName>syrie</placeName>: vt veniret ad <persName>isaac</persName> patrem suum in terram <placeName>chanaan</placeName>.
+        et duxit vniuersa pecoraa sua et omnem substantiam suam quam acquisierat in <placeName>mesopotamia</placeName> <placeName>syrie</placeName>: vt veniret ad <persName>isaac</persName> patrem suum in terram <placeName>chanaan</placeName>.
         </ab>
 
         <ab n="19">
@@ -3736,7 +3736,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="24">
-        et venit verbum a facie dei ad <persName>laban</persName> <placeName>syrum</placeName> in somnio noctis: et dixit ei. Caue tibi ne loquaris cum <persName>iacob</persName> a bono vsque ad malum: et ccomprehendit <persName>laban</persName> <persName>iacob</persName>. 
+        et venit verbum a facie dei ad <persName>laban</persName> <placeName>syrum</placeName> in somnio noctis: et dixit ei. Caue tibi ne loquaris cum <persName>iacob</persName> a bono vsque ad malum: et comprehendit <persName>laban</persName> <persName>iacob</persName>. 
         </ab>
 
         <ab n="25">
@@ -3776,7 +3776,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="34">
-        <persName>Rachel</persName> autem accepit imagines: et posuit eas in stramentis camelis: et sedit desuuper: et attrectauit <persName>laban</persName> vniuersa que erant in tabernaculo: et non inuenit. 
+        <persName>Rachel</persName> autem accepit imagines: et posuit eas in stramentis cameli: et sedit desuper: et attrectauit <persName>laban</persName> vniuersa que erant in tabernaculo: et non inuenit. 
         </ab>
 
         <ab n="35">
@@ -3788,7 +3788,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="37">
-        <choice><abbr>Qm</abbr><expan>Quam</expan></choice> atrecctasti <choice><abbr>omia</abbr><expan>omnia</expan></choice> vasa mea: quid inuenisti dde vniuersis vasis domus tue: pone nunc coram <choice><abbr>fribus</abbr><expan>fratribus</expan></choice> meis et <choice><abbr>fribus</abbr><expan>fratribus</expan></choice> tuis: et iudicent inter nos ambos. 
+        <choice><abbr>Qm</abbr><expan>Quam</expan></choice> atrectasti omnia vasa mea: quid inuenisti de vniuersis vasis domus tue: pone nunc coram <choice><abbr>fribus</abbr><expan>fratribus</expan></choice> meis et <choice><abbr>fribus</abbr><expan>fratribus</expan></choice> tuis: et iudicent inter nos ambos. 
         </ab>
 
         <ab n="38">
@@ -3808,7 +3808,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="42">
-        nisi <choice><abbr>q</abbr><expan>quod</expan></choice> deus <choice><abbr>pris</abbr><expan>patris</expan></choice> mei deus <persName>abrahe</persName>: et ille quem timebat <persName>isaac</persName> suisset in adiutorium meum: iam nunc vacuum me dimisisses: labor meus et afflictio manuum mearum manifesta sunt coram deo: et arguit te hesterna nocte. 
+        nisi <choice><abbr>q</abbr><expan>quod</expan></choice> deus <choice><abbr>pris</abbr><expan>patris</expan></choice> mei deus <persName>abrahe</persName>: et ille quem timebat <persName>isaac</persName> fuisset in adiutorium meum: iam nunc vacuum me dimisisses: labor meus et afflictio manuum mearum manifesta sunt coram deo: et arguit te hesterna nocte. 
         </ab>
 
         <ab n="43">
@@ -3820,27 +3820,43 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="45">
-        accipiens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> lapidem: statuit eum titulum. 
+        et tulit <persName>iacob</persName> lapidem: et erexit eum in titulum. 
         </ab>
 
         <ab n="46">
-        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> fratribus suis. colligite lapides: et collegerunt lapides: et fecerunt collem. et <choice><abbr>comedert</abbr><expan>comederunt</expan></choice> illic super collem: et biberunt 
+        Et ait <persName>iacob</persName> fratribus suis. Colligite lapides: et tulerunt lapides et fecerunt aceruum: et comederunt ibi super aceruum.
         </ab>
 
         <ab n="47">
-        et vocauit eum <persName>laban</persName>: collis testimonii. at <persName>iacob</persName> vocauit eum: collis testis. 
+        Et vocauit eum <persName>laban</persName> aceruum testimonii. <persName>Iacob</persName> autem appellauit eum <persName>galaad</persName>. 
         </ab>
 
         <ab n="48">
-        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>laban</persName>: tumulus iste testis est inter me et te hodie. <choice><abbr>propt</abbr><expan>propter</expan></choice> hoc vocatum est nomen loci: collis testi ficatur: visio quam dixit. 
+       et ait <persName>laban</persName>. Aceruus iste erit testis inter me et inter te hodie: ideo appellauit nomen eius <persName>galaad</persName> et speculam: quia dixit. 
         </ab>
 
         <ab n="49">
-        respiciat deus inter me et te. <choice><abbr>q</abbr><expan>quia</expan></choice> discedemus alter ab altero: 
+       Speculetur verbum domini inter me et te: quando absentes fuerimus vnusquisque a proximo suo. 
         </ab>
 
         <ab n="50">
-        si humiliaueris filias meas: si acceperis vxores super filias meas: vide: nullus nobiscum est deus testis inter me et te. 
+        Si afflixeris filias meas: et si acceperis vxores super filias meas: non est vir nobiscum: vide <choice><abbr>q</abbr><expan>quod</expan></choice> verbum domini est testis inter me et te. 
+        </ab>
+
+        <ab n="51">
+        Et dixit <persName>laban</persName> ad <persName>iacob</persName>. Ecce tumulus iste. et ecce titulus quem erexi inter me et te: 
+        </ab>
+
+        <ab n="52">
+        testis tumulus iste et testis titulus: <choice><abbr>q</abbr><expan>quod</expan></choice> ego non trasibo tumulum hunc ad te: et <choice><abbr>q</abbr><expan>quod</expan></choice> tu non pertransibis tumulum hunc et titulum hunc in malum mihi. 
+        </ab>
+
+        <ab n="53">
+        Deus <persName>abraham</persName> et deus <persName>nachor</persName> iudicent inter nos: deus patrum eorum. Et iurauit <persName>iacob</persName> per illum quem timebat pater suus <persName>isaac</persName>. 
+        </ab>
+
+        <ab n="54">
+        Et immolauit <persName>iacob</persName> victimam in monte: et vocauit fratres suos: vt comederent panem: et comederunt panem: et dormierunt in monte. Et surrexit <persName>laban</persName> mane: et osculatus est filios suos: et filias suas: et benedixit eis: et abiit. et reuersus est <persName>laban</persName> in locum suum. 
         </ab>
 
 
