@@ -3994,6 +3994,112 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="33">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="33" type="ordinal">33.</num></ab>
+
+        <ab n="1">
+        ET leuauit <persName>iacob</persName> <choice><abbr>oclos</abbr><expan>oculos</expan></choice> suos et vidit. Et ecce <persName>esau</persName> veniebat: et cum eo <choice><abbr>qdringenti</abbr><expan>quadringenti</expan></choice> viri: et diuisit filios cum <persName>lia</persName> et cum <persName>rachel</persName> et cum duabus concubinis. 
+        </ab>
+
+        <ab n="2">
+        Et posuit concubinas et filios earum in <choice><abbr>pncipio</abbr><expan>principio</expan></choice>: <persName>liamque</persName> et filios suos posteriores. <persName>Rachel</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> et <persName>ioseph</persName> nouissimos. 
+        </ab>
+
+        <ab n="3">
+        et ipse transiuit ante eos et adorauit super terram septem vicibus: donec <choice><abbr>appropinquit</abbr><expan>appropinquauit</expan></choice> vsque ad <choice><abbr>frem</abbr><expan>fratrem</expan></choice> suum. 
+        </ab>
+
+        <ab n="4">
+        Et cucurrit <persName>esau</persName> in occursum eius: et amplexatus est cum: et ruit super collum eius et osculatus est cum: et fleuerunt. 
+        </ab>
+
+        <ab n="5">
+        Et leuauit oculos suos: viditque mulieres et filios et ait. Qui sunt isti tibi: et ait. Filii sunt quos donauit deus seruo tuo. 
+        </ab>
+
+        <ab n="6">
+        Et accesserunt concubine et filii earum et adorauerunt: 
+        </ab>
+
+        <ab n="7">
+        et accessit etiam <persName>lia</persName> et filii sui et <choice><abbr>adorauert</abbr><expan>adorauerunt</expan></choice>: et postea accessit <persName>ioseph</persName> et <persName>rachel</persName> et adorauerunt. 
+        </ab>
+
+        <ab n="8">
+        Et ait. Ad <choice><abbr>qd</abbr><expan>quod</expan></choice> tibi hec turma quam obuiam habui: et ait. Ut inueniam gratiam in oculis domini mei. 
+        </ab>
+
+        <ab n="9">
+        Et dixit <persName>esau</persName>. Habeo multum frater mi: prosit tibi quod tuum est. 
+        </ab>
+
+        <ab n="10">
+        Et dixit <persName>iacob</persName>: obsecro nunc si inueni nunc <choice><abbr>gram</abbr><expan>gratiam</expan></choice> in oculis tuis: vt suscipias munus meum de manu mea: <choice><abbr>q</abbr><expan>quia</expan></choice> sic vidi faciem tuam quasi viderim faciem principum: et placuisti mihi. 
+        </ab>
+
+        <ab n="11">
+        Suscipe obsecro munus meum: <choice><abbr>qd</abbr><expan>quod</expan></choice> oblatum est tibi: <choice><abbr>qm</abbr><expan>quam</expan></choice> misertus est mihi deus: et <choice><abbr>qm</abbr><expan>quam</expan></choice> habeo <choice><abbr>oia</abbr><expan>omnia</expan></choice>: et coegit eum: et suscepit. 
+        </ab>
+
+        <ab n="12">
+        Et dixit: proficiscere et eamus: et ibo e regione tui. 
+        </ab>
+
+        <ab n="13">
+        et dixit ei. <choice><abbr>Dns</abbr><expan>Domoinus </expan></choice> meus scit <choice><abbr>qm</abbr><expan>quam</expan></choice> paruuli sunt teneri: et oues et boues lactantes apud me: et si fatigarent eas vno die:
+        </ab>
+
+        <ab n="14">
+        morientur <choice><abbr>oes</abbr><expan>omnes</expan></choice> oues: transeat nunc <choice><abbr>dns</abbr><expan>dominus</expan></choice> meus ante seruus suum: et ego ducam paulatim iuxta gressum familie <choice><abbr>q</abbr><expan>qui</expan></choice> est coram me: et <choice><abbr>sm</abbr><expan>secundum</expan></choice> gressum paruulorum: donec veniam ad <choice><abbr>dnm</abbr><expan>dominum</expan></choice> meum in <placeName>seir</placeName>. 
+        </ab>
+
+        <ab n="15">
+        et dixit <persName>esau</persName>. Dimittam nunc tecum de <choice><abbr>poplo</abbr><expan>populo</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> mecum est: et dixit. Ad <choice><abbr>qd</abbr><expan>quod</expan></choice>? inueniam gratiam in oculis <choice><abbr>dni</abbr><expan>domini</expan></choice> mei. 
+        </ab>
+
+        <ab n="16">
+        Et reuersus est <persName>esau</persName> in die illa per viam suam in <placeName>seir</placeName>:
+        </ab>
+
+        <ab n="17">
+        Et edificauit sibi domum: et pecoribus suis fecit vmbracula: propterea vocatum est nomen loci <placeName>sochoth</placeName>.
+        </ab>
+
+        <ab n="18">
+        Et venit <persName>iacob</persName> sanus in ciuitatem <placeName>sichem</placeName>: <choice><abbr>q</abbr><expan>qui</expan></choice> est in terra <placeName>chanaan</placeName> <choice><abbr>qn</abbr><expan>quando</expan></choice> veniebat de <placeName>mesopotamia</placeName> <placeName>syrie</placeName>: et mansit e regione ciuitatis:
+        </ab>
+
+        <ab n="19">
+        emitque possessionem agri: in quo tetenderat tabernaculum suum de filiis hemor patris sichem centum agnis.
+        </ab>
+
+        <ab n="20">
+        Et erexit ibi altare: et sacrificauit super illud coram fortissimo deo <placeName>israel</placeName>. 
+        </ab>
+
+
+        </div>
+
+        <div n="34">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="34" type="ordinal">34.</num></ab>
+
+        <ab n="1">
+        Et egressa est dina filia <persName>lie</persName> quam pepererat ex <persName>iacob</persName> vt videret filias terre: 
+        </ab>
+
+        <ab n="2">
+        et vidit eam <persName>sichem</persName> filius <persName>hemor</persName> euei principis terre: et tulit eam: dormiuitque cum ea: oppressit eam. 
+        </ab>
+
+        <ab n="3">
+        Et complacuit <choice><abbr>aie</abbr><expan>anime</expan></choice> sue in dina filia <persName>iacob</persName>: et dilexit puellam: et locutus est consolationes ad cor puelle. 
+        </ab>
+
+        <ab n="4">
+        et ait <persName>sichem</persName> ad <persName>hemor</persName> aptrem suum dicens. Accipe mihi puellam hanc in vxorem. 
+        </ab>
+        </div>
+
     </body>
     </text>
 </TEI>

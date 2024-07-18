@@ -4046,6 +4046,142 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="33">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="33" type="ordinal">33.</num></ab>
+
+        <ab n="1">
+        REspiciens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName>: vidit. et ecce <persName>esau</persName> frater eius veniens: et quadringenti viri cum eo. et diuisit <persName>iacob</persName> filios ad <persName>liam</persName>: et ad <persName>rachel</persName>: et duas ancillas. 
+        </ab>
+
+        <ab n="2">
+        et fecit duas ancillas et filios carum in primis: et <persName>liam</persName> et filios eius post: <persName>rachel</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> et <persName>ioseph</persName> vltimos. 
+        </ab>
+
+        <ab n="3">
+        ipse <choice><abbr>at</abbr><expan>autem</expan></choice> precessit ante eos. et adorauit super terram septies: donec <choice><abbr>apropinqret</abbr><expan>apropinquaret</expan></choice> fratri suo. 
+        </ab>
+
+        <ab n="4">
+        et accurrit <persName>esau</persName> in occursum ei. et amplexatus eum: osculatus est. et cecidit super collum eius. et fleuerunt ambo. 
+        </ab>
+
+        <ab n="5">
+        et respiciens <persName>esau</persName>: vidit mulieres et puerulos. et dixit: <choice><abbr>qd</abbr><expan>quod</expan></choice> hec tibi sunt? et ait: paruuli: <choice><abbr>qbus</abbr><expan>quibus</expan></choice> <unclear>mistus</unclear> est deus serui tui. 
+        </ab>
+
+        <ab n="6">
+        et <choice><abbr>apropinquerunt</abbr><expan>apropinquauerunt</expan></choice> ancille et filii earum: et adorauerunt. 
+        </ab>
+
+        <ab n="7">
+        et <choice><abbr>appropinquit</abbr><expan>appropinquauit</expan></choice> <persName>lia</persName>: et filii eius: et adorauerunt. et post hoc appropinquauit <persName>rachel</persName>: et <persName>ioseph</persName>: et adorauerunt. 
+        </ab>
+
+        <ab n="8">
+        et ait: <choice><abbr>qd</abbr><expan>quod</expan></choice> hec tibi sunt? <choice><abbr>oes</abbr><expan>omnes</expan></choice> turme iste: <choice><abbr>qbus</abbr><expan>quibus</expan></choice> obuiauit? ille <choice><abbr>at</abbr><expan>autem</expan></choice> dixit: vt inueniat serus tuus <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram te <choice><abbr>dne</abbr><expan>domine</expan></choice>. 
+        </ab>
+
+        <ab n="9">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName>: sunt mihi multa frater. sint tibi tua. 
+        </ab>
+
+        <ab n="10">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName>: si inueni <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram te: accipe dona per meas manus. propter hoc vidi faciem tuam: sicut si <choice><abbr>qs</abbr><expan>quas</expan></choice> videret faciem dei. et <choice><abbr>bndices</abbr><expan>benedices</expan></choice> mihi. 
+        </ab>
+
+        <ab n="11">
+        accipe <choice><abbr>bndictiones</abbr><expan>benedictiones</expan></choice> meas: <choice><abbr>qs</abbr><expan>quas</expan></choice> attuli tibi. <choice><abbr>q</abbr><expan>quia</expan></choice> misertus est mei deus: et sunt mihi <choice><abbr>oia</abbr><expan>omnia</expan></choice>. et compulit eum: et accepit. 
+        </ab>
+
+        <ab n="12">
+        et dixit: discentes: gradiamur in rectam. 
+        </ab>
+
+        <ab n="13">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> illi: <choice><abbr>dns</abbr><expan>dominus</expan></choice> meus scit: <choice><abbr>q</abbr><expan>quod</expan></choice> teneriores pueri: et oues et boues fete sunt <choice><abbr>apd</abbr><expan>apud</expan></choice> me. si ergo vrgeam eos diem vnum morientur <choice><abbr>oia</abbr><expan>omnia</expan></choice> pecora. 
+        </ab>
+
+        <ab n="14">
+        precedat <choice><abbr>dns</abbr><expan>dominus</expan></choice> meus ante seruum suum. ego <choice><abbr>at</abbr><expan>autem</expan></choice> fortis ero in via <choice><abbr>sm</abbr><expan>secundum</expan></choice> ocium ambulationis <choice><abbr>q</abbr><expan>cuius</expan></choice> ante me: et <choice><abbr>sm</abbr><expan>secundum</expan></choice> pedem puerulorum meorum donec veniam ad <choice><abbr>dnm</abbr><expan>dominum</expan></choice> meum in <placeName>seir</placeName>. 
+        </ab>
+
+        <ab n="15">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName>: relinquam tecum: de <choice><abbr>pplo</abbr><expan>populo</expan></choice> <choice><abbr>q</abbr><expan>cuius</expan></choice> mecum. ille <choice><abbr>at</abbr><expan>autem</expan></choice> dixit: ad <choice><abbr>qd</abbr><expan>quod</expan></choice> hoc? satis: <choice><abbr>q</abbr><expan>quod</expan></choice> inueni <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram te <choice><abbr>dne</abbr><expan>domine</expan></choice>. 
+        </ab>
+
+        <ab n="16">
+        reuersus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> in die illa in viam suam in <placeName>seir</placeName>.
+        </ab>
+
+        <ab n="17">
+        et <persName>iacob</persName> discedit in tabernacula. et fecit sibi domos: et pecoribus suis fecit tabernacula. propter hoc vocauit nomen loci illius: tabernacula. 
+        </ab>
+
+        <ab n="18">
+        et venit <persName>iacob</persName> in salem ciuitatem sicimorum: <choice><abbr>q</abbr><expan>quae</expan></choice> est in terram <placeName>chanaam</placeName>. <choice><abbr>qn</abbr><expan>quando</expan></choice> venit de <placeName>mesopotamia</placeName> <placeName>syrie</placeName>. et castrametatus est <choice><abbr>sm</abbr><expan>secundum</expan></choice> faciem ciuitatis. 
+        </ab>
+
+        <ab n="19">
+        et <choice><abbr>acqsiuit</abbr><expan>acquisiuit</expan></choice> partem agri: vbi statuit ibi tabernaculum suum: ab <persName>hemor</persName> patre <placeName>sychem</placeName>: centum agnis.
+        </ab>
+
+        <ab n="20">
+        et statuit illic altare. et innocauit deum <placeName>israel</placeName>. 
+        </ab>
+
+        </div>
+
+        <div n="34">
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="32" type="ordinal">32.</num></ab>
+
+        <ab n="1">
+        Egressa est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>dina</persName>: filia <persName>lie</persName>: quam peperit <persName>iacob</persName>: vt cognosceret filias indigenarum. 
+        </ab>
+
+        <ab n="2">
+        et vidit eam <persName>sychem</persName> filius <persName>emor</persName>: <persName>eueus</persName>: princeps terre. accipiens eam: dormiuit cum illa: et humiliauit eam. 
+        </ab>
+
+        <ab n="3">
+        et intendit <choice><abbr>aie</abbr><expan>anime</expan></choice> dine filie <persName>iacob</persName>. et dilexit virginem. et locutus est <choice><abbr>scdm</abbr><expan>secundum</expan></choice> mentem virginis ei.
+        </ab>
+
+        <ab n="4">
+        ait <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>sychem</persName> ad <persName>emor</persName> <choice><abbr>prem</abbr><expan>patrem</expan></choice> suum: dicens: accipe mihi puella hanc in vxorem. 
+        </ab>
+
+        <ab n="5">
+        <persName>iacob</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> audiuit <choice><abbr>q</abbr><expan>quod</expan></choice> polluit <persName>sychem</persName> filius <persName>emor</persName> dinam filiam suam. at filii sui erant cum pecoribus in agro. tacuit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName>: donec venirent ipsi. 
+        </ab>
+
+        <ab n="6">
+        egressus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>emor</persName> pater <persName>sychem</persName> ad <persName>iacob</persName>: vt <choice><abbr>loqretur</abbr><expan>loqaretur</expan></choice> ei. 
+        </ab>
+
+        <ab n="7">
+        at filii <persName>iacob</persName> venerunt de agro. vt <choice><abbr>at</abbr><expan>autem</expan></choice> audierunt: conpuncti sunt viri: et triste fuit illis valde. <choice><abbr>q</abbr><expan>quia</expan></choice> turpe fecit in <placeName>israel</placeName> <persName>sychem</persName>: dormiens cum filia <persName>iacob</persName>. et non sic erit. 
+        </ab>
+
+        <ab n="8">
+        et locutus est eis <persName>emor</persName>: dicens: <persName>sychem</persName> filius meus elegit ex <choice><abbr>aia</abbr><expan>anima</expan></choice> filiam vestram. date eam illi vxorem. 
+        </ab>
+
+        <ab n="9">
+        et affinitatem contrahite nobiscum. filias <choice><abbr>vris</abbr><expan>vestris</expan></choice>:
+        </ab>
+
+        <ab n="10">
+        et inter nos habitate. et terra ecce lata coram vocbis: habitate: et negociamini in ea: et acquirite in ea. 
+        </ab>
+
+        <ab n="11">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>sychem</persName> ad patrem eius: et ad
+        </ab>
+
+
+        </div>
+
+
 
     </body>
     </text>
