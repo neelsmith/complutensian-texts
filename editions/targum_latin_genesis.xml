@@ -4096,8 +4096,117 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="4">
-        et ait <persName>sichem</persName> ad <persName>hemor</persName> aptrem suum dicens. Accipe mihi puellam hanc in vxorem. 
+        et ait <persName>sichem</persName> ad <persName>hemor</persName> patrem suum dicens. Accipe mihi puellam hanc in vxorem. 
         </ab>
+
+        <ab n="5">
+        Et <persName>iacob</persName> audiuit <choice><abbr>q</abbr><expan>quod</expan></choice> violata esset <persName>dina</persName> filia sua: et filii sui erant cum pecoribus suis in agro: et siluit <persName>iacob</persName> donec venirent. 
+        </ab>
+
+        <ab n="6">
+        Egressusque est <persName>hemor</persName> pater <persName>sichem</persName> ad <persName>iaocb</persName>: vt loqueretur cum eo. 
+        </ab>
+
+        <ab n="7">
+        Filii autem <persName>iacob</persName> venerunt de agro: cumque audissent quod factum fuerat: indignati sunt viri et irati sunt valde: quoniam ignominia facta esset in <placeName>israel</placeName>: dormiendo cum filia <persName>iacob</persName>: et sic non debuerat fieri. 
+        </ab>
+
+        <ab n="8">
+        Et locutus est <persName>hemor</persName> cum eis dicens. Anime <persName>sichem</persName> filii mei complacuit filia vestra: date obsecro eam ipsi in vxorem:
+        </ab>
+
+        <ab n="9">
+        et iungite <unclear>connubia</unclear> nobiscum: filias vestras dabitis nobis: et filias <choice><abbr>nras</abbr><expan>nostras</expan></choice> accipietis vobis. 
+        </ab>
+
+        <ab n="10">
+        Et nobiscum habitabitis: terra autem est coram vobis: manete: et negociamini in ea: atque possidete eam. 
+        </ab>
+
+        <ab n="11">
+        Dixitque <persName>sichem</persName> patri eius et fratribus. Inueniam gratiam in oculis vestris et quic quid dixeritis mihi dabo: 
+        </ab>
+
+        <ab n="12">
+        multiplicate nimis super me dotem et munera: et dabo sicut dixeritis mihi: et date mihi puellam in vxorem. 
+        </ab>
+
+        <ab n="13">
+        Et responderunt filii <persName>iacob</persName> ad <persName>sichem</persName> et ad <persName>hemor</persName> atque locuti sunt sapienter: eo <choice><abbr>q</abbr><expan>quod</expan></choice> violata esset <persName>dina</persName> soror eorum. 
+        </ab>
+
+        <ab n="14">
+        dixeruntque eis. Non possumus facere rem hanc: vt demus sororem nostram viro habenti preputium: quoniam opprobrium est nobis. 
+        </ab>
+
+        <ab n="15">
+        sed in hoc conueniemus vobiscum. Si fueritis sicut nos: vt circumcidatur ex vobis <choice><abbr>ois</abbr><expan>omnis</expan></choice> masculus: 
+        </ab>
+
+        <ab n="16">
+        et dabimus filias nostras vobis: et filias vestras accipiemus nobis: et habitabimus vobiscum: erimusque in vnum populum. 
+        </ab>
+
+        <ab n="17">
+        et si non acquieueritis nobis vt circumcidamini: tollemus filiam nostram: et ibimus. 
+        </ab>
+
+        <ab n="18">
+        Et placuerunt verba corum in oculis <persName>oculis</persName> hemor et in oculis <persName>sichem</persName> filii <persName>hemor</persName>:
+        </ab>
+
+        <ab n="19">
+        et non distulit puer facere rem illam: <choice><abbr>qm</abbr><expan>quam</expan></choice> conplacuit sibi in filia <persName>iacob</persName>: et ipse erat honorabilior omni domo patris sui. 
+        </ab>
+
+        <ab n="20">
+        Et venit <persName>hemor</persName> et <persName>sichem</persName> filius eius ad portam ciuitatis eorum: et locuti sunt cum viris ciuitatis eorum dicentes. 
+        </ab>
+
+        <ab n="21">
+        Viri isti pacifici sunt nobiscum: et habitabunt in terra et negociabuntur in ea. terra autem ecce spaciosa est et lata coram eis. filias eorum accipiemus nobis in vxores: et filias <choice><abbr>nras</abbr><expan>nostras</expan></choice> dabimus eis. 
+        </ab>
+
+        <ab n="22">
+        Sed in hoc conuenient nobiscum viri: vt <choice><abbr>hitent</abbr><expan>habitent</expan></choice> nobiscum: vt simus in <choice><abbr>pplm</abbr><expan>populum</expan></choice> vnum: si circumcidetur in nobis <choice><abbr>ois</abbr><expan>omnis</expan></choice> masculus: 
+        </ab>
+
+        <ab n="23">
+        <unclear>sic</unclear> ipsi circumcisi sunt: pecora eorum et armenta et <choice><abbr>oia</abbr><expan>omnia</expan></choice> iumenta eorum nonne nobis erunt? Verun <unclear>tn</unclear> conueniamus cum eis: habitent nobiscum. 
+        </ab>
+
+        <ab n="24">
+        Et obedierunt <persName>hemor</persName> et sichem filio eius <choice><abbr>oes</abbr><expan>omnes</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> ingrediebantur portam ciuitati illius: et circumciderunt <choice><abbr>oes</abbr><expan>omnes</expan></choice> masculos: <choice><abbr>oes</abbr><expan>omnes</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> egrediebantur portam ciuitati illius. 
+        </ab>
+
+        <ab n="25">
+        Et factum est in die tertio <choice><abbr>qn</abbr><expan>quando</expan></choice> preualuerunt dolores eorum super eos: duo filii <persName>iacob</persName> <persName>simeon</persName> et <persName>leui</persName> <choice><abbr>fres</abbr><expan>fratres</expan></choice> dine tulerunt <choice><abbr>vnusqsque</abbr><expan>vnusquisque</expan></choice> gladium suum et ingressi sunt ciuitatem <choice><abbr>q</abbr><expan>qui</expan></choice> <choice><abbr>hitabat</abbr><expan>habitabat</expan></choice> <unclear>ofidenter</unclear>: interfecerunt <choice><abbr>oem</abbr><expan>omnem</expan></choice> masculum. 
+        </ab>
+
+        <ab n="26">
+        <persName>Hemor</persName> <unclear>qque</unclear> et <persName>sichem</persName> filium eius occiderunt in ore gladii: et tulerunt <persName>dinam</persName> de domo <persName>sichem</persName>: et egressi sunt. 
+        </ab>
+
+        <ab n="27">
+        Filii <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> ingressi sunt ad spolium interfectorum: et <unclear>depdati</unclear> sunt vrbem: eo <choice><abbr>q</abbr><expan>quod</expan></choice> violauerunt sororem suam. 
+        </ab>
+
+        <ab n="28">
+        Oues eorum et boues et asinos eorum et <choice><abbr>oia</abbr><expan>omnia</expan></choice> que erant in ciuitate et in agro <unclear>depdati</unclear> sunt: 
+        </ab>
+
+        <ab n="29">
+        et <choice><abbr>oem</abbr><expan>omnem</expan></choice> supellectilem eorum et <choice><abbr>oes</abbr><expan>omnes</expan></choice> peruulos suos: et <choice><abbr>oes</abbr><expan>omnes</expan></choice> mulieres eorum captiuauerunt: atque <unclear>depdati</unclear> sunt <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> erant in domibus. 
+        </ab>
+
+        <ab n="30">
+        Et dixit <persName>iacob</persName> ad <persName>simeon</persName> et <persName>leui</persName> conturbastis me: vt poneretis inimicitiam iter me et <placeName>chananeum</placeName> et <placeName>pherezeum</placeName> habitatores terre. Ego <choice><abbr>aut</abbr><expan>autem</expan></choice> habeo populum paucum: et congregabuntur contra me et percutient me: et peribo ego et viri domus mee. 
+        </ab>
+
+        <ab n="31">
+        Et dixerunt. <choice><abbr>uunqd</abbr><expan>uunquod</expan></choice> sicut cum meretrice fieri debuit cum sorore <choice><abbr>nra</abbr><expan>nostra</expan></choice>?
+        </ab>
+
         </div>
 
     </body>

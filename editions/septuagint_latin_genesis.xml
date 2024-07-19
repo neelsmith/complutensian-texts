@@ -4147,7 +4147,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="4">
-        ait <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>sychem</persName> ad <persName>emor</persName> <choice><abbr>prem</abbr><expan>patrem</expan></choice> suum: dicens: accipe mihi puella hanc in vxorem. 
+        ait <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>sychem</persName> ad <persName>emor</persName> <choice><abbr>prem</abbr><expan>patrem</expan></choice> suum: dicens: accipe mihi puellam hanc in vxorem. 
         </ab>
 
         <ab n="5">
@@ -4167,15 +4167,95 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        et affinitatem contrahite nobiscum. filias <choice><abbr>vris</abbr><expan>vestris</expan></choice>:
-        </ab>
+        et affinitatem contrahite nobiscum. filias <choice><abbr>vris</abbr><expan>vestris</expan></choice>: date nobis: et filias <choice><abbr>nras</abbr><expan>nostras</expan></choice> accipite filiis <choice><abbr>vris</abbr><expan>vestris</expan></choice>:
+        </ab> 
 
         <ab n="10">
-        et inter nos habitate. et terra ecce lata coram vocbis: habitate: et negociamini in ea: et acquirite in ea. 
+        et inter nos habitate. et terra ecce lata coram vobis: habitate: et negociamini in ea: et acquirite in ea. 
         </ab>
 
         <ab n="11">
-        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>sychem</persName> ad patrem eius: et ad
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>sychem</persName> ad patrem eius: et ad fratres eius: dicens: inueniam <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram vobis. et <choice><abbr>qd</abbr><expan>quod</expan></choice> cumque dixeritis: dabimus. 
+        </ab>
+
+        <ab n="12">
+        implete dotem valde: et dabo sicut dixeritis mihi: et dabitis mihi puellam hanc in vxorem. 
+        </ab>
+
+        <ab n="13">
+        responderunt <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>iacob</persName> <persName>sychem</persName> et <persName>emor</persName> <choice><abbr>pri</abbr><expan>patri</expan></choice> suo cum dolo. et locuti sunt eis: <choice><abbr>q</abbr><expan>quia</expan></choice> polluerant dinam sororem suam: 
+        </ab>
+
+        <ab n="14">
+        et <choice><abbr>dixert</abbr><expan>dixerunt</expan></choice> eis <persName>symeon</persName> et <persName>leui</persName> fratres dine: non poterimus facere <choice><abbr>vbum</abbr><expan>verbum</expan></choice> hoc: dare sororem nostram <choice><abbr>hoim</abbr><expan>hominum</expan></choice> habenti preputium: est enim opprobrium nobis. 
+        </ab>
+
+        <ab n="15">
+        solum in hoc assimilabimur vobis: et <choice><abbr>hitabimus</abbr><expan>habitabimus</expan></choice> inter vos: si sueritis sicut nos et vos: in circumcidendo <choice><abbr>vrm</abbr><expan>vestrum</expan></choice> <choice><abbr>oem</abbr><expan>omnem</expan></choice> masculinum:
+        </ab>
+
+        <ab n="16">
+        et dabimus filias <choice><abbr>nras</abbr><expan>nostras</expan></choice> vobis: et de filiabus <choice><abbr>vris</abbr><expan>vestris</expan></choice> acciptemus nobis: et <choice><abbr>hitabimus</abbr><expan>habitabimus</expan></choice> <choice><abbr>apd</abbr><expan>apud</expan></choice> vos: et erimus genus vnum.
+        </ab>
+
+        <ab n="17">
+        si <choice><abbr>at</abbr><expan>autem</expan></choice> non audieritis nos: et circumcisi fueritis: accipientes filiam <choice><abbr>nram</abbr><expan>nostram</expan></choice>: abibimus. 
+        </ab>
+
+        <ab n="18">
+        et pacuerunt <choice><abbr>vba</abbr><expan>verba</expan></choice> coram <persName>emor</persName>: et coram <persName>sychem</persName>: filio <persName>emor</persName>
+        </ab>
+
+        <ab n="19">
+        et non tardauit iuuenis facere verbum hoc: incubuerat <choice><abbr>.n.</abbr><expan>enim</expan></choice> filie <persName>iacob</persName>. ipse <choice><abbr>at</abbr><expan>autem</expan></choice> erat glosissimus <choice><abbr>oim</abbr><expan>omnium</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> in domo <choice><abbr>pris</abbr><expan>patris</expan></choice> sui.
+        </ab>
+
+        <ab n="20">
+        venit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>emor</persName> et <persName>sychem</persName> filius eius ad portam ciuitatis eorum: et locuti sunt ad viros ciuitatis eorum: dicentes. 
+        </ab>
+
+        <ab n="21">
+        <choice><abbr>hoies</abbr><expan>homines</expan></choice> isti pacifici sunt: nobiscum <choice><abbr>hitent</abbr><expan>habitent</expan></choice> super terram: et negocientur in ea. et terra ecce lata coram eis. filias eorum accipiemus nobis vxores: et filias <choice><abbr>nras</abbr><expan>nostras</expan></choice> dabimus eis. 
+        </ab>
+
+        <ab n="22">
+        solum in hoc assimilabuntur nobis <choice><abbr>hoies</abbr><expan>homines</expan></choice> isti vt <choice><abbr>hitent</abbr><expan>habitent</expan></choice> vobiscum: vt sit <choice><abbr>pplis</abbr><expan>populis</expan></choice> vnus: in circumcidendo nostrum <choice><abbr>oem</abbr><expan>omnem</expan></choice> masculinum: sicut et ipsi circumcisi sunt. 
+        </ab>
+
+        <ab n="23">
+        et pecora eorum et quadrupedia eorum: et <choice><abbr>ois</abbr><expan>omnis</expan></choice> substantia non <choice><abbr>nra</abbr><expan>nostra</expan></choice> erunt? solum in hoc assimilemur eis. et habitabunt nobiscum. 
+        </ab>
+
+        <ab n="24">
+        et audierunt <persName>emor</persName> et <persName>sychem</persName> filium eius <choice><abbr>oes</abbr><expan>omnes</expan></choice> exeuntes portam ciuitatis eorum: et <choice><abbr>circumcidert</abbr><expan>circumciderunt</expan></choice> carnem preputii eorum <choice><abbr>oem</abbr><expan>omnem</expan></choice> masculum. 
+        </ab>
+
+        <ab n="25">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> in die tertio: <choice><abbr>qn</abbr><expan>quando</expan></choice> erant in dolore: accipientes duo filii <persName>iacob</persName> <persName>symeom</persName> et <persName>leui</persName>: fratres dine: <choice><abbr>vnusqsque</abbr><expan>vnusquisque</expan></choice> gladium suum: ingressi sunt in ciuitatem confidenter: et <choice><abbr>interfecert</abbr><expan>interfecerunt</expan></choice> <choice><abbr>oe</abbr><expan>omnem</expan></choice> masculinum. 
+        </ab>
+
+        <ab n="26">
+        et <persName>emor</persName> et <persName>syche</persName> filium eius occiderunt in ore gladii. et <choice><abbr>tulert</abbr><expan>tulerunt</expan></choice> dinam de domo <persName>sychem</persName>: et egressi sunt. 
+        </ab>
+
+        <ab n="27">
+        at filii <persName>iacob</persName> ingressi sunt super vulneratos: et diripuerunt ciuitatem: in <choice><abbr>q</abbr><expan>quae</expan></choice> <choice><abbr>polluert</abbr><expan>polluerunt</expan></choice> dinam sororem suam. 
+        </ab>
+
+        <ab n="28">
+        et oues eorum: et boues eorum: et asinos eorum: <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> erant in vrbe: et <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> erant in agro: tulerunt: 
+        </ab>
+
+        <ab n="29">
+        et <choice><abbr>oia</abbr><expan>omnia</expan></choice> corpora eorum: et <choice><abbr>oem</abbr><expan>omnem</expan></choice> supellectilem eorum: et vxores eorum captiuauerunt. et <choice><abbr>diripuert</abbr><expan>diripuerunt</expan></choice> <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> erant in ciuitate: et <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> erant in domibus. 
+        </ab>
+
+        <ab n="30">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> <persName>symeon</persName> et <persName>leui</persName>: odiosume fecistis: ita vt malus ego sim <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> habitantibus terram: inque <persName>chananeis</persName>: et in <persName>pherezeis</persName>. ego <choice><abbr>at</abbr><expan>autem</expan></choice> paucissimus sum in numero. et congregati super me: percutient me: et delebor ego: et domus mea. 
+        </ab>
+
+        <ab n="31">
+        illi <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>dixert</abbr><expan>dixerunt</expan></choice>: sed sicut scorto vtentur sorore <choice><abbr>nra</abbr><expan>nostra</expan></choice>. 
         </ab>
 
 
