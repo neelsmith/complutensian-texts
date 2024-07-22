@@ -4261,6 +4261,94 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="35">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="35" type="ordinal">35.</num></ab>
+
+        <ab n="1">
+        DIxit <choice><abbr>at</abbr><expan>autem</expan></choice> deus ad <persName>iacob</persName>: surgens: ascende in locum <placeName>bethel</placeName>. et <choice><abbr>hita</abbr><expan>habita</expan></choice> ibi: et fac ibi altare deo <choice><abbr>q</abbr><expan>cui</expan></choice> apparuit tibi: cum sugeres a facie <persName>esau</persName> <choice><abbr>fris</abbr><expan>fratris</expan></choice> tui. 
+        </ab>
+
+        <ab n="2">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName>: domui sue: et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> <choice><abbr>q</abbr><expan>quibus</expan></choice> cum eo: tollite deos alienos de medio <choice><abbr>vrm</abbr><expan>vestrum</expan></choice>: et mundamini: et mutate vestimenta <choice><abbr>vra</abbr><expan>vestra</expan></choice>: 
+        </ab>
+
+        <ab n="3">
+        et surgentes ascendamus in <placeName>bethel</placeName>: et faciamus ibi altare deo: <choice><abbr>q</abbr><expan>cui</expan></choice> exaudiuit me in die exaudiuit me in die tribulationis: <choice><abbr>q</abbr><expan>quam</expan></choice> fuit mecum: et saluauit me in via: <choice><abbr>q</abbr><expan>quae</expan></choice> ambulaui: 
+        </ab>
+
+        <ab n="4">
+        et dederunt <persName>iacob</persName> deos alienos: <choice><abbr>q</abbr><expan>qui</expan></choice> erant in manibus eorum: et inaures <choice><abbr>q</abbr><expan>quae</expan></choice> in auribus eorum. et abscondit ea <persName>iacob</persName> sub terebintho <choice><abbr>q</abbr><expan>quam</expan></choice> in <placeName>sicimis</placeName>. et perdidit ea: vsque in hodiernum diem. 
+        </ab>
+
+        <ab n="5">
+        et profectus est <placeName>israel</placeName> de <placeName>sicimis</placeName>. et factus est timor dei super ciuitates <choice><abbr>q</abbr><expan>quas</expan></choice> in circuitu eorum. et non persecuti sunt post filios <placeName>israel</placeName>. 
+        </ab>
+
+        <ab n="6">
+        venit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> in <placeName>luza</placeName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> <placeName>chanaan</placeName>: <choice><abbr>q</abbr><expan>quae</expan></choice> est <placeName>Bethel</placeName>: ipse et <choice><abbr>ois</abbr><expan>omnis</expan></choice> <choice><abbr>pplis</abbr><expan>populis</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> erat cum eo: 
+        </ab>
+
+        <ab n="7">
+        et edificauit ibi altare: et vocauit nomen loci: <placeName>bethel</placeName>: illic enim apparuit ei deus: cum fugeret ipse a facie <persName>esau</persName> fratris sui. 
+        </ab>
+
+        <ab n="8">
+        mortua est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>debora</persName> nutrix <persName>rebecce</persName>: et sepulta est inferius <placeName>bethel</placeName> sub quercu: et vocauit <placeName>iacob</placeName> nomen eius: <choice><abbr>qrcus</abbr><expan>quercus</expan></choice> fletus
+        </ab>
+
+        <ab n="9">
+        apparuit <choice><abbr>at</abbr><expan>autem</expan></choice> deus <persName>iacob</persName> adhuc in <placeName>luza</placeName>: <choice><abbr>qn</abbr><expan>quando</expan></choice> venit de <placeName>mesopotamia</placeName> <placeName>syrie</placeName>. et <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> ei deus: et dixit illi deus: 
+        </ab>
+
+        <ab n="10">
+        nomen tuum non vocabitur vltra <persName>iacob</persName>: sed <placeName>israel</placeName> erit nomen tuum. 
+        </ab>
+
+        <ab n="11">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ei deus: ego deus tuus: cresce: et multiplicare: gentes et congregationes gentium erunt ex te: et reges de lumbo tuo exibunt: 
+        </ab>
+
+        <ab n="12">
+        et <choice><abbr>tra</abbr><expan>terram</expan></choice>: quam dedi <persName>abraam</persName> et <persName>isaac</persName>: tibi dedi eam: tibi erit: et semini tuo post te dabo <choice><abbr>tra</abbr><expan>terram</expan></choice> hanc. 
+        </ab>
+
+        <ab n="13">
+        ascendit <choice><abbr>at</abbr><expan>autem</expan></choice> deus ab eo de loco: vbi locutus est cum eo. 
+        </ab>
+
+        <ab n="14">
+        et statuit <persName>iacob</persName> titulum in loco: quo locutus est cum eo deus: titulum lapideum: et fecit super eam libamen: et effudit super eam oleum: 
+        </ab>
+
+        <ab n="15">
+        et vocauit <persName>iacob</persName> nomen loci: in quo locutus est cum eo illic deus: <placeName>bethel</placeName>. 
+        </ab>
+
+        <ab n="16">
+        descendes <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> de <persName>bethel</persName>: fixit tabernaculum suum: vltra turrim <placeName>gader</placeName>. factum est <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>qn</abbr><expan>quando</expan></choice> <choice><abbr>apropinquit</abbr><expan>apropinquauit</expan></choice> <placeName>chabrath</placeName> vt veniret in <placeName>ephrata</placeName>: peperit <persName>rachel</persName>. et cum pareret: difficile peperit. 
+        </ab>
+
+        <ab n="17">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> cum difficulter <choice><abbr>ipa</abbr><expan>ipsa</expan></choice> pareret: dixit ei obstetri: confide: et <unclear>em</unclear> iste tibi filius est. 
+        </ab>
+
+        <ab n="18">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> cum emitteret <choice><abbr>ipa</abbr><expan>ipsa</expan></choice> <choice><abbr>aiam</abbr><expan>animam</expan></choice>: moriebatur enim: vocauit nomen eius: filius doloris mei. at <choice><abbr>pr</abbr><expan>pater</expan></choice> vocauit nomen eius: <persName>beniamin</persName>. 
+        </ab>
+
+        <ab n="19">
+        mortua est at <persName>rachel</persName>: et seplta est in via <placeName>ephratha</placeName>. hec est <placeName>bethleem</placeName>. 
+        </ab>
+
+        <ab n="20">
+        et statuit <persName>iacob</persName> titulum super monumentum eius. hic est titulus super
+        </ab>
+
+
+
+        </div>
+
+
 
 
     </body>

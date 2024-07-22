@@ -4209,6 +4209,54 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="35">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="35" type="ordinal">35.</num></ab>
+
+        <ab n="1">
+        Et dixit deus ad <persName>iacob</persName>. Surge ascende in <placeName>bethel</placeName>: et habita ibi: et fac ibi altare deo qui apparuit tibi: <choice><abbr>qn</abbr><expan>quando</expan></choice> fugiebas a facie <persName>esau</persName> fratris tui. 
+        </ab>
+
+        <ab n="2">
+        Et dixit <persName>iacob</persName> viris domus sue et <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> qui secum erant. Auferte idola populorum que sunt in medio vestri: et mundamini et mutate vestimenta <choice><abbr>vra</abbr><expan>vestra</expan></choice>:
+        </ab>
+
+        <ab n="3">
+        et surgamus et ascendamus in <placeName>bethel</placeName>: et faciam ibi altare deo qui suscepit orationem meam in tempore tribulationis mee: et fuit verbum eius in adiutorium meum in via qua ambulaui. 
+        </ab>
+
+        <ab n="4">
+        Et dederunt <persName>iacob</persName> <choice><abbr>oia</abbr><expan>omnia</expan></choice> idola populorum que erant in manibus suis: et maures que erant in auribus suis. Et abscondit eas <persName>iacob</persName> sub quercu: que est iuxta <placeName>sichem</placeName>. 
+        </ab>
+
+        <ab n="5">
+        Profectique sunt: et fuit terror a facie dei super omnes populos qui erant in ciuitatibus per circuitum eorum: et non sunt secuti post filios <persName>iacob</persName>. 
+        </ab>
+
+        <ab n="6">
+        Et venit <persName>iacob</persName> in <placeName>luzam</placeName> <choice><abbr>q</abbr><expan>qui</expan></choice> est in terra <placeName>chanaan</placeName>: ipsa est <placeName>bethel</placeName>: ipse et <choice><abbr>ois</abbr><expan>omnis</expan></choice> <choice><abbr>ppls</abbr><expan>populis</expan></choice> <choice><abbr>q</abbr><expan>qui</expan></choice> cum eo erat. 
+        </ab>
+
+        <ab n="7">
+        Et edificauit ibi altare: et appellauit locum deus <placeName>bethel</placeName>: <choice><abbr>qm</abbr><expan>quam</expan></choice> ibi apperuit ei angelus dei: <choice><abbr>qn</abbr><expan>quando</expan></choice> fugiebat a facie <choice><abbr>fris</abbr><expan>fratris</expan></choice> sui. 
+        </ab>
+
+        <ab n="8">
+        Et mortua est <persName>debbora</persName> nutrix <persName>rebecce</persName>: et sepulta est subtus <placeName>bethel</placeName> in planicie vallis. Et vocauit nomen eius vallis planctus. 
+        </ab>
+
+        <ab n="9">
+        Et apparuit deus iternum <persName>iacob</persName> quando veniebat de <placeName>mesopotamia</placeName> <placeName>syrie</placeName>: et benedixit ei. 
+        </ab>
+
+        <ab n="10">
+        Dixitque ei deus: non vocabitur vltra nomen tuum <persName>iacob</persName>: sed <placeName>israel</placeName> erit nomen tuum. 
+        </ab>
+
+        <ab n="11">
+        Et vocauit nomen eius <placeName>israel</placeName>. et dixit ei deus. Ego deus omnipotens: cresce et multiplicare: populus et congregatio tribuum erunt ex te: et reges qui <choice><abbr>dnabuntur</abbr><expan>dominabuntur</expan></choice> populis ex te egredientur: 
+        </ab>
+        </div>
+
     </body>
     </text>
 </TEI>
