@@ -4255,6 +4255,47 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="11">
         Et vocauit nomen eius <placeName>israel</placeName>. et dixit ei deus. Ego deus omnipotens: cresce et multiplicare: populus et congregatio tribuum erunt ex te: et reges qui <choice><abbr>dnabuntur</abbr><expan>dominabuntur</expan></choice> populis ex te egredientur: 
         </ab>
+
+        <ab n="12">
+        et dabo tibi terram quam dedi <persName>abrahe</persName> et <persName>isaac</persName>: et filiis tuis post te dabo eam. 
+        </ab>
+
+        <ab n="13">
+        Et ascendit ab eo gloria <choice><abbr>dni</abbr><expan>domini</expan></choice> in loco vbi locutus fuerat cum eo. 
+        </ab>
+
+        <ab n="14">
+        Et erexit <persName>iacob</persName> titulum in loco vbi locutus fuerat cum eo: titulum lapideum: et libauit super eum libamina: et effudit super eum oleum. 
+        </ab>
+
+        <ab n="15">
+        Et vocauit <persName>iacob</persName> nomen loci <placeName>bethel</placeName>: in quo locutus fuerat ei deus. 
+        </ab>
+
+        <ab n="16">
+        Et profecti sunt de <placeName>bethel</placeName>: et cum adhuc esset spacium terre vt ingrederetur efratam: parturiuit <persName>rachel</persName>:
+        </ab>
+
+        <ab n="17">
+        et aggrauata est in partu suo. Et factum est cum aggrauaretur in partu suo: ait ei obstetrix. Ne timeas <choice><abbr>qm</abbr><expan>quam</expan></choice> hic quoque erit tibi filius. 
+        </ab>
+
+        <ab n="18">
+        Et factum est cum egrederetur anima eius et moreretur: vocauit nomen filii: filium doloris mei. Pater <choice><abbr>aut</abbr><expan>autem</expan></choice> eius appellauit eum <persName>beniamin</persName>.
+        </ab>
+
+        <ab n="19">
+        Et mortua est <persName>rachel</persName>: et sepulta est in via efrate: ipsa est <placeName>bethleem</placeName>.
+        </ab>
+
+        <ab n="20">
+        Erexitque <persName>iacob</persName> titulum super sepulchrum eius: ipse est titulus sepulture <persName>rachel</persName> vsque in diem hanc. 
+        </ab>
+
+        <ab n="21">
+        
+        </ab>
+
         </div>
 
     </body>

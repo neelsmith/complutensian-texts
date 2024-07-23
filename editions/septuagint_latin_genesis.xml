@@ -4341,8 +4341,42 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        et statuit <persName>iacob</persName> titulum super monumentum eius. hic est titulus super
+        et statuit <persName>iacob</persName> titulum super monumentum eius. hic est titulus monumenti <persName>rachel</persName>: vsque diem hunc. 
         </ab>
+
+        <ab n="21">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>qn</abbr><expan>quando</expan></choice> <choice><abbr>hitauit</abbr><expan>habitauit</expan></choice> <placeName>israel</placeName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> illa: abiit rubem: et dormiuit cum <persName>balla</persName> concubina <choice><abbr>pris</abbr><expan>patris</expan></choice> sui <persName>iacob</persName>. et audiuit <placeName>israel</placeName>: et malum apperuit in conspectu eius. 
+        </ab>
+
+        <ab n="22">
+        erant <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>iacob</persName> duodecim. filii <persName>lie</persName>: primogenitus <persName>iacob</persName>: <persName>rubem</persName>: et <persName>symeom</persName>: <persName>leui</persName>: <persName>iudas</persName>: <persName>issachar</persName>: <persName>zabulom</persName>: 
+        </ab>
+
+        <ab n="23">
+        filii <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rachel</persName>: <persName>ioseph</persName>: et <persName>bemiamin</persName>. 
+        </ab>
+
+        <ab n="24">
+        filii <choice><abbr>at</abbr><expan>balle</expan></choice> ancille <persName>rachel</persName>: <persName>dan</persName>: et <persName>nephthalim</persName>.
+        </ab>
+
+        <ab n="25">
+        filii <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>zelphe</persName> ancille <persName>lie</persName>: <persName>gad</persName>: et <persName>aser</persName>. isti filii <persName>iacob</persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> fuerunt ei in <placeName>mesopotamia</placeName> <placeName>syrie</placeName>. 
+        </ab>
+
+        <ab n="26">
+        venit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> ad <persName>isaac</persName> <choice><abbr>prm</abbr><expan>patrem</expan></choice> suum: in <placeName>mambre</placeName>: in ciuitatem agri. hec est <placeName>chebrom</placeName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> <placeName>chanaan</placeName>: vbi habitauit <persName>abraam</persName> et <persName>isaac</persName>. 
+        </ab>
+
+        <ab n="27">
+        fuerunt <choice><abbr>at</abbr><expan>autem</expan></choice> dies <persName>isaac</persName>: quos vixit: anni centum octoginta. 
+        </ab>
+
+        <ab n="28">
+        et deficiens <persName>isaac</persName> mortuus est. et apprositus est ad genus suum senior: et plenus diernum. et sepelierunt eum <persName>esau</persName> et <persName>iacob</persName> filii eius. 
+        </ab>
+
+
 
 
 
