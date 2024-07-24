@@ -4329,7 +4329,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="17">
-        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> cum difficulter <choice><abbr>ipa</abbr><expan>ipsa</expan></choice> pareret: dixit ei obstetri: confide: et <unclear>em</unclear> iste tibi filius est. 
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> cum difficulter <choice><abbr>ipa</abbr><expan>ipsa</expan></choice> pareret: dixit ei obstetrix: confide: et <unclear>em</unclear> iste tibi filius est. 
         </ab>
 
         <ab n="18">
@@ -4341,43 +4341,149 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        et statuit <persName>iacob</persName> titulum super monumentum eius. hic est titulus monumenti <persName>rachel</persName>: vsque diem hunc. 
+        et statuit <persName>iacob</persName> titulum super monumentum eius. hic est titulus super monumenti <persName>rachel</persName>: vsque diem hunc. 
         </ab>
 
         <ab n="21">
-        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>qn</abbr><expan>quando</expan></choice> <choice><abbr>hitauit</abbr><expan>habitauit</expan></choice> <placeName>israel</placeName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> illa: abiit rubem: et dormiuit cum <persName>balla</persName> concubina <choice><abbr>pris</abbr><expan>patris</expan></choice> sui <persName>iacob</persName>. et audiuit <placeName>israel</placeName>: et malum apperuit in conspectu eius. 
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>qn</abbr><expan>quando</expan></choice> <choice><abbr>hitauit</abbr><expan>habitauit</expan></choice> <placeName>israel</placeName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> illa: 
         </ab>
 
         <ab n="22">
-        erant <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>iacob</persName> duodecim. filii <persName>lie</persName>: primogenitus <persName>iacob</persName>: <persName>rubem</persName>: et <persName>symeom</persName>: <persName>leui</persName>: <persName>iudas</persName>: <persName>issachar</persName>: <persName>zabulom</persName>: 
+        abiit rubem: et dormiuit cum <persName>balla</persName> concubina <choice><abbr>pris</abbr><expan>patris</expan></choice> sui <persName>iacob</persName>. et audiuit <placeName>israel</placeName>: et malum apperuit in conspectu eius. erant <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>iacob</persName> duodecim.
         </ab>
 
         <ab n="23">
-        filii <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rachel</persName>: <persName>ioseph</persName>: et <persName>bemiamin</persName>. 
+         filii <persName>lie</persName>: primogenitus <persName>iacob</persName>: <persName>rubem</persName>: et <persName>symeom</persName>: <persName>leui</persName>: <persName>iudas</persName>: <persName>issachar</persName>: <persName>zabulom</persName>: 
         </ab>
 
         <ab n="24">
-        filii <choice><abbr>at</abbr><expan>balle</expan></choice> ancille <persName>rachel</persName>: <persName>dan</persName>: et <persName>nephthalim</persName>.
+        filii <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>rachel</persName>: <persName>ioseph</persName>: et <persName>bemiamin</persName>. 
         </ab>
 
         <ab n="25">
-        filii <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>zelphe</persName> ancille <persName>lie</persName>: <persName>gad</persName>: et <persName>aser</persName>. isti filii <persName>iacob</persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> fuerunt ei in <placeName>mesopotamia</placeName> <placeName>syrie</placeName>. 
+        filii <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>balle</persName> ancille <persName>rachel</persName>: <persName>dan</persName>: et <persName>nephthalim</persName>.
         </ab>
 
         <ab n="26">
-        venit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> ad <persName>isaac</persName> <choice><abbr>prm</abbr><expan>patrem</expan></choice> suum: in <placeName>mambre</placeName>: in ciuitatem agri. hec est <placeName>chebrom</placeName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> <placeName>chanaan</placeName>: vbi habitauit <persName>abraam</persName> et <persName>isaac</persName>. 
+        filii <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>zelphe</persName> ancille <persName>lie</persName>: <persName>gad</persName>: et <persName>aser</persName>. isti filii <persName>iacob</persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> fuerunt ei in <placeName>mesopotamia</placeName> <placeName>syrie</placeName>. 
         </ab>
 
         <ab n="27">
-        fuerunt <choice><abbr>at</abbr><expan>autem</expan></choice> dies <persName>isaac</persName>: quos vixit: anni centum octoginta. 
+        venit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> ad <persName>isaac</persName> <choice><abbr>prm</abbr><expan>patrem</expan></choice> suum: in <placeName>mambre</placeName>: in ciuitatem agri. hec est <placeName>chebrom</placeName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> <placeName>chanaan</placeName>: vbi habitauit <persName>abraam</persName> et <persName>isaac</persName>. 
         </ab>
 
         <ab n="28">
+        fuerunt <choice><abbr>at</abbr><expan>autem</expan></choice> dies <persName>isaac</persName>: quos vixit: anni centum octoginta. 
+        </ab>
+
+        <ab n="29">
         et deficiens <persName>isaac</persName> mortuus est. et apprositus est ad genus suum senior: et plenus diernum. et sepelierunt eum <persName>esau</persName> et <persName>iacob</persName> filii eius. 
         </ab>
 
+        </div>
 
+        <div n="36">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="36" type="ordinal">36.</num></ab>
 
+        <ab n="1">
+        He <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> <persName>esau</persName>. <choice><abbr>ipe</abbr><expan>ipse</expan></choice> est <placeName>edom</placeName>. 
+        </ab>
+
+        <ab n="2">
+        <persName>esau</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> accepit vxores suas de filiabus <placeName>chananeorum</placeName>. <persName>ada</persName>: filiam <persName>elom</persName> <persName>ethei</persName>. et <persName>eliba</persName>: filiam <persName>enan</persName> filii <persName>sebagon</persName> <persName>euei</persName>. 
+        </ab>
+
+        <ab n="3">
+        et <persName>basemath</persName>: filiam <persName>ismael</persName>: sororem <persName>nabaioth</persName>.
+        </ab>
+
+        <ab n="4">
+        peperit <choice><abbr>at</abbr><expan>autem</expan></choice> ei <persName>ada</persName> <persName>elipham</persName>. et <persName>besamath</persName> peperit <persName>raguel</persName>.
+        </ab>
+
+        <ab n="5">
+        et <persName>elibama</persName> peperit <persName>ieul</persName>: et <persName>ieglom</persName>: et <persName>core</persName>. hi filii <persName></persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> fuerunt ei in terra <placeName>chanaan</placeName>. 
+        </ab>
+
+        <ab n="6">
+        accepit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> vxores suas: et filios suos: et filias: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> corpora domus <persName>sue</persName>: et <choice><abbr>oem</abbr><expan>omnem</expan></choice> substantiam: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> pecora: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> possedit: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> acquisiuit in terra <placeName>chanaan</placeName>: et abiit <persName>esau</persName> de terra <placeName>chanaan</placeName>: a facie <persName>iacob</persName> fratris sui. 
+        </ab>
+
+        <ab n="7">
+        erat <choice><abbr>.n.</abbr><expan>enim</expan></choice> substantia eorum multa: vt habitarent simul. et non poterat <choice><abbr>tra</abbr><expan>terra</expan></choice> <choice><abbr>hitationis</abbr><expan>habitationis</expan></choice> eorum ferre eos: pre <choice><abbr>mltitudine</abbr><expan>multitudine</expan></choice> substantie eorum. 
+        </ab>
+
+        <ab n="8">
+        <choice><abbr>hitauit</abbr><expan>habitauit</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> in monte <persName>seir</persName>. <persName>esau</persName>: <choice><abbr>ipe</abbr><expan>ipse</expan></choice> est <persName>edom</persName>. 
+        </ab>
+
+        <ab n="9">
+        hatauit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> <choice><abbr>hitauit</abbr><expan>habitauit</expan></choice> pater suus in <choice><abbr>tra</abbr><expan>terra</expan></choice> <placeName>chanaan</placeName>. he <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>gnationes</abbr><expan>generationes</expan></choice> <persName>esau</persName> <choice><abbr>pris</abbr><expan>patris</expan></choice> <persName>edom</persName> in monte <placeName>seir</placeName>. 
+        </ab>
+
+        <ab n="10">
+        et ista <choice><abbr>noia</abbr><expan>nomina</expan></choice> filiorum <persName>esau</persName>. <persName>eliphas</persName>: filius <persName>ada</persName> vxoris <persName>esau</persName>. et <persName>raguel</persName>: filius <persName>basemath</persName>: vxoris <persName>esau</persName>. 
+        </ab>
+
+        <ab n="11">
+        fuerunt <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>eliphas</persName>: <persName>theman</persName>: <persName>omar</persName>: <persName>sophar</persName>: <persName>gotham</persName>: <persName>cenez</persName>. <persName>thamna</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> concubina <persName>eliphas</persName> filii <persName>esau</persName>:
+        </ab>
+
+        <ab n="12">
+        peperit <persName>eliphas</persName><persName>amalec</persName>. hi filii <persName>ada</persName>: vxoris <persName>esau</persName>. hi <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>raguel</persName>: <persName>nazeth</persName>: <persName>zaresome</persName>: et <persName>moze</persName>. hi fuerunt filii <persName>basemath</persName>: vxoris <persName>esau</persName>.
+        </ab>
+
+        <ab n="14">
+        hi <choice><abbr>at</abbr><expan>autem</expan></choice> fuerunt filii libemas filie <persName>enan</persName>: filii <persName>sebegon</persName> vxoris <persName>esau</persName>. peperit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>esau</persName> <persName>ieul</persName>: et <persName>ieglom</persName>: et <persName>core</persName>. 
+        </ab>
+
+        <ab n="15">
+        hi duces filii <persName>esau</persName>. <persName>elibas</persName>: primogenti <persName>esau</persName>: dux <persName>themam</persName>: dux <persName>omar</persName>: dux <persName>sophar</persName>: dux <persName>cenez</persName>: 
+        </ab>
+
+        <ab n="16">
+        dux <persName>core</persName>: dux <persName>gotha</persName>: dux <persName>amalec</persName>. hi duces <persName>eliphas</persName> in terra <persName>idumee</persName>. hi filii <persName>adas</persName>. 
+        </ab>
+
+        <ab n="17">
+        et hi filii <persName>raguel</persName>. filii <persName>esau</persName>: dux <persName>nachoth</persName>: dux <persName>zare</persName>: dux <persName>some</persName>: dux <persName>moze</persName>. hi duces <persName>raguel</persName> in <persName>edom</persName>.
+        </ab>
+
+        <ab n="18">
+        hi filii <persName>basemas</persName>: vxoris <persName>esau</persName>. hi <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>elibemas</persName>: vxoris <persName>esau</persName>: dux <persName>ieul</persName>: dux <persName>ieglom</persName>: dux <persName>core</persName>. hi duces <persName>elibemas</persName>. 
+        </ab>
+
+        <ab n="19">
+        hi filii <persName>esau</persName>. et hi duces eorum. hi sunt filii <persName>edom</persName>. 
+        </ab>
+
+        <ab n="20">
+        hi <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>seir</persName> <persName>horrei</persName>: <choice><abbr>hitantis</abbr><expan>habitantis</expan></choice> <choice><abbr>tra</abbr><expan>terra</expan></choice>: <persName>lotan</persName>: <persName>sobal</persName>: <persName>sebegon</persName>: <persName>ana</persName>:
+        </ab>
+
+        <ab n="21">
+        et <persName>leson</persName>: et <persName>asar</persName>: et <persName>rison</persName>. hi duces <persName>chorrei</persName>: filii <persName>seir</persName> in <choice><abbr>tra</abbr><expan>terra</expan></choice> <placeName>edom</placeName>. 
+        </ab>
+
+        <ab n="22">
+        fuerunt <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>lotan</persName>: <persName>chorri</persName>: et <persName>eman</persName>. soror <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>lotan</persName>: <persName>themna</persName>. 
+        </ab>
+
+        <ab n="23">
+        hi <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>sobal</persName>: <persName>tolam</persName>: et <persName>manachath</persName>: et <persName>gebel</persName>: <persName>sophan</persName>: et <persName>oman</persName>. 
+        </ab>
+
+        <ab n="24">
+        et hi filii <persName>sebeon</persName>: <persName>ee</persName> et <persName>enan</persName>. hic <persName>enan</persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> inuenit <persName>eamin</persName> in deserto: <choice><abbr>qn</abbr><expan>quando</expan></choice> inuenit subiugalia <persName>sebeon</persName> <choice><abbr>pris</abbr><expan>patris</expan></choice> sui. 
+        </ab>
+
+        <ab n="25">
+        hi <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>enan</persName>. <persName>deson</persName>: et <persName>elibemath</persName>: filia <persName>enan</persName>. 
+        </ab>
+
+        <ab n="26">
+        hi <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>deson</persName>: 
+        </ab>
 
 
         </div>

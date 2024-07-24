@@ -4293,9 +4293,105 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="21">
-        
+        Et profectus est <placeName>israel</placeName>: et tetendit tabernaculum suum vltra turrim gregis.
         </ab>
 
+        <ab n="22">
+         Et factum est cum moraretur <placeName>israel</placeName> in terra illa: abiit <persName>ruben</persName> et dormiuit cum <persName>bala</persName> concubina patris sui: et audiuit <placeName>israel</placeName>. 
+        </ab>
+
+        <ab n="23">
+        Fueruntque filii <persName>iacob</persName> duodecim. filii <persName>lie</persName>: primogenitus <persName>iacob</persName>: <persName>rubeo</persName>: <persName>simeon</persName>: et <persName>leui</persName>: et <persName>iuda</persName>: et <persName>isachar</persName>: et <persName>zabulon</persName>.
+        </ab>
+
+        <ab n="24">
+        Filii <persName>rachel</persName> <persName>ioseph</persName>: et <persName>beniamin</persName>. 
+        </ab>
+
+        <ab n="25">
+        Filii autem <persName>bale</persName> ancille <persName>rachel</persName>: <persName>dan</persName>: et <persName>neptali</persName>. 
+        </ab>
+
+        <ab n="26">
+        Et filii <persName>zelphe</persName> ancille <persName>lie</persName>: <persName>gad</persName>: et <persName>afer</persName>. Isti sunt filii <persName>iacob</persName> qui nati sunt ei in <placeName>mesopotamia</placeName> <placeName>syrie</placeName>. 
+        </ab>
+
+        <ab n="27">
+        Venit autem <persName>iacob</persName> ad <persName>isaac</persName> patrem suum in <placeName>mamre</placeName> ciuitatem <persName>arbee</persName>: ipsa est <persName>hebron</persName> in qua peregrinatus est <persName>abraham</persName> et <persName>isaac</persName>. 
+        </ab>
+
+        <ab n="28">
+        Et fuerunt dies <persName>isaac</persName> centum et octoginta anni. 
+        </ab>
+
+        <ab n="29">
+        Et defecit et mortuus est: et congregatus est ad populum suum senex et plenus dierum. Et sepelierunt eum <persName>esau</persName> et <persName>iacob</persName> filii sui. 
+        </ab>
+
+        </div>
+
+        <div n="36">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="36" type="ordinal">36.</num></ab>
+
+        <ab n="1">
+        He autem sunt generationes <persName>esau</persName>: ipse est <placeName>edom</placeName>. 
+        </ab>
+
+        <ab n="2">
+        <persName>Esau</persName> accepit vxores suas de filiabus <placeName>chanaan</placeName>: <persName>Ada</persName> filiam <persName>elon</persName> <persName>ethei</persName>: et <persName>oolibama</persName> filiam <persName>ane</persName> filiam <persName>sebeon</persName> <persName>euei</persName>:
+        </ab>
+
+        <ab n="3">
+        et <persName>basemath</persName> filiam <persName>ismaelis</persName> sororem <persName>nabaioth</persName>. 
+        </ab>
+
+        <ab n="4">
+        Peperit autem <persName>ada</persName> <persName>elipham</persName> de <persName>esau</persName>: et <persName>basemath</persName> peperit <persName>rahuel</persName>. 
+        </ab>
+
+        <ab n="5">
+        Et odibama peperit <persName>iehus</persName> et <persName>hielom</persName> et <persName>chore</persName>. Hi filii <persName>esau</persName> <choice><abbr>q</abbr><expan>qui</expan></choice> nati sunt ei in terra <placeName>chanaan</placeName>. 
+        </ab>
+
+        <ab n="6">
+        Tulit <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>esau</persName> vxores suas et filios suos et filias suas: et omnes animas domus <persName>sue</persName> et pecora sua et omnia iumenta sua: et vniuersam substantiam quam acquisierat in terra <placeName>chanaan</placeName>: et abiit in terram aliam propter <persName>iacob</persName> fratrem suum:
+        </ab>
+
+        <ab n="7">
+        quia erat substantia eorum multa vt habitarent simul: et non poterat terra habitationis eorum sustinere eos propter pecora eorum. 
+        </ab>
+
+        <ab n="8">
+        Et habitauit <persName>esau</persName> in monte <persName>seir</persName>: <persName>esau</persName> ipse est <persName>edom</persName>.
+        </ab>
+
+        <ab n="9">
+        Et he sunt generationes <persName>esau</persName> patris idumeorum in monte <persName>seir</persName>. 
+        </ab>
+
+        <ab n="10">
+        Hec sunt nomina filiorum <persName>esau</persName>: <persName>elipham</persName> filius <persName>ada</persName> vxoris <persName>esau</persName>: <persName>rahuel</persName> filius <persName>basemath</persName> vxoris <persName>esau</persName>. 
+        </ab>
+
+        <ab n="11">
+        Fueruntque filii <persName>elipham</persName>: <persName>theman</persName>: <persName>omar</persName>: <persName>sepho</persName>: et <persName>gatham</persName>: et <persName>cenez</persName>. 
+        </ab>
+
+        <ab n="12">
+        Erat autem <persName>thamna</persName> concubina <persName>elipham</persName> filii <persName>esau</persName>: ex qua natus est <persName>amalech</persName>. Hi sunt filii <persName>ada</persName> vxoris <persName>esau</persName>. 
+        </ab>
+
+        <ab n="13">
+        filii autem <persName>rahuel</persName>: <persName>naath</persName> et <persName>zara</persName> et <persName>semma</persName> et <persName>meza</persName>. 
+        </ab>
+
+        <ab n="14">
+        Hi filii <persName>basemath</persName> vxoris <persName>esau</persName> et isti filii <persName>oolibama</persName> filie <persName>ane</persName> filie <persName>sebeon</persName> vxoris <persName>esau</persName>: quepeperit ei <persName>hieus</persName> et <persName>hielom</persName> et <persName>chore</persName>. 
+        </ab>
+
+        <ab n="15">
+        Isti sunt duces
+        </ab>
         </div>
 
     </body>
