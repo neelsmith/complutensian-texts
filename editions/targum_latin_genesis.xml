@@ -4390,8 +4390,155 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="15">
-        Isti sunt duces
+        Isti sunt duces filiorum <persName>esau</persName>: filii <persName>elipham</persName> primogeniti <persName>esau</persName>. dux <persName>themam</persName>: dux <persName>omar</persName>: dux <persName>sepho</persName>: dux <persName>cenez</persName>:
         </ab>
+
+        <ab n="16">
+        dux <persName>chore</persName>: dux <persName>gatham</persName>: dux <persName>amalech</persName>. Hi duces <persName>elipham</persName> in terra <persName>edom</persName>: hi filii <persName>ada</persName>. 
+        </ab>
+
+        <ab n="17">
+        Hi quoque filii <persName>rahuel</persName> filii <persName>esau</persName>: dux <persName>naath</persName>: dux <persName>zara</persName>: dux <persName>samma</persName>: dux <persName>meza</persName>. Hi duces <persName>rahuel</persName> in terra <persName>edom</persName>: isti filii <persName>basemath</persName> vxoris <persName>esau</persName>. 
+        </ab>
+
+        <ab n="18">
+        Hi autem filii <persName>oolibama</persName> vxoris <persName>esau</persName>. dux <persName>ichus</persName>: dux <persName>hielom</persName>: dux <persName>chore</persName>. Hi duces <persName>oolibama</persName> filie <persName>ane</persName> vxoris <persName>esau</persName>. 
+        </ab>
+
+        <ab n="19">
+        Isti sunt filii <persName>esau</persName>: et hi duces eorum: ipse est <persName>edom</persName>. 
+        </ab>
+
+        <ab n="20">
+        Isti sunt filii <persName>seir</persName> <persName>horrei</persName> habitatores terre: <persName>lothan</persName>: et <persName>sobal</persName>: et <persName>sebeon</persName>: et <persName>ana</persName>: 
+        </ab>
+
+        <ab n="21">
+        et <persName>dison</persName>: et <persName>eser</persName>: et <persName>disan</persName>. Hi duces <persName>horrei</persName> filii <persName>seir</persName> in terra <persName>edom</persName>. 
+        </ab>
+
+        <ab n="22">
+        Fueruntque filii <persName>lothan</persName>: <persName>horri</persName>: et <persName>hamam</persName>. Soror <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>lothan</persName> <persName>thamna</persName>. 
+        </ab>
+
+        <ab n="23">
+        Et isti filii <persName>sobal</persName>: <persName>aluan</persName> et <persName>maneeth</persName>: et <persName>hebal</persName>: <persName>sephi</persName> et <persName>onam</persName>. 
+        </ab>
+
+        <ab n="24">
+        Et hi filii <persName>sebeon</persName>: <persName>aya</persName> et <persName>ana</persName>. Iste est <persName>ana</persName> qui inuenit gigantes in solitudine: cum pasceret asinos <persName>sebeon</persName> patris sui. 
+        </ab>
+
+        <ab n="25">
+        Et hi filii <persName>ane</persName>: <persName>disson</persName>: et <persName>oolibama</persName> filia <persName>ane</persName>. 
+        </ab>
+
+        <ab n="26">
+        Hi autem filii <persName>disan</persName> <persName>amdan</persName>: et <persName>eseban</persName> et <persName>iethran</persName> et <persName>charam</persName>. 
+        </ab>
+
+        <ab n="27">
+        Isti sunt filii <persName>eser</persName> <persName>balan</persName> et <persName>zaauan</persName> et <persName>achan</persName>.
+        </ab>
+
+        <ab n="28">
+        Hi sunt filii <persName>disan</persName>: <persName>hus</persName>: et <persName>aran</persName>. 
+        </ab>
+
+        <ab n="29">
+        Istsi sunt duces <persName>horrei</persName>. Dux <persName>lotan</persName>: dux <persName>sobal</persName>: dux <persName>sebeon</persName>: dux <persName>ana</persName>: 
+        </ab>
+
+        <ab n="30">
+        dux <persName>dison</persName>: dux <persName>eser</persName>: dux <persName>disan</persName>. Isti duces <persName>horreorum</persName> <choice><abbr>sm</abbr><expan>secundum</expan></choice> principatus eorum in terra <placeName>seyr</placeName>. 
+        </ab>
+
+        <ab n="31">
+        Et isti sunt reges qui regnauerunt in terra <placeName>edom</placeName>: ante <choice><abbr>q</abbr><expan>quam</expan></choice> regnaret rex in filiis <placeName>israel</placeName>. 
+        </ab>
+
+        <ab n="32">
+        Regnauit <choice><abbr>aut</abbr><expan>autem</expan></choice> in <placeName>edom</placeName> <persName>bale</persName> filius <persName>beor</persName>: et nomen ciuitatis eius <placeName>denaba</placeName>. 
+        </ab>
+
+        <ab n="33">
+        Mortuus est <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>bale</persName>: et regnauit pro eo <persName>iobab</persName> filius <persName>zare</persName> de <placeName>bosra</placeName>. 
+        </ab>
+
+        <ab n="34">
+        Mortuus est autem <persName>iobab</persName>: et regnauit pro eo <persName>husam</persName> de terra <placeName>australi</placeName>.
+        </ab>
+
+        <ab n="35">
+        Mortuusque est <persName>husam</persName>: et regnauit pro eo <persName>hadad</persName> filius <persName>bedad</persName>: qui interfecit <persName>madian</persName> in campestribus <placeName>moab</placeName>: et nomen vrbis eius <placeName>auith</placeName>. 
+        </ab>
+
+        <ab n="36">
+        Mortuusque est <persName>hadad</persName>: et regnauit pro eo <persName>semla</persName> de <placeName>maserecha</placeName>. 
+        </ab>
+
+        <ab n="37">
+        Mortuusque est <persName>semla</persName>: et regnauit pro eo <placeName>saul</placeName> de <persName>rooboth</persName>: que est iuxta <placeName>euphratem</placeName>. 
+        </ab>
+
+        <ab n="38">
+        Mortuusque est <persName>saul</persName>: et regnauit pro eo <persName>baalanam</persName> filius <persName>achobor</persName>. 
+        </ab>
+
+        <ab n="39">
+        Mortuusque est <persName>baalanam</persName> filius <persName>achobor</persName>: et regnauit pro eo <persName>adar</persName>: et nomen vrbis eius <placeName>phou</placeName>: et nomen vxoris eius <persName>mehetabel</persName> filia <persName>mathreth</persName>: filia aurificis. 
+        </ab>
+
+        <ab n="40">
+        Et hec sunt nomina principum <persName>esau</persName> <choice><abbr>sm</abbr><expan>secundum</expan></choice> cognationes eorum per loca eorum <choice><abbr>noibus</abbr><expan>nominibus</expan></choice> suis: dux <persName>thamna</persName>: dux <persName>alua</persName>: dux <persName>ietheth</persName>:
+        </ab>
+
+        <ab n="41">
+        dux <persName>oolibama</persName>: dux <persName>ela</persName>: dux <persName>phinon</persName>: 
+        </ab>
+
+        <ab n="42">
+        dux <persName>cenez</persName>: dux <persName>theman</persName>: dux <persName>mabsar</persName>: 
+        </ab>
+
+        <ab n="43">
+        dux <persName>magdihel</persName>: dux <persName>hiram</persName>. Hi duces <placeName>edom</placeName> in habitationibus suis in terra possessionis eorum: ipse est <persName>esau</persName> pater <persName>idumeorum</persName>. Habitatuit autem <persName>iacob</persName> in terra habitationis patris sui in terra <placeName>chanaan</placeName>. He sunt generationes <persName>iacob</persName>. 
+        </ab>
+
+        </div>
+
+        <div n="37">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="37" type="ordinal">37.</num></ab>
+
+        <ab n="2">
+        <persName>Ioseph</persName> filius erat decem et septem annorum quando pascebat oues cum fratribus suis: et ipse nutriebatur cum filiis <persName>bale</persName> et cum filiis <persName>zelphe</persName> vxorum patris sui. Et adduxit <persName>ioseph</persName> accusationem eorum malam ad patrem suum. 
+        </ab>
+
+        <ab n="3">
+        <placeName>Israel</placeName> autem diligebat <persName>ioseph</persName> <choice><abbr>plusq</abbr><expan>plusquam</expan></choice> vniuersos filios suos: quoniam filius sapiens erat ei. Fecitque ei tunicam polymitam: 
+        </ab>
+
+        <ab n="4">
+        et viderunt fratres eius <choice><abbr>q</abbr><expan>quod</expan></choice> diligeret eum pater suus <choice><abbr>plusq</abbr><expan>plusquam</expan></choice> <choice><abbr>oes</abbr><expan>omnes</expan></choice> fratres eius: et oderunt eum: et nolebant loqui pacifice cum eo. 
+        </ab>
+
+        <ab n="5">
+        Et somniauit <persName>ioseph</persName> somnium: et narrauit fratribus suis: et addiderunt amplius odio habere eum. 
+        </ab>
+
+        <ab n="6">
+        Et ait eis. Audite obsecro somnium hoc quod somniaui: 
+        </ab>
+
+        <ab n="7">
+        ecce ligabamus manipulos in medio agri: et ecce stabat manipulus meus: et etiam erigebatur: et ecce circundabant eum manipuli vestri: et adorabant manipulum meum. 
+        </ab>
+
+        <ab n="8">
+        Et dixerunt ei fratres sui. Nunquid regnare existimas super nos? aut dominari putas nostri? Et addiderunt amplius odio habere eum propter somnia sua: 
+        </ab>
+
+
         </div>
 
     </body>
