@@ -4615,9 +4615,88 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="16">
-        ille <choice><abbr>at</abbr><expan>autem</expan></choice> dixit: fratres meos <choice><abbr>qro</abbr><expan>quaero</expan></choice>: nuncia mihi vbi pascunt. dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ei <choice><abbr>ho</abbr><expan>homo</expan></choice>: recesserunt hinc. audiui <unclear>em</unclear> eos dicentes: eamus in <placeName>dothaim</placeName>.
+        ille <choice><abbr>at</abbr><expan>autem</expan></choice> dixit: fratres meos <choice><abbr>qro</abbr><expan>quaero</expan></choice>: nuncia mihi vbi pascunt. 
         </ab>
 
+        <ab n="17">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> ei <choice><abbr>ho</abbr><expan>homo</expan></choice>: recesserunt hinc. audiui <unclear>em</unclear> eos dicentes: eamus in <placeName>dothaim</placeName>. et abiit <persName>ioseph</persName> post fratres suos. et inuenit eos in <placeName>dothaim</placeName>. 
+        </ab>
+
+        <ab n="18">
+        <unclear>prouiderunt</unclear> <choice><abbr>at</abbr><expan>autem</expan></choice> eum alonge: <choice><abbr>anteq</abbr><expan>antequam</expan></choice> <choice><abbr>appropinqret</abbr><expan>appropinquaret</expan></choice> ipse ad eos. et malignati sunt vt occiderent illum. 
+        </ab>
+
+        <ab n="19">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>vnusqsque</abbr><expan>vnusquisque</expan></choice> ad <choice><abbr>frem</abbr><expan>fratrem</expan></choice> suum: ecce somniator ille venit. 
+        </ab>
+
+        <ab n="20">
+        nunc ergo venite interficiamus eum: et <unclear>proiiciamus</unclear> eum in vnam cisternarum. et dicemus: bestia mala deuorauit eum: et videbimus: <choice><abbr>qd</abbr><expan>quod</expan></choice> erunt somnia eius. 
+        </ab>
+
+        <ab n="21">
+        audiens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>ruben</persName>: abstulit eum de manibus eorum. et ait: non percutiamus eum in <choice><abbr>aiam</abbr><expan>animam</expan></choice>.
+        </ab>
+
+        <ab n="22">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> eis <persName>ruben</persName>: ne effundatis sanguinem: eiicite <choice><abbr>at</abbr><expan>autem</expan></choice> eum in vnam cisternarum haorum: que in solitudine: manum <choice><abbr>at</abbr><expan>autem</expan></choice> ne intuleritis ei: vt eriperet eum de manibus eorum: et redderet eum <choice><abbr>pri</abbr><expan>patri</expan></choice> suo. 
+        </ab>
+
+        <ab n="23">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>qn</abbr><expan>quando</expan></choice> venit <persName>ioseph</persName> ad fratres suos: exuerunt <persName>ioseph</persName> tunicam variam <choice><abbr>q</abbr><expan>quem</expan></choice> circa eum: 
+        </ab>
+
+        <ab n="24">
+        et accipientes eum <choice><abbr>proiecert</abbr><expan>proieceret</expan></choice> in cisternam. at cisterna vacua: aquam non habebat. 
+        </ab>
+
+        <ab n="25">
+        <choice><abbr>sedert</abbr><expan>sederunt</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> manducare panem. et respicientes oculis: viderunt. et ecce viatores <persName>ismaelite</persName> veniebant ex <placeName>galaad</placeName>. et cameli eorum pleni erant aromatibus et resina et stacie. ibant <choice><abbr>at</abbr><expan>autem</expan></choice> deducere in <placeName>egyptum</placeName>. 
+        </ab>
+
+        <ab n="26">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iudas</persName> ad fratres suos: <choice><abbr>qd</abbr><expan>quod</expan></choice> vtile: si occiderimus <choice><abbr>frem</abbr><expan>fratrem</expan></choice> <choice><abbr>nrm</abbr><expan>nostrum</expan></choice> et absconderimus sanguinem eius. 
+        </ab>
+
+        <ab n="27">
+        venite vendainus eum <persName>ismaelitis</persName> istis: at manus <choice><abbr>nre</abbr><expan>nostre</expan></choice> ne sint super eum: <choice><abbr>q</abbr><expan>quia</expan></choice> frater et caro <choice><abbr>nra</abbr><expan>nostra</expan></choice> est. obedierunt <choice><abbr>at</abbr><expan>autem</expan></choice> fratres eius: 
+        </ab>
+        
+        <ab n="28">
+        et preteribant <choice><abbr>hoies</abbr><expan>homines</expan></choice> madianite mercatores: et extraxerunt et ascendere <choice><abbr>fecert</abbr><expan>fecerunt</expan></choice> <persName>ioseph</persName> ex cisterna. et vendiderunt <persName>ioseph</persName> <persName>ismaelitis</persName> viginti aureis. et deduxerunt <persName>ioseph</persName> in <placeName>egyptum</placeName>. 
+        </ab>
+
+        <ab n="29">
+        reuersus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>ruben</persName> ad cisternam: et non inuenit <persName>ioseph</persName> in cisterna: et rupit vestimenta sua: 
+        </ab>
+
+        <ab n="30">
+        et reuersus est ad fratres suos: et ait: puer non est in cisterna: ego <choice><abbr>at</abbr><expan>autem</expan></choice> quo ibo adhuc. 
+        </ab>
+
+        <ab n="31">
+        accipientes <choice><abbr>at</abbr><expan>autem</expan></choice> tunicam <persName>ioseph</persName>: <choice><abbr>iugulauert</abbr><expan>iugulauerunt</expan></choice> hedum caprarum: et ppolluerunt tunicam variam. 
+        </ab>
+
+        <ab n="32">
+        et attulerunt <choice><abbr>pri</abbr><expan>patri</expan></choice> suo: et <choice><abbr>dixert</abbr><expan>dixerunt</expan></choice>: hanc inuenimus: nosce si tunica filii tui  est an non: et cognouit eam. 
+        </ab>
+
+        <ab n="33">
+        et ait: tunica filii mei est: bestia mala deuorauit eum: bestia rapuit <persName>ioseph</persName>. 
+        </ab>
+
+        <ab n="34">
+        rupit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> vestimenta sua: et imposuit cilicium super lumbum suum: et lugebat filium suu dies multos. 
+        </ab>
+
+        <ab n="35">
+        congregati sunt <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>oes</abbr><expan>omnes</expan></choice> filii eius et filie: et <choice><abbr>venert</abbr><expan>venerunt</expan></choice>: consolari eum: et non voluit consolationem accipere: dicens: <choice><abbr>q</abbr><expan>quod</expan></choice> descendam ad filium meum lugens in infernum. et fleuit eum <choice><abbr>pr</abbr><expan>pater</expan></choice> eius. 
+        </ab>
+
+        <ab n="36">
+        at madianite <choice><abbr>vendidert</abbr><expan>vendiderunt</expan></choice> <persName>ioseph</persName> in <placeName>egyptum</placeName> phutifari eunucho pharaonis principi coquorum. 
+        </ab>
 
 
 
