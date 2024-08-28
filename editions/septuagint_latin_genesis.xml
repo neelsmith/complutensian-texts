@@ -1856,7 +1856,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="6">
-        Et sestinauit <persName>abraam</persName> ad tabernaculum ad <persName>sarra</persName>: et dixit ei. Accelera: et commisce tres mensuras simile: et fac subcineritias
+        Et festinauit <persName>abraam</persName> ad tabernaculum ad <persName>sarra</persName>: et dixit ei. Accelera: et commisce tres mensuras simile: et fac subcineritias
         </ab>
 
         <ab n="7">
@@ -2599,7 +2599,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="18">
-        illa <choice><abbr>at</abbr><expan>autem</expan></choice> dixit: bibe <choice><abbr>dne</abbr><expan>domine</expan></choice>: et sestinauit: et deposuit hydriam super brachium suum et potauit eum: donec cessauit bibens. 
+        illa <choice><abbr>at</abbr><expan>autem</expan></choice> dixit: bibe <choice><abbr>dne</abbr><expan>domine</expan></choice>: et festinauit: et deposuit hydriam super brachium suum et potauit eum: donec cessauit bibens. 
         </ab>
 
         <ab n="19">
@@ -2607,7 +2607,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        et sestinauit et euacuauit hydriam in adaquatorium. et cucurrit iterum ad puteum vt hauriret et. et hausit aquam <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> camelis. 
+        et festinauit et euacuauit hydriam in adaquatorium. et cucurrit iterum ad puteum vt hauriret et. et hausit aquam <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> camelis. 
         </ab>
 
         <ab n="21">
@@ -2711,7 +2711,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="46">
-        et sestinans deposuit hydriam suam a seipsa. et dixit bibe tu: et camelis tuis potum dabo. et bibi: et camelos meos <choice><abbr>adaquit</abbr><expan>adaquauit</expan></choice>. 
+        et festinans deposuit hydriam suam a seipsa. et dixit bibe tu: et camelis tuis potum dabo. et bibi: et camelos meos <choice><abbr>adaquit</abbr><expan>adaquauit</expan></choice>. 
         </ab>
 
         <ab n="47">
