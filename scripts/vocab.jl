@@ -12,7 +12,7 @@ Reduce ambiguous orthography to equivalent of Latin 23
 by changing v/j to u/i.
 """
 function freqs(c::CitableTextCorpus; ortho = latin25())
-    lex = filter(tokenize(corpus, latin25())) do tkn
+    lex = filter(tokenize(c, latin25())) do tkn
         tokencategory(tkn) isa LexicalToken
     end
 

@@ -378,7 +378,6 @@ habito
 uocauerunt
 respondentes
 inualui
-euilat
 decepit
 fuerit
 facis
@@ -423,7 +422,6 @@ sepelierunt
 acquisiuit
 aduersus
 uenire
-castrametatus
 appropinquans
 suscitemus
 consenui
@@ -556,7 +554,6 @@ extendens
 occidi
 conplexus
 confuerunt
-uenatio
 conteret
 occiderit
 existentes
@@ -571,7 +568,6 @@ seruiet
 adaquauit
 numerauit
 deficit
-maledictio
 exuerunt
 immisit
 loquente
@@ -589,7 +585,6 @@ reddideris
 egisti
 dices
 percutere
-castrametata
 reuerti
 egrediamur
 respiciat
@@ -865,7 +860,6 @@ disponemus
 commisce
 seruauit
 derelinquam
-turturem
 habebit
 distinxit
 nabitur
@@ -996,7 +990,6 @@ inicias
 dormiui
 turbati
 producat
-diuisiones
 conteres
 admiratus
 diminuebatur
@@ -1093,7 +1086,7 @@ mouens
 fedit
 inueniebant
 donauit
-dnaberis
+dominaberis
 maledixit
 scens
 intrauit
@@ -1343,7 +1336,6 @@ somniauit
 uidebimus
 faciatis
 reliquisti
-cogitatio
 egreditur
 abibo
 reuertentur
@@ -1495,7 +1487,7 @@ comederitis
 preteriit
 diximus
 prouectus
-feccisti
+fecisti
 declinauerunt
 flere
 esset
