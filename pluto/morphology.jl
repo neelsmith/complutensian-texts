@@ -80,7 +80,7 @@ function iiifsvc()
 end
 
 # ╔═╡ 3dc65db9-8d1b-4f73-92b6-70a7c5ffce4e
-md"""> ## Structured repository"""
+md"""> ## Structured repository and texts"""
 
 # ╔═╡ 7f803a32-625b-4914-8532-b19b66014c57
 # Create EditingRepository for this notebook's repository
@@ -94,33 +94,36 @@ r =  begin
 	repository(dirname(pwd()))
 end
 
-# ╔═╡ 649f1c86-cdc3-4031-9fc9-f7fcbe736a94
-md"""> ## User selection of page"""
+# ╔═╡ 34543655-e9ce-4812-93a6-c620ce69c653
+corpus = normalizedcorpus(r)
 
-# ╔═╡ d2e25bbd-fb2f-4e02-9d15-ac2efc47b043
-"""Create a menu of string options with an initial blank item."""
-function surfacemenu()
-	options = [""]
-	for s in surfaces(r, strict = false)
-		push!(options, string(s))
-	end
-	options
+# ╔═╡ 8f15df66-1eec-43c6-bb60-51c246790bcb
+works = map(psg -> workcomponent(psg.urn), corpus.passages) |> unique
+
+# ╔═╡ c1cfd46c-7d70-49b3-b7bc-7dea13f3e013
+psgreff = filter(map(psg -> passagecomponent(psg.urn), corpus.passages) |> unique) do s
+	! endswith(s, "title")
 end
-
 
 # ╔═╡ 85d9046f-da64-4fd9-8ff0-093e9be4d7f2
-md"""## Choose a surface to verify
+md"""## Choose a passage to analyze
 
-$(@bind surface Select(surfacemenu()))
+$(@bind ref Select(psgreff))
 """
 
-# ╔═╡ df6a6494-6b76-4dd2-9410-7e0ac547d6df
-if ! isnothing(surface)
-	md"""Get texts for **$(surface)** and parse"""
-end
+# ╔═╡ 1d068ed9-d145-4d33-b01c-86623bd9ed8f
+lxxglosses = filter(psg -> workcomponent(psg.urn) == 
+"bible.genesis.sept_latin.normalized", corpus.passages)
 
-# ╔═╡ 73e3a049-7a59-4ff8-8b0f-94f0e7e35f18
-surfaceurn = isempty(surface) ? nothing  : Cite2Urn(surface)
+# ╔═╡ df6a6494-6b76-4dd2-9410-7e0ac547d6df
+septpsg = filter(psg -> passagecomponent(psg.urn) == ref, lxxglosses)
+
+# ╔═╡ def33c17-5d05-4b78-8e27-19ef976b2ff0
+targglosses = filter(psg -> workcomponent(psg.urn) == 
+"bible.genesis.targum_latin.normalized", corpus.passages)
+
+# ╔═╡ c061798b-a719-4b25-8b3a-08073bfd325e
+targpsg = filter(psg -> passagecomponent(psg.urn) == ref, targglosses)
 
 # ╔═╡ 62a5723b-3727-41ac-81b4-bcf63c857a7e
 md"""> ## Display CSS"""
@@ -1796,7 +1799,8 @@ version = "17.4.0+2"
 # ╟─260470fe-b5c2-41dc-bcdf-89be81ce07d3
 # ╟─47108cda-eaae-4c0b-a400-db973b7f6e26
 # ╟─85d9046f-da64-4fd9-8ff0-093e9be4d7f2
-# ╟─df6a6494-6b76-4dd2-9410-7e0ac547d6df
+# ╠═df6a6494-6b76-4dd2-9410-7e0ac547d6df
+# ╠═c061798b-a719-4b25-8b3a-08073bfd325e
 # ╟─85325db4-2d6d-4d48-b304-2214d50d746f
 # ╟─8bc9ffb0-1902-4a0d-9808-a597e0458dbc
 # ╟─025c84cd-e4bd-4c24-aad9-01dc0094feb1
@@ -1806,9 +1810,11 @@ version = "17.4.0+2"
 # ╟─b15f7f9c-163e-4f30-9419-d3e0ba925f93
 # ╟─3dc65db9-8d1b-4f73-92b6-70a7c5ffce4e
 # ╟─7f803a32-625b-4914-8532-b19b66014c57
-# ╟─649f1c86-cdc3-4031-9fc9-f7fcbe736a94
-# ╟─d2e25bbd-fb2f-4e02-9d15-ac2efc47b043
-# ╟─73e3a049-7a59-4ff8-8b0f-94f0e7e35f18
+# ╟─34543655-e9ce-4812-93a6-c620ce69c653
+# ╠═8f15df66-1eec-43c6-bb60-51c246790bcb
+# ╟─c1cfd46c-7d70-49b3-b7bc-7dea13f3e013
+# ╟─1d068ed9-d145-4d33-b01c-86623bd9ed8f
+# ╟─def33c17-5d05-4b78-8e27-19ef976b2ff0
 # ╟─62a5723b-3727-41ac-81b4-bcf63c857a7e
 # ╟─d71a59ab-5198-4b84-8a3f-7b1c2e48612e
 # ╟─b90d0e00-2df6-4de3-98a8-98b870aaa092
