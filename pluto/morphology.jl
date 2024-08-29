@@ -30,6 +30,8 @@ begin
 	using EditionBuilders
 	using Orthography
 
+	using CitableParserBuilder
+	using Tabulae
 	# Specific readers for your project:
 	using CitableTeiReaders
 	using LatinOrthography
@@ -48,6 +50,9 @@ md"""Validate Latin texts of Complutensian Bible by passage."""
 # ╔═╡ 47108cda-eaae-4c0b-a400-db973b7f6e26
 @bind loadem Button("Reload data from repository")
 
+# ╔═╡ 7a68deb6-4dfe-4917-bcfc-f655b86224bc
+
+
 # ╔═╡ 85325db4-2d6d-4d48-b304-2214d50d746f
 html"""
 <br/><br/><br/><br/><br/>
@@ -61,7 +66,18 @@ md"""> # Mechanics"""
 md"""> ## Parser"""
 
 # ╔═╡ 6a4c4bd7-7a06-4482-9c7b-3b7f9a1beb48
-md"""Do we need separate Lat23 and Lat25 parsers?"""
+p25file = joinpath(dirname(pwd()), "complut-parser25.cex")
+
+# ╔═╡ 501396c4-2be2-4b3c-8fe6-e5a841d33a90
+p25 = TabulaeStringParser(readlines(p25file), latin25(), "|")
+
+
+# ╔═╡ 940b4f2e-0989-4fc9-a764-5f35f791aeb4
+p23file = joinpath(dirname(pwd()), "complut-parser23.cex")
+
+# ╔═╡ f0d3cedb-332f-4a4e-98ad-b7f3c4e317a9
+p23 = TabulaeStringParser(readlines(p23file), latin23(), "|")
+
 
 # ╔═╡ f9ee99f4-1f08-4ed5-9131-7dc3489ebb37
 md"""> ## Image services"""
@@ -117,6 +133,21 @@ lxxglosses = filter(psg -> workcomponent(psg.urn) ==
 
 # ╔═╡ df6a6494-6b76-4dd2-9410-7e0ac547d6df
 septpsg = filter(psg -> passagecomponent(psg.urn) == ref, lxxglosses)
+
+# ╔═╡ b997998d-a91b-417f-812a-d7c4f82b58ed
+lxxwords = map(septpsg) do psg
+	lex = filter(tokenize(psg, latin23())) do tkn
+		tokencategory(tkn) isa LexicalToken
+	end
+	tokentext.(lex) .|> lowercase 
+
+end |> Iterators.flatten |> collect
+
+# ╔═╡ 07231346-1660-4666-b576-e5046550a4e3
+map(lxxwords) do w
+	(token = w, parses = parsetoken(w, p25))
+	
+end
 
 # ╔═╡ def33c17-5d05-4b78-8e27-19ef976b2ff0
 targglosses = filter(psg -> workcomponent(psg.urn) == 
@@ -221,6 +252,7 @@ CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableImage = "17ccb2e5-db19-44b3-b354-4fd16d92c74e"
 CitableObject = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
+CitableParserBuilder = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
 CitablePhysicalText = "e38a874e-a7c2-4ff3-8dea-81ae2e5c9b07"
 CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
@@ -230,12 +262,14 @@ LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
 
 [compat]
 CitableBase = "~10.4.0"
 CitableCorpus = "~0.13.5"
 CitableImage = "~0.7.1"
 CitableObject = "~0.16.1"
+CitableParserBuilder = "~0.29.0"
 CitablePhysicalText = "~0.11.0"
 CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
@@ -244,6 +278,7 @@ EditorsRepo = "~0.19.3"
 LatinOrthography = "~0.7.3"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.59"
+Tabulae = "~0.12.1"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -252,7 +287,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "f410b0dbd942ae02b8a1e8f48a612f721a45cff5"
+project_hash = "78c86e28e8113fa6f18bf1e1192ba6753927d71c"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -699,6 +734,11 @@ deps = ["Artifacts", "Expat_jll", "JLLWrappers", "LibCURL_jll", "Libdl", "Libico
 git-tree-sha1 = "d18fb8a1f3609361ebda9bf029b60fd0f120c809"
 uuid = "f8c6e375-362e-5223-8a59-34ff63f689eb"
 version = "2.44.0+2"
+
+[[deps.Glob]]
+git-tree-sha1 = "97285bbd5230dd766e9ef6749b80fc617126d496"
+uuid = "c27321d9-0574-5035-807b-f59d2c89b15c"
+version = "1.3.1"
 
 [[deps.Graphics]]
 deps = ["Colors", "LinearAlgebra", "NaNMath"]
@@ -1634,6 +1674,12 @@ git-tree-sha1 = "598cd7c1f68d1e205689b1c2fe65a9f85846f297"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 version = "1.12.0"
 
+[[deps.Tabulae]]
+deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
+git-tree-sha1 = "1e9ec7c403955b549560f01af63df0e257c721a6"
+uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
+version = "0.12.1"
+
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
@@ -1799,19 +1845,25 @@ version = "17.4.0+2"
 # ╟─260470fe-b5c2-41dc-bcdf-89be81ce07d3
 # ╟─47108cda-eaae-4c0b-a400-db973b7f6e26
 # ╟─85d9046f-da64-4fd9-8ff0-093e9be4d7f2
-# ╠═df6a6494-6b76-4dd2-9410-7e0ac547d6df
-# ╠═c061798b-a719-4b25-8b3a-08073bfd325e
+# ╟─df6a6494-6b76-4dd2-9410-7e0ac547d6df
+# ╠═b997998d-a91b-417f-812a-d7c4f82b58ed
+# ╠═07231346-1660-4666-b576-e5046550a4e3
+# ╠═7a68deb6-4dfe-4917-bcfc-f655b86224bc
+# ╟─c061798b-a719-4b25-8b3a-08073bfd325e
 # ╟─85325db4-2d6d-4d48-b304-2214d50d746f
 # ╟─8bc9ffb0-1902-4a0d-9808-a597e0458dbc
 # ╟─025c84cd-e4bd-4c24-aad9-01dc0094feb1
 # ╟─6a4c4bd7-7a06-4482-9c7b-3b7f9a1beb48
+# ╟─501396c4-2be2-4b3c-8fe6-e5a841d33a90
+# ╟─940b4f2e-0989-4fc9-a764-5f35f791aeb4
+# ╟─f0d3cedb-332f-4a4e-98ad-b7f3c4e317a9
 # ╟─f9ee99f4-1f08-4ed5-9131-7dc3489ebb37
 # ╟─7e280ab7-d56d-4f96-ba3f-1cc9535bc49a
 # ╟─b15f7f9c-163e-4f30-9419-d3e0ba925f93
 # ╟─3dc65db9-8d1b-4f73-92b6-70a7c5ffce4e
 # ╟─7f803a32-625b-4914-8532-b19b66014c57
 # ╟─34543655-e9ce-4812-93a6-c620ce69c653
-# ╠═8f15df66-1eec-43c6-bb60-51c246790bcb
+# ╟─8f15df66-1eec-43c6-bb60-51c246790bcb
 # ╟─c1cfd46c-7d70-49b3-b7bc-7dea13f3e013
 # ╟─1d068ed9-d145-4d33-b01c-86623bd9ed8f
 # ╟─def33c17-5d05-4b78-8e27-19ef976b2ff0
