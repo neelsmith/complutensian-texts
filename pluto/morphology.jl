@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.46
+# v0.19.43
 
 using Markdown
 using InteractiveUtils
@@ -23,17 +23,11 @@ begin
 	using CitableBase
 	using CitableText
 	using CitableCorpus
-	using CitableObject
-	using CitableImage
-	using CitablePhysicalText
-	using CitableTeiReaders
-	using EditionBuilders
-	using Orthography
 
 	using CitableParserBuilder
 	using Tabulae
-	# Specific readers for your project:
-	using CitableTeiReaders
+
+	using Orthography
 	using LatinOrthography
 
 	using Downloads
@@ -61,6 +55,9 @@ md"""## Density of verb expressions"""
 # ╔═╡ b840da80-2919-4b78-b952-e625674c651e
 md"""Graph parser coverage by passage (chapter?)"""
 
+# ╔═╡ 7592d9af-2d93-42ee-b6e7-7e8eb8775dc5
+md"""## Comparison by parts of speech"""
+
 # ╔═╡ 85325db4-2d6d-4d48-b304-2214d50d746f
 html"""
 <br/><br/><br/><br/><br/>
@@ -73,8 +70,17 @@ md"""> # Mechanics"""
 # ╔═╡ 2b27294c-3a59-44a6-b62a-7791ebc9955e
 md"""> ## Parsing output"""
 
+# ╔═╡ a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
+md""" ### Septuagint glosses"""
+
 # ╔═╡ 40b4a3b4-3d90-4a51-a792-f1e2c1df55aa
-#lxxverbs = filter(a -> isverb(latinForm(a)), lxxsuccesses)
+#lxxverbs = filter(a -> isverb(latinForm(a)), lxxparses)
+
+# ╔═╡ b241d50d-addf-4050-8f38-11d72a2ab78c
+
+
+# ╔═╡ 522b8f0d-3561-4bfa-9642-eff47e76dc58
+md"""### Targum glosses"""
 
 # ╔═╡ 87b0c22e-0e29-4e25-bd81-93904eaa06e1
 md"""Failures in septuagint glosses:"""
@@ -85,13 +91,54 @@ md"""Failures in Targum glosses:"""
 # ╔═╡ 99dbea8a-de0e-42b7-a218-9617e95c28a0
 md"""> ## Utilities"""
 
+# ╔═╡ 16353526-03bb-4263-b6ef-090bd0b59a6c
+"""Format quotient of part and whole as a rounded percentage."""
+function pct(part, whole)
+	((part / whole) * 100 ) |> round
+end
+
 # ╔═╡ 988813e9-a733-40cb-b0ca-ec0059755222
 """True if form is a verbal form."""
 function isverb(frm)
 	frm isa LMFFiniteVerb ||
 	frm isa LMFInfinitive ||
-	frm isa LMFParticiple #||
-	#frm isa LMFGerundive
+	frm isa LMFParticiple ||
+	frm isa LMFGerundive
+end
+
+# ╔═╡ 965a7ad1-b86d-4527-9cd9-986e3d621bb9
+"""True if any form in a list of analyses is a verb form."""
+function verbparse(parses)
+	verbal = false
+	for p in parses
+		try
+			#latform = latinForm(p)
+		catch
+			@warn("Error on $(p)")
+		end
+		#if isverb(latinForm(p))
+		#	verbal = true
+		#end
+	end
+	verbal
+end
+
+# ╔═╡ 0914ffc2-924a-4077-9067-f5f11774f04c
+"""Summarize a set of parses."""
+function linescore(parselist)
+	successes = filter(pr -> ! isempty(pr.parses), parselist)
+	successcount = successes |> length
+	total = length(parselist)
+	successpct = pct(successcount, total)
+
+	successparses =  map(pr -> pr.parses, successes)	
+	verbcount = filter(successparses) do plist
+		verbparse(plist)
+	end |> length
+	verbpct = pct(verbcount, successcount)
+
+	
+	(total, successcount, successpct, verbcount, verbpct)
 end
 
 # ╔═╡ 025c84cd-e4bd-4c24-aad9-01dc0094feb1
@@ -217,14 +264,8 @@ lxxparses = map(lxxlex) do tkn
 	(token = tkn, parses = parsetoken(tkn, p23))
 end
 
-# ╔═╡ da5fc59d-8ab3-41cc-8dce-dbd1d8872df1
-lxxsuccesses = filter(pr -> ! isempty(pr.parses), lxxparses)
-
-# ╔═╡ 786947ec-fd0f-4920-a776-98b118cb452e
-length(lxxsuccesses)
-
-# ╔═╡ 9edf3d36-4666-4603-8647-40dce77ae920
-length(lxxparses)
+# ╔═╡ c32a1dad-cf71-4580-bf72-9750f2dc9887
+(lxxtokens, lxxparsed, lxxparsedpct, lxxverbs, lxxverbpct) = linescore(lxxparses)
 
 # ╔═╡ 7035f44b-c522-4648-9c7c-0fc8c9df3cdb
 lxxfails = map(filter(pr -> isempty(pr.parses), lxxparses)) do pr
@@ -234,14 +275,8 @@ end |> unique
 # ╔═╡ cb80e7ca-c463-4986-98e4-75f507fa1aba
 @bind badlxx Select(lxxfails)
 
-# ╔═╡ 16353526-03bb-4263-b6ef-090bd0b59a6c
-"""Format rounded percentage."""
-function pct(part, whole)
-	100 * (length(lxxsuccesses) / length(lxxparses)) |> round
-end
-
-# ╔═╡ 348ac9a1-9f0a-4b58-a0f4-b53bfe1894d1
-lxxpct = pct(length(lxxsuccesses), length(lxxparses))
+# ╔═╡ 2e688cc4-f64a-4558-a54f-6f9a9120330d
+verbparse.(map(pr -> pr.parses, lxxparses))
 
 # ╔═╡ def33c17-5d05-4b78-8e27-19ef976b2ff0
 targglosses = filter(psg -> workcomponent(psg.urn) == 
@@ -266,6 +301,9 @@ targparses = map(targlex) do tkn
 	(token = tkn, parses = parsetoken(tkn, p23))
 end
 
+# ╔═╡ a6efed6c-479c-4ed9-859c-7c8f17bae6a9
+(targtokens, targparsed, targparsedpct, targverbs, targverbpct) = linescore(targparses)
+
 # ╔═╡ 92e4a10b-ab4f-489b-ae93-e48575c6ca4a
 targsuccesses = filter(pr -> ! isempty(pr.parses), targparses)
 
@@ -276,8 +314,8 @@ targpct =  pct(length(targsuccesses), length(targparses))
 md"""
 | | Tokens | Distinct tokens | Analyzed | Pct | Verbs | Pct of analyzed|
 | --- | --- | --- | --- | --- | --- | --- |
-| LXX glosses | $(length(lxxlextokens))| $(length(lxxparses)) | $(length(lxxsuccesses)) | $(lxxpct) | | |
-| Targum glosses |$(length(targlextokens)) |  $(length(targparses))| $(length(targsuccesses)) | $(targpct) |||
+| LXX glosses | $(length(lxxlextokens))| $(lxxtokens) | $(lxxparsed) | $(lxxparsedpct) | $(lxxverbs) | $(lxxverbpct) |
+| Targum glosses |$(length(targlextokens)) |  $(targtokens)| $(targparsed) | $(targpct) | $(targverbs) | $(targverbpct) |
 
 """
 
@@ -383,14 +421,9 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
-CitableImage = "17ccb2e5-db19-44b3-b354-4fd16d92c74e"
-CitableObject = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
 CitableParserBuilder = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
-CitablePhysicalText = "e38a874e-a7c2-4ff3-8dea-81ae2e5c9b07"
-CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
 Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
 EditorsRepo = "3fa2051c-bcb6-4d65-8a68-41ff86d56437"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
@@ -401,27 +434,22 @@ Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
 [compat]
 CitableBase = "~10.4.0"
 CitableCorpus = "~0.13.5"
-CitableImage = "~0.7.1"
-CitableObject = "~0.16.1"
-CitableParserBuilder = "~0.29.0"
-CitablePhysicalText = "~0.11.0"
-CitableTeiReaders = "~0.10.3"
+CitableParserBuilder = "~0.30.1"
 CitableText = "~0.16.2"
-EditionBuilders = "~0.8.5"
-EditorsRepo = "~0.19.3"
+EditorsRepo = "~0.19.4"
 LatinOrthography = "~0.7.3"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.60"
-Tabulae = "~0.12.1"
+Tabulae = "~0.13.2"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "bbfda284b312fefe3e5dd98599575daebf50cb6d"
+project_hash = "d61b3c39c8b20fe1be33317919ca56f8e5f7b247"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -588,9 +616,9 @@ version = "0.16.1"
 
 [[deps.CitableParserBuilder]]
 deps = ["CSV", "CitableBase", "CitableCorpus", "CitableObject", "CitableText", "Compat", "DataFrames", "Dictionaries", "DocStringExtensions", "Documenter", "Downloads", "OrderedCollections", "Orthography", "StatsBase", "Test", "TestSetExtensions", "TypedTables"]
-git-tree-sha1 = "fbce105543993f657c2a6a18d98e640eed3bbc70"
+git-tree-sha1 = "57ddf6f5aa12c616d993f3c50236bfb8d531d687"
 uuid = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
-version = "0.29.0"
+version = "0.30.1"
 
 [[deps.CitablePhysicalText]]
 deps = ["CitableBase", "CitableImage", "CitableObject", "CitableText", "CiteEXchange", "DocStringExtensions", "Documenter", "HTTP", "SplitApplyCombine", "Test", "TestSetExtensions"]
@@ -676,7 +704,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.1.1+0"
 
 [[deps.ComputationalResources]]
 git-tree-sha1 = "52cb3ec90e8a8bea0e62e275ba577ad0f74821f7"
@@ -788,9 +816,9 @@ version = "0.8.5"
 
 [[deps.EditorsRepo]]
 deps = ["CSV", "CitableBase", "CitableCorpus", "CitableImage", "CitableObject", "CitableParserBuilder", "CitablePhysicalText", "CitableTeiReaders", "CitableText", "CiteEXchange", "DocStringExtensions", "Documenter", "EditionBuilders", "Orthography", "Tables", "Test", "TypedTables"]
-git-tree-sha1 = "e58720d81b4c2070d0c7be97173ce20d1111b6fc"
+git-tree-sha1 = "3e455dd16b22066e617b7cfbd469a7bbe4652a99"
 uuid = "3fa2051c-bcb6-4d65-8a68-41ff86d56437"
-version = "0.19.3"
+version = "0.19.4"
 
 [[deps.ExceptionUnwrapping]]
 deps = ["Test"]
@@ -1083,10 +1111,10 @@ uuid = "1d092043-8f09-5a30-832f-7509e371ab51"
 version = "0.1.5"
 
 [[deps.IntelOpenMP_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "14eb2b542e748570b56446f4c50fbfb2306ebc45"
+deps = ["Artifacts", "JLLWrappers", "LazyArtifacts", "Libdl"]
+git-tree-sha1 = "10bd689145d2c3b2a9844005d01087cc1194e79e"
 uuid = "1d5cc7b8-4909-519e-a0f8-d0f5ad9712d0"
-version = "2024.2.0+0"
+version = "2024.2.1+0"
 
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
@@ -1813,9 +1841,9 @@ version = "1.12.0"
 
 [[deps.Tabulae]]
 deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "1e9ec7c403955b549560f01af63df0e257c721a6"
+git-tree-sha1 = "ba0ea42449ea25c370a72481c2c3665069483019"
 uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-version = "0.12.1"
+version = "0.13.2"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -1976,7 +2004,7 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═32f2923a-0e59-46c2-9781-096759165936
+# ╟─32f2923a-0e59-46c2-9781-096759165936
 # ╟─5d314426-e3c1-46bc-adc6-416b7abedc6a
 # ╟─99731564-660e-11ef-0e61-35a897945007
 # ╟─260470fe-b5c2-41dc-bcdf-89be81ce07d3
@@ -1992,21 +2020,24 @@ version = "17.4.0+2"
 # ╟─41926534-d24d-4048-a4af-9c0cc60cde8e
 # ╟─5d9e358d-d5ad-486b-96b2-457ccf9a26e5
 # ╟─b840da80-2919-4b78-b952-e625674c651e
+# ╟─7592d9af-2d93-42ee-b6e7-7e8eb8775dc5
 # ╟─85325db4-2d6d-4d48-b304-2214d50d746f
 # ╟─8bc9ffb0-1902-4a0d-9808-a597e0458dbc
 # ╟─2b27294c-3a59-44a6-b62a-7791ebc9955e
+# ╠═0914ffc2-924a-4077-9067-f5f11774f04c
+# ╟─a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
 # ╟─f7d5fece-a95d-43b6-9dea-9fc8439eedce
-# ╟─179d1f83-0e42-4135-8f35-7bce51d50163
 # ╟─e68b336c-1b91-4d16-896b-017e6241131f
-# ╟─e8f0dbd0-c3a2-4123-b156-4ba6e370ccbf
 # ╟─5209a61f-b51e-4b1b-b6e0-2d5bb7e6f3f6
-# ╟─fb3b7301-48ef-4bd1-ab5e-9d2f108868cf
-# ╟─da5fc59d-8ab3-41cc-8dce-dbd1d8872df1
-# ╟─92e4a10b-ab4f-489b-ae93-e48575c6ca4a
+# ╠═c32a1dad-cf71-4580-bf72-9750f2dc9887
 # ╠═40b4a3b4-3d90-4a51-a792-f1e2c1df55aa
-# ╠═786947ec-fd0f-4920-a776-98b118cb452e
-# ╠═9edf3d36-4666-4603-8647-40dce77ae920
-# ╠═348ac9a1-9f0a-4b58-a0f4-b53bfe1894d1
+# ╠═b241d50d-addf-4050-8f38-11d72a2ab78c
+# ╟─522b8f0d-3561-4bfa-9642-eff47e76dc58
+# ╟─179d1f83-0e42-4135-8f35-7bce51d50163
+# ╟─e8f0dbd0-c3a2-4123-b156-4ba6e370ccbf
+# ╟─fb3b7301-48ef-4bd1-ab5e-9d2f108868cf
+# ╠═a6efed6c-479c-4ed9-859c-7c8f17bae6a9
+# ╟─92e4a10b-ab4f-489b-ae93-e48575c6ca4a
 # ╠═cf0d966b-a0d6-431c-891e-a42ba0f3d87b
 # ╠═7035f44b-c522-4648-9c7c-0fc8c9df3cdb
 # ╟─3719e8bd-13e9-4da0-8ded-61bad5b84c77
@@ -2017,6 +2048,8 @@ version = "17.4.0+2"
 # ╟─99dbea8a-de0e-42b7-a218-9617e95c28a0
 # ╟─16353526-03bb-4263-b6ef-090bd0b59a6c
 # ╟─988813e9-a733-40cb-b0ca-ec0059755222
+# ╠═965a7ad1-b86d-4527-9cd9-986e3d621bb9
+# ╠═2e688cc4-f64a-4558-a54f-6f9a9120330d
 # ╟─025c84cd-e4bd-4c24-aad9-01dc0094feb1
 # ╟─501396c4-2be2-4b3c-8fe6-e5a841d33a90
 # ╟─f0d3cedb-332f-4a4e-98ad-b7f3c4e317a9
