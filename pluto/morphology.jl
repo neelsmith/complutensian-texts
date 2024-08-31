@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.43
+# v0.19.46
 
 using Markdown
 using InteractiveUtils
@@ -76,11 +76,20 @@ md""" ### Septuagint glosses"""
 # ╔═╡ 40b4a3b4-3d90-4a51-a792-f1e2c1df55aa
 #lxxverbs = filter(a -> isverb(latinForm(a)), lxxparses)
 
-# ╔═╡ b241d50d-addf-4050-8f38-11d72a2ab78c
-
-
 # ╔═╡ 522b8f0d-3561-4bfa-9642-eff47e76dc58
 md"""### Targum glosses"""
+
+# ╔═╡ da2d395e-2223-4fc2-845c-ba716201cffb
+
+
+# ╔═╡ 55734c1f-7ab3-4b74-a309-966034339ba1
+
+
+# ╔═╡ 7d37e4b0-eb33-4593-8dd7-81eaa94114a1
+md""" ### Vulgate"""
+
+# ╔═╡ f47c00d4-a340-4540-8fa7-284915c809d7
+md""" ### Failure lists"""
 
 # ╔═╡ 87b0c22e-0e29-4e25-bd81-93904eaa06e1
 md"""Failures in septuagint glosses:"""
@@ -112,7 +121,7 @@ function verbparse(parses)
 	verbal = false
 	for p in parses
 		try
-			#latform = latinForm(p)
+			latform = latinForm(p)
 		catch
 			@warn("Error on $(p)")
 		end
@@ -146,7 +155,7 @@ md"""> ## Parser"""
 
 # ╔═╡ 0d80fd63-2103-463c-a71b-e09f60d3602e
 function buildp25()
-	url = "http://shot.holycross.edu/morphology/complut-lat25-current.cex"
+	url = "http://shot.holycross.edu/complutensian/complut-lat25-current.cex"
 	f = Downloads.download(url)
 	data = readlines(f)
 	rm(f)
@@ -160,7 +169,7 @@ p25 = buildp25() #TabulaeStringParser(readlines(p25file), latin25(), "|")
 
 # ╔═╡ 38a0ad3b-c8f5-4f70-8b6b-1a6ef4585729
 function buildp23()
-	url = "http://shot.holycross.edu/morphology/complut-lat23-current.cex"
+	url = "http://shot.holycross.edu/complutensian/complut-lat23-current.cex"
 	f = Downloads.download(url)
 	data = readlines(f)
 	rm(f)
@@ -304,21 +313,6 @@ end
 # ╔═╡ a6efed6c-479c-4ed9-859c-7c8f17bae6a9
 (targtokens, targparsed, targparsedpct, targverbs, targverbpct) = linescore(targparses)
 
-# ╔═╡ 92e4a10b-ab4f-489b-ae93-e48575c6ca4a
-targsuccesses = filter(pr -> ! isempty(pr.parses), targparses)
-
-# ╔═╡ cf0d966b-a0d6-431c-891e-a42ba0f3d87b
-targpct =  pct(length(targsuccesses), length(targparses))
-
-# ╔═╡ 41926534-d24d-4048-a4af-9c0cc60cde8e
-md"""
-| | Tokens | Distinct tokens | Analyzed | Pct | Verbs | Pct of analyzed|
-| --- | --- | --- | --- | --- | --- | --- |
-| LXX glosses | $(length(lxxlextokens))| $(lxxtokens) | $(lxxparsed) | $(lxxparsedpct) | $(lxxverbs) | $(lxxverbpct) |
-| Targum glosses |$(length(targlextokens)) |  $(targtokens)| $(targparsed) | $(targpct) | $(targverbs) | $(targverbpct) |
-
-"""
-
 # ╔═╡ 3719e8bd-13e9-4da0-8ded-61bad5b84c77
 targfails = map(filter(pr -> isempty(pr.parses), targparses)) do pr
 	pr.token
@@ -326,6 +320,51 @@ end |> unique
 
 # ╔═╡ 7b936adf-cbae-4fc6-bfb1-1969abdb06a4
 @bind badtarg Select(targfails)
+
+# ╔═╡ cd45fc24-bb49-44e7-99a7-e8f00546c059
+md"""> ## Other texts"""
+
+# ╔═╡ ad83b6fa-fdfc-4816-96a6-8cdc03e0b9af
+function vulg()
+	url = "https://github.com/neelsmith/compnov/raw/main/corpus/compnov.cex"
+	c = fromcex(url, CitableTextCorpus, UrlReader)
+	filter(p -> versionid(p.urn) == "vulgate", c.passages) |> CitableTextCorpus
+end
+
+# ╔═╡ 2187d1dd-6786-4dc8-8b50-212f0517a51d
+vulgate = vulg()
+
+# ╔═╡ f6a75c0e-1d78-447e-b39b-ed1d24fdebe7
+vulgate_genesis = filter(p -> workid(p.urn) == "genesis", vulgate.passages) |> CitableTextCorpus
+
+# ╔═╡ c79baf2a-2f0d-43d4-aead-2ed5b0aea55c
+vulgatelextokens = filter(tokenize(vulgate_genesis, latin25())) do ct
+	tokencategory(ct) isa LexicalToken
+end
+
+# ╔═╡ 72a6e056-41df-4d84-ad4f-3c8f5ea7c13b
+vulgatelex = map(tkn -> tokentext(tkn), vulgatelextokens) .|> lowercase |> unique |> sort
+
+# ╔═╡ 11b343b9-7a42-4826-b5ba-951e9a0dc6f9
+vulgateparses = map(vulgatelex) do tkn
+	(token = tkn, parses = parsetoken(tkn, p25))
+end
+
+# ╔═╡ 70ee88af-d776-4148-871e-adb8a4c7007b
+(vulgtokens, vulgparsed, vulgparsedpct, vulgverbs, vulgverbpct) = linescore(vulgateparses)
+
+# ╔═╡ 41926534-d24d-4048-a4af-9c0cc60cde8e
+md"""
+| | Tokens | Distinct tokens | Analyzed | Pct | Verbs | Pct of analyzed|
+| --- | --- | --- | --- | --- | --- | --- |
+| LXX glosses | $(length(lxxlextokens))| $(lxxtokens) | $(lxxparsed) | $(lxxparsedpct) | $(lxxverbs) | $(lxxverbpct) |
+| Targum glosses |$(length(targlextokens)) |  $(targtokens)| $(targparsed) | $(targparsedpct) | $(targverbs) | $(targverbpct) |
+| Vulgate *Genesis* | $(length(vulgatelextokens)) | $(vulgtokens) | $(vulgparsed) | $(vulgparsedpct) | $(vulgverbs) | $(vulgverbpct) |
+
+"""
+
+# ╔═╡ 91d9b49f-1e11-4ea6-a572-6e1ad54eeade
+vulgtokens, vulgparsed, vulgparsedpct, vulgverbs, vulgverbpct
 
 # ╔═╡ 62a5723b-3727-41ac-81b4-bcf63c857a7e
 md"""> ## Display CSS"""
@@ -447,7 +486,7 @@ Tabulae = "~0.13.2"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.4"
+julia_version = "1.10.1"
 manifest_format = "2.0"
 project_hash = "d61b3c39c8b20fe1be33317919ca56f8e5f7b247"
 
@@ -704,7 +743,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.1+0"
+version = "1.1.0+0"
 
 [[deps.ComputationalResources]]
 git-tree-sha1 = "52cb3ec90e8a8bea0e62e275ba577ad0f74821f7"
@@ -1171,9 +1210,9 @@ version = "0.4.52"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
-git-tree-sha1 = "7e5d6779a1e09a36db2a7b6cff50942a0a7d0fca"
+git-tree-sha1 = "f389674c99bfcde17dc57454011aa44d5a260a40"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.5.0"
+version = "1.6.0"
 
 [[deps.JSON]]
 deps = ["Dates", "Mmap", "Parsers", "Unicode"]
@@ -2018,6 +2057,7 @@ version = "17.4.0+2"
 # ╟─c061798b-a719-4b25-8b3a-08073bfd325e
 # ╟─4c3db11f-83d3-48ac-b454-32337e812827
 # ╟─41926534-d24d-4048-a4af-9c0cc60cde8e
+# ╠═91d9b49f-1e11-4ea6-a572-6e1ad54eeade
 # ╟─5d9e358d-d5ad-486b-96b2-457ccf9a26e5
 # ╟─b840da80-2919-4b78-b952-e625674c651e
 # ╟─7592d9af-2d93-42ee-b6e7-7e8eb8775dc5
@@ -2031,14 +2071,19 @@ version = "17.4.0+2"
 # ╟─5209a61f-b51e-4b1b-b6e0-2d5bb7e6f3f6
 # ╠═c32a1dad-cf71-4580-bf72-9750f2dc9887
 # ╠═40b4a3b4-3d90-4a51-a792-f1e2c1df55aa
-# ╠═b241d50d-addf-4050-8f38-11d72a2ab78c
 # ╟─522b8f0d-3561-4bfa-9642-eff47e76dc58
-# ╟─179d1f83-0e42-4135-8f35-7bce51d50163
+# ╠═179d1f83-0e42-4135-8f35-7bce51d50163
 # ╟─e8f0dbd0-c3a2-4123-b156-4ba6e370ccbf
-# ╟─fb3b7301-48ef-4bd1-ab5e-9d2f108868cf
+# ╠═fb3b7301-48ef-4bd1-ab5e-9d2f108868cf
 # ╠═a6efed6c-479c-4ed9-859c-7c8f17bae6a9
-# ╟─92e4a10b-ab4f-489b-ae93-e48575c6ca4a
-# ╠═cf0d966b-a0d6-431c-891e-a42ba0f3d87b
+# ╠═da2d395e-2223-4fc2-845c-ba716201cffb
+# ╠═55734c1f-7ab3-4b74-a309-966034339ba1
+# ╟─7d37e4b0-eb33-4593-8dd7-81eaa94114a1
+# ╟─c79baf2a-2f0d-43d4-aead-2ed5b0aea55c
+# ╟─72a6e056-41df-4d84-ad4f-3c8f5ea7c13b
+# ╠═11b343b9-7a42-4826-b5ba-951e9a0dc6f9
+# ╠═70ee88af-d776-4148-871e-adb8a4c7007b
+# ╟─f47c00d4-a340-4540-8fa7-284915c809d7
 # ╠═7035f44b-c522-4648-9c7c-0fc8c9df3cdb
 # ╟─3719e8bd-13e9-4da0-8ded-61bad5b84c77
 # ╟─87b0c22e-0e29-4e25-bd81-93904eaa06e1
@@ -2067,6 +2112,10 @@ version = "17.4.0+2"
 # ╟─30d89e0d-5051-4ae5-b671-91ac1be98383
 # ╟─def33c17-5d05-4b78-8e27-19ef976b2ff0
 # ╟─b569786d-de01-42fc-a11e-fb458fd69019
+# ╟─cd45fc24-bb49-44e7-99a7-e8f00546c059
+# ╟─2187d1dd-6786-4dc8-8b50-212f0517a51d
+# ╟─f6a75c0e-1d78-447e-b39b-ed1d24fdebe7
+# ╟─ad83b6fa-fdfc-4816-96a6-8cdc03e0b9af
 # ╟─62a5723b-3727-41ac-81b4-bcf63c857a7e
 # ╟─d71a59ab-5198-4b84-8a3f-7b1c2e48612e
 # ╟─b90d0e00-2df6-4de3-98a8-98b870aaa092
