@@ -99,10 +99,15 @@ ortho25 = latin25()
 # ╔═╡ 07f9a37b-a39a-452c-a705-3d51d1430c8b
 """True if analysis has a verb form."""
 function verbform(a::Analysis)
+	try 
 	latform = latinForm(a)
 	latform isa LMFFiniteVerb ||
 	latform isa LMFInfinitive ||
 	latform isa LMFParticiple 
+	catch
+		@info("Wooa, filed on analysis $(cex(a))")
+		false
+	end
 end
 
 # ╔═╡ 86022f06-27b8-480c-b2b6-446d2eb059a1
@@ -370,7 +375,7 @@ HypertextLiteral = "~0.9.5"
 LatinOrthography = "~0.7.3"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.60"
-Tabulae = "~0.13.2"
+Tabulae = "~0.13.3"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -379,7 +384,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "4298cbbce36e91d6acbc8feb00922583676c7dd4"
+project_hash = "54d0b22e381f560ab2206acc19c10015f7236c5b"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1015,9 +1020,9 @@ version = "1.12.0"
 
 [[deps.Tabulae]]
 deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "ba0ea42449ea25c370a72481c2c3665069483019"
+git-tree-sha1 = "9f3a302872478f434117b2cbd8067c6ef2fde0a2"
 uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-version = "0.13.2"
+version = "0.13.3"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -1116,11 +1121,11 @@ version = "17.4.0+2"
 # ╟─db93c0c9-4848-4b32-a090-8c57c605e633
 # ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
 # ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
-# ╠═ae699e89-b241-42ee-85ca-bfed095d8037
+# ╟─ae699e89-b241-42ee-85ca-bfed095d8037
 # ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
 # ╟─15f946b0-6261-4369-900f-aaa6605175d5
 # ╟─4a9214db-c200-4e3b-944d-45a67a2c85a7
-# ╟─07f9a37b-a39a-452c-a705-3d51d1430c8b
+# ╠═07f9a37b-a39a-452c-a705-3d51d1430c8b
 # ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
 # ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
 # ╠═7b5000d9-7208-4075-8206-dec7b96de23d

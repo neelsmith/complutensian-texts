@@ -30,6 +30,9 @@ begin
 	using Orthography
 	using LatinOrthography
 
+	using StatsBase
+	using OrderedCollections
+
 	using Downloads
 	md"""*To see Julia environment, unhide this cell*."""
 end
@@ -40,14 +43,11 @@ TableOfContents()
 # ╔═╡ 99731564-660e-11ef-0e61-35a897945007
 md"""# Analyze morphology"""
 
-# ╔═╡ 260470fe-b5c2-41dc-bcdf-89be81ce07d3
-md"""Validate Latin texts of Complutensian Bible by passage."""
-
 # ╔═╡ 47108cda-eaae-4c0b-a400-db973b7f6e26
 @bind loadem Button("Reload data from repository")
 
 # ╔═╡ 4c3db11f-83d3-48ac-b454-32337e812827
-md"""## Overview of texts"""
+md"""## Overview of morphological analysis"""
 
 # ╔═╡ 5d9e358d-d5ad-486b-96b2-457ccf9a26e5
 md"""## Density of verb expressions"""
@@ -56,7 +56,7 @@ md"""## Density of verb expressions"""
 md"""Graph parser coverage by passage (chapter?)"""
 
 # ╔═╡ 7592d9af-2d93-42ee-b6e7-7e8eb8775dc5
-md"""## Comparison by parts of speech"""
+md"""## Summary of verbal constructions"""
 
 # ╔═╡ 85325db4-2d6d-4d48-b304-2214d50d746f
 html"""
@@ -70,20 +70,29 @@ md"""> # Mechanics"""
 # ╔═╡ 2b27294c-3a59-44a6-b62a-7791ebc9955e
 md"""> ## Parsing output"""
 
+# ╔═╡ c314775e-6c45-496b-992e-63490d86e243
+function verbsummary()
+	verbtokens = 0
+	totalanalyzed = 0
+	
+	distinctverbtokens = 0
+	distinctanalyzed = 0
+
+	finite = 0
+	infinitive = 0
+	gerundival = 0
+	participle = 0
+	
+end
+
 # ╔═╡ a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
 md""" ### Septuagint glosses"""
 
-# ╔═╡ 40b4a3b4-3d90-4a51-a792-f1e2c1df55aa
-#lxxverbs = filter(a -> isverb(latinForm(a)), lxxparses)
+# ╔═╡ 5209a61f-b51e-4b1b-b6e0-2d5bb7e6f3f6
+
 
 # ╔═╡ 522b8f0d-3561-4bfa-9642-eff47e76dc58
 md"""### Targum glosses"""
-
-# ╔═╡ da2d395e-2223-4fc2-845c-ba716201cffb
-
-
-# ╔═╡ 55734c1f-7ab3-4b74-a309-966034339ba1
-
 
 # ╔═╡ 7d37e4b0-eb33-4593-8dd7-81eaa94114a1
 md""" ### Vulgate"""
@@ -91,11 +100,27 @@ md""" ### Vulgate"""
 # ╔═╡ f47c00d4-a340-4540-8fa7-284915c809d7
 md""" ### Failure lists"""
 
+# ╔═╡ 7035f44b-c522-4648-9c7c-0fc8c9df3cdb
+#lxxfails = map(filter(pr -> isempty(pr.parses), lxxparses)) do pr
+#	pr.token
+#end |> unique
+
+# ╔═╡ 3719e8bd-13e9-4da0-8ded-61bad5b84c77
+#targfails = map(filter(pr -> isempty(pr.parses), targparses)) do pr
+#	pr.token
+#end |> unique
+
 # ╔═╡ 87b0c22e-0e29-4e25-bd81-93904eaa06e1
 md"""Failures in septuagint glosses:"""
 
+# ╔═╡ cb80e7ca-c463-4986-98e4-75f507fa1aba
+#@bind badlxx Select(lxxfails)
+
 # ╔═╡ 392d537b-cc07-4f1d-9011-2d0bc70feace
 md"""Failures in Targum glosses:"""
+
+# ╔═╡ 7b936adf-cbae-4fc6-bfb1-1969abdb06a4
+#@bind badtarg Select(targfails)
 
 # ╔═╡ 99dbea8a-de0e-42b7-a218-9617e95c28a0
 md"""> ## Utilities"""
@@ -106,15 +131,6 @@ function pct(part, whole)
 	((part / whole) * 100 ) |> round
 end
 
-# ╔═╡ 988813e9-a733-40cb-b0ca-ec0059755222
-"""True if form is a verbal form."""
-function isverb(frm)
-	frm isa LMFFiniteVerb ||
-	frm isa LMFInfinitive ||
-	frm isa LMFParticiple ||
-	frm isa LMFGerundive
-end
-
 # ╔═╡ 965a7ad1-b86d-4527-9cd9-986e3d621bb9
 """True if any form in a list of analyses is a verb form."""
 function verbparse(parses)
@@ -122,32 +138,14 @@ function verbparse(parses)
 	for p in parses
 		try
 			latform = latinForm(p)
+			if is_verb(latform)
+				verbal = true
+			end
 		catch
 			@warn("Error on $(p)")
 		end
-		#if isverb(latinForm(p))
-		#	verbal = true
-		#end
 	end
 	verbal
-end
-
-# ╔═╡ 0914ffc2-924a-4077-9067-f5f11774f04c
-"""Summarize a set of parses."""
-function linescore(parselist)
-	successes = filter(pr -> ! isempty(pr.parses), parselist)
-	successcount = successes |> length
-	total = length(parselist)
-	successpct = pct(successcount, total)
-
-	successparses =  map(pr -> pr.parses, successes)	
-	verbcount = filter(successparses) do plist
-		verbparse(plist)
-	end |> length
-	verbpct = pct(verbcount, successcount)
-
-	
-	(total, successcount, successpct, verbcount, verbpct)
 end
 
 # ╔═╡ 025c84cd-e4bd-4c24-aad9-01dc0094feb1
@@ -179,6 +177,64 @@ end
 # ╔═╡ f0d3cedb-332f-4a4e-98ad-b7f3c4e317a9
 p23 = buildp23()
 
+
+# ╔═╡ 0914ffc2-924a-4077-9067-f5f11774f04c
+"""Summarize a set of parses."""
+function linescore(corp; ortho = latin23())
+	lextokens = filter(tokenize(corp, ortho)) do ct
+		tokencategory(ct) isa LexicalToken
+	end
+	total = length(lextokens)
+
+	
+
+	
+	
+	lex = map(tkn -> tokentext(tkn), lextokens) .|> lowercase |> unique |> sort
+	totaldistinct = length(lex)
+	
+	parselist = map(lex) do tkn
+		(token = tkn, parses = parsetoken(tkn, p23))
+	end
+
+
+	
+	successes = filter(pr -> ! isempty(pr.parses), parselist)
+
+	## Count number of distinct lexemes that succeeded:
+	successcount = successes |> length
+	successpct = pct(successcount, totaldistinct)
+	### Count number of *occurrences* in text that succeeded:
+	occurrence_successs_counts = []
+	tknfreqs = map(tkn -> lowercase(tokentext(tkn)), lextokens) |> countmap |> OrderedDict
+	#for k in keys(tknfreqs)
+	#	if isnothing(findfirst(pr -> pr.token == k, successes))
+	#		push!(occurrence_successs_counts, tknfreqs[k])		
+	#	else
+	#		push!(occurrence_successs_counts, 0)
+	#	end
+	#end
+	for l in lextokens
+    	parses = parsetoken(lowercase(tokentext(l)), p25)
+       	if ! isempty(parses)
+       		push!(occurrence_successs_counts, 1)
+       end
+    end
+	occurrence_successses = sum(occurrence_successs_counts)
+	occurrence_successs_pct = pct(occurrence_successses, total)
+	
+	successparses =  map(pr -> pr.parses, successes)	
+	verbcount = filter(successparses) do plist
+		verbparse(plist)
+	end |> length
+	verbpct = pct(verbcount, successcount)
+	
+
+	lexemecount = map(pr -> lexemeurn.(pr.parses), parselist) |> Iterators.flatten  |> collect .|> string |> unique |> length
+
+	
+	(total, occurrence_successses, occurrence_successs_pct, totaldistinct, successcount, successpct, lexemecount, verbcount, verbpct )
+end
 
 # ╔═╡ f9ee99f4-1f08-4ed5-9131-7dc3489ebb37
 md"""> ## Image services"""
@@ -222,104 +278,38 @@ psgreff = filter(map(psg -> passagecomponent(psg.urn), corpus.passages) |> uniqu
 	! endswith(s, "title")
 end
 
-# ╔═╡ 85d9046f-da64-4fd9-8ff0-093e9be4d7f2
-md"""## Choose a passage to analyze
-
-$(@bind ref Select(psgreff))
-"""
-
 # ╔═╡ 1d068ed9-d145-4d33-b01c-86623bd9ed8f
 lxxglosses = filter(psg -> workcomponent(psg.urn) == 
 "bible.genesis.sept_latin.normalized", corpus.passages)
 
-# ╔═╡ df6a6494-6b76-4dd2-9410-7e0ac547d6df
-septpsg = filter(psg -> passagecomponent(psg.urn) == ref, lxxglosses)
-
-# ╔═╡ b997998d-a91b-417f-812a-d7c4f82b58ed
-lxxwords = map(septpsg) do psg
-	lex = filter(tokenize(psg, latin23())) do tkn
-		tokencategory(tkn) isa LexicalToken
-	end
-	tokentext.(lex) .|> lowercase 
-
-end |> Iterators.flatten |> collect
-
-# ╔═╡ 07231346-1660-4666-b576-e5046550a4e3
-lxxpsgparsed = map(lxxwords) do w
-	(token = w, parses = parsetoken(w, p23))	
-end
-
-# ╔═╡ e7a59883-0326-4fcf-9d0f-ff5e8058b632
-lxxpsgparsed
-
-# ╔═╡ bbef346c-b49c-4dab-83f0-9b2b11aaebe3
-map(lxxpsgparsed) do pr
-	latinForm.(pr.parses)
-end
-
 # ╔═╡ 30d89e0d-5051-4ae5-b671-91ac1be98383
 lxxcorpus = CitableTextCorpus(lxxglosses)
 
-# ╔═╡ f7d5fece-a95d-43b6-9dea-9fc8439eedce
-lxxlextokens = filter(tokenize(lxxcorpus, latin23())) do ct
-	tokencategory(ct) isa LexicalToken
-end
-
-# ╔═╡ e68b336c-1b91-4d16-896b-017e6241131f
-lxxlex = map(tkn -> tokentext(tkn), lxxlextokens) .|> lowercase |> unique |> sort
-
-# ╔═╡ 5209a61f-b51e-4b1b-b6e0-2d5bb7e6f3f6
-lxxparses = map(lxxlex) do tkn
-	(token = tkn, parses = parsetoken(tkn, p23))
-end
-
 # ╔═╡ c32a1dad-cf71-4580-bf72-9750f2dc9887
-(lxxtokens, lxxparsed, lxxparsedpct, lxxverbs, lxxverbpct) = linescore(lxxparses)
+(lxxtokens, lxxsuccesses, lxxcoverage, lxxdistinct, lxxparsed, lxxparsedpct, lxxlexemes, lxxverbs, lxxverbpct ) = linescore(lxxcorpus)
 
-# ╔═╡ 7035f44b-c522-4648-9c7c-0fc8c9df3cdb
-lxxfails = map(filter(pr -> isempty(pr.parses), lxxparses)) do pr
-	pr.token
-end |> unique
+# ╔═╡ bec96bfb-45c4-4074-ac83-65cdbe1e2711
+md"""
+| Text |  Distinct tokens | Verbs | Pct of tokens|
+| --- | --- | --- | --- | 
+| LXX glosses | $(lxxdistinct)|  $(lxxverbs) | $(lxxverbpct) |
 
-# ╔═╡ cb80e7ca-c463-4986-98e4-75f507fa1aba
-@bind badlxx Select(lxxfails)
-
-# ╔═╡ 2e688cc4-f64a-4558-a54f-6f9a9120330d
-verbparse.(map(pr -> pr.parses, lxxparses))
+"""
+#=
+| Targum glosses | $(targtokens) | $(targsuccesses) | $(targcoverage) | $(targparsed) | $(targparsedpct) | $(targlexemes) | $(targverbs) | $(targverbpct) |
+| Vulgate *Genesis* | $(vulgtokens)  | $(vulgsuccesses) | $(vulgcoverage) | $(vulgdistinct) | $(vulgparsed) | $(vulgparsedpct) | $(vulglexemes) | $(vulgverbs) | $(vulgverbpct) |
+"""
+=#
 
 # ╔═╡ def33c17-5d05-4b78-8e27-19ef976b2ff0
 targglosses = filter(psg -> workcomponent(psg.urn) == 
 "bible.genesis.targum_latin.normalized", corpus.passages)
 
-# ╔═╡ c061798b-a719-4b25-8b3a-08073bfd325e
-targpsg = filter(psg -> passagecomponent(psg.urn) == ref, targglosses)
-
 # ╔═╡ b569786d-de01-42fc-a11e-fb458fd69019
 targcorpus = CitableTextCorpus(targglosses)
 
-# ╔═╡ 179d1f83-0e42-4135-8f35-7bce51d50163
-targlextokens = filter(tokenize(targcorpus, latin25())) do ct
-	tokencategory(ct) isa LexicalToken
-end
-
-# ╔═╡ e8f0dbd0-c3a2-4123-b156-4ba6e370ccbf
-targlex = map(tkn -> tokentext(tkn), targlextokens) .|> lowercase |> unique |> sort
-
-# ╔═╡ fb3b7301-48ef-4bd1-ab5e-9d2f108868cf
-targparses = map(targlex) do tkn
-	(token = tkn, parses = parsetoken(tkn, p23))
-end
-
 # ╔═╡ a6efed6c-479c-4ed9-859c-7c8f17bae6a9
-(targtokens, targparsed, targparsedpct, targverbs, targverbpct) = linescore(targparses)
-
-# ╔═╡ 3719e8bd-13e9-4da0-8ded-61bad5b84c77
-targfails = map(filter(pr -> isempty(pr.parses), targparses)) do pr
-	pr.token
-end |> unique
-
-# ╔═╡ 7b936adf-cbae-4fc6-bfb1-1969abdb06a4
-@bind badtarg Select(targfails)
+(targtokens,targsuccesses, targcoverage, targdistinct,  targparsed, targparsedpct, targlexemes, targverbs, targverbpct, ) = linescore(targcorpus)
 
 # ╔═╡ cd45fc24-bb49-44e7-99a7-e8f00546c059
 md"""> ## Other texts"""
@@ -335,36 +325,25 @@ end
 vulgate = vulg()
 
 # ╔═╡ f6a75c0e-1d78-447e-b39b-ed1d24fdebe7
-vulgate_genesis = filter(p -> workid(p.urn) == "genesis", vulgate.passages) |> CitableTextCorpus
-
-# ╔═╡ c79baf2a-2f0d-43d4-aead-2ed5b0aea55c
-vulgatelextokens = filter(tokenize(vulgate_genesis, latin25())) do ct
-	tokencategory(ct) isa LexicalToken
-end
-
-# ╔═╡ 72a6e056-41df-4d84-ad4f-3c8f5ea7c13b
-vulgatelex = map(tkn -> tokentext(tkn), vulgatelextokens) .|> lowercase |> unique |> sort
-
-# ╔═╡ 11b343b9-7a42-4826-b5ba-951e9a0dc6f9
-vulgateparses = map(vulgatelex) do tkn
-	(token = tkn, parses = parsetoken(tkn, p25))
+vulgate_genesis = begin
+	allgenesis = filter(p -> workid(p.urn) == "genesis", vulgate.passages) 
+	chaptlist = map(psg -> collapsePassageBy(urn(psg), 1) |> passagecomponent, lxxcorpus) |> unique
+	filter(psg -> passagecomponent(collapsePassageBy(psg.urn,1)) in chaptlist, allgenesis) |> CitableTextCorpus
 end
 
 # ╔═╡ 70ee88af-d776-4148-871e-adb8a4c7007b
-(vulgtokens, vulgparsed, vulgparsedpct, vulgverbs, vulgverbpct) = linescore(vulgateparses)
+(vulgtokens, vulgsuccesses, vulgcoverage, vulgdistinct, vulgparsed, vulgparsedpct, vulgverbs, vulglexemes, vulgverbpct ) = linescore(vulgate_genesis)
 
 # ╔═╡ 41926534-d24d-4048-a4af-9c0cc60cde8e
 md"""
-| | Tokens | Distinct tokens | Analyzed | Pct | Verbs | Pct of analyzed|
-| --- | --- | --- | --- | --- | --- | --- |
-| LXX glosses | $(length(lxxlextokens))| $(lxxtokens) | $(lxxparsed) | $(lxxparsedpct) | $(lxxverbs) | $(lxxverbpct) |
-| Targum glosses |$(length(targlextokens)) |  $(targtokens)| $(targparsed) | $(targparsedpct) | $(targverbs) | $(targverbpct) |
-| Vulgate *Genesis* | $(length(vulgatelextokens)) | $(vulgtokens) | $(vulgparsed) | $(vulgparsedpct) | $(vulgverbs) | $(vulgverbpct) |
+| Text | Lexical tokens | Analyzed | Coverage | Distinct tokens | Tokens analyzed | Pct tokens analyzed |  Lexemes | 
+| --- | --- | --- | --- | --- | --- | --- | --- | 
+| Vulgate *Genesis* | $(vulgtokens)  | $(vulgsuccesses) | $(vulgcoverage)% | $(vulgdistinct) | $(vulgparsed) | $(vulgparsedpct)% | $(vulglexemes) |
+| LXX glosses | $(lxxtokens)| $(lxxsuccesses) | $(lxxcoverage)% | $(lxxdistinct) | $(lxxparsed) | $(lxxparsedpct)% | $(lxxlexemes)  |
+| Targum glosses | $(targtokens) | $(targsuccesses) | $(targcoverage)% | $(targdistinct) | $(targparsed)| $(targparsedpct)% | **$(targlexemes)** |
 
 """
 
-# ╔═╡ 91d9b49f-1e11-4ea6-a572-6e1ad54eeade
-vulgtokens, vulgparsed, vulgparsedpct, vulgverbs, vulgverbpct
 
 # ╔═╡ 62a5723b-3727-41ac-81b4-bcf63c857a7e
 md"""> ## Display CSS"""
@@ -466,8 +445,10 @@ Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 EditorsRepo = "3fa2051c-bcb6-4d65-8a68-41ff86d56437"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
+OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
 
 [compat]
@@ -477,9 +458,11 @@ CitableParserBuilder = "~0.30.1"
 CitableText = "~0.16.2"
 EditorsRepo = "~0.19.4"
 LatinOrthography = "~0.7.3"
+OrderedCollections = "~1.6.3"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.60"
-Tabulae = "~0.13.2"
+StatsBase = "~0.34.3"
+Tabulae = "~0.13.3"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -488,7 +471,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "d61b3c39c8b20fe1be33317919ca56f8e5f7b247"
+project_hash = "cbd2194dc37ce3dfac307971cc13d12edef63236"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1880,9 +1863,9 @@ version = "1.12.0"
 
 [[deps.Tabulae]]
 deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "ba0ea42449ea25c370a72481c2c3665069483019"
+git-tree-sha1 = "9f3a302872478f434117b2cbd8067c6ef2fde0a2"
 uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-version = "0.13.2"
+version = "0.13.3"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -2046,55 +2029,35 @@ version = "17.4.0+2"
 # ╟─32f2923a-0e59-46c2-9781-096759165936
 # ╟─5d314426-e3c1-46bc-adc6-416b7abedc6a
 # ╟─99731564-660e-11ef-0e61-35a897945007
-# ╟─260470fe-b5c2-41dc-bcdf-89be81ce07d3
 # ╟─47108cda-eaae-4c0b-a400-db973b7f6e26
-# ╟─85d9046f-da64-4fd9-8ff0-093e9be4d7f2
-# ╟─df6a6494-6b76-4dd2-9410-7e0ac547d6df
-# ╟─b997998d-a91b-417f-812a-d7c4f82b58ed
-# ╟─07231346-1660-4666-b576-e5046550a4e3
-# ╠═e7a59883-0326-4fcf-9d0f-ff5e8058b632
-# ╠═bbef346c-b49c-4dab-83f0-9b2b11aaebe3
-# ╟─c061798b-a719-4b25-8b3a-08073bfd325e
 # ╟─4c3db11f-83d3-48ac-b454-32337e812827
 # ╟─41926534-d24d-4048-a4af-9c0cc60cde8e
-# ╠═91d9b49f-1e11-4ea6-a572-6e1ad54eeade
 # ╟─5d9e358d-d5ad-486b-96b2-457ccf9a26e5
 # ╟─b840da80-2919-4b78-b952-e625674c651e
+# ╠═bec96bfb-45c4-4074-ac83-65cdbe1e2711
 # ╟─7592d9af-2d93-42ee-b6e7-7e8eb8775dc5
 # ╟─85325db4-2d6d-4d48-b304-2214d50d746f
 # ╟─8bc9ffb0-1902-4a0d-9808-a597e0458dbc
 # ╟─2b27294c-3a59-44a6-b62a-7791ebc9955e
-# ╠═0914ffc2-924a-4077-9067-f5f11774f04c
+# ╟─0914ffc2-924a-4077-9067-f5f11774f04c
+# ╠═c314775e-6c45-496b-992e-63490d86e243
 # ╟─a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
-# ╟─f7d5fece-a95d-43b6-9dea-9fc8439eedce
-# ╟─e68b336c-1b91-4d16-896b-017e6241131f
 # ╟─5209a61f-b51e-4b1b-b6e0-2d5bb7e6f3f6
 # ╠═c32a1dad-cf71-4580-bf72-9750f2dc9887
-# ╠═40b4a3b4-3d90-4a51-a792-f1e2c1df55aa
 # ╟─522b8f0d-3561-4bfa-9642-eff47e76dc58
-# ╠═179d1f83-0e42-4135-8f35-7bce51d50163
-# ╟─e8f0dbd0-c3a2-4123-b156-4ba6e370ccbf
-# ╠═fb3b7301-48ef-4bd1-ab5e-9d2f108868cf
 # ╠═a6efed6c-479c-4ed9-859c-7c8f17bae6a9
-# ╠═da2d395e-2223-4fc2-845c-ba716201cffb
-# ╠═55734c1f-7ab3-4b74-a309-966034339ba1
 # ╟─7d37e4b0-eb33-4593-8dd7-81eaa94114a1
-# ╟─c79baf2a-2f0d-43d4-aead-2ed5b0aea55c
-# ╟─72a6e056-41df-4d84-ad4f-3c8f5ea7c13b
-# ╠═11b343b9-7a42-4826-b5ba-951e9a0dc6f9
 # ╠═70ee88af-d776-4148-871e-adb8a4c7007b
 # ╟─f47c00d4-a340-4540-8fa7-284915c809d7
-# ╠═7035f44b-c522-4648-9c7c-0fc8c9df3cdb
+# ╟─7035f44b-c522-4648-9c7c-0fc8c9df3cdb
 # ╟─3719e8bd-13e9-4da0-8ded-61bad5b84c77
 # ╟─87b0c22e-0e29-4e25-bd81-93904eaa06e1
-# ╠═cb80e7ca-c463-4986-98e4-75f507fa1aba
+# ╟─cb80e7ca-c463-4986-98e4-75f507fa1aba
 # ╟─392d537b-cc07-4f1d-9011-2d0bc70feace
 # ╟─7b936adf-cbae-4fc6-bfb1-1969abdb06a4
 # ╟─99dbea8a-de0e-42b7-a218-9617e95c28a0
 # ╟─16353526-03bb-4263-b6ef-090bd0b59a6c
-# ╟─988813e9-a733-40cb-b0ca-ec0059755222
-# ╠═965a7ad1-b86d-4527-9cd9-986e3d621bb9
-# ╠═2e688cc4-f64a-4558-a54f-6f9a9120330d
+# ╟─965a7ad1-b86d-4527-9cd9-986e3d621bb9
 # ╟─025c84cd-e4bd-4c24-aad9-01dc0094feb1
 # ╟─501396c4-2be2-4b3c-8fe6-e5a841d33a90
 # ╟─f0d3cedb-332f-4a4e-98ad-b7f3c4e317a9
