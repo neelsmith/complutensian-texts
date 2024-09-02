@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.46
+# v0.19.43
 
 using Markdown
 using InteractiveUtils
@@ -225,7 +225,7 @@ function verbtokens(lex; parser = p23)
     verbids = map(filter(pr -> verbparse(pr.parses), parselist)) do pr
         pr.token
     end
-    filter(tkn -> tkn in verbids, lex)
+    filter(tkn -> tkn in verbids, lex)  
 end
 
 
@@ -532,29 +532,15 @@ PlotlyJS = "f0f68f2c-4968-5e81-91da-67840de0976a"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-
-[compat]
-CitableBase = "~10.4.0"
-CitableCorpus = "~0.13.5"
-CitableParserBuilder = "~0.30.1"
-CitableText = "~0.16.2"
-EditorsRepo = "~0.19.4"
-LatinOrthography = "~0.7.3"
-OrderedCollections = "~1.6.3"
-Orthography = "~0.22.0"
-PlotlyJS = "~0.18.11"
-PlutoUI = "~0.7.60"
-StatsBase = "~0.34.3"
-Tabulae = "~0.13.3"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "c9b299051cb56bc732daf07411ca61a2c818f28c"
+project_hash = "42e382f6892d34b0e4440a2522bc2f4ac7a0e349"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -821,7 +807,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.1.1+0"
 
 [[deps.ComputationalResources]]
 git-tree-sha1 = "52cb3ec90e8a8bea0e62e275ba577ad0f74821f7"
@@ -1306,9 +1292,9 @@ version = "0.4.52"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
-git-tree-sha1 = "f389674c99bfcde17dc57454011aa44d5a260a40"
+git-tree-sha1 = "7e5d6779a1e09a36db2a7b6cff50942a0a7d0fca"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.6.0"
+version = "1.5.0"
 
 [[deps.JSExpr]]
 deps = ["JSON", "MacroTools", "Observables", "WebIO"]
@@ -1547,15 +1533,15 @@ version = "2023.1.10"
 
 [[deps.Mustache]]
 deps = ["Printf", "Tables"]
-git-tree-sha1 = "a7cefa21a2ff993bff0456bf7521f46fc077ddf1"
+git-tree-sha1 = "3b2db451a872b20519ebb0cec759d3d81a1c6bcb"
 uuid = "ffc61752-8dc7-55ee-8c37-f3e9cdd09e70"
-version = "1.0.19"
+version = "1.0.20"
 
 [[deps.Mux]]
 deps = ["AssetRegistry", "Base64", "HTTP", "Hiccup", "MbedTLS", "Pkg", "Sockets"]
-git-tree-sha1 = "0bdaa479939d2a1f85e2f93e38fbccfcb73175a5"
+git-tree-sha1 = "7295d849103ac4fcbe3b2e439f229c5cc77b9b69"
 uuid = "a975b10e-0019-58db-a62f-e48ff68538c9"
-version = "1.0.1"
+version = "1.0.2"
 
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
@@ -1703,10 +1689,28 @@ uuid = "a03496cd-edff-5a9b-9e67-9cda94a718b5"
 version = "0.8.19"
 
 [[deps.PlotlyJS]]
-deps = ["Base64", "Blink", "DelimitedFiles", "JSExpr", "JSON", "Kaleido_jll", "Markdown", "Pkg", "PlotlyBase", "REPL", "Reexport", "Requires", "WebIO"]
-git-tree-sha1 = "3db9e7724e299684bf0ca8f245c0265c4bdd8dc6"
+deps = ["Base64", "Blink", "DelimitedFiles", "JSExpr", "JSON", "Kaleido_jll", "Markdown", "Pkg", "PlotlyBase", "PlotlyKaleido", "REPL", "Reexport", "Requires", "WebIO"]
+git-tree-sha1 = "e62d886d33b81c371c9d4e2f70663c0637f19459"
 uuid = "f0f68f2c-4968-5e81-91da-67840de0976a"
-version = "0.18.11"
+version = "0.18.13"
+
+    [deps.PlotlyJS.extensions]
+    CSVExt = "CSV"
+    DataFramesExt = ["DataFrames", "CSV"]
+    IJuliaExt = "IJulia"
+    JSON3Ext = "JSON3"
+
+    [deps.PlotlyJS.weakdeps]
+    CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+    DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+    IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+    JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+
+[[deps.PlotlyKaleido]]
+deps = ["Base64", "JSON", "Kaleido_jll"]
+git-tree-sha1 = "2650cd8fb83f73394996d507b3411a7316f6f184"
+uuid = "f2990250-8cf9-495f-b13a-cce12b45703c"
+version = "2.2.4"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
@@ -2029,9 +2033,9 @@ version = "1.12.0"
 
 [[deps.Tabulae]]
 deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "9f3a302872478f434117b2cbd8067c6ef2fde0a2"
+git-tree-sha1 = "ba0ea42449ea25c370a72481c2c3665069483019"
 uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-version = "0.13.3"
+version = "0.13.2"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -2258,13 +2262,13 @@ version = "17.4.0+2"
 # ╟─1211f868-cc94-4c54-a5c8-6100e3532bc5
 # ╟─16353526-03bb-4263-b6ef-090bd0b59a6c
 # ╟─ddf335a6-02b5-419a-aad7-290425447aac
-# ╟─a27293cf-15fd-4459-bcd7-b36e65daed47
+# ╠═a27293cf-15fd-4459-bcd7-b36e65daed47
 # ╟─965a7ad1-b86d-4527-9cd9-986e3d621bb9
 # ╟─aa425aae-71c8-4075-bb13-ae5d58cad7da
 # ╟─025c84cd-e4bd-4c24-aad9-01dc0094feb1
 # ╟─501396c4-2be2-4b3c-8fe6-e5a841d33a90
 # ╟─f0d3cedb-332f-4a4e-98ad-b7f3c4e317a9
-# ╠═0d80fd63-2103-463c-a71b-e09f60d3602e
+# ╟─0d80fd63-2103-463c-a71b-e09f60d3602e
 # ╟─38a0ad3b-c8f5-4f70-8b6b-1a6ef4585729
 # ╟─f9ee99f4-1f08-4ed5-9131-7dc3489ebb37
 # ╟─7e280ab7-d56d-4f96-ba3f-1cc9535bc49a

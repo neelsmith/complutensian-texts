@@ -214,9 +214,6 @@ function chapterproportion(tokenlist, chapter; parser = p23, normfunction = down
     length(vtokens) / length(chapttokens)
 end
 
-chapterproportion(lxxlextokens, "1")
-
-
 function verbproportion(tokenlist, chaptlist; parser = p23, normfunction = downgrade23)
 
     map(chaptlist) do c
@@ -241,13 +238,3 @@ xs = 1:37
 plot(xs, lxxverbproportion)
 plot!(xs, targverbproportion)
 plot!(xs, vulgverbproportion)
-#bar(x = xs, y = ys)
-
-ys[1]
-
-
-xs = [1,2,3]
-ys  = [5,10,15]
-bar(x = xs, y = ys)
-
-plot(xs, ys)
