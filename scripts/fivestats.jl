@@ -31,8 +31,10 @@ function pct(part, whole)
 end
 
 function downgrade23(s)
-    step1 = replace(lowercase(s), "v" => "u")
-    replace(step1, "j" => "i")
+    lc = lowercase(s)
+    step1 = replace(lc, "v" => "u")
+    step2 = replace(step1, "j" => "i")
+    step2
 end
 
 function buildp23()
@@ -189,3 +191,52 @@ linescore(lxxverbvocab)
 linescore(targverbvocab)
 
 
+chaptlist = map(psg -> collapsePassageBy(urn(psg), 1) |> passagecomponent, lxxcorpus) |> unique
+
+
+function chapterproportion(tokenlist, chapter; parser = p23, normfunction = downgrade23)
+   
+   chapttokens = filter(tokenlist) do t
+        startswith(passagecomponent(urn(t)), "$(c).")
+    end
+    chaptnormed = map(tkn -> normfunction(tokentext(tkn)), chapttokens)
+    vtokens = verbtokens(chaptnormed; parser = parser)
+
+    length(vtokens) / length(tokenlist)
+end
+
+
+
+function verbproportion(tokenlist, chaptlist; parser = p23, normfunction = downgrade23)
+    map(chaptlist) do c
+        prop = chapterproportion(tokenlist, c; parser = parser, normfunction = normfunction)
+        @info("$(c) -> $(prop)")
+        prop
+    end
+end
+
+lxxverbproportion = verbproportion(lxxlextokens, chaptlist)
+targverbproportion = verbproportion(targlextokens, chaptlist)
+vulgverbproportion = verbproportion(vulglextokens, chaptlist; normfunction = lowercase)
+
+verbproportion(lxxlextokens, chaptlist[1:3])
+
+
+using Plots
+plotly()
+
+xs = 1:37
+
+plot(xs, lxxverbproportion)
+plot!(xs, targverbproportion)
+plot!(xs, vulgverbproportion)
+#bar(x = xs, y = ys)
+
+ys[1]
+
+
+xs = [1,2,3]
+ys  = [5,10,15]
+bar(x = xs, y = ys)
+
+plot(xs, ys)
