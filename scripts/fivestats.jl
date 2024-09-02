@@ -44,8 +44,15 @@ function buildp23()
 	rm(f)
 	TabulaeStringParser(data, latin23(), "|")
 end
-p23 = buildp23()
 
+function buildp25()
+	url = "http://shot.holycross.edu/complutensian/complut-lat25-current.cex"
+	f = Downloads.download(url)
+	data = readlines(f)
+	rm(f)
+	TabulaeStringParser(data, latin25(), "|")
+
+end
 """True if any form in a list of analyses is a verb form."""
 function verbparse(parses)
 	verbal = false
@@ -144,6 +151,8 @@ function verbsplits(tknlist; parser = p23)
     (finite, infinitive, participle, gerundive)
 end
 
+p23 = buildp23()
+
 
 r =  repository(repo)
 corpus = normalizedcorpus(r)
@@ -154,9 +163,8 @@ lxxlextokens = filter(tokenize(lxxcorpus, latin23())) do ct
 	tokencategory(ct) isa LexicalToken
 end
 lxxvocab = map(t -> downgrade23(tokentext(t)), lxxlextokens)
+lxxverbs = verbtokens(lxxvocab)
 
-lxxverbs = verbtokens(lxxlextokens)
-lxxverbvocab = map(t -> downgrade23(tokentext(t)), lxxverbs)
 
 targcorpus = filter(psg -> workcomponent(psg.urn) == 
 "bible.genesis.targum_latin.normalized", corpus.passages) |> CitableTextCorpus
@@ -164,50 +172,53 @@ targlextokens = filter(tokenize(targcorpus, latin23())) do ct
 	tokencategory(ct) isa LexicalToken
 end
 targvocab = map(t -> downgrade23(tokentext(t)), targlextokens)
+targverbs = verbtokens(targvocab)
 
-targverbs = verbtokens(targlextokens)
-targverbvocab = map(t -> downgrade23(tokentext(t)), targverbs)
+
+p25 = buildp25()
+
+chaptlist = map(psg -> collapsePassageBy(urn(psg), 1) |> passagecomponent, lxxcorpus) |> unique
 
 vulgate = vulg()
 vulgate_genesis = begin
 	allgenesis = filter(p -> workid(p.urn) == "genesis", vulgate.passages) 
-	chaptlist = map(psg -> collapsePassageBy(urn(psg), 1) |> passagecomponent, lxxcorpus) |> unique
 	filter(psg -> passagecomponent(collapsePassageBy(psg.urn,1)) in chaptlist, allgenesis) |> CitableTextCorpus
 end
 vulglextokens = filter(tokenize(vulgate_genesis, latin25())) do ct
 	tokencategory(ct) isa LexicalToken
 end
-vulgvocab = map(t -> downgrade23(tokentext(t)), vulglextokens)
-vulgverbs = verbtokens(vulglextokens)
-vulgverbvocab = map(t -> downgrade23(tokentext(t)), vulgverbs)
+vulgvocab = map(t -> lowercase(tokentext(t)), vulglextokens)
+vulgverbs = verbtokens(vulgvocab; parser = p25)
+
 
 
 linescore(vulgvocab)
 linescore(lxxvocab)
 linescore(targvocab)
 
-linescore(vulgverbvocab)
-linescore(lxxverbvocab)
-linescore(targverbvocab)
-
-
-chaptlist = map(psg -> collapsePassageBy(urn(psg), 1) |> passagecomponent, lxxcorpus) |> unique
+linescore(vulgverbs)
+linescore(lxxverbs)
+linescore(targverbs)
 
 
 function chapterproportion(tokenlist, chapter; parser = p23, normfunction = downgrade23)
    
    chapttokens = filter(tokenlist) do t
-        startswith(passagecomponent(urn(t)), "$(c).")
+        startswith(passagecomponent(urn(t)), "$(chapter).")
     end
     chaptnormed = map(tkn -> normfunction(tokentext(tkn)), chapttokens)
     vtokens = verbtokens(chaptnormed; parser = parser)
-
-    length(vtokens) / length(tokenlist)
+    #@info("Chapter $(chapter): $(vtokens) $(length(vtokens))")
+    #info("Length $(length(chapttokens))")
+    @info("Chapter $(chapter):  $(length(vtokens)) / $(length(chapttokens))")
+    length(vtokens) / length(chapttokens)
 end
 
+chapterproportion(lxxlextokens, "1")
 
 
 function verbproportion(tokenlist, chaptlist; parser = p23, normfunction = downgrade23)
+
     map(chaptlist) do c
         prop = chapterproportion(tokenlist, c; parser = parser, normfunction = normfunction)
         @info("$(c) -> $(prop)")
@@ -219,7 +230,7 @@ lxxverbproportion = verbproportion(lxxlextokens, chaptlist)
 targverbproportion = verbproportion(targlextokens, chaptlist)
 vulgverbproportion = verbproportion(vulglextokens, chaptlist; normfunction = lowercase)
 
-verbproportion(lxxlextokens, chaptlist[1:3])
+
 
 
 using Plots

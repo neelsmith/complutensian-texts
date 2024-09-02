@@ -39,9 +39,6 @@ begin
 	md"""*To see Julia environment, unhide this cell*."""
 end
 
-# ╔═╡ 5ed1d7d5-ff35-4410-8c53-e32c04d73290
-
-
 # ╔═╡ 5d314426-e3c1-46bc-adc6-416b7abedc6a
 TableOfContents()
 
@@ -77,10 +74,6 @@ md"""> # Mechanics"""
 
 # ╔═╡ 2b27294c-3a59-44a6-b62a-7791ebc9955e
 md"""> ## Parsing output"""
-
-# ╔═╡ eac4d9e6-f3b2-4ead-83d3-c509ddb7786a
-function verbsplits()
-end
 
 # ╔═╡ a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
 md""" ### Septuagint glosses"""
@@ -131,6 +124,9 @@ end
 function pct(part, whole)
 	((part / whole) * 100 ) |> round
 end
+
+# ╔═╡ ddf335a6-02b5-419a-aad7-290425447aac
+md"""> ## Verb analyses"""
 
 # ╔═╡ 965a7ad1-b86d-4527-9cd9-986e3d621bb9
 """True if any form in a list of analyses is a verb form."""
@@ -234,7 +230,7 @@ end
 
 
 # ╔═╡ aa425aae-71c8-4075-bb13-ae5d58cad7da
-
+"""Count different types of verb forms."""
 function verbsplits(tknlist; parser = p23)
     finite = []
     infinitive = []
@@ -2214,8 +2210,7 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═5ed1d7d5-ff35-4410-8c53-e32c04d73290
-# ╠═32f2923a-0e59-46c2-9781-096759165936
+# ╟─32f2923a-0e59-46c2-9781-096759165936
 # ╟─5d314426-e3c1-46bc-adc6-416b7abedc6a
 # ╟─99731564-660e-11ef-0e61-35a897945007
 # ╟─47108cda-eaae-4c0b-a400-db973b7f6e26
@@ -2231,7 +2226,6 @@ version = "17.4.0+2"
 # ╟─8bc9ffb0-1902-4a0d-9808-a597e0458dbc
 # ╟─2b27294c-3a59-44a6-b62a-7791ebc9955e
 # ╟─0914ffc2-924a-4077-9067-f5f11774f04c
-# ╠═eac4d9e6-f3b2-4ead-83d3-c509ddb7786a
 # ╟─a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
 # ╟─5209a61f-b51e-4b1b-b6e0-2d5bb7e6f3f6
 # ╠═e2eaa43b-e358-41e2-b9b2-4fcacfa8f81b
@@ -2261,15 +2255,16 @@ version = "17.4.0+2"
 # ╟─392d537b-cc07-4f1d-9011-2d0bc70feace
 # ╟─7b936adf-cbae-4fc6-bfb1-1969abdb06a4
 # ╟─99dbea8a-de0e-42b7-a218-9617e95c28a0
-# ╠═1211f868-cc94-4c54-a5c8-6100e3532bc5
+# ╟─1211f868-cc94-4c54-a5c8-6100e3532bc5
 # ╟─16353526-03bb-4263-b6ef-090bd0b59a6c
-# ╠═a27293cf-15fd-4459-bcd7-b36e65daed47
+# ╟─ddf335a6-02b5-419a-aad7-290425447aac
+# ╟─a27293cf-15fd-4459-bcd7-b36e65daed47
 # ╟─965a7ad1-b86d-4527-9cd9-986e3d621bb9
 # ╟─aa425aae-71c8-4075-bb13-ae5d58cad7da
 # ╟─025c84cd-e4bd-4c24-aad9-01dc0094feb1
 # ╟─501396c4-2be2-4b3c-8fe6-e5a841d33a90
 # ╟─f0d3cedb-332f-4a4e-98ad-b7f3c4e317a9
-# ╟─0d80fd63-2103-463c-a71b-e09f60d3602e
+# ╠═0d80fd63-2103-463c-a71b-e09f60d3602e
 # ╟─38a0ad3b-c8f5-4f70-8b6b-1a6ef4585729
 # ╟─f9ee99f4-1f08-4ed5-9131-7dc3489ebb37
 # ╟─7e280ab7-d56d-4f96-ba3f-1cc9535bc49a

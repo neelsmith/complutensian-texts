@@ -96,27 +96,13 @@ ortho23 = latin23()
 # ╔═╡ 2a1cebbe-7594-4eee-bbbe-a1b90705f924
 ortho25 = latin25()
 
-# ╔═╡ 07f9a37b-a39a-452c-a705-3d51d1430c8b
-"""True if analysis has a verb form."""
-function verbform(a::Analysis)
-	try 
-	latform = latinForm(a)
-	latform isa LMFFiniteVerb ||
-	latform isa LMFInfinitive ||
-	latform isa LMFParticiple 
-	catch
-		@info("Wooa, filed on analysis $(cex(a))")
-		false
-	end
-end
-
 # ╔═╡ 86022f06-27b8-480c-b2b6-446d2eb059a1
 """Format a string representing a lexical token for HTML display."""
 function formatlexstring(s, p)
 	parses = parsetoken(s,p)
 	if isempty(parses)
 		"""<span class="unparsed">$(s)</span>"""
-	elseif verbform(parses[1])
+	elseif is_verb(latinForm(parses[1]))
 		"""<span class="hilite">$(s)</span>"""
 	else
 		s
@@ -1106,7 +1092,7 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═0abfe5ae-2752-11ef-38cf-f984b91b0112
+# ╟─0abfe5ae-2752-11ef-38cf-f984b91b0112
 # ╟─ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
 # ╟─a41a17e7-f985-4a5d-8b76-f91f07824242
 # ╟─6048a3e7-abf5-46de-b450-9d6812f915dc
@@ -1125,7 +1111,6 @@ version = "17.4.0+2"
 # ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
 # ╟─15f946b0-6261-4369-900f-aaa6605175d5
 # ╟─4a9214db-c200-4e3b-944d-45a67a2c85a7
-# ╠═07f9a37b-a39a-452c-a705-3d51d1430c8b
 # ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
 # ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
 # ╠═7b5000d9-7208-4075-8206-dec7b96de23d
