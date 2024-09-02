@@ -73,29 +73,8 @@ md"""> # Mechanics"""
 # ╔═╡ 2b27294c-3a59-44a6-b62a-7791ebc9955e
 md"""> ## Parsing output"""
 
-# ╔═╡ 8b9c5a4e-880d-45aa-a42f-34143719ead0
-
-"""Find number of tokens appearing in list of successful parses."""
-function analyzedcount(tokenlist, parses)
-    filter(tokenlist) do ct
-        tokentext(ct) in parses
-    end |> length
-end
-
-
-# ╔═╡ c314775e-6c45-496b-992e-63490d86e243
-function verbsummary(lextokens)
-	verbtokens = 0
-	totalanalyzed = 0
-	
-	distinctverbtokens = 0
-	distinctanalyzed = 0
-
-	finite = 0
-	infinitive = 0
-	gerundival = 0
-	participle = 0
-	
+# ╔═╡ eac4d9e6-f3b2-4ead-83d3-c509ddb7786a
+function verbsplits()
 end
 
 # ╔═╡ a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
@@ -196,6 +175,7 @@ p23 = buildp23()
 
 
 # ╔═╡ 0914ffc2-924a-4077-9067-f5f11774f04c
+"""Summarize morpholgoical parsing of a list of strings."""
 function linescore(lexstrings; ortho = latin23())
     # 1)
 	total = length(lexstrings)
@@ -236,18 +216,44 @@ function linescore(lexstrings; ortho = latin23())
 end
 
 # ╔═╡ a27293cf-15fd-4459-bcd7-b36e65daed47
-function verbtokens(lextokens; ortho = latin23())
-    # Parse unique vocab list
-	lex = map(tkn -> tokentext(tkn), lextokens) .|> lowercase |> unique |> sort
+"""Select verb tokens from a vocabulary list"""
+function verbtokens(lex; parser = p23)
     parselist =  map(lex) do tkn
-		(token = tkn, parses = parsetoken(tkn, p23))
+		(token = tkn, parses = parsetoken(tkn, parser))
 	end
-    successes = map(filter(pr -> ! isempty(pr.parses), parselist)) do pr
+    verbids = map(filter(pr -> verbparse(pr.parses), parselist)) do pr
         pr.token
     end
-    filter(lextokens) do tkn
-        tokentext(tkn) in successes
+    filter(tkn -> tkn in verbids, lex)
+end
+
+
+# ╔═╡ aa425aae-71c8-4075-bb13-ae5d58cad7da
+
+function verbsplits(tknlist; parser = p23)
+    finite = []
+    infinitive = []
+    participle = []
+    gerundive = []
+    for t in tknlist
+        parses = filter(parsetoken(t,parser)) do p
+            is_verb(latinForm(p) )
+        end
+        
+        if latinForm(parses[1]) isa LMFFiniteVerb
+            push!(finite, t)
+        elseif latinForm(parses[1]) isa LMFInfinitive
+            push!(infinitive, t)
+        elseif latinForm(parses[1]) isa LMFParticiple
+            push!(participle, t)
+        elseif latinForm(parses[1]) isa LMFGerundive
+            push!(gerundive, t)            
+        else 
+            @warn("Couldn't place token $(t) as a verb form")
+        end
+        
     end
+    (length(finite), length(infinitive), length(participle), length(gerundive))
 end
 
 # ╔═╡ f9ee99f4-1f08-4ed5-9131-7dc3489ebb37
@@ -311,13 +317,13 @@ lxxvocab = map(t -> downgrade23(tokentext(t)), lxxlextokens)
 (lxxtokens, lxxsuccesses, lxxcoverage, lxxdistinct, lxxparsed, lxxparsedpct, lxxlexemes ) = linescore(lxxvocab)
 
 # ╔═╡ fdfca413-a1ef-4519-a8d3-47ee2c657621
-lxxverbs = verbtokens(lxxlextokens)
-
-# ╔═╡ a68ea6b6-1bab-4ee9-8b65-1ec23b0bec79
-lxxverbvocab = map(t -> downgrade23(tokentext(t)), lxxverbs)
+lxxverbvocab = verbtokens(lxxvocab)
 
 # ╔═╡ 35080d5c-6bd7-4181-a0af-4dfc6c958fb5
 (lxxvtokens, lxxvsuccesses, lxxvcoverage, lxxvdistinct, lxxvparsed, lxxvparsedpct, lxxvlexemes ) = linescore(lxxverbvocab)
+
+# ╔═╡ 60283c58-8958-4b82-bf8a-04841a08085a
+  (lxxfinite, lxxinfinitive, lxxparticiple, lxxgerundive) = verbsplits(lxxverbvocab)
 
 # ╔═╡ def33c17-5d05-4b78-8e27-19ef976b2ff0
 targglosses = filter(psg -> workcomponent(psg.urn) == 
@@ -338,13 +344,13 @@ targvocab = map(t -> downgrade23(tokentext(t)), targlextokens)
 (targtokens,targsuccesses, targcoverage, targdistinct,  targparsed, targparsedpct, targlexemes ) = linescore(targvocab)
 
 # ╔═╡ 61bd38cc-e949-4dd9-9b0e-8d33efda6b77
-targverbs = verbtokens(targlextokens)
-
-# ╔═╡ dcce6e8e-346b-494d-9227-5f0547ee14e1
-targverbvocab = map(t -> downgrade23(tokentext(t)), targverbs)
+targverbvocab = verbtokens(targvocab)
 
 # ╔═╡ 4ecdbb2d-4be2-4e40-a03a-f8b3599ce90a
 (targvtokens, targvsuccesses, targvcoverage, targvdistinct, targvparsed, targvparsedpct, targvlexemes ) = linescore(targverbvocab)
+
+# ╔═╡ 15bd534c-4e1a-44db-b393-17ab180f7666
+ (targfinite, targinfinitive, targparticiple, targgerundive) = verbsplits(targverbvocab)
 
 # ╔═╡ cd45fc24-bb49-44e7-99a7-e8f00546c059
 md"""> ## Other texts"""
@@ -389,10 +395,7 @@ md"""
 
 
 # ╔═╡ 5372d2d5-bc9e-4d1a-9960-250230a7f249
-vulgverbs = verbtokens(vulglextokens)
-
-# ╔═╡ 3376ce39-ba50-4742-bc51-ae0896c3b439
-vulgverbvocab = map(t -> lowercase(tokentext(t)), vulgverbs)
+vulgverbvocab = verbtokens(vulgvocab)
 
 # ╔═╡ 8b3a86e7-8db8-4443-b87d-be0af27733a0
 (vulgvtokens, vulgvsuccesses, vulgvcoverage, vulgvdistinct, vulgvparsed, vulgvparsedpct, vulgvlexemes ) = linescore(vulgverbvocab)
@@ -407,6 +410,18 @@ md"""
 
 """
 
+
+# ╔═╡ 9928c267-cbd9-41e8-9e6a-39e3aee7e465
+ (vulgfinite, vulginfinitive, vulgparticiple, vulggerundive) = verbsplits(vulgverbvocab)
+
+# ╔═╡ 0a9d3505-d1e5-4ed9-9ee1-492e2e3a017e
+md"""
+| Text | Finite forms | Infinitives | Participles |  Gerundival |
+| --- | --- | --- | --- | --- | 
+| Vulgate | $(vulgfinite) | $(vulginfinitive) | $(vulgparticiple) | $(vulggerundive) |
+| LXX glosses | $(lxxfinite) | $(lxxinfinitive) | $(lxxparticiple) | $(lxxgerundive) |
+| Targum glosses | $(targfinite) | $(targinfinitive) | $(targparticiple) | $(targgerundive) |
+"""
 
 # ╔═╡ 62a5723b-3727-41ac-81b4-bcf63c857a7e
 md"""> ## Display CSS"""
@@ -2098,35 +2113,35 @@ version = "17.4.0+2"
 # ╟─2e11d192-d43b-48d1-93a8-79f788455731
 # ╟─bec96bfb-45c4-4074-ac83-65cdbe1e2711
 # ╟─7592d9af-2d93-42ee-b6e7-7e8eb8775dc5
+# ╟─0a9d3505-d1e5-4ed9-9ee1-492e2e3a017e
 # ╟─5d9e358d-d5ad-486b-96b2-457ccf9a26e5
 # ╟─b840da80-2919-4b78-b952-e625674c651e
 # ╟─85325db4-2d6d-4d48-b304-2214d50d746f
 # ╟─8bc9ffb0-1902-4a0d-9808-a597e0458dbc
 # ╟─2b27294c-3a59-44a6-b62a-7791ebc9955e
-# ╟─8b9c5a4e-880d-45aa-a42f-34143719ead0
 # ╟─0914ffc2-924a-4077-9067-f5f11774f04c
-# ╠═c314775e-6c45-496b-992e-63490d86e243
+# ╠═eac4d9e6-f3b2-4ead-83d3-c509ddb7786a
 # ╟─a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
 # ╟─5209a61f-b51e-4b1b-b6e0-2d5bb7e6f3f6
 # ╠═e2eaa43b-e358-41e2-b9b2-4fcacfa8f81b
 # ╠═c32a1dad-cf71-4580-bf72-9750f2dc9887
 # ╠═fdfca413-a1ef-4519-a8d3-47ee2c657621
-# ╠═a68ea6b6-1bab-4ee9-8b65-1ec23b0bec79
 # ╠═35080d5c-6bd7-4181-a0af-4dfc6c958fb5
+# ╠═60283c58-8958-4b82-bf8a-04841a08085a
 # ╟─522b8f0d-3561-4bfa-9642-eff47e76dc58
 # ╟─dcad30be-5bcd-4ba2-8652-9bfd07c477e1
 # ╠═7752ce54-1a1f-4d93-9558-e44e6a976cd4
 # ╠═a6efed6c-479c-4ed9-859c-7c8f17bae6a9
 # ╠═61bd38cc-e949-4dd9-9b0e-8d33efda6b77
-# ╠═dcce6e8e-346b-494d-9227-5f0547ee14e1
 # ╠═4ecdbb2d-4be2-4e40-a03a-f8b3599ce90a
+# ╠═15bd534c-4e1a-44db-b393-17ab180f7666
 # ╟─7d37e4b0-eb33-4593-8dd7-81eaa94114a1
 # ╟─038762fa-81e5-4451-becb-486e18e127eb
 # ╠═e628b974-cf65-4d41-b563-08236fddba88
 # ╠═70ee88af-d776-4148-871e-adb8a4c7007b
 # ╠═5372d2d5-bc9e-4d1a-9960-250230a7f249
-# ╠═3376ce39-ba50-4742-bc51-ae0896c3b439
 # ╠═8b3a86e7-8db8-4443-b87d-be0af27733a0
+# ╠═9928c267-cbd9-41e8-9e6a-39e3aee7e465
 # ╟─f47c00d4-a340-4540-8fa7-284915c809d7
 # ╟─7035f44b-c522-4648-9c7c-0fc8c9df3cdb
 # ╟─3719e8bd-13e9-4da0-8ded-61bad5b84c77
@@ -2139,6 +2154,7 @@ version = "17.4.0+2"
 # ╟─16353526-03bb-4263-b6ef-090bd0b59a6c
 # ╟─a27293cf-15fd-4459-bcd7-b36e65daed47
 # ╟─965a7ad1-b86d-4527-9cd9-986e3d621bb9
+# ╟─aa425aae-71c8-4075-bb13-ae5d58cad7da
 # ╟─025c84cd-e4bd-4c24-aad9-01dc0094feb1
 # ╟─501396c4-2be2-4b3c-8fe6-e5a841d33a90
 # ╟─f0d3cedb-332f-4a4e-98ad-b7f3c4e317a9

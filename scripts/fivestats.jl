@@ -61,47 +61,16 @@ function verbparse(parses)
 end
 
 
-function verbtokens(lextokens; ortho = latin23())
-    # Parse unique vocab list
-	lex = map(tkn -> tokentext(tkn), lextokens) .|> lowercase |> unique |> sort
+"""Select verb tokens from a vocabulary list"""
+function verbtokens(lex; parser = p23)
     parselist =  map(lex) do tkn
-		(token = tkn, parses = parsetoken(tkn, p23))
+		(token = tkn, parses = parsetoken(tkn, parser))
 	end
-    successes = map(filter(pr -> ! isempty(pr.parses), parselist)) do pr
+    verbids = map(filter(pr -> verbparse(pr.parses), parselist)) do pr
         pr.token
     end
-    filter(lextokens) do tkn
-        tokentext(tkn) in successes
-    end
+    filter(tkn -> tkn in verbids, lex)  
 end
-
-"""True if any form in a list of analyses is a verb form."""
-function verbparse(parses)
-	verbal = false
-	for p in parses
-		try
-			latform = latinForm(p)
-			if is_verb(latform)
-				verbal = true
-			end
-		catch
-			@warn("Error on $(p)")
-		end
-	end
-	verbal
-end
-
-
-
-#=
-"""Find number of tokens appearing in list of successful parses."""
-function analyzedcount(tokenlist, parses)
-    filter(tokenlist) do ct
-        @info("Check $(tokentext(ct))...")
-        tokentext(ct) in parses
-    end |> length
-end
-=#
 
 
 """Report number of tokens, number analyzed and percent analyzed;
@@ -145,6 +114,32 @@ function linescore(lexstrings; ortho = latin23())
     numlexemes
     )
    
+end
+
+function verbsplits(tknlist; parser = p23)
+    finite = []
+    infinitive = []
+    participle = []
+    gerundive = []
+    for t in tknlist
+        parses = filter(parsetoken(t,parser)) do p
+            is_verb(latinForm(p) )
+        end
+        
+        if latinForm(parses[1]) isa LMFFiniteVerb
+            push!(finite, t)
+        elseif latinForm(parses[1]) isa LMFInfinitive
+            push!(infinitive, t)
+        elseif latinForm(parses[1]) isa LMFParticiple
+            push!(participle, t)
+        elseif latinForm(parses[1]) isa LMFGerundive
+            push!(gerundive, t)            
+        else 
+            @warn("Couldn't place token $(t) as a verb form")
+        end
+        
+    end
+    (finite, infinitive, participle, gerundive)
 end
 
 
