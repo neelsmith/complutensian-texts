@@ -75,6 +75,47 @@ md"""> # Mechanics"""
 # ╔═╡ 2b27294c-3a59-44a6-b62a-7791ebc9955e
 md"""> ## Parsing output"""
 
+# ╔═╡ 0914ffc2-924a-4077-9067-f5f11774f04c
+"""Summarize morpholgoical parsing of a list of strings."""
+function linescore(lexstrings; ortho = latin23())
+    # 1)
+	total = length(lexstrings)
+
+    # Parse unique vocab list
+	lex = lexstrings |> unique |> sort
+    parselist =  map(lex) do tkn
+		(token = tkn, parses = parsetoken(tkn, p23))
+	end
+    # Save list of forms that parsed
+    successes = map(filter(pr -> ! isempty(pr.parses), parselist)) do pr
+        pr.token
+    end
+
+    # 2)
+    analyzed = filter(s -> s in successes, lexstrings) |> length
+    @info("Analyzed $(analyzed)")
+    # 3)
+    pctanalyzed = pct(analyzed, total)
+   
+   
+    # 4)
+    numdistinct = length(lex)
+    # 5)
+    distinctanalyzed = filter(s -> s in successes, lex) |> length
+    # 6)
+    distinctpctanalyzed = pct(distinctanalyzed, numdistinct)
+
+
+    # 7)
+    numlexemes = map(pr -> lexemeurn.(pr.parses), parselist) |> Iterators.flatten  |> collect .|> string |> unique |> length
+   
+    (total, analyzed, pctanalyzed, 
+    numdistinct, distinctanalyzed, distinctpctanalyzed,
+    numlexemes
+    )
+   
+end
+
 # ╔═╡ a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
 md""" ### Septuagint glosses"""
 
@@ -128,6 +169,19 @@ end
 # ╔═╡ ddf335a6-02b5-419a-aad7-290425447aac
 md"""> ## Verb analyses"""
 
+# ╔═╡ a27293cf-15fd-4459-bcd7-b36e65daed47
+"""Select verb tokens from a vocabulary list"""
+function verbtokens(lex; parser = p23)
+    parselist =  map(lex) do tkn
+		(token = tkn, parses = parsetoken(tkn, parser))
+	end
+    verbids = map(filter(pr -> verbparse(pr.parses), parselist)) do pr
+        pr.token
+    end
+    filter(tkn -> tkn in verbids, lex)  
+end
+
+
 # ╔═╡ 965a7ad1-b86d-4527-9cd9-986e3d621bb9
 """True if any form in a list of analyses is a verb form."""
 function verbparse(parses)
@@ -143,6 +197,34 @@ function verbparse(parses)
 		end
 	end
 	verbal
+end
+
+# ╔═╡ aa425aae-71c8-4075-bb13-ae5d58cad7da
+"""Count different types of verb forms."""
+function verbsplits(tknlist; parser = p23)
+    finite = []
+    infinitive = []
+    participle = []
+    gerundive = []
+    for t in tknlist
+        parses = filter(parsetoken(t,parser)) do p
+            is_verb(latinForm(p) )
+        end
+        
+        if latinForm(parses[1]) isa LMFFiniteVerb
+            push!(finite, t)
+        elseif latinForm(parses[1]) isa LMFInfinitive
+            push!(infinitive, t)
+        elseif latinForm(parses[1]) isa LMFParticiple
+            push!(participle, t)
+        elseif latinForm(parses[1]) isa LMFGerundive
+            push!(gerundive, t)            
+        else 
+            @warn("Couldn't place token $(t) as a verb form")
+        end
+        
+    end
+    (length(finite), length(infinitive), length(participle), length(gerundive))
 end
 
 # ╔═╡ 025c84cd-e4bd-4c24-aad9-01dc0094feb1
@@ -174,88 +256,6 @@ end
 # ╔═╡ f0d3cedb-332f-4a4e-98ad-b7f3c4e317a9
 p23 = buildp23()
 
-
-# ╔═╡ 0914ffc2-924a-4077-9067-f5f11774f04c
-"""Summarize morpholgoical parsing of a list of strings."""
-function linescore(lexstrings; ortho = latin23())
-    # 1)
-	total = length(lexstrings)
-
-    # Parse unique vocab list
-	lex = lexstrings |> unique |> sort
-    parselist =  map(lex) do tkn
-		(token = tkn, parses = parsetoken(tkn, p23))
-	end
-    # Save list of forms that parsed
-    successes = map(filter(pr -> ! isempty(pr.parses), parselist)) do pr
-        pr.token
-    end
-
-    # 2)
-    analyzed = filter(s -> s in successes, lexstrings) |> length
-    @info("Analyzed $(analyzed)")
-    # 3)
-    pctanalyzed = pct(analyzed, total)
-   
-   
-    # 4)
-    numdistinct = length(lex)
-    # 5)
-    distinctanalyzed = filter(s -> s in successes, lex) |> length
-    # 6)
-    distinctpctanalyzed = pct(distinctanalyzed, numdistinct)
-
-
-    # 7)
-    numlexemes = map(pr -> lexemeurn.(pr.parses), parselist) |> Iterators.flatten  |> collect .|> string |> unique |> length
-   
-    (total, analyzed, pctanalyzed, 
-    numdistinct, distinctanalyzed, distinctpctanalyzed,
-    numlexemes
-    )
-   
-end
-
-# ╔═╡ a27293cf-15fd-4459-bcd7-b36e65daed47
-"""Select verb tokens from a vocabulary list"""
-function verbtokens(lex; parser = p23)
-    parselist =  map(lex) do tkn
-		(token = tkn, parses = parsetoken(tkn, parser))
-	end
-    verbids = map(filter(pr -> verbparse(pr.parses), parselist)) do pr
-        pr.token
-    end
-    filter(tkn -> tkn in verbids, lex)  
-end
-
-
-# ╔═╡ aa425aae-71c8-4075-bb13-ae5d58cad7da
-"""Count different types of verb forms."""
-function verbsplits(tknlist; parser = p23)
-    finite = []
-    infinitive = []
-    participle = []
-    gerundive = []
-    for t in tknlist
-        parses = filter(parsetoken(t,parser)) do p
-            is_verb(latinForm(p) )
-        end
-        
-        if latinForm(parses[1]) isa LMFFiniteVerb
-            push!(finite, t)
-        elseif latinForm(parses[1]) isa LMFInfinitive
-            push!(infinitive, t)
-        elseif latinForm(parses[1]) isa LMFParticiple
-            push!(participle, t)
-        elseif latinForm(parses[1]) isa LMFGerundive
-            push!(gerundive, t)            
-        else 
-            @warn("Couldn't place token $(t) as a verb form")
-        end
-        
-    end
-    (length(finite), length(infinitive), length(participle), length(gerundive))
-end
 
 # ╔═╡ f9ee99f4-1f08-4ed5-9131-7dc3489ebb37
 md"""> ## Image services"""
