@@ -228,18 +228,22 @@ targverbproportion = verbproportion(targlextokens, chaptlist)
 vulgverbproportion = verbproportion(vulglextokens, chaptlist; normfunction = lowercase)
 
 using PlotlyJS
+function plotem()
 
-xvect = 1:37 |> collect
 
-t1 = scatter(x = xvect, y = lxxverbproportion, name = "LXX glosses")
-t2 = scatter(x = xvect, y = targverbproportion, name = "Targum glosses")
-t3 = scatter(x = xvect, y = vulgverbproportion, name = "Vulgate")
+    xvect = 1:37 |> collect
 
-lyt = Layout(title = "Genesis: verb forms as proportion of words ",
+    t1 = scatter(x = xvect, y = lxxverbproportion, name = "LXX glosses")
+    t2 = scatter(x = xvect, y = targverbproportion, name = "Targum glosses")
+    t3 = scatter(x = xvect, y = vulgverbproportion, name = "Vulgate")
+
+    lyt = Layout(title = "Genesis: verb forms as proportion of words ",
        xaxis = attr(showticklabels=true; title = "Chapter", nticks = length(xvect)),
        yaxis = attr(title = "Proportion of verbs (0.0-1.0)")
-       )
+    )
 
-plt = plot([t1, t2, t3], lyt)
+    plot([t1, t2, t3], lyt)
+end
 
-savefig(plt, "genesis-verbproportions-by-chap.png"; width = 1300, height = 1000)
+#plot = plotem()
+#savefig(plt, "genesis-verbproportions-by-chap.png"; width = 1300, height = 1000)

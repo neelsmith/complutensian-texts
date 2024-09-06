@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.46
+# v0.19.43
 
 using Markdown
 using InteractiveUtils
@@ -54,8 +54,28 @@ md"""## Overview of morphological analysis"""
 # ╔═╡ 2e11d192-d43b-48d1-93a8-79f788455731
 md"""## Breakdown of verb forms"""
 
+# ╔═╡ bec96bfb-45c4-4074-ac83-65cdbe1e2711
+md"""
+| Text | Lexical tokens | Distinct tokens | Lexemes | 
+| --- | --- | --- | --- | 
+| Vulgate *Genesis* | $(vulgvtokens)| $(vulgvdistinct) | $(vulgvlexemes)  |
+| LXX glosses | $(lxxvtokens)| $(lxxvdistinct) | $(lxxvlexemes)  |
+| Targum glosses | $(targvtokens)| $(targvdistinct) | $(targvlexemes)  |
+
+"""
+
+
 # ╔═╡ 7592d9af-2d93-42ee-b6e7-7e8eb8775dc5
 md"""## Summary of verbal constructions"""
+
+# ╔═╡ 0a9d3505-d1e5-4ed9-9ee1-492e2e3a017e
+md"""
+| Text | Finite forms | Infinitives | Participles |  Gerundival |
+| --- | --- | --- | --- | --- | 
+| Vulgate | $(vulgfinite) | $(vulginfinitive) | $(vulgparticiple) | $(vulggerundive) |
+| LXX glosses | $(lxxfinite) | $(lxxinfinitive) | $(lxxparticiple) | $(lxxgerundive) |
+| Targum glosses | $(targfinite) | $(targinfinitive) | $(targparticiple) | $(targgerundive) |
+"""
 
 # ╔═╡ 5d9e358d-d5ad-486b-96b2-457ccf9a26e5
 md"""## Density of verb expressions"""
@@ -78,11 +98,32 @@ md"""> ## Parsing output"""
 # ╔═╡ a4e0c8f4-87cd-44dd-b4b0-553cff044dd1
 md""" ### Septuagint glosses"""
 
+# ╔═╡ 35080d5c-6bd7-4181-a0af-4dfc6c958fb5
+#(lxxvtokens, lxxvsuccesses, lxxvcoverage, lxxvdistinct, lxxvparsed, lxxvparsedpct, lxxvlexemes ) = linescore(lxxverbvocab)
+
+# ╔═╡ 60283c58-8958-4b82-bf8a-04841a08085a
+  #(lxxfinite, lxxinfinitive, lxxparticiple, lxxgerundive) = verbsplits(lxxverbvocab)
+
 # ╔═╡ 522b8f0d-3561-4bfa-9642-eff47e76dc58
 md"""### Targum glosses"""
 
+# ╔═╡ 4ecdbb2d-4be2-4e40-a03a-f8b3599ce90a
+#(targvtokens, targvsuccesses, targvcoverage, targvdistinct, targvparsed, targvparsedpct, targvlexemes ) = linescore(targverbvocab)
+
+# ╔═╡ 15bd534c-4e1a-44db-b393-17ab180f7666
+#(targfinite, targinfinitive, targparticiple, targgerundive) = verbsplits(targverbvocab)
+
 # ╔═╡ 7d37e4b0-eb33-4593-8dd7-81eaa94114a1
 md""" ### Vulgate"""
+
+# ╔═╡ 5372d2d5-bc9e-4d1a-9960-250230a7f249
+#vulgverbvocab = verbtokens(vulgvocab)
+
+# ╔═╡ 8b3a86e7-8db8-4443-b87d-be0af27733a0
+#(vulgvtokens, vulgvsuccesses, vulgvcoverage, vulgvdistinct, vulgvparsed, vulgvparsedpct, vulgvlexemes ) = linescore(vulgverbvocab)
+
+# ╔═╡ 9928c267-cbd9-41e8-9e6a-39e3aee7e465
+ #(vulgfinite, vulginfinitive, vulgparticiple, vulggerundive) = verbsplits(vulgverbvocab)
 
 # ╔═╡ f47c00d4-a340-4540-8fa7-284915c809d7
 md""" ### Failure lists"""
@@ -127,6 +168,9 @@ end
 
 # ╔═╡ ddf335a6-02b5-419a-aad7-290425447aac
 md"""> ## Verb analyses"""
+
+# ╔═╡ a9d08b65-556d-4ac3-bb39-a54ae238d804
+
 
 # ╔═╡ 965a7ad1-b86d-4527-9cd9-986e3d621bb9
 """True if any form in a list of analyses is a verb form."""
@@ -318,13 +362,19 @@ lxxvocab = map(t -> downgrade23(tokentext(t)), lxxlextokens)
 (lxxtokens, lxxsuccesses, lxxcoverage, lxxdistinct, lxxparsed, lxxparsedpct, lxxlexemes ) = linescore(lxxvocab)
 
 # ╔═╡ fdfca413-a1ef-4519-a8d3-47ee2c657621
-lxxverbvocab = verbtokens(lxxvocab)
+#lxxverbvocab = verbtokens(lxxvocab)
 
-# ╔═╡ 35080d5c-6bd7-4181-a0af-4dfc6c958fb5
-(lxxvtokens, lxxvsuccesses, lxxvcoverage, lxxvdistinct, lxxvparsed, lxxvparsedpct, lxxvlexemes ) = linescore(lxxverbvocab)
+# ╔═╡ 1178e845-1e86-4322-a0c3-50fef6b29a4f
+begin
+	parselist = map(lxxvocab[1:3])  do tkn#\
+			(token = tkn, parses = parsetoken(tkn, p23))
+	end
 
-# ╔═╡ 60283c58-8958-4b82-bf8a-04841a08085a
-  (lxxfinite, lxxinfinitive, lxxparticiple, lxxgerundive) = verbsplits(lxxverbvocab)
+	map(pr -> verbparse(pr.parses), parselist)
+end
+
+# ╔═╡ 3677e89e-8149-4ceb-8ecd-7e3a15d1fbfd
+verbtokens(lxxvocab[1:3])
 
 # ╔═╡ def33c17-5d05-4b78-8e27-19ef976b2ff0
 targglosses = filter(psg -> workcomponent(psg.urn) == 
@@ -345,13 +395,7 @@ targvocab = map(t -> downgrade23(tokentext(t)), targlextokens)
 (targtokens,targsuccesses, targcoverage, targdistinct,  targparsed, targparsedpct, targlexemes ) = linescore(targvocab)
 
 # ╔═╡ 61bd38cc-e949-4dd9-9b0e-8d33efda6b77
-targverbvocab = verbtokens(targvocab)
-
-# ╔═╡ 4ecdbb2d-4be2-4e40-a03a-f8b3599ce90a
-(targvtokens, targvsuccesses, targvcoverage, targvdistinct, targvparsed, targvparsedpct, targvlexemes ) = linescore(targverbvocab)
-
-# ╔═╡ 15bd534c-4e1a-44db-b393-17ab180f7666
-(targfinite, targinfinitive, targparticiple, targgerundive) = verbsplits(targverbvocab)
+#targverbvocab = verbtokens(targvocab)
 
 # ╔═╡ cd45fc24-bb49-44e7-99a7-e8f00546c059
 md"""> ## Other texts"""
@@ -396,35 +440,6 @@ md"""
 
 """
 
-
-# ╔═╡ 5372d2d5-bc9e-4d1a-9960-250230a7f249
-vulgverbvocab = verbtokens(vulgvocab)
-
-# ╔═╡ 8b3a86e7-8db8-4443-b87d-be0af27733a0
-(vulgvtokens, vulgvsuccesses, vulgvcoverage, vulgvdistinct, vulgvparsed, vulgvparsedpct, vulgvlexemes ) = linescore(vulgverbvocab)
-
-# ╔═╡ bec96bfb-45c4-4074-ac83-65cdbe1e2711
-md"""
-| Text | Lexical tokens | Distinct tokens | Lexemes | 
-| --- | --- | --- | --- | 
-| Vulgate *Genesis* | $(vulgvtokens)| $(vulgvdistinct) | $(vulgvlexemes)  |
-| LXX glosses | $(lxxvtokens)| $(lxxvdistinct) | $(lxxvlexemes)  |
-| Targum glosses | $(targvtokens)| $(targvdistinct) | $(targvlexemes)  |
-
-"""
-
-
-# ╔═╡ 9928c267-cbd9-41e8-9e6a-39e3aee7e465
- (vulgfinite, vulginfinitive, vulgparticiple, vulggerundive) = verbsplits(vulgverbvocab)
-
-# ╔═╡ 0a9d3505-d1e5-4ed9-9ee1-492e2e3a017e
-md"""
-| Text | Finite forms | Infinitives | Participles |  Gerundival |
-| --- | --- | --- | --- | --- | 
-| Vulgate | $(vulgfinite) | $(vulginfinitive) | $(vulgparticiple) | $(vulggerundive) |
-| LXX glosses | $(lxxfinite) | $(lxxinfinitive) | $(lxxparticiple) | $(lxxgerundive) |
-| Targum glosses | $(targfinite) | $(targinfinitive) | $(targparticiple) | $(targgerundive) |
-"""
 
 # ╔═╡ 62a5723b-3727-41ac-81b4-bcf63c857a7e
 md"""> ## Display CSS"""
@@ -532,20 +547,6 @@ PlotlyJS = "f0f68f2c-4968-5e81-91da-67840de0976a"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-
-[compat]
-CitableBase = "~10.4.0"
-CitableCorpus = "~0.13.5"
-CitableParserBuilder = "~0.30.1"
-CitableText = "~0.16.2"
-EditorsRepo = "~0.19.4"
-LatinOrthography = "~0.7.3"
-OrderedCollections = "~1.6.3"
-Orthography = "~0.22.0"
-PlotlyJS = "~0.18.13"
-PlutoUI = "~0.7.60"
-StatsBase = "~0.34.3"
-Tabulae = "~0.13.3"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -554,7 +555,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "ff854fe3709a1e07b08ac0ebdc5ee4dc2f2faed7"
+project_hash = "42e382f6892d34b0e4440a2522bc2f4ac7a0e349"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -605,9 +606,9 @@ version = "0.4.0"
 
 [[deps.ArrayInterface]]
 deps = ["Adapt", "LinearAlgebra"]
-git-tree-sha1 = "3640d077b6dafd64ceb8fd5c1ec76f7ca53bcf76"
+git-tree-sha1 = "f54c23a5d304fb87110de62bace7777d59088c34"
 uuid = "4fba245c-0d91-5ea0-9b3e-6abc04ee57a9"
-version = "7.16.0"
+version = "7.15.0"
 
     [deps.ArrayInterface.extensions]
     ArrayInterfaceBandedMatricesExt = "BandedMatrices"
@@ -922,9 +923,9 @@ version = "0.9.3"
 
 [[deps.Documenter]]
 deps = ["ANSIColoredPrinters", "AbstractTrees", "Base64", "CodecZlib", "Dates", "DocStringExtensions", "Downloads", "Git", "IOCapture", "InteractiveUtils", "JSON", "LibGit2", "Logging", "Markdown", "MarkdownAST", "Pkg", "PrecompileTools", "REPL", "RegistryInstances", "SHA", "TOML", "Test", "Unicode"]
-git-tree-sha1 = "5a1ee886566f2fa9318df1273d8b778b9d42712d"
+git-tree-sha1 = "9d29b99b6b2b6bc2382a4c8dbec6eb694f389853"
 uuid = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-version = "1.7.0"
+version = "1.6.0"
 
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
@@ -1300,15 +1301,15 @@ version = "1.0.0"
 
 [[deps.JLD2]]
 deps = ["FileIO", "MacroTools", "Mmap", "OrderedCollections", "PrecompileTools", "Requires", "TranscodingStreams"]
-git-tree-sha1 = "a0746c21bdc986d0dc293efa6b1faee112c37c28"
+git-tree-sha1 = "049950edff105ff73918d29dbf109220ff364157"
 uuid = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
-version = "0.4.53"
+version = "0.4.52"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
-git-tree-sha1 = "f389674c99bfcde17dc57454011aa44d5a260a40"
+git-tree-sha1 = "7e5d6779a1e09a36db2a7b6cff50942a0a7d0fca"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.6.0"
+version = "1.5.0"
 
 [[deps.JSExpr]]
 deps = ["JSON", "MacroTools", "Observables", "WebIO"]
@@ -2047,9 +2048,9 @@ version = "1.12.0"
 
 [[deps.Tabulae]]
 deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "9f3a302872478f434117b2cbd8067c6ef2fde0a2"
+git-tree-sha1 = "ba0ea42449ea25c370a72481c2c3665069483019"
 uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-version = "0.13.3"
+version = "0.13.2"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -2228,7 +2229,7 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─32f2923a-0e59-46c2-9781-096759165936
+# ╠═32f2923a-0e59-46c2-9781-096759165936
 # ╟─5d314426-e3c1-46bc-adc6-416b7abedc6a
 # ╟─99731564-660e-11ef-0e61-35a897945007
 # ╟─47108cda-eaae-4c0b-a400-db973b7f6e26
@@ -2276,7 +2277,10 @@ version = "17.4.0+2"
 # ╟─1211f868-cc94-4c54-a5c8-6100e3532bc5
 # ╟─16353526-03bb-4263-b6ef-090bd0b59a6c
 # ╟─ddf335a6-02b5-419a-aad7-290425447aac
-# ╟─a27293cf-15fd-4459-bcd7-b36e65daed47
+# ╠═a27293cf-15fd-4459-bcd7-b36e65daed47
+# ╠═1178e845-1e86-4322-a0c3-50fef6b29a4f
+# ╠═3677e89e-8149-4ceb-8ecd-7e3a15d1fbfd
+# ╠═a9d08b65-556d-4ac3-bb39-a54ae238d804
 # ╟─965a7ad1-b86d-4527-9cd9-986e3d621bb9
 # ╟─aa425aae-71c8-4075-bb13-ae5d58cad7da
 # ╟─025c84cd-e4bd-4c24-aad9-01dc0094feb1
