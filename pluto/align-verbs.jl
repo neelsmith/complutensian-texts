@@ -47,9 +47,6 @@ TableOfContents()
 # ╔═╡ c2901788-6e26-11ef-2774-9d31f8783421
 md"""# Align verb forms"""
 
-# ╔═╡ f093bfcd-a294-480e-a9ca-3a92cdd3997e
-
-
 # ╔═╡ ffca06be-a838-4945-87f6-c8f9df991f2c
 html"""
 <br/><br/><br/><br/><br/>
@@ -67,6 +64,15 @@ md""" ### Functions"""
 # ╔═╡ 3bf983af-0def-43f9-a96f-c29316694247
 """Count cooccurences of lexeme in a list of tokens per passage."""
 function cooccurs(lexeme, psgs, tokens)
+	
+	matchingpassages = filter(tokens) do tkn
+		passagecomponent(collapsePassageBy(tkn.urn,1)) in psgs
+	end
+	"Look for cooccurring verbs with $(lexeme):  $(length(psgs)) source passages, found $(length(matchingpassages)) matching verbs"
+	counts = map(matchingpassages) do parselist
+		lexemeurn.(parselist.parses)
+	end |> Iterators.flatten |> collect .|> string |> countmap |> OrderedDict
+	sort(counts, rev=true, byvalue = true)
 end
 
 
@@ -327,6 +333,12 @@ lxxglossverbparses = filter(lxxglossesparsed) do tupl
 	latinverbparse(tupl.parses)
 end
 
+# ╔═╡ 1513a034-7b6d-45f1-ad9f-c56c2ec86cec
+facio_in_lxxglosses = passagesforverb(lxxglossverbparses, facio)
+
+# ╔═╡ 7ed61cef-01ea-441d-98da-c68796bbec9f
+cooccurs(facio, facio_in_lxxglosses , vulggenesisverbparses)
+
 # ╔═╡ 6b8d75c5-cdf2-4cb5-ae40-0fa0a8598370
 passagesforverb(lxxglossverbparses, creo)
 
@@ -337,6 +349,18 @@ passagesforverb(lxxglossverbparses, facio)
 lxxglossverbs = map(lxxglossverbparses) do tupl
 	lexemeurn.(tupl.parses) 
 end |> Iterators.flatten |> collect .|> string |> unique .|> LexemeUrn
+
+# ╔═╡ dc2fc24a-1f15-48d3-8a9f-d9b3274c39b7
+ begin
+	lxxgloss2vulgate = Dict()
+	for verb in string.(lxxglossverbs)
+		psglist = passagesforverb(lxxglossverbparses, verb)
+		lxxgloss2vulgate[verb] = cooccurs(verb, psglist, vulggenesisverbparses)
+	end
+end
+
+# ╔═╡ 9107ed53-d974-472a-a8bd-4be54c8d4eff
+lxxgloss2vulgate
 
 # ╔═╡ 5dc41091-8fe4-409c-92a7-bcd4e82e6c3b
 lxxglossverbs
@@ -450,12 +474,34 @@ end
 # ╔═╡ 961a8121-6ee2-4711-a549-61447c4f1c21
 latindict = dev_dict()  #Tabulae.lexlemma_dict_remote()
 
+# ╔═╡ f093bfcd-a294-480e-a9ca-3a92cdd3997e
+lxxglossvocabmenu = map(sort(string.(lxxglossverbs))) do v
+	v => label(LexemeUrn(v), latindict)
+end
+
+# ╔═╡ ce26b5ad-358b-4460-886b-c2c05af1020d
+@bind verbchoice Select(lxxglossvocabmenu)
+
+# ╔═╡ 996ff112-dc3c-45b8-8f30-002b1e586a4f
+verbchoice
+
+# ╔═╡ 87d505dc-dfa7-43b6-ac84-c8492a6cb454
+lxxgloss2vulgate[verbchoice]
+
+# ╔═╡ ef66834d-85e1-47bd-8010-9124ee94d77c
+coocurringverbs = map(s -> LexemeUrn(s), collect(keys(lxxgloss2vulgate[verbchoice])))
+
+# ╔═╡ 0729c41e-085d-4142-8205-1d93514e6cf6
+coocurcounts = map(string.(coocurringverbs)) do v
+	string(label(LexemeUrn(v), latindict), " ", lxxgloss2vulgate[verbchoice][v], " cooccurences")
+end
+
 # ╔═╡ 323b8396-392b-4cf6-93a7-1491922989e9
 targverbslabelled = map(v -> label(v,latindict), targglossverbs)
 
 # ╔═╡ 55d80ba7-01f3-4b0f-ba0f-3c909ca44564
-nolemma = filter(keys(latindict) |> collect) do k
-	! startswith(k, "lsx")
+registeredLS = filter(keys(latindict) |> collect) do k
+	 startswith(k, "ls.")
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -2134,14 +2180,23 @@ version = "17.4.0+2"
 # ╟─86652ea7-82db-4e2a-afe4-b5dfef8b6220
 # ╟─c2901788-6e26-11ef-2774-9d31f8783421
 # ╟─69c513e9-0b77-4870-b04e-1b303b8b438d
-# ╠═f093bfcd-a294-480e-a9ca-3a92cdd3997e
+# ╟─f093bfcd-a294-480e-a9ca-3a92cdd3997e
+# ╟─ce26b5ad-358b-4460-886b-c2c05af1020d
+# ╠═996ff112-dc3c-45b8-8f30-002b1e586a4f
+# ╠═87d505dc-dfa7-43b6-ac84-c8492a6cb454
+# ╟─ef66834d-85e1-47bd-8010-9124ee94d77c
+# ╟─0729c41e-085d-4142-8205-1d93514e6cf6
 # ╟─ffca06be-a838-4945-87f6-c8f9df991f2c
 # ╟─52ab1089-cec1-4ea6-94bb-5181d0358389
 # ╟─a31fb612-fd20-4554-b63e-09b26374cfa5
 # ╟─a9476aeb-6c36-4e36-b680-da41a816632d
-# ╠═3bf983af-0def-43f9-a96f-c29316694247
+# ╟─3bf983af-0def-43f9-a96f-c29316694247
 # ╟─cc6d04ec-c1fd-4a70-bd9b-bee8ce4aa428
 # ╟─aaad115d-209f-4684-ac9f-cc37820293d1
+# ╠═dc2fc24a-1f15-48d3-8a9f-d9b3274c39b7
+# ╠═9107ed53-d974-472a-a8bd-4be54c8d4eff
+# ╠═1513a034-7b6d-45f1-ad9f-c56c2ec86cec
+# ╠═7ed61cef-01ea-441d-98da-c68796bbec9f
 # ╠═961a8121-6ee2-4711-a549-61447c4f1c21
 # ╟─6b8d75c5-cdf2-4cb5-ae40-0fa0a8598370
 # ╠═3aa8feac-df03-4d73-891f-1c5eadc00290
