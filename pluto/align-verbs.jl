@@ -86,6 +86,9 @@ lxx = filter(p -> versionid(p.urn) == "septuagint", compnov.passages) |> Citable
 # ╔═╡ 504a471e-564c-4080-9d1b-d5608ebad857
 lxx_genesis = filter(psg -> workid(urn(psg)) == "genesis", lxx.passages) |> CitableTextCorpus
 
+# ╔═╡ ac8b3541-d59e-4546-b7c6-174c7e6c1e09
+md"""> ## Parsed tokens"""
+
 # ╔═╡ 69a70592-610f-49f3-942f-3be1eb80eaf5
 md"""> ## Tokenizations"""
 
@@ -102,6 +105,14 @@ md"""### Vulgate"""
 vulglextokens = filter(tokenize(vulgate, latin25())) do ct
 	tokencategory(ct) isa LexicalToken
 end
+
+# ╔═╡ 3da928ed-bb9d-4a3f-b961-0c4098a62e3a
+vulggenlextokens = filter(tokenize(vulgate_genesis, latin25())) do ct
+	tokencategory(ct) isa LexicalToken
+end
+
+# ╔═╡ c734ca5d-d179-41d7-8df4-96cd382d9b01
+length(vulglextokens)
 
 # ╔═╡ bbcab150-d569-4433-8257-41aae4fda455
 md"""### Targum glosses"""
@@ -129,12 +140,20 @@ length(lxxglosslextokens)
 md""" ### Septuagint"""
 
 # ╔═╡ 73baa4dd-1bfd-4bff-926f-ea7dfe68e21c
-septtokens = filter(tokenize(lxx_genesis, literaryGreek())) do ct
+lxxgentokens = filter(tokenize(lxx_genesis, literaryGreek())) do ct
 	tokencategory(ct) isa LexicalToken
 end
 
 # ╔═╡ e4a250c3-8174-421a-a143-1f762c6dc0dc
-length(septtokens)
+length(lxxgentokens)
+
+# ╔═╡ a222af6e-1e03-4eb6-aab1-528cd7a93ef4
+lxxgenlextokens = filter(tokenize(lxx_genesis, literaryGreek())) do ct
+	tokencategory(ct) isa LexicalToken
+end
+
+# ╔═╡ 009423f2-1d07-49d2-b7d0-4176d9de5bf8
+length(lxxgenlextokens)
 
 # ╔═╡ c3980912-ab07-4dc0-876a-c3db9c0e253f
 md"""> ## Parsers"""
@@ -152,6 +171,12 @@ end
 # ╔═╡ 13f8ef7e-ef64-47d1-91f9-201b55c3f6f2
 p25 = buildp25()
 
+# ╔═╡ 01c28e6a-340a-49dc-ad06-070378a59893
+vulggenparsed = map(vulggenlextokens) do ct
+	s = tokentext(ct) |> lowercase
+	(token = s, urn = urn(ct), parses = parsetoken(s, p25))
+end
+
 # ╔═╡ b961d41f-36dc-401c-a5d2-9147175b0bd2
 function buildp23()
 	url = "http://shot.holycross.edu/complutensian/complut-lat23-current.cex"
@@ -165,6 +190,18 @@ end
 # ╔═╡ 6b2419de-72bd-4ad3-b2f9-37d6441cbb5e
 p23 = buildp23()
 
+# ╔═╡ 0f606be6-cd08-4705-a99c-4c1e87785950
+targglossesparsed = map(targlextokens) do ct
+	s = downgrade23(tokentext(ct))
+	(token = s, urn = urn(ct), parses = parsetoken(s, p23))
+end
+
+# ╔═╡ 7147b2c5-6530-412a-84bb-a1d245067d62
+lxxglossesparsed = map(lxxglosslextokens) do ct
+	s = downgrade23(tokentext(ct))
+	(token = s, urn = urn(ct), parses = parsetoken(s, p23))
+end
+
 # ╔═╡ 309ad15f-4cfa-4336-bc4b-a701f0e86106
 function buildkanones()
 	url = "http://shot.holycross.edu/morphology/complutensian-current.cex"
@@ -177,6 +214,13 @@ end
 
 # ╔═╡ ee969cd7-5413-4562-a6e1-a29f9a1609e4
 kanones = buildkanones()
+
+# ╔═╡ ededbbcc-c7b8-455a-89eb-f15cca95305c
+lxxgenparsed = map(lxxgenlextokens) do ct
+	s = tokentext(ct)
+	(token = s, urn = urn(ct), parses = parsetoken(s, kanones))
+end
+	
 
 # ╔═╡ 680ab246-0d92-4ef8-9947-76ed0854d783
 md"""> ## Debug"""
@@ -251,7 +295,7 @@ Tabulae = "~0.14.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.4"
+julia_version = "1.10.5"
 manifest_format = "2.0"
 project_hash = "53ba4e0d2ff57d9eff6dc917c8a870a19f2b9c47"
 
@@ -1852,7 +1896,7 @@ version = "1.5.6+0"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.8.0+1"
+version = "5.11.0+0"
 
 [[deps.libpng_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
@@ -1901,23 +1945,32 @@ version = "17.4.0+2"
 # ╟─ca7914c0-c5ff-407d-a9a6-8140d030144a
 # ╟─530fb2b7-5496-407b-9690-380157829ac4
 # ╟─504a471e-564c-4080-9d1b-d5608ebad857
+# ╟─ac8b3541-d59e-4546-b7c6-174c7e6c1e09
 # ╟─69a70592-610f-49f3-942f-3be1eb80eaf5
 # ╟─54a44ede-b915-4ebe-b68b-2451dd52c512
 # ╟─eb745615-4a1a-48e3-a3b2-8e0fa0119fdd
-# ╠═c6809bf1-c803-42a2-b891-ceb9e2e3da06
+# ╟─c6809bf1-c803-42a2-b891-ceb9e2e3da06
+# ╠═3da928ed-bb9d-4a3f-b961-0c4098a62e3a
+# ╟─c734ca5d-d179-41d7-8df4-96cd382d9b01
+# ╠═01c28e6a-340a-49dc-ad06-070378a59893
 # ╟─bbcab150-d569-4433-8257-41aae4fda455
 # ╟─007981c0-6d83-4b04-8441-cda532b9ae74
 # ╠═c86bcb98-ab20-4dd0-b045-4bebe9df5ef5
+# ╠═0f606be6-cd08-4705-a99c-4c1e87785950
 # ╟─d1920424-7d91-4ecc-9d80-cfcdc9e80213
 # ╠═ada2afb7-0271-45af-995d-e3bcaf67c20b
 # ╠═b7db8f0d-9dd6-4173-bd9f-cebec1a814b9
+# ╠═7147b2c5-6530-412a-84bb-a1d245067d62
 # ╟─a0fec679-9101-4336-a824-fdac1ec078ec
-# ╠═73baa4dd-1bfd-4bff-926f-ea7dfe68e21c
+# ╟─73baa4dd-1bfd-4bff-926f-ea7dfe68e21c
 # ╠═e4a250c3-8174-421a-a143-1f762c6dc0dc
+# ╟─a222af6e-1e03-4eb6-aab1-528cd7a93ef4
+# ╠═009423f2-1d07-49d2-b7d0-4176d9de5bf8
+# ╠═ededbbcc-c7b8-455a-89eb-f15cca95305c
 # ╟─c3980912-ab07-4dc0-876a-c3db9c0e253f
 # ╟─0728dc43-91ff-4b57-ac94-cc790c084e11
 # ╠═13f8ef7e-ef64-47d1-91f9-201b55c3f6f2
-# ╠═b961d41f-36dc-401c-a5d2-9147175b0bd2
+# ╟─b961d41f-36dc-401c-a5d2-9147175b0bd2
 # ╠═6b2419de-72bd-4ad3-b2f9-37d6441cbb5e
 # ╟─309ad15f-4cfa-4336-bc4b-a701f0e86106
 # ╠═ee969cd7-5413-4562-a6e1-a29f9a1609e4
