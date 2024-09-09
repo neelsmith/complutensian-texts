@@ -4,6 +4,16 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+end
+
 # ╔═╡ 7ed14615-5a28-4a47-bd66-8f82d2b1f03d
 begin
 	using Markdown
@@ -37,6 +47,9 @@ TableOfContents()
 # ╔═╡ c2901788-6e26-11ef-2774-9d31f8783421
 md"""# Align verb forms"""
 
+# ╔═╡ f093bfcd-a294-480e-a9ca-3a92cdd3997e
+
+
 # ╔═╡ ffca06be-a838-4945-87f6-c8f9df991f2c
 html"""
 <br/><br/><br/><br/><br/>
@@ -44,6 +57,29 @@ html"""
 
 # ╔═╡ 52ab1089-cec1-4ea6-94bb-5181d0358389
 md"""> # Mechanics"""
+
+# ╔═╡ a31fb612-fd20-4554-b63e-09b26374cfa5
+md"""> ## Scoring"""
+
+# ╔═╡ a9476aeb-6c36-4e36-b680-da41a816632d
+md""" ### Functions"""
+
+# ╔═╡ 3bf983af-0def-43f9-a96f-c29316694247
+"""Count cooccurences of lexeme in a list of tokens per passage."""
+function cooccurs(lexeme, psgs, tokens)
+end
+
+
+# ╔═╡ aaad115d-209f-4684-ac9f-cc37820293d1
+"""Find all passages for a given verb."""
+function passagesforverb(parses, verb)
+
+	tupls = filter(parses) do tupl
+		options = tupl.parses .|> lexemeurn .|> string
+		verb in options
+	end
+	map(tupl -> passagecomponent(collapsePassageBy(tupl.urn,1)), tupls)
+end
 
 # ╔═╡ cec7886a-acea-4513-a005-b3f9cfd98413
 md"""> ## Text corpora"""
@@ -63,11 +99,6 @@ lxxglosses = filter(psg -> workcomponent(psg.urn) ==
 targglosses = filter(psg -> workcomponent(psg.urn) == 
 "bible.genesis.targum_latin.normalized", corpus.passages) |> CitableTextCorpus
 
-# ╔═╡ 15b4d47e-1085-45c2-bf3a-c4d9f8b34b05
-psgreff = filter(map(psg -> passagecomponent(psg.urn), targglosses) |> unique) do s
-	! endswith(s, "title")
-end
-
 # ╔═╡ 0fa2a742-7bab-44be-9405-9bb6edfba8a0
 compnovurl = "https://github.com/neelsmith/compnov/raw/main/corpus/compnov.cex"
 
@@ -86,11 +117,65 @@ lxx = filter(p -> versionid(p.urn) == "septuagint", compnov.passages) |> Citable
 # ╔═╡ 504a471e-564c-4080-9d1b-d5608ebad857
 lxx_genesis = filter(psg -> workid(urn(psg)) == "genesis", lxx.passages) |> CitableTextCorpus
 
+# ╔═╡ 15b4d47e-1085-45c2-bf3a-c4d9f8b34b05
+psgreff = filter(map(psg -> passagecomponent(psg.urn), targglosses) |> unique) do s
+	! endswith(s, "title")
+end
+
+# ╔═╡ 1274c954-998b-452e-a2ad-3300d2423618
+md"""> ## Verbs"""
+
+# ╔═╡ 4c740ea1-4c8d-4862-8fdf-28e59a1777e3
+facio = "ls.n17516"
+
+# ╔═╡ 0383f418-09a6-4633-856b-8da9f5aa811b
+creo = "ls.n11543"
+
+# ╔═╡ 40dc1546-f0db-4dbe-aa38-2eecc07005cc
+md"""### Functions"""
+
+# ╔═╡ 425c121a-47bd-449e-a5c8-f29e575d66a2
+"""True if any of the parses in a Vector of parses, `v`, is a verb form."""
+function latinverbparse(v)
+	judgment = false
+	forms = latinForm.(v)
+	for frm in forms
+		if is_verb(frm)
+			judgment = true
+		end
+	end
+	judgment
+	
+end
+
+# ╔═╡ cd6339f6-cff4-46ba-8d60-f19f01d756a4
+"""True if a form is a form of a Greek verb."""
+function greekverb(frm)
+	frm isa GMFFiniteVerb ||
+	frm isa GMFInfinitive ||
+	frm isa GMFParticiple ||
+	frm isa GMFVerbalAdjective
+end
+
+# ╔═╡ da1886a8-e0e9-46c4-a5bf-86996a0009f1
+"""True if any of the parses in a Vector of parses, `v`, is a verb form."""
+function greekverbparse(v)
+	judgment = false
+	forms = greekForm.(v)
+	for frm in forms
+		if greekverb(frm)
+			judgment = true
+		end
+	end
+	judgment
+	
+end
+
 # ╔═╡ ac8b3541-d59e-4546-b7c6-174c7e6c1e09
 md"""> ## Parsed tokens"""
 
-# ╔═╡ 69a70592-610f-49f3-942f-3be1eb80eaf5
-md"""> ## Tokenizations"""
+# ╔═╡ 9fa20227-16ae-421c-8da3-c25cc976914f
+md""" ### Utilities"""
 
 # ╔═╡ 54a44ede-b915-4ebe-b68b-2451dd52c512
 function downgrade23(s)
@@ -177,6 +262,22 @@ vulggenparsed = map(vulggenlextokens) do ct
 	(token = s, urn = urn(ct), parses = parsetoken(s, p25))
 end
 
+# ╔═╡ 018e66ce-cc2e-4b78-a073-d85fc81a1c6e
+vulggenesisverbparses = filter(vulggenparsed) do tupl
+	latinverbparse(tupl.parses)
+end
+
+# ╔═╡ c04266a5-35cb-4118-91e2-4763e7faabc7
+vulggenesisverbs = map(vulggenesisverbparses) do tupl
+	lexemeurn.(tupl.parses) 
+end |> Iterators.flatten |> collect .|> string |> unique .|> LexemeUrn
+
+# ╔═╡ 07189db0-c64c-47f4-8182-d755be7d3a96
+vulggenesisverbs
+
+# ╔═╡ 7b189963-9355-4b19-b1dd-daeb5cfd8a7e
+vulggenparsed[3].parses
+
 # ╔═╡ b961d41f-36dc-401c-a5d2-9147175b0bd2
 function buildp23()
 	url = "http://shot.holycross.edu/complutensian/complut-lat23-current.cex"
@@ -196,11 +297,49 @@ targglossesparsed = map(targlextokens) do ct
 	(token = s, urn = urn(ct), parses = parsetoken(s, p23))
 end
 
+# ╔═╡ 1f618943-eed7-48f0-b116-03365c856ebd
+targglossverbparses = filter(targglossesparsed) do tupl
+	latinverbparse(tupl.parses)
+end
+
+# ╔═╡ 3aa8feac-df03-4d73-891f-1c5eadc00290
+passagesforverb(targglossverbparses, creo)
+
+# ╔═╡ c77780a0-3fed-4f69-988e-2fcc3194c27e
+passagesforverb(targglossverbparses, facio)
+
+# ╔═╡ 86ed789f-fb1b-4b53-8deb-4b2068d1501c
+targglossverbs = map(targglossverbparses) do tupl
+	lexemeurn.(tupl.parses) 
+end |> Iterators.flatten |> collect .|> string |> unique .|> LexemeUrn
+
+# ╔═╡ d6eb75c8-b4ce-45a8-9703-11fc2ce2964b
+targglossverbs
+
 # ╔═╡ 7147b2c5-6530-412a-84bb-a1d245067d62
 lxxglossesparsed = map(lxxglosslextokens) do ct
 	s = downgrade23(tokentext(ct))
 	(token = s, urn = urn(ct), parses = parsetoken(s, p23))
 end
+
+# ╔═╡ 37d26a68-9ad0-4cd1-9ee5-2cbd6ffa2fd1
+lxxglossverbparses = filter(lxxglossesparsed) do tupl
+	latinverbparse(tupl.parses)
+end
+
+# ╔═╡ 6b8d75c5-cdf2-4cb5-ae40-0fa0a8598370
+passagesforverb(lxxglossverbparses, creo)
+
+# ╔═╡ 2018956e-ed09-4676-854e-215650607d38
+passagesforverb(lxxglossverbparses, facio)
+
+# ╔═╡ bca05ad3-5e04-4a81-9440-99f58500c6a5
+lxxglossverbs = map(lxxglossverbparses) do tupl
+	lexemeurn.(tupl.parses) 
+end |> Iterators.flatten |> collect .|> string |> unique .|> LexemeUrn
+
+# ╔═╡ 5dc41091-8fe4-409c-92a7-bcd4e82e6c3b
+lxxglossverbs
 
 # ╔═╡ 309ad15f-4cfa-4336-bc4b-a701f0e86106
 function buildkanones()
@@ -221,6 +360,45 @@ lxxgenparsed = map(lxxgenlextokens) do ct
 	(token = s, urn = urn(ct), parses = parsetoken(s, kanones))
 end
 	
+
+# ╔═╡ 24acbbc1-8d79-4753-bd7c-a06e03233369
+lxxgenesisverbparses = filter(lxxgenparsed) do tupl
+	greekverbparse(tupl.parses)
+end
+
+# ╔═╡ 0f9d55db-7c3a-4a9d-abbe-98a63e4a5a1b
+lxxgenesisverbs = map(lxxgenesisverbparses) do tupl
+	lexemeurn.(tupl.parses) 
+end |> Iterators.flatten |> collect .|> string |> unique .|> LexemeUrn
+
+# ╔═╡ 33a5a142-79cf-4a65-acb8-24e5d30ec7ac
+lxxgenesisverbs
+
+# ╔═╡ c01c00cc-d345-4fa9-bed7-34ae011f4553
+md"""> ## UI"""
+
+# ╔═╡ 9fa4ae58-19b4-481a-9208-85ff6aa7ca89
+textmenu = [
+	"vulgate" => "Vulgate",
+	"lxx" => "Septuagint",
+	"lxxglosses" => "Glosses on Septuagint",
+	"targumglosses" => "Glosses on Targum Onkelos"
+]
+
+# ╔═╡ 69c513e9-0b77-4870-b04e-1b303b8b438d
+md"""*Passage of* **Genesis**: $(@bind psg Select(psgreff)) $(@bind basetext Select(textmenu))"""
+
+# ╔═╡ cc6d04ec-c1fd-4a70-bd9b-bee8ce4aa428
+"""Find all verbs in a given passage."""
+function verbsforpassage(parses, psg = psg)
+	s = psg * "."
+	tupls = filter(parses) do tupl
+		startswith(passagecomponent(tupl.urn), s)
+	end
+	map(tupls) do tupl
+		lexemeurn.(tupl.parses)
+	end |> Iterators.flatten |> collect .|> string |> unique .|> LexemeUrn
+end
 
 # ╔═╡ 680ab246-0d92-4ef8-9947-76ed0854d783
 md"""> ## Debug"""
@@ -244,17 +422,41 @@ end
 # ╔═╡ 1cb6f073-7def-4ef8-aaa9-217ad52e914e
 lxxreff .== targreff[1:length(lxxreff)]
 
-# ╔═╡ 04fe3df7-e129-4e53-9421-bb200534603f
-lxxreff[1051]
+# ╔═╡ 9a745cb2-8f6d-4c50-89fb-d41bc63c9283
+function dev_dict()
+    iddict = Dict()
+    url1 = "https://raw.githubusercontent.com/neelsmith/Tabulae.jl/dev/lexicaldata/ls.cex"
+    f1 = Downloads.download(url1)
+    idpairs = filter(ln -> !isempty(ln), readlines(f1))
+    rm(f1)
+    for pr in idpairs[2:end]
+        pieces = split(pr, "|")
 
-# ╔═╡ 08b679bd-5272-4960-81c3-988f3bb21970
-lxxreff[1052]
+        iddict[pieces[1]]= pieces[2]
+    end
 
-# ╔═╡ f9c85bd9-a509-4d8e-bbcd-99f7c373d817
-targreff[1051]
+    url2 = "https://raw.githubusercontent.com/neelsmith/Tabulae.jl/dev/lexicaldata/lsx.cex"
+    f2 = Downloads.download(url2)
+    idpairs = filter(ln -> !isempty(ln), readlines(f2))
+    rm(f2)
+    for pr in idpairs[2:end]
+        pieces = split(pr, "|")
 
-# ╔═╡ 86fb4173-f65e-4e46-9b09-eb0fa43947a2
-targreff[1052]
+        iddict[pieces[1]]= pieces[2]
+    end
+    iddict
+end
+
+# ╔═╡ 961a8121-6ee2-4711-a549-61447c4f1c21
+latindict = dev_dict()  #Tabulae.lexlemma_dict_remote()
+
+# ╔═╡ 323b8396-392b-4cf6-93a7-1491922989e9
+targverbslabelled = map(v -> label(v,latindict), targglossverbs)
+
+# ╔═╡ 55d80ba7-01f3-4b0f-ba0f-3c909ca44564
+nolemma = filter(keys(latindict) |> collect) do k
+	! startswith(k, "lsx")
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -281,7 +483,7 @@ CitableCorpus = "~0.13.5"
 CitableParserBuilder = "~0.30.1"
 CitableText = "~0.16.2"
 EditorsRepo = "~0.19.4"
-Kanones = "~0.26.0"
+Kanones = "~0.26.1"
 LatinOrthography = "~0.7.3"
 OrderedCollections = "~1.6.3"
 Orthography = "~0.22.0"
@@ -297,7 +499,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.5"
 manifest_format = "2.0"
-project_hash = "53ba4e0d2ff57d9eff6dc917c8a870a19f2b9c47"
+project_hash = "3428ea93535e419fbf584cddc1b62cdc1cfa9168"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1079,9 +1281,9 @@ version = "3.0.3+0"
 
 [[deps.Kanones]]
 deps = ["AtticGreek", "BenchmarkTools", "CSV", "CitableBase", "CitableCollection", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DataFrames", "Dates", "DelimitedFiles", "DocStringExtensions", "Documenter", "Downloads", "Glob", "HTTP", "Orthography", "PolytonicGreek", "Query", "StatsBase", "Tables", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "6353328c0df63dc2e1f4dc157a261c8d38ef0fe6"
+git-tree-sha1 = "a18629d5bd224c0bd43509613eb50c073c84a071"
 uuid = "107500f9-53d4-4696-8485-0747242ad8bc"
-version = "0.26.0"
+version = "0.26.1"
 
 [[deps.LERC_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1931,12 +2133,27 @@ version = "17.4.0+2"
 # ╟─7ed14615-5a28-4a47-bd66-8f82d2b1f03d
 # ╟─86652ea7-82db-4e2a-afe4-b5dfef8b6220
 # ╟─c2901788-6e26-11ef-2774-9d31f8783421
+# ╟─69c513e9-0b77-4870-b04e-1b303b8b438d
+# ╠═f093bfcd-a294-480e-a9ca-3a92cdd3997e
 # ╟─ffca06be-a838-4945-87f6-c8f9df991f2c
 # ╟─52ab1089-cec1-4ea6-94bb-5181d0358389
+# ╟─a31fb612-fd20-4554-b63e-09b26374cfa5
+# ╟─a9476aeb-6c36-4e36-b680-da41a816632d
+# ╠═3bf983af-0def-43f9-a96f-c29316694247
+# ╟─cc6d04ec-c1fd-4a70-bd9b-bee8ce4aa428
+# ╟─aaad115d-209f-4684-ac9f-cc37820293d1
+# ╠═961a8121-6ee2-4711-a549-61447c4f1c21
+# ╟─6b8d75c5-cdf2-4cb5-ae40-0fa0a8598370
+# ╠═3aa8feac-df03-4d73-891f-1c5eadc00290
+# ╟─2018956e-ed09-4676-854e-215650607d38
+# ╟─c77780a0-3fed-4f69-988e-2fcc3194c27e
+# ╠═33a5a142-79cf-4a65-acb8-24e5d30ec7ac
+# ╠═07189db0-c64c-47f4-8182-d755be7d3a96
+# ╠═d6eb75c8-b4ce-45a8-9703-11fc2ce2964b
+# ╠═5dc41091-8fe4-409c-92a7-bcd4e82e6c3b
 # ╟─cec7886a-acea-4513-a005-b3f9cfd98413
 # ╟─3f913354-434c-4424-b5b6-a3d3d54bc70d
 # ╟─87af5ce8-3d20-43ee-8cd6-15a950d34ebd
-# ╟─15b4d47e-1085-45c2-bf3a-c4d9f8b34b05
 # ╟─81c982d2-1d64-4ef2-a8d8-9d46e3762ad1
 # ╟─1c1451ec-10b2-46c3-9585-3607ea686ac3
 # ╟─0fa2a742-7bab-44be-9405-9bb6edfba8a0
@@ -1945,14 +2162,32 @@ version = "17.4.0+2"
 # ╟─ca7914c0-c5ff-407d-a9a6-8140d030144a
 # ╟─530fb2b7-5496-407b-9690-380157829ac4
 # ╟─504a471e-564c-4080-9d1b-d5608ebad857
+# ╟─15b4d47e-1085-45c2-bf3a-c4d9f8b34b05
+# ╟─1274c954-998b-452e-a2ad-3300d2423618
+# ╠═4c740ea1-4c8d-4862-8fdf-28e59a1777e3
+# ╠═0383f418-09a6-4633-856b-8da9f5aa811b
+# ╟─40dc1546-f0db-4dbe-aa38-2eecc07005cc
+# ╟─425c121a-47bd-449e-a5c8-f29e575d66a2
+# ╟─da1886a8-e0e9-46c4-a5bf-86996a0009f1
+# ╟─cd6339f6-cff4-46ba-8d60-f19f01d756a4
+# ╠═24acbbc1-8d79-4753-bd7c-a06e03233369
+# ╠═0f9d55db-7c3a-4a9d-abbe-98a63e4a5a1b
+# ╠═018e66ce-cc2e-4b78-a073-d85fc81a1c6e
+# ╠═c04266a5-35cb-4118-91e2-4763e7faabc7
+# ╠═37d26a68-9ad0-4cd1-9ee5-2cbd6ffa2fd1
+# ╠═bca05ad3-5e04-4a81-9440-99f58500c6a5
+# ╠═1f618943-eed7-48f0-b116-03365c856ebd
+# ╠═86ed789f-fb1b-4b53-8deb-4b2068d1501c
+# ╠═323b8396-392b-4cf6-93a7-1491922989e9
 # ╟─ac8b3541-d59e-4546-b7c6-174c7e6c1e09
-# ╟─69a70592-610f-49f3-942f-3be1eb80eaf5
+# ╟─9fa20227-16ae-421c-8da3-c25cc976914f
 # ╟─54a44ede-b915-4ebe-b68b-2451dd52c512
 # ╟─eb745615-4a1a-48e3-a3b2-8e0fa0119fdd
 # ╟─c6809bf1-c803-42a2-b891-ceb9e2e3da06
-# ╠═3da928ed-bb9d-4a3f-b961-0c4098a62e3a
+# ╟─3da928ed-bb9d-4a3f-b961-0c4098a62e3a
 # ╟─c734ca5d-d179-41d7-8df4-96cd382d9b01
-# ╠═01c28e6a-340a-49dc-ad06-070378a59893
+# ╟─01c28e6a-340a-49dc-ad06-070378a59893
+# ╠═7b189963-9355-4b19-b1dd-daeb5cfd8a7e
 # ╟─bbcab150-d569-4433-8257-41aae4fda455
 # ╟─007981c0-6d83-4b04-8441-cda532b9ae74
 # ╠═c86bcb98-ab20-4dd0-b045-4bebe9df5ef5
@@ -1974,15 +2209,15 @@ version = "17.4.0+2"
 # ╠═6b2419de-72bd-4ad3-b2f9-37d6441cbb5e
 # ╟─309ad15f-4cfa-4336-bc4b-a701f0e86106
 # ╠═ee969cd7-5413-4562-a6e1-a29f9a1609e4
+# ╟─c01c00cc-d345-4fa9-bed7-34ae011f4553
+# ╟─9fa4ae58-19b4-481a-9208-85ff6aa7ca89
 # ╟─680ab246-0d92-4ef8-9947-76ed0854d783
 # ╠═a58597c7-bff4-4bc4-9210-e19a03be1233
 # ╠═00db0730-7dcb-4510-817e-c7f83ee4a6db
 # ╠═5fa00d1c-d71b-4e54-a6a7-02d445027cd9
 # ╠═7794b111-7a54-4178-bd18-e51cbd8feb08
 # ╠═1cb6f073-7def-4ef8-aaa9-217ad52e914e
-# ╠═04fe3df7-e129-4e53-9421-bb200534603f
-# ╠═08b679bd-5272-4960-81c3-988f3bb21970
-# ╠═f9c85bd9-a509-4d8e-bbcd-99f7c373d817
-# ╠═86fb4173-f65e-4e46-9b09-eb0fa43947a2
+# ╠═9a745cb2-8f6d-4c50-89fb-d41bc63c9283
+# ╠═55d80ba7-01f3-4b0f-ba0f-3c909ca44564
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
