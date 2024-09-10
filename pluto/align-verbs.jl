@@ -47,6 +47,18 @@ TableOfContents()
 # ╔═╡ c2901788-6e26-11ef-2774-9d31f8783421
 md"""# Align verb forms"""
 
+# ╔═╡ c8c6ac63-00eb-435a-8109-18580e27ff63
+md"""### Vocabulary of Septuagint"""
+
+# ╔═╡ 0a920ccb-61ad-4f81-b115-56390f67040a
+md"""### Vocabulary of Vulgate *Genesis*"""
+
+# ╔═╡ 0c28a4bd-330d-44d8-aa77-1dd8ff4493c1
+md""" ### Vocabulary of Targum glosses"""
+
+# ╔═╡ a1478d22-4bf6-4497-a9a6-3159dc934924
+md"""### Vocabulary of LXX glosses"""
+
 # ╔═╡ ffca06be-a838-4945-87f6-c8f9df991f2c
 html"""
 <br/><br/><br/><br/><br/>
@@ -136,6 +148,12 @@ facio = "ls.n17516"
 
 # ╔═╡ 0383f418-09a6-4633-856b-8da9f5aa811b
 creo = "ls.n11543"
+
+# ╔═╡ 3722584a-bc35-4756-96f2-bc4e9d994db6
+lsjids = Kanones.lsjdict()
+
+# ╔═╡ d02a9732-09b6-49fa-af70-00c1c8d94ea6
+lemmalabel(facio; dict = lsjids)
 
 # ╔═╡ 40dc1546-f0db-4dbe-aa38-2eecc07005cc
 md"""### Functions"""
@@ -474,6 +492,27 @@ end
 # ╔═╡ 961a8121-6ee2-4711-a549-61447c4f1c21
 latindict = dev_dict()  #Tabulae.lexlemma_dict_remote()
 
+# ╔═╡ a8b2b941-808f-47a3-b312-81529ca1b957
+lxxvocabmenu = map(sort(string.(lxxgenesisverbs))) do v
+	v => label(LexemeUrn(v), latindict)
+end
+
+# ╔═╡ 7d4ec7ef-e55e-4ef9-b6dd-3a511f593959
+vulgvocabmenu = map(sort(string.(vulggenesisverbs))) do v
+	v => label(LexemeUrn(v), latindict)
+end
+
+# ╔═╡ 600a1877-c135-4097-ae84-30f18968e5ee
+@bind vulgatechoice Select(vulgvocabmenu)
+
+# ╔═╡ f105a76b-65de-4817-8bde-02a9f19a13fd
+targglossvocabmenu = map(sort(string.(targglossverbs))) do v
+	v => label(LexemeUrn(v), latindict)
+end
+
+# ╔═╡ 28240ed2-b473-4725-a7b9-5624474e891e
+@bind targchoice Select(targglossvocabmenu)
+
 # ╔═╡ f093bfcd-a294-480e-a9ca-3a92cdd3997e
 lxxglossvocabmenu = map(sort(string.(lxxglossverbs))) do v
 	v => label(LexemeUrn(v), latindict)
@@ -543,7 +582,7 @@ Tabulae = "~0.14.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.5"
+julia_version = "1.10.4"
 manifest_format = "2.0"
 project_hash = "3428ea93535e419fbf584cddc1b62cdc1cfa9168"
 
@@ -2144,7 +2183,7 @@ version = "1.5.6+0"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.11.0+0"
+version = "5.8.0+1"
 
 [[deps.libpng_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
@@ -2180,6 +2219,15 @@ version = "17.4.0+2"
 # ╟─86652ea7-82db-4e2a-afe4-b5dfef8b6220
 # ╟─c2901788-6e26-11ef-2774-9d31f8783421
 # ╟─69c513e9-0b77-4870-b04e-1b303b8b438d
+# ╟─c8c6ac63-00eb-435a-8109-18580e27ff63
+# ╠═a8b2b941-808f-47a3-b312-81529ca1b957
+# ╟─0a920ccb-61ad-4f81-b115-56390f67040a
+# ╠═7d4ec7ef-e55e-4ef9-b6dd-3a511f593959
+# ╟─600a1877-c135-4097-ae84-30f18968e5ee
+# ╟─0c28a4bd-330d-44d8-aa77-1dd8ff4493c1
+# ╟─f105a76b-65de-4817-8bde-02a9f19a13fd
+# ╟─28240ed2-b473-4725-a7b9-5624474e891e
+# ╟─a1478d22-4bf6-4497-a9a6-3159dc934924
 # ╟─f093bfcd-a294-480e-a9ca-3a92cdd3997e
 # ╟─ce26b5ad-358b-4460-886b-c2c05af1020d
 # ╠═996ff112-dc3c-45b8-8f30-002b1e586a4f
@@ -2221,6 +2269,8 @@ version = "17.4.0+2"
 # ╟─1274c954-998b-452e-a2ad-3300d2423618
 # ╠═4c740ea1-4c8d-4862-8fdf-28e59a1777e3
 # ╠═0383f418-09a6-4633-856b-8da9f5aa811b
+# ╠═3722584a-bc35-4756-96f2-bc4e9d994db6
+# ╠═d02a9732-09b6-49fa-af70-00c1c8d94ea6
 # ╟─40dc1546-f0db-4dbe-aa38-2eecc07005cc
 # ╟─425c121a-47bd-449e-a5c8-f29e575d66a2
 # ╟─da1886a8-e0e9-46c4-a5bf-86996a0009f1
