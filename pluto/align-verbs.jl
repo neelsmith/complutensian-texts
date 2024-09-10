@@ -149,11 +149,21 @@ facio = "ls.n17516"
 # ╔═╡ 0383f418-09a6-4633-856b-8da9f5aa811b
 creo = "ls.n11543"
 
+# ╔═╡ 9eebd007-a670-4b19-9924-209d6fae5d45
+ποιεω = "lsj.n84234"
+
 # ╔═╡ 3722584a-bc35-4756-96f2-bc4e9d994db6
 lsjids = Kanones.lsjdict()
 
-# ╔═╡ d02a9732-09b6-49fa-af70-00c1c8d94ea6
-lemmalabel(facio; dict = lsjids)
+# ╔═╡ 154298e0-bcc8-4687-93fa-767ae9fc0331
+function greeklabel(s; dict = lsjids)
+	atme = lemmalabel(s; dict = dict)
+	parts = split(atme, "@")
+	string(parts[1], " (", parts[2], ")")
+end
+
+# ╔═╡ de1f92d7-780e-4505-b032-fa5f7042995c
+greeklabel("lsj.n84234")
 
 # ╔═╡ 40dc1546-f0db-4dbe-aa38-2eecc07005cc
 md"""### Functions"""
@@ -413,6 +423,14 @@ lxxgenesisverbs = map(lxxgenesisverbparses) do tupl
 	lexemeurn.(tupl.parses) 
 end |> Iterators.flatten |> collect .|> string |> unique .|> LexemeUrn
 
+# ╔═╡ a8b2b941-808f-47a3-b312-81529ca1b957
+lxxvocabmenu = map(sort(string.(lxxgenesisverbs))) do v
+	v => greeklabel(v)
+end
+
+# ╔═╡ fdd9cc22-9e51-4150-ab32-e6eb25ac845c
+@bind lxxchoice Select(lxxvocabmenu)
+
 # ╔═╡ 33a5a142-79cf-4a65-acb8-24e5d30ec7ac
 lxxgenesisverbs
 
@@ -491,11 +509,6 @@ end
 
 # ╔═╡ 961a8121-6ee2-4711-a549-61447c4f1c21
 latindict = dev_dict()  #Tabulae.lexlemma_dict_remote()
-
-# ╔═╡ a8b2b941-808f-47a3-b312-81529ca1b957
-lxxvocabmenu = map(sort(string.(lxxgenesisverbs))) do v
-	v => label(LexemeUrn(v), latindict)
-end
 
 # ╔═╡ 7d4ec7ef-e55e-4ef9-b6dd-3a511f593959
 vulgvocabmenu = map(sort(string.(vulggenesisverbs))) do v
@@ -2221,9 +2234,10 @@ version = "17.4.0+2"
 # ╟─69c513e9-0b77-4870-b04e-1b303b8b438d
 # ╟─c8c6ac63-00eb-435a-8109-18580e27ff63
 # ╠═a8b2b941-808f-47a3-b312-81529ca1b957
+# ╠═fdd9cc22-9e51-4150-ab32-e6eb25ac845c
 # ╟─0a920ccb-61ad-4f81-b115-56390f67040a
 # ╠═7d4ec7ef-e55e-4ef9-b6dd-3a511f593959
-# ╟─600a1877-c135-4097-ae84-30f18968e5ee
+# ╠═600a1877-c135-4097-ae84-30f18968e5ee
 # ╟─0c28a4bd-330d-44d8-aa77-1dd8ff4493c1
 # ╟─f105a76b-65de-4817-8bde-02a9f19a13fd
 # ╟─28240ed2-b473-4725-a7b9-5624474e891e
@@ -2269,8 +2283,10 @@ version = "17.4.0+2"
 # ╟─1274c954-998b-452e-a2ad-3300d2423618
 # ╠═4c740ea1-4c8d-4862-8fdf-28e59a1777e3
 # ╠═0383f418-09a6-4633-856b-8da9f5aa811b
+# ╠═9eebd007-a670-4b19-9924-209d6fae5d45
 # ╠═3722584a-bc35-4756-96f2-bc4e9d994db6
-# ╠═d02a9732-09b6-49fa-af70-00c1c8d94ea6
+# ╠═de1f92d7-780e-4505-b032-fa5f7042995c
+# ╠═154298e0-bcc8-4687-93fa-767ae9fc0331
 # ╟─40dc1546-f0db-4dbe-aa38-2eecc07005cc
 # ╟─425c121a-47bd-449e-a5c8-f29e575d66a2
 # ╟─da1886a8-e0e9-46c4-a5bf-86996a0009f1
