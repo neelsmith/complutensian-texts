@@ -4698,7 +4698,50 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         at madianite <choice><abbr>vendidert</abbr><expan>vendiderunt</expan></choice> <persName>ioseph</persName> in <placeName>egyptum</placeName> phutifari eunucho pharaonis principi coquorum. 
         </ab>
 
+        </div>
 
+        <div n="38">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="38" type="ordinal">38.</num></ab>
+
+        <ab n="1">
+        Factum est <choice><abbr>at</abbr><expan>autem</expan></choice> in tempore illo: descendit <persName>iudas</persName> a fratribus suis: et peruenit vsque ad <choice><abbr>hoiem</abbr><expan>hominem</expan></choice> quemdam odollamitem: cui nomen iras. 
+        </ab>
+
+        <ab n="2">
+        et vidit illic <persName>iudas</persName> filiam <choice><abbr>hois</abbr><expan>hominis</expan></choice> <placeName>chananei</placeName>: cui nomen <persName>saua</persName>. et accepit eam: et ingressus est ad eam.
+        </ab>
+
+        <ab n="3">
+        et concipiens: peperit filium: et vocauit nomen eius: <persName>her</persName>.
+        </ab>
+
+        <ab n="4">
+        et concipiens adhuc: peperit filium: et vocauit nomen eius: <persName>onan</persName>.
+        </ab>
+
+        <ab n="5">
+        et adiiciens peperit filium: et vocauit nomen eius: <persName>silom</persName>. hec <choice><abbr>at</abbr><expan>autem</expan></choice> erat in <placeName>chasti</placeName>: <choice><abbr>qn</abbr><expan>quando</expan></choice> peperit eos. 
+        </ab>
+
+        <ab n="6">
+        et accepit <persName>iudas</persName> vxorem <persName>her</persName> <choice><abbr>pmogenito</abbr><expan>primogenito</expan></choice> suo: cui nomen <persName>thamar</persName>.
+        </ab>
+
+        <ab n="7">
+        fuit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>her</persName> primogenitus <persName>iude</persName> malus coram <choice><abbr>dno</abbr><expan>domino</expan></choice>: et occidit eum deus.
+        </ab>
+
+        <ab n="8">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iudas</persName> <persName>onan</persName>: ingredere ad vxorem fratris tui: et duc vxorem eam: et suscita semen fratri tuo. 
+        </ab>
+
+        <ab n="9">
+        sciens <choice><abbr>at</abbr><expan>autem</expan></choice>  <persName>onan</persName> quod non eius erit semen: factum est <choice><abbr>qn</abbr><expan>quando</expan></choice> ingressus est ad vxorem fratris sui: effudit super terram: ne daret semen fratri suo.
+        </ab>
+
+        <ab n="10">
+        malum <choice><abbr>at</abbr><expan>autem</expan></choice> apparuit coram deo: quia fecit hoc: et occidit et hunc.
+        </ab>
 
         </div>
 
