@@ -4743,6 +4743,26 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         malum <choice><abbr>at</abbr><expan>autem</expan></choice> apparuit coram deo: quia fecit hoc: et occidit et hunc.
         </ab>
 
+        <ab n="11">
+        dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iudas</persName> <persName>thamar</persName> nurui sue: sede vidua in domo patris tui: donec magnus efficiatur <persName>silion</persName> filius meus. dixit <choice><abbr>em</abbr><expan>enim</expan></choice> ne forte moriatur et iste: sicut et <choice><abbr>fres</abbr><expan>fratres</expan></choice> eius. abiens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>thamar</persName>: sedit in domo <choice><abbr>pris</abbr><expan>patris</expan></choice> sui.
+        </ab>
+
+        <ab n="12">
+        <choice><abbr>mltiplicati</abbr><expan>multiplicati</expan></choice> sunt <choice><abbr>at</abbr><expan>autem</expan></choice> dies: et mortus est <persName>saua</persName> vxor <persName>iuda</persName>. et consolatus <persName>iudas</persName>: ascendit ad tondentes oues suas: <choice><abbr>ipe</abbr><expan>ipse</expan></choice> et iras pastor eius odollamitas in <placeName>thamna</placeName>. 
+        </ab>
+
+        <ab n="13">
+        et nunciatum est <persName>thamar</persName> nurui sue: dicentes: ecce socer tuus ascecndit in <placeName>thamna</placeName>: tondere oues suas. 
+        </ab>
+
+        <ab n="14">
+        et auferens vestimenta viduitatis a se: induit theristrum: et ornata est ad portas <placeName>enant</placeName> <choice><abbr>q</abbr><expan>quae</expan></choice> est in transitu <placeName>thamnan</placeName>: vidit <choice><abbr>em</abbr><expan>enim</expan></choice> <choice><abbr>qd</abbr><expan>quod</expan></choice> magnus factus est <persName>siliom</persName>: ipse <choice><abbr>at</abbr><expan>autem</expan></choice> non dedit eam illi vxorem. 
+        </ab>
+
+        <ab n="15">
+        et videns eam <persName>iudas</persName>
+        </ab>
+
         </div>
 
     </body>
