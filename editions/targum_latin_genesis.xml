@@ -4653,6 +4653,71 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="38">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="38" type="ordinal">38.</num></ab>
+
+        <ab n="1">
+        Et factum est in illo <choice><abbr>tpe</abbr><expan>tempore</expan></choice> et descendit <persName>iudas</persName> a <choice><abbr>fribus</abbr><expan>fratribus</expan></choice> suis: et diuertit ad virum odolamitem: cuius nomen erat <persName>hyra</persName>
+        </ab> 
+
+        <ab n="2">
+        Viditque ibi <persName>iudas</persName> filiam <choice><abbr>hois</abbr><expan>hominis</expan></choice> mercatoris: cuius nomen erat <persName>sue</persName>: et accepit eam: ingressusque est ad eam. 
+        </ab>
+
+        <ab n="3">
+        Et concepit et peperit filium: et vocauit nomen eius <persName>her</persName>. 
+        </ab>
+
+        <ab n="4">
+        Concepitque rursus: et peperit filium: et vocauit nomen eius <persName>onan</persName>. 
+        </ab>
+
+        <ab n="5">
+        Et addidit rursus et peperit filium: vocauitque nomen eius <persName>sela</persName>: et erat in <placeName>chemib</placeName> <choice><abbr>qn</abbr><expan>quando</expan></choice> peperit eum. 
+        </ab>
+
+        <ab n="6">
+        et accepit <persName>iudas</persName> vxorem <persName>her</persName> primogenito suo: cuius nomen erat <persName>thamar</persName>. 
+        </ab>
+
+        <ab n="7">
+        Erat <choice><abbr>aut</abbr><expan>autem</expan></choice> <persName>her</persName> <choice><abbr>pmogenitus</abbr><expan>primogenitus</expan></choice> <persName>iude</persName>  malus coram <choice><abbr>dno</abbr><expan>domino</expan></choice>: et occidit eum <choice><abbr>dns</abbr><expan>dominus</expan></choice>. 
+        </ab>
+
+        <ab n="8">
+        Dixitque <persName>iudas</persName> ad <persName>onan</persName>. Ingredere ad vxorem fratris tui: et sociare illi: et suscita semen fratri tuo. 
+        </ab>
+
+        <ab n="9">
+        Cognouitque <persName>onan</persName> quoniam non nomine eius vocaretur semen: et quando ingrediebatur ad vxorem fratris sui corrumpebat viam suam super terram: vt non suscitaret semen fratri suo. 
+        </ab>
+
+        <ab n="10">
+        Displicuitque coram domino quod fecit: et interfecit etiam ipsum. 
+        </ab>
+
+        <ab n="11">
+        Dixitque <persName>iudas</persName> <persName>thamar</persName> nurui sue. Esto vidua in domo patris tui: donec crescat <persName>sela</persName> filius meus: dixit enim: ne forte moriatur etiam ipse sicut fratres eius. Et abiit <persName>thamar</persName>: et habitauit in domo patris sui. 
+        </ab>
+
+        <ab n="12">
+        Post multos autem dies mortua est filia sue vxor inde: et consolatus est <persName>iudas</persName>: et ascendit ad tonsores ouium suarum in <placeName>thamnath</placeName>: ipse et <persName>hira</persName> socius eius <persName>odolamites</persName>. 
+        </ab>
+
+        <ab n="13">
+        Nunciatumque est <persName>thamar</persName> dicendo. Ecce socer tuus ascendit in <placeName>thamnath</placeName> ad tondendas oues suas. 
+        </ab>
+
+        <ab n="14">
+        Et deposuit vestimenta viduitatis sue a se: et operuit se pallio: et ornauit se: et sedit in biuio itineris: quod est iuxta viam <placeName>thamnath</placeName>: quoniam vidit quod creuerat <persName>sela</persName>: et ipsa non tradebatur ei in vxorem. 
+        </ab>
+
+        <ab n="15">
+        Et vidit eam <persName>iudas</persName>:
+        </ab>
+
+        </div>
+
     </body>
     </text>
 </TEI>
