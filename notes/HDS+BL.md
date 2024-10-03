@@ -1,11 +1,19 @@
 
+## Inventory
 
-Call no. in Harvard Divinity School: 303 1514
+1. Notes are on HDS copy: call no. in Harvard Divinity School: `303 1514`.  Permalink for catalog entry: https://id.lib.harvard.edu/alma/990022610190203941/catalog
+2. Comparison notes are on BL  `G.11951-56.`  This is the Grenville copy.
 
 
-Permalink for catalog entry:
+## Contents of vol 6 in BL `G.11951-56.`
 
-https://id.lib.harvard.edu/alma/990022610190203941/catalog
+
+1. *Ad lectorem* (1 pages). 
+2. *Incipit vocabularium Hebraicum totius veteris testamenti cum aliis dictionibus chaldaicis ibi contentis. Et hod secundum ordinem Alphabeti hebraici.* Numbered folios from 1 - 172
+3. Untitled index of Latin terms to folio in section 2 (lexicon) of Complutensian volume 6
+4. *Incipiunt interpretationes hebraicorum:chaldeorum:grecorumque nominum:veteris ac noui testamenti secundum ordinem alphabeti.* Alphabetical by Latin form of name. Entries optionally flagged with *D* (doubtful interpretation) or *G* (Greek meaning). *No folio numbers but quire numbers*
+5. *Nomina que sequuntur sunt illa que in vtroque testamento vicio scriptorum sunt aliter scripta quam in hebreo et greco et in aliquibus bibliis nostris antiquis.* Alphabetical by erroneous form, gives canonical Biblical references to passages and correct form of name.  6 pages (3 folios, unnumbered).
+6. *Introductiones artis grammatice hebraice*. Numbered folios from 1r - 15v, with quire numbers A - C iii  
 
 
 ## Contents of vol 6 in Harvard Div School version
@@ -50,9 +58,10 @@ No folio mark
 
 ### Section 2: Hebrew lexicon
 
+- separately numbered folios
 
-In **BNE**: `urn:cite2:citebne:complutensian.v1:v6p3` through
-`urn:cite2:citebne:complutensian.v1:v6d_p49`
+In **BNE**: `urn:cite2:citebne:complutensian.v1:v6p3` (folio 1r) through
+`urn:cite2:citebne:complutensian.v1:v6d_p49` (172r)
 
 
 
@@ -68,7 +77,9 @@ Ends with unnumbered recto following `FFii` on folio 171
 
 ### Section 3: Hebrew grammar
 
-In **BNE** this runs from `urn:cite2:citebne:complutensian.v1:v6e_p19`  to `urn:cite2:citebne:complutensian.v1:v6e_p48`.
+- Separately numbered folios
+
+In **BNE** this runs from `urn:cite2:citebne:complutensian.v1:v6e_p19`  (folio 1r) to `urn:cite2:citebne:complutensian.v1:v6e_p48` (folio 15v).
 
 Quire mark (?) "A" urn:cite2:citebne:complutensian.v1:v6e_p19@0.7733,0.8519,0.03067,0.01478
 

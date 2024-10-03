@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.42
+# v0.19.46
 
 using Markdown
 using InteractiveUtils
@@ -69,127 +69,6 @@ html"""
 # ╔═╡ e5ec8309-58cc-4127-998d-da4ff70ac34c
 md"""> ## HTMLing"""
 
-# ╔═╡ 6662a744-a6ab-4609-b4dd-05cc0cb5e78b
-css = html"""
-<style>
-.match {
-	background-color: yellow;
-	font-weight: bold;
-}
-</style>
-"""
-
-# ╔═╡ b7cb6ead-9d89-4532-a5e5-bddaecef8338
-md"""> ## Data"""
-
-# ╔═╡ 9988e7cd-7d52-43ea-8bbc-4237a56a002e
-verbdataraw = loadverbdata()
-
-
-# ╔═╡ d26fff15-871c-424b-bc68-3df2cf48752a
-md"""Tweak skip list:"""
-
-# ╔═╡ ce2f65bc-8e6b-4f2f-ba3e-2ec3c0d07f0e
-dico = "ls.n13804"
-
-# ╔═╡ 2d6fdab9-0abd-4f21-aa5d-2a6c9eafbc9c
-eo = "ls.n15868"
-
-# ╔═╡ a3263b9e-a1bd-462b-9b83-71a839b4d040
-facio = "ls.n17516"
-
-# ╔═╡ 8d4e5b24-6024-4fa5-81e2-91376f754fd1
-creo = "ls.n11543"
-
-# ╔═╡ a45d2229-e648-443a-b87f-7974782027e1
-fero = "ls.n17964"
-
-# ╔═╡ 50b2ada9-5bae-4fb7-993f-3228d27f5ccb
-skips = [Complutensian.SUM, dico, eo, facio, fero]
-
-# ╔═╡ 121f116d-79dd-4b5e-a3c5-debb7187065c
-verbdata = filter(v -> (v.lexeme in skips) == false, verbdataraw)
-
-# ╔═╡ 195b55f6-21e5-4a85-a2eb-40e95801dcc5
-length(verbdata)
-
-# ╔═╡ 0f533e23-757a-4882-8f8a-2ce16fee2b11
-labels = loadlabels()
-
-# ╔═╡ e8cffc02-fe2b-40bc-a446-38eda5a79657
- allverbs = verblist(verbdata)
-
-# ╔═╡ a09b12f6-1957-414b-b542-e6df7782ded3
-length(allverbs)
-
-# ╔═╡ 30e16882-caac-406c-a50e-f05c981f7ead
-lsjverbs = filter(v -> startswith(v, "lsj"), allverbs)
-
-# ╔═╡ 629286fc-323c-4412-83db-0979c503a716
-latverbs = filter(v -> ! startswith(v, "lsj"), allverbs)
-
-# ╔═╡ e29fa791-8f01-43e8-8d2c-5673f7abe4fb
-verbsmenu =  map(latverbs) do v
-	Pair(v, labellex(v; labelsdict = labels))
-end
-
-# ╔═╡ 07969ca0-7ec5-43d8-99b9-4d86dceb396c
-eo in allverbs
-
-# ╔═╡ c319c43c-ac4f-443c-9640-8018d68072fa
-md"""### Labelling"""
-
-# ╔═╡ ba3d4590-d85e-4b88-b03d-4f22837c493c
-lsjid_url = "https://raw.githubusercontent.com/neelsmith/Kanones.jl/main/datasets/lsj-vocab/lexemes/lsj.cex"
-
-# ╔═╡ 57499957-c9a6-4150-b9b9-56fe5d44edc7
-"""Build a dictionary of lexeme URNs to lemma forms"""
-function lsjid_dict(u)
-    lsjfile = Downloads.download(u)
-    iddict = Dict()
-    idpairs = filter(ln -> !isempty(ln), readlines(lsjfile))
-    for pr in idpairs[2:end]
-        pieces = split(pr, "|")
-        x = Unicode.normalize(pieces[2], stripmark = true)
-		y = pieces[1]
-        iddict[y]= x
-    end
-	rm(lsjfile)
-    iddict
-end
-
-# ╔═╡ 380a1611-25aa-473c-b137-e6e90200ee26
-lsjlabels = lsjid_dict(lsjid_url)
-
-# ╔═╡ 287532b4-4755-430a-8c4a-22566471ce54
-"""Label a Greek lexeme urn with a lemma form"""
-function labelgreek(vb; labels = lsjlabels)
-	if haskey(labels, vb)
-		string(labels[vb], " (", vb, ")")
-	else
-		vb
-	end
-end
-
-# ╔═╡ 35d7f0b6-8648-4a50-b230-1bd7853a9508
-greekverbsmenu =  map(lsjverbs) do v
-	Pair(v, labelgreek(v))
-end
-
-# ╔═╡ b2d023e3-a79a-4830-b276-b54525e8c0b7
-if baselang == "Greek"
-	md"""*Choose a verb*: $(@bind verbchoice Select(greekverbsmenu))"""
-else
-	md"""*Choose a verb*: $(@bind verbchoice Select(verbsmenu))"""
-end
-
-# ╔═╡ 08c0ab69-4b06-4243-ba87-b0d880e490cb
-if baselang == "Greek"
-	md"""## Alignments with $(labelgreek(verbchoice; ))"""
-else
-	md"""## Alignments with *$(labellex(verbchoice; labelsdict = labels))*"""
-end
-
 # ╔═╡ 954fabb3-6c65-464a-9b3c-0f115df029db
 """Compose an HTML table for table of alignments."""
 function alignmenttab(vrb, data; lbls = labels, lang = baselang)
@@ -256,8 +135,129 @@ function alignmenttab(vrb, data; lbls = labels, lang = baselang)
 	join(htmlout) |> HTML
 end
 
+# ╔═╡ 6662a744-a6ab-4609-b4dd-05cc0cb5e78b
+css = html"""
+<style>
+.match {
+	background-color: yellow;
+	font-weight: bold;
+}
+</style>
+"""
+
+# ╔═╡ b7cb6ead-9d89-4532-a5e5-bddaecef8338
+md"""> ## Data"""
+
+# ╔═╡ 9988e7cd-7d52-43ea-8bbc-4237a56a002e
+verbdataraw = loadverbdata()
+
+
+# ╔═╡ d26fff15-871c-424b-bc68-3df2cf48752a
+md"""Tweak skip list:"""
+
+# ╔═╡ ce2f65bc-8e6b-4f2f-ba3e-2ec3c0d07f0e
+dico = "ls.n13804"
+
+# ╔═╡ 2d6fdab9-0abd-4f21-aa5d-2a6c9eafbc9c
+eo = "ls.n15868"
+
+# ╔═╡ a3263b9e-a1bd-462b-9b83-71a839b4d040
+facio = "ls.n17516"
+
+# ╔═╡ 8d4e5b24-6024-4fa5-81e2-91376f754fd1
+creo = "ls.n11543"
+
+# ╔═╡ a45d2229-e648-443a-b87f-7974782027e1
+fero = "ls.n17964"
+
+# ╔═╡ 50b2ada9-5bae-4fb7-993f-3228d27f5ccb
+skips = [Complutensian.SUM, dico, eo, facio, fero]
+
+# ╔═╡ 121f116d-79dd-4b5e-a3c5-debb7187065c
+verbdata = filter(v -> (v.lexeme in skips) == false, verbdataraw)
+
+# ╔═╡ 195b55f6-21e5-4a85-a2eb-40e95801dcc5
+length(verbdata)
+
+# ╔═╡ 0f533e23-757a-4882-8f8a-2ce16fee2b11
+labels = loadlabels()
+
+# ╔═╡ e8cffc02-fe2b-40bc-a446-38eda5a79657
+ allverbs = verblist(verbdata)
+
+# ╔═╡ a09b12f6-1957-414b-b542-e6df7782ded3
+length(allverbs)
+
+# ╔═╡ 30e16882-caac-406c-a50e-f05c981f7ead
+lsjverbs = filter(v -> startswith(v, "lsj"), allverbs)
+
+# ╔═╡ 35d7f0b6-8648-4a50-b230-1bd7853a9508
+greekverbsmenu =  map(lsjverbs) do v
+	Pair(v, labelgreek(v))
+end
+
+# ╔═╡ 629286fc-323c-4412-83db-0979c503a716
+latverbs = filter(v -> ! startswith(v, "lsj"), allverbs)
+
+# ╔═╡ e29fa791-8f01-43e8-8d2c-5673f7abe4fb
+verbsmenu =  map(latverbs) do v
+	Pair(v, labellex(v; labelsdict = labels))
+end
+
+# ╔═╡ b2d023e3-a79a-4830-b276-b54525e8c0b7
+if baselang == "Greek"
+	md"""*Choose a verb*: $(@bind verbchoice Select(greekverbsmenu))"""
+else
+	md"""*Choose a verb*: $(@bind verbchoice Select(verbsmenu))"""
+end
+
+# ╔═╡ 08c0ab69-4b06-4243-ba87-b0d880e490cb
+if baselang == "Greek"
+	md"""## Alignments with $(labelgreek(verbchoice; ))"""
+else
+	md"""## Alignments with *$(labellex(verbchoice; labelsdict = labels))*"""
+end
+
 # ╔═╡ f61455da-0d8f-48b6-b5ab-9e14186281cf
 alignmenttab(verbchoice, verbdata)
+
+# ╔═╡ 07969ca0-7ec5-43d8-99b9-4d86dceb396c
+eo in allverbs
+
+# ╔═╡ c319c43c-ac4f-443c-9640-8018d68072fa
+md"""### Labelling"""
+
+# ╔═╡ 287532b4-4755-430a-8c4a-22566471ce54
+"""Label a Greek lexeme urn with a lemma form"""
+function labelgreek(vb; labels = lsjlabels)
+	if haskey(labels, vb)
+		string(labels[vb], " (", vb, ")")
+	else
+		vb
+	end
+end
+
+# ╔═╡ ba3d4590-d85e-4b88-b03d-4f22837c493c
+lsjid_url = "https://raw.githubusercontent.com/neelsmith/Kanones.jl/main/datasets/lsj-vocab/lexemes/lsj.cex"
+
+# ╔═╡ 380a1611-25aa-473c-b137-e6e90200ee26
+lsjlabels = lsjid_dict(lsjid_url)
+
+# ╔═╡ 57499957-c9a6-4150-b9b9-56fe5d44edc7
+"""Build a dictionary of lexeme URNs to lemma forms"""
+function lsjid_dict(u)
+    lsjfile = Downloads.download(u)
+    iddict = Dict()
+    idpairs = filter(ln -> !isempty(ln), readlines(lsjfile))
+    for pr in idpairs[2:end]
+        pieces = split(pr, "|")
+        x = Unicode.normalize(pieces[2], stripmark = true)
+		y = pieces[1]
+        iddict[y]= x
+    end
+	rm(lsjfile)
+    iddict
+end
 
 # ╔═╡ Cell order:
 # ╟─34e2e4d6-ba9e-4652-9d1c-be7a80386978

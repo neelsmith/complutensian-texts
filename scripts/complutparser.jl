@@ -7,3 +7,4 @@ function parser(tabulaeroot; ortho = "lat25")
     srcdirs = vcat(coreds.dirs, [compshared, comportho])
     Tabulae.Dataset(srcdirs) |> tsp
 end
+

@@ -38,6 +38,33 @@ end
 # ╔═╡ 8180ad26-1acf-4c40-b96a-646533852970
 TableOfContents()
 
+# ╔═╡ 97be17dd-e4ea-4522-947f-be3a68d97eec
+#dumpdict(failedcountssorted)
+
+# ╔═╡ 82c4ce07-71f3-4b9f-9831-98d5834df8b7
+pwd()
+
+
+# ╔═╡ 57e3280f-08db-44cc-8b8f-82a53b28d24b
+function dumpdict(d; outfile = "failed-freqs.cex")
+	txt = []
+	for k in keys(d)
+		push!(txt, string(k,"|",d[k]))
+	end
+	open(outfile,"w") do io
+		write(io, join(txt,"\n"))
+	end
+end
+
+# ╔═╡ f2b63de2-60f7-4d3b-99c7-d3c230b154ea
+function failedmenu(dict)
+	menu = []
+	for k in keys(dict)
+		push!(menu, string(k, " (", dict[k], ")"))
+	end
+	menu
+end
+
 # ╔═╡ 761ede18-6c8f-11ef-279a-9131aeb3700a
 md"""# Complutensian Bible: overview of Greek morphology"""
 
@@ -142,6 +169,9 @@ failedcounts = countmap(map(pr -> pr.token, fails))
 
 # ╔═╡ 7a29a697-39ae-46d9-a914-1033e598a235
 failedcountssorted = sort(failedcounts, rev = true, byvalue = true)
+
+# ╔═╡ 13c40ec0-43b0-4de2-9fac-1bcb14b567bb
+@bind greekfail Select(failedmenu(failedcountssorted))
 
 # ╔═╡ 9221df51-36ce-4b6b-ba6d-3ed2b8fc5394
 failed_freq = keys(failedcountssorted) |> collect
@@ -1975,6 +2005,11 @@ version = "1.4.1+1"
 # ╔═╡ Cell order:
 # ╟─7d62e1d6-b3ef-4caf-bff9-79743fe2fdba
 # ╟─8180ad26-1acf-4c40-b96a-646533852970
+# ╠═97be17dd-e4ea-4522-947f-be3a68d97eec
+# ╠═82c4ce07-71f3-4b9f-9831-98d5834df8b7
+# ╠═57e3280f-08db-44cc-8b8f-82a53b28d24b
+# ╠═13c40ec0-43b0-4de2-9fac-1bcb14b567bb
+# ╠═f2b63de2-60f7-4d3b-99c7-d3c230b154ea
 # ╟─761ede18-6c8f-11ef-279a-9131aeb3700a
 # ╟─2a257718-4620-43f3-a0ca-390e6cc7b576
 # ╟─8c304257-a636-40aa-8e1e-3f945b6f7755
@@ -1988,12 +2023,12 @@ version = "1.4.1+1"
 # ╟─1ba4351b-312c-4ccc-85e6-4bd06ac60671
 # ╟─86fbd9ef-a53e-4470-9165-73eed9d3929a
 # ╟─8b85ccd7-ac19-406f-bfac-04afaad9be63
-# ╟─cff69c80-7d62-4612-8e46-54a32b67d8f7
+# ╠═cff69c80-7d62-4612-8e46-54a32b67d8f7
 # ╟─0f299cca-d2fe-42ad-a1d0-55944048b749
-# ╟─3381cad1-5842-4140-9b71-146612439329
-# ╟─dc7f487f-85b9-4ca1-9026-23d4ab95abda
-# ╟─fa008a94-04ea-4607-ab2a-239eb1c5d9bd
-# ╟─e7c5b280-a7d5-4c1d-8f30-80b51e272da3
+# ╠═3381cad1-5842-4140-9b71-146612439329
+# ╠═dc7f487f-85b9-4ca1-9026-23d4ab95abda
+# ╠═fa008a94-04ea-4607-ab2a-239eb1c5d9bd
+# ╠═e7c5b280-a7d5-4c1d-8f30-80b51e272da3
 # ╠═7fb034ac-b0c8-4ada-afe9-b81aaab25de9
 # ╠═0747e038-b6b8-46c9-8d97-995c1f77b18c
 # ╠═e292687b-4e6a-4d8a-835c-6d7b8ce40078
