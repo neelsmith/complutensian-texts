@@ -4402,7 +4402,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        et <persName>elibama</persName> peperit <persName>ieul</persName>: et <persName>ieglom</persName>: et <persName>core</persName>. hi filii <persName></persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> fuerunt ei in terra <placeName>chanaan</placeName>. 
+        et <persName>elibama</persName> peperit <persName>ieul</persName>: et <persName>ieglom</persName>: et <persName>core</persName>. hi filii <persName>esau</persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> fuerunt ei in terra <placeName>chanaan</placeName>. 
         </ab>
 
         <ab n="6">
@@ -4482,7 +4482,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="26">
-        hi <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>deson</persName>: <persName>abada</persName>: et <persName>asbar</persName>: et <persName>ithram</persName>: et <persName>charram</persName>. 
+        hi <choice><abbr>at</abbr><expan>autem</expan></choice> filii <persName>deson</persName>: <persName>abada</persName>: et <persName>asba</persName>: et <persName>ithram</persName>: et <persName>charram</persName>. 
         </ab>
 
         <ab n="27">
@@ -4559,7 +4559,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="37" type="ordinal">37.</num></ab>
 
         <ab n="2">
-        <persName>Ioseph</persName> decem et septem annorum erat: scens cum fratribus suis oues <choice><abbr>pris</abbr><expan>patris</expan></choice> sui: <unclear>exns</unclear> iuuenis cum filiis <persName>balle</persName>: et cum filiis <persName>zelphe</persName>: vxorum <choice><abbr>pris</abbr><expan>patris</expan></choice> sui. attulit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>ioseph</persName> vituperium malum ad <placeName>israel</placeName> <choice><abbr>prem</abbr><expan>patrem</expan></choice> suum. 
+        <persName>Ioseph</persName> decem et septem annorum erat: pascens cum fratribus suis oues <choice><abbr>pris</abbr><expan>patris</expan></choice> sui: <unclear>exns</unclear> iuuenis cum filiis <persName>balle</persName>: et cum filiis <persName>zelphe</persName>: vxorum <choice><abbr>pris</abbr><expan>patris</expan></choice> sui. attulit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>ioseph</persName> vituperium malum ad <placeName>israel</placeName> <choice><abbr>prem</abbr><expan>patrem</expan></choice> suum. 
         </ab>
 
         <ab n="3">
@@ -4587,7 +4587,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        vidit <choice><abbr>at</abbr><expan>autem</expan></choice> somonium alterum: et narrauit illud <choice><abbr>pri</abbr><expan>patri</expan></choice> suo: et fratribus suis. et dixit: ecce somuiaui somnium alternum. sicut sol et luna et vndecim stelle adorabant me. 
+        vidit <choice><abbr>at</abbr><expan>autem</expan></choice> somnium alterum: et narrauit illud <choice><abbr>pri</abbr><expan>patri</expan></choice> suo: et fratribus suis. et dixit: ecce somuiaui somnium alternum. sicut sol et luna et vndecim stelle adorabant me. 
         </ab>
 
         <ab n="10">
@@ -4595,7 +4595,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="11">
-        <choice><abbr>inuidert</abbr><expan>inuiderunt</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> ei fratres eius. aat pater eius seruauit verbum. 
+        <choice><abbr>inuidert</abbr><expan>inuiderunt</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> ei fratres eius. at pater eius seruauit verbum. 
         </ab>
 
         <ab n="12">
@@ -4659,7 +4659,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="27">
-        venite vendainus eum <persName>ismaelitis</persName> istis: at manus <choice><abbr>nre</abbr><expan>nostre</expan></choice> ne sint super eum: <choice><abbr>q</abbr><expan>quia</expan></choice> frater et caro <choice><abbr>nra</abbr><expan>nostra</expan></choice> est. obedierunt <choice><abbr>at</abbr><expan>autem</expan></choice> fratres eius: 
+        venite vendamus eum <persName>ismaelitis</persName> istis: at manus <choice><abbr>nre</abbr><expan>nostre</expan></choice> ne sint super eum: <choice><abbr>q</abbr><expan>quia</expan></choice> frater et caro <choice><abbr>nra</abbr><expan>nostra</expan></choice> est. obedierunt <choice><abbr>at</abbr><expan>autem</expan></choice> fratres eius: 
         </ab>
         
         <ab n="28">
