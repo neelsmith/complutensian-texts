@@ -4446,11 +4446,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="29">
-        Istsi sunt duces <persName>horrei</persName>. Dux <persName>lotan</persName>: dux <persName>sobal</persName>: dux <persName>sebeon</persName>: dux <persName>ana</persName>: 
+        Isti sunt duces <persName>horrei</persName>. Dux <persName>lotan</persName>: dux <persName>sobal</persName>: dux <persName>sebeon</persName>: dux <persName>ana</persName>: 
         </ab>
 
         <ab n="30">
-        dux <persName>dison</persName>: dux <persName>eser</persName>: dux <persName>disan</persName>. Isti duces <persName>horreorum</persName> <choice><abbr>sm</abbr><expan>secundum</expan></choice> principatus eorum in terra <placeName>seyr</placeName>. 
+        dux <persName>dison</persName>: dux <persName>eser</persName>: dux <persName>dison</persName>. Isti duces <persName>horreorum</persName> <choice><abbr>sm</abbr><expan>secundum</expan></choice> principatus eorum in terra <placeName>seyr</placeName>. 
         </ab>
 
         <ab n="31">
@@ -4543,7 +4543,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="10">
-        Etnarrauit patri suo et <choice><abbr>fribus</abbr><expan>fratribus</expan></choice> suis: in crepauitque eum pater suus: et ait. Quid est somnium hoc <choice><abbr>qd</abbr><expan>quod</expan></choice> somniasti: <choice><abbr>nunqd</abbr><expan>nunquid</expan></choice> venientes veniemus ego et mater ta et fratres tui vt adoremus te super terram. 
+        Et narrauit patri suo et <choice><abbr>fribus</abbr><expan>fratribus</expan></choice> suis: in crepauitque eum pater suus: et ait. Quid est somnium hoc <choice><abbr>qd</abbr><expan>quod</expan></choice> somniasti: <choice><abbr>nunqd</abbr><expan>nunquid</expan></choice> venientes veniemus ego et mater tua et fratres tui vt adoremus te super terram. 
         </ab>
 
         <ab n="11">
@@ -4583,7 +4583,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        et nunc venite occidamus eum: et proiiciamus eum in vnam ex cisternis: et dicemus bestia pessima coinedit eum: et videbimus <choice><abbr>qs</abbr><expan>quas</expan></choice> erit finis somniorum suorum. 
+        et nunc venite occidamus eum: et proiiciamus eum in vnam ex cisternis: et dicemus bestia pessima comedit eum: et videbimus <choice><abbr>qs</abbr><expan>quas</expan></choice> erit finis somniorum suorum. 
         </ab>
 
         <ab n="21">
