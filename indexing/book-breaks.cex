@@ -1,5 +1,5 @@
 Book opening|Image|Category|Notes
-Title page|urn:cite2:citebne:complutensian.v1:v1p5||Volume 1
+Title page|urn:cite2:citebne:complutensian.v1:v1p5|title|Volume 1
 Prolog to the Pope|urn:cite2:citebne:complutensian.v1:v1p7|editorial|
 Prolog to the reader|urn:cite2:citebne:complutensian.v1:v1p8|editorial|
 Finding Hebrew roots|urn:cite2:citebne:complutensian.v1:v1p9|editorial|Refers to earlier Hebrew grammar! Quire mark +iiii
@@ -14,13 +14,16 @@ Leviticus|urn:cite2:citebne:complutensian.v1:v1b_p86|text|
 Numbers|urn:cite2:citebne:complutensian.v1:v1cp69|text|
 Deuteronomy|urn:cite2:citebne:complutensian.v1:v1d_p90|text|
 
+
+
+Title page|urn:cite2:citebne:complutensian.v1:v2a_p3|title|Volume 2
 Prolog to Pope|urn:cite2:citebne:complutensian.v1:v2a_p4|editorial|
 
-Joshua|urn:cite2:citebne:complutensian.v1:v2a_p5|text|
+Joshua|urn:cite2:citebne:complutensian.v1:v2a_p5|text|begins new quire count with `a`
 Judges|urn:cite2:citebne:complutensian.v1:v2a_p57|text|
 Ruth|urn:cite2:citebne:complutensian.v1:v2b_p11|text|
 
-Jerome's prolog to Kings|urn:cite2:citebne:complutensian.v1:v2b_p19|jerome|
+Jerome's prolog to Kings|urn:cite2:citebne:complutensian.v1:v2b_p19|jerome|continues quire count with `k ii`
 
 1 Samuel|urn:cite2:citebne:complutensian.v1:v2b_p20|text|Greek calls this first book of Kings, as do Latin page headings in Complutensian
 2 Samuel|urn:cite2:citebne:complutensian.v1:v2b_p92|text|second book of Kings
@@ -28,9 +31,11 @@ Jerome's prolog to Kings|urn:cite2:citebne:complutensian.v1:v2b_p19|jerome|
 2 Kings|urn:cite2:citebne:complutensian.v1:v2d_p25|text|fourth book of Kings
 1 Chronicles|urn:cite2:citebne:complutensian.v1:v2d_p91|text|1 paralipomenon, 1 dibreiamim
 2 Chronicles|urn:cite2:citebne:complutensian.v1:v2e_p50|text|2 paralipomenon, 2 dibreiamim
+Collation|urn:cite2:citebne:complutensian.v1:v3a_p20|editorial|Volume 2
 
+Title page|urn:cite2:citebne:complutensian.v1:v3a_p21|title|Volume 3
 Prolog to Pope|urn:cite2:citebne:complutensian.v1:v3a_p22|editorial|
-Prolog to reader|urn:cite2:citebne:complutensian.v1:v3a_p23|editorial|
+Prolog to reader|urn:cite2:citebne:complutensian.v1:v3a_p23|editorial|continues quire count with `aaa ii`! So vol 3 was planned as continuation of 2
 Prolog of Jerome to Ezra|urn:cite2:citebne:complutensian.v1:v3a_p24|jerome|
 
 1 Ezra|urn:cite2:citebne:complutensian.v1:v3a_p25|text|
@@ -58,11 +63,15 @@ Ecclesiastes|urn:cite2:citebne:complutensian.v1:v3d_p34|text|
 Song of songs|urn:cite2:citebne:complutensian.v1:v3d_p49|text|
 Wisdom|urn:cite2:citebne:complutensian.v1:v3d_p57|text|
 Sirach|urn:cite2:citebne:complutensian.v1:v3d_p74|text|Also called Ecclesiasticus
+Colllation|urn:cite2:citebne:complutensian.v1:v3e_p23|editorial|Volume 3
 
+
+Title|urn:cite2:citebne:complutensian.v1:v4a_p1|title|Volume 4
 Prolog to Pope|urn:cite2:citebne:complutensian.v1:v4a_p2|editorial|
-Prolog to reader|urn:cite2:citebne:complutensian.v1:v4a_p3|editorial|
+Prolog to reader|urn:cite2:citebne:complutensian.v1:v4a_p3|editorial|continues quire count with `a ii`
 
-Isaiah|urn:cite2:citebne:complutensian.v1:v4a_p5|text|
+
+Isaiah|urn:cite2:citebne:complutensian.v1:v4a_p5|text|continues quire count with `a iii`
 
 Prolog to Jeremiah|urn:cite2:citebne:complutensian.v1:v4b_p2|jerome|
 Jeremiah|urn:cite2:citebne:complutensian.v1:v4b_p2|text|
@@ -115,16 +124,17 @@ Prolog to Maccabees|urn:cite2:citebne:complutensian.v1:v4e_p57|jerome|
 1 Maccabees|urn:cite2:citebne:complutensian.v1:v4e_p57|text|
 2 Maccabees|urn:cite2:citebne:complutensian.v1:v4e_p98|text|
 3 Maccabees|urn:cite2:citebne:complutensian.v1:v4f_p27|text|not in Vulgate
+Collation|urn:cite2:citebne:complutensian.v1:v4f_p35|editorial|Volume 4: list of books, not quires
 
 
-
+Title page|urn:cite2:citebne:complutensian.v1:v5a_p1|title|Volume 5
 Prolog to volume 5|urn:cite2:citebne:complutensian.v1:v5a_p1|editorial|
-Greek preface to the reader|urn:cite2:citebne:complutensian.v1:v5a_p3|editorial|
+Greek preface to the reader|urn:cite2:citebne:complutensian.v1:v5a_p3|editorial|continues quire count with `a ii`
 Latin translation of Greek preface to the reader|urn:cite2:citebne:complutensian.v1:v5a_p4|editorial|
 Letter of Eusebius|urn:cite2:citebne:complutensian.v1:v5a_p5|editorial|
 Letter of Jerome to Pope|urn:cite2:citebne:complutensian.v1:v5a_p6|jerome|
 
-Matthew|urn:cite2:citebne:complutensian.v1:v5a_p9|text|
+Matthew|urn:cite2:citebne:complutensian.v1:v5a_p9|text|begins new quire count with `A i`
 
 Preface to Mark|urn:cite2:citebne:complutensian.v1:v5a_p63|jerome|
 Mark|urn:cite2:citebne:complutensian.v1:v5a_p64|text|
@@ -135,8 +145,8 @@ Luke|urn:cite2:citebne:complutensian.v1:v5b_p2|text|
 Preface to John|urn:cite2:citebne:complutensian.v1:v5b_p60|jerome|
 John|urn:cite2:citebne:complutensian.v1:v5b_p61|text|
 
-Greek preface to Pauline letters|urn:cite2:citebne:complutensian.v1:v5c_p5|editorial|
-Preface to Pauline letters|urn:cite2:citebne:complutensian.v1:v5c_p17|jerome|
+Greek preface to Pauline letters|urn:cite2:citebne:complutensian.v1:v5c_p5|editorial|The apodemia. Begins new quire count with alpha
+Preface to Pauline letters|urn:cite2:citebne:complutensian.v1:v5c_p17|jerome|Continues quire count from before apodemia with `R` !
 
 Romans|urn:cite2:citebne:complutensian.v1:v5c_p18|text|
 
