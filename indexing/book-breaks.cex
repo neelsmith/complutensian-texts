@@ -1,6 +1,6 @@
 Book opening|Image|Category|Notes
 Title page|urn:cite2:citebne:complutensian.v1:v1p5|title|Volume 1
-Prolog to the Pope|urn:cite2:citebne:complutensian.v1:v1p7|editorial|
+Prolog to the Pope|urn:cite2:citebne:complutensian.v1:v1p7|editorial|continues quire count with `+ iii`
 Prolog to the reader|urn:cite2:citebne:complutensian.v1:v1p8|editorial|
 Finding Hebrew roots|urn:cite2:citebne:complutensian.v1:v1p9|editorial|Refers to earlier Hebrew grammar! Quire mark +iiii
 Prolog to Hebrew dictionary|urn:cite2:citebne:complutensian.v1:v1p11|editorial|
@@ -13,7 +13,7 @@ Exodus|urn:cite2:citebne:complutensian.v1:v1a_p65|text|
 Leviticus|urn:cite2:citebne:complutensian.v1:v1b_p86|text|
 Numbers|urn:cite2:citebne:complutensian.v1:v1cp69|text|
 Deuteronomy|urn:cite2:citebne:complutensian.v1:v1d_p90|text|
-
+Collation|urn:cite2:citebne:complutensian.v1:v1e_p95|editorial|"All are ternions except the last which is a quaternion"
 
 
 Title page|urn:cite2:citebne:complutensian.v1:v2a_p3|title|Volume 2
@@ -32,6 +32,8 @@ Jerome's prolog to Kings|urn:cite2:citebne:complutensian.v1:v2b_p19|jerome|conti
 1 Chronicles|urn:cite2:citebne:complutensian.v1:v2d_p91|text|1 paralipomenon, 1 dibreiamim
 2 Chronicles|urn:cite2:citebne:complutensian.v1:v2e_p50|text|2 paralipomenon, 2 dibreiamim
 Collation|urn:cite2:citebne:complutensian.v1:v3a_p20|editorial|Volume 2
+
+
 
 Title page|urn:cite2:citebne:complutensian.v1:v3a_p21|title|Volume 3
 Prolog to Pope|urn:cite2:citebne:complutensian.v1:v3a_p22|editorial|
@@ -247,9 +249,12 @@ Jude|urn:cite2:citebne:complutensian.v1:v5e_p15|text|
 
 Preface to Revelation|urn:cite2:citebne:complutensian.v1:v5e_p17|jerome|
 Revelation|urn:cite2:citebne:complutensian.v1:v5e_p18|text|
+Colophon to NT|urn:cite2:citebne:complutensian.v1:v5e_p46|editorial|Dated Jan. 15, 1514
+
 
 Poem of Demetrius Lukas of Crete|urn:cite2:citebne:complutensian.v1:v5e_p47|other|
 Poem of John of Toledo|urn:cite2:citebne:complutensian.v1:v5e_p47|other|
+
 
 Commentary on proper names: Matthew|urn:cite2:citebne:complutensian.v1:v5e_p49|reference|
 Commentary on proper names: Mark|urn:cite2:citebne:complutensian.v1:v5e_p51|reference|
@@ -292,6 +297,9 @@ Commentary on proper names: Revelation|urn:cite2:citebne:complutensian.v1:v5e_p6
 Brief introduction to Greek|urn:cite2:citebne:complutensian.v1:v5e_p69|reference|starts new quire count with `a`
 Greek-Latin lexicon|urn:cite2:citebne:complutensian.v1:v5e_p71|reference|
 Collation|urn:cite2:citebne:complutensian.v1:v5f_p45|editorial|"Telos" but no collation
+
+
+
 
 
 Title page|urn:cite2:citebne:complutensian.v1:v6p1|title|Volume 6
