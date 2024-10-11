@@ -4675,7 +4675,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="31">
-        accipientes <choice><abbr>at</abbr><expan>autem</expan></choice> tunicam <persName>ioseph</persName>: <choice><abbr>iugulauert</abbr><expan>iugulauerunt</expan></choice> hedum caprarum: et ppolluerunt tunicam variam. 
+        accipientes <choice><abbr>at</abbr><expan>autem</expan></choice> tunicam <persName>ioseph</persName>: <choice><abbr>iugulauert</abbr><expan>iugulauerunt</expan></choice> hedum caprarum: et polluerunt tunicam variam. 
         </ab>
 
         <ab n="32">
@@ -4687,7 +4687,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="34">
-        rupit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> vestimenta sua: et imposuit cilicium super lumbum suum: et lugebat filium suu dies multos. 
+        rupit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>iacob</persName> vestimenta sua: et imposuit cilicium super lumbum suum: et lugebat filium suum dies multos. 
         </ab>
 
         <ab n="35">
@@ -4748,11 +4748,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        <choice><abbr>mltiplicati</abbr><expan>multiplicati</expan></choice> sunt <choice><abbr>at</abbr><expan>autem</expan></choice> dies: et mortus est <persName>saua</persName> vxor <persName>iuda</persName>. et consolatus <persName>iudas</persName>: ascendit ad tondentes oues suas: <choice><abbr>ipe</abbr><expan>ipse</expan></choice> et iras pastor eius odollamitas in <placeName>thamna</placeName>. 
+        <choice><abbr>mltiplicati</abbr><expan>multiplicati</expan></choice> sunt <choice><abbr>at</abbr><expan>autem</expan></choice> dies: et mortua est <persName>saua</persName> vxor <persName>iuda</persName>. et consolatus <persName>iudas</persName>: ascendit ad tondentes oues suas: <choice><abbr>ipe</abbr><expan>ipse</expan></choice> et iras pastor eius odollamitas in <placeName>thamna</placeName>. 
         </ab>
 
         <ab n="13">
-        et nunciatum est <persName>thamar</persName> nurui sue: dicentes: ecce socer tuus ascecndit in <placeName>thamna</placeName>: tondere oues suas. 
+        et nunciatum est <persName>thamar</persName> nurui sue: dicentes: ecce socer tuus ascendit in <placeName>thamna</placeName>: tondere oues suas. 
         </ab>
 
         <ab n="14">
@@ -4822,6 +4822,68 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="30">
         et post hoc egressus est frater eius: in quo erat super manum eius coccinum. et vocauit nomen eius: <persName>zara</persName>. 
         </ab>
+
+        </div>
+
+        <div n="39">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="39" type="ordinal">39.</num></ab>
+
+        <ab n="1">
+        <persName>Ioseph</persName> <choice><abbr>at</abbr><expan>autem</expan></choice> deductus est in <placeName>egyptum</placeName>. et emit eum <persName>petephres</persName> eunuchus pharaonis: princeps coquorum: vir <placeName>egyptius</placeName>: de manu <persName>ismaelitarum</persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> deduxerunt eum illuc. 
+        </ab>
+
+        <ab n="2">
+        et fuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> cum <persName>ioseph</persName>. et fuit vir fortunatus et fuit in domo apud <choice><abbr>dnm</abbr><expan>dominum</expan></choice> suum <placeName>egyptium</placeName>. 
+        </ab>
+
+        <ab n="3">
+        sciebat <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>dns</abbr><expan>dominus</expan></choice> eius: quod <choice><abbr>dns</abbr><expan>dominus</expan></choice> erat cum eo: et <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> <choice><abbr>facert</abbr><expan>facerunt</expan></choice> <choice><abbr>dns</abbr><expan>dominus</expan></choice> persperaret in manibus eius. 
+        </ab>
+
+        <ab n="4">
+        et inuenit <choice><abbr>gram</abbr><expan>gratiam</expan></choice> <persName>ioseph</persName> coram <choice><abbr>dno</abbr><expan>domino</expan></choice> suo. placuit <choice><abbr>at</abbr><expan>autem</expan></choice> ei: et constituit eum super domum suam. et <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> erant ei: dedit in manum <persName>ioseph</persName>. 
+        </ab>
+
+        <ab n="5">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> postquam constitutus est <choice><abbr>ipe</abbr><expan>ipse</expan></choice> super domum eius: et super <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> erant ei: et <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> <choice><abbr>dns</abbr><expan>dominus</expan></choice> domum <persName>egyptii</persName> propter <persName>ioseph</persName>. et facta est <choice><abbr>bndictio</abbr><expan>benedictio</expan></choice> <choice><abbr>dni</abbr><expan>domini</expan></choice> in <unclear>exntibus</unclear> ei in domo et in agro eius. 
+        </ab>
+
+        <ab n="6">
+        et conmisit <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> erant ei: in manus <persName>ioseph</persName>. et non sciebat eorum <choice><abbr>q</abbr><expan>qui</expan></choice> apud se nihil: preter panem quo <choice><abbr>vescebat</abbr><expan>vescebatur</expan></choice> ipse. et erat <persName>ioseph</persName> pulcher facie: et decorus aspectu valde. 
+        </ab>
+
+        <ab n="7">
+        et factum est post verba hec: et iniecit vxor <choice><abbr>dni</abbr><expan>domini</expan></choice> eius oculos suos in <persName>ioseph</persName>: et dixit dormi mecum: 
+        </ab>
+
+        <ab n="8">
+        ille <choice><abbr>at</abbr><expan>autem</expan></choice> non voluit. dixit <choice><abbr>at</abbr><expan>autem</expan></choice> vxori <choice><abbr>dni</abbr><expan>domini</expan></choice> sui: si <choice><abbr>dns</abbr><expan>dominus</expan></choice> meus non scit propter me in domo sua: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> sunt ei: dedit in manus meas: 
+        </ab>
+
+        <ab n="9">
+        et non est in domo hac: neque excipit a me nihil: <choice><abbr>pter</abbr><expan>propter</expan></choice> te: et quod tu vxor eius es: et <unclear><choice><abbr>quo</abbr><expan>quomodo</expan></choice></unclear> faciam verbum malum hoc: et paccabo coram deo. 
+        </ab>
+
+        <ab n="10">
+        <choice><abbr>qn</abbr><expan>quando</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>loqbat</abbr><expan>loquebatur</expan></choice> <persName>ioseph</persName> diem ex die: et non obediuit ei dormire cum eo: vt coiret cum ea. 
+        </ab>
+
+        <ab n="11">
+        facta est <choice><abbr>at</abbr><expan>autem</expan></choice> talis quedam dies: et intrauit <persName>ioseph</persName> in domum facere oepra sua: et nemo erat in domo <choice><abbr>intus</abbr><expan>interius</expan></choice>: 
+        </ab>
+
+        <ab n="12">
+        et attraxit eum vestimentis: dicens: dormi mecum: et <choice><abbr>reliqns</abbr><expan>reliquens</expan></choice> vestimenta sua in manibus eius: fugit: et egressus est foras. 
+        </ab>
+
+        <ab n="13">
+        et factum est: vt vidit quod relinquens vestimenta sua in manibus eius: fugit: et egressus est foras: 
+        </ab>
+
+        <ab n="14">
+        et vocauit <unclear>exntes</unclear> in domo: 
+        </ab>
+
 
 
         </div>

@@ -4627,7 +4627,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="31">
-        Et tulerunt tunicam <persName>ioseph</persName>: et mactauerunt hedum caprarum: et tinerunt tunicam in sanguinem. 
+        Et tulerunt tunicam <persName>ioseph</persName>: et mactauerunt hedum caprarum: et tinxerunt tunicam in sanguinem. 
         </ab>
 
         <ab n="32">
@@ -4701,7 +4701,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        Post multos autem dies mortua est filia sue vxor inde: et consolatus est <persName>iudas</persName>: et ascendit ad tonsores ouium suarum in <placeName>thamnath</placeName>: ipse et <persName>hira</persName> socius eius <persName>odolamites</persName>. 
+        Post multos autem dies mortua est filia sue vxor iude: et consolatus est <persName>iudas</persName>: et ascendit ad tonsores ouium suarum in <placeName>thamnath</placeName>: ipse et <persName>hira</persName> socius eius <persName>odolamites</persName>. 
         </ab>
 
         <ab n="13">
@@ -4725,7 +4725,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="18">
-        Et dixit. Quod erit pignus quod dabo tibi: et ait. Annulus tuus et sudarium tuum et baculus tuus: quid est in manu tua. Et dedit ei: et ingressus est ad eam: et concepit ex eo. 
+        Et dixit. Quod erit pignus quod dabo tibi: et ait. Annulus tuus et sudarium tuum et baculus tuus: qui est in manu tua. Et dedit ei: et ingressus est ad eam: et concepit ex eo. 
         </ab>
 
         <ab n="19">
@@ -4775,6 +4775,31 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="30">
         Et post hec egressus est frater eius: super cuius manu erat coccinum: et vocauit nomen eius <persName>zara</persName>. 
         </ab>
+        </div>
+
+        <div n="39">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="39" type="ordinal">39.</num></ab>
+
+        <ab n="1">
+        <persName>Ioseph</persName> <choice><abbr>aut</abbr><expan>autem</expan></choice> deductus est in <placeName>egyptum</placeName>: et emit eum <persName>putiphar</persName> princeps pharaonis magister militum vir <persName>egyptius</persName> de manu <persName>arabum</persName>: <choice><abbr>q</abbr><expan>qui</expan></choice> deduxerunt eum ibi
+        </ab>
+
+        <ab n="2">
+        Et factum est verbum <choice><abbr>dni</abbr><expan>domini</expan></choice> in auxilium <persName>ioseph</persName>: et fuit vir perspere agens eratque in domo <choice><abbr>dni</abbr><expan>domini</expan></choice> sui <placeName>egyptii</placeName>. 
+        </ab>
+
+        <ab n="3">
+        Et vidit <choice><abbr>dns</abbr><expan>dominus</expan></choice> eius quod erat verbum <choice><abbr>dni</abbr><expan>domini</expan></choice> in auxilium eius: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> ipse faciebat <choice><abbr>dns</abbr><expan>dominus</expan></choice> dirigebat in manu sua. 
+        </ab>
+
+        <ab n="4">
+        Et inuenit <persName>ioseph</persName> <unclear><choice><abbr>miam</abbr><expan></expan></choice></unclear> in oculis eius: et ministrabat ei: constituit eum super domum sua: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> <choice><abbr>q</abbr><expan>quae</expan></choice> habebat tradidit in manu eius. 
+        </ab>
+
+        <ab n="5">
+        Et factum est ab eo tempore quo constituit eum in domo sua et super <choice><abbr>oia</abbr><expan>omnia</expan></choice>
+        </ab>
+
         </div>
 
     </body>
