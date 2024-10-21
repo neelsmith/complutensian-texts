@@ -1,9 +1,31 @@
 sequence|image|urn|rv|label
-1|urn:cite2:citebne:complutensian.v1:v1p5|urn:cite2:complutensian:pages.bne:v1_title_r|recto|Volume 1, title page
-2|urn:cite2:citebne:complutensian.v1:v1p6|urn:cite2:complutensian:pages.bne:v1_title_v|verso|Volume 1, title page verso
+1|urn:cite2:citebne:complutensian.v1:v1p5|urn:cite2:complutensian:pages.all.bne:v1_title_r|recto|Volume 1, title page
+2|urn:cite2:citebne:complutensian.v1:v1p6|urn:cite2:complutensian:pages.all.bne:v1_title_v|verso|Volume 1, title page verso
 
 
 
 
-3|urn:cite2:citebne:complutensian.v1:v1p7|urn:cite2:complutensian:pages.bne:v1_+iii|recto|Volume 1, page +iii
-4|urn:cite2:citebne:complutensian.v1:v1p8|urn:cite2:complutensian:pages.bne:v1_+iiii|verso|Volume 1, page +iiii
+3|urn:cite2:citebne:complutensian.v1:v1p7|urn:cite2:complutensian:pages.all.bne:v1_+iii_r|recto|Volume 1, page +iii recto
+4|urn:cite2:citebne:complutensian.v1:v1p8|urn:cite2:complutensian:pages.all.bne:v1_+iii_v|verso|Volume 1, page +iii verso
+5|urn:cite2:citebne:complutensian.v1:v1p9|urn:cite2:complutensian:pages.all.bne:v1_+iiii_r|recto|Volume 1, page +iiii recto
+6|urn:cite2:citebne:complutensian.v1:v1p10|urn:cite2:complutensian:pages.all.bne:v1_+iiii_v|verso|Volume 1, page +iiii verso
+
+7|urn:cite2:citebne:complutensian.v1:v1p11|urn:cite2:complutensian:pages.all.bne:v1_+v_r|recto|Volume 1, page +v recto
+8|urn:cite2:citebne:complutensian.v1:v1p12|urn:cite2:complutensian:pages.all.bne:v1_+v_v|verso|Volume 1, page +v verso
+
+9|urn:cite2:citebne:complutensian.v1:v1p13|urn:cite2:complutensian:pages.all.bne:v1_+vi_r|recto|Volume 1, page +vi recto
+10|urn:cite2:citebne:complutensian.v1:v1p14|urn:cite2:complutensian:pages.all.bne:v1_+vi_v|verso|Volume 1, page +vi verso
+
+11|urn:cite2:citebne:complutensian.v1:v1p15|urn:cite2:complutensian:pages.all.bne:v1_+vii_r|recto|Volume 1, page +vii recto
+12|urn:cite2:citebne:complutensian.v1:v1p16|urn:cite2:complutensian:pages.all.bne:v1_+vii_v|verso|Volume 1, page +vii verso
+
+
+13|urn:cite2:citebne:complutensian.v1:v1p17|urn:cite2:complutensian:pages.all.bne:v1_+viii_r|recto|Volume 1, page +viii recto
+14|urn:cite2:citebne:complutensian.v1:v1p18|urn:cite2:complutensian:pages.all.bne:v1_+viii_v|verso|Volume 1, page +viii verso
+
+
+15|urn:cite2:citebne:complutensian.v1:v1p19|urn:cite2:complutensian:pages.all.bne:v1_a_i_r|recto|Volume 1, page a i recto
+16|urn:cite2:citebne:complutensian.v1:v1p20|urn:cite2:complutensian:pages.all.bne:v1_a_i_v|verso|Volume 1, page a i verso
+
+17|urn:cite2:citebne:complutensian.v1:v1p21|urn:cite2:complutensian:pages.all.bne:v1_a_ii_r|recto|Volume 1, page a ii recto
+18|urn:cite2:citebne:complutensian.v1:v1p22|urn:cite2:complutensian:pages.all.bne:v1_a_ii_v|verso|Volume 1, page a ii verso
