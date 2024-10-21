@@ -30,7 +30,7 @@ md"""*Notebook version*: **$(nbversion)**. *Show version info*: $(@bind versioni
 # ╔═╡ 80cddf00-adec-42c6-9eab-06d8cb0379a8
 if versioninfo
 	md"""
-- **1.0.0**: initial release	
+- **1.0.0**: initial release
 """	
 end
 
@@ -519,8 +519,8 @@ version = "17.4.0+2"
 # ╟─afafa3b1-63d5-4e3b-a8c7-d04387fddc5a
 # ╟─8073c51e-75a3-42be-a61a-39b7fd7b3d6b
 # ╟─7c6d8b3d-b31f-46c5-83bc-043c91a70c36
-# ╠═4d3c4167-6640-4d2b-9234-8d62c72385ba
 # ╟─bb57547e-ae97-4b8c-879c-1632ce4900ef
+# ╟─4d3c4167-6640-4d2b-9234-8d62c72385ba
 # ╟─1bb0882b-bf46-4602-b26c-d334b28f97e8
 # ╟─3c449c8e-95ec-4bde-8a50-9e9fc05b5e1b
 # ╟─3ae6f9d1-e0e3-4046-a5ef-4c69e1af2411
