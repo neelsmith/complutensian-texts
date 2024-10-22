@@ -4797,9 +4797,84 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="5">
-        Et factum est ab eo tempore quo constituit eum in domo sua et super <choice><abbr>oia</abbr><expan>omnia</expan></choice>
+        Et factum est ab eo tempore quo constituit eum in domo sua et super <choice><abbr>oia</abbr><expan>omnia</expan></choice> que habebat: et <choice><abbr>bndixit</abbr><expan>benedixit</expan></choice> <choice><abbr>dns</abbr><expan>dominus</expan></choice> domui <persName>egyptii</persName> propter <persName>ioseph</persName>: et fuit benedictio <choice><abbr>dni</abbr><expan>domini</expan></choice> in <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> que habebat in domo et in agro. 
         </ab>
 
+        <ab n="6">
+        Et reliquit <choice><abbr>oia</abbr><expan>omnia</expan></choice> sua in manu <persName>ioseph</persName>: et non nouerat cum eo <unclear>quic</unclear> nisi panem quo vescebatur. Eratque <persName>ioseph</persName> pulcher facie et decorus aspectu. 
+        </ab>
+
+        <ab n="7">
+        Et factum est post verba hec: leuauit vxor <choice><abbr>dni</abbr><expan>domini</expan></choice> sui oculos ad <persName>ioseph</persName>: et dixit. 
+        </ab>
+
+        <ab n="8">
+        Cuba mecum: et noluit. Et ait vxori <choice><abbr>dni</abbr><expan>domini</expan></choice> sui. Ecce <choice><abbr>dns</abbr><expan>dominus</expan></choice> meus non nouit mecum <unclear>quicquam</unclear> eorum que in domo sua sunt: et <choice><abbr>oia</abbr><expan>omnia</expan></choice> sua tradidit in manu mea. 
+        </ab>
+
+        <ab n="9">
+        Non est ipse maior me in domo hac: neque prohibuit a me <unclear>quicquam</unclear> preter te: eo <choice><abbr>q</abbr><expan>qui</expan></choice> tu vxor eius es. Quomodo ergo faciam hoc magnum malum: et peccabo coram deo?
+        </ab>
+
+        <ab n="10">
+        Et factum est cum loqueretur cum <persName>ioseph</persName> per singulos dies: non acquieuit ei vt cubaret cum ea: 
+        </ab>
+
+        <ab n="11">
+        vt esset cum ea. Et factum est quadam die: et ingressus est in domum: vt inuestigaret scripturas rationis sue. Et nullus vir de <choice><abbr>hoibus</abbr><expan>hominibus</expan></choice> domus erat ibi in domo. 
+        </ab>
+
+        <ab n="12">
+        Apprehendituqe vestimenta eius: dicens. Cuba mecum. Et reliquit vestimenta sua in manu eius: et fugit: et egressus est foras. 
+        </ab>
+
+        <ab n="13">
+        Et factum est cum vidisset quod reliquisset vestimenta eius in manu sua et quod fugisset foras: 
+        </ab>
+
+        <ab n="14">
+        vocauit viros domus sue: et ait eis: dicens. Videte: adduxit nobis virum <persName>hebreum</persName> vt illuderet <choice><abbr>nob</abbr><expan>nobis</expan></choice>. Ingressus est ad me vt cubaret mecum et clamaui voce magna. 
+        </ab>
+
+        <ab n="15">
+        Et factum est cum audiret quod eleuarem vocem meam et clamarem: <choice><abbr>reliqt</abbr><expan>reliqueret</expan></choice> vestimenta sua apud me: et fugit et egressus est foras. 
+        </ab>
+
+        <ab n="16">
+        Et retinuit vestimentum eius apud se: donec veniret <choice><abbr>dns</abbr><expan>dominus</expan></choice> eius in domum suam. 
+        </ab>
+
+        <ab n="17">
+        Et locuta est cum eo verba hec: dicens. Ingressus est ad me seruus <persName>hebreus</persName> quem adduxisti nobis: vt illuderet mihi. 
+        </ab>
+
+        <ab n="18">
+        Et factum est cum eleuarem vocem meam et clamarem: reliquit vestimenta sua apud me: et fugit foras. 
+        </ab>
+
+        <ab n="19">
+        Et factum est cum audiret <choice><abbr>dns</abbr><expan>dominus</expan></choice> eius verba vxoris sue <choice><abbr>q</abbr><expan>qui</expan></choice> locuta est ad eum: dicens. Sicut verba hec fecit mihi seruus tuus. Et iratus est furor eius:  
+        </ab>
+
+        <ab n="20">
+        tulitque <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>ioseph</persName> eum et tradidit eum in domum carceris vbi vincti regis erant. Eratque ibi in domo carceris. 
+        </ab>
+
+        <ab n="21">
+        Et fuit verbum <choice><abbr>dni</abbr><expan>dominus</expan></choice> in auxilium <persName>ioseph</persName>: et fecit cum eo misericordiam: et dedit illi gratiam coram principe carceris. 
+        </ab>
+
+        <ab n="21">
+        Et tradidit princeps carceris in manu <persName>ioseph</persName> <choice><abbr>omes</abbr><ex>omnes</ex></choice> vinctos qui erant in domo carceris. 
+        </ab>
+
+        <ab n="22">
+        Et tradidit princeps carceris in manu <persName>ioseph</persName> <choice><abbr>omes</abbr><expan>omnes</expan></choice> vinctos qui erant in domo carceris. et omnia que fiebant ibi: ipse faciebat. 
+        </ab>
+
+        <ab n="23">
+        Nullum delictum videbat princeps carceris in manu eius: eo quod verbum domini erat in auxilium eius. Et quod ipse faciebat: <choice><abbr>dns</abbr><expan>dominus</expan></choice> dirigebat. 
+        </ab>
         </div>
 
     </body>
