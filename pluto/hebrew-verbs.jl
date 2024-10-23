@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.47
+# v0.19.46
 
 using Markdown
 using InteractiveUtils
@@ -31,7 +31,7 @@ md"""# Hebrew verbs
 md"""Num passages to consider:"""
 
 # ╔═╡ 5e186692-4c62-45c1-9f60-1ba11508cda2
-@bind num Slider(1:2313; default=4, show_value=true)
+@bind num confirm(Slider(1:10:2313; default=5, show_value=true))
 
 # ╔═╡ 053e823c-42c6-41b1-a319-e307df35ab31
 bdb("וַיֹּ֥אמֶר") .|> headword
@@ -89,24 +89,75 @@ function posarticles(tkn, poscode)
     bdbid.(posarticles)
 end
 
-# ╔═╡ 98cde27c-203a-4580-a45e-45d377c1c7c5
-theverbs = map(hebrew.passages[1:num]) do psg
-	@info("Process $(psg.urn)")
-	psglex = filter(tokenize(psg , ortho)) do t
-		tokencategory(t) isa LexicalToken
-	end
-	psgverbs = filter(psglex) do tkn
-		!isempty(posarticles(tkn.passage.text,"v"))
-	end
-	
-	#map(psgverbs) do vrb
-		#bdb(vrb.text) .|> headword
-	#end
+# ╔═╡ cd800397-78dc-499e-b586-725538621fac
+function strongverb(tkn, poscode = "v")
+    plusentries = bdbplus(tkn)
+    posarticles = filter(plusentries) do plusentry
+        strongs = strong(plusentry)
+        !isempty(filter(st -> pos(st) == poscode, strongs))
+    end
 
+
+	map(posarticles ) do v #.|> strong
+		(lemma = headword(bdb(v)), id = id(bdb(v)))
+	end
 end
+
+# ╔═╡ 98cde27c-203a-4580-a45e-45d377c1c7c5
+function findverbs()
+	reslts = []
+	for (i,psg) in enumerate(hebrew.passages[1:num])
+		@info("Process $(i) / $(num)")
+		psglex = filter(tokenize(psg , ortho)) do t
+			tokencategory(t) isa LexicalToken
+		end
+		#
+		psgverbs = filter(psglex) do tkn
+			!isempty(strongverb(tkn.passage.text,"v"))
+		end
+		for v in psgverbs
+			push!(reslts, (v, "head", "id"))
+		end
+	end
+	reslts
+end
+
+# ╔═╡ 2ec1e7a5-6197-4f72-98f3-d15aaf594d08
+function findverbs2()
+	reslts = []
+	for (i,psg) in enumerate(hebrew.passages[1:num])
+		@info("Process $(i) / $(num)")
+		psglex = filter(tokenize(psg , ortho)) do t
+			tokencategory(t) isa LexicalToken
+		end
+
+		for lextkn in psglex
+			for strongv in strongverb(lextkn.passage.text)
+				oneresult = (urn = lextkn.passage.urn, form = lextkn.passage.text, headword = strongv.lemma, id = strongv.id)
+				push!(reslts, oneresult)
+			end
+		end
+		
+		#=
+		psgverbs = filter(psglex) do tkn
+			!isempty(strongverb(tkn.passage.text,"v"))
+		end
+		for v in psgverbs
+			push!(reslts, (v, "head", "id"))
+		end
+		=#
+	end
+	reslts
+end
+
+# ╔═╡ 662b39a0-bbc7-419a-aa61-d06186fb1fb7
+theverbs = findverbs2()
 
 # ╔═╡ 3152667a-14a9-4f3c-a141-1373024b4d77
 theverbs
+
+# ╔═╡ 0cdbd5a2-ce66-47f3-a935-e7a141ad3d92
+strongverb("וַיֹּ֥אמֶר")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -803,22 +854,26 @@ version = "17.4.0+2"
 # ╔═╡ Cell order:
 # ╠═67d94abd-a0fb-4611-a125-7ff4037deda1
 # ╟─be7c2e3e-8ff0-11ef-2e17-7f38850edc9e
-# ╠═8ff3e655-228d-434c-ab54-6332a558bb56
-# ╟─5e186692-4c62-45c1-9f60-1ba11508cda2
+# ╟─8ff3e655-228d-434c-ab54-6332a558bb56
+# ╠═5e186692-4c62-45c1-9f60-1ba11508cda2
 # ╠═400672e1-0d66-4528-bfbe-344cca1ac103
 # ╠═98cde27c-203a-4580-a45e-45d377c1c7c5
+# ╠═2ec1e7a5-6197-4f72-98f3-d15aaf594d08
+# ╠═662b39a0-bbc7-419a-aa61-d06186fb1fb7
 # ╠═3152667a-14a9-4f3c-a141-1373024b4d77
 # ╠═053e823c-42c6-41b1-a319-e307df35ab31
 # ╠═f11ac8b0-b7a4-4b10-88ee-ca899f00ec75
 # ╟─53b0596f-7f67-4b5c-8fff-5982b25e5236
 # ╟─da6e01ff-40b3-4e7b-8dff-1ec91c0015a7
 # ╟─fb8a8758-442d-409c-9259-a206496f8fdb
-# ╟─6a29c7c2-ffb5-49b6-a430-5284aa27f32b
-# ╟─da0392c5-c436-4e0a-83d6-a7d7dfafd197
-# ╟─51a8ee84-839a-4056-a07e-647e6716e7f4
+# ╠═6a29c7c2-ffb5-49b6-a430-5284aa27f32b
+# ╠═da0392c5-c436-4e0a-83d6-a7d7dfafd197
+# ╠═51a8ee84-839a-4056-a07e-647e6716e7f4
 # ╟─3ecdea6f-a24e-4edf-afcf-001ceaae0903
-# ╟─6b227b0a-2e96-4d7d-9aac-054880285a80
+# ╠═6b227b0a-2e96-4d7d-9aac-054880285a80
 # ╟─b29be642-2f0f-41f6-9d4b-e8fe6b3c81b9
 # ╠═685c8d7b-ac34-40ec-aa93-f8af6b1a1613
+# ╠═cd800397-78dc-499e-b586-725538621fac
+# ╠═0cdbd5a2-ce66-47f3-a935-e7a141ad3d92
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

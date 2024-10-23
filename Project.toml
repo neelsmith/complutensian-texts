@@ -1,4 +1,6 @@
 [deps]
+BiblicalHebrew = "23d2231d-1fc1-47c2-a612-987552d9b38e"
+BrownDriverBriggs = "ed877a0f-8e86-4599-984a-df81107104eb"
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
