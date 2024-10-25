@@ -181,42 +181,17 @@ ecclesiastesfile = joinpath(dirname(pwd()), "data", "ecclesiastes.cex")
 # ╔═╡ 5f468021-eb9b-47f6-8a5e-eb56a97e0721
 songsfile = joinpath(dirname(pwd()), "data", "songs.cex")
 
-# ╔═╡ 9dbf8ebe-abd3-45dd-8a48-6125c7bc7a3a
-filemenu = [
-	genesisfile => "Genesis",
-	exodusfile => "Exodus",
-	leviticusfile => "Leviticus",
-	numbersfile => "Numbers",
-	deuteronomyfile => "Deuteronomy",
-	"" => "---",
-	joshuafile => "Joshua",
-	judgesfile => "Judges",
-	ruthfile => "Ruth",
-	samuel1file => "1 Samuel",
-	samuel2file => "2 Samuel",
-	kings1file => "1 Kings",
-	kings2file => "2 Kings",
-	chronicles2file => "Chronicles",
-	ezrafile => "Ezra",
-	nehemiahfile => "Nehemiah",
-	estherfile => "Esther",
-	jobfile => "Job",
-	psalmsfile => "Psalms",
-	proverbsfile => "Proverbs",
-	ecclesiastesfile => "Ecclesiastes",
-	songsfile => "Songs",
-	
-	
-]
-
-# ╔═╡ e4f04e9e-dfa4-4da6-8fb6-e2afc745989a
-md"""*Choose a book to summarize*: $(@bind srcfile Select(filemenu))"""
-
 # ╔═╡ aac41c94-b7f8-4e2f-ad1b-7bf1f9dd7219
 isaiahfile = joinpath(dirname(pwd()), "data", "isaiah.cex")
 
 # ╔═╡ db346f4f-f67d-43b9-a8b0-7b86f8b08237
 jeremiahfile = joinpath(dirname(pwd()), "data", "jeremiah.cex")
+
+# ╔═╡ 8d944450-f42c-4444-b4f8-75849f7f91e3
+lamentationsfile = joinpath(dirname(pwd()), "data", "lamentations.cex")
+
+# ╔═╡ 0048081e-a0ec-4d60-aac9-fbdf67f23cc5
+ezekielfile = joinpath(dirname(pwd()), "data", "ezekiel.cex")
 
 # ╔═╡ f51331e5-17a4-4e2a-bc31-1f60a406d265
 danielfile = joinpath(dirname(pwd()), "data", "daniel.cex")
@@ -252,10 +227,60 @@ zephaniahfile = joinpath(dirname(pwd()), "data", "zephaniah.cex")
 haggaifile = joinpath(dirname(pwd()), "data", "haggai.cex")
 
 # ╔═╡ 95a6c43d-1e04-4a62-9979-df8f5d36da76
-zecariahfile = joinpath(dirname(pwd()), "data", "zecariah.cex")
+zechariahfile = joinpath(dirname(pwd()), "data", "zechariah.cex")
 
 # ╔═╡ 2311605e-8eb4-4345-89c2-0eadfbef3704
 malachifile = joinpath(dirname(pwd()), "data", "malachi.cex")
+
+# ╔═╡ 9dbf8ebe-abd3-45dd-8a48-6125c7bc7a3a
+filemenu = [
+	genesisfile => "Genesis",
+	exodusfile => "Exodus",
+	leviticusfile => "Leviticus",
+	numbersfile => "Numbers",
+	deuteronomyfile => "Deuteronomy",
+	"" => "---",
+	joshuafile => "Joshua",
+	judgesfile => "Judges",
+	ruthfile => "Ruth",
+	samuel1file => "1 Samuel",
+	samuel2file => "2 Samuel",
+	kings1file => "1 Kings",
+	kings2file => "2 Kings",
+	chronicles2file => "Chronicles",
+	ezrafile => "Ezra",
+	nehemiahfile => "Nehemiah",
+	estherfile => "Esther",
+	jobfile => "Job",
+	psalmsfile => "Psalms",
+	proverbsfile => "Proverbs",
+	ecclesiastesfile => "Ecclesiastes",
+	songsfile => "Songs",
+	isaiahfile => "Isaiah",
+	jeremiahfile => "Jeremiah",
+	lamentationsfile => "Lamentations",
+	ezekielfile => "Ezekiel",
+	danielfile => "Daniel",
+	hoseafile => "Hosea",
+	joelfile => "Joel",
+	amosfile => "Amos",
+	obadiahfile => "Obadiah",
+	jonahfile => "Jonah",
+	micahfile => "Micah",
+	nahumfile => "Nahum",
+	habakkukfile => "Habakkuk",
+	zephaniahfile => "Zephaniah",
+	haggaifile => "Haggai",
+	zechariahfile => "Zechariah",
+	malachifile => "Malachi"
+	
+	
+	
+	
+]
+
+# ╔═╡ e4f04e9e-dfa4-4da6-8fb6-e2afc745989a
+md"""*Choose a book to summarize*: $(@bind srcfile Select(filemenu))"""
 
 # ╔═╡ e7d6a7a2-b89d-4323-83d0-2d13023dc7f8
 md"""## Read data"""
@@ -348,10 +373,7 @@ html"""
 """
 
 # ╔═╡ 11f902c4-e18e-4e76-92cd-1fb73193d2a9
-md"""## Debugging"""
-
-# ╔═╡ d51889c3-9f95-419e-b431-40506c916448
-map(p -> workid(p.urn), bible.passages) |> unique
+md"""## Composite data"""
 
 # ╔═╡ 20a753fe-a194-46df-9729-fc5a1d06cf1f
 allfilenames = filter(fname -> ! isempty(fname), map(pr -> pr[1], filemenu))
@@ -407,9 +429,6 @@ if showbdb
 	bdbhtml() |> HTML
 end
 
-# ╔═╡ 5510a0a1-ccc7-4119-b619-2cdd287f9894
-selectedbdb |> isnothing
-
 # ╔═╡ 469497ce-165a-4f52-b682-64eb3900fbd0
 """Format selected passages as HTML."""
 function passageshtml()
@@ -427,9 +446,15 @@ if showpassages
 	passageshtml() |> HTML
 end
 
+# ╔═╡ 61e4ab26-0441-4e4d-9a06-18a5dff5f598
+md"""## Debugging"""
+
+# ╔═╡ d51889c3-9f95-419e-b431-40506c916448
+map(p -> workid(p.urn), bible.passages) |> unique
+
 # ╔═╡ 01f325aa-b28e-448b-a6ef-c2694df87562
 filter(bible.passages) do p
-	workid(p.urn) == "daniel"
+	workid(p.urn) == "malachi"
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1185,21 +1210,23 @@ version = "17.4.0+2"
 # ╟─1be84181-1999-40ca-8ed9-30d950ba8ca8
 # ╟─a57a3138-5e69-495d-ae82-59a733b8dd9c
 # ╟─5f468021-eb9b-47f6-8a5e-eb56a97e0721
-# ╠═aac41c94-b7f8-4e2f-ad1b-7bf1f9dd7219
-# ╠═db346f4f-f67d-43b9-a8b0-7b86f8b08237
-# ╠═f51331e5-17a4-4e2a-bc31-1f60a406d265
-# ╠═2ac07776-7472-49f2-b665-170d5744ef77
-# ╠═c2bd5717-ddc3-4a0e-b84e-365a786de53a
-# ╠═164de5e5-4acd-4afb-921c-1dd50ca7ad08
-# ╠═a7565935-466c-480c-9b67-460feb7cfada
-# ╠═e317bd48-dde0-49c1-98c7-f2c684b39802
-# ╠═8c69bdb0-4103-4351-be6c-0c52d915becf
-# ╠═6f1f43a6-8763-47eb-8748-c9457b5b152b
-# ╠═c472f05e-5523-45c3-a76c-aabbc6db3edc
-# ╠═c3ddf726-02f3-4a68-855b-68cdfdc8170b
-# ╠═99b988bb-5adb-4528-a5d7-a614ab019b21
-# ╠═95a6c43d-1e04-4a62-9979-df8f5d36da76
-# ╠═2311605e-8eb4-4345-89c2-0eadfbef3704
+# ╟─aac41c94-b7f8-4e2f-ad1b-7bf1f9dd7219
+# ╟─db346f4f-f67d-43b9-a8b0-7b86f8b08237
+# ╟─8d944450-f42c-4444-b4f8-75849f7f91e3
+# ╟─0048081e-a0ec-4d60-aac9-fbdf67f23cc5
+# ╟─f51331e5-17a4-4e2a-bc31-1f60a406d265
+# ╟─2ac07776-7472-49f2-b665-170d5744ef77
+# ╟─c2bd5717-ddc3-4a0e-b84e-365a786de53a
+# ╟─164de5e5-4acd-4afb-921c-1dd50ca7ad08
+# ╟─a7565935-466c-480c-9b67-460feb7cfada
+# ╟─e317bd48-dde0-49c1-98c7-f2c684b39802
+# ╟─8c69bdb0-4103-4351-be6c-0c52d915becf
+# ╟─6f1f43a6-8763-47eb-8748-c9457b5b152b
+# ╟─c472f05e-5523-45c3-a76c-aabbc6db3edc
+# ╟─c3ddf726-02f3-4a68-855b-68cdfdc8170b
+# ╟─99b988bb-5adb-4528-a5d7-a614ab019b21
+# ╟─95a6c43d-1e04-4a62-9979-df8f5d36da76
+# ╟─2311605e-8eb4-4345-89c2-0eadfbef3704
 # ╟─e7d6a7a2-b89d-4323-83d0-2d13023dc7f8
 # ╟─c987da96-66a7-4c59-87fa-e6b20d6ec47f
 # ╟─9abeb236-35d7-49a4-9a90-a1fdd5b8082a
@@ -1207,15 +1234,15 @@ version = "17.4.0+2"
 # ╟─e3588b70-8a10-45d8-b41e-f52f0195db82
 # ╟─858d613c-59fe-4223-ac21-0ddcddd9ee5c
 # ╟─5fddbf3c-58eb-4329-935c-43408c72a05d
-# ╠═b33139c8-b864-4ae6-8c4b-26edc1816cb2
-# ╠═5510a0a1-ccc7-4119-b619-2cdd287f9894
+# ╟─b33139c8-b864-4ae6-8c4b-26edc1816cb2
 # ╟─469497ce-165a-4f52-b682-64eb3900fbd0
 # ╠═2013b63e-5933-4444-b1f9-e3166de2bf53
 # ╟─11f902c4-e18e-4e76-92cd-1fb73193d2a9
-# ╟─d51889c3-9f95-419e-b431-40506c916448
 # ╟─20a753fe-a194-46df-9729-fc5a1d06cf1f
 # ╟─9870b618-cf59-4380-a1aa-de67adccf5ac
 # ╟─303ffcac-2a6d-4c12-a44a-889ad6bec209
+# ╟─61e4ab26-0441-4e4d-9a06-18a5dff5f598
+# ╟─d51889c3-9f95-419e-b431-40506c916448
 # ╠═01f325aa-b28e-448b-a6ef-c2694df87562
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

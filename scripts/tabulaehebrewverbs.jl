@@ -50,4 +50,4 @@ end
 
 # Timing out. :-(
 # try in batches of 500-1000
-@time findverbs(hebrew; start = 18981, limit = 19000)
+@time findverbs(hebrew; start = 23001) #, limit = 23000)

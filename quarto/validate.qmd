@@ -1,5 +1,6 @@
 ---
 title: "Test and debug validation"
+engine: julia
 format:
     html: default
 ---
