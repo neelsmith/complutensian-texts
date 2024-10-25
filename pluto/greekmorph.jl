@@ -14,452 +14,295 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 8cc6d48d-9e7e-4a9a-9e0e-4d102ec8b225
+# ╔═╡ 0abfe5ae-2752-11ef-38cf-f984b91b0112
 begin
-	using CitableBase, CitableText
+	# Make sure Tabulae is running current version.
+	using Kanones
+	using CitableParserBuilder
+	using CitableBase
+	using CitableText
 	using CitableCorpus
-	using StatsBase, OrderedCollections
-	using PlutoUI
+	using CitableTeiReaders
+	using EditionBuilders
 
-	using BrownDriverBriggs
-	md"""*Unhide this cell to see the Julia environment.*"""
+	using Orthography, PolytonicGreek
+
+	using Downloads
+	using HypertextLiteral
+
+	using PlutoUI
+	md"""*Unhide this cell to see Julia package versions*."""
 end
 
-# ╔═╡ 77a9a5b0-b486-4bb0-8edc-06f29829b8ce
+# ╔═╡ ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
 TableOfContents()
 
-# ╔═╡ cc636d4e-9152-11ef-380b-6f2284ffc745
-md"""# Read pre-compiled data on Hebrew verbs"""
+# ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
+nbversion = "0.0.1";
 
-# ╔═╡ c8edd94b-70f7-42f3-8718-b382d752c289
-md"""## Summarize a single book"""
+# ╔═╡ 6048a3e7-abf5-46de-b450-9d6812f915dc
+md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversion CheckBox())"""
 
-# ╔═╡ 9a9763ca-4757-4836-bb91-13e8aa6d1086
-md"""## View occurrences and dictionary entry for a selected verb"""
-
-# ╔═╡ f3e2dfe3-d4df-460d-a200-fcbee33a9622
-md"""*Limit data to a single book*: $(@bind onebook CheckBox(true))"""
-
-# ╔═╡ 0762a46c-219f-470b-a50f-c6242e8e2be1
+# ╔═╡ 64b25989-dd2d-4407-9993-f083529d918f
+if showversion
 md"""
 
--  *list of verbs is sorted by frequency*
--  *forms derived from the chosen verb are highlighted*
-
+not yet released
 """
 
-# ╔═╡ e37220c0-019a-4516-bb94-42bf1384daf9
-md"""*Show BDB article(s)* $(@bind showbdb CheckBox()) *See passages* $(@bind showpassages CheckBox())"""
+end
 
-# ╔═╡ e9d89a7f-5e3f-4e91-9807-962912253a31
+# ╔═╡ 2d774dd8-0513-4957-9b6a-5a33fd300199
+md"""# Morphology of Septuagint in Complutensian Bible"""
+
+# ╔═╡ 86a5302a-ae3d-46cf-ab95-f253954efdbb
+html"""<p>Color key:</p>
+<ul>
+<li><span class="hilite">parsed verb form</li>
+<li>other parsed form (not a verb form)
+<li><span class="unparsed">unparsed form</li>
+</ul>
+"""
+
+# ╔═╡ ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
+md"""*Book*: $(@bind book Select(["genesis" => "Genesis"]))"""
+
+# ╔═╡ 459f076a-c991-41aa-97a4-2fb4b8070fd8
+#md"""*Optionally, add a reference for a passage formatted like* `1.1` or a range of passages formatted like `1.1-1.5`: $(@bind verse confirm(TextField()))"""
+md"""*Optionally, add a reference for a passage formatted like* `1.1`: $(@bind verse confirm(TextField()))"""
+
+# ╔═╡ db93c0c9-4848-4b32-a090-8c57c605e633
 html"""
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 """
 
-# ╔═╡ f0e38d33-42b0-411a-a74b-a5b73c8db0a8
-md"""> # Mechanics"""
+# ╔═╡ 40fce696-fcfe-43b5-a84e-dc670935e6c4
+md"""> ## Things you can skip"""
 
-# ╔═╡ cb90bb7c-3ea7-449a-a9e9-3dddec8d92eb
-md"""## Text"""
+# ╔═╡ 49c93fbf-769b-46cd-9668-2a6f81e85c66
+md"""> ### Utils"""
 
-# ╔═╡ 37940b74-9b1b-4d09-b53b-a313d27f0f6b
-"""Download Hebrew Bible from `compnov` github repo."""
-function gethebrew()
-	srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
-corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
-hebrew = filter(corpus.passages) do psg
-	versionid(psg.urn) == "masoretic"
-end |> CitableTextCorpus
-
+# ╔═╡ 6202a3ad-04de-4594-9d6b-da885129c7ab
+function is_verb(frm)
+	frm isa GMFFiniteVerb ||
+	frm isa GMFInfinitive ||
+	frm isa GMFParticiple ||
+	frm isa GMFVerbalAdjective
 end
 
-# ╔═╡ 61adccdb-08db-4258-b007-93e3ba743a61
-bible = gethebrew()
+# ╔═╡ 8b00adaa-4f2d-47a5-b1db-591ac763380e
+md"""> ### Tokenization and parsing"""
 
-# ╔═╡ 3f3d3ecb-47cc-4fc8-afbd-7c7ae297b807
-md"""## Selected verb"""
+# ╔═╡ ae699e89-b241-42ee-85ca-bfed095d8037
+ortho = literaryGreek()
 
-# ╔═╡ bb435bca-0868-48fd-9997-fe54a93f25b9
-md""" ## Frequencies"""
-
-# ╔═╡ 7d23d9fe-fbab-442f-a322-8cbe26d4ff7d
-"""Compile an ordered dictionary of ID counts from a vector of named tuples."""
-function idcountsfromtuples(tuplelist)
-	rawcounts = map(tup -> tup.bdbid, tuplelist) |> countmap |> OrderedDict
-	sort(rawcounts; rev = true, byvalue= true)
-end
-
-# ╔═╡ 8d871e3f-b0c8-46e1-b7cb-7fb3e36ad2c9
-"""Compile an ordred dictionary of lemma counts from a vector of named matchtuples."""
-function lemmacountsfromtuples(tuplelist)
-	rawcounts =  map(tup -> tup.lemma, tuplelist) |> countmap |> OrderedDict
-	sort(rawcounts; rev = true, byvalue= true)
-end
-
-# ╔═╡ 6e95a7db-ae27-419c-851b-075f5af92be1
-"""Build user menu for choosing verbs by frequency."""
-function choosefreqsmenu(countsdict)
-	lemmafreqs = Pair{String, String}[
-		"" => "--choose a verb--"
-		
-	]
-
-	for k in keys(countsdict)
-		push!(lemmafreqs, k => string("Verb ", k, " (", countsdict[k], " occurrences)"))
-	end
-	lemmafreqs
-
-end
-
-# ╔═╡ f95ee4a9-2cce-4cc8-b31d-ed1e5e5dca77
-md"""## Summaries"""
-
-# ╔═╡ 22a568be-0576-4663-b048-6fef81df547c
-md""" ## Source files"""
-
-# ╔═╡ 13d507b9-18ce-4739-a55e-3cf48ec08972
-genesisfile = joinpath(dirname(pwd()), "data", "genesis.cex")
-
-# ╔═╡ e5b09a0d-7c16-4b7c-898e-060fe0e66118
-exodusfile = joinpath(dirname(pwd()), "data", "exodus.cex")
-
-# ╔═╡ 90a26573-c8a7-462c-affb-2fb0bd4d26a9
-leviticusfile = joinpath(dirname(pwd()), "data", "leviticus.cex")
-
-# ╔═╡ 338d61e1-eb43-4d83-addf-4b994dac9b84
-numbersfile = joinpath(dirname(pwd()), "data", "numbers.cex")
-
-# ╔═╡ 06db4b52-9469-4e8a-9c3a-5ea694d4dfb5
-deuteronomyfile = joinpath(dirname(pwd()), "data", "deuteronomy.cex")
-
-# ╔═╡ c760f46c-aa18-4e71-a5e8-ab3bea88d069
-joshuafile = joinpath(dirname(pwd()), "data", "joshua.cex")
-
-# ╔═╡ ae2813d2-f79b-4d12-ba89-03c6c057a590
-judgesfile = joinpath(dirname(pwd()), "data", "judges.cex")
-
-# ╔═╡ 70fb2c80-557c-414a-936b-754f53a3b982
-ruthfile = joinpath(dirname(pwd()), "data", "ruth.cex")
-
-# ╔═╡ c8abeabc-0259-4090-92ca-447b879e4c8d
-samuel1file = joinpath(dirname(pwd()), "data", "1samuel.cex")
-
-# ╔═╡ 91c69e74-fe47-4a05-a05f-bd6c2dd7a7ac
-samuel2file = joinpath(dirname(pwd()), "data", "2samuel.cex")
-
-# ╔═╡ 3ae1bc48-eb91-4c73-bc5f-7ea109a2c462
-kings1file = joinpath(dirname(pwd()), "data", "1kings.cex")
-
-# ╔═╡ c56ba726-6941-4d90-9eb6-5c5feb7da64f
-kings2file = joinpath(dirname(pwd()), "data", "2kings.cex")
-
-# ╔═╡ e15bd91a-c45d-4771-82b8-bcdcd57fcc20
-chronicles2file = joinpath(dirname(pwd()), "data", "2chronicles.cex")
-
-# ╔═╡ e45cd1bc-49e7-4291-be46-991cf32f110c
-ezrafile = joinpath(dirname(pwd()), "data", "ezra.cex")
-
-# ╔═╡ f9fc625b-7c52-43f4-8d96-cc38c34b83de
-nehemiahfile = joinpath(dirname(pwd()), "data", "nehemiah.cex")
-
-# ╔═╡ 058c0047-a3f4-45f2-afdc-2af3839bf4cb
-estherfile = joinpath(dirname(pwd()), "data", "esther.cex")
-
-# ╔═╡ 263ca802-e0e3-4a68-bb7a-568ec35a605b
-jobfile = joinpath(dirname(pwd()), "data", "job.cex")
-
-# ╔═╡ e4eee511-5da9-45dd-9919-995550305ca1
-psalmsfile = joinpath(dirname(pwd()), "data", "psalms.cex")
-
-# ╔═╡ 1be84181-1999-40ca-8ed9-30d950ba8ca8
-proverbsfile = joinpath(dirname(pwd()), "data", "proverbs.cex")
-
-# ╔═╡ a57a3138-5e69-495d-ae82-59a733b8dd9c
-ecclesiastesfile = joinpath(dirname(pwd()), "data", "ecclesiastes.cex")
-
-# ╔═╡ 5f468021-eb9b-47f6-8a5e-eb56a97e0721
-songsfile = joinpath(dirname(pwd()), "data", "songs.cex")
-
-# ╔═╡ 9dbf8ebe-abd3-45dd-8a48-6125c7bc7a3a
-filemenu = [
-	genesisfile => "Genesis",
-	exodusfile => "Exodus",
-	leviticusfile => "Leviticus",
-	numbersfile => "Numbers",
-	deuteronomyfile => "Deuteronomy",
-	"" => "---",
-	joshuafile => "Joshua",
-	judgesfile => "Judges",
-	ruthfile => "Ruth",
-	samuel1file => "1 Samuel",
-	samuel2file => "2 Samuel",
-	kings1file => "1 Kings",
-	kings2file => "2 Kings",
-	chronicles2file => "Chronicles",
-	ezrafile => "Ezra",
-	nehemiahfile => "Nehemiah",
-	estherfile => "Esther",
-	jobfile => "Job",
-	psalmsfile => "Psalms",
-	proverbsfile => "Proverbs",
-	ecclesiastesfile => "Ecclesiastes",
-	songsfile => "Songs",
-	
-	
-]
-
-# ╔═╡ e4f04e9e-dfa4-4da6-8fb6-e2afc745989a
-md"""*Choose a book to summarize*: $(@bind srcfile Select(filemenu))"""
-
-# ╔═╡ aac41c94-b7f8-4e2f-ad1b-7bf1f9dd7219
-isaiahfile = joinpath(dirname(pwd()), "data", "isaiah.cex")
-
-# ╔═╡ db346f4f-f67d-43b9-a8b0-7b86f8b08237
-jeremiahfile = joinpath(dirname(pwd()), "data", "jeremiah.cex")
-
-# ╔═╡ f51331e5-17a4-4e2a-bc31-1f60a406d265
-danielfile = joinpath(dirname(pwd()), "data", "daniel.cex")
-
-# ╔═╡ 2ac07776-7472-49f2-b665-170d5744ef77
-hoseafile = joinpath(dirname(pwd()), "data", "hosea.cex")
-
-# ╔═╡ c2bd5717-ddc3-4a0e-b84e-365a786de53a
-joelfile = joinpath(dirname(pwd()), "data", "joel.cex")
-
-# ╔═╡ 164de5e5-4acd-4afb-921c-1dd50ca7ad08
-amosfile = joinpath(dirname(pwd()), "data", "amos.cex")
-
-# ╔═╡ a7565935-466c-480c-9b67-460feb7cfada
-obadiahfile = joinpath(dirname(pwd()), "data", "obadiah.cex")
-
-# ╔═╡ e317bd48-dde0-49c1-98c7-f2c684b39802
-jonahfile = joinpath(dirname(pwd()), "data", "jonah.cex")
-
-# ╔═╡ 8c69bdb0-4103-4351-be6c-0c52d915becf
-micahfile = joinpath(dirname(pwd()), "data", "micah.cex")
-
-# ╔═╡ 6f1f43a6-8763-47eb-8748-c9457b5b152b
-nahumfile = joinpath(dirname(pwd()), "data", "nahum.cex")
-
-# ╔═╡ c472f05e-5523-45c3-a76c-aabbc6db3edc
-habakkukfile = joinpath(dirname(pwd()), "data", "habakkuk.cex")
-
-# ╔═╡ c3ddf726-02f3-4a68-855b-68cdfdc8170b
-zephaniahfile = joinpath(dirname(pwd()), "data", "zephaniah.cex")
-
-# ╔═╡ 99b988bb-5adb-4528-a5d7-a614ab019b21
-haggaifile = joinpath(dirname(pwd()), "data", "haggai.cex")
-
-# ╔═╡ 95a6c43d-1e04-4a62-9979-df8f5d36da76
-zecariahfile = joinpath(dirname(pwd()), "data", "zecariah.cex")
-
-# ╔═╡ 2311605e-8eb4-4345-89c2-0eadfbef3704
-malachifile = joinpath(dirname(pwd()), "data", "malachi.cex")
-
-# ╔═╡ e7d6a7a2-b89d-4323-83d0-2d13023dc7f8
-md"""## Read data"""
-
-# ╔═╡ c987da96-66a7-4c59-87fa-e6b20d6ec47f
-datalines = isempty(srcfile) ? [] : readlines(srcfile)[2:end]
-
-# ╔═╡ b73b4882-d892-4e5e-965e-cc667b65884e
-"""Read data from a file into a vector or named tuples."""
-function readdatafile(f)
-	# Skip header line:
-	raw = readlines(f)[2:end]
-	data = map(filter(ln -> ! isempty(ln), raw)) do ln
-		(urnstring, form, lemma, bdbid) = split(ln, "|")
-		(urn = CtsUrn(urnstring), form = form, lemma = lemma, bdbid = bdbid)
+# ╔═╡ 86022f06-27b8-480c-b2b6-446d2eb059a1
+"""Format a string representing a lexical token for HTML display."""
+function formatlexstring(s, p)
+	parses = parsetoken(s,p)
+	if isempty(parses)
+		"""<span class="unparsed">$(s)</span>"""
+	elseif is_verb(greekForm(parses[1]))
+		"""<span class="hilite">$(s)</span>"""
+	else
+		s
 	end
 end
 
-# ╔═╡ 9abeb236-35d7-49a4-9a90-a1fdd5b8082a
-data = readdatafile(srcfile)
+# ╔═╡ 4a9214db-c200-4e3b-944d-45a67a2c85a7
+"""Format a single passage for HTML display"""
+function formatsingle(psg, ortho, p)
+	tlist = ["<p><span class=\"ref\">$(passagecomponent(urn(psg)))</span> "]
+	for t in tokenize(psg, ortho)
+		if tokencategory(t) isa LexicalToken
+			push!(tlist, " " * formatlexstring(t.passage.text, p))
+		else
+			#@info("NOT a lexical: $(t.passage.text)")
+			push!(tlist, t.passage.text)
+		end
+	end
+	push!(tlist,"</p>")
+	join(tlist)
+end
 
-# ╔═╡ b58cba31-1067-440e-a632-ef634759d2ce
-idcounts = idcountsfromtuples(data)
-
-# ╔═╡ abfbb01e-b60c-49eb-83ac-d2250a6a7894
-lemmacounts = lemmacountsfromtuples(data)
-
-# ╔═╡ 15be1b5b-76cd-44a1-8bb4-375171e7ec72
-verses = map(data) do tup
-	collapsePassageBy(tup.urn,1) |> passagecomponent
-end |> unique
-
-
-# ╔═╡ 82723411-e0e1-48b8-988a-078b2b7fca86
-chapters = map(data) do tup
-		collapsePassageBy(tup.urn,2) |> passagecomponent
-end |> unique
-
-# ╔═╡ 3736905f-0dba-4366-ad62-c673bc934fcb
-occurrences =  map(data) do tup
-		tup.urn |> passagecomponent
-end |> unique 
-
-
-# ╔═╡ 62e1853c-1791-4fff-b4c6-bd236e16d2b8
-forms = map(tup -> tup.form, data) |> unique
-
-# ╔═╡ ce454866-645e-43e8-b8a2-44b90bff6f08
-ids = map(tup -> tup.bdbid, data) |> unique
-
-# ╔═╡ f4a1fce3-a834-466d-8614-444bf9ccc817
-md"""
-
-For selected book:
-
-- Identified **$(length(forms))** distinct forms from **$(length(ids))** distinct verbs
-- These appear in **$(length(occurrences))** occurrences of verb forms, distributed in  **$(length(verses))** verses of  **$(length(chapters))** chapters
-
-
-
+# ╔═╡ 15f946b0-6261-4369-900f-aaa6605175d5
+"""Format a vector of citable passages for HTML display.
 """
-
-# ╔═╡ e3588b70-8a10-45d8-b41e-f52f0195db82
-md"""## HTML + CSS"""
-
-# ╔═╡ 5fddbf3c-58eb-4329-935c-43408c72a05d
-"""Format a single tuple for display in HTML."""
-function formatmatch(tupl; corp = bible)
-	targeturn = collapsePassageBy(tupl.urn, 1)
-	occurrence = tupl.form
+function formatpsg(psgvect, ortho, p)
+	tlist = []
+	for psg in psgvect
+		push!(tlist, formatsingle(psg, ortho, p))
 	
-	matchpsgs = filter(p -> passagecomponent(p.urn) == passagecomponent(targeturn) && workid(p.urn) == workid(targeturn), corp.passages)
-
-	htmltext = map(matchpsgs) do psg
-		replace(psg.text, occurrence => "<span class=\"hilite\">" * occurrence * "</span>")
 	end
-
 	
-	"<i>$(titlecase(workid(targeturn)))</i> <b>$(passagecomponent(targeturn))</b>:" * join(htmltext,"\n")
-	
+	join(tlist,"\n")
 end
 
-# ╔═╡ 2013b63e-5933-4444-b1f9-e3166de2bf53
-html"""
+# ╔═╡ 65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
+md"""(NB: CSS for highlighting in following cell.)"""
+
+# ╔═╡ 7b5000d9-7208-4075-8206-dec7b96de23d
+@htl """
 <style>
 	.hilite {
-		color: orange;
+		background-color: yellow;
+	}
+	.unparsed {
+		color: silver
+	}
+	.ref {
+		color: blue;
 	}
 </style>
 """
 
-# ╔═╡ 11f902c4-e18e-4e76-92cd-1fb73193d2a9
-md"""## Debugging"""
+# ╔═╡ c09235c3-f2df-445e-8713-ef68e186f616
+md"""> ### Text passages"""
 
-# ╔═╡ d51889c3-9f95-419e-b431-40506c916448
-map(p -> workid(p.urn), bible.passages) |> unique
+# ╔═╡ 77cb4e4e-c90b-4ba0-a6a6-42038ce81f2c
+urnbase = "urn:cts:compnov:bible"
 
-# ╔═╡ 20a753fe-a194-46df-9729-fc5a1d06cf1f
-allfilenames = filter(fname -> ! isempty(fname), map(pr -> pr[1], filemenu))
-
-# ╔═╡ 9870b618-cf59-4380-a1aa-de67adccf5ac
-dataperfile = map(f -> readdatafile(f), allfilenames)
-
-# ╔═╡ 303ffcac-2a6d-4c12-a44a-889ad6bec209
-allverbtuples = vcat(dataperfile...)
-
-# ╔═╡ e01a6c6e-02a6-4afd-8eae-0af922056bf2
-md"""
-## Overall coverage
-
-For entire Hebrew Bible:
-
-- books in selection menu include **$(allverbtuples |> length)** verb records from Sefaria."""
-
-# ╔═╡ 5216f37e-3d69-44fb-bdf4-89f2542f5516
-allidcounts = idcountsfromtuples(allverbtuples)
-
-# ╔═╡ e5695a53-83a1-495c-998a-f518bdf1511f
-alllemmacounts = lemmacountsfromtuples(allverbtuples)
-
-# ╔═╡ c2148db8-0ee0-49d9-b728-170809184938
-freqmenu = onebook ? choosefreqsmenu(lemmacounts) : choosefreqsmenu(alllemmacounts)
-
-# ╔═╡ 880cbecc-43b4-458c-9562-40f3f88c9cf1
-@bind selectedlemma Select(freqmenu) #lemmafreqs)
-
-
-# ╔═╡ 858d613c-59fe-4223-ac21-0ddcddd9ee5c
-matchtuples =  
-	
-	onebook ? filter(tup -> tup.lemma == selectedlemma, data) :  filter(tup -> tup.lemma == selectedlemma, allverbtuples) 
-
-# ╔═╡ 03faaea2-9ed6-4048-ab23-62c821b7a491
-selectedid = isempty(matchtuples) ? nothing : matchtuples[1].bdbid
-
-# ╔═╡ 98b3e315-6238-4ea4-b6ba-b296ec09895b
-selectedbdb = isempty(matchtuples) ? nothing : filter(bdb(matchtuples[1].form)) do dictarticle
-	id(dictarticle) == selectedid
-end
-
-# ╔═╡ b33139c8-b864-4ae6-8c4b-26edc1816cb2
-"""Format selected BDB entries as HTML"""
-function bdbhtml()
-	isnothing(selectedbdb) ? "" : 	"<h4>BDB entry</h4>" * join( html_string.(selectedbdb), "\n\n")
-end
-
-# ╔═╡ c8c58df0-998d-4625-b25f-3802a2166500
-if showbdb
-	bdbhtml() |> HTML
-end
-
-# ╔═╡ 5510a0a1-ccc7-4119-b619-2cdd287f9894
-selectedbdb |> isnothing
-
-# ╔═╡ 469497ce-165a-4f52-b682-64eb3900fbd0
-"""Format selected passages as HTML."""
-function passageshtml()
-	paras = map(matchtuples) do tup
-		"<li>" * formatmatch(tup) * "</li>"
+# ╔═╡ f72696b9-27ac-479d-a0aa-f2e48064a511
+"""Retrieve texts from corpus."""
+function retrieve(u::CtsUrn, c::CitableTextCorpus)
+	if isrange(u)
+		"Not handling rnges yet."
+	else
+		psgref = passagecomponent(u)
+		dotted = psgref * "."
+		
+		filter(c.passages) do psg
+			checkref = passagecomponent(psg.urn) 
+			groupid(psg.urn) == groupid(u) &&
+			workid(psg.urn) == workid(u) &&
+			(psgref == checkref || startswith(checkref, dotted) )
+		end
 	end
-	htmllist =  isempty(paras) ? "" : "<h4>Passages</h4><ol>" * join(paras,"\n") * "</ol>" 
-	
-	
-	htmllist #|> HTML
 end
 
-# ╔═╡ bc47a2ac-e987-4b4b-bb06-f1eede1556fc
-if showpassages
-	passageshtml() |> HTML
+# ╔═╡ 2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
+md"""> ### Textcorpus"""
+
+# ╔═╡ ce437209-793f-4daa-80f8-303f6237ee0b
+md"""#### Septuagint"""
+
+# ╔═╡ 2cf59288-55cf-4f40-a7a8-37ac25435a13
+srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
+
+# ╔═╡ 10d7b498-f9e8-479e-8d61-fe4233b76df0
+corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
+
+# ╔═╡ fff4dd01-fe30-4363-bd21-0c44206be92b
+septuagint = filter(corpus.passages) do psg
+	versionid(psg.urn) == "septuagint"
+end |> CitableTextCorpus
+
+# ╔═╡ 0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
+md"""> ### Build parser"""
+
+# ╔═╡ d8198183-4e97-4f39-9e8e-03a98a939d0a
+parserurl = "http://shot.holycross.edu/morphology/complutensian-current.cex"
+
+# ╔═╡ 7b96d31c-b45c-4848-ab8f-64900cc2d1d4
+parser = kParser(parserurl, UrlReader)
+
+# ╔═╡ 97753b65-a272-4620-8469-df6485ca34c3
+md"""> ### User selections"""
+
+# ╔═╡ a776ad50-892d-4d98-99b7-e7a111934622
+"""Find unique list of chapter values for given book in a corpus."""
+function chaptersforbook(corpus, bookid = "genesis")
+	bookpassages = filter(corpus.passages) do psg
+		workid(psg.urn) == bookid
+	end
+	map(bookpassages) do psg
+		collapsePassageTo(psg.urn, 1) |> passagecomponent
+		
+	end |> unique
+		
 end
 
-# ╔═╡ 01f325aa-b28e-448b-a6ef-c2694df87562
-filter(bible.passages) do p
-	workid(p.urn) == "daniel"
+# ╔═╡ ff99f087-856e-4b35-a63b-e76d7d2d8709
+md"""*Chapter*: $(@bind chapter Select(chaptersforbook(septuagint, book)))"""
+
+# ╔═╡ f9055bda-a0b8-4129-8f38-a379b75f51ad
+u = if isempty(verse)
+	string(urnbase,".",book,":",chapter) |> CtsUrn
+else
+	string(urnbase,".", book, ":", verse) |> CtsUrn
+end
+
+
+# ╔═╡ 6d044127-495e-463d-888d-1d67a3faeab9
+textpsg = retrieve(u, septuagint)
+
+# ╔═╡ b01b5ff3-9e46-477b-94bc-3f1140c3f52d
+begin
+	hdr = isempty(verse) ? "<h4><i>$(titlecase(book))</i> $(chapter)</h4>" : "<h4><i>$(titlecase(book))</i> $(verse)</h4>" 
+
+	
+	textdisplay = "<p><i>Septuagint</i></p>" * formatpsg(textpsg, ortho, parser)
+	
+	hdr * textdisplay |> HTML
+end
+
+# ╔═╡ aadc9d89-d5dd-4c41-825a-6296dca32fbc
+md"""> Debugging"""
+
+# ╔═╡ 7f80a08a-a653-4a4a-9048-da7b82113518
+"""Format a single passage for HTML display"""
+function debug(psg, ortho, p)
+	tlist = ["<p>"]
+	for t in tokenize(psg, ortho)
+		if tokencategory(t) isa LexicalToken
+			push!(tlist, " " * formatlexstring(t.passage.text, p))
+		else
+			push!(tlist, t.passage.text)
+		end
+	end
+	push!(tlist,"</p>")
+	join(tlist)
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
-BrownDriverBriggs = "ed877a0f-8e86-4599-984a-df81107104eb"
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
+CitableParserBuilder = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
+CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
-OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
+HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
+Kanones = "107500f9-53d4-4696-8485-0747242ad8bc"
+Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+PolytonicGreek = "72b824a7-2b4a-40fa-944c-ac4f345dc63a"
 
 [compat]
-BrownDriverBriggs = "~0.2.0"
 CitableBase = "~10.4.0"
 CitableCorpus = "~0.13.5"
+CitableParserBuilder = "~0.30.1"
+CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
-OrderedCollections = "~1.6.3"
+EditionBuilders = "~0.8.5"
+HypertextLiteral = "~0.9.5"
+Kanones = "~0.26.0"
+Orthography = "~0.22.0"
 PlutoUI = "~0.7.60"
-StatsBase = "~0.34.3"
+PolytonicGreek = "~0.21.12"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.5"
+julia_version = "1.10.1"
 manifest_format = "2.0"
-project_hash = "8cbcae07063bf31061f6814fe6ba5400148bc959"
+project_hash = "db19423469a0b9210ea8f81dfeafca5346941c1a"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -479,9 +322,9 @@ version = "0.4.5"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra", "Requires"]
-git-tree-sha1 = "d80af0733c99ea80575f612813fa6aa71022d33a"
+git-tree-sha1 = "6a55b747d1812e699320963ffde36f1ebdda4099"
 uuid = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
-version = "4.1.0"
+version = "4.0.4"
 
     [deps.Adapt.extensions]
     AdaptStaticArraysExt = "StaticArrays"
@@ -496,31 +339,31 @@ version = "1.1.1"
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 
+[[deps.AtticGreek]]
+deps = ["DocStringExtensions", "Documenter", "Orthography", "PolytonicGreek", "Test", "TestSetExtensions", "Unicode"]
+git-tree-sha1 = "4d3502c9b4c198f62312cfcf0140ecfffe0ca978"
+uuid = "330c8319-f7ed-461a-8c52-cee5da4c0892"
+version = "0.9.3"
+
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
-[[deps.BiblicalHebrew]]
-deps = ["DocStringExtensions", "Documenter", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "b01c791cd47c33fb5e4ef8311ca6eb814f727759"
-uuid = "23d2231d-1fc1-47c2-a612-987552d9b38e"
-version = "0.4.0"
+[[deps.BenchmarkTools]]
+deps = ["JSON", "Logging", "Printf", "Profile", "Statistics", "UUIDs"]
+git-tree-sha1 = "f1dff6729bc61f4d49e140da1af55dcd1ac97b2f"
+uuid = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+version = "1.5.0"
 
 [[deps.BitFlags]]
 git-tree-sha1 = "0691e34b3bb8be9307330f88d1a3c3f25466c24d"
 uuid = "d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35"
 version = "0.1.9"
 
-[[deps.BrownDriverBriggs]]
-deps = ["BiblicalHebrew", "DocStringExtensions", "Documenter", "Downloads", "JSON3", "Orthography", "Test", "TestSetExtensions"]
-git-tree-sha1 = "8510a757ec58b1786d7bca5af28c5780ea2ce096"
-uuid = "ed877a0f-8e86-4599-984a-df81107104eb"
-version = "0.2.0"
-
 [[deps.CSV]]
 deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "PrecompileTools", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings", "WorkerUtilities"]
-git-tree-sha1 = "deddd8725e5e1cc49ee205a1964256043720a6c3"
+git-tree-sha1 = "6c834533dc1fabd820c1db03c839bf97e45a3fab"
 uuid = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
-version = "0.10.15"
+version = "0.10.14"
 
 [[deps.CitableBase]]
 deps = ["DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
@@ -528,11 +371,35 @@ git-tree-sha1 = "eec0c6a088940306a72f965fe5f9d81cda597d25"
 uuid = "d6f014bd-995c-41bd-9893-703339864534"
 version = "10.4.0"
 
+[[deps.CitableCollection]]
+deps = ["CSV", "CitableBase", "CitableObject", "CitableText", "CiteEXchange", "DocStringExtensions", "Documenter", "HTTP", "Tables", "Test", "TypedTables"]
+git-tree-sha1 = "866abc4fb8ae2d3350a2ccd91f80a24b42e8343c"
+uuid = "7b95b006-44c5-4794-afff-00ccebff52d7"
+version = "0.4.6"
+
 [[deps.CitableCorpus]]
 deps = ["CitableBase", "CitableText", "CiteEXchange", "DocStringExtensions", "Documenter", "HTTP", "Tables", "Test"]
 git-tree-sha1 = "f400484e7b0fc1707f9dfd288fa297a4a2d9a2ad"
 uuid = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 version = "0.13.5"
+
+[[deps.CitableObject]]
+deps = ["CitableBase", "CiteEXchange", "DocStringExtensions", "Documenter", "Downloads", "Test", "TestSetExtensions"]
+git-tree-sha1 = "86eb34cc98bc2c5b73dc96da5fe116adba903d56"
+uuid = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
+version = "0.16.1"
+
+[[deps.CitableParserBuilder]]
+deps = ["CSV", "CitableBase", "CitableCorpus", "CitableObject", "CitableText", "Compat", "DataFrames", "Dictionaries", "DocStringExtensions", "Documenter", "Downloads", "OrderedCollections", "Orthography", "StatsBase", "Test", "TestSetExtensions", "TypedTables"]
+git-tree-sha1 = "57ddf6f5aa12c616d993f3c50236bfb8d531d687"
+uuid = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
+version = "0.30.1"
+
+[[deps.CitableTeiReaders]]
+deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "HTTP", "Test"]
+git-tree-sha1 = "deed5242dad324dfd619bdeaa23528e131664a91"
+uuid = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
+version = "0.10.3"
 
 [[deps.CitableText]]
 deps = ["CitableBase", "DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
@@ -571,7 +438,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.1+0"
+version = "1.1.0+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -579,10 +446,21 @@ git-tree-sha1 = "ea32b83ca4fefa1768dc84e504cc0a94fb1ab8d1"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
 version = "2.4.2"
 
+[[deps.Crayons]]
+git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
+uuid = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
+version = "4.1.1"
+
 [[deps.DataAPI]]
 git-tree-sha1 = "abe83f3a2f1b857aac70ef8b269080af17764bbe"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
 version = "1.16.0"
+
+[[deps.DataFrames]]
+deps = ["Compat", "DataAPI", "DataStructures", "Future", "InlineStrings", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrecompileTools", "PrettyTables", "Printf", "REPL", "Random", "Reexport", "SentinelArrays", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
+git-tree-sha1 = "04c738083f29f86e62c8afc341f0967d8717bdb8"
+uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+version = "1.6.1"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
@@ -595,6 +473,12 @@ git-tree-sha1 = "bfc1187b79289637fa0ef6d4436ebdfe6905cbd6"
 uuid = "e2d170a0-9d28-54be-80f0-106bbe20a464"
 version = "1.0.0"
 
+[[deps.DataValues]]
+deps = ["DataValueInterfaces", "Dates"]
+git-tree-sha1 = "d88a19299eba280a6d062e135a43f00323ae70bf"
+uuid = "e7dc6d0d-1eca-5fa6-8ad6-5aecde8b7ea5"
+version = "0.4.13"
+
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
@@ -604,11 +488,17 @@ git-tree-sha1 = "9824894295b62a6a4ab6adf1c7bf337b3a9ca34c"
 uuid = "ab62b9b5-e342-54a8-a765-a90f495de1a6"
 version = "1.2.0"
 
+[[deps.DelimitedFiles]]
+deps = ["Mmap"]
+git-tree-sha1 = "9e2f36d3c96a820c678f2f1f1782582fcf685bae"
+uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+version = "1.9.1"
+
 [[deps.Dictionaries]]
 deps = ["Indexing", "Random", "Serialization"]
-git-tree-sha1 = "35b66b6744b2d92c778afd3a88d2571875664a2a"
+git-tree-sha1 = "1f3b7b0d321641c1f2e519f7aed77f8e1f6cb133"
 uuid = "85a47980-9c8c-11e8-2b9f-f7ca1fa99fb4"
-version = "0.4.2"
+version = "0.3.29"
 
 [[deps.Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
@@ -622,14 +512,20 @@ version = "0.9.3"
 
 [[deps.Documenter]]
 deps = ["ANSIColoredPrinters", "AbstractTrees", "Base64", "CodecZlib", "Dates", "DocStringExtensions", "Downloads", "Git", "IOCapture", "InteractiveUtils", "JSON", "LibGit2", "Logging", "Markdown", "MarkdownAST", "Pkg", "PrecompileTools", "REPL", "RegistryInstances", "SHA", "TOML", "Test", "Unicode"]
-git-tree-sha1 = "5a1ee886566f2fa9318df1273d8b778b9d42712d"
+git-tree-sha1 = "9d29b99b6b2b6bc2382a4c8dbec6eb694f389853"
 uuid = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-version = "1.7.0"
+version = "1.6.0"
 
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
+
+[[deps.EditionBuilders]]
+deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "Test"]
+git-tree-sha1 = "2934d7babf1127b7e8ef380de231b9683893aa49"
+uuid = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
+version = "0.8.5"
 
 [[deps.ExceptionUnwrapping]]
 deps = ["Test"]
@@ -642,6 +538,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "1c6317308b9dc757616f0b5cb379db10494443a7"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
 version = "2.6.2+0"
+
+[[deps.EzXML]]
+deps = ["Printf", "XML2_jll"]
+git-tree-sha1 = "380053d61bb9064d6aa4a9777413b40429c79901"
+uuid = "8f5d6c58-4d21-5cfd-889c-e3ad7ee6a615"
+version = "1.2.0"
 
 [[deps.FilePathsBase]]
 deps = ["Compat", "Dates"]
@@ -675,9 +577,14 @@ version = "1.3.1"
 
 [[deps.Git_jll]]
 deps = ["Artifacts", "Expat_jll", "JLLWrappers", "LibCURL_jll", "Libdl", "Libiconv_jll", "OpenSSL_jll", "PCRE2_jll", "Zlib_jll"]
-git-tree-sha1 = "ea372033d09e4552a04fd38361cd019f9003f4f4"
+git-tree-sha1 = "d18fb8a1f3609361ebda9bf029b60fd0f120c809"
 uuid = "f8c6e375-362e-5223-8a59-34ff63f689eb"
-version = "2.46.2+0"
+version = "2.44.0+2"
+
+[[deps.Glob]]
+git-tree-sha1 = "97285bbd5230dd766e9ef6749b80fc617126d496"
+uuid = "c27321d9-0574-5035-807b-f59d2c89b15c"
+version = "1.3.1"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
@@ -725,10 +632,21 @@ version = "1.4.2"
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 
+[[deps.InvertedIndices]]
+git-tree-sha1 = "0dc7b50b8d436461be01300fd8cd45aa0274b038"
+uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
+version = "1.3.0"
+
 [[deps.IrrationalConstants]]
 git-tree-sha1 = "630b497eafcc20001bba38a4651b327dcfc491d2"
 uuid = "92d709cd-6900-40b7-9082-c6be49f344b6"
 version = "0.2.2"
+
+[[deps.IterableTables]]
+deps = ["DataValues", "IteratorInterfaceExtensions", "Requires", "TableTraits", "TableTraitsUtils"]
+git-tree-sha1 = "70300b876b2cebde43ebc0df42bc8c94a144e1b4"
+uuid = "1c8ee90f-4401-5389-894e-7a04a3dc0f4d"
+version = "1.0.0"
 
 [[deps.IteratorInterfaceExtensions]]
 git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
@@ -737,9 +655,9 @@ version = "1.0.0"
 
 [[deps.JLLWrappers]]
 deps = ["Artifacts", "Preferences"]
-git-tree-sha1 = "be3dc50a92e5a386872a493a10050136d4703f9b"
+git-tree-sha1 = "f389674c99bfcde17dc57454011aa44d5a260a40"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.6.1"
+version = "1.6.0"
 
 [[deps.JSON]]
 deps = ["Dates", "Mmap", "Parsers", "Unicode"]
@@ -747,17 +665,16 @@ git-tree-sha1 = "31e996f0a15c7b280ba9f76636b3ff9e2ae58c9a"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "0.21.4"
 
-[[deps.JSON3]]
-deps = ["Dates", "Mmap", "Parsers", "PrecompileTools", "StructTypes", "UUIDs"]
-git-tree-sha1 = "1d322381ef7b087548321d3f878cb4c9bd8f8f9b"
-uuid = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
-version = "1.14.1"
+[[deps.Kanones]]
+deps = ["AtticGreek", "BenchmarkTools", "CSV", "CitableBase", "CitableCollection", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DataFrames", "Dates", "DelimitedFiles", "DocStringExtensions", "Documenter", "Downloads", "Glob", "HTTP", "Orthography", "PolytonicGreek", "Query", "StatsBase", "Tables", "Test", "TestSetExtensions", "Unicode"]
+git-tree-sha1 = "6353328c0df63dc2e1f4dc157a261c8d38ef0fe6"
+uuid = "107500f9-53d4-4696-8485-0747242ad8bc"
+version = "0.26.0"
 
-    [deps.JSON3.extensions]
-    JSON3ArrowExt = ["ArrowTypes"]
-
-    [deps.JSON3.weakdeps]
-    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
+[[deps.LaTeXStrings]]
+git-tree-sha1 = "50901ebc375ed41dbf8058da26f9de442febbbec"
+uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
+version = "1.3.1"
 
 [[deps.LazilyInitializedFields]]
 git-tree-sha1 = "8f7f3cabab0fd1800699663533b6d5cb3fc0e612"
@@ -831,6 +748,12 @@ git-tree-sha1 = "65f28ad4b594aebe22157d6fac869786a255b7eb"
 uuid = "6c6e2e6c-3030-632d-7369-2d6c69616d65"
 version = "0.1.4"
 
+[[deps.MacroTools]]
+deps = ["Markdown", "Random"]
+git-tree-sha1 = "2fa9ee3e63fd3a4f7a9a4f4744a52f4856de82df"
+uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
+version = "0.5.13"
+
 [[deps.Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
@@ -882,9 +805,9 @@ version = "1.4.3"
 
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "7493f61f55a6cce7325f197443aa80d32554ba10"
+git-tree-sha1 = "a028ee3cb5641cccc4c24e90c36b0a4f7707bdf5"
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.0.15+1"
+version = "3.0.14+0"
 
 [[deps.OrderedCollections]]
 git-tree-sha1 = "dfdf5519f235516220579f949664f1bf44e741c5"
@@ -919,6 +842,12 @@ git-tree-sha1 = "eba4810d5e6a01f612b948c9fa94f905b49087b0"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 version = "0.7.60"
 
+[[deps.PolytonicGreek]]
+deps = ["Compat", "DocStringExtensions", "Documenter", "Orthography", "Test", "TestSetExtensions", "Unicode"]
+git-tree-sha1 = "64cc300d2f6d121008987294340860c740778d98"
+uuid = "72b824a7-2b4a-40fa-944c-ac4f345dc63a"
+version = "0.21.12"
+
 [[deps.PooledArrays]]
 deps = ["DataAPI", "Future"]
 git-tree-sha1 = "36d8b4b899628fb92c2749eb488d884a926614d3"
@@ -937,9 +866,31 @@ git-tree-sha1 = "9306f6085165d270f7e3db02af26a400d580f5c6"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
 version = "1.4.3"
 
+[[deps.PrettyTables]]
+deps = ["Crayons", "LaTeXStrings", "Markdown", "PrecompileTools", "Printf", "Reexport", "StringManipulation", "Tables"]
+git-tree-sha1 = "66b20dd35966a748321d3b2537c4584cf40387c7"
+uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
+version = "2.3.2"
+
 [[deps.Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+
+[[deps.Profile]]
+deps = ["Printf"]
+uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
+
+[[deps.Query]]
+deps = ["DataValues", "IterableTables", "MacroTools", "QueryOperators", "Statistics"]
+git-tree-sha1 = "a66aa7ca6f5c29f0e303ccef5c8bd55067df9bbe"
+uuid = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
+version = "1.0.0"
+
+[[deps.QueryOperators]]
+deps = ["DataStructures", "DataValues", "IteratorInterfaceExtensions", "TableShowUtils"]
+git-tree-sha1 = "911c64c204e7ecabfd1872eb93c49b4e7c701f02"
+uuid = "2aef5ad7-51ca-5a8f-8e88-e75cf067b44b"
+version = "0.9.3"
 
 [[deps.REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
@@ -980,9 +931,9 @@ version = "1.4.5"
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
 [[deps.SimpleBufferStream]]
-git-tree-sha1 = "f305871d2f381d21527c770d4788c06c097c9bc1"
+git-tree-sha1 = "874e8867b33a00e784c8a7e4b60afe9e037b74e1"
 uuid = "777ac1f9-54b0-4bf8-805c-2214025038e7"
-version = "1.2.0"
+version = "1.1.0"
 
 [[deps.Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
@@ -1021,11 +972,11 @@ git-tree-sha1 = "5cf7606d6cef84b543b483848d4ae08ad9832b21"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.34.3"
 
-[[deps.StructTypes]]
-deps = ["Dates", "UUIDs"]
-git-tree-sha1 = "159331b30e94d7b11379037feeb9b690950cace8"
-uuid = "856f2bd8-1eba-4b0a-8007-ebc267875bd4"
-version = "1.11.0"
+[[deps.StringManipulation]]
+deps = ["PrecompileTools"]
+git-tree-sha1 = "a04cabe79c5f01f4d723cc6704070ada0b9d46d5"
+uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
+version = "0.3.4"
 
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
@@ -1037,11 +988,23 @@ deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 version = "1.0.3"
 
+[[deps.TableShowUtils]]
+deps = ["DataValues", "Dates", "JSON", "Markdown", "Unicode"]
+git-tree-sha1 = "2a41a3dedda21ed1184a47caab56ed9304e9a038"
+uuid = "5e66a065-1f0a-5976-b372-e0b8c017ca10"
+version = "0.2.6"
+
 [[deps.TableTraits]]
 deps = ["IteratorInterfaceExtensions"]
 git-tree-sha1 = "c06b2f539df1c6efa794486abfb6ed2022561a39"
 uuid = "3783bdb8-4a98-5b6b-af9a-565f29a5fe9c"
 version = "1.0.1"
+
+[[deps.TableTraitsUtils]]
+deps = ["DataValues", "IteratorInterfaceExtensions", "Missings", "TableTraits"]
+git-tree-sha1 = "78fecfe140d7abb480b53a44f3f85b6aa373c293"
+uuid = "382cd787-c1b6-5bf2-a167-d5b971a19bda"
+version = "1.0.2"
 
 [[deps.Tables]]
 deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "OrderedCollections", "TableTraits"]
@@ -1065,9 +1028,9 @@ uuid = "98d24dd4-01ad-11ea-1b02-c9a08f80db04"
 version = "2.0.0"
 
 [[deps.TranscodingStreams]]
-git-tree-sha1 = "0c45878dcfdcfa8480052b6ab162cdd138781742"
+git-tree-sha1 = "e84b3a11b9bece70d14cce63406bbc79ed3464d2"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
-version = "0.11.3"
+version = "0.11.2"
 
 [[deps.Tricks]]
 git-tree-sha1 = "7822b97e99a1672bfb1b49b668a6d46d58d8cbcb"
@@ -1103,6 +1066,12 @@ git-tree-sha1 = "cd1659ba0d57b71a464a29e64dbc67cfe83d54e7"
 uuid = "76eceee3-57b5-4d4a-8e66-0e911cebbf60"
 version = "1.6.1"
 
+[[deps.XML2_jll]]
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Libiconv_jll", "Zlib_jll"]
+git-tree-sha1 = "1165b0443d0eca63ac1e32b8c0eb69ed2f4f8127"
+uuid = "02c8fc9c-b97f-50b9-bbe4-9be30ff0a78a"
+version = "2.13.3+0"
+
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
@@ -1111,7 +1080,7 @@ version = "1.2.13+1"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.11.0+0"
+version = "5.8.0+1"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1125,97 +1094,44 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─8cc6d48d-9e7e-4a9a-9e0e-4d102ec8b225
-# ╟─77a9a5b0-b486-4bb0-8edc-06f29829b8ce
-# ╟─cc636d4e-9152-11ef-380b-6f2284ffc745
-# ╟─e01a6c6e-02a6-4afd-8eae-0af922056bf2
-# ╟─c8edd94b-70f7-42f3-8718-b382d752c289
-# ╟─e4f04e9e-dfa4-4da6-8fb6-e2afc745989a
-# ╟─f4a1fce3-a834-466d-8614-444bf9ccc817
-# ╟─9a9763ca-4757-4836-bb91-13e8aa6d1086
-# ╟─f3e2dfe3-d4df-460d-a200-fcbee33a9622
-# ╟─0762a46c-219f-470b-a50f-c6242e8e2be1
-# ╟─880cbecc-43b4-458c-9562-40f3f88c9cf1
-# ╟─e37220c0-019a-4516-bb94-42bf1384daf9
-# ╟─c8c58df0-998d-4625-b25f-3802a2166500
-# ╟─bc47a2ac-e987-4b4b-bb06-f1eede1556fc
-# ╟─e9d89a7f-5e3f-4e91-9807-962912253a31
-# ╟─f0e38d33-42b0-411a-a74b-a5b73c8db0a8
-# ╟─cb90bb7c-3ea7-449a-a9e9-3dddec8d92eb
-# ╟─37940b74-9b1b-4d09-b53b-a313d27f0f6b
-# ╟─61adccdb-08db-4258-b007-93e3ba743a61
-# ╟─3f3d3ecb-47cc-4fc8-afbd-7c7ae297b807
-# ╟─03faaea2-9ed6-4048-ab23-62c821b7a491
-# ╟─98b3e315-6238-4ea4-b6ba-b296ec09895b
-# ╟─bb435bca-0868-48fd-9997-fe54a93f25b9
-# ╟─c2148db8-0ee0-49d9-b728-170809184938
-# ╟─7d23d9fe-fbab-442f-a322-8cbe26d4ff7d
-# ╟─b58cba31-1067-440e-a632-ef634759d2ce
-# ╟─5216f37e-3d69-44fb-bdf4-89f2542f5516
-# ╟─8d871e3f-b0c8-46e1-b7cb-7fb3e36ad2c9
-# ╟─abfbb01e-b60c-49eb-83ac-d2250a6a7894
-# ╟─e5695a53-83a1-495c-998a-f518bdf1511f
-# ╟─6e95a7db-ae27-419c-851b-075f5af92be1
-# ╟─f95ee4a9-2cce-4cc8-b31d-ed1e5e5dca77
-# ╟─15be1b5b-76cd-44a1-8bb4-375171e7ec72
-# ╟─82723411-e0e1-48b8-988a-078b2b7fca86
-# ╟─3736905f-0dba-4366-ad62-c673bc934fcb
-# ╟─62e1853c-1791-4fff-b4c6-bd236e16d2b8
-# ╟─ce454866-645e-43e8-b8a2-44b90bff6f08
-# ╟─22a568be-0576-4663-b048-6fef81df547c
-# ╠═9dbf8ebe-abd3-45dd-8a48-6125c7bc7a3a
-# ╟─13d507b9-18ce-4739-a55e-3cf48ec08972
-# ╟─e5b09a0d-7c16-4b7c-898e-060fe0e66118
-# ╟─90a26573-c8a7-462c-affb-2fb0bd4d26a9
-# ╟─338d61e1-eb43-4d83-addf-4b994dac9b84
-# ╟─06db4b52-9469-4e8a-9c3a-5ea694d4dfb5
-# ╟─c760f46c-aa18-4e71-a5e8-ab3bea88d069
-# ╟─ae2813d2-f79b-4d12-ba89-03c6c057a590
-# ╟─70fb2c80-557c-414a-936b-754f53a3b982
-# ╟─c8abeabc-0259-4090-92ca-447b879e4c8d
-# ╟─91c69e74-fe47-4a05-a05f-bd6c2dd7a7ac
-# ╟─3ae1bc48-eb91-4c73-bc5f-7ea109a2c462
-# ╟─c56ba726-6941-4d90-9eb6-5c5feb7da64f
-# ╟─e15bd91a-c45d-4771-82b8-bcdcd57fcc20
-# ╟─e45cd1bc-49e7-4291-be46-991cf32f110c
-# ╟─f9fc625b-7c52-43f4-8d96-cc38c34b83de
-# ╟─058c0047-a3f4-45f2-afdc-2af3839bf4cb
-# ╟─263ca802-e0e3-4a68-bb7a-568ec35a605b
-# ╟─e4eee511-5da9-45dd-9919-995550305ca1
-# ╟─1be84181-1999-40ca-8ed9-30d950ba8ca8
-# ╟─a57a3138-5e69-495d-ae82-59a733b8dd9c
-# ╟─5f468021-eb9b-47f6-8a5e-eb56a97e0721
-# ╠═aac41c94-b7f8-4e2f-ad1b-7bf1f9dd7219
-# ╠═db346f4f-f67d-43b9-a8b0-7b86f8b08237
-# ╠═f51331e5-17a4-4e2a-bc31-1f60a406d265
-# ╠═2ac07776-7472-49f2-b665-170d5744ef77
-# ╠═c2bd5717-ddc3-4a0e-b84e-365a786de53a
-# ╠═164de5e5-4acd-4afb-921c-1dd50ca7ad08
-# ╠═a7565935-466c-480c-9b67-460feb7cfada
-# ╠═e317bd48-dde0-49c1-98c7-f2c684b39802
-# ╠═8c69bdb0-4103-4351-be6c-0c52d915becf
-# ╠═6f1f43a6-8763-47eb-8748-c9457b5b152b
-# ╠═c472f05e-5523-45c3-a76c-aabbc6db3edc
-# ╠═c3ddf726-02f3-4a68-855b-68cdfdc8170b
-# ╠═99b988bb-5adb-4528-a5d7-a614ab019b21
-# ╠═95a6c43d-1e04-4a62-9979-df8f5d36da76
-# ╠═2311605e-8eb4-4345-89c2-0eadfbef3704
-# ╟─e7d6a7a2-b89d-4323-83d0-2d13023dc7f8
-# ╟─c987da96-66a7-4c59-87fa-e6b20d6ec47f
-# ╟─9abeb236-35d7-49a4-9a90-a1fdd5b8082a
-# ╟─b73b4882-d892-4e5e-965e-cc667b65884e
-# ╟─e3588b70-8a10-45d8-b41e-f52f0195db82
-# ╟─858d613c-59fe-4223-ac21-0ddcddd9ee5c
-# ╟─5fddbf3c-58eb-4329-935c-43408c72a05d
-# ╠═b33139c8-b864-4ae6-8c4b-26edc1816cb2
-# ╠═5510a0a1-ccc7-4119-b619-2cdd287f9894
-# ╟─469497ce-165a-4f52-b682-64eb3900fbd0
-# ╠═2013b63e-5933-4444-b1f9-e3166de2bf53
-# ╟─11f902c4-e18e-4e76-92cd-1fb73193d2a9
-# ╟─d51889c3-9f95-419e-b431-40506c916448
-# ╟─20a753fe-a194-46df-9729-fc5a1d06cf1f
-# ╟─9870b618-cf59-4380-a1aa-de67adccf5ac
-# ╟─303ffcac-2a6d-4c12-a44a-889ad6bec209
-# ╠═01f325aa-b28e-448b-a6ef-c2694df87562
+# ╟─0abfe5ae-2752-11ef-38cf-f984b91b0112
+# ╟─ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
+# ╟─a41a17e7-f985-4a5d-8b76-f91f07824242
+# ╟─6048a3e7-abf5-46de-b450-9d6812f915dc
+# ╟─64b25989-dd2d-4407-9993-f083529d918f
+# ╟─2d774dd8-0513-4957-9b6a-5a33fd300199
+# ╟─86a5302a-ae3d-46cf-ab95-f253954efdbb
+# ╟─ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
+# ╟─ff99f087-856e-4b35-a63b-e76d7d2d8709
+# ╟─459f076a-c991-41aa-97a4-2fb4b8070fd8
+# ╟─b01b5ff3-9e46-477b-94bc-3f1140c3f52d
+# ╟─db93c0c9-4848-4b32-a090-8c57c605e633
+# ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
+# ╟─49c93fbf-769b-46cd-9668-2a6f81e85c66
+# ╟─6202a3ad-04de-4594-9d6b-da885129c7ab
+# ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
+# ╟─ae699e89-b241-42ee-85ca-bfed095d8037
+# ╟─15f946b0-6261-4369-900f-aaa6605175d5
+# ╟─4a9214db-c200-4e3b-944d-45a67a2c85a7
+# ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
+# ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
+# ╠═7b5000d9-7208-4075-8206-dec7b96de23d
+# ╟─c09235c3-f2df-445e-8713-ef68e186f616
+# ╟─77cb4e4e-c90b-4ba0-a6a6-42038ce81f2c
+# ╟─f9055bda-a0b8-4129-8f38-a379b75f51ad
+# ╟─6d044127-495e-463d-888d-1d67a3faeab9
+# ╟─f72696b9-27ac-479d-a0aa-f2e48064a511
+# ╟─2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
+# ╟─ce437209-793f-4daa-80f8-303f6237ee0b
+# ╟─2cf59288-55cf-4f40-a7a8-37ac25435a13
+# ╟─10d7b498-f9e8-479e-8d61-fe4233b76df0
+# ╟─fff4dd01-fe30-4363-bd21-0c44206be92b
+# ╟─0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
+# ╟─d8198183-4e97-4f39-9e8e-03a98a939d0a
+# ╟─7b96d31c-b45c-4848-ab8f-64900cc2d1d4
+# ╟─97753b65-a272-4620-8469-df6485ca34c3
+# ╟─a776ad50-892d-4d98-99b7-e7a111934622
+# ╟─aadc9d89-d5dd-4c41-825a-6296dca32fbc
+# ╟─7f80a08a-a653-4a4a-9048-da7b82113518
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

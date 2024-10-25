@@ -1,0 +1,2 @@
+ἔσται
+λήψῃ (fails for ending)

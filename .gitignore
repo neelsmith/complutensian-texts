@@ -3,3 +3,4 @@ Manifest.toml
 scratch/
 .DS_Store
 *_files/
+data/src/

@@ -22,11 +22,11 @@ function strongverb(s; poscode = "v")
 	end
 end
 
-
-function findverbs(c::CitableTextCorpus; limit = length(c.passages), ortho = HebrewOrthography())
-	reslts = []
-	for (i,psg) in enumerate(c.passages[1:limit])
-		@info("Process $(i) / $(limit)")
+function findverbs(c::CitableTextCorpus; start = 1, limit = length(c.passages), ortho = HebrewOrthography())
+	
+	for (i,psg) in enumerate(c.passages[start:limit])
+		@info("Process $(i) / $(limit - start) + 1 ($(workid(psg.urn)), $(passagecomponent(psg.urn)))")
+		reslts = []
 		psglex = filter(tokenize(psg , ortho)) do t
 			tokencategory(t) isa LexicalToken
 		end
@@ -37,17 +37,17 @@ function findverbs(c::CitableTextCorpus; limit = length(c.passages), ortho = Heb
 				push!(reslts, oneresult)
 			end
         end
+		delimited = map(reslts) do v
+			join([v.urn, v.form, v.headword, v.id], "|")
+		end
+		outfile = string(workid(psg.urn), "_",  passagecomponent(psg.urn), ".cex")
+		open(outfile, "w") do io
+			write(io, join(delimited, "\n") * "\n")
+		end
 	end
-	reslts
+	@info("Completed run from $(start)-$(limit)")
 end
 
-@time allverbs = findverbs(hebrew)
-
-
-delimited = map(allverbs) do v
-    join([v.urn, v.form, v.headword, v.id], "|")
-end
-
-open("hebrewverbs.cex", "w") do io
-    write(io, "urn|form|lemma|id\n" * join(delimited, "\n"))
-end
+# Timing out. :-(
+# try in batches of 500-1000
+@time findverbs(hebrew; start = 18981, limit = 19000)
