@@ -595,7 +595,7 @@ Tabulae = "~0.14.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.4"
+julia_version = "1.10.6"
 manifest_format = "2.0"
 project_hash = "3428ea93535e419fbf584cddc1b62cdc1cfa9168"
 
@@ -2196,7 +2196,7 @@ version = "1.5.6+0"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.8.0+1"
+version = "5.11.0+0"
 
 [[deps.libpng_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
@@ -2273,7 +2273,7 @@ version = "17.4.0+2"
 # ╟─87af5ce8-3d20-43ee-8cd6-15a950d34ebd
 # ╟─81c982d2-1d64-4ef2-a8d8-9d46e3762ad1
 # ╟─1c1451ec-10b2-46c3-9585-3607ea686ac3
-# ╟─0fa2a742-7bab-44be-9405-9bb6edfba8a0
+# ╠═0fa2a742-7bab-44be-9405-9bb6edfba8a0
 # ╟─1e6575e1-39aa-4d9f-8aa1-74b4579e573e
 # ╟─c31dca9e-fbca-4a36-87e5-7738355b3790
 # ╟─ca7914c0-c5ff-407d-a9a6-8140d030144a

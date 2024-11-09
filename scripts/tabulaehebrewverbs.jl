@@ -51,3 +51,8 @@ end
 # Timing out. :-(
 # try in batches of 500-1000
 @time findverbs(hebrew; start = 23001) #, limit = 23000)
+
+
+vlist = findverbs(CitableTextCorpus(hebrew.passages[1:10]))
+
+vlist
