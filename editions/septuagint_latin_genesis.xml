@@ -4861,7 +4861,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="9">
-        et non est in domo hac: neque excipit a me nihil: <choice><abbr>pter</abbr><expan>propter</expan></choice> te: et quod tu vxor eius es: et <unclear><choice><abbr>quo</abbr><expan>quomodo</expan></choice></unclear> faciam verbum malum hoc: et paccabo coram deo. 
+        et non est in domo hac: neque excipit a me nihil: <choice><abbr>pter</abbr><expan>propter</expan></choice> te: eo quod tu vxor eius es: et <unclear><choice><abbr>quo</abbr><expan>quomodo</expan></choice></unclear> faciam verbum malum hoc: et peccabo coram deo. 
         </ab>
 
         <ab n="10">
@@ -4869,7 +4869,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="11">
-        facta est <choice><abbr>at</abbr><expan>autem</expan></choice> talis quedam dies: et intrauit <persName>ioseph</persName> in domum facere oepra sua: et nemo erat in domo <choice><abbr>intus</abbr><expan>interius</expan></choice>: 
+        facta est <choice><abbr>at</abbr><expan>autem</expan></choice> talis quedam dies: et intrauit <persName>ioseph</persName> in domum facere opera sua: et nemo erat in domo <choice><abbr>intus</abbr><expan>interius</expan></choice>: 
         </ab>
 
         <ab n="12">
@@ -4885,7 +4885,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="15">
-        cum <choice><abbr>at</abbr><expan>autem</expan></choice> audiret <choice><abbr>ipe</abbr><expan>ipse</expan></choice>: quod exaltaui vocem meam: et clamaui: relinquens vestimenta sua meam: et clamaui: relinquens vestimenta sua apud me: fugit: et egressus est foras. 
+        cum <choice><abbr>at</abbr><expan>autem</expan></choice> audiret <choice><abbr>ipe</abbr><expan>ipse</expan></choice>: quod exaltaui vocem meam: et clamaui: relinquens vestimenta sua apud me: fugit: et egressus est foras. 
         </ab>
 
         <ab n="16">
@@ -4905,11 +4905,11 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="20">
-        et accipiens <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>ioseph</persName>: iniecit eum in munitionem: et in munitionem: et in locum: in quo vincti regis detinentur illic in munitione: 
+        et accipiens <choice><abbr>dns</abbr><expan>dominus</expan></choice> <persName>ioseph</persName>: iniecit eum in munitionem: et in locum: in quo vincti regis detinentur illic in munitione: 
         </ab>
 
         <ab n="21">
-        et suit <choice><abbr>dns</abbr><expan>dominus</expan></choice> cum <persName>ioseph</persName>: et effudit ei <unclear>miam</unclear>: et dedit ei <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram principe carceris. 
+        et fuit <choice><abbr>dns</abbr><expan>dominus</expan></choice> cum <persName>ioseph</persName>: et effudit ei <unclear>miam</unclear>: et dedit ei <choice><abbr>gram</abbr><expan>gratiam</expan></choice> coram principe carceris. 
         </ab>
 
         <ab n="22">
@@ -4919,6 +4919,104 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="23">
         non erat princeps carceris excarcere sciens <unclear>propteripum</unclear> nihil. <choice><abbr>oia</abbr><expan>omnia</expan></choice> <unclear>em</unclear> erant per manum <persName>ioseph</persName>: eo quod <choice><abbr>dns</abbr><expan>dominus</expan></choice> cum illo erat. et <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> <choice><abbr>ipe</abbr><expan>ipse</expan></choice> faciebat: <choice><abbr>dns</abbr><expan>dominus</expan></choice> prosperabat in manibus eius. 
         </ab>
+
+        </div>
+
+        <div n="40">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="40" type="ordinal">40.</num></ab>
+
+        <ab n="1">
+        Factum est <choice><abbr>at</abbr><expan>autem</expan></choice> post verba hec: peccauit princeps pincernarum regis <placeName>egypti</placeName>: et princeps pistorum <choice><abbr>dno</abbr><expan>domino</expan></choice> suo regi <placeName>egypti</placeName>. 
+        </ab>
+
+        <ab n="2">
+        et iratus est <persName>pharao</persName> super duobus eunuchis suis: super principe pincernarum et super principe pistorum. 
+        </ab>
+
+        <ab n="3">
+        et posuit eos in custodia in carcere: in locum: vbi <persName>ioseph</persName> iacebat ibi. 
+        </ab>
+
+        <ab n="4">
+        et commendauit <choice><abbr>pnceps</abbr><expan>princeps</expan></choice> carceris <persName>ioseph</persName> <choice><abbr>ipos</abbr><expan>ipsos</expan></choice>. et astitit eis. fuerant <choice><abbr>at</abbr><expan>autem</expan></choice> dies in carcere: 
+        </ab>
+
+        <ab n="5">
+        et viderunt ambo somnium in vna nocte vnum. quorum visiones insomnii eorum pincerna et pistor erant regi <placeName>egypti</placeName> <choice><abbr>exntes</abbr><expan>extentes</expan></choice> in carcere. 
+        </ab>
+
+        <ab n="6">
+        intrauit <choice><abbr>at</abbr><expan>autem</expan></choice> ad eos <persName>ioseph</persName> mane: et vidit eos: et erant conturbati. 
+        </ab>
+
+        <ab n="7">
+        et introgauit eunuchos pharaonis: <choice><abbr>q</abbr><expan>qui</expan></choice> erant cum eo: dicens: <choice><abbr>qre</abbr><expan>quare</expan></choice> facies <unclear><choice><abbr>vre</abbr><expan>vestre</expan></choice></unclear> tristes hodie. 
+        </ab>
+
+        <ab n="8">
+        illi <choice><abbr>at</abbr><expan>autem</expan></choice> <choice><abbr>dixert</abbr><expan>dixerunt</expan></choice> somnium vidimus: et coniectans illud: non est. dixit <choice><abbr>at</abbr><expan>autem</expan></choice> eis <persName>ioseph</persName>: non per deum manifestatio eius est? narrate ergo mihi. 
+        </ab>
+
+        <ab n="9">
+        et narrauit <choice><abbr>pnceps</abbr><expan>princeps</expan></choice> pincernarum somnium suum <persName>ioseph</persName>. et ait illi sic: in somnio meo erat vitis coram me:
+        </ab>
+
+        <ab n="10">
+        in <choice><abbr>at</abbr><expan>autem</expan></choice> vite tres propagines: et <choice><abbr>ipa</abbr><expan>ipsa</expan></choice> virescens producebat germina maturos racemos vue: 
+        </ab>
+
+        <ab n="11">
+        et calix pharaonis in manum mea: et accepi vuam: <unclear>t</unclear> expressi eam in calicem et dedi calicem in manu pharaonis. 
+        </ab>
+
+        <ab n="12">
+        et dixit ei <persName>ioseph</persName>: hoc coniectatio eius. tres propagines: tres dies sunt: 
+        </ab>
+
+        <ab n="13">
+        adhuc tres dies: et recordabitur pharao principatus tui: et restituet te ad principatum pincernatus tui: et dabis calicem pharaonis in manum eius <choice><abbr>sm</abbr><expan>secundum</expan></choice> <choice><abbr>pncipatum</abbr><expan>principatum</expan></choice> tuum priorem: sicut eras vinum fundens. 
+        </ab>
+
+        <ab n="14">
+        sed memento mei per temetipsum: <choice><abbr>qn</abbr><expan>quando</expan></choice> <choice><abbr>bn</abbr><expan>bene</expan></choice> tibi fuerit: et facies mecum misericordiam. et recordatus de me ad pharaonem: et educes me de carcere isto. 
+        </ab>
+
+        <ab n="15">
+        <choice><abbr>q</abbr><expan>quia</expan></choice> furto surreptus suum de <choice><abbr>tra</abbr><expan>terra</expan></choice> <persName>hebreorum</persName>: et hic non feci nihil: <choice><abbr>sm</abbr><expan>secundum</expan></choice> iniecerunt me in domum lacus huius. 
+        </ab>
+
+        <ab n="16">
+        et vidit princeps pistorum: <choice><abbr>q</abbr><expan>quod</expan></choice> recte coniectauit: et ait <persName>ioseph</persName>: et ego vidi somnium. putabam tria canistra farinarum tollere super caput meum: 
+        </ab>
+
+        <ab n="17">
+        in <choice><abbr>at</abbr><expan>autem</expan></choice> canistro superiore ab <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> <unclear><choice><abbr>gnribus</abbr><expan>generibus</expan></choice></unclear>: que comedit pharao opere pistoris: et aues celi comederunt illa a canistro capitis mei. 
+        </ab>
+
+        <ab n="18">
+        <choice><abbr>rndens</abbr><expan>respondens</expan></choice> <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>ioseph</persName>: ait illi: hec coniectatio eius: tria canistra tres dies sunt: 
+        </ab>
+
+        <ab n="19">
+        adhuc tribus diebus: et auferet pharao caput tuum a te: et suspendet te in ligno: et comedent aues celi carnes tuas a te.  
+        </ab>
+
+        <ab n="20">
+        factum est <choice><abbr>at</abbr><expan>autem</expan></choice> in <unclear>die</unclear> tertia: natiuitatis dies erat pharaonis: et faciebat conuiuium <choice><abbr>oibus</abbr><expan>omnibus</expan></choice> seruis suis: et recordatus est principis pincernarum: et principatus principis pistorum in medio seruorum suorum. 
+        </ab>
+
+        <ab n="21">
+        et restituit principem pincernarum in principatum suum: et dedit calicem in manum pharaonis. 
+        </ab>
+
+        <ab n="22">
+        at principem pistorum suspendit: sicut coniectauit eis <persName>ioseph</persName>. 
+        </ab>
+
+        <ab n="23">
+        et non recordatus est princeps pincernarum <persName>ioseph</persName>: sed oblitus est eius. 
+        </ab>
+
 
 
 

@@ -4825,7 +4825,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="12">
-        Apprehendituqe vestimenta eius: dicens. Cuba mecum. Et reliquit vestimenta sua in manu eius: et fugit: et egressus est foras. 
+        Apprehenditque vestimenta eius: dicens. Cuba mecum. Et reliquit vestimenta sua in manu eius: et fugit: et egressus est foras. 
         </ab>
 
         <ab n="13">
@@ -4865,7 +4865,7 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         </ab>
 
         <ab n="21">
-        Et tradidit princeps carceris in manu <persName>ioseph</persName> <choice><abbr>omes</abbr><ex>omnes</ex></choice> vinctos qui erant in domo carceris. 
+        Et tradidit princeps carceris in manu <persName>ioseph</persName> <choice><abbr>omes</abbr><expan>omnes</expan></choice> vinctos qui erant in domo carceris. 
         </ab>
 
         <ab n="22">
@@ -4875,6 +4875,103 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         <ab n="23">
         Nullum delictum videbat princeps carceris in manu eius: eo quod verbum domini erat in auxilium eius. Et quod ipse faciebat: <choice><abbr>dns</abbr><expan>dominus</expan></choice> dirigebat. 
         </ab>
+        </div>
+
+        <div n="40">
+         <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="40" type="ordinal">40.</num></ab>
+
+         <ab n="1">
+         Et factum est post verba: hec peccauerunt pincerna regis <placeName>egypti</placeName> et pistor <choice><abbr>dno</abbr><expan>domino</expan></choice> suo regi <placeName>egypti</placeName>.
+         </ab>
+
+         <ab n="2">
+         Et iratus est <persName>pharao</persName> contra duos principes suos: contra principem pincernarum et contra principem pistorum: 
+         </ab>
+
+         <ab n="3">
+         et posuit eos in <unclear>cnstodia</unclear> in domo <unclear>magri</unclear> militum in domo vinctorum vbi <persName>ioseph</persName> erat vinctus.
+         </ab>
+
+         <ab n="4">
+         Et posuit princeps militum cum eis <persName>ioseph</persName>: et ministrabat eis. Et fuerunt <choice><abbr>aliqbus</abbr><expan>aliquibus</expan></choice> diebus in custodia. 
+         </ab>
+
+         <ab n="5">
+         Somniauerunt <choice><abbr>aut</abbr><expan>autem</expan></choice> somnium ambo: <choice><abbr>vnusqsque</abbr><expan>vnusquisque</expan></choice> somnium suum in nocte vna: singuli iuxta <choice><abbr>interptationem</abbr><expan>interpretationem</expan></choice> est somnii sui: pincerna videlicet et pistor regis <placeName>egypti</placeName> qui vincti erant in domo carceris. 
+         </ab>
+
+         <ab n="6">
+         Venitque ad eos <persName>ioseph</persName> mane: et vidit eos: et ecce erant tristes. 
+         </ab>
+
+         <ab n="7">
+         Et interro gauit <choice><abbr>pncipes</abbr><expan>principes</expan></choice> pharaonis: <choice><abbr>q</abbr><expan>qui</expan></choice> secum erant in custodia in domo <choice><abbr>dni</abbr><expan>domini</expan></choice> sui: dicens. Quare facies <unclear><choice><abbr>vre</abbr><expan>vestre</expan></choice></unclear> tristes sunt hodie. 
+         </ab>
+
+         <ab n="8">
+         Et <choice><abbr>dixert</abbr><expan>dixerunt</expan></choice> ei. somnium somniauimus: et non est <choice><abbr>q</abbr><expan>qui</expan></choice> <choice><abbr>interptetur</abbr><expan>interpretetur</expan></choice> illud. Dixitque eis <persName>ioseph</persName>: vtique a facie dei est interpretatio somnii: narrate obsecro mihi. 
+         </ab>
+
+         <ab n="9">
+         Narrauitque princeps pincernarum somnium suum <persName>ioseph</persName>. et dixit ei. In somnio meo ecce vitus erat coram me: et in vite erant tres palmites: 
+         </ab>
+
+         <ab n="10">
+         et erat quasi florens et producebat gemmas: et post flores maturabant vue in botris suis. 
+         </ab>
+
+         <ab n="11">
+         et calix pharaonis erat in manu mea: et tollebam vuas: et exprimebam eas in calice pharaonis: et ponebam calicem in manu pharaonis.  
+         </ab>
+
+         <ab n="12">
+         Dixitque ei <persName>ioseph</persName>: hec est <choice><abbr>interptatio</abbr><expan>interpretatio</expan></choice> eius. tres palmites: tres dies sunt. 
+         </ab>
+
+         <ab n="13">
+         In fine trium dierum recordabitur tui pharao: et reducet te ad ministerium tuum: et pones calicem pharaonis in manu eius: sicut ante consueueras <choice><abbr>qn</abbr><expan>quando</expan></choice> eras pincerna eius. 
+         </ab>
+
+         <ab n="14">
+         Sed memento mei tecum: cum bene fuerit tibi. Et facies obsecro mecum <choice><abbr>miam</abbr><expan>minimam</expan></choice>: et recordaberis mei apud pharaonem: et educes me de hoc carcere. 
+         </ab>
+
+         <ab n="15">
+         Quoniam furto sublatus sum de terra <persName>hebreorum</persName>: et hic quoque nihil feci vt ponerent me in carcerem. 
+         </ab>
+
+         <ab n="16">
+         Et vidit princeps pistorum <choice><abbr>q</abbr><expan>quod</expan></choice> recte interpretatus esset. Et dixit ad <persName>ioseph</persName>. Ego quoque videbam in somnio meo: et ecce tria canistra plena pane principali erant super caput meum. 
+         </ab>
+
+         <ab n="17">
+         Et in canistro superiori erat de omni cibo pharaonis qui fit arte pistoria: et aues comedebant ea que erant in canistro super capite meo. 
+         </ab>
+
+         <ab n="18">
+         Responditque <persName>ioseph</persName>: et ait. Hec est <choice><abbr>interptatio</abbr><expan>interpretatio</expan></choice> eius. Tria canistra: tres dies sunt. 
+         </ab>
+
+         <ab n="19">
+         in fine trium dierum auferet pharao caput tuum a te: et suspendet te in patibulo: et comedent aues carnes tuas a te. 
+         </ab>
+
+         <ab n="20">
+         Et factum est in die tertio: die natiuitatis pharaonis: fecit conuiuium omnibus seruis suis: et recordatus est capitis principis pincerarum: et capitis principis pistorum in medio seruorum suorum. 
+         </ab>
+
+         <ab n="21">
+         Et reduxit principem pincernarum ad ministerium suum: et posuit calicem super manum pharaonis. 
+         </ab>
+
+         <ab n="22">
+         Et principem pistorum suspendit: sicut interpretatus est eis <persName>ioseph</persName>. 
+         </ab>
+
+         <ab n="23">
+         Et non est recordatus princeps pincernarum <persName>ioseph</persName>: sed oblitus est eius. 
+         </ab>
+
         </div>
 
     </body>
