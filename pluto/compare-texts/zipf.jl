@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.42
+# v0.19.47
 
 using Markdown
 using InteractiveUtils
@@ -14,294 +14,293 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ f82ebfde-453c-4e47-bfeb-df73c7633059
+# ╔═╡ df91c300-e907-4ccc-a575-036dd58ba358
 begin
-	# Tabulae must be version 0.10 or higher.
-	using Tabulae
-	using CitableParserBuilder
-	using CitableBase
-	using CitableText
-	using CitableCorpus
-	using CitableTeiReaders
-	using EditionBuilders
-
+	using CitableBase, CitableCorpus, CitableText
 	using Orthography, LatinOrthography
 
-	using StatsBase, OrderedCollections
+	using CitableTeiReaders
+	using EditionBuilders
+	
+	using StatsBase
+	using OrderedCollections
+	
 	using PlotlyJS
 	
-	using Downloads
-	using HypertextLiteral
 
+	using VectorAlignments
+	
 	using PlutoUI
-	md"""*Unhide this cell to see Julia package versions*."""
+	md"""*Unhide this cell to see the Julia environment*."""
 end
 
-# ╔═╡ e4ab310c-a9aa-4ee6-854a-4935c27e6288
+# ╔═╡ b05ca334-a115-4f68-a11c-3ed27c03f413
 TableOfContents()
 
-# ╔═╡ ae1ebf75-d551-4df5-864c-07e7813c8621
-nbversion = "1.0.0";
+# ╔═╡ 83ad9ce8-2c9a-11ef-2e53-ad978a4e6f59
+md"""# Token frequency in Latin texts of Complutensian Bible"""
 
-# ╔═╡ 4b6f8847-9f4b-4fc4-b6f0-c5d31e263007
-md"""*See version info*: $(@bind showversion CheckBox())"""
+# ╔═╡ fd278ecc-89ef-4ede-b07b-0bb18377c3ea
+@bind reloadtext Button("Reload glosses")
 
-# ╔═╡ 6dfb338f-4c83-4f8b-a122-579248909e79
-if showversion
-md"""
+# ╔═╡ 21d5f438-69b6-410f-9139-87a0f2024463
+md"""## Frequency plots"""
 
-- **1.0.0**: initial release
-"""
-end
+# ╔═╡ 8e254baf-35a0-4793-ae3e-4660927ce77d
+md"""*Minimum num. occurrences to include*" $(@bind freqthresh Slider(1:50, show_value = true))"""
 
-# ╔═╡ 6568f1e0-2da5-11ef-27df-5f07fa823895
-md"""# Histogram of verbs in parallel texts"""
+# ╔═╡ 56d83662-2a9b-441d-bb17-fdba83fdc403
+md"""## Alignments"""
 
-# ╔═╡ a04059ac-04d8-4ed8-a476-fd0231323783
-@bind reloadtext Button("Reload text")
+# ╔═╡ 10ef7bfa-f614-41a9-ab9c-aeac04b08f89
+md"""*Number of terms to show*: $(@bind alignmax Slider(5:5:100, show_value=true))"""
 
-# ╔═╡ 2e8e15ae-f0f6-4b22-a963-33570fcc5180
-html"""
+# ╔═╡ 40f2817a-1aa0-4ee4-9683-6dbfa7b77b2b
+
+
+# ╔═╡ bbeab184-f035-41eb-acea-7ed98274091d
+ html"""
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 """
 
-# ╔═╡ b53c4198-35f0-4f6b-a58e-20b6aee44e98
-md"""> # Things you can skip"""
+# ╔═╡ 274fd19a-de33-4e82-a38d-a40c4f5a93e1
+md"""> # Behind the scenes"""
 
-# ╔═╡ 03a2e2a8-1f3c-4af1-acc1-7b706312b948
-function formsforlex(parsedtkns)
-	dict = Dict()
-	for atkn in parsedtkns
-		l = atkn.analyses[1] |> lexemeurn |> string
-		t = atkn.analyses[1] |> token
-		if haskey(dict, l)
-			prev = dict[l]
-			push!(prev, t)
-			dict[l] = unique(prev)
-		else
-			dict[l] = [t]
-		end
-	end
-	dict
-end
+# ╔═╡ 46f5b6dd-63bb-4901-b9c3-3662bf8972bf
+md"""> ## Vocab"""
 
-# ╔═╡ 20bcdb8e-27d6-46b1-bedd-1caf625a2e6e
-md"""> ## Skip tokens"""
+# ╔═╡ 507f303e-5a46-40ba-aa47-d6aaa8e88aaf
+md"""> ## Plotting"""
 
-# ╔═╡ bad510e7-19be-4e2e-8279-ba6252fe2f9d
-genA = joinpath(pwd() |> dirname, "notes", "verbs-gen1-16.cex") |> read |> String
+# ╔═╡ 6a25a972-2cbb-44db-8d01-ceabd4b49d15
 
-# ╔═╡ eda291f3-24bf-4865-96f3-6ca470a82624
-genAdatalines = filter(ln -> ! isempty(ln), split(genA,"\n")[2:end])
+"""Plot values against keys of ordereddict d
+with PlotlyJS
+"""
+function plotordereddict(d; thresh = freqthresh)
+	xsraw = keys(d) |> collect
+	ysraw = values(d) |> collect
 
-# ╔═╡ c295820e-7185-447a-82c5-5cc9d07c3369
-	genAskipcol = map(genAdatalines) do ln
-		split(ln,"|")[3]
-	end
+	ys = filter(y -> y >= thresh, ysraw)
+	max = length(ys)
+	xs = xsraw[1:max]
 
-# ╔═╡ d478cf0d-d303-4682-b3a9-f1338d2a8dce
-skiplist = filter(ln -> ! isempty(ln), genAskipcol) |> unique
-
-
-# ╔═╡ ec75a412-68be-42ba-8219-46e6a0dc73ad
-md"""> ## Tokenization and parsing"""
-
-# ╔═╡ 14949ae5-9993-46ea-8f63-28c04fbfa86c
-ortho23 = latin23()
-
-# ╔═╡ 300a8a69-049b-45a3-8d5a-d8c6fd6bfcca
-ortho25 = latin25()
-
-# ╔═╡ 77bde32d-a14a-4528-8e9f-6cbe4c168f8e
-"""True if analysis has a verb form."""
-function verbform(a::Analysis)
-	latform = latinForm(a)
-	latform isa LMFFiniteVerb ||
-	latform isa LMFInfinitive ||
-	latform isa LMFParticiple 
-end
-
-# ╔═╡ c8c68085-fd0b-4603-afca-7413de920df9
-"""Plot a histogram of verb lexemes"""
-function verbhisto(atc::AnalyzedTokenCollection; title = "Lexical frequencies",  w = 800, h = 800)
-	parsedtknlist = filter(atkn -> ! isempty(atkn.analyses) && verbform(atkn.analyses[1]), atc.analyses)
-
+	graphlayout = Layout(title = "n-gram frequencies")
+	plotted = scatter(x = xs, y = ys)
 	
-	lexlist = map(parsedtknlist) do atkn
-		atkn.analyses[1] |> lexemeurn |> string
-	end
-	freqsdict = countmap(lexlist) |> OrderedDict
-	freqs = sort(freqsdict, byvalue = true, rev = true)
-
-	formsdict = formsforlex(parsedtknlist)
-
-
-	xs = begin
-		xlexxlist = keys(freqs) |> collect
-		map(xlexxlist) do lex
-			formlist = formsdict[lex]
-			if length(formlist) > 3
-				join(formlist[1:3],", ") * "..."
-			else
-				join(formlist, ", ")
-			end
-		end
-	end
-	ys = values(freqs) |> collect
-
-	graphlayout = Layout(title = title, height = h, width = w)
-	Plot(bar(x = xs,y = ys), graphlayout)
 end
 
-# ╔═╡ 9294ef16-705b-494e-96e5-f32e4f4d6491
-md"""> ## Text corpus"""
+# ╔═╡ 9bc243a0-3204-4f75-a659-296d91137d55
+md"""> ## Corpus"""
 
-# ╔═╡ 0ab274df-d0d3-4dab-9f87-252bfd71e811
-md"""### Septuagint glossses"""
-
-# ╔═╡ 5b876552-d296-4a12-87fe-65779766bbc4
+# ╔═╡ b3088be4-8fa6-4891-a78f-4f72f1137369
 repo = dirname(pwd())
 
-# ╔═╡ 2c583f26-39b3-4e91-8735-698d27c4b468
+# ╔═╡ 4c330499-1e06-4ddb-be3d-63b6a660d374
+md"""### Septuagint glosses"""
+
+# ╔═╡ 9c6841b2-c621-4217-8e34-0852be2c2e38
 septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
 
-# ╔═╡ 6e53ea39-55e4-476f-a31e-afbbaae31f92
+# ╔═╡ cdf9b572-4c3f-43f0-9029-d7f447f70e1e
 septlatinxmlcorpus = begin
 	reloadtext
 	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
 
-# ╔═╡ d217a173-5901-4f5d-a542-1494d317a951
+# ╔═╡ 18647286-2a52-4c87-aa52-3ea4454f6280
 lxxbldr = normalizedbuilder(; versionid = "lxxlatinnormed")
 
-# ╔═╡ 04bede56-1d54-404c-9fce-fda47cb309f2
+# ╔═╡ 49956c62-5827-4a60-97c7-1992a8de156e
 septlatin = edited(lxxbldr, septlatinxmlcorpus)
 
-# ╔═╡ bb83b83c-16bb-4fab-a42d-aa5df38e9a53
-psgreff = map(psg -> dropversion(urn(psg)), septlatin.passages)
+# ╔═╡ a85a8f05-ea12-4a1f-a4c4-e02ebe48a3f2
+lxxtkns = tokenize(septlatin, latin23())
 
-# ╔═╡ c7aa5067-4a6b-4c3a-8638-945a366d0a8d
-lxxtokens = tokenizedcorpus(septlatin, ortho23)
+# ╔═╡ 79020b86-4f0f-44be-a975-2b94dcdc1a29
+lxxlextkns = filter(t -> tokencategory(t) isa LexicalToken, lxxtkns)
 
-# ╔═╡ 002b286f-72f1-4fa6-b69c-c34d849a7b46
+# ╔═╡ 35115290-c72e-4f5c-a77a-0b1a537c89d3
+lxxfreqs = countmap(map(t -> CitableCorpus.text(passage(t)), lxxlextkns)) |> OrderedDict
 
+# ╔═╡ b1147d34-02f4-4d0d-8d3d-2095224706ea
+lxxsorted = sort(lxxfreqs; rev = true,  byvalue = true)
 
-# ╔═╡ 67ba6669-d248-4224-a29c-16ab450e1978
-md""" ### Targum glosses"""
+# ╔═╡ 55c471d6-6109-48f4-9d96-3335a759abfc
+begin
+	lxxlayout = Layout(title = "Septuagint glosses", height = 400, width = 600)
+	Plot(plotordereddict(lxxsorted), lxxlayout)
+end
 
-# ╔═╡ 31b85560-1933-4935-9ab0-a3cc91564c3e
+# ╔═╡ d4e59085-5bb2-413a-9e26-4e016f699bb0
+lxxvocab = keys(lxxsorted) |> collect
+
+# ╔═╡ dff3748b-5a5e-4af9-81d0-bfaca39d0066
+xsrc = keys(lxxsorted) |> collect
+
+# ╔═╡ 113ca4a3-6dc8-476f-aca4-ff1c7d299405
+plotordereddict(lxxsorted)
+
+# ╔═╡ 263f3525-bb0e-4c95-ba52-3ed12ac503e6
+md"""> ### Targum glosses"""
+
+# ╔═╡ 6cdc559c-b62c-4540-ab47-d2b88ad18bae
 targumlatinxml =  joinpath(repo, "editions", "targum_latin_genesis.xml")
 
-# ╔═╡ e85e45de-5f66-4c6f-a8d4-64c61187f701
+# ╔═╡ 622ec8cd-69ad-4b82-9b0e-735daa9bf2f0
 targbldr = normalizedbuilder(; versionid = "targumlatinnormed")
 
-# ╔═╡ 27557198-c030-438a-9f56-cfdecbe0bd4a
+# ╔═╡ 62980cd7-925a-47ac-9c01-1bb11ef43cf5
 targumlatinxmlcorpus = begin
 	reloadtext
 	readcitable(targumlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
 
-# ╔═╡ 0137579d-0be0-423b-98da-1965c17ae7ca
+# ╔═╡ 04d141d6-7fc6-4b70-8a5c-610a573b53e4
 targumlatin = edited(targbldr, targumlatinxmlcorpus)
 
-# ╔═╡ ae16b4b8-b4e4-4a65-91ad-9c7fd7bbe5ce
-targtokens = tokenizedcorpus(targumlatin, ortho23)
+# ╔═╡ 03d738c6-f2ff-43d1-b099-8a930c4412c0
+targumtkns = tokenize(targumlatin, latin23())
 
-# ╔═╡ fa00482b-fae8-44f6-8012-4a9428a793c2
-md""" ### Vulgate"""
+# ╔═╡ 949b423f-9de5-4599-bca6-1b9d1f4eaa13
+targumlextkns = filter(t -> tokencategory(t) isa LexicalToken, targumtkns)
 
-# ╔═╡ 0f5274c4-5bee-419d-8460-d660670e8ba6
+# ╔═╡ 432dcc60-f33f-4596-96bd-8b91bb10726f
+targumfreqs = countmap(map(t -> CitableCorpus.text(passage(t)), targumlextkns)) |> OrderedDict
+
+# ╔═╡ 568d6e14-f97c-4dcb-9894-02fb046f92df
+targumsorted = sort(targumfreqs; rev = true,  byvalue = true)
+
+# ╔═╡ 61f9fb78-824c-4fe6-841b-6d69fe1b6003
+begin
+	targumlayout = Layout(title = "Targum glosses", height = 400, width = 600)
+	Plot(plotordereddict(targumsorted), targumlayout)
+end
+
+# ╔═╡ a623f028-570c-48ab-a743-60e9e8309594
+targvocab = keys(targumsorted) |> collect
+
+# ╔═╡ 19b5c1c8-8eed-40ad-9869-7b23f822d959
+md"""> ### Vulgate"""
+
+# ╔═╡ f9e5aaa8-3311-4175-a47c-1af4b397f810
 srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
 
-# ╔═╡ 800b981e-377d-4466-81bf-0c1bff1776d5
+# ╔═╡ fdc92d2d-2877-4dac-b778-daeb1acd7d86
 corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 
-# ╔═╡ 2d238610-add6-481c-8594-ab3e3598e3d9
+# ╔═╡ cca90194-4474-4965-8946-406ded4ffdfe
 vulgate = filter(corpus.passages) do psg
 	versionid(psg.urn) == "vulgate"
 end |> CitableTextCorpus
 
-# ╔═╡ 5df71a7f-5fa0-46fb-a4ed-244e255a4e2e
-vulgatetokens = tokenizedcorpus(vulgate, ortho23)
+# ╔═╡ 2806ef34-7844-4f62-8db2-875a170bde32
+vulgatetkns = tokenize(vulgate, latin24())
 
-# ╔═╡ beb900e8-326b-4afd-bdbc-b44720af18e7
-md"""> ## Build parsers"""
+# ╔═╡ 761e232f-ceee-4236-8038-02032b44a0ee
+vulgatelextkns = filter(t -> tokencategory(t) isa LexicalToken, vulgatetkns)
 
-# ╔═╡ 29b840c3-7976-4e25-955b-cc2f2516d0bd
-p23url = "http://shot.holycross.edu/tabulae/medieval-lat23-current.cex"
+# ╔═╡ 6a761b48-4a30-4e7f-b51f-e4edf8763849
+vulgatefreqs = countmap(map(t -> CitableCorpus.text(passage(t)), vulgatelextkns)) |> OrderedDict
 
-# ╔═╡ 264c7e8b-d738-4928-b6e8-670d00152295
-p25url = "http://shot.holycross.edu/tabulae/medieval-lat25-current.cex"
+# ╔═╡ 03d1b11d-498f-4be6-a375-c7700b536a75
+vulgatesorted = sort(vulgatefreqs; rev = true,  byvalue = true)
 
-# ╔═╡ cb147cb4-b577-4d2a-967f-2280fa50c3cb
-parser23 = tabulaeStringParser(p23url, UrlReader)
+# ╔═╡ 524e9be7-3fa0-4dcd-b48d-7065c04f83eb
+begin
+	vulgatelayout = Layout(title = "All of Vulgate", height = 400, width = 600)
+	Plot(plotordereddict(vulgatesorted), vulgatelayout)
+end
 
-# ╔═╡ 1c831692-2798-4360-bbb1-e16f60b3ad88
-septparsed = parsecorpus(lxxtokens, parser23)
+# ╔═╡ dfbca1a4-d664-4fe5-a4de-95baaac09cf8
+vulgvocab = keys(vulgatesorted) |> collect
 
-# ╔═╡ d1f48321-f51c-43f2-833e-55da460771f2
-verbhisto(septparsed; title = "Septuagint glosses")
+# ╔═╡ a724a105-b8cf-48bb-9731-3fe0559155fc
+md"""Genesis only:"""
 
-# ╔═╡ eed1f2ae-cb17-4ea2-93ba-18b576398be6
-targparsed = parsecorpus(targtokens, parser23)
+# ╔═╡ a7c3bd9a-7176-44eb-8405-b1d73eb39565
+genesislex = filter(t -> workid(urn(t)) == "genesis", vulgatelextkns)
 
-# ╔═╡ 5e8cdb48-6296-41da-a0a1-92228af19de9
-verbhisto(targparsed; title = "Targum glosses")
+# ╔═╡ c062e00a-3bbf-48bb-9402-c6fa84232ca0
+genesisfreqs = countmap(map(t -> CitableCorpus.text(passage(t)), vulgatelextkns)) |> OrderedDict
 
-# ╔═╡ df3841db-64ff-493d-81ee-1aa9360828b3
-parser25 = tabulaeStringParser(p25url, UrlReader)
 
-# ╔═╡ b57c0c88-d1b3-4905-8d4e-9e45096944be
-vulgateparsed = parsecorpus(vulgatetokens, parser25)
+# ╔═╡ 5a428845-aa9f-427b-8c9f-d714a2026690
+genesissorted = sort(genesisfreqs; rev = true,  byvalue = true)
 
-# ╔═╡ 06ec38fe-0970-4b0e-b5f2-ac32c82f7495
-verbhisto(vulgateparsed; title = "Vulgate")
+# ╔═╡ 8123218d-253b-4a66-9802-7e6529ef6d0c
+begin
+	genesislayout = Layout(title = "Vulgate: Genesis", height = 400, width = 600)
+	Plot(plotordereddict(genesissorted), genesislayout)
+end
+
+# ╔═╡ fc72955d-cc6f-4fdc-a301-52fff41d5d15
+genesisvocab = keys(genesissorted) |> collect
+
+# ╔═╡ 33c8b731-868b-4478-8b6d-f79b7a261f42
+featurem = featurematrix(lxxvocab[1:alignmax], targvocab[1:alignmax], genesisvocab[1:alignmax], vulgvocab[1:alignmax])
+
+# ╔═╡ 082ee54d-c434-42bc-9a2e-4c475c39d31f
+rows = featurem[1:alignmax,:]
+
+# ╔═╡ b554a80e-f698-489c-9675-003afbdbdeec
+function tablify(m, titles)
+	mdlines = ["| " * join(titles, " | ") * " |",
+		repeat("| ---  ", length(titles)) * " |"
+	]
+	for r in eachrow(rows)
+		push!(mdlines, "| " * join(r, " | ") * " |")
+	end
+	
+	join(mdlines, "\n")
+end
+
+# ╔═╡ da364f80-c734-45d8-af80-2eb597d36d95
+tablify(rows, ["LXX", "Targum", "Genesis", "Vulgate"]) |> Markdown.parse
+
+# ╔═╡ c34c6cf3-3272-47fb-8515-f048addf982e
+
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
-CitableParserBuilder = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
 CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
-Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
-HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlotlyJS = "f0f68f2c-4968-5e81-91da-67840de0976a"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
-Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
+VectorAlignments = "137e0234-31ad-43b7-8b27-b236525e28e1"
 
 [compat]
 CitableBase = "~10.4.0"
 CitableCorpus = "~0.13.5"
-CitableParserBuilder = "~0.29.0"
 CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
 EditionBuilders = "~0.8.5"
-HypertextLiteral = "~0.9.5"
 LatinOrthography = "~0.7.3"
 OrderedCollections = "~1.6.3"
 Orthography = "~0.22.0"
 PlotlyJS = "~0.18.11"
 PlutoUI = "~0.7.59"
 StatsBase = "~0.34.3"
-Tabulae = "~0.11.1"
+VectorAlignments = "~0.3.0"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.6"
 manifest_format = "2.0"
-project_hash = "5e379a52a4443863dd21dc73860806b1f48c3553"
+project_hash = "32156df12db2ca7d3a1b6a4b527d5f07ac6eff4f"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -376,18 +375,6 @@ git-tree-sha1 = "f400484e7b0fc1707f9dfd288fa297a4a2d9a2ad"
 uuid = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 version = "0.13.5"
 
-[[deps.CitableObject]]
-deps = ["CitableBase", "CiteEXchange", "DocStringExtensions", "Documenter", "Downloads", "Test", "TestSetExtensions"]
-git-tree-sha1 = "86eb34cc98bc2c5b73dc96da5fe116adba903d56"
-uuid = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
-version = "0.16.1"
-
-[[deps.CitableParserBuilder]]
-deps = ["CSV", "CitableBase", "CitableCorpus", "CitableObject", "CitableText", "Compat", "DataFrames", "Dictionaries", "DocStringExtensions", "Documenter", "Downloads", "OrderedCollections", "Orthography", "StatsBase", "Test", "TestSetExtensions", "TypedTables"]
-git-tree-sha1 = "fbce105543993f657c2a6a18d98e640eed3bbc70"
-uuid = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
-version = "0.29.0"
-
 [[deps.CitableTeiReaders]]
 deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "HTTP", "Test"]
 git-tree-sha1 = "deed5242dad324dfd619bdeaa23528e131664a91"
@@ -455,7 +442,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.1.1+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -463,21 +450,10 @@ git-tree-sha1 = "6cbbd4d241d7e6579ab354737f4dd95ca43946e1"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
 version = "2.4.1"
 
-[[deps.Crayons]]
-git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
-uuid = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
-version = "4.1.1"
-
 [[deps.DataAPI]]
 git-tree-sha1 = "abe83f3a2f1b857aac70ef8b269080af17764bbe"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
 version = "1.16.0"
-
-[[deps.DataFrames]]
-deps = ["Compat", "DataAPI", "DataStructures", "Future", "InlineStrings", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrecompileTools", "PrettyTables", "Printf", "REPL", "Random", "Reexport", "SentinelArrays", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
-git-tree-sha1 = "04c738083f29f86e62c8afc341f0967d8717bdb8"
-uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-version = "1.6.1"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
@@ -507,9 +483,9 @@ version = "1.9.1"
 
 [[deps.Dictionaries]]
 deps = ["Indexing", "Random", "Serialization"]
-git-tree-sha1 = "1f3b7b0d321641c1f2e519f7aed77f8e1f6cb133"
+git-tree-sha1 = "35b66b6744b2d92c778afd3a88d2571875664a2a"
 uuid = "85a47980-9c8c-11e8-2b9f-f7ca1fa99fb4"
-version = "0.3.29"
+version = "0.4.2"
 
 [[deps.Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
@@ -593,11 +569,6 @@ git-tree-sha1 = "d18fb8a1f3609361ebda9bf029b60fd0f120c809"
 uuid = "f8c6e375-362e-5223-8a59-34ff63f689eb"
 version = "2.44.0+2"
 
-[[deps.Glob]]
-git-tree-sha1 = "97285bbd5230dd766e9ef6749b80fc617126d496"
-uuid = "c27321d9-0574-5035-807b-f59d2c89b15c"
-version = "1.3.1"
-
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
 git-tree-sha1 = "d1d712be3164d61d1fb98e7ce9bcbc6cc06b45ed"
@@ -635,24 +606,13 @@ version = "1.1.1"
 
 [[deps.InlineStrings]]
 deps = ["Parsers"]
-git-tree-sha1 = "86356004f30f8e737eff143d57d41bd580e437aa"
+git-tree-sha1 = "9cc2baf75c6d09f9da536ddf58eb2f29dedaf461"
 uuid = "842dd82b-1e85-43dc-bf29-5d0ee9dffc48"
-version = "1.4.1"
-
-    [deps.InlineStrings.extensions]
-    ArrowTypesExt = "ArrowTypes"
-
-    [deps.InlineStrings.weakdeps]
-    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
+version = "1.4.0"
 
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
-
-[[deps.InvertedIndices]]
-git-tree-sha1 = "0dc7b50b8d436461be01300fd8cd45aa0274b038"
-uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
-version = "1.3.0"
 
 [[deps.IrrationalConstants]]
 git-tree-sha1 = "630b497eafcc20001bba38a4651b327dcfc491d2"
@@ -930,12 +890,6 @@ git-tree-sha1 = "9306f6085165d270f7e3db02af26a400d580f5c6"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
 version = "1.4.3"
 
-[[deps.PrettyTables]]
-deps = ["Crayons", "LaTeXStrings", "Markdown", "PrecompileTools", "Printf", "Reexport", "StringManipulation", "Tables"]
-git-tree-sha1 = "66b20dd35966a748321d3b2537c4584cf40387c7"
-uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
-version = "2.3.2"
-
 [[deps.Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
@@ -1020,12 +974,6 @@ git-tree-sha1 = "5cf7606d6cef84b543b483848d4ae08ad9832b21"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.34.3"
 
-[[deps.StringManipulation]]
-deps = ["PrecompileTools"]
-git-tree-sha1 = "a04cabe79c5f01f4d723cc6704070ada0b9d46d5"
-uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
-version = "0.3.4"
-
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
@@ -1047,12 +995,6 @@ deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "Linear
 git-tree-sha1 = "cb76cf677714c095e535e3501ac7954732aeea2d"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 version = "1.11.1"
-
-[[deps.Tabulae]]
-deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "1405e6b3f0080f373c97572fa192e52e2dfaeb4a"
-uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-version = "0.11.1"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -1112,6 +1054,12 @@ version = "1.0.2"
 [[deps.Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
+[[deps.VectorAlignments]]
+deps = ["DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
+git-tree-sha1 = "749e1c027969c6cd421c7762bfe764fcfb55f8f7"
+uuid = "137e0234-31ad-43b7-8b27-b236525e28e1"
+version = "0.3.0"
+
 [[deps.WeakRefStrings]]
 deps = ["DataAPI", "InlineStrings", "Parsers"]
 git-tree-sha1 = "b1be2855ed9ed8eac54e5caff2afcdb442d52c23"
@@ -1155,7 +1103,7 @@ version = "1.2.13+1"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.8.0+1"
+version = "5.11.0+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1169,57 +1117,66 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─f82ebfde-453c-4e47-bfeb-df73c7633059
-# ╟─e4ab310c-a9aa-4ee6-854a-4935c27e6288
-# ╟─ae1ebf75-d551-4df5-864c-07e7813c8621
-# ╟─4b6f8847-9f4b-4fc4-b6f0-c5d31e263007
-# ╟─6dfb338f-4c83-4f8b-a122-579248909e79
-# ╟─6568f1e0-2da5-11ef-27df-5f07fa823895
-# ╟─a04059ac-04d8-4ed8-a476-fd0231323783
-# ╟─d1f48321-f51c-43f2-833e-55da460771f2
-# ╟─5e8cdb48-6296-41da-a0a1-92228af19de9
-# ╟─06ec38fe-0970-4b0e-b5f2-ac32c82f7495
-# ╟─2e8e15ae-f0f6-4b22-a963-33570fcc5180
-# ╟─b53c4198-35f0-4f6b-a58e-20b6aee44e98
-# ╠═c8c68085-fd0b-4603-afca-7413de920df9
-# ╠═03a2e2a8-1f3c-4af1-acc1-7b706312b948
-# ╟─20bcdb8e-27d6-46b1-bedd-1caf625a2e6e
-# ╟─bad510e7-19be-4e2e-8279-ba6252fe2f9d
-# ╟─eda291f3-24bf-4865-96f3-6ca470a82624
-# ╟─c295820e-7185-447a-82c5-5cc9d07c3369
-# ╟─d478cf0d-d303-4682-b3a9-f1338d2a8dce
-# ╟─ec75a412-68be-42ba-8219-46e6a0dc73ad
-# ╟─14949ae5-9993-46ea-8f63-28c04fbfa86c
-# ╟─300a8a69-049b-45a3-8d5a-d8c6fd6bfcca
-# ╟─77bde32d-a14a-4528-8e9f-6cbe4c168f8e
-# ╟─bb83b83c-16bb-4fab-a42d-aa5df38e9a53
-# ╟─9294ef16-705b-494e-96e5-f32e4f4d6491
-# ╟─0ab274df-d0d3-4dab-9f87-252bfd71e811
-# ╠═5b876552-d296-4a12-87fe-65779766bbc4
-# ╟─2c583f26-39b3-4e91-8735-698d27c4b468
-# ╟─6e53ea39-55e4-476f-a31e-afbbaae31f92
-# ╟─d217a173-5901-4f5d-a542-1494d317a951
-# ╠═04bede56-1d54-404c-9fce-fda47cb309f2
-# ╠═c7aa5067-4a6b-4c3a-8638-945a366d0a8d
-# ╠═1c831692-2798-4360-bbb1-e16f60b3ad88
-# ╠═002b286f-72f1-4fa6-b69c-c34d849a7b46
-# ╟─67ba6669-d248-4224-a29c-16ab450e1978
-# ╟─31b85560-1933-4935-9ab0-a3cc91564c3e
-# ╟─e85e45de-5f66-4c6f-a8d4-64c61187f701
-# ╟─27557198-c030-438a-9f56-cfdecbe0bd4a
-# ╟─0137579d-0be0-423b-98da-1965c17ae7ca
-# ╠═ae16b4b8-b4e4-4a65-91ad-9c7fd7bbe5ce
-# ╠═eed1f2ae-cb17-4ea2-93ba-18b576398be6
-# ╟─fa00482b-fae8-44f6-8012-4a9428a793c2
-# ╟─0f5274c4-5bee-419d-8460-d660670e8ba6
-# ╠═800b981e-377d-4466-81bf-0c1bff1776d5
-# ╟─2d238610-add6-481c-8594-ab3e3598e3d9
-# ╠═5df71a7f-5fa0-46fb-a4ed-244e255a4e2e
-# ╠═b57c0c88-d1b3-4905-8d4e-9e45096944be
-# ╟─beb900e8-326b-4afd-bdbc-b44720af18e7
-# ╟─29b840c3-7976-4e25-955b-cc2f2516d0bd
-# ╟─264c7e8b-d738-4928-b6e8-670d00152295
-# ╠═cb147cb4-b577-4d2a-967f-2280fa50c3cb
-# ╠═df3841db-64ff-493d-81ee-1aa9360828b3
+# ╟─df91c300-e907-4ccc-a575-036dd58ba358
+# ╟─b05ca334-a115-4f68-a11c-3ed27c03f413
+# ╟─83ad9ce8-2c9a-11ef-2e53-ad978a4e6f59
+# ╟─fd278ecc-89ef-4ede-b07b-0bb18377c3ea
+# ╟─21d5f438-69b6-410f-9139-87a0f2024463
+# ╟─8e254baf-35a0-4793-ae3e-4660927ce77d
+# ╟─55c471d6-6109-48f4-9d96-3335a759abfc
+# ╟─61f9fb78-824c-4fe6-841b-6d69fe1b6003
+# ╟─8123218d-253b-4a66-9802-7e6529ef6d0c
+# ╟─524e9be7-3fa0-4dcd-b48d-7065c04f83eb
+# ╟─56d83662-2a9b-441d-bb17-fdba83fdc403
+# ╟─10ef7bfa-f614-41a9-ab9c-aeac04b08f89
+# ╟─da364f80-c734-45d8-af80-2eb597d36d95
+# ╠═40f2817a-1aa0-4ee4-9683-6dbfa7b77b2b
+# ╟─bbeab184-f035-41eb-acea-7ed98274091d
+# ╟─274fd19a-de33-4e82-a38d-a40c4f5a93e1
+# ╟─46f5b6dd-63bb-4901-b9c3-3662bf8972bf
+# ╟─b554a80e-f698-489c-9675-003afbdbdeec
+# ╠═082ee54d-c434-42bc-9a2e-4c475c39d31f
+# ╠═33c8b731-868b-4478-8b6d-f79b7a261f42
+# ╟─d4e59085-5bb2-413a-9e26-4e016f699bb0
+# ╟─a623f028-570c-48ab-a743-60e9e8309594
+# ╠═dfbca1a4-d664-4fe5-a4de-95baaac09cf8
+# ╠═fc72955d-cc6f-4fdc-a301-52fff41d5d15
+# ╟─507f303e-5a46-40ba-aa47-d6aaa8e88aaf
+# ╟─6a25a972-2cbb-44db-8d01-ceabd4b49d15
+# ╠═dff3748b-5a5e-4af9-81d0-bfaca39d0066
+# ╠═113ca4a3-6dc8-476f-aca4-ff1c7d299405
+# ╟─9bc243a0-3204-4f75-a659-296d91137d55
+# ╟─b3088be4-8fa6-4891-a78f-4f72f1137369
+# ╟─4c330499-1e06-4ddb-be3d-63b6a660d374
+# ╟─9c6841b2-c621-4217-8e34-0852be2c2e38
+# ╟─cdf9b572-4c3f-43f0-9029-d7f447f70e1e
+# ╟─18647286-2a52-4c87-aa52-3ea4454f6280
+# ╟─49956c62-5827-4a60-97c7-1992a8de156e
+# ╟─a85a8f05-ea12-4a1f-a4c4-e02ebe48a3f2
+# ╟─79020b86-4f0f-44be-a975-2b94dcdc1a29
+# ╟─35115290-c72e-4f5c-a77a-0b1a537c89d3
+# ╟─b1147d34-02f4-4d0d-8d3d-2095224706ea
+# ╟─263f3525-bb0e-4c95-ba52-3ed12ac503e6
+# ╟─6cdc559c-b62c-4540-ab47-d2b88ad18bae
+# ╟─622ec8cd-69ad-4b82-9b0e-735daa9bf2f0
+# ╟─62980cd7-925a-47ac-9c01-1bb11ef43cf5
+# ╟─04d141d6-7fc6-4b70-8a5c-610a573b53e4
+# ╠═03d738c6-f2ff-43d1-b099-8a930c4412c0
+# ╠═949b423f-9de5-4599-bca6-1b9d1f4eaa13
+# ╠═432dcc60-f33f-4596-96bd-8b91bb10726f
+# ╠═568d6e14-f97c-4dcb-9894-02fb046f92df
+# ╟─19b5c1c8-8eed-40ad-9869-7b23f822d959
+# ╟─f9e5aaa8-3311-4175-a47c-1af4b397f810
+# ╟─fdc92d2d-2877-4dac-b778-daeb1acd7d86
+# ╟─cca90194-4474-4965-8946-406ded4ffdfe
+# ╟─2806ef34-7844-4f62-8db2-875a170bde32
+# ╟─761e232f-ceee-4236-8038-02032b44a0ee
+# ╠═6a761b48-4a30-4e7f-b51f-e4edf8763849
+# ╠═03d1b11d-498f-4be6-a375-c7700b536a75
+# ╟─a724a105-b8cf-48bb-9731-3fe0559155fc
+# ╠═a7c3bd9a-7176-44eb-8405-b1d73eb39565
+# ╠═c062e00a-3bbf-48bb-9402-c6fa84232ca0
+# ╠═5a428845-aa9f-427b-8c9f-d714a2026690
+# ╠═c34c6cf3-3272-47fb-8515-f048addf982e
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

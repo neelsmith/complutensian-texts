@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.42
+# v0.19.47
 
 using Markdown
 using InteractiveUtils
@@ -14,8 +14,7 @@ begin
 	using EditionBuilders
 	using StatsBase, OrderedCollections
 
-	using TypedTables
-	using CSV
+	using DataFrames
 	
 	using PlutoUI
 	md"""*Unhide this cell to see the Julia environment.*"""
@@ -27,14 +26,17 @@ TableOfContents()
 # ╔═╡ 85fc6546-2f3e-11ef-0f00-01f8fe9ce42a
 md"""# Verb tallies"""
 
-# ╔═╡ 67cb111f-f09a-4f79-835c-458e6a3335b3
-lex = "ls.n11543"
+# ╔═╡ d9aea20b-4a04-44e2-aeab-6816d6a78b30
+md"""## Array based"""
 
-# ╔═╡ d84733d6-2c22-411e-931e-bdee82248f66
-function scorelex(l, data::Table)
-	lexmatches = filter(r -> r.lexeme == l, data)
-	TypedTables.group(r -> r.sequence, lexmatches)
-end
+# ╔═╡ 15c8ad37-052d-4d1e-991e-58620a62d04f
+md"""## DF based"""
+
+# ╔═╡ 6beeddae-04d8-4fbc-bbf6-9dee9e8c371a
+
+
+# ╔═╡ 485a9d3e-5296-4dc6-b222-8ff2db3cec37
+
 
 # ╔═╡ 1a87569b-6ff6-4a48-89c3-67d9d558ed88
 html"""
@@ -46,104 +48,23 @@ html"""
 # ╔═╡ ba636bac-49d3-4d61-b0d2-ea37abbc7103
 md"""> # Mechanics"""
 
-# ╔═╡ c0dee535-1a93-45cb-aa1d-cf30c93474f4
-verbinventory = vocab()
-
-# ╔═╡ 90881583-9875-4073-98f4-2e20c935587f
-"""Get list of all lexeme ID strings"""
-function vocab()
-	tlex = targverbs .|> alex .|> string
-	slex = septverbs .|> alex .|> string
-	vlex = vulgverbs .|> alex .|> string
-	vcat(tlex, slex, vlex) |> unique
-end
+# ╔═╡ 4318bfed-a92b-4fd6-8c3c-781906be4b74
+repo = pwd() |> dirname
 
 # ╔═╡ 1e591229-5151-481f-bf7f-7566361a7c39
-md"""> ## Data collection"""
+md"""> ## Arrays"""
 
-# ╔═╡ 62482b8d-55b2-4d4b-8526-3caa902aac25
-"""Compose a TypedTable for our data."""
-function populatettable(urnlist)	
-	seq = []
-	urns = []
-	docs = []
-	lexemes = []
-	for (i,u) in enumerate(urnlist)
-		if i % 5 == 0
-			@info("Passage $(i)/$(length(urnlist))...")
-		end
-		for lex in passagelexstrings(u, vulgverbs)
-			push!(seq, i)
-			push!(urns, u)
-			push!(docs,"vulgate")
-			push!(lexemes, lex)
-		end
-		for lex in passagelexstrings(u, targverbs)
-			push!(seq, i)
-			push!(urns, u)
-			push!(docs,"targum")
-			push!(lexemes, lex)
-		end
-		for lex in passagelexstrings(u, septverbs)
-			push!(seq, i)
-			push!(urns, u)
-			push!(docs,"septuagint")
-			push!(lexemes, lex)
-		end
-	end
-	#Table(sequence = seq, urn = urns, document = docs, lexeme = lexemes)
-	seq
-	urns
-	docs
-	lexemes
-	t = Table(sequence = seq, urn = urns, document = docs, lexeme = lexemes)
-	t
-end
+# ╔═╡ afc2e210-c3f7-4b9a-969a-daa7e5632e5e
+md"""> ## DataFrames"""
 
-# ╔═╡ 7d6cb28e-8267-43e1-81bc-347b44102c85
-md"""Debug:"""
-
-# ╔═╡ 03cfde36-c6c9-48b3-8a10-b859bb8e2087
- t = TypedTables.Table(name = ["Alice", "Bob", "Charlie"], age = [25, 42, 37])
-
-# ╔═╡ 8efe6faa-94d2-4b95-93ca-73488d180a11
-
-
-# ╔═╡ 30bca03d-0687-4f80-9432-93bfb37d8f16
-
-
-# ╔═╡ d64d6985-d194-43a7-b9e2-78b5e5428caa
-"""Populate array of named tuples by adding data for each passage in urnlist."""
-function populatearr(urnlist)
-	rows = []
-	for (i,u) in enumerate(urnlist)
-		if i % 5 == 0
-			@info("Passage $(i)/$(length(urnlist))...")
-		end
-		for lex in passagelexstrings(u, vulgverbs)
-			push!(rows, (sequence = i, urn = u, document = "vulgate", lexeme = lex))
-		end
-		for lex in passagelexstrings(u, targverbs)
-			push!(rows, (sequence = i, urn = u, document = "targum", lexeme = lex))
-		end
-		for lex in passagelexstrings(u, septverbs)
-			push!(rows, (sequence = i, urn = u, document = "septuagint", lexeme = lex))
-		end
-	end
-	rows
-end
+# ╔═╡ 8bc2fd54-a286-425e-86f2-46327bb6c4a6
+dfmodel = DataFrame(sequence = Int[], passage = String[], document = String[], lexeme = String[])
 
 # ╔═╡ 3bdd1ae3-d777-487c-b5fd-616bd0387676
 md"""> ## Analysis"""
 
 # ╔═╡ 91acaa0d-69a9-47c1-a6d4-21d2a91f463f
 md"""> ## Retrieval functions"""
-
-# ╔═╡ 01e5add2-cca5-44b4-a2fc-3d001916e34f
-"""Get string values for lexical IDs of verbs in a passage."""
-function passagelexstrings(u::CtsUrn, v::Vector{AnalyzedToken})
-	retrieveparses(u,v) .|> alex .|> string |> unique
-end
 
 # ╔═╡ 01bb2af1-e2c7-4364-b355-93d4974eb816
 """Get lexeme URN of first analysis."""
@@ -168,6 +89,12 @@ function retrieveparses(u::CtsUrn, v::Vector{AnalyzedToken})
 			(psgref == checkref || startswith(checkref, dotted) )
 		end
 	end
+end
+
+# ╔═╡ 01e5add2-cca5-44b4-a2fc-3d001916e34f
+"""Get string values for lexical IDs of verbs in a passage."""
+function passagelexstrings(u::CtsUrn, v::Vector{AnalyzedToken})
+	retrieveparses(u,v) .|> alex .|> string |> unique
 end
 
 # ╔═╡ 98302eaa-2c21-44e1-aef9-650845ce4df8
@@ -206,9 +133,6 @@ parser25 = tabulaeStringParser(p25url, UrlReader)
 
 # ╔═╡ 174cdf34-ec49-47e8-aad8-c95df2287c23
 md"""> ## Texts"""
-
-# ╔═╡ 4318bfed-a92b-4fd6-8c3c-781906be4b74
-repo = pwd() |> dirname
 
 # ╔═╡ 5cb784ce-4ebb-439c-8da8-ee21cbdf6026
 function readvulgate()
@@ -253,33 +177,6 @@ reflist = filter(reflistraw) do u
 	! endswith(passagecomponent(u), "title")
 end
 
-# ╔═╡ a9981af0-4d18-4d1d-b513-50e638efdf8f
-ttable = populatettable(reflist[1:3])
-
-# ╔═╡ 926e8b4e-1b92-4e2d-b6cb-c964ea2fa0a4
-clust = scorelex(lex, ttable)
-
-# ╔═╡ ff5fe730-2462-477b-9b52-eaf6d211ec1e
-clust
-
-# ╔═╡ 6beeddae-04d8-4fbc-bbf6-9dee9e8c371a
-ttable[ttable.sequence .== 3]
-
-# ╔═╡ f3c5c426-1975-4fcb-a3a7-ed80401a5314
-typeof(ttable)
-
-# ╔═╡ 335600d1-fae6-4194-ac4d-75af511341f5
-ttable
-
-# ╔═╡ 16c387a4-585a-4fb9-81ad-77849e1cee32
-filter(r -> r.sequence > 2, ttable)
-
-# ╔═╡ 99fbe77e-b0ed-4fdc-b37c-3f7dc2adbe1a
-arr = populatearr(reflist[1:5])
-
-# ╔═╡ 270402cd-83a8-417f-855e-22282004f3de
-slist = map(r -> r.sequence, arr)
-
 # ╔═╡ 2127b840-fba3-417d-bbe7-9939d24be57b
 md"""> ## Parsed texts"""
 
@@ -316,50 +213,122 @@ vulgverbs = filter(vulgparses.analyses) do a
 	! isempty(a.analyses) && verbform(a.analyses[1])
 end
 
-# ╔═╡ 9d604131-4462-4a2f-aeea-7f0b42dbbef1
-begin
-	seq = []
-	urns = []
-	docs = []
-	lexlist = []
-	for (i,u) in enumerate(reflist[1:5])
-		if i % 5 == 0
-			@info("Passage $(i)/$(length(reflist))...")
-		end
-		for lex in passagelexstrings(u, vulgverbs)
-			push!(seq, i)
-			push!(urns, u)
-			push!(docs,"vulgate")
-			push!(lexlist, lex)
-		end
-		for lex in passagelexstrings(u, targverbs)
-			push!(seq, i)
-			push!(urns, u)
-			push!(docs,"targum")
-			push!(lexlist, lex)
-		end
-		for lex in passagelexstrings(u, septverbs)
-			push!(seq, i)
-			push!(urns, u)
-			push!(docs,"septuagint")
-			push!(lexlist, lex)
-		end
-	end
+# ╔═╡ 90881583-9875-4073-98f4-2e20c935587f
+"""Get list of all lexeme ID strings"""
+function vocab()
+	tlex = targverbs .|> alex .|> string
+	slex = septverbs .|> alex .|> string
+	vlex = vulgverbs .|> alex .|> string
+	vcat(tlex, slex, vlex) |> unique
 end
 
+# ╔═╡ c0dee535-1a93-45cb-aa1d-cf30c93474f4
+verbinventory = vocab()
 
-# ╔═╡ 8637ce95-8bc7-4d3e-b2f0-a9810603daf4
-Table(sequence = seq, urn = urns, document = docs, lexeme = lexlist)
+# ╔═╡ 28f68797-bb8b-4573-b063-f6b32b41d507
+
+function toytally(ref::CtsUrn)
+	tparses = retrieveparses(ref, targverbs)
+	sparses = retrieveparses(ref, septverbs)
+	vparses = retrieveparses(ref, vulgverbs)
+
+	tlex = tparses .|> alex .|> string |> unique
+	slex = sparses .|> alex .|> string |> unique
+	vlex = vparses .|> alex .|> string |> unique
+	lexinventory = vcat(tlex, slex, vlex) |> unique
+end
+
+# ╔═╡ f752cd84-ff28-4513-9433-f9e2fcccf849
+"""Populate empty DataFrame by adding data for each passage in urnlist."""
+function populatearr(urnlist)
+	rows = []
+	for (i,u) in enumerate(urnlist)
+		if i % 5 == 0
+			@info("Passage $(i)/$(length(urnlist))...")
+			for lex in passagelexstrings(u, vulgverbs)
+				push!(rows, (sequence = i, urn = u, document = "vulgate", lexeme = lex))
+			end
+			for lex in passagelexstrings(u, targverbs)
+				push!(rows, (sequence = i, urn = u, document = "targum", lexeme = lex))
+			end
+			for lex in passagelexstrings(u, septverbs)
+				push!(rows, (sequence = i, urn = u, document = "septuagint", lexeme = lex))
+			end
+		end
+	end
+	rows
+end
+
+# ╔═╡ 1403c0c5-f0d8-4842-9fe3-992e8cf70032
+arr = populatearr(reflist)
+
+# ╔═╡ 0bf17b30-f280-4c61-9882-13d4df23d071
+"""Nothing but side effectsh here!"""
+function addrowforpassage(u::CtsUrn, seqnum::Int, df::DataFrame)
+	psglabel = join([workid(u),passagecomponent(u)], "_")
+	for lex in passagelexstrings(u, vulgverbs)
+		push!(df, [seqnum, psglabel, "vulgate", lex])
+	end
+	for lex in passagelexstrings(u, targverbs)
+		push!(df, [seqnum, psglabel, "targum", lex])
+	end
+		for lex in passagelexstrings(u, septverbs)
+		push!(df, [ seqnum, psglabel, "septuagint", lex])
+	end
+	df
+end
+
+# ╔═╡ 0b37086b-3b65-4bf3-b2ea-f60116874f32
+"""Populate empty DataFrame by adding data for each passage in urnlist."""
+function populate(df, urnlist)
+	for (i,u) in enumerate(urnlist)
+		if i % 5 == 0
+			@info("Passage $(i)/$(length(urnlist))...")
+		end
+		addrowforpassage(u,i, df)
+	end
+	df
+end
+
+# ╔═╡ 5fce08f4-2426-41a3-b7af-74fe2297616f
+df = populate(dfmodel, reflist)
+
+# ╔═╡ 461fea8a-9254-4ed1-b994-a336202445fb
+describe(df)
+
+# ╔═╡ ad28ff6f-5873-4437-85df-d5acf5bafbee
+verbgroups = groupby(df, [:sequence, :document])
+
+# ╔═╡ 4a4d68b5-c7f8-4476-8165-7bbcb908464e
+verbgroups[(1,"vulgate")]
+
+# ╔═╡ e99b6b38-a76e-470c-8ea8-55172e51f5e4
+psggroups = groupby(df, [:sequence])
+
+# ╔═╡ 266bd32a-c26a-4573-885b-eefd5791f243
+keys(psggroups)
+
+# ╔═╡ cf41dd01-dabb-4221-9fba-65f868abea19
+psggroups[2]
+
+# ╔═╡ e68e1526-e499-4ae3-85b6-508e7a0560f6
+countedpsg = combine(psggroups[2], :lexeme => (l -> countmap(l)))
+
+# ╔═╡ 3548d2d5-5ac4-4b99-bfae-d5816d120c8b
+describe(countedpsg)
+
+# ╔═╡ 40a32107-734a-497e-aa02-cd62ae65090b
+lexgroups = groupby(df, [:lexeme])
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
-CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableParserBuilder = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
 CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
@@ -367,15 +336,14 @@ Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-TypedTables = "9d95f2ec-7b3d-5a63-8d20-e2491e220bb9"
 
 [compat]
-CSV = "~0.10.14"
 CitableBase = "~10.4.0"
 CitableCorpus = "~0.13.5"
 CitableParserBuilder = "~0.29.0"
 CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
+DataFrames = "~1.6.1"
 EditionBuilders = "~0.8.5"
 LatinOrthography = "~0.7.3"
 OrderedCollections = "~1.6.3"
@@ -383,16 +351,15 @@ Orthography = "~0.22.0"
 PlutoUI = "~0.7.59"
 StatsBase = "~0.34.3"
 Tabulae = "~0.11.1"
-TypedTables = "~1.4.6"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.0"
+julia_version = "1.10.6"
 manifest_format = "2.0"
-project_hash = "889c2cee8cae3e0516f9d5bd356f20940103ad36"
+project_hash = "c9d0d221acc0ad42ffbae853cccb6acfe017f3a3"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -510,7 +477,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.0.5+1"
+version = "1.1.1+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -837,7 +804,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+2"
+version = "0.3.23+4"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -1098,7 +1065,7 @@ version = "1.2.13+1"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.8.0+1"
+version = "5.11.0+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1115,30 +1082,33 @@ version = "17.4.0+2"
 # ╟─34adabe3-4459-4335-ba6f-45b1b0e4f917
 # ╟─3900b099-b9b7-48c2-82e3-dc62d4540962
 # ╟─85fc6546-2f3e-11ef-0f00-01f8fe9ce42a
-# ╟─67cb111f-f09a-4f79-835c-458e6a3335b3
-# ╠═926e8b4e-1b92-4e2d-b6cb-c964ea2fa0a4
-# ╠═ff5fe730-2462-477b-9b52-eaf6d211ec1e
-# ╠═d84733d6-2c22-411e-931e-bdee82248f66
+# ╟─d9aea20b-4a04-44e2-aeab-6816d6a78b30
+# ╟─15c8ad37-052d-4d1e-991e-58620a62d04f
+# ╠═461fea8a-9254-4ed1-b994-a336202445fb
 # ╠═6beeddae-04d8-4fbc-bbf6-9dee9e8c371a
-# ╠═f3c5c426-1975-4fcb-a3a7-ed80401a5314
-# ╠═335600d1-fae6-4194-ac4d-75af511341f5
+# ╠═ad28ff6f-5873-4437-85df-d5acf5bafbee
+# ╠═e99b6b38-a76e-470c-8ea8-55172e51f5e4
+# ╠═266bd32a-c26a-4573-885b-eefd5791f243
+# ╠═cf41dd01-dabb-4221-9fba-65f868abea19
+# ╠═e68e1526-e499-4ae3-85b6-508e7a0560f6
+# ╠═3548d2d5-5ac4-4b99-bfae-d5816d120c8b
+# ╠═4a4d68b5-c7f8-4476-8165-7bbcb908464e
+# ╠═40a32107-734a-497e-aa02-cd62ae65090b
+# ╠═485a9d3e-5296-4dc6-b222-8ff2db3cec37
 # ╟─1a87569b-6ff6-4a48-89c3-67d9d558ed88
 # ╟─ba636bac-49d3-4d61-b0d2-ea37abbc7103
+# ╟─4318bfed-a92b-4fd6-8c3c-781906be4b74
 # ╟─c0dee535-1a93-45cb-aa1d-cf30c93474f4
 # ╟─90881583-9875-4073-98f4-2e20c935587f
+# ╟─28f68797-bb8b-4573-b063-f6b32b41d507
 # ╟─1e591229-5151-481f-bf7f-7566361a7c39
-# ╠═a9981af0-4d18-4d1d-b513-50e638efdf8f
-# ╠═16c387a4-585a-4fb9-81ad-77849e1cee32
-# ╟─62482b8d-55b2-4d4b-8526-3caa902aac25
-# ╟─7d6cb28e-8267-43e1-81bc-347b44102c85
-# ╟─9d604131-4462-4a2f-aeea-7f0b42dbbef1
-# ╠═8637ce95-8bc7-4d3e-b2f0-a9810603daf4
-# ╠═03cfde36-c6c9-48b3-8a10-b859bb8e2087
-# ╠═270402cd-83a8-417f-855e-22282004f3de
-# ╠═8efe6faa-94d2-4b95-93ca-73488d180a11
-# ╠═30bca03d-0687-4f80-9432-93bfb37d8f16
-# ╠═99fbe77e-b0ed-4fdc-b37c-3f7dc2adbe1a
-# ╟─d64d6985-d194-43a7-b9e2-78b5e5428caa
+# ╠═1403c0c5-f0d8-4842-9fe3-992e8cf70032
+# ╠═f752cd84-ff28-4513-9433-f9e2fcccf849
+# ╟─afc2e210-c3f7-4b9a-969a-daa7e5632e5e
+# ╟─5fce08f4-2426-41a3-b7af-74fe2297616f
+# ╟─8bc2fd54-a286-425e-86f2-46327bb6c4a6
+# ╟─0b37086b-3b65-4bf3-b2ea-f60116874f32
+# ╠═0bf17b30-f280-4c61-9882-13d4df23d071
 # ╟─3bdd1ae3-d777-487c-b5fd-616bd0387676
 # ╟─a9723ca5-34e6-4444-9d7e-fadc50b37204
 # ╟─a7ebb347-bc77-4f7b-a20b-554255b22033
@@ -1155,7 +1125,6 @@ version = "17.4.0+2"
 # ╟─5e0a5267-186a-44e7-8ed3-e6203c39d27b
 # ╟─62055d0e-2878-4aa6-8d78-590fb7cf4f65
 # ╟─174cdf34-ec49-47e8-aad8-c95df2287c23
-# ╟─4318bfed-a92b-4fd6-8c3c-781906be4b74
 # ╟─91351f19-e22a-4a26-b31f-76d3791507de
 # ╟─de376495-6a98-4a14-8751-6c4d168399c6
 # ╟─a16984f6-b7a4-4b80-8426-61511ed5046b
