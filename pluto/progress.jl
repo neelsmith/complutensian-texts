@@ -14,419 +14,164 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 0abfe5ae-2752-11ef-38cf-f984b91b0112
+# ╔═╡ 4d0be702-4d37-4635-b927-7d93f937ece5
 begin
-	# Tabulae must be version 0.10 or higher.
-	using Tabulae
-	using CitableParserBuilder
-	using CitableBase
 	using CitableText
 	using CitableCorpus
+	using CitableBase
 	using CitableTeiReaders
-	using EditionBuilders
-
-	using Orthography, LatinOrthography
-
-	using Downloads
-	using HypertextLiteral
+	
+	using StatsBase, OrderedCollections
+	using PlutoVista
 
 	using PlutoUI
-	md"""*Unhide this cell to see Julia package versions*."""
 end
 
-# ╔═╡ ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
+# ╔═╡ 50c7652d-467f-4c73-9dec-7af7c18da7db
 TableOfContents()
 
-# ╔═╡ a41a17e7-f985-4a5d-8b76-f91f07824242
-nbversion = "prerelease";
+# ╔═╡ 5751f856-3b90-11ef-2cb7-4d7190a7ad3c
+md"""# Progress editing *Genesis*"""
 
-# ╔═╡ 6048a3e7-abf5-46de-b450-9d6812f915dc
-md"""*Notebook version*: **$(nbversion)** *See version notes*: $(@bind showversion CheckBox())"""
-
-# ╔═╡ 64b25989-dd2d-4407-9993-f083529d918f
-if showversion
-md"""
-
-- not yet released
-"""
-
-end
-
-# ╔═╡ 2d774dd8-0513-4957-9b6a-5a33fd300199
-md"""# Overlapping lexemes in Latin documents of Complutensian Bible"""
-
-# ╔═╡ b8b8224e-ad2e-47e7-b45a-605ad4571af7
+# ╔═╡ 5ecb6a0c-68fe-4efb-812f-9c36a47e8d89
 @bind reloadtext Button("Reload editing of glosses")
 
-# ╔═╡ ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
-md"""*Book*: $(@bind book Select(["genesis" => "Genesis"]))"""
-
-# ╔═╡ 459f076a-c991-41aa-97a4-2fb4b8070fd8
-#md"""*Optionally, add a reference for a passage formatted like* `1.1` or a range of passages formatted like `1.1-1.5`: $(@bind verse confirm(TextField()))"""
-md"""*Optionally, add a reference for a passage formatted like* `1.1`: $(@bind verse confirm(TextField()))"""
-
-# ╔═╡ 07ebab5e-f728-4167-b8de-df99a70a1545
+# ╔═╡ 8b7b3d01-c3c5-4b36-b92b-df593265a4ec
+md"""### *Genesis*: verses per chapter. 
 
 
-# ╔═╡ db93c0c9-4848-4b32-a090-8c57c605e633
+- green line: text edited
+- dashed blue line: average verses per chapter"""
+
+# ╔═╡ 390f0db6-2284-4f69-9564-8f24c1f98146
 html"""
-<br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
 """
 
-# ╔═╡ 40fce696-fcfe-43b5-a84e-dc670935e6c4
-md"""> # Things you can skip"""
+# ╔═╡ f66aba8f-fa22-430f-ab86-92cbd50e6692
+md"""## Mechanics"""
 
-# ╔═╡ 05c1af16-fea5-429b-b9ae-3fbd12d11094
+# ╔═╡ 8eabdc06-dd29-430a-ac8c-7fa6369a5151
+md"""### Edited"""
 
+# ╔═╡ 73ab0c8c-8da7-4a2e-bd93-4339f7991d8d
+#versecountsraw = countmap(chapnumforverse) |> OrderedDict
 
-# ╔═╡ 8b00adaa-4f2d-47a5-b1db-591ac763380e
-md"""> ### Tokenization and parsing"""
+# ╔═╡ 921faafe-e846-428b-9a41-84a0e17c412a
+md"""### Cumulative plot"""
 
-# ╔═╡ ae699e89-b241-42ee-85ca-bfed095d8037
-ortho23 = latin23()
+# ╔═╡ bf96d42f-bce6-4222-85b0-30f378c97398
+md"""### Simple plot"""
 
-# ╔═╡ 2a1cebbe-7594-4eee-bbbe-a1b90705f924
-ortho25 = latin25()
+# ╔═╡ 6d1ae006-5173-48b9-8e17-96b1d5190e45
+#targumchaps = parse.(Int, map(u -> passagecomponent(collapsePassageBy(u, 1)), targumurns) |> unique)
 
-# ╔═╡ 07f9a37b-a39a-452c-a705-3d51d1430c8b
-"""True if analysis has a verb form."""
-function verbform(a::Analysis)
-	latform = latinForm(a)
-	latform isa LMFFiniteVerb ||
-	latform isa LMFInfinitive ||
-	latform isa LMFParticiple 
-end
+# ╔═╡ 94a27704-0225-4b10-8c79-b1aff7a43eae
+md"""### Vulgate text"""
 
-# ╔═╡ 4a9214db-c200-4e3b-944d-45a67a2c85a7
-"""
-"""
-function singlelexemes(psg, ortho, p)
-	vlist = []
-	tlist = ["<p><span class=\"ref\">$(passagecomponent(urn(psg)))</span> "]
-	for t in tokenize(psg, ortho)
-		if tokencategory(t) isa LexicalToken
-			parses = parsetoken(t.passage.text,p)
-			if ! isempty(parses)
-				if verbform(parses[1])
-					parse1 = parses[1]
-					tkn = token(parse1)
-					lex = lexemeurn(parse1)
-					push!(vlist, (token = tkn, lexeme = lex))
-				end
-			end
-		end	
+# ╔═╡ b2ca3067-fb48-4d1d-9678-e34cc31150ee
+srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
+
+# ╔═╡ 729aa046-c680-4741-b66c-071e5ef3d2f1
+corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
+
+# ╔═╡ e6977674-09f5-4ac4-bbb2-ef46cd8d6c9d
+vulgate = filter(p -> versionid(urn(p)) == "vulgate" && workid(urn(p)) == "genesis", corpus.passages)
+
+# ╔═╡ 00e581fd-8259-42dc-b750-2cbb68df1058
+vulgateurns = map(p -> p.urn, vulgate)
+
+# ╔═╡ 073da51d-38ac-4745-91b4-691e3f4e0deb
+chapnumforverse = map(u -> parse(Int, passagecomponent(collapsePassageBy(u, 1))), vulgateurns)
+
+# ╔═╡ 41ae286d-20e0-4964-8771-88721445aade
+versecountsraw = countmap(chapnumforverse) |> OrderedDict
+
+# ╔═╡ 0c6b45ea-b258-4a40-b690-3e38c0aa14f5
+versecounts = sort(versecountsraw)
+
+# ╔═╡ bc5e54d4-26a8-419f-80c5-e035ca48e147
+xs = collect(keys(versecounts))
+
+# ╔═╡ 55a74e65-8daf-4565-82c9-4170767b157e
+runningsums = map(xs) do x
+	total = 0
+	for i in 1:x
+		total = total + versecounts[i]
 	end
-	push!(tlist,"</p>")
-	join(tlist)
-	vlist
+	total
 end
 
-# ╔═╡ 15f946b0-6261-4369-900f-aaa6605175d5
-""".
-"""
-function passagelexemes(psgvect, ortho, p)
-	tlist = []
-	for psg in psgvect
-		if ortho == ortho23
-			normedstr1 = replace(psg.text, "v" => "u")
-			normedstr = replace(normedstr1, "j" => "j")
-			
-			normed = CitablePassage(urn(psg),normedstr)
-				
-			
-			push!(tlist, singlelexemes(normed, ortho, p))
-		else
-			
-			push!(tlist, singlelexemes(psg, ortho, p))
-		end
-	end
-	
-	#join(tlist,"\n")
-	tlist
-end
+# ╔═╡ 4259a1d6-8700-4d65-9f08-f06e07794009
+ys = map(x -> versecounts[x], xs)
 
-# ╔═╡ 86022f06-27b8-480c-b2b6-446d2eb059a1
-"""Format a string representing a lexical token for HTML display."""
-function formatlexstring(s, p)
-	parses = parsetoken(s,p)
-	if isempty(parses)
-		"""<span class="unparsed">$(s)</span>"""
-	elseif verbform(parses[1])
-		"""<span class="hilite">$(s)</span>"""
-	else
-		s
-	end
-end
+# ╔═╡ a33b476f-aa38-433d-bff8-867f2e432066
+averageverses = mean(ys)
 
-# ╔═╡ 65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
-md"""(NB: CSS for highlighting in following cell.)"""
+# ╔═╡ 597e8871-9175-4369-93b2-7c5a035a8975
+md"""### Glosses"""
 
-# ╔═╡ 7b5000d9-7208-4075-8206-dec7b96de23d
-@htl """
-<style>
-	.hilite {
-		background-color: yellow;
-	}
-	.unparsed {
-		color: silver
-	}
-	.ref {
-		color: blue;
-	}
-</style>
-"""
-
-# ╔═╡ c09235c3-f2df-445e-8713-ef68e186f616
-md"""> ### Text passages"""
-
-# ╔═╡ 77cb4e4e-c90b-4ba0-a6a6-42038ce81f2c
-urnbase = "urn:cts:compnov:bible"
-
-# ╔═╡ f72696b9-27ac-479d-a0aa-f2e48064a511
-"""Retrieve texts from corpus, omitting title elements."""
-function retrieve(u::CtsUrn, c::CitableTextCorpus)
-	if isrange(u)
-		"Not handling rnges yet."
-	else
-		psgref = passagecomponent(u)
-		dotted = psgref * "."
-		
-		psglist = filter(c.passages) do psg
-			checkref = passagecomponent(psg.urn) 
-			groupid(psg.urn) == groupid(u) &&
-			workid(psg.urn) == workid(u) &&
-			(psgref == checkref || startswith(checkref, dotted) )
-		end
-		filter(psglist) do psg
-			! endswith(passagecomponent(urn(psg)), "title")
-		end
-	end
-end
-
-# ╔═╡ 2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
-md"""> ### Textcorpus"""
-
-# ╔═╡ ddcfdd60-1d23-4d5a-bf97-ea377a01ecb1
+# ╔═╡ 2cf5608d-5b21-4091-8fa0-ff88c1db1ac9
 repo = dirname(pwd())
 
-# ╔═╡ 962818cf-547c-4e61-a40f-f0dee1b77c28
-md"""#### Septuagint glosses"""
-
-# ╔═╡ 5dffd504-11c2-45ad-8987-6fdfcc7b5a97
+# ╔═╡ f6f3d489-c863-454b-8472-0d3f4b404e93
 septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
 
-# ╔═╡ 5ab1ddb8-24f5-419e-9ccd-0442224f3347
+# ╔═╡ 9ea1a06a-64f0-4b41-80db-0a1929f621ca
 septlatinxmlcorpus = begin
 	reloadtext
 	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
 end
 
-# ╔═╡ 938ca51b-2728-484f-9d0c-55d9fdb10a4a
-lxxbldr = normalizedbuilder(; versionid = "lxxlatinnormed")
+# ╔═╡ 545d52e2-9000-4c4f-ad9a-8355b66dc920
+septlatinurns = map(p -> p.urn, septlatinxmlcorpus)
 
-# ╔═╡ f7c78ed2-c6ec-48bc-aac0-fbb1fb0b27fd
-septlatin = edited(lxxbldr, septlatinxmlcorpus)
+# ╔═╡ ea0057b3-9a07-4034-8f74-120c4aa3e209
+lxxchapters = map(u -> parse(Int, passagecomponent(collapsePassageBy(u, 1))), septlatinurns) |> unique
 
-# ╔═╡ e84d9a63-d531-4d27-8c7d-047fc46998f8
-md"""#### Targum glosses"""
-
-# ╔═╡ 66078ed5-353e-4a21-8936-f41f6371f8e9
-targumlatinxml =  joinpath(repo, "editions", "targum_latin_genesis.xml")
-
-# ╔═╡ 6973b628-dbc8-4188-9121-09530e7a89fe
-targbldr = normalizedbuilder(; versionid = "targumlatinnormed")
-
-# ╔═╡ 49faad62-3a6f-4d39-a27f-38e67de6406f
-targumlatinxmlcorpus = begin
-	reloadtext
-	readcitable(targumlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
-end
-
-# ╔═╡ 406ec17e-7ede-4bdc-b5e9-86404fbc81bf
-targumlatin = edited(targbldr, targumlatinxmlcorpus)
-
-# ╔═╡ ce437209-793f-4daa-80f8-303f6237ee0b
-md"""#### Vulgate"""
-
-# ╔═╡ 2cf59288-55cf-4f40-a7a8-37ac25435a13
-srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
-
-# ╔═╡ 10d7b498-f9e8-479e-8d61-fe4233b76df0
-corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
-
-# ╔═╡ fff4dd01-fe30-4363-bd21-0c44206be92b
-vulgate = filter(corpus.passages) do psg
-	versionid(psg.urn) == "vulgate"
-end |> CitableTextCorpus
-
-# ╔═╡ 0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-md"""> ### Build parsers"""
-
-# ╔═╡ d8198183-4e97-4f39-9e8e-03a98a939d0a
-p23url = "http://shot.holycross.edu/tabulae/medieval-lat23-current.cex"
-
-# ╔═╡ e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
-p25url = "http://shot.holycross.edu/tabulae/medieval-lat25-current.cex"
-
-# ╔═╡ 7b96d31c-b45c-4848-ab8f-64900cc2d1d4
-parser23 = tabulaeStringParser(p23url, UrlReader)
-
-# ╔═╡ 8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
-parser25 = tabulaeStringParser(p25url, UrlReader)
-
-# ╔═╡ 97753b65-a272-4620-8469-df6485ca34c3
-md"""> ### User selections"""
-
-# ╔═╡ a776ad50-892d-4d98-99b7-e7a111934622
-"""Find unique list of chapter values for given book in a corpus."""
-function chaptersforbook(corpus, bookid = "genesis")
-	bookpassages = filter(corpus.passages) do psg
-		workid(psg.urn) == bookid
-	end
-	map(bookpassages) do psg
-		collapsePassageTo(psg.urn, 1) |> passagecomponent
-		
-	end |> unique
-		
-end
-
-# ╔═╡ ff99f087-856e-4b35-a63b-e76d7d2d8709
-md"""*Chapter*: $(@bind chapter Select(chaptersforbook(vulgate, book)))"""
-
-# ╔═╡ f9055bda-a0b8-4129-8f38-a379b75f51ad
-u = if isempty(verse)
-	string(urnbase,".",book,":",chapter) |> CtsUrn
-else
-	string(urnbase,".", book, ":", verse) |> CtsUrn
-end
-
-
-# ╔═╡ 2e8c8eab-ca7a-4a80-97a2-45407f70736e
- targumpsg = retrieve(u, targumlatin)
-
-# ╔═╡ cba6ce0f-dc74-4b47-b718-03ef3d3a61c8
- map(passagelexemes(targumpsg, ortho23, parser23)[1]) do pr
-	 pr.lexeme
- end .|> string |> Set
-
-# ╔═╡ 833c6016-42e4-4f61-ad6a-cf7b694c057c
- septpsg = retrieve(u, septlatin)
-
-# ╔═╡ 6d044127-495e-463d-888d-1d67a3faeab9
-vulgatepsg = retrieve(u, vulgate)
-
-# ╔═╡ b01b5ff3-9e46-477b-94bc-3f1140c3f52d
+# ╔═╡ 3eecf27a-b225-4203-a9ba-49fed68e7bb4
 begin
-	hdr = isempty(verse) ? "#### *$(titlecase(book))* $(chapter)" : "#### *$(titlecase(book))* $(verse)" 
+	pltsimple = PlutoVistaPlot(resolution=(500,300),titlefontsize=20, title = "Verses/chapter")
+	plot!(pltsimple, xs,ys; color = :silver)
+	plot!(pltsimple, [1,xs[end]], [averageverses, averageverses]; color = :blue, linestyle = :dash)
 
-	reff = targumpsg .|> urn .|> passagecomponent
-
-
-	
-	targ = passagelexemes(targumpsg, ortho23, parser23)
-	sept = passagelexemes(septpsg, ortho23, parser23) 
-	vulg = passagelexemes(vulgatepsg, ortho25, parser25) 
-	
-	mdlines = [hdr, "",
-		"| Passage | Targum gloss | Septuagint gloss | Vulgate |",
-		"| --- | --- | --- | --- |"
-	
-	]
-
-	for (i, tpsg) in enumerate(targ)
-		
-		tlex = map(pr -> pr.lexeme, tpsg) .|> string .|> Set
-		slex = map(pr -> pr.lexeme, sept[i]) .|> string .|> Set
-		vlex = map(pr -> pr.lexeme, vulg[i]) .|> string .|> Set
-
-		matched = tlex == slex == vlex
-		if matched
-			push!(mdlines, "| MATCHED! | |||" )
-		else
-			push!(mdlines, "| no match | |||" )
-		end
-		#tlist = join(tpsg .|> token, ", ") 
-		#=
-		
-		
-		slist = if length(sept) >= i
-			join( (sept[i] .|> token), ", ")
-		else
-			"???"
-		end
-		vlist = if length(vulg) >= i
-			join( (vulg[i] .|> token), ", ")
-		else
-			"???"
-		end
-			#length(sept) >= i) ? join( (sept[i] .|> token), ", ") : "???"
-		#vlist = length(vulg) >= i) ? join(vulg[i] .|> token, ", ")  : "???"
-		row = "| $(reff[i]) | $(tlist) | $(slist) | $(vlist) |"
-		push!(mdlines,row)
-		=#
-	end
-
-	join(mdlines, "\n") |> Markdown.parse
-	
+	plot!(pltsimple, lxxchapters, ys[1:length(lxxchapters)])
 end
 
-# ╔═╡ aadc9d89-d5dd-4c41-825a-6296dca32fbc
-md"""> Debugging"""
+# ╔═╡ 86abb708-5b50-408f-bf8a-6eeafebbcd59
+begin
+	pltcumulative = PlutoVistaPlot(resolution=(500,300),titlefontsize=20, title = "Cumulative number of verses")
+	plot!(pltcumulative, xs,runningsums; color = :silver)
+	plot!(pltcumulative, [1,xs[end]], [averageverses, averageverses]; color = :blue, linestyle = :dash)
 
-# ╔═╡ 7f80a08a-a653-4a4a-9048-da7b82113518
-"""Format a single passage for HTML display"""
-function debug(psg, ortho, p)
-	tlist = ["<p>"]
-	for t in tokenize(psg, ortho)
-		if tokencategory(t) isa LexicalToken
-			push!(tlist, " " * formatlexstring(t.passage.text, p))
-		else
-			push!(tlist, t.passage.text)
-		end
-	end
-	push!(tlist,"</p>")
-	join(tlist)
+	plot!(pltcumulative, lxxchapters, runningsums[1:length(lxxchapters)])
+	
 end
-
-# ╔═╡ 8124a305-8f48-44ab-a9dc-1fadbe4d7f13
-t1 = septpsg[1]
-
-# ╔═╡ cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
-tokenize(t1, ortho25)
-
-# ╔═╡ 5150037b-d2b5-41de-b536-5026372ef442
-debug(t1,ortho25, parser25)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
-CitableParserBuilder = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
 CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
-Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
-HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
-LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
-Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
+OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
+PlutoVista = "646e1f28-b900-46d7-9d87-d554eb38a413"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
 CitableBase = "~10.4.0"
 CitableCorpus = "~0.13.5"
-CitableParserBuilder = "~0.29.0"
 CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
-EditionBuilders = "~0.8.5"
-HypertextLiteral = "~0.9.5"
-LatinOrthography = "~0.7.3"
-Orthography = "~0.22.0"
+OrderedCollections = "~1.6.3"
 PlutoUI = "~0.7.59"
-Tabulae = "~0.11.1"
+PlutoVista = "~1.0.1"
+StatsBase = "~0.34.3"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -435,7 +180,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.6"
 manifest_format = "2.0"
-project_hash = "acbef897e192a27103ffb7b45f01f31caa0a8bb7"
+project_hash = "6c0c16b078457bf0f90410d26962cc261a9a31da"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -453,18 +198,6 @@ git-tree-sha1 = "2d9c9a55f9c93e8887ad391fbae72f8ef55e1177"
 uuid = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
 version = "0.4.5"
 
-[[deps.Adapt]]
-deps = ["LinearAlgebra", "Requires"]
-git-tree-sha1 = "6a55b747d1812e699320963ffde36f1ebdda4099"
-uuid = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
-version = "4.0.4"
-
-    [deps.Adapt.extensions]
-    AdaptStaticArraysExt = "StaticArrays"
-
-    [deps.Adapt.weakdeps]
-    StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
-
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
 version = "1.1.1"
@@ -476,9 +209,9 @@ uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[deps.BitFlags]]
-git-tree-sha1 = "2dc09997850d68179b69dafb58ae806167a32b1b"
+git-tree-sha1 = "0691e34b3bb8be9307330f88d1a3c3f25466c24d"
 uuid = "d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35"
-version = "0.1.8"
+version = "0.1.9"
 
 [[deps.CSV]]
 deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "PrecompileTools", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings", "WorkerUtilities"]
@@ -497,18 +230,6 @@ deps = ["CitableBase", "CitableText", "CiteEXchange", "DocStringExtensions", "Do
 git-tree-sha1 = "f400484e7b0fc1707f9dfd288fa297a4a2d9a2ad"
 uuid = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 version = "0.13.5"
-
-[[deps.CitableObject]]
-deps = ["CitableBase", "CiteEXchange", "DocStringExtensions", "Documenter", "Downloads", "Test", "TestSetExtensions"]
-git-tree-sha1 = "86eb34cc98bc2c5b73dc96da5fe116adba903d56"
-uuid = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
-version = "0.16.1"
-
-[[deps.CitableParserBuilder]]
-deps = ["CSV", "CitableBase", "CitableCorpus", "CitableObject", "CitableText", "Compat", "DataFrames", "Dictionaries", "DocStringExtensions", "Documenter", "Downloads", "OrderedCollections", "Orthography", "StatsBase", "Test", "TestSetExtensions", "TypedTables"]
-git-tree-sha1 = "fbce105543993f657c2a6a18d98e640eed3bbc70"
-uuid = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
-version = "0.29.0"
 
 [[deps.CitableTeiReaders]]
 deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "HTTP", "Test"]
@@ -530,15 +251,39 @@ version = "0.10.2"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
-git-tree-sha1 = "59939d8a997469ee05c4b4944560a820f9ba0d73"
+git-tree-sha1 = "b8fe8546d52ca154ac556809e10c75e6e7430ac8"
 uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
-version = "0.7.4"
+version = "0.7.5"
+
+[[deps.ColorSchemes]]
+deps = ["ColorTypes", "ColorVectorSpace", "Colors", "FixedPointNumbers", "PrecompileTools", "Random"]
+git-tree-sha1 = "4b270d6465eb21ae89b732182c20dc165f8bf9f2"
+uuid = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
+version = "3.25.0"
 
 [[deps.ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
 git-tree-sha1 = "b10d0b65641d57b8b4d5e234446582de5047050d"
 uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
 version = "0.11.5"
+
+[[deps.ColorVectorSpace]]
+deps = ["ColorTypes", "FixedPointNumbers", "LinearAlgebra", "Requires", "Statistics", "TensorCore"]
+git-tree-sha1 = "a1f44953f2382ebb937d60dafbe2deea4bd23249"
+uuid = "c3611d14-8923-5661-9e6a-0046d554d3a4"
+version = "0.10.0"
+
+    [deps.ColorVectorSpace.extensions]
+    SpecialFunctionsExt = "SpecialFunctions"
+
+    [deps.ColorVectorSpace.weakdeps]
+    SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
+
+[[deps.Colors]]
+deps = ["ColorTypes", "FixedPointNumbers", "Reexport"]
+git-tree-sha1 = "362a287c3aa50601b0bc359053d5c2468f0e7ce0"
+uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
+version = "0.12.11"
 
 [[deps.Compat]]
 deps = ["TOML", "UUIDs"]
@@ -557,25 +302,14 @@ version = "1.1.1+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
-git-tree-sha1 = "6cbbd4d241d7e6579ab354737f4dd95ca43946e1"
+git-tree-sha1 = "ea32b83ca4fefa1768dc84e504cc0a94fb1ab8d1"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
-version = "2.4.1"
-
-[[deps.Crayons]]
-git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
-uuid = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
-version = "4.1.1"
+version = "2.4.2"
 
 [[deps.DataAPI]]
 git-tree-sha1 = "abe83f3a2f1b857aac70ef8b269080af17764bbe"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
 version = "1.16.0"
-
-[[deps.DataFrames]]
-deps = ["Compat", "DataAPI", "DataStructures", "Future", "InlineStrings", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrecompileTools", "PrettyTables", "Printf", "REPL", "Random", "Reexport", "SentinelArrays", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
-git-tree-sha1 = "04c738083f29f86e62c8afc341f0967d8717bdb8"
-uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-version = "1.6.1"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
@@ -597,12 +331,6 @@ git-tree-sha1 = "9824894295b62a6a4ab6adf1c7bf337b3a9ca34c"
 uuid = "ab62b9b5-e342-54a8-a765-a90f495de1a6"
 version = "1.2.0"
 
-[[deps.Dictionaries]]
-deps = ["Indexing", "Random", "Serialization"]
-git-tree-sha1 = "1f3b7b0d321641c1f2e519f7aed77f8e1f6cb133"
-uuid = "85a47980-9c8c-11e8-2b9f-f7ca1fa99fb4"
-version = "0.3.29"
-
 [[deps.Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
@@ -615,20 +343,14 @@ version = "0.9.3"
 
 [[deps.Documenter]]
 deps = ["ANSIColoredPrinters", "AbstractTrees", "Base64", "CodecZlib", "Dates", "DocStringExtensions", "Downloads", "Git", "IOCapture", "InteractiveUtils", "JSON", "LibGit2", "Logging", "Markdown", "MarkdownAST", "Pkg", "PrecompileTools", "REPL", "RegistryInstances", "SHA", "TOML", "Test", "Unicode"]
-git-tree-sha1 = "5461b2a67beb9089980e2f8f25145186b6d34f91"
+git-tree-sha1 = "76deb8c15f37a3853f13ea2226b8f2577652de05"
 uuid = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-version = "1.4.1"
+version = "1.5.0"
 
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
-
-[[deps.EditionBuilders]]
-deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "Test"]
-git-tree-sha1 = "2934d7babf1127b7e8ef380de231b9683893aa49"
-uuid = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
-version = "0.8.5"
 
 [[deps.ExceptionUnwrapping]]
 deps = ["Test"]
@@ -679,10 +401,11 @@ git-tree-sha1 = "d18fb8a1f3609361ebda9bf029b60fd0f120c809"
 uuid = "f8c6e375-362e-5223-8a59-34ff63f689eb"
 version = "2.44.0+2"
 
-[[deps.Glob]]
-git-tree-sha1 = "97285bbd5230dd766e9ef6749b80fc617126d496"
-uuid = "c27321d9-0574-5035-807b-f59d2c89b15c"
-version = "1.3.1"
+[[deps.GridVisualizeTools]]
+deps = ["ColorSchemes", "Colors", "DocStringExtensions", "StaticArraysCore"]
+git-tree-sha1 = "e111f256aa000c4e4662d1119281b751aa66dc37"
+uuid = "5573ae12-3b76-41d9-b48c-81d0b6e61cc5"
+version = "1.1.0"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
@@ -708,25 +431,21 @@ git-tree-sha1 = "b6d6bfdd7ce25b0f9b2f6b3dd56b2673a66c8770"
 uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
 version = "0.2.5"
 
-[[deps.Indexing]]
-git-tree-sha1 = "ce1566720fd6b19ff3411404d4b977acd4814f9f"
-uuid = "313cdc1a-70c2-5d6a-ae34-0150d3930a38"
-version = "1.1.1"
-
 [[deps.InlineStrings]]
 deps = ["Parsers"]
-git-tree-sha1 = "9cc2baf75c6d09f9da536ddf58eb2f29dedaf461"
+git-tree-sha1 = "86356004f30f8e737eff143d57d41bd580e437aa"
 uuid = "842dd82b-1e85-43dc-bf29-5d0ee9dffc48"
-version = "1.4.0"
+version = "1.4.1"
+
+    [deps.InlineStrings.extensions]
+    ArrowTypesExt = "ArrowTypes"
+
+    [deps.InlineStrings.weakdeps]
+    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
 
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
-
-[[deps.InvertedIndices]]
-git-tree-sha1 = "0dc7b50b8d436461be01300fd8cd45aa0274b038"
-uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
-version = "1.3.0"
 
 [[deps.IrrationalConstants]]
 git-tree-sha1 = "630b497eafcc20001bba38a4651b327dcfc491d2"
@@ -749,17 +468,6 @@ deps = ["Dates", "Mmap", "Parsers", "Unicode"]
 git-tree-sha1 = "31e996f0a15c7b280ba9f76636b3ff9e2ae58c9a"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "0.21.4"
-
-[[deps.LaTeXStrings]]
-git-tree-sha1 = "50901ebc375ed41dbf8058da26f9de442febbbec"
-uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
-version = "1.3.1"
-
-[[deps.LatinOrthography]]
-deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "Orthography", "Test"]
-git-tree-sha1 = "b1578be26f15a1864afd88540babb3c53f3766fc"
-uuid = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
-version = "0.7.3"
 
 [[deps.LazilyInitializedFields]]
 git-tree-sha1 = "8f7f3cabab0fd1800699663533b6d5cb3fc0e612"
@@ -893,12 +601,6 @@ git-tree-sha1 = "dfdf5519f235516220579f949664f1bf44e741c5"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 version = "1.6.3"
 
-[[deps.Orthography]]
-deps = ["CitableBase", "CitableCorpus", "CitableText", "Compat", "DocStringExtensions", "Documenter", "OrderedCollections", "StatsBase", "Test", "TestSetExtensions", "TypedTables", "Unicode"]
-git-tree-sha1 = "8012ec93b9f48c5b4aae0d59021f7f7b53100e8b"
-uuid = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
-version = "0.22.0"
-
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
@@ -921,6 +623,12 @@ git-tree-sha1 = "ab55ee1510ad2af0ff674dbcced5e94921f867a9"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 version = "0.7.59"
 
+[[deps.PlutoVista]]
+deps = ["AbstractPlutoDingetjes", "ColorSchemes", "Colors", "DocStringExtensions", "GridVisualizeTools", "HypertextLiteral", "UUIDs"]
+git-tree-sha1 = "5be7548065d668761814809e2c7ee33310a3d82f"
+uuid = "646e1f28-b900-46d7-9d87-d554eb38a413"
+version = "1.0.1"
+
 [[deps.PooledArrays]]
 deps = ["DataAPI", "Future"]
 git-tree-sha1 = "36d8b4b899628fb92c2749eb488d884a926614d3"
@@ -938,12 +646,6 @@ deps = ["TOML"]
 git-tree-sha1 = "9306f6085165d270f7e3db02af26a400d580f5c6"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
 version = "1.4.3"
-
-[[deps.PrettyTables]]
-deps = ["Crayons", "LaTeXStrings", "Markdown", "PrecompileTools", "Printf", "Reexport", "StringManipulation", "Tables"]
-git-tree-sha1 = "66b20dd35966a748321d3b2537c4584cf40387c7"
-uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
-version = "2.3.2"
 
 [[deps.Printf]]
 deps = ["Unicode"]
@@ -980,9 +682,9 @@ version = "0.7.0"
 
 [[deps.SentinelArrays]]
 deps = ["Dates", "Random"]
-git-tree-sha1 = "90b4f68892337554d31cdcdbe19e48989f26c7e6"
+git-tree-sha1 = "6bb314cb1aacfa37ef58e5a0ccf4a1ec0311f495"
 uuid = "91c51154-3ec4-41a3-a24f-3f23e20d615c"
-version = "1.4.3"
+version = "1.4.4"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
@@ -1006,11 +708,10 @@ deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 version = "1.10.0"
 
-[[deps.SplitApplyCombine]]
-deps = ["Dictionaries", "Indexing"]
-git-tree-sha1 = "c06d695d51cfb2187e6848e98d6252df9101c588"
-uuid = "03a91e81-4c3e-53e1-a0a4-9c0c8f19dd66"
-version = "1.2.3"
+[[deps.StaticArraysCore]]
+git-tree-sha1 = "192954ef1208c7019899fbf8049e717f92959682"
+uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
+version = "1.4.3"
 
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
@@ -1028,12 +729,6 @@ deps = ["DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunctions", "Missin
 git-tree-sha1 = "5cf7606d6cef84b543b483848d4ae08ad9832b21"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.34.3"
-
-[[deps.StringManipulation]]
-deps = ["PrecompileTools"]
-git-tree-sha1 = "a04cabe79c5f01f4d723cc6704070ada0b9d46d5"
-uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
-version = "0.3.4"
 
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
@@ -1057,16 +752,16 @@ git-tree-sha1 = "cb76cf677714c095e535e3501ac7954732aeea2d"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 version = "1.11.1"
 
-[[deps.Tabulae]]
-deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "1405e6b3f0080f373c97572fa192e52e2dfaeb4a"
-uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-version = "0.11.1"
-
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
 version = "1.10.0"
+
+[[deps.TensorCore]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "1feb45f88d133a655e001435632f019a9a1bcdb6"
+uuid = "62fd8b95-f654-4bbd-a8a5-9c27f68ccd50"
+version = "0.1.1"
 
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
@@ -1079,9 +774,9 @@ uuid = "98d24dd4-01ad-11ea-1b02-c9a08f80db04"
 version = "2.0.0"
 
 [[deps.TranscodingStreams]]
-git-tree-sha1 = "a947ea21087caba0a798c5e494d0bb78e3a1a3a0"
+git-tree-sha1 = "60df3f8126263c0d6b357b9a1017bb94f53e3582"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
-version = "0.10.9"
+version = "0.11.0"
 weakdeps = ["Random", "Test"]
 
     [deps.TranscodingStreams.extensions]
@@ -1091,12 +786,6 @@ weakdeps = ["Random", "Test"]
 git-tree-sha1 = "eae1bb484cd63b36999ee58be2de6c178105112f"
 uuid = "410a4b4d-49e4-4fbc-ab6d-cb71b17b3775"
 version = "0.1.8"
-
-[[deps.TypedTables]]
-deps = ["Adapt", "Dictionaries", "Indexing", "SplitApplyCombine", "Tables", "Unicode"]
-git-tree-sha1 = "84fd7dadde577e01eb4323b7e7b9cb51c62c60d4"
-uuid = "9d95f2ec-7b3d-5a63-8d20-e2491e220bb9"
-version = "1.4.6"
 
 [[deps.URIs]]
 git-tree-sha1 = "67db6cc7b3821e19ebe75791a9dd19c9b1188f2b"
@@ -1123,9 +812,9 @@ version = "1.6.1"
 
 [[deps.XML2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libiconv_jll", "Zlib_jll"]
-git-tree-sha1 = "52ff2af32e591541550bd753c0da8b9bc92bb9d9"
+git-tree-sha1 = "d9717ce3518dc68a99e6b96300813760d887a01d"
 uuid = "02c8fc9c-b97f-50b9-bbe4-9be30ff0a78a"
-version = "2.12.7+0"
+version = "2.13.1+0"
 
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
@@ -1149,65 +838,37 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─0abfe5ae-2752-11ef-38cf-f984b91b0112
-# ╟─ece7ee2b-2c5f-4995-ab1a-f66b33f50a08
-# ╟─a41a17e7-f985-4a5d-8b76-f91f07824242
-# ╟─6048a3e7-abf5-46de-b450-9d6812f915dc
-# ╟─64b25989-dd2d-4407-9993-f083529d918f
-# ╟─2d774dd8-0513-4957-9b6a-5a33fd300199
-# ╟─b8b8224e-ad2e-47e7-b45a-605ad4571af7
-# ╟─ec79ea3a-1da5-475d-8fe4-ec729c26b3bf
-# ╟─ff99f087-856e-4b35-a63b-e76d7d2d8709
-# ╟─459f076a-c991-41aa-97a4-2fb4b8070fd8
-# ╟─b01b5ff3-9e46-477b-94bc-3f1140c3f52d
-# ╠═cba6ce0f-dc74-4b47-b718-03ef3d3a61c8
-# ╠═07ebab5e-f728-4167-b8de-df99a70a1545
-# ╟─db93c0c9-4848-4b32-a090-8c57c605e633
-# ╟─40fce696-fcfe-43b5-a84e-dc670935e6c4
-# ╠═05c1af16-fea5-429b-b9ae-3fbd12d11094
-# ╟─8b00adaa-4f2d-47a5-b1db-591ac763380e
-# ╟─ae699e89-b241-42ee-85ca-bfed095d8037
-# ╟─2a1cebbe-7594-4eee-bbbe-a1b90705f924
-# ╠═15f946b0-6261-4369-900f-aaa6605175d5
-# ╠═4a9214db-c200-4e3b-944d-45a67a2c85a7
-# ╟─07f9a37b-a39a-452c-a705-3d51d1430c8b
-# ╟─86022f06-27b8-480c-b2b6-446d2eb059a1
-# ╟─65b1b6a8-7d93-474a-99c6-b2aa08e5bc3a
-# ╠═7b5000d9-7208-4075-8206-dec7b96de23d
-# ╟─c09235c3-f2df-445e-8713-ef68e186f616
-# ╠═77cb4e4e-c90b-4ba0-a6a6-42038ce81f2c
-# ╟─f9055bda-a0b8-4129-8f38-a379b75f51ad
-# ╠═2e8c8eab-ca7a-4a80-97a2-45407f70736e
-# ╟─833c6016-42e4-4f61-ad6a-cf7b694c057c
-# ╟─6d044127-495e-463d-888d-1d67a3faeab9
-# ╠═f72696b9-27ac-479d-a0aa-f2e48064a511
-# ╟─2b225ad7-5feb-477a-b3d5-4dd1e1ad74f1
-# ╠═ddcfdd60-1d23-4d5a-bf97-ea377a01ecb1
-# ╟─962818cf-547c-4e61-a40f-f0dee1b77c28
-# ╠═5dffd504-11c2-45ad-8987-6fdfcc7b5a97
-# ╠═5ab1ddb8-24f5-419e-9ccd-0442224f3347
-# ╠═938ca51b-2728-484f-9d0c-55d9fdb10a4a
-# ╠═f7c78ed2-c6ec-48bc-aac0-fbb1fb0b27fd
-# ╟─e84d9a63-d531-4d27-8c7d-047fc46998f8
-# ╠═66078ed5-353e-4a21-8936-f41f6371f8e9
-# ╠═6973b628-dbc8-4188-9121-09530e7a89fe
-# ╠═49faad62-3a6f-4d39-a27f-38e67de6406f
-# ╠═406ec17e-7ede-4bdc-b5e9-86404fbc81bf
-# ╟─ce437209-793f-4daa-80f8-303f6237ee0b
-# ╠═2cf59288-55cf-4f40-a7a8-37ac25435a13
-# ╠═10d7b498-f9e8-479e-8d61-fe4233b76df0
-# ╠═fff4dd01-fe30-4363-bd21-0c44206be92b
-# ╟─0e81b1bc-6cae-4e2e-8a5f-c682ea66cb59
-# ╠═d8198183-4e97-4f39-9e8e-03a98a939d0a
-# ╟─e4e325c8-d4e6-43aa-b833-fd5d2a5593cd
-# ╠═7b96d31c-b45c-4848-ab8f-64900cc2d1d4
-# ╠═8fcf58a4-56ec-417f-a4ff-ec7935d9e7ca
-# ╟─97753b65-a272-4620-8469-df6485ca34c3
-# ╟─a776ad50-892d-4d98-99b7-e7a111934622
-# ╟─aadc9d89-d5dd-4c41-825a-6296dca32fbc
-# ╟─7f80a08a-a653-4a4a-9048-da7b82113518
-# ╠═cdedfed2-bbfa-4a84-aa4b-5af55d19c3f6
-# ╠═5150037b-d2b5-41de-b536-5026372ef442
-# ╠═8124a305-8f48-44ab-a9dc-1fadbe4d7f13
+# ╟─4d0be702-4d37-4635-b927-7d93f937ece5
+# ╟─50c7652d-467f-4c73-9dec-7af7c18da7db
+# ╟─5751f856-3b90-11ef-2cb7-4d7190a7ad3c
+# ╟─5ecb6a0c-68fe-4efb-812f-9c36a47e8d89
+# ╟─8b7b3d01-c3c5-4b36-b92b-df593265a4ec
+# ╟─3eecf27a-b225-4203-a9ba-49fed68e7bb4
+# ╟─86abb708-5b50-408f-bf8a-6eeafebbcd59
+# ╟─390f0db6-2284-4f69-9564-8f24c1f98146
+# ╟─f66aba8f-fa22-430f-ab86-92cbd50e6692
+# ╟─8eabdc06-dd29-430a-ac8c-7fa6369a5151
+# ╠═73ab0c8c-8da7-4a2e-bd93-4339f7991d8d
+# ╟─ea0057b3-9a07-4034-8f74-120c4aa3e209
+# ╟─921faafe-e846-428b-9a41-84a0e17c412a
+# ╟─55a74e65-8daf-4565-82c9-4170767b157e
+# ╟─bf96d42f-bce6-4222-85b0-30f378c97398
+# ╟─bc5e54d4-26a8-419f-80c5-e035ca48e147
+# ╟─4259a1d6-8700-4d65-9f08-f06e07794009
+# ╟─a33b476f-aa38-433d-bff8-867f2e432066
+# ╠═073da51d-38ac-4745-91b4-691e3f4e0deb
+# ╠═41ae286d-20e0-4964-8771-88721445aade
+# ╠═0c6b45ea-b258-4a40-b690-3e38c0aa14f5
+# ╠═6d1ae006-5173-48b9-8e17-96b1d5190e45
+# ╟─94a27704-0225-4b10-8c79-b1aff7a43eae
+# ╟─b2ca3067-fb48-4d1d-9678-e34cc31150ee
+# ╟─729aa046-c680-4741-b66c-071e5ef3d2f1
+# ╠═e6977674-09f5-4ac4-bbb2-ef46cd8d6c9d
+# ╠═00e581fd-8259-42dc-b750-2cbb68df1058
+# ╟─597e8871-9175-4369-93b2-7c5a035a8975
+# ╠═2cf5608d-5b21-4091-8fa0-ff88c1db1ac9
+# ╠═f6f3d489-c863-454b-8472-0d3f4b404e93
+# ╠═9ea1a06a-64f0-4b41-80db-0a1929f621ca
+# ╠═545d52e2-9000-4c4f-ad9a-8355b66dc920
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

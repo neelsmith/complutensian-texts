@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.40
+# v0.19.47
 
 using Markdown
 using InteractiveUtils
@@ -66,9 +66,6 @@ md"""> Parsers"""
 # ╔═╡ f64a365b-cfa1-4971-85f5-b39142331744
 greekparserurl = "http://shot.holycross.edu/morphology/comprehensive-current.csv"
 
-# ╔═╡ 6e65b7d7-e5ac-4f23-8de6-00d64200987f
-grkparser = getremoteparser(greekparserurl)
-
 # ╔═╡ a0ca5b26-64e0-4a98-928e-97496e7d37d8
 """Download Kanones parser data from URN `u` and instantiate a DataFrame parser.""" 
 function getremoteparser(u)
@@ -77,6 +74,9 @@ function getremoteparser(u)
 	rm(tmp)
 	parser
 end
+
+# ╔═╡ 6e65b7d7-e5ac-4f23-8de6-00d64200987f
+grkparser = getremoteparser(greekparserurl)
 
 # ╔═╡ fba14966-12fa-40b7-a71a-03031d2fcf44
 md"""> Text corpora"""
@@ -98,40 +98,10 @@ sept = filter(corpus.passages) do psg
     versionid(psg.urn) == "septuagint"
 end |> CitableTextCorpus
 
-# ╔═╡ 5859344b-edde-44bc-b64c-776cb9dfe9e2
-md"""*Chapter:* $(@bind chapter Select(chapters(book, sept)))"""
-
-# ╔═╡ b14ca35c-984b-4d44-bf94-d0048352434c
-md"""*Verse*: $(@bind verse Select(verses(book, chapter, sept)))"""
-
-# ╔═╡ 10cffcd1-c1a6-43dd-a11a-7fde83c97c6a
-septpsg = retrieve(book, verse, sept)
-
-# ╔═╡ 9c7248e5-2691-4221-af78-dbd14d6bc483
-septpsg
-
-# ╔═╡ c68de8a0-6f27-4c73-b096-d4c2e89373d5
-greektkns = tokenize(septpsg, greekortho)
-
-# ╔═╡ 92a4d84e-3af1-48b2-8c0c-70146d9b518f
-greeklex = filter(t -> t.tokentype isa LexicalToken, greektkns)
-
-# ╔═╡ 89297c82-3c61-4233-b2ee-afb00c475f51
-greekparses = [parsetoken(t, grkparser) for t in map(lex -> lex.passage.text, greeklex)]
-
-
-
-
 # ╔═╡ 780353d1-9fed-469a-adc2-652e0d970d27
 tanach = filter(corpus.passages) do psg
     versionid(psg.urn) == "masoretic"
 end |> CitableTextCorpus
-
-# ╔═╡ 01098d0d-b322-4c5f-bc06-6ce38391a2cc
-tanachpsg =  retrieve(book, verse, tanach)
-
-# ╔═╡ 54b5c2c3-c1b8-4314-9371-bcf32ec8ce0c
-tanachpsg
 
 # ╔═╡ 268e6e02-353e-43a1-93d0-c7fbd0028858
 """Retrieve citable passage from corpus."""
@@ -157,6 +127,9 @@ function chapters(bk, c)
 	end |> unique
 end
 
+# ╔═╡ 5859344b-edde-44bc-b64c-776cb9dfe9e2
+md"""*Chapter:* $(@bind chapter Select(chapters(book, sept)))"""
+
 # ╔═╡ 6c276ded-f2e8-48e1-80cf-40f5704a71d0
 """Get list of verses for a give book and chapter."""
 function verses(book, chap, corp)
@@ -168,6 +141,33 @@ function verses(book, chap, corp)
 		passagecomponent(psg.urn)
 	end
 end
+
+# ╔═╡ b14ca35c-984b-4d44-bf94-d0048352434c
+md"""*Verse*: $(@bind verse Select(verses(book, chapter, sept)))"""
+
+# ╔═╡ 10cffcd1-c1a6-43dd-a11a-7fde83c97c6a
+septpsg = retrieve(book, verse, sept)
+
+# ╔═╡ 9c7248e5-2691-4221-af78-dbd14d6bc483
+septpsg
+
+# ╔═╡ c68de8a0-6f27-4c73-b096-d4c2e89373d5
+greektkns = tokenize(septpsg, greekortho)
+
+# ╔═╡ 92a4d84e-3af1-48b2-8c0c-70146d9b518f
+greeklex = filter(t -> t.tokentype isa LexicalToken, greektkns)
+
+# ╔═╡ 89297c82-3c61-4233-b2ee-afb00c475f51
+greekparses = [parsetoken(t, grkparser) for t in map(lex -> lex.passage.text, greeklex)]
+
+
+
+
+# ╔═╡ 01098d0d-b322-4c5f-bc06-6ce38391a2cc
+tanachpsg =  retrieve(book, verse, tanach)
+
+# ╔═╡ 54b5c2c3-c1b8-4314-9371-bcf32ec8ce0c
+tanachpsg
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -199,7 +199,7 @@ PolytonicGreek = "~0.21.11"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.1"
+julia_version = "1.10.6"
 manifest_format = "2.0"
 project_hash = "289cf797738e9f7e89eddfeccd6ef7fe18b14872"
 
@@ -331,7 +331,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.1.1+0"
 
 [[deps.ConcurrentUtilities]]
 deps = ["Serialization", "Sockets"]
@@ -947,7 +947,7 @@ version = "1.2.13+1"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.8.0+1"
+version = "5.11.0+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
