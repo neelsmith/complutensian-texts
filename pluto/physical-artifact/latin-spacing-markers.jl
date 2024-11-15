@@ -102,7 +102,7 @@ md"""> Load indexing data for Latin spacers
 """
 
 # ╔═╡ 61122160-bf90-43a9-81f3-bd92858a65ac
-repo = dirname(pwd())
+repo = dirname(pwd()) |> dirname
 
 # ╔═╡ 6dc8bb4c-8d5c-436b-8854-696ded89f127
 latinsrc = begin
@@ -1948,7 +1948,7 @@ version = "17.4.0+2"
 # ╟─f7a3fbdd-c97d-413b-9c14-013616dece85
 # ╟─f14abd8c-fb48-45ec-b760-22b9ff6359ed
 # ╟─f5fb87ea-9df8-44e3-a232-1bc3ee036aa9
-# ╟─61122160-bf90-43a9-81f3-bd92858a65ac
+# ╠═61122160-bf90-43a9-81f3-bd92858a65ac
 # ╟─6dc8bb4c-8d5c-436b-8854-696ded89f127
 # ╟─0deefae2-0067-4085-ab21-a795d3e20572
 # ╟─f1c88738-80f7-45f2-a94c-510424b50187
