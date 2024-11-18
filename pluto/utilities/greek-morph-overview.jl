@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.47
+# v0.19.46
 
 using Markdown
 using InteractiveUtils
@@ -143,7 +143,7 @@ vocab_alpha = vocab_freq |> sort
 md"""> ## Parser"""
 
 # ╔═╡ 333b8754-8762-4720-8b16-458d326785f3
-"""Insantiate Complutensian parser with latin25 orthography"""
+"""Insantiate Complutensian parser for Septuagint"""
 function buildparser()
 	   url = "http://shot.holycross.edu/morphology/complutensian-current.cex"
 	   f = Downloads.download(url)
@@ -2033,8 +2033,8 @@ version = "1.4.1+1"
 # ╠═0747e038-b6b8-46c9-8d97-995c1f77b18c
 # ╠═e292687b-4e6a-4d8a-835c-6d7b8ce40078
 # ╟─4616febc-8706-44ba-87ab-b31bd305b4ec
-# ╟─333b8754-8762-4720-8b16-458d326785f3
-# ╟─a561db09-3166-42bf-bad5-0a0aec533c61
+# ╠═333b8754-8762-4720-8b16-458d326785f3
+# ╠═a561db09-3166-42bf-bad5-0a0aec533c61
 # ╟─4b6c71d6-7e8b-4146-ac20-752ce130e280
 # ╠═c87f1d38-9e4f-4ac4-b806-b793332880a2
 # ╠═cf1e190c-9171-4441-a911-6afaf8b7359e

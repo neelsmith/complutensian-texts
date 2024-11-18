@@ -14,263 +14,178 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ f82ebfde-453c-4e47-bfeb-df73c7633059
+# ╔═╡ e7bc663a-a5e2-11ef-14dd-cba6a2c37f48
 begin
-	# Tabulae must be version 0.10 or higher.
-	using Tabulae
-	using CitableParserBuilder
-	using CitableBase
-	using CitableText
-	using CitableCorpus
-	using CitableTeiReaders
-	using EditionBuilders
-
-	using Orthography, LatinOrthography
-
-	using Downloads
-	using HypertextLiteral
 
 	using PlutoUI
-	md"""*Unhide this cell to see Julia package versions*."""
+	using OpenScripturesHebrew
+	using CitableBase, CitableText, CitableCorpus
+	using Orthography, PolytonicGreek
+	using LatinOrthography
+	using Tabulae
+	using CitableParserBuilder
+	using Downloads
+	using Kanones
+	md"""*To see the Julia environment, unhide this cell.*"""
 end
 
-# ╔═╡ e4ab310c-a9aa-4ee6-854a-4935c27e6288
+# ╔═╡ 2dff45c0-c1b9-4125-aeca-60085e1aef3e
 TableOfContents()
 
-# ╔═╡ 6568f1e0-2da5-11ef-27df-5f07fa823895
-md"""# Align verbs in parallel passages"""
+# ╔═╡ d02c95fc-56c8-4552-9963-37c7f86b8bdf
+md"""# Isolate verbs in Hebrew, Greek and Latin"""
 
-# ╔═╡ a04059ac-04d8-4ed8-a476-fd0231323783
-@bind reloadtext Button("Reload text")
+# ╔═╡ c304919f-c174-4c0c-b70a-d1097a714f56
+md"""*Hebrew verbs*: $(@bind hebrewpairs CheckBox(default = true)) *Greek verbs*: $(@bind greekpairs CheckBox()) *Latin verbs*: $(@bind latinpairs CheckBox()) """
 
-# ╔═╡ 7cfa1522-74ab-4c78-bd2d-239fd0032b1d
-md"""*Display passages with*: $(@bind displayopts Select(["match" => "same number of verbs", "nomatch" => "different number of verbs", "all" => "all passages"]))"""
-
-# ╔═╡ 2e8e15ae-f0f6-4b22-a963-33570fcc5180
+# ╔═╡ 29e06931-a194-4435-bf0e-820abcccb811
 html"""
-<br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
 """
 
-# ╔═╡ b53c4198-35f0-4f6b-a58e-20b6aee44e98
-md"""> # Things you can skip"""
+# ╔═╡ 2c63743d-b95b-44ff-8a9f-c17700361b03
+md"""> # Mechanics"""
 
-# ╔═╡ afb29d3a-55f6-40d6-ba47-99765cfe4a7a
-function mdlist(v)
-	join(v, ", ")
-end
+# ╔═╡ 25bc46d5-82e3-4914-83ab-a2fcd42254c6
+md"""## Texts"""
 
-# ╔═╡ 20bcdb8e-27d6-46b1-bedd-1caf625a2e6e
-md"""> ## Skip tokens"""
-
-# ╔═╡ bad510e7-19be-4e2e-8279-ba6252fe2f9d
-genA = joinpath(pwd() |> dirname, "notes", "verbs-gen1-16.cex") |> read |> String
-
-# ╔═╡ eda291f3-24bf-4865-96f3-6ca470a82624
-genAdatalines = filter(ln -> ! isempty(ln), split(genA,"\n")[2:end])
-
-# ╔═╡ c295820e-7185-447a-82c5-5cc9d07c3369
-	genAskipcol = map(genAdatalines) do ln
-		split(ln,"|")[3]
-	end
-
-# ╔═╡ d478cf0d-d303-4682-b3a9-f1338d2a8dce
-skiplist = filter(ln -> ! isempty(ln), genAskipcol) |> unique
-
-
-# ╔═╡ 713065c4-9d98-4e10-90cf-5f3c62023fa8
-md"""> ## Aligning passages"""
-
-# ╔═╡ ec75a412-68be-42ba-8219-46e6a0dc73ad
-md"""> ## Tokenization and parsing"""
-
-# ╔═╡ 14949ae5-9993-46ea-8f63-28c04fbfa86c
-ortho23 = latin23()
-
-# ╔═╡ 300a8a69-049b-45a3-8d5a-d8c6fd6bfcca
-ortho25 = latin25()
-
-# ╔═╡ 77bde32d-a14a-4528-8e9f-6cbe4c168f8e
-"""True if analysis has a verb form."""
-function verbform(a::Analysis)
-	latform = latinForm(a)
-	latform isa LMFFiniteVerb ||
-	latform isa LMFInfinitive ||
-	latform isa LMFParticiple 
-end
-
-# ╔═╡ 3576848a-b0b3-4643-928a-5da897fd7265
-"""Retrieve texts from corpus."""
-function retrieve(u::CtsUrn, c::CitableTextCorpus)
-	if isrange(u)
-		"Not handling rnges yet."
-	else
-		psgref = passagecomponent(u)
-		dotted = psgref * "."
-		
-		psglist = filter(c.passages) do psg
-			checkref = passagecomponent(psg.urn) 
-			groupid(psg.urn) == groupid(u) &&
-			workid(psg.urn) == workid(u) &&
-			(psgref == checkref || startswith(checkref, dotted) )
-		end
-		filter(psglist) do psg
-			! endswith(passagecomponent(urn(psg)), "title")
-		end
-	end
-end
-
-# ╔═╡ 83ef729d-125c-41d6-9030-dc5d829f8116
-"""Extract verb forms from a passage"""
-function retrieveverbs(psg, corpus, ortho, parser; stoplist = skiplist)
-	psglist = retrieve(psg, corpus)
-	results = []
-	for p in psglist
-		for t in tokenize(p, ortho)	
-			txtval = text(passage(t))
-			if txtval in stoplist
-				# skip it
-			else
-				parses = parsetoken(txtval, parser)
-				if isempty(parses)
-				elseif verbform(parses[1])
-					push!(results, parses[1] |> token)
-				end
-			end
-		end
-	end
-	results
-end
-
-# ╔═╡ 9294ef16-705b-494e-96e5-f32e4f4d6491
-md"""> ## Text corpus"""
-
-# ╔═╡ 0ab274df-d0d3-4dab-9f87-252bfd71e811
-md"""### Septuagint glossses"""
-
-# ╔═╡ 5b876552-d296-4a12-87fe-65779766bbc4
-repo = dirname(pwd()) |> dirname
-
-# ╔═╡ 2c583f26-39b3-4e91-8735-698d27c4b468
-septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
-
-# ╔═╡ 6e53ea39-55e4-476f-a31e-afbbaae31f92
-septlatinxmlcorpus = begin
-	reloadtext
-	readcitable(septlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
-end
-
-# ╔═╡ d217a173-5901-4f5d-a542-1494d317a951
-lxxbldr = normalizedbuilder(; versionid = "lxxlatinnormed")
-
-# ╔═╡ 04bede56-1d54-404c-9fce-fda47cb309f2
-septlatin = edited(lxxbldr, septlatinxmlcorpus)
-
-# ╔═╡ bb83b83c-16bb-4fab-a42d-aa5df38e9a53
-psgreff = begin
-	allreff = map(psg -> dropversion(urn(psg)), septlatin.passages)
-	filter(allreff) do u
-		! endswith(passagecomponent(u), "title")
-	end
-end
-
-# ╔═╡ 67ba6669-d248-4224-a29c-16ab450e1978
-md""" ### Targum glosses"""
-
-# ╔═╡ 31b85560-1933-4935-9ab0-a3cc91564c3e
-targumlatinxml =  joinpath(repo, "editions", "targum_latin_genesis.xml")
-
-# ╔═╡ e85e45de-5f66-4c6f-a8d4-64c61187f701
-targbldr = normalizedbuilder(; versionid = "targumlatinnormed")
-
-# ╔═╡ 27557198-c030-438a-9f56-cfdecbe0bd4a
-targumlatinxmlcorpus = begin
-	reloadtext
-	readcitable(targumlatinxml, CtsUrn("urn:cts:compnov:bible.genesis.sept_latin:"), TEIDivAb, FileReader)
-end
-
-# ╔═╡ 0137579d-0be0-423b-98da-1965c17ae7ca
-targumlatin = edited(targbldr, targumlatinxmlcorpus)
-
-# ╔═╡ fa00482b-fae8-44f6-8012-4a9428a793c2
-md""" ### Vulgate"""
-
-# ╔═╡ 0f5274c4-5bee-419d-8460-d660670e8ba6
+# ╔═╡ edc680ec-28bd-4b36-8292-756be1af9c19
 srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
 
-# ╔═╡ 800b981e-377d-4466-81bf-0c1bff1776d5
-corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
+# ╔═╡ bbd9d750-acee-423a-b44c-aafbf81fd932
+corpus = fromcex(srcurl, CitableTextCorpus, UrlReader) 
 
-# ╔═╡ 2d238610-add6-481c-8594-ab3e3598e3d9
-vulgate = filter(corpus.passages) do psg
-	versionid(psg.urn) == "vulgate"
+# ╔═╡ 87ab246a-d3ae-4428-abd6-c040c1267918
+lxx = filter(corpus.passages) do psg
+    versionid(psg.urn) == "septuagint"
 end |> CitableTextCorpus
 
-# ╔═╡ beb900e8-326b-4afd-bdbc-b44720af18e7
-md"""> ### Build parsers"""
+# ╔═╡ 75a7460f-8dd2-42ba-8a22-c2b6bd3704b2
+vulgate = filter(corpus.passages) do psg
+    versionid(psg.urn) == "vulgate"
+end |> CitableTextCorpus
 
-# ╔═╡ 29b840c3-7976-4e25-955b-cc2f2516d0bd
-p23url = "http://shot.holycross.edu/tabulae/complut-lat23-current.cex"
+# ╔═╡ 3a2035dc-fbf1-4998-9c77-5729cdcfcf67
+hebrew = filter(corpus.passages) do psg
+    versionid(psg.urn) == "masoretic"
+end |> CitableTextCorpus
 
-# ╔═╡ 264c7e8b-d738-4928-b6e8-670d00152295
+# ╔═╡ 306b250f-c74c-47ba-a61e-c89f9798e0b4
+md"""## Tokenization of Latin and Greek"""
+
+# ╔═╡ fdb69fba-1095-4f23-b901-135566d584f4
+lxxtokens = tokenize(lxx, literaryGreek())
+
+# ╔═╡ 07e0a465-1308-41f8-9342-f6927902c787
+lxxlex = filter(t -> tokencategory(t) isa LexicalToken, lxxtokens)
+
+# ╔═╡ 91b73ae5-6ce6-4af7-8254-6ebd80b4ccd7
+vulgatetokens = tokenize(vulgate, latin25())
+
+# ╔═╡ 1ffe4e62-683b-426a-a8ce-36883b8b6b3b
+vulgatelex = filter(t -> tokencategory(t) isa LexicalToken, vulgatetokens)
+
+# ╔═╡ 4858c70b-fbdf-415b-9406-402fa54afdf5
+	md"""## Parsers for Latin and Greek"""
+
+# ╔═╡ 4776c757-b3c8-4677-94ae-d3fca7c126b6
 p25url = "http://shot.holycross.edu/tabulae/complut-lat25-current.cex"
 
-# ╔═╡ cb147cb4-b577-4d2a-967f-2280fa50c3cb
-parser23 = tabulaeStringParser(p23url, UrlReader)
+# ╔═╡ dd9e5ee8-6081-436c-8800-fe20e1ed36f5
+vulgateparser = tabulaeStringParser(p25url, UrlReader)
 
-# ╔═╡ d7dcc396-a176-47c7-afbf-87b9336d2ee2
-testout = retrieveverbs(psgreff[6], septlatin, ortho23, parser23)
-
-# ╔═╡ df3841db-64ff-493d-81ee-1aa9360828b3
-parser25 = tabulaeStringParser(p25url, UrlReader)
-
-# ╔═╡ 274afe87-7e6d-4884-9503-db08e468ee88
-function verbsets(psgref::CtsUrn)
-	@info("Get verbs for $(psgref)")
-	(
-	septlatin = retrieveverbs(psgref, septlatin, ortho23, parser23),
-	targumlatin = retrieveverbs(psgref, targumlatin, ortho23, parser23),
-	vulgate = retrieveverbs(psgref, vulgate, ortho25, parser25),
-	
-	
-	)
+# ╔═╡ ef742565-e2c6-4525-abee-5b992492ce8a
+"""Insantiate Complutensian parser for Septuagint"""
+function buildkparser()
+	   url = "http://shot.holycross.edu/morphology/complutensian-current.cex"
+	   f = Downloads.download(url)
+	   data = readlines(f)
+	   rm(f)
+	   KanonesStringParser(data, literaryGreek(), "|")
 end
 
-# ╔═╡ cf1a781b-4be7-43de-9b44-a0dbee1a5bc9
-allverbsets = map(p -> verbsets(p), psgreff)
+# ╔═╡ a3314f18-c36e-4b3c-829d-0b4636046905
+greekparser = buildkparser()
 
-# ╔═╡ 0c6ab1ee-b367-4512-bd7c-e1fdef5e97f6
-begin
-	mdlines = [
-		"|Ref | LXX glosses | Targum glosses | Vulgate | Aligned |",
-		"| --- | --- | --- | --- | --- |"
-		
-	]
-	for (i,vset) in enumerate(allverbsets)
-		ref = psgreff[i] |> passagecomponent
-		aligned = length(vset.septlatin) == length(vset.targumlatin) == length(vset.vulgate)
-		amark = aligned ? "✅" : "❌"
-		
-		data = [ref, mdlist(vset.septlatin), mdlist(vset.targumlatin),mdlist(vset.vulgate), amark]
+# ╔═╡ 315057e4-3410-48bc-9679-80fc5bc57687
+md"""## Utilities"""
 
+# ╔═╡ 1cb3cac6-9340-4e6d-a149-addfd5f42ebb
 
-		if displayopts == "all" 
-			push!(mdlines, "| " * join(data, " | "), " |")
-		elseif  displayopts == "match" 
-			if aligned
-				push!(mdlines, "| " * join(data, " | "), " |")
-			end
-		elseif ! aligned
-			push!(mdlines, "| " * join(data, " | "), " |")
-		end
-		
+"""True if a LatinMorphologicalForm is a verbal form."""
+function is_latin_verb(f::T) where T <: LatinMorphologicalForm
+    f isa LMFFiniteVerb ||
+    f isa LMFGerundive ||
+    f isa LMFInfinitive ||
+    f isa LMFParticiple
+    # omit supine for now
+end
+
+# ╔═╡ 7a2773cf-35ef-4338-935f-b46ba9785a81
+"""True if a GreekMorphologicalForm is a verbal form."""
+function is_greek_verb(f::T) where T <: GreekMorphologicalForm
+    f isa GMFFiniteVerb ||
+    f isa GMFInfinitive ||
+    f isa GMFParticiple ||
+    f isa GMFVerbalAdjective
+end
+
+# ╔═╡ 4a689ac7-b7bb-41f7-ae91-0f19e8e2a2f8
+md"""## Isolate verbs"""
+
+# ╔═╡ 38fc6ab2-4244-4f52-92f3-ba44b93fea26
+"""Given a list of `CitableTokens` and a Kanones parser, pull out pairs of passage ids + lexeme ids."""
+function isolate_greek_verbs(ctokenlist, parser; messageinterval = 1000 )
+    i = 0
+    greekverbs = []
+    for t in ctokenlist
+        id = join([workid(t.passage.urn), passagecomponent(collapsePassageBy(t.passage.urn,1))], ":")
+
+        i = i + 1
+        if mod(i, messageinterval) == 0
+            @info("$(i):  $(id)")
+        end
+        
+        str = t.passage.text
+        parses = parsetoken(t.passage.text, parser)
+        #@debug("$(id) has $(length(parses)) parses.")
+        for p in parses
+            f = greekForm(p.form)
+            if is_greek_verb(f)
+                lexid = p.lexeme
+                #@debug("Verb form: $(str) =  $(f) from $(lexid)")
+                push!(greekverbs, (ref = id, lexeme = lexid))
+            end
+        end
+    end
+    greekverbs
+end
+
+# ╔═╡ 8ddf069c-6442-45e3-b9ab-a6fce65a3aa4
+greekverbs = greekpairs ? isolate_greek_verbs(lxxlex, greekparser) : []
+
+# ╔═╡ e0cbcd7c-83de-42b5-b1ab-5b78c67407fe
+oshbwords = tanakh()
+
+# ╔═╡ 72ff55c1-8705-4ee7-a39b-8445eca2e7eb
+"""Isolate passage IDs + lexeme IDs from OSHB data."""
+function isolate_hebrew_verbs(words = oshbwords)
+
+	hebrew = filter(w -> language(w.code) isa HebrewLanguage, words)
+	hebrewverbs = filter(w -> isverb(w), hebrew)
+	# Map to tuple of passage + lexeme
+	map(hebrewverbs) do v
+    	trueurn = CtsUrn(v.urn)
+    	id 	= join([workid(trueurn), passagecomponent(trueurn)], ":")
+    	(ref = id, lexeme = v.lemma)
 	end
-	recordcount = length(mdlines) - 2
-	preface = "$(recordcount) verses:\n\n"
-	preface * join(mdlines,"\n") |> Markdown.parse
-	
 end
+
+# ╔═╡ 7bcb13bc-6eb6-4739-bf70-7ff02d8ac36e
+# ╠═╡ show_logs = false
+hebrewverbs = hebrewpairs ? isolate_hebrew_verbs() : []
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -278,27 +193,27 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableCorpus = "cf5ac11a-93ef-4a1a-97a3-f6af101603b5"
 CitableParserBuilder = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
-CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
 Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
-HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
+Kanones = "107500f9-53d4-4696-8485-0747242ad8bc"
 LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
+OpenScripturesHebrew = "a2aa3e71-aced-403c-831b-dc7e729b9ba3"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+PolytonicGreek = "72b824a7-2b4a-40fa-944c-ac4f345dc63a"
 Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
 
 [compat]
 CitableBase = "~10.4.0"
 CitableCorpus = "~0.13.5"
 CitableParserBuilder = "~0.30.1"
-CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
-EditionBuilders = "~0.8.5"
-HypertextLiteral = "~0.9.5"
+Kanones = "~0.26.1"
 LatinOrthography = "~0.7.3"
+OpenScripturesHebrew = "~0.1.0"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.60"
+PolytonicGreek = "~0.21.12"
 Tabulae = "~0.15.0"
 """
 
@@ -308,7 +223,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.6"
 manifest_format = "2.0"
-project_hash = "015723d8dbf1ef792475d0148595d88f35315559"
+project_hash = "6191eb2aab59d144a718756e28227d4348b048f1"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -345,13 +260,37 @@ version = "1.1.1"
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 
+[[deps.AtticGreek]]
+deps = ["DocStringExtensions", "Documenter", "Orthography", "PolytonicGreek", "Test", "TestSetExtensions", "Unicode"]
+git-tree-sha1 = "4d3502c9b4c198f62312cfcf0140ecfffe0ca978"
+uuid = "330c8319-f7ed-461a-8c52-cee5da4c0892"
+version = "0.9.3"
+
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+
+[[deps.BenchmarkTools]]
+deps = ["JSON", "Logging", "Printf", "Profile", "Statistics", "UUIDs"]
+git-tree-sha1 = "f1dff6729bc61f4d49e140da1af55dcd1ac97b2f"
+uuid = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+version = "1.5.0"
+
+[[deps.BiblicalHebrew]]
+deps = ["DocStringExtensions", "Documenter", "Orthography", "Test", "TestSetExtensions", "Unicode"]
+git-tree-sha1 = "b01c791cd47c33fb5e4ef8311ca6eb814f727759"
+uuid = "23d2231d-1fc1-47c2-a612-987552d9b38e"
+version = "0.4.0"
 
 [[deps.BitFlags]]
 git-tree-sha1 = "0691e34b3bb8be9307330f88d1a3c3f25466c24d"
 uuid = "d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35"
 version = "0.1.9"
+
+[[deps.BrownDriverBriggs]]
+deps = ["BiblicalHebrew", "DocStringExtensions", "Documenter", "Downloads", "JSON3", "Orthography", "Test", "TestSetExtensions"]
+git-tree-sha1 = "8510a757ec58b1786d7bca5af28c5780ea2ce096"
+uuid = "ed877a0f-8e86-4599-984a-df81107104eb"
+version = "0.2.0"
 
 [[deps.CSV]]
 deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "PrecompileTools", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings", "WorkerUtilities"]
@@ -364,6 +303,12 @@ deps = ["DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
 git-tree-sha1 = "eec0c6a088940306a72f965fe5f9d81cda597d25"
 uuid = "d6f014bd-995c-41bd-9893-703339864534"
 version = "10.4.0"
+
+[[deps.CitableCollection]]
+deps = ["CSV", "CitableBase", "CitableObject", "CitableText", "CiteEXchange", "DocStringExtensions", "Documenter", "HTTP", "Tables", "Test", "TypedTables"]
+git-tree-sha1 = "866abc4fb8ae2d3350a2ccd91f80a24b42e8343c"
+uuid = "7b95b006-44c5-4794-afff-00ccebff52d7"
+version = "0.4.6"
 
 [[deps.CitableCorpus]]
 deps = ["CitableBase", "CitableText", "CiteEXchange", "DocStringExtensions", "Documenter", "HTTP", "Tables", "Test"]
@@ -382,12 +327,6 @@ deps = ["CSV", "CitableBase", "CitableCorpus", "CitableObject", "CitableText", "
 git-tree-sha1 = "57ddf6f5aa12c616d993f3c50236bfb8d531d687"
 uuid = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
 version = "0.30.1"
-
-[[deps.CitableTeiReaders]]
-deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "HTTP", "Test"]
-git-tree-sha1 = "deed5242dad324dfd619bdeaa23528e131664a91"
-uuid = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
-version = "0.10.3"
 
 [[deps.CitableText]]
 deps = ["CitableBase", "DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
@@ -461,6 +400,12 @@ git-tree-sha1 = "bfc1187b79289637fa0ef6d4436ebdfe6905cbd6"
 uuid = "e2d170a0-9d28-54be-80f0-106bbe20a464"
 version = "1.0.0"
 
+[[deps.DataValues]]
+deps = ["DataValueInterfaces", "Dates"]
+git-tree-sha1 = "d88a19299eba280a6d062e135a43f00323ae70bf"
+uuid = "e7dc6d0d-1eca-5fa6-8ad6-5aecde8b7ea5"
+version = "0.4.13"
+
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
@@ -469,6 +414,12 @@ uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 git-tree-sha1 = "9824894295b62a6a4ab6adf1c7bf337b3a9ca34c"
 uuid = "ab62b9b5-e342-54a8-a765-a90f495de1a6"
 version = "1.2.0"
+
+[[deps.DelimitedFiles]]
+deps = ["Mmap"]
+git-tree-sha1 = "9e2f36d3c96a820c678f2f1f1782582fcf685bae"
+uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+version = "1.9.1"
 
 [[deps.Dictionaries]]
 deps = ["Indexing", "Random", "Serialization"]
@@ -496,12 +447,6 @@ version = "1.8.0"
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
-
-[[deps.EditionBuilders]]
-deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "EzXML", "Test"]
-git-tree-sha1 = "2934d7babf1127b7e8ef380de231b9683893aa49"
-uuid = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
-version = "0.8.5"
 
 [[deps.ExceptionUnwrapping]]
 deps = ["Test"]
@@ -618,6 +563,12 @@ git-tree-sha1 = "630b497eafcc20001bba38a4651b327dcfc491d2"
 uuid = "92d709cd-6900-40b7-9082-c6be49f344b6"
 version = "0.2.2"
 
+[[deps.IterableTables]]
+deps = ["DataValues", "IteratorInterfaceExtensions", "Requires", "TableTraits", "TableTraitsUtils"]
+git-tree-sha1 = "70300b876b2cebde43ebc0df42bc8c94a144e1b4"
+uuid = "1c8ee90f-4401-5389-894e-7a04a3dc0f4d"
+version = "1.0.0"
+
 [[deps.IteratorInterfaceExtensions]]
 git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
 uuid = "82899510-4779-5014-852e-03e436cf321d"
@@ -634,6 +585,24 @@ deps = ["Dates", "Mmap", "Parsers", "Unicode"]
 git-tree-sha1 = "31e996f0a15c7b280ba9f76636b3ff9e2ae58c9a"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "0.21.4"
+
+[[deps.JSON3]]
+deps = ["Dates", "Mmap", "Parsers", "PrecompileTools", "StructTypes", "UUIDs"]
+git-tree-sha1 = "1d322381ef7b087548321d3f878cb4c9bd8f8f9b"
+uuid = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+version = "1.14.1"
+
+    [deps.JSON3.extensions]
+    JSON3ArrowExt = ["ArrowTypes"]
+
+    [deps.JSON3.weakdeps]
+    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
+
+[[deps.Kanones]]
+deps = ["AtticGreek", "BenchmarkTools", "CSV", "CitableBase", "CitableCollection", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DataFrames", "Dates", "DelimitedFiles", "DocStringExtensions", "Documenter", "Downloads", "Glob", "HTTP", "Orthography", "PolytonicGreek", "Query", "StatsBase", "Tables", "Test", "TestSetExtensions", "Unicode"]
+git-tree-sha1 = "a18629d5bd224c0bd43509613eb50c073c84a071"
+uuid = "107500f9-53d4-4696-8485-0747242ad8bc"
+version = "0.26.1"
 
 [[deps.LaTeXStrings]]
 git-tree-sha1 = "dda21b8cbd6a6c40d9d02a73230f9d70fed6918c"
@@ -718,6 +687,12 @@ git-tree-sha1 = "65f28ad4b594aebe22157d6fac869786a255b7eb"
 uuid = "6c6e2e6c-3030-632d-7369-2d6c69616d65"
 version = "0.1.4"
 
+[[deps.MacroTools]]
+deps = ["Markdown", "Random"]
+git-tree-sha1 = "2fa9ee3e63fd3a4f7a9a4f4744a52f4856de82df"
+uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
+version = "0.5.13"
+
 [[deps.Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
@@ -773,6 +748,12 @@ git-tree-sha1 = "7493f61f55a6cce7325f197443aa80d32554ba10"
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
 version = "3.0.15+1"
 
+[[deps.OpenScripturesHebrew]]
+deps = ["BrownDriverBriggs", "CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "Downloads", "EzXML", "OrderedCollections", "StatsBase", "TestSetExtensions"]
+git-tree-sha1 = "e8c99b271ff89f038660b25e6acbe6da1706d952"
+uuid = "a2aa3e71-aced-403c-831b-dc7e729b9ba3"
+version = "0.1.0"
+
 [[deps.OrderedCollections]]
 git-tree-sha1 = "dfdf5519f235516220579f949664f1bf44e741c5"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
@@ -806,6 +787,12 @@ git-tree-sha1 = "eba4810d5e6a01f612b948c9fa94f905b49087b0"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 version = "0.7.60"
 
+[[deps.PolytonicGreek]]
+deps = ["Compat", "DocStringExtensions", "Documenter", "Orthography", "Test", "TestSetExtensions", "Unicode"]
+git-tree-sha1 = "64cc300d2f6d121008987294340860c740778d98"
+uuid = "72b824a7-2b4a-40fa-944c-ac4f345dc63a"
+version = "0.21.12"
+
 [[deps.PooledArrays]]
 deps = ["DataAPI", "Future"]
 git-tree-sha1 = "36d8b4b899628fb92c2749eb488d884a926614d3"
@@ -833,6 +820,22 @@ version = "2.4.0"
 [[deps.Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+
+[[deps.Profile]]
+deps = ["Printf"]
+uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
+
+[[deps.Query]]
+deps = ["DataValues", "IterableTables", "MacroTools", "QueryOperators", "Statistics"]
+git-tree-sha1 = "a66aa7ca6f5c29f0e303ccef5c8bd55067df9bbe"
+uuid = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
+version = "1.0.0"
+
+[[deps.QueryOperators]]
+deps = ["DataStructures", "DataValues", "IteratorInterfaceExtensions", "TableShowUtils"]
+git-tree-sha1 = "911c64c204e7ecabfd1872eb93c49b4e7c701f02"
+uuid = "2aef5ad7-51ca-5a8f-8e88-e75cf067b44b"
+version = "0.9.3"
 
 [[deps.REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
@@ -920,6 +923,12 @@ git-tree-sha1 = "a6b1675a536c5ad1a60e5a5153e1fee12eb146e3"
 uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
 version = "0.4.0"
 
+[[deps.StructTypes]]
+deps = ["Dates", "UUIDs"]
+git-tree-sha1 = "159331b30e94d7b11379037feeb9b690950cace8"
+uuid = "856f2bd8-1eba-4b0a-8007-ebc267875bd4"
+version = "1.11.0"
+
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
@@ -930,11 +939,23 @@ deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 version = "1.0.3"
 
+[[deps.TableShowUtils]]
+deps = ["DataValues", "Dates", "JSON", "Markdown", "Unicode"]
+git-tree-sha1 = "2a41a3dedda21ed1184a47caab56ed9304e9a038"
+uuid = "5e66a065-1f0a-5976-b372-e0b8c017ca10"
+version = "0.2.6"
+
 [[deps.TableTraits]]
 deps = ["IteratorInterfaceExtensions"]
 git-tree-sha1 = "c06b2f539df1c6efa794486abfb6ed2022561a39"
 uuid = "3783bdb8-4a98-5b6b-af9a-565f29a5fe9c"
 version = "1.0.1"
+
+[[deps.TableTraitsUtils]]
+deps = ["DataValues", "IteratorInterfaceExtensions", "Missings", "TableTraits"]
+git-tree-sha1 = "78fecfe140d7abb480b53a44f3f85b6aa373c293"
+uuid = "382cd787-c1b6-5bf2-a167-d5b971a19bda"
+version = "1.0.2"
 
 [[deps.Tables]]
 deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "OrderedCollections", "TableTraits"]
@@ -1030,51 +1051,36 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═f82ebfde-453c-4e47-bfeb-df73c7633059
-# ╟─e4ab310c-a9aa-4ee6-854a-4935c27e6288
-# ╟─6568f1e0-2da5-11ef-27df-5f07fa823895
-# ╟─a04059ac-04d8-4ed8-a476-fd0231323783
-# ╟─7cfa1522-74ab-4c78-bd2d-239fd0032b1d
-# ╠═0c6ab1ee-b367-4512-bd7c-e1fdef5e97f6
-# ╟─2e8e15ae-f0f6-4b22-a963-33570fcc5180
-# ╟─b53c4198-35f0-4f6b-a58e-20b6aee44e98
-# ╠═afb29d3a-55f6-40d6-ba47-99765cfe4a7a
-# ╟─20bcdb8e-27d6-46b1-bedd-1caf625a2e6e
-# ╟─bad510e7-19be-4e2e-8279-ba6252fe2f9d
-# ╠═eda291f3-24bf-4865-96f3-6ca470a82624
-# ╟─c295820e-7185-447a-82c5-5cc9d07c3369
-# ╟─d478cf0d-d303-4682-b3a9-f1338d2a8dce
-# ╟─713065c4-9d98-4e10-90cf-5f3c62023fa8
-# ╟─cf1a781b-4be7-43de-9b44-a0dbee1a5bc9
-# ╟─274afe87-7e6d-4884-9503-db08e468ee88
-# ╟─ec75a412-68be-42ba-8219-46e6a0dc73ad
-# ╟─14949ae5-9993-46ea-8f63-28c04fbfa86c
-# ╠═300a8a69-049b-45a3-8d5a-d8c6fd6bfcca
-# ╟─d7dcc396-a176-47c7-afbf-87b9336d2ee2
-# ╟─77bde32d-a14a-4528-8e9f-6cbe4c168f8e
-# ╟─83ef729d-125c-41d6-9030-dc5d829f8116
-# ╟─3576848a-b0b3-4643-928a-5da897fd7265
-# ╟─bb83b83c-16bb-4fab-a42d-aa5df38e9a53
-# ╟─9294ef16-705b-494e-96e5-f32e4f4d6491
-# ╟─0ab274df-d0d3-4dab-9f87-252bfd71e811
-# ╠═5b876552-d296-4a12-87fe-65779766bbc4
-# ╟─2c583f26-39b3-4e91-8735-698d27c4b468
-# ╟─6e53ea39-55e4-476f-a31e-afbbaae31f92
-# ╟─d217a173-5901-4f5d-a542-1494d317a951
-# ╠═04bede56-1d54-404c-9fce-fda47cb309f2
-# ╟─67ba6669-d248-4224-a29c-16ab450e1978
-# ╟─31b85560-1933-4935-9ab0-a3cc91564c3e
-# ╟─e85e45de-5f66-4c6f-a8d4-64c61187f701
-# ╟─27557198-c030-438a-9f56-cfdecbe0bd4a
-# ╟─0137579d-0be0-423b-98da-1965c17ae7ca
-# ╟─fa00482b-fae8-44f6-8012-4a9428a793c2
-# ╟─0f5274c4-5bee-419d-8460-d660670e8ba6
-# ╠═800b981e-377d-4466-81bf-0c1bff1776d5
-# ╟─2d238610-add6-481c-8594-ab3e3598e3d9
-# ╟─beb900e8-326b-4afd-bdbc-b44720af18e7
-# ╠═29b840c3-7976-4e25-955b-cc2f2516d0bd
-# ╠═264c7e8b-d738-4928-b6e8-670d00152295
-# ╠═cb147cb4-b577-4d2a-967f-2280fa50c3cb
-# ╠═df3841db-64ff-493d-81ee-1aa9360828b3
+# ╟─e7bc663a-a5e2-11ef-14dd-cba6a2c37f48
+# ╟─2dff45c0-c1b9-4125-aeca-60085e1aef3e
+# ╟─d02c95fc-56c8-4552-9963-37c7f86b8bdf
+# ╟─c304919f-c174-4c0c-b70a-d1097a714f56
+# ╟─7bcb13bc-6eb6-4739-bf70-7ff02d8ac36e
+# ╟─8ddf069c-6442-45e3-b9ab-a6fce65a3aa4
+# ╟─29e06931-a194-4435-bf0e-820abcccb811
+# ╟─2c63743d-b95b-44ff-8a9f-c17700361b03
+# ╟─25bc46d5-82e3-4914-83ab-a2fcd42254c6
+# ╟─edc680ec-28bd-4b36-8292-756be1af9c19
+# ╟─bbd9d750-acee-423a-b44c-aafbf81fd932
+# ╟─87ab246a-d3ae-4428-abd6-c040c1267918
+# ╟─75a7460f-8dd2-42ba-8a22-c2b6bd3704b2
+# ╟─3a2035dc-fbf1-4998-9c77-5729cdcfcf67
+# ╟─306b250f-c74c-47ba-a61e-c89f9798e0b4
+# ╟─fdb69fba-1095-4f23-b901-135566d584f4
+# ╟─07e0a465-1308-41f8-9342-f6927902c787
+# ╟─91b73ae5-6ce6-4af7-8254-6ebd80b4ccd7
+# ╟─1ffe4e62-683b-426a-a8ce-36883b8b6b3b
+# ╟─4858c70b-fbdf-415b-9406-402fa54afdf5
+# ╟─4776c757-b3c8-4677-94ae-d3fca7c126b6
+# ╟─dd9e5ee8-6081-436c-8800-fe20e1ed36f5
+# ╟─ef742565-e2c6-4525-abee-5b992492ce8a
+# ╟─a3314f18-c36e-4b3c-829d-0b4636046905
+# ╟─315057e4-3410-48bc-9679-80fc5bc57687
+# ╟─1cb3cac6-9340-4e6d-a149-addfd5f42ebb
+# ╟─7a2773cf-35ef-4338-935f-b46ba9785a81
+# ╟─4a689ac7-b7bb-41f7-ae91-0f19e8e2a2f8
+# ╟─38fc6ab2-4244-4f52-92f3-ba44b93fea26
+# ╟─72ff55c1-8705-4ee7-a39b-8445eca2e7eb
+# ╠═e0cbcd7c-83de-42b5-b1ab-5b78c67407fe
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

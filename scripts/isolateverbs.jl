@@ -39,7 +39,7 @@ end
 
 greekparser = buildkparser()
 """True if a GreekMorphologicalForm is a verbal form."""
-function is_verb(f::T) where T <: GreekMorphologicalForm
+function is_greek_verb(f::T) where T <: GreekMorphologicalForm
     f isa GMFFiniteVerb ||
     f isa GMFInfinitive ||
     f isa GMFParticiple ||
@@ -48,10 +48,35 @@ end
 
 
 
+function greeklkabeldict()
+    compositedict = Dict()
+    dict1 = "https://raw.githubusercontent.com/neelsmith/Kanones.jl/refs/heads/main/datasets/lsj-vocab/lexemes/lsj.cex"
+    f1 = Downloads.download(dict1)
+    for ln in filter(ln -> ! isempty(ln), readlines(f1))[2:end]
+        (id, label) = split(ln, "|")
+        compositedict[id] = label
+    end
+    rm(f1)
+
+
+    dict2 = "https://raw.githubusercontent.com/neelsmith/Kanones.jl/refs/heads/main/datasets/lsj-vocab/lexemes/lsjx.cex"
+    f2 = Downloads.download(dict2)
+    for ln in filter(ln -> ! isempty(ln), readlines(f2))[2:end]
+        (id, label) = split(ln, "|")
+        compositedict[id] = label
+    end
+    rm(f2)
+
+    compositedict
+end
+greeklabels = greeklkabeldict()
+
+
+
 """Parse all citable tokens in a list, and return pairs of passage ids + lexeme id
 for verb forms only.
 """
-function isolate_greek_verbs(ctokenlist, parser; messageinterval = 1000 )
+function isolate_greek_verbs(ctokenlist, parser, labelsdict; messageinterval = 1000 )
     i = 0
     greekverbs = []
     for t in ctokenlist
@@ -67,17 +92,22 @@ function isolate_greek_verbs(ctokenlist, parser; messageinterval = 1000 )
         @debug("$(id) has $(length(parses)) parses.")
         for p in parses
             f = greekForm(p.form)
-            if is_verb(f)
-                lexid = p.lexeme
+            if is_greek_verb(f)
+                lexid = string(p.lexeme)
                 @debug("Verb form: $(str) =  $(f) from $(lexid)")
-                push!(greekverbs, (ref = id, lexeme = lexid))
+                lbl = haskey(labelsdict, string(lexid)) ? labelsdict[lexid] : "no_label"
+                push!(greekverbs, (ref = id, lexeme = lexid, label = lbl))
             end
         end
     end
     greekverbs
 end
 
-@time greekverblexemes = isolate_greek_verbs(lxxlex, greekparser)
+
+
+
+
+@time greekverblexemes = isolate_greek_verbs(lxxlex, greekparser, greeklabels)
 
 
 # 2. ISOLATE VERBS IN LATIN VULGATE
@@ -95,7 +125,7 @@ p25url = "http://shot.holycross.edu/tabulae/complut-lat25-current.cex"
 vulgateparser = tabulaeStringParser(p25url, UrlReader)
 
 
-
+latinlabels = Tabulae.lexlemma_dict_remote()
 
 """True if a LatinMorphologicalForm is a verbal form."""
 function is_latin_verb(f::T) where T <: LatinMorphologicalForm
@@ -107,7 +137,9 @@ function is_latin_verb(f::T) where T <: LatinMorphologicalForm
 end
 
 
-function isolate_latin_verbs(ctokenlist, parser; messageinterval = 1000 )
+latinlemmdict = Tabulae.lexlemma_dict_remote()
+
+function isolate_latin_verbs(ctokenlist, parser, labelsdict = latinlemmdict; messageinterval = 1000 )
     i = 0
     latinverbs = []
     for t in ctokenlist
@@ -124,9 +156,11 @@ function isolate_latin_verbs(ctokenlist, parser; messageinterval = 1000 )
         for p in parses
             f = latinForm(p.form)
             if is_latin_verb(f)
-                lexid = p.lexeme
+                lexid = string(p.lexeme)
                 @debug("Verb form: $(str) =  $(f) from $(lexid)")
-                push!(latinverbs, (ref = id, lexeme = lexid))
+                lbl = haskey(labelsdict, string(lexid)) ? labelsdict[lexid] : "no_label"
+                push!(latinverbs, (ref = id, lexeme = lexid, label = lbl))
+                #push!(latinverbs, (ref = id, lexeme = lexid))
             end
         end
     end
@@ -145,3 +179,52 @@ using StatsBase, OrderedCollections
 lxxstringcounts = sort(OrderedDict(countmap(lxxstringtokens)); rev = true, byvalue = true)
 
 =#
+
+using StatsBase, OrderedCollections
+
+
+function cooccurs(tuples1, tuples2; messageinterval = 5)
+    masterdict = Dict()
+    lemmalist = map(t -> string(t.lexeme), tuples1)
+    uniquelemms = unique(lemmalist)
+    lemmalabel = ""
+
+    @info("Counting cooccurrences for $(length(uniquelemms)) lexemes")
+    count = 0
+    for lemm in uniquelemms
+        count = count + 1
+      
+        
+        
+        cooccurlemms = []
+        lemtuples = filter(t -> t.lexeme == lemm, tuples1)
+        lemmalabel = lemm * ":" * lemtuples[1].label
+
+        #if mod(count, messageinterval) == 0
+        @info("$(lemmalabel): $(count) / $(length(unique(lemmalist))). $(length(lemtuples)) passages in source 1")
+        #end
+
+        passagecount = 0
+        for t1 in lemtuples
+            passagecount = passagecount + 1
+            @info("-> $(lemmalabel): $(t1.ref) $(passagecount) / $(length(lemtuples))")
+            matches = filter(t2 -> t2.ref == t1.ref, tuples2)
+            for v in matches
+                push!(cooccurlemms, string(v.lexeme,":", v.label))
+            end
+        end 
+        counted = sort(OrderedDict(countmap(cooccurlemms)), rev=true, byvalue=true)
+        
+        masterdict[lemmalabel] = counted
+      
+    end
+
+    masterdict
+end
+
+# TEMP:
+gvl = map(t -> (ref = t.ref, lexeme = string(t.lexeme), label = t.label), greekverblexemes)
+lvl = map(t -> (ref = t.ref, lexeme = string(t.lexeme), label = t.label), latinverblexemes)
+
+
+@time Sept2Vulg = cooccurs(gvl, lvl)
