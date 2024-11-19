@@ -1,16 +1,6 @@
-# 1. ISOLATE HEBREW VERBS
-using OpenScripturesHebrew
-words = tanakh()
-hebrew = filter(w -> language(w.code) isa HebrewLanguage, words)
-hebrewverbs = filter(w -> isverb(w), hebrew)
-# Map to tuple of passage + lexeme
-@time hebrewverblexems = map(hebrewverbs) do v
-    trueurn = CtsUrn(v.urn)
-    id = join([workid(trueurn), passagecomponent(trueurn)], ":")
-    (ref = id, lexeme = v.lemma)
-end
 
-# 2. ISOLATE VERBS IN GREEK LXXX
+
+# 1. ISOLATE VERBS IN GREEK LXXX
 using CitableBase, CitableText, CitableCorpus
 srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
 corpus = fromcex(srcurl, CitableTextCorpus, UrlReader) 
@@ -22,8 +12,6 @@ end |> CitableTextCorpus
 using Orthography, PolytonicGreek
 @time lxxtokens = tokenize(lxx, literaryGreek())
 lxxlex = filter(t -> tokencategory(t) isa LexicalToken, lxxtokens)
-
-
 
 using CitableParserBuilder
 using Downloads
@@ -207,7 +195,7 @@ function cooccurs(tuples1, tuples2; messageinterval = 5)
         passagecount = 0
         for t1 in lemtuples
             passagecount = passagecount + 1
-            @info("-> $(lemmalabel): $(t1.ref) $(passagecount) / $(length(lemtuples))")
+            @info("$(count) / $(length(unique(lemmalist))) -> $(lemmalabel): $(t1.ref) $(passagecount) / $(length(lemtuples))")
             matches = filter(t2 -> t2.ref == t1.ref, tuples2)
             for v in matches
                 push!(cooccurlemms, string(v.lexeme,":", v.label))
