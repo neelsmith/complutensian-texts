@@ -1,22 +1,15 @@
-
-
-# 1. ISOLATE VERBS IN GREEK LXXX
 using CitableBase, CitableText, CitableCorpus
-srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
-corpus = fromcex(srcurl, CitableTextCorpus, UrlReader) 
-
-lxx = filter(corpus.passages) do psg
-    versionid(psg.urn) == "septuagint"
-end |> CitableTextCorpus
-
 using Orthography, PolytonicGreek
-@time lxxtokens = tokenize(lxx, literaryGreek())
-lxxlex = filter(t -> tokencategory(t) isa LexicalToken, lxxtokens)
-
 using CitableParserBuilder
 using Downloads
 using Kanones
-"""Insantiate Complutensian parser for Septuagint"""
+using LatinOrthography
+using Tabulae
+using StatsBase, OrderedCollections
+
+
+# Greek parser and parsing utilities
+"""Instantiate Complutensian parser for Septuagint"""
 function buildkparser()
 	   url = "http://shot.holycross.edu/morphology/complutensian-current.cex"
 	   f = Downloads.download(url)
@@ -24,17 +17,7 @@ function buildkparser()
 	   rm(f)
 	   KanonesStringParser(data, literaryGreek(), "|")
 end
-
 greekparser = buildkparser()
-"""True if a GreekMorphologicalForm is a verbal form."""
-function is_greek_verb(f::T) where T <: GreekMorphologicalForm
-    f isa GMFFiniteVerb ||
-    f isa GMFInfinitive ||
-    f isa GMFParticiple ||
-    f isa GMFVerbalAdjective
-end
-
-
 
 function greeklkabeldict()
     compositedict = Dict()
@@ -59,7 +42,40 @@ function greeklkabeldict()
 end
 greeklabels = greeklkabeldict()
 
+# Latin parser and parsing utilities
+p25url = "http://shot.holycross.edu/tabulae/complut-lat25-current.cex"
+vulgateparser = tabulaeStringParser(p25url, UrlReader)
+latinlabels = Tabulae.lexlemma_dict_remote()
 
+
+# Text corpus
+srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
+corpus = fromcex(srcurl, CitableTextCorpus, UrlReader) 
+
+function book(corpus::CitableTextCorpus, version, bookid)
+    filter(corpus.passages) do psg
+        versionid(psg.urn) == version &&
+        workid(psg.urn) == bookid
+    end |> CitableTextCorpus
+end
+
+# 1. ISOLATE VERBS IN GREEK LXXX
+lxxbook = book(corpus, "septuagint", "genesis")
+@time lxxbooktokens = tokenize(lxxbook, literaryGreek())
+lxxbooklex = filter(t -> tokencategory(t) isa LexicalToken, lxxbooktokens)
+
+#lxx = filter(corpus.passages) do psg
+#    versionid(psg.urn) == "septuagint"
+#end |> CitableTextCorpus
+#@time lxxtokens = tokenize(lxx, literaryGreek())
+#lxxlex = filter(t -> tokencategory(t) isa LexicalToken, lxxtokens)
+"""True if a GreekMorphologicalForm is a verbal form."""
+function is_greek_verb(f::T) where T <: GreekMorphologicalForm
+    f isa GMFFiniteVerb ||
+    f isa GMFInfinitive ||
+    f isa GMFParticiple ||
+    f isa GMFVerbalAdjective
+end
 
 """Parse all citable tokens in a list, and return pairs of passage ids + lexeme id
 for verb forms only.
@@ -91,29 +107,19 @@ function isolate_greek_verbs(ctokenlist, parser, labelsdict; messageinterval = 1
     greekverbs
 end
 
-
-
-
-
-@time greekverblexemes = isolate_greek_verbs(lxxlex, greekparser, greeklabels)
+#@time greekverblexemes = isolate_greek_verbs(lxxlex, greekparser, greeklabels)
+@time greekverblexemes = isolate_greek_verbs(lxxbooklex, greekparser, greeklabels)
 
 
 # 2. ISOLATE VERBS IN LATIN VULGATE
-using LatinOrthography
-using Tabulae
-
-vulgate = filter(corpus.passages) do psg
-    versionid(psg.urn) == "vulgate"
-end |> CitableTextCorpus
-@time vulgatetokens = tokenize(vulgate, latin25())
-vulgatelex = filter(t -> tokencategory(t) isa LexicalToken, vulgatetokens)
-
-
-p25url = "http://shot.holycross.edu/tabulae/complut-lat25-current.cex"
-vulgateparser = tabulaeStringParser(p25url, UrlReader)
-
-
-latinlabels = Tabulae.lexlemma_dict_remote()
+#vulgate = filter(corpus.passages) do psg
+#    versionid(psg.urn) == "vulgate"
+#end |> CitableTextCorpus
+#@time vulgatetokens = tokenize(vulgate, latin25())
+#vulgatelex = filter(t -> tokencategory(t) isa LexicalToken, vulgatetokens)
+vulgatebook = book(corpus, "vulgate", "genesis")
+@time vulgatebooktokens = tokenize(vulgatebook, latin25())
+vulgatebooklex = filter(t -> tokencategory(t) isa LexicalToken, vulgatebooktokens)
 
 """True if a LatinMorphologicalForm is a verbal form."""
 function is_latin_verb(f::T) where T <: LatinMorphologicalForm
@@ -125,9 +131,7 @@ function is_latin_verb(f::T) where T <: LatinMorphologicalForm
 end
 
 
-latinlemmdict = Tabulae.lexlemma_dict_remote()
-
-function isolate_latin_verbs(ctokenlist, parser, labelsdict = latinlemmdict; messageinterval = 1000 )
+function isolate_latin_verbs(ctokenlist, parser, labelsdict = latinlabels; messageinterval = 1000 )
     i = 0
     latinverbs = []
     for t in ctokenlist
@@ -155,21 +159,35 @@ function isolate_latin_verbs(ctokenlist, parser, labelsdict = latinlemmdict; mes
     latinverbs
 end
 
-@time latinverblexemes = isolate_latin_verbs(vulgatelex, vulgateparser)
+@time latinverblexemes = isolate_latin_verbs(vulgatebooklex, vulgateparser)
 
 
 
+# 3. Isolate verb data from Sefaria
+repo = pwd()
+datadir = joinpath(repo, "data")
+cexsrc = filter(f -> endswith(f, "cex"), readdir(datadir))
 
-## Use these for surveying coverage #########################################################
-#=
-@time lxxstringtokens = map(t -> knormal(tokentext(t)), lxxlex)
-using StatsBase, OrderedCollections
-lxxstringcounts = sort(OrderedDict(countmap(lxxstringtokens)); rev = true, byvalue = true)
+function isolatesefariafiles(flist, srcdir = datadir)
+    tuples = []
+    for f in flist
+        datalines = readlines(joinpath(srcdir, f))[2:end]
+        #urn:cts:compnov:bible.genesis.masoretic_tokens:1.1.2|בָּרָ֣א|בָּרָא|BDB01439
+        for ln in filter(ln -> ! isempty(ln), datalines)
+            (urnstr, form, lemma, lexid) = split(ln, "|")
+            u = CtsUrn(urnstr)
+            id = join([workid(u), passagecomponent(u)], ":")
+            push!(tuples, (ref = id, lexeme = lexid, label = lemma, form = form))
 
-=#
+        end
+    end
+    tuples
+end
 
-using StatsBase, OrderedCollections
+@time sefariaverblexemes = isolatesefariafiles(["genesis.cex"])
 
+
+# Find coocurrences:
 
 function cooccurs(tuples1, tuples2; messageinterval = 5)
     masterdict = Dict()
@@ -210,9 +228,20 @@ function cooccurs(tuples1, tuples2; messageinterval = 5)
     masterdict
 end
 
-# TEMP:
-gvl = map(t -> (ref = t.ref, lexeme = string(t.lexeme), label = t.label), greekverblexemes)
-lvl = map(t -> (ref = t.ref, lexeme = string(t.lexeme), label = t.label), latinverblexemes)
+Sept2Vulg = cooccurs(greekverblexemes, latinverblexemes)
+Sept2Hebrew = cooccurs(greekverblexemes, sefariaverblexemes)
 
 
-@time Sept2Vulg = cooccurs(gvl, lvl)
+
+
+
+
+
+
+
+## Use these for surveying coverage #########################################################
+#=
+@time lxxstringtokens = map(t -> knormal(tokentext(t)), lxxlex)
+using StatsBase, OrderedCollections
+lxxstringcounts = sort(OrderedDict(countmap(lxxstringtokens)); rev = true, byvalue = true)
+=#

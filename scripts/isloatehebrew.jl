@@ -1,4 +1,5 @@
 # 1. ISOLATE HEBREW VERBS
+using CitableText
 using OpenScripturesHebrew
 words = tanakh()
 hebrew = filter(w -> language(w.code) isa HebrewLanguage, words)
@@ -15,7 +16,7 @@ repo = pwd()
 datadir = joinpath(repo, "data")
 cexsrc = filter(f -> endswith(f, "cex"), readdir(datadir))
 
-using CitableText
+
 
 
 function isolatesefariafiles(flist)
@@ -26,14 +27,14 @@ function isolatesefariafiles(flist)
         for ln in filter(ln -> ! isempty(ln), datalines)
             (urnstr, form, lemma, lexid) = split(ln, "|")
             u = CtsUrn(urnstr)
-            id = join([workid(u), passagecomponent(collapsePassageBy(u, 1))], ":")
-            push!(tuples, (ref = id, lexeme = lexid, label = lemma))
+            id = join([workid(u), passagecomponent(u)], ":")
+            push!(tuples, (ref = id, lexeme = lexid, label = lemma, form = form))
 
         end
     end
     tuples
 end
 
-sefariaverblexemes = isolatesefariafiles(cexsrc)
+@time sefariaverblexemes = isolatesefariafiles(cexsrc)
 
 
