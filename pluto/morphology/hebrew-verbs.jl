@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.47
+# v0.19.46
 
 using Markdown
 using InteractiveUtils
@@ -29,7 +29,7 @@ end
 TableOfContents()
 
 # ╔═╡ cc636d4e-9152-11ef-380b-6f2284ffc745
-md"""# Read pre-compiled data on Hebrew verbs"""
+md"""# Read pre-compiled data on Hebrew verbs from Sefaria"""
 
 # ╔═╡ c8edd94b-70f7-42f3-8718-b382d752c289
 md"""## Summarize a single book"""
@@ -118,119 +118,122 @@ md"""## Summaries"""
 # ╔═╡ 22a568be-0576-4663-b048-6fef81df547c
 md""" ## Source files"""
 
+# ╔═╡ ebc4c624-06c1-4dd8-9092-6427834ca471
+repo = pwd() |> dirname |> dirname
+
 # ╔═╡ 13d507b9-18ce-4739-a55e-3cf48ec08972
-genesisfile = joinpath(dirname(pwd()), "data", "genesis.cex")
+genesisfile = joinpath(repo, "data", "genesis.cex")
 
 # ╔═╡ e5b09a0d-7c16-4b7c-898e-060fe0e66118
-exodusfile = joinpath(dirname(pwd()), "data", "exodus.cex")
+exodusfile = joinpath(repo, "data", "exodus.cex")
 
 # ╔═╡ 90a26573-c8a7-462c-affb-2fb0bd4d26a9
-leviticusfile = joinpath(dirname(pwd()), "data", "leviticus.cex")
+leviticusfile = joinpath(repo, "data", "leviticus.cex")
 
 # ╔═╡ 338d61e1-eb43-4d83-addf-4b994dac9b84
-numbersfile = joinpath(dirname(pwd()), "data", "numbers.cex")
+numbersfile = joinpath(repo, "data", "numbers.cex")
 
 # ╔═╡ 06db4b52-9469-4e8a-9c3a-5ea694d4dfb5
-deuteronomyfile = joinpath(dirname(pwd()), "data", "deuteronomy.cex")
+deuteronomyfile = joinpath(repo, "data", "deuteronomy.cex")
 
 # ╔═╡ c760f46c-aa18-4e71-a5e8-ab3bea88d069
-joshuafile = joinpath(dirname(pwd()), "data", "joshua.cex")
+joshuafile = joinpath(repo, "data", "joshua.cex")
 
 # ╔═╡ ae2813d2-f79b-4d12-ba89-03c6c057a590
-judgesfile = joinpath(dirname(pwd()), "data", "judges.cex")
+judgesfile = joinpath(repo, "data", "judges.cex")
 
 # ╔═╡ 70fb2c80-557c-414a-936b-754f53a3b982
-ruthfile = joinpath(dirname(pwd()), "data", "ruth.cex")
+ruthfile = joinpath(repo, "data", "ruth.cex")
 
 # ╔═╡ c8abeabc-0259-4090-92ca-447b879e4c8d
-samuel1file = joinpath(dirname(pwd()), "data", "1samuel.cex")
+samuel1file = joinpath(repo, "data", "1samuel.cex")
 
 # ╔═╡ 91c69e74-fe47-4a05-a05f-bd6c2dd7a7ac
-samuel2file = joinpath(dirname(pwd()), "data", "2samuel.cex")
+samuel2file = joinpath(repo, "data", "2samuel.cex")
 
 # ╔═╡ 3ae1bc48-eb91-4c73-bc5f-7ea109a2c462
-kings1file = joinpath(dirname(pwd()), "data", "1kings.cex")
+kings1file = joinpath(repo, "data", "1kings.cex")
 
 # ╔═╡ c56ba726-6941-4d90-9eb6-5c5feb7da64f
-kings2file = joinpath(dirname(pwd()), "data", "2kings.cex")
+kings2file = joinpath(repo, "data", "2kings.cex")
 
 # ╔═╡ e15bd91a-c45d-4771-82b8-bcdcd57fcc20
-chronicles2file = joinpath(dirname(pwd()), "data", "2chronicles.cex")
+chronicles2file = joinpath(repo, "data", "2chronicles.cex")
 
 # ╔═╡ e45cd1bc-49e7-4291-be46-991cf32f110c
-ezrafile = joinpath(dirname(pwd()), "data", "ezra.cex")
+ezrafile = joinpath(repo, "data", "ezra.cex")
 
 # ╔═╡ f9fc625b-7c52-43f4-8d96-cc38c34b83de
-nehemiahfile = joinpath(dirname(pwd()), "data", "nehemiah.cex")
+nehemiahfile = joinpath(repo, "data", "nehemiah.cex")
 
 # ╔═╡ 058c0047-a3f4-45f2-afdc-2af3839bf4cb
-estherfile = joinpath(dirname(pwd()), "data", "esther.cex")
+estherfile = joinpath(repo, "data", "esther.cex")
 
 # ╔═╡ 263ca802-e0e3-4a68-bb7a-568ec35a605b
-jobfile = joinpath(dirname(pwd()), "data", "job.cex")
+jobfile = joinpath(repo, "data", "job.cex")
 
 # ╔═╡ e4eee511-5da9-45dd-9919-995550305ca1
-psalmsfile = joinpath(dirname(pwd()), "data", "psalms.cex")
+psalmsfile = joinpath(repo, "data", "psalms.cex")
 
 # ╔═╡ 1be84181-1999-40ca-8ed9-30d950ba8ca8
-proverbsfile = joinpath(dirname(pwd()), "data", "proverbs.cex")
+proverbsfile = joinpath(repo, "data", "proverbs.cex")
 
 # ╔═╡ a57a3138-5e69-495d-ae82-59a733b8dd9c
-ecclesiastesfile = joinpath(dirname(pwd()), "data", "ecclesiastes.cex")
+ecclesiastesfile = joinpath(repo, "data", "ecclesiastes.cex")
 
 # ╔═╡ 5f468021-eb9b-47f6-8a5e-eb56a97e0721
-songsfile = joinpath(dirname(pwd()), "data", "songs.cex")
+songsfile = joinpath(repo, "data", "songs.cex")
 
 # ╔═╡ aac41c94-b7f8-4e2f-ad1b-7bf1f9dd7219
-isaiahfile = joinpath(dirname(pwd()), "data", "isaiah.cex")
+isaiahfile = joinpath(repo, "data", "isaiah.cex")
 
 # ╔═╡ db346f4f-f67d-43b9-a8b0-7b86f8b08237
-jeremiahfile = joinpath(dirname(pwd()), "data", "jeremiah.cex")
+jeremiahfile = joinpath(repo, "data", "jeremiah.cex")
 
 # ╔═╡ 8d944450-f42c-4444-b4f8-75849f7f91e3
-lamentationsfile = joinpath(dirname(pwd()), "data", "lamentations.cex")
+lamentationsfile = joinpath(repo, "data", "lamentations.cex")
 
 # ╔═╡ 0048081e-a0ec-4d60-aac9-fbdf67f23cc5
-ezekielfile = joinpath(dirname(pwd()), "data", "ezekiel.cex")
+ezekielfile = joinpath(repo, "data", "ezekiel.cex")
 
 # ╔═╡ f51331e5-17a4-4e2a-bc31-1f60a406d265
-danielfile = joinpath(dirname(pwd()), "data", "daniel.cex")
+danielfile = joinpath(repo, "data", "daniel.cex")
 
 # ╔═╡ 2ac07776-7472-49f2-b665-170d5744ef77
-hoseafile = joinpath(dirname(pwd()), "data", "hosea.cex")
+hoseafile = joinpath(repo, "data", "hosea.cex")
 
 # ╔═╡ c2bd5717-ddc3-4a0e-b84e-365a786de53a
-joelfile = joinpath(dirname(pwd()), "data", "joel.cex")
+joelfile = joinpath(repo, "data", "joel.cex")
 
 # ╔═╡ 164de5e5-4acd-4afb-921c-1dd50ca7ad08
-amosfile = joinpath(dirname(pwd()), "data", "amos.cex")
+amosfile = joinpath(repo, "data", "amos.cex")
 
 # ╔═╡ a7565935-466c-480c-9b67-460feb7cfada
-obadiahfile = joinpath(dirname(pwd()), "data", "obadiah.cex")
+obadiahfile = joinpath(repo, "data", "obadiah.cex")
 
 # ╔═╡ e317bd48-dde0-49c1-98c7-f2c684b39802
-jonahfile = joinpath(dirname(pwd()), "data", "jonah.cex")
+jonahfile = joinpath(repo, "data", "jonah.cex")
 
 # ╔═╡ 8c69bdb0-4103-4351-be6c-0c52d915becf
-micahfile = joinpath(dirname(pwd()), "data", "micah.cex")
+micahfile = joinpath(repo, "data", "micah.cex")
 
 # ╔═╡ 6f1f43a6-8763-47eb-8748-c9457b5b152b
-nahumfile = joinpath(dirname(pwd()), "data", "nahum.cex")
+nahumfile = joinpath(repo, "data", "nahum.cex")
 
 # ╔═╡ c472f05e-5523-45c3-a76c-aabbc6db3edc
-habakkukfile = joinpath(dirname(pwd()), "data", "habakkuk.cex")
+habakkukfile = joinpath(repo, "data", "habakkuk.cex")
 
 # ╔═╡ c3ddf726-02f3-4a68-855b-68cdfdc8170b
-zephaniahfile = joinpath(dirname(pwd()), "data", "zephaniah.cex")
+zephaniahfile = joinpath(repo, "data", "zephaniah.cex")
 
 # ╔═╡ 99b988bb-5adb-4528-a5d7-a614ab019b21
-haggaifile = joinpath(dirname(pwd()), "data", "haggai.cex")
+haggaifile = joinpath(repo, "data", "haggai.cex")
 
 # ╔═╡ 95a6c43d-1e04-4a62-9979-df8f5d36da76
-zechariahfile = joinpath(dirname(pwd()), "data", "zechariah.cex")
+zechariahfile = joinpath(repo, "data", "zechariah.cex")
 
 # ╔═╡ 2311605e-8eb4-4345-89c2-0eadfbef3704
-malachifile = joinpath(dirname(pwd()), "data", "malachi.cex")
+malachifile = joinpath(repo, "data", "malachi.cex")
 
 # ╔═╡ 9dbf8ebe-abd3-45dd-8a48-6125c7bc7a3a
 filemenu = [
@@ -1189,7 +1192,8 @@ version = "17.4.0+2"
 # ╟─ce454866-645e-43e8-b8a2-44b90bff6f08
 # ╟─22a568be-0576-4663-b048-6fef81df547c
 # ╠═9dbf8ebe-abd3-45dd-8a48-6125c7bc7a3a
-# ╟─13d507b9-18ce-4739-a55e-3cf48ec08972
+# ╠═ebc4c624-06c1-4dd8-9092-6427834ca471
+# ╠═13d507b9-18ce-4739-a55e-3cf48ec08972
 # ╟─e5b09a0d-7c16-4b7c-898e-060fe0e66118
 # ╟─90a26573-c8a7-462c-affb-2fb0bd4d26a9
 # ╟─338d61e1-eb43-4d83-addf-4b994dac9b84
@@ -1230,7 +1234,7 @@ version = "17.4.0+2"
 # ╟─e7d6a7a2-b89d-4323-83d0-2d13023dc7f8
 # ╟─c987da96-66a7-4c59-87fa-e6b20d6ec47f
 # ╟─9abeb236-35d7-49a4-9a90-a1fdd5b8082a
-# ╟─b73b4882-d892-4e5e-965e-cc667b65884e
+# ╠═b73b4882-d892-4e5e-965e-cc667b65884e
 # ╟─e3588b70-8a10-45d8-b41e-f52f0195db82
 # ╟─858d613c-59fe-4223-ac21-0ddcddd9ee5c
 # ╟─5fddbf3c-58eb-4329-935c-43408c72a05d
