@@ -48,7 +48,10 @@ md"""---
 """
 
 # ╔═╡ 7f2fe1ee-e261-42f6-9368-a092f7379ccd
-md""" # Verb menus"""
+md""" # Verb menus and user selections"""
+
+# ╔═╡ ef7eae6e-aaa7-4590-8961-8b0a7490c33e
+
 
 # ╔═╡ f31b070f-745b-4b58-8524-e1bea64b0a34
 md"""## Verb occurrences"""
@@ -96,8 +99,33 @@ else
 	md"Nope"
 end
 
+# ╔═╡ 37407be9-a2f2-4895-8975-ca21019ae93d
+(chosenlemma, chosenlabel) = split(verbchoice, ":")
+
 # ╔═╡ af905422-41af-4e72-a72d-8a1415eef5aa
 hebrewverbconcordance = getverbs(hebrewverburl)
+
+# ╔═╡ 6b499244-78b4-40d4-bc5c-4151674e0b25
+conc = if keylanguage == "Latin"
+	latinverbconcordance
+elseif keylanguage == "Greek"
+	greekverbconcordance
+elseif keylanguage == "Hebrew"
+	hebrewverbconcordance
+end
+
+# ╔═╡ 77de2a17-4590-4fdf-b2ee-94879c25e720
+chosenpassages = filter(tup -> tup.lemma == chosenlemma, conc)
+
+# ╔═╡ fa23c556-a740-4538-8093-affc825fb31e
+summarymsg = """**$(length(chosenpassages))** passages for *$(chosenlabel)* (`$(chosenlemma)`)."""
+
+
+# ╔═╡ 75cfe53a-9966-4c31-811b-a6d9e9906d00
+Markdown.parse(summarymsg)
+
+# ╔═╡ 06f74daa-41e8-4fdf-9ca9-6407f676621e
+hebrewverbmenu = sort(map(tup -> string(tup.lemma, ":", tup.label), hebrewverbconcordance) |> countmap |> OrderedDict, rev=true, byvalue = true) |> keys |> collect
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -463,19 +491,26 @@ version = "17.4.0+2"
 # ╟─19161990-52b4-408b-ad08-2b021d60b76d
 # ╟─c4cd3eca-a901-11ef-221d-01795b474879
 # ╟─3f1c3b5b-a6aa-40de-ab85-8eb03f89a020
-# ╠═2a4d843d-c521-4985-b546-d014de5dea58
+# ╟─2a4d843d-c521-4985-b546-d014de5dea58
+# ╟─75cfe53a-9966-4c31-811b-a6d9e9906d00
 # ╟─8aa27093-2324-4824-944f-234ef58a0341
 # ╟─c52c252b-ed70-44ab-a158-68f11d11a056
 # ╟─7f2fe1ee-e261-42f6-9368-a092f7379ccd
-# ╠═3f4b7ff2-f34e-4a09-8c7f-4a4f7a0b0fce
-# ╠═a3753ef9-c3d0-4b0b-90c9-cce0fa119796
+# ╠═37407be9-a2f2-4895-8975-ca21019ae93d
+# ╟─6b499244-78b4-40d4-bc5c-4151674e0b25
+# ╠═ef7eae6e-aaa7-4590-8961-8b0a7490c33e
+# ╟─77de2a17-4590-4fdf-b2ee-94879c25e720
+# ╟─fa23c556-a740-4538-8093-affc825fb31e
+# ╟─3f4b7ff2-f34e-4a09-8c7f-4a4f7a0b0fce
+# ╟─a3753ef9-c3d0-4b0b-90c9-cce0fa119796
+# ╟─06f74daa-41e8-4fdf-9ca9-6407f676621e
 # ╟─f31b070f-745b-4b58-8524-e1bea64b0a34
-# ╠═9bdfc921-7018-43b1-ae0a-9ffe7a05909d
-# ╠═276c82bb-4872-40cf-9818-65fcdbb8b6d8
-# ╠═345711c4-753d-4831-9e7c-74da06dabf2e
+# ╟─9bdfc921-7018-43b1-ae0a-9ffe7a05909d
+# ╟─276c82bb-4872-40cf-9818-65fcdbb8b6d8
+# ╟─345711c4-753d-4831-9e7c-74da06dabf2e
 # ╟─7563152c-1b0e-4397-84f1-b2d954c76e5a
-# ╠═baf00831-b64d-4d98-8df6-3e5fa063151b
-# ╠═886d7bb2-0508-4793-a3eb-a9abdb79a4ef
-# ╠═af905422-41af-4e72-a72d-8a1415eef5aa
+# ╟─baf00831-b64d-4d98-8df6-3e5fa063151b
+# ╟─886d7bb2-0508-4793-a3eb-a9abdb79a4ef
+# ╟─af905422-41af-4e72-a72d-8a1415eef5aa
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
