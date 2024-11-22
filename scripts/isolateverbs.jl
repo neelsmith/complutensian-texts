@@ -294,11 +294,11 @@ end
 
 
 Sept2Hebrew = cooccurs(greekverblexemes, sefariaverblexemes)
-s2jtable = tabulate(Sept2Hebrew)
+s2htable = tabulate(Sept2Hebrew)
 
 s2hfile = joinpath(repo, "data", "cooccurrences", "septuagint_hebrew.cex")
 open(s2hfile, "w") do io
-    write(io, coocurhdr * join(s2vtable, "\n"))
+    write(io, coocurhdr * join(s2htable, "\n"))
 end
 
 
