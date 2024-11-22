@@ -267,17 +267,76 @@ function cooccurs(tuples1, tuples2; messageinterval = 5)
     masterdict
 end
 
-Sept2Vulg = cooccurs(greekverblexemes, latinverblexemes)
+
+
+function tabulate(dictofdicts)
+    output = []
+    for k in keys(dictofdicts)
+        subdict = dictofdicts[k]
+        for k2 in keys(subdict)
+            push!(output, string(k,"|", k2, "|", subdict[k2]))
+        end
+    end
+    output
+end
+
+
+@time Sept2Vulg = cooccurs(greekverblexemes, latinverblexemes)
+s2vtable = tabulate(Sept2Vulg)
+
+
+coocurhdr = "lemma1|lemma2|count\n"
+s2vfile = joinpath(repo, "data", "cooccurrences", "septuagint_vulgate.cex")
+open(s2vfile, "w") do io
+    write(io, coocurhdr * join(s2vtable, "\n"))
+end
+
+
+
 Sept2Hebrew = cooccurs(greekverblexemes, sefariaverblexemes)
+s2jtable = tabulate(Sept2Hebrew)
+
+s2hfile = joinpath(repo, "data", "cooccurrences", "septuagint_hebrew.cex")
+open(s2hfile, "w") do io
+    write(io, coocurhdr * join(s2vtable, "\n"))
+end
+
 
 Hebrew2Vulg =  cooccurs(sefariaverblexemes, latinverblexemes)
-Hebrew2Sept =  cooccurs(sefariaverblexemes, greekverblexemes)
+h2vtable = tabulate(Hebrew2Vulg)
 
+h2vfile = joinpath(repo, "data", "cooccurrences", "hebrew_vulgate.cex")
+open(h2vfile, "w") do io
+    write(io, coocurhdr * join(h2vtable, "\n"))
+end
+
+
+Hebrew2Sept =  cooccurs(sefariaverblexemes, greekverblexemes)
+h2stable = tabulate(Hebrew2Sept)
+
+h2sfile = joinpath(repo, "data", "cooccurrences", "hebrew_septuagint.cex")
+open(h2sfile, "w") do io
+    write(io, coocurhdr * join(h2stable, "\n"))
+end
 
 Vulg2Sept = cooccurs(latinverblexemes, greekverblexemes)
+v2stable = tabulate(Vulg2Sept)
+
+
+v2sfile = joinpath(repo, "data", "cooccurrences", "vulgate_septuagint.cex")
+open(v2sfile, "w") do io
+    write(io, coocurhdr * join(v2stable, "\n"))
+end
+
 Vulg2Hebrew = cooccurs(latinverblexemes, sefariaverblexemes)
+v2htable = tabulate(Vulg2Hebrew)
 
 
+
+v2hfile = joinpath(repo, "data", "cooccurrences", "vulgate_hebrew.cex")
+open(v2hfile, "w") do io
+    write(io, coocurhdr * join(v2htable, "\n"))
+end
 
 
 
