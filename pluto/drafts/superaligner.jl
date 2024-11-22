@@ -35,11 +35,14 @@ md"""# Hebrew/Greek/Latin verb alignments"""
 # ╔═╡ 3f1c3b5b-a6aa-40de-ab85-8eb03f89a020
 md"""*Reference language*: $(@bind keylanguage Select(["Hebrew", "Greek", "Latin"], default = "Greek"))"""
 
-# ╔═╡ 1d713741-179d-4780-a432-981b11b1a48f
-function bestpairing(keylang, pairedlang, lemma, ref)
-	"Best match in $(pairedlang) for $(lemma) in $(ref)"
-	
+# ╔═╡ 0888a4d1-71c5-4b6d-a2f1-156ed7fa9684
+function screen(prefs, actuals)
+	"Look at $(length(actuals)) verbs"
 end
+
+# ╔═╡ 20f336dd-9b5f-4db7-92e8-491d6187ffde
+testref = "genesis:1.3"
+
 
 # ╔═╡ 8aa27093-2324-4824-944f-234ef58a0341
 html"""
@@ -57,11 +60,20 @@ md"""---
 md""" ## Text pairings"""
 
 # ╔═╡ aab44b63-6cac-401e-b594-ad952dc6b44c
-t1label = if keylanguage == "Greek" || keylanguage == "Latin"
+ t1label = if keylanguage == "Greek" || keylanguage == "Latin"
 	"Hebrew"
 elseif keylanguage == "Hebrew"
 	"Greek"
 end
+
+# ╔═╡ 857e0dfc-e92a-400d-a447-f81121e295fa
+t1label
+
+# ╔═╡ 4e7f127a-98f9-45eb-ad59-d11f8fb70f62
+t1label
+
+# ╔═╡ 18eddf70-a1ab-4377-a178-67748c0f5056
+t1label
 
 # ╔═╡ 1369b442-c547-4fe5-81b5-9fd30bae6f68
 t2label = if keylanguage == "Greek"
@@ -114,6 +126,30 @@ latinverbmenu = sort(map(tup -> string(tup.lemma, ":", tup.label), latinverbconc
 # ╔═╡ af905422-41af-4e72-a72d-8a1415eef5aa
 hebrewverbconcordance = getverbs(hebrewverburl)
 
+# ╔═╡ ede8bf8e-68b4-4809-9779-4447fa6cd6db
+function concordchoice(lang)
+	if lang == "Greek" 
+		greekverbconcordance
+		
+		
+	elseif lang == "Latin"
+		latinverbconcordance
+		
+	elseif lang == "Hebrew"
+		hebrewverbconcordance
+			
+		
+	else
+		nothing
+	end
+	
+end
+
+# ╔═╡ a76843d0-2cb6-425c-a1ed-fd4288556a86
+psgs1 = filter(concordchoice(t1label)) do tpl
+		testref  == tpl.ref
+	end
+
 # ╔═╡ 6b499244-78b4-40d4-bc5c-4151674e0b25
 conc = if keylanguage == "Latin"
 	latinverbconcordance
@@ -140,6 +176,9 @@ end
 # ╔═╡ 37407be9-a2f2-4895-8975-ca21019ae93d
 (chosenlemma, chosenlabel) = split(verbchoice, ":")
 
+# ╔═╡ 6c043673-6984-4113-aee8-f29272084604
+testkey = string(chosenlemma,":",chosenlabel)
+
 # ╔═╡ 77de2a17-4590-4fdf-b2ee-94879c25e720
 chosenpassages = filter(tup -> tup.lemma == chosenlemma, conc)
 
@@ -148,14 +187,6 @@ defaultnum = length(chosenpassages) > 20 ? 20 : legnth(chosenpassages)
 
 # ╔═╡ 3abe6d2c-5d82-42e6-91de-86432ddc18f0
 md"""*Number passages to show*: $(@bind passagecount Slider(1:length(chosenpassages), default = defaultnum, show_value= true))"""
-
-# ╔═╡ 2827f758-2589-4fe9-ad5b-e2544206b391
-rows = map(chosenpassages[1:passagecount]) do tup
-	"| $(tup.ref) | $(bestpairing(keylanguage, t1label, chosenlemma, tup.ref)) | $(bestpairing(keylanguage, t2label, chosenlemma, tup.ref))  |"
-end
-
-# ╔═╡ 1fbd8cd2-8803-4f0c-a740-7dbb600fc63d
-tbl = "| Passage | Best match: $(t1label) | Best match: $(t2label) |\n| --- |--- | --- |\n" * join(rows,"\n") |> Markdown.parse
 
 # ╔═╡ 1285be78-27e0-445e-a325-166a929950df
 chosenpassages[1:passagecount]
@@ -183,7 +214,10 @@ s2vurl = "https://raw.githubusercontent.com/neelsmith/complutensian-texts/refs/h
 s2hurl = "https://raw.githubusercontent.com/neelsmith/complutensian-texts/refs/heads/main/data/cooccurrences/septuagint_hebrew.cex"
 
 # ╔═╡ ae32e611-4780-4b77-9ca3-6139ef40828b
+v2surl = "https://raw.githubusercontent.com/neelsmith/complutensian-texts/refs/heads/main/data/cooccurrences/vulgate_septuagint.cex"
 
+# ╔═╡ 164c9759-4dae-4894-991e-5c1f0e533a74
+v2hurl = "https://raw.githubusercontent.com/neelsmith/complutensian-texts/refs/heads/main/data/cooccurrences/vulgate_hebrew.cex"
 
 # ╔═╡ df42ca57-1ba1-4c1b-9648-33c3a3410ffc
 """Read co-occurrence data from URL into a named tuple."""
@@ -212,6 +246,113 @@ Septuagint2Vulgate = getcooccurs(s2vurl)
 
 # ╔═╡ c77259b2-c6c8-493c-9230-86f27d0a4011
 Septuagint2Hebrew = getcooccurs(s2hurl)
+
+# ╔═╡ 7ed35c9d-28b2-4bbc-becd-e9985d6b81e8
+Vulgate2Septuagint = getcooccurs(v2surl)
+
+# ╔═╡ 1af7e2b9-7e21-429d-a779-ba43cacc8819
+Vulgate2Hebrew = getcooccurs(v2hurl)
+
+# ╔═╡ 74105710-3782-48d3-b717-f141aed39be2
+"""Chooose cooccurence dictionary for a given pair of languages."""
+function cooccurdict(lang1, lang2)
+	if lang1 == "Greek" 
+		if lang2 == "Latin"
+			Septuagint2Vulgate
+		elseif lang2 == "Hebrew"
+			Septuagint2Hebrew
+		end
+		
+	elseif lang1 == "Latin"
+		if lang2 == "Greek"
+			Vulgate2Septuagint
+		elseif lang2 == "Hebrew"
+			Vulgate2Hebrew
+		end
+		
+	elseif lang1 == "Hebrew"
+		if lang2 == "Greek"
+			Hebrew2Septuagint
+		elseif lang2 == "Latin"
+			Hebrew2Vulgate
+		end
+		
+	else
+		nothing
+	end
+	
+end
+
+# ╔═╡ 2ac7dd9e-804b-4a34-a157-44e6ba10edde
+t1dict = cooccurdict(keylanguage, t1label)
+
+# ╔═╡ 2827f758-2589-4fe9-ad5b-e2544206b391
+rows = map(chosenpassages[1:passagecount]) do tup
+	dictkey = string(tup.lemma, ":", tup.label)
+
+	
+	coocfreqs = filter(t1dict) do coocs
+		coocs.lemma1 == dictkey
+	end
+	psgs1 = filter(concordchoice(t1label)) do tpl
+		tup.ref == tpl.ref
+	end
+
+	
+	
+	#psgs2 = filter(concordchoice(t2label)) do tpl
+#		tup.ref == tpl.ref
+	#end
+	
+	#$(bestpairing(keylanguage, t2label, chosenlemma, tup.ref))  |"
+	
+	"| $(tup.ref)  | $(screen(coocfreqs, psgs1)) | 2 | "
+end
+
+# ╔═╡ 1fbd8cd2-8803-4f0c-a740-7dbb600fc63d
+tbl = "| Passage | Best match: $(t1label) | Best match: $(t2label) |\n| --- |--- | --- |\n" * join(rows,"\n") |> Markdown.parse
+
+# ╔═╡ 27e5493a-204b-4c57-8c1f-a3798dee50c2
+t1dict
+
+# ╔═╡ 934a4b25-3f3a-4fcd-b426-6fb572ddd61f
+coocfreqs = filter(t1dict) do coocs
+		coocs.lemma1 == testkey
+	end
+
+# ╔═╡ ecc01ee2-d921-454c-a5b3-6ddd6c3e490e
+for p in psgs1
+	k = string(p.lemma,":",p.label)
+	
+	x = filter(coocfreqs) do freq
+		freq.lemma2 == k
+	end
+	top = x[1]
+end
+
+# ╔═╡ c4dc174e-b378-41b7-bb7d-f72c497a89cc
+t1dict |> length
+
+# ╔═╡ d716973c-84a2-4e30-952f-d7b2c07d925c
+t2dict = cooccurdict(keylanguage, t2label)
+
+# ╔═╡ e8645575-6047-440d-9334-7c566ed6e946
+cooccurdict("Greek", "Hebrew")
+
+# ╔═╡ 5560e3ea-f500-4275-becf-44f1dd939711
+keylanguage
+
+# ╔═╡ 8474f3c3-c3cb-4520-aa94-dd062fcdf073
+t1label
+
+# ╔═╡ 1d713741-179d-4780-a432-981b11b1a48f
+function bestpairing(keylang, pairedlang, lemma, ref)
+	#dict = cooccurdict(keylang, pairedlang)
+
+	
+	"Best match in $(pairedlang) for $(lemma) in $(ref)" # using $(dict)"
+	
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -582,20 +723,35 @@ version = "17.4.0+2"
 # ╟─75cfe53a-9966-4c31-811b-a6d9e9906d00
 # ╟─3abe6d2c-5d82-42e6-91de-86432ddc18f0
 # ╟─1fbd8cd2-8803-4f0c-a740-7dbb600fc63d
-# ╠═2827f758-2589-4fe9-ad5b-e2544206b391
-# ╠═1d713741-179d-4780-a432-981b11b1a48f
+# ╟─2827f758-2589-4fe9-ad5b-e2544206b391
+# ╠═0888a4d1-71c5-4b6d-a2f1-156ed7fa9684
+# ╠═20f336dd-9b5f-4db7-92e8-491d6187ffde
+# ╠═6c043673-6984-4113-aee8-f29272084604
+# ╠═27e5493a-204b-4c57-8c1f-a3798dee50c2
+# ╠═934a4b25-3f3a-4fcd-b426-6fb572ddd61f
+# ╠═a76843d0-2cb6-425c-a1ed-fd4288556a86
+# ╠═ecc01ee2-d921-454c-a5b3-6ddd6c3e490e
+# ╠═857e0dfc-e92a-400d-a447-f81121e295fa
 # ╟─8aa27093-2324-4824-944f-234ef58a0341
 # ╟─c52c252b-ed70-44ab-a158-68f11d11a056
 # ╟─d7ca89c2-63cb-4e3b-b536-a4fee1b32b88
-# ╠═aab44b63-6cac-401e-b594-ad952dc6b44c
-# ╠═1369b442-c547-4fe5-81b5-9fd30bae6f68
+# ╠═4e7f127a-98f9-45eb-ad59-d11f8fb70f62
+# ╠═2ac7dd9e-804b-4a34-a157-44e6ba10edde
+# ╠═18eddf70-a1ab-4377-a178-67748c0f5056
+# ╠═c4dc174e-b378-41b7-bb7d-f72c497a89cc
+# ╠═d716973c-84a2-4e30-952f-d7b2c07d925c
+# ╠═ede8bf8e-68b4-4809-9779-4447fa6cd6db
+# ╠═e8645575-6047-440d-9334-7c566ed6e946
+# ╠═74105710-3782-48d3-b717-f141aed39be2
+# ╟─aab44b63-6cac-401e-b594-ad952dc6b44c
+# ╟─1369b442-c547-4fe5-81b5-9fd30bae6f68
 # ╟─7f2fe1ee-e261-42f6-9368-a092f7379ccd
 # ╠═1285be78-27e0-445e-a325-166a929950df
 # ╠═2e440c93-ee80-4c56-954e-b5ebb34bce7b
 # ╠═37407be9-a2f2-4895-8975-ca21019ae93d
 # ╟─6b499244-78b4-40d4-bc5c-4151674e0b25
 # ╟─77de2a17-4590-4fdf-b2ee-94879c25e720
-# ╠═fa23c556-a740-4538-8093-affc825fb31e
+# ╟─fa23c556-a740-4538-8093-affc825fb31e
 # ╟─3f4b7ff2-f34e-4a09-8c7f-4a4f7a0b0fce
 # ╟─a3753ef9-c3d0-4b0b-90c9-cce0fa119796
 # ╟─06f74daa-41e8-4fdf-9ca9-6407f676621e
@@ -611,13 +767,19 @@ version = "17.4.0+2"
 # ╟─bdfc3a48-60ce-43d7-bf38-a62f0560da43
 # ╟─0ae7a084-8b77-4ddc-8a2a-c92c2c21fea4
 # ╟─ebe0a25c-1973-4640-98e0-207c1d42dfbd
-# ╟─04cfe49f-0a32-4813-a8b5-8c262605b503
+# ╠═04cfe49f-0a32-4813-a8b5-8c262605b503
 # ╠═ae32e611-4780-4b77-9ca3-6139ef40828b
-# ╠═df42ca57-1ba1-4c1b-9648-33c3a3410ffc
+# ╠═164c9759-4dae-4894-991e-5c1f0e533a74
+# ╟─df42ca57-1ba1-4c1b-9648-33c3a3410ffc
 # ╟─99692ac2-f31d-490e-8be6-c29858472cc4
 # ╟─2abe8c77-a094-4abf-93f8-d366309a4449
 # ╟─6dcae0bf-2ffe-42b0-9f85-253f7158c1a2
 # ╟─12470c5e-7380-4de0-b968-85ca36d7d737
-# ╟─c77259b2-c6c8-493c-9230-86f27d0a4011
+# ╠═c77259b2-c6c8-493c-9230-86f27d0a4011
+# ╠═7ed35c9d-28b2-4bbc-becd-e9985d6b81e8
+# ╠═1af7e2b9-7e21-429d-a779-ba43cacc8819
+# ╠═5560e3ea-f500-4275-becf-44f1dd939711
+# ╠═8474f3c3-c3cb-4520-aa94-dd062fcdf073
+# ╠═1d713741-179d-4780-a432-981b11b1a48f
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
