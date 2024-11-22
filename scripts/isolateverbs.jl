@@ -7,6 +7,7 @@ using LatinOrthography
 using Tabulae
 using StatsBase, OrderedCollections
 
+repo = pwd()
 
 # Greek parser and parsing utilities
 """Instantiate Complutensian parser for Septuagint"""
@@ -42,6 +43,9 @@ function greeklkabeldict()
 end
 greeklabels = greeklkabeldict()
 
+
+
+
 # Latin parser and parsing utilities
 p25url = "http://shot.holycross.edu/tabulae/complut-lat25-current.cex"
 vulgateparser = tabulaeStringParser(p25url, UrlReader)
@@ -60,15 +64,14 @@ function book(corpus::CitableTextCorpus, version, bookid)
 end
 
 # 1. ISOLATE VERBS IN GREEK LXXX
-lxxbook = book(corpus, "septuagint", "genesis")
-@time lxxbooktokens = tokenize(lxxbook, literaryGreek())
-lxxbooklex = filter(t -> tokencategory(t) isa LexicalToken, lxxbooktokens)
+#lxxbook = book(corpus, "septuagint", "genesis")
+#@time lxxbooktokens = tokenize(lxxbook, literaryGreek())
+# lxxbooklex = filter(t -> tokencategory(t) isa LexicalToken, lxxbooktokens)
+lxx = filter(p -> versionid(p.urn) == "septuagint", corpus.passages) |> CitableTextCorpus
+@time lxxtokens = tokenize(lxx, literaryGreek())
+lxxlex = filter(t -> tokencategory(t) isa LexicalToken, lxxtokens)
 
-#lxx = filter(corpus.passages) do psg
-#    versionid(psg.urn) == "septuagint"
-#end |> CitableTextCorpus
-#@time lxxtokens = tokenize(lxx, literaryGreek())
-#lxxlex = filter(t -> tokencategory(t) isa LexicalToken, lxxtokens)
+
 """True if a GreekMorphologicalForm is a verbal form."""
 function is_greek_verb(f::T) where T <: GreekMorphologicalForm
     f isa GMFFiniteVerb ||
@@ -107,19 +110,30 @@ function isolate_greek_verbs(ctokenlist, parser, labelsdict; messageinterval = 1
     greekverbs
 end
 
-#@time greekverblexemes = isolate_greek_verbs(lxxlex, greekparser, greeklabels)
-@time greekverblexemes = isolate_greek_verbs(lxxbooklex, greekparser, greeklabels)
+@time greekverblexemes = isolate_greek_verbs(lxxlex, greekparser, greeklabels)
+#@time greekverblexemes = isolate_greek_verbs(lxxbooklex, greekparser, greeklabels)
+greekverblexemes[1]
+greekverbfile = joinpath(repo, "data", "greek", "greekverbs.cex")
+
+greekverbstrings = map(greekverblexemes) do tupl
+    string(tupl.ref, "|", tupl.lexeme, "|", tupl.label)
+end
+
+open(greekverbfile, "w") do io
+    write(io, join(greekverbstrings, "\n"))
+end
+
 
 
 # 2. ISOLATE VERBS IN LATIN VULGATE
-#vulgate = filter(corpus.passages) do psg
-#    versionid(psg.urn) == "vulgate"
-#end |> CitableTextCorpus
-#@time vulgatetokens = tokenize(vulgate, latin25())
-#vulgatelex = filter(t -> tokencategory(t) isa LexicalToken, vulgatetokens)
-vulgatebook = book(corpus, "vulgate", "genesis")
-@time vulgatebooktokens = tokenize(vulgatebook, latin25())
-vulgatebooklex = filter(t -> tokencategory(t) isa LexicalToken, vulgatebooktokens)
+vulgate = filter(corpus.passages) do psg
+    versionid(psg.urn) == "vulgate"
+end |> CitableTextCorpus
+@time vulgatetokens = tokenize(vulgate, latin25())
+vulgatelex = filter(t -> tokencategory(t) isa LexicalToken, vulgatetokens)
+#vulgatebook = book(corpus, "vulgate", "genesis")
+#@time vulgatebooktokens = tokenize(vulgatebook, latin25())
+#vulgatebooklex = filter(t -> tokencategory(t) isa LexicalToken, vulgatebooktokens)
 
 """True if a LatinMorphologicalForm is a verbal form."""
 function is_latin_verb(f::T) where T <: LatinMorphologicalForm
@@ -176,7 +190,7 @@ function isolatesefariafiles(flist, srcdir = datadir)
         for ln in filter(ln -> ! isempty(ln), datalines)
             (urnstr, form, lemma, lexid) = split(ln, "|")
             u = CtsUrn(urnstr)
-            id = join([workid(u), passagecomponent(u)], ":")
+            id = join([workid(u), passagecomponent(collapsePassageBy(u,1))], ":")
             push!(tuples, (ref = id, lexeme = lexid, label = lemma, form = form))
 
         end
@@ -199,9 +213,7 @@ function cooccurs(tuples1, tuples2; messageinterval = 5)
     count = 0
     for lemm in uniquelemms
         count = count + 1
-      
-        
-        
+
         cooccurlemms = []
         lemtuples = filter(t -> t.lexeme == lemm, tuples1)
         lemmalabel = lemm * ":" * lemtuples[1].label
@@ -231,6 +243,12 @@ end
 Sept2Vulg = cooccurs(greekverblexemes, latinverblexemes)
 Sept2Hebrew = cooccurs(greekverblexemes, sefariaverblexemes)
 
+Hebrew2Vulg =  cooccurs(sefariaverblexemes, latinverblexemes)
+Hebrew2Sept =  cooccurs(sefariaverblexemes, greekverblexemes)
+
+
+Vulg2Sept = cooccurs(latinverblexemes, greekverblexemes)
+Vulg2Hebrew = cooccurs(latinverblexemes, sefariaverblexemes)
 
 
 

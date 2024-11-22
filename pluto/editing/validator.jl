@@ -1,17 +1,19 @@
 ### A Pluto.jl notebook ###
-# v0.19.41
+# v0.20.3
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
+    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
+    #! format: on
 end
 
 # ╔═╡ c98d7fb6-f37f-11ee-1031-096fd7191832
@@ -121,7 +123,7 @@ md"""> ## Structured repository"""
 # when user clicks it.
 r =  begin
 	loadem
-	repository(dirname(pwd()))
+	repository(dirname(pwd()) |> dirname)
 end
 
 # ╔═╡ f11d6db3-53ea-4abe-aa03-517414663373
@@ -139,6 +141,7 @@ end
 
 
 # ╔═╡ 160ef930-ee9b-4d4e-b628-bf8e686e9bc5
+# ╠═╡ show_logs = false
 md"""## Choose a surface to verify
 
 $(@bind surface Select(surfacemenu()))
@@ -156,6 +159,7 @@ function waiting()
 end
 
 # ╔═╡ cbe71429-08e1-41b9-aebe-b7484e2e3f5f
+# ╠═╡ show_logs = false
 begin
 	if isnothing(surfaceurn)
 		HTML(waiting())
@@ -289,7 +293,7 @@ PlutoUI = "~0.7.59"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.2"
+julia_version = "1.10.6"
 manifest_format = "2.0"
 project_hash = "c0103ed0fa385dc44fd2eb35d825c580769f4221"
 
@@ -539,7 +543,7 @@ weakdeps = ["Dates", "LinearAlgebra"]
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "1.1.0+0"
+version = "1.1.1+0"
 
 [[deps.ComputationalResources]]
 git-tree-sha1 = "52cb3ec90e8a8bea0e62e275ba577ad0f74821f7"
@@ -1759,7 +1763,7 @@ version = "1.5.6+0"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.8.0+1"
+version = "5.11.0+0"
 
 [[deps.libpng_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
