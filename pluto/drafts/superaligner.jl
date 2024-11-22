@@ -4,10 +4,25 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    #! format: off
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+    #! format: on
+end
+
 # ╔═╡ 4037e0e0-9e55-4bbf-9389-23fd00c540cc
 begin
 	using PlutoUI
 	using Downloads
+
+	using StatsBase, OrderedCollections
+	
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
@@ -16,6 +31,9 @@ TableOfContents()
 
 # ╔═╡ c4cd3eca-a901-11ef-221d-01795b474879
 md"""# Super aligner!"""
+
+# ╔═╡ 3f1c3b5b-a6aa-40de-ab85-8eb03f89a020
+@bind keylanguage Select(["Hebrew", "Greek", "Latin"], default = "Greek")
 
 # ╔═╡ 8aa27093-2324-4824-944f-234ef58a0341
 html"""
@@ -28,6 +46,9 @@ md"""---
 
 > # Mechanics
 """
+
+# ╔═╡ 7f2fe1ee-e261-42f6-9368-a092f7379ccd
+md""" # Verb menus"""
 
 # ╔═╡ f31b070f-745b-4b58-8524-e1bea64b0a34
 md"""## Verb occurrences"""
@@ -54,19 +75,42 @@ function getverbs(url)
 end
 
 # ╔═╡ baf00831-b64d-4d98-8df6-3e5fa063151b
-getverbs(greekverburl)
+greekverbconcordance = getverbs(greekverburl)
+
+# ╔═╡ 3f4b7ff2-f34e-4a09-8c7f-4a4f7a0b0fce
+greekverbmenu = sort(map(tup -> string(tup.lemma, ":", tup.label), greekverbconcordance) |> countmap |> OrderedDict, rev=true, byvalue = true) |> keys |> collect
 
 # ╔═╡ 886d7bb2-0508-4793-a3eb-a9abdb79a4ef
-getverbs(latinverburl)
+latinverbconcordance =  getverbs(latinverburl)
+
+# ╔═╡ a3753ef9-c3d0-4b0b-90c9-cce0fa119796
+latinverbmenu = sort(map(tup -> string(tup.lemma, ":", tup.label), latinverbconcordance) |> countmap |> OrderedDict, rev=true, byvalue = true) |> keys |> collect
+
+# ╔═╡ 2a4d843d-c521-4985-b546-d014de5dea58
+if keylanguage == "Greek"
+	@bind verbchoice Select(greekverbmenu)
+elseif keylanguage == "Latin"
+	@bind verbchoice Select(latinverbmenu)
+else
+	
+	md"Nope"
+end
+
+# ╔═╡ af905422-41af-4e72-a72d-8a1415eef5aa
+hebrewverbconcordance = getverbs(hebrewverburl)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
 [compat]
+OrderedCollections = "~1.6.3"
 PlutoUI = "~0.7.60"
+StatsBase = "~0.34.3"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -75,7 +119,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.6"
 manifest_format = "2.0"
-project_hash = "6a9baa245de3b2e3e2ee0b43626ae8f73b7bc8ef"
+project_hash = "8134bde1d309d350b2a566e2098c653cbf0ec88c"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -99,14 +143,41 @@ git-tree-sha1 = "b10d0b65641d57b8b4d5e234446582de5047050d"
 uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
 version = "0.11.5"
 
+[[deps.Compat]]
+deps = ["TOML", "UUIDs"]
+git-tree-sha1 = "8ae8d32e09f0dcf42a36b90d4e17f5dd2e4c4215"
+uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
+version = "4.16.0"
+weakdeps = ["Dates", "LinearAlgebra"]
+
+    [deps.Compat.extensions]
+    CompatLinearAlgebraExt = "LinearAlgebra"
+
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
 version = "1.1.1+0"
 
+[[deps.DataAPI]]
+git-tree-sha1 = "abe83f3a2f1b857aac70ef8b269080af17764bbe"
+uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
+version = "1.16.0"
+
+[[deps.DataStructures]]
+deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
+git-tree-sha1 = "1d0a14036acb104d9e89698bd408f63ab58cdc82"
+uuid = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+version = "0.18.20"
+
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
+
+[[deps.DocStringExtensions]]
+deps = ["LibGit2"]
+git-tree-sha1 = "2fb1e02f2b635d0845df5d7c167fec4dd739b00d"
+uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
+version = "0.9.3"
 
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
@@ -143,6 +214,11 @@ version = "0.2.5"
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
+
+[[deps.IrrationalConstants]]
+git-tree-sha1 = "630b497eafcc20001bba38a4651b327dcfc491d2"
+uuid = "92d709cd-6900-40b7-9082-c6be49f344b6"
+version = "0.2.2"
 
 [[deps.JSON]]
 deps = ["Dates", "Mmap", "Parsers", "Unicode"]
@@ -181,6 +257,22 @@ uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
+[[deps.LogExpFunctions]]
+deps = ["DocStringExtensions", "IrrationalConstants", "LinearAlgebra"]
+git-tree-sha1 = "a2d09619db4e765091ee5c6ffe8872849de0feea"
+uuid = "2ab3a3ac-af41-5b50-aa03-7779005ae688"
+version = "0.3.28"
+
+    [deps.LogExpFunctions.extensions]
+    LogExpFunctionsChainRulesCoreExt = "ChainRulesCore"
+    LogExpFunctionsChangesOfVariablesExt = "ChangesOfVariables"
+    LogExpFunctionsInverseFunctionsExt = "InverseFunctions"
+
+    [deps.LogExpFunctions.weakdeps]
+    ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+    ChangesOfVariables = "9e997f8a-9a97-42d5-a9f1-ce6bfc15e2c0"
+    InverseFunctions = "3587e190-3f89-42d0-90ee-14403ec27112"
+
 [[deps.Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
@@ -198,6 +290,12 @@ deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
 version = "2.28.2+1"
 
+[[deps.Missings]]
+deps = ["DataAPI"]
+git-tree-sha1 = "ec4f7fbeab05d7747bdf98eb74d130a2a2ed298d"
+uuid = "e1d29d7a-bbdc-5cf2-9ac0-f12de2c33e28"
+version = "1.2.0"
+
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
@@ -213,6 +311,11 @@ version = "1.2.0"
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
 version = "0.3.23+4"
+
+[[deps.OrderedCollections]]
+git-tree-sha1 = "dfdf5519f235516220579f949664f1bf44e741c5"
+uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+version = "1.6.3"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
@@ -270,6 +373,12 @@ uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 [[deps.Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 
+[[deps.SortingAlgorithms]]
+deps = ["DataStructures"]
+git-tree-sha1 = "66e0a8e672a0bdfca2c3f5937efb8538b9ddc085"
+uuid = "a2af1166-a08f-5f64-846c-94a0d3cef48c"
+version = "1.2.1"
+
 [[deps.SparseArrays]]
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
@@ -279,6 +388,18 @@ version = "1.10.0"
 deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 version = "1.10.0"
+
+[[deps.StatsAPI]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "1ff449ad350c9c4cbc756624d6f8a8c3ef56d3ed"
+uuid = "82ae8749-77ed-4fe6-ae5f-f523153014b0"
+version = "1.7.0"
+
+[[deps.StatsBase]]
+deps = ["DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunctions", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]
+git-tree-sha1 = "5cf7606d6cef84b543b483848d4ae08ad9832b21"
+uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+version = "0.34.3"
 
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
@@ -341,8 +462,13 @@ version = "17.4.0+2"
 # ╟─4037e0e0-9e55-4bbf-9389-23fd00c540cc
 # ╟─19161990-52b4-408b-ad08-2b021d60b76d
 # ╟─c4cd3eca-a901-11ef-221d-01795b474879
+# ╟─3f1c3b5b-a6aa-40de-ab85-8eb03f89a020
+# ╠═2a4d843d-c521-4985-b546-d014de5dea58
 # ╟─8aa27093-2324-4824-944f-234ef58a0341
 # ╟─c52c252b-ed70-44ab-a158-68f11d11a056
+# ╟─7f2fe1ee-e261-42f6-9368-a092f7379ccd
+# ╠═3f4b7ff2-f34e-4a09-8c7f-4a4f7a0b0fce
+# ╠═a3753ef9-c3d0-4b0b-90c9-cce0fa119796
 # ╟─f31b070f-745b-4b58-8524-e1bea64b0a34
 # ╠═9bdfc921-7018-43b1-ae0a-9ffe7a05909d
 # ╠═276c82bb-4872-40cf-9818-65fcdbb8b6d8
@@ -350,5 +476,6 @@ version = "17.4.0+2"
 # ╟─7563152c-1b0e-4397-84f1-b2d954c76e5a
 # ╠═baf00831-b64d-4d98-8df6-3e5fa063151b
 # ╠═886d7bb2-0508-4793-a3eb-a9abdb79a4ef
+# ╠═af905422-41af-4e72-a72d-8a1415eef5aa
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
