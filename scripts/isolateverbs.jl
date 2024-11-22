@@ -113,14 +113,15 @@ end
 @time greekverblexemes = isolate_greek_verbs(lxxlex, greekparser, greeklabels)
 #@time greekverblexemes = isolate_greek_verbs(lxxbooklex, greekparser, greeklabels)
 greekverblexemes[1]
-greekverbfile = joinpath(repo, "data", "greek", "greekverbs.cex")
+
 
 greekverbstrings = map(greekverblexemes) do tupl
     string(tupl.ref, "|", tupl.lexeme, "|", tupl.label)
 end
-
+hdr = "ref|lexeme|label\n"
+greekverbfile = joinpath(repo, "data", "greek", "greekverbs.cex")
 open(greekverbfile, "w") do io
-    write(io, join(greekverbstrings, "\n"))
+    write(io, hdr * join(greekverbstrings, "\n"))
 end
 
 
@@ -173,13 +174,26 @@ function isolate_latin_verbs(ctokenlist, parser, labelsdict = latinlabels; messa
     latinverbs
 end
 
-@time latinverblexemes = isolate_latin_verbs(vulgatebooklex, vulgateparser)
+#@time latinverblexemes = isolate_latin_verbs(vulgatebooklex, vulgateparser)
+@time latinverblexemes = isolate_latin_verbs(vulgatelex, vulgateparser)
+
+
+latinverbstrings = map(latinverblexemes) do tupl
+    string(tupl.ref, "|", tupl.lexeme, "|", tupl.label)
+end
+
+latinverbfile = joinpath(repo, "data", "latin", "latinverbs.cex")
+open(latinverbfile, "w") do io
+    write(io, hdr * join(latinverbstrings, "\n"))
+end
+
+
+
 
 
 
 # 3. Isolate verb data from Sefaria
-repo = pwd()
-datadir = joinpath(repo, "data")
+datadir = joinpath(repo, "data", "sefaria")
 cexsrc = filter(f -> endswith(f, "cex"), readdir(datadir))
 
 function isolatesefariafiles(flist, srcdir = datadir)
@@ -198,7 +212,20 @@ function isolatesefariafiles(flist, srcdir = datadir)
     tuples
 end
 
-@time sefariaverblexemes = isolatesefariafiles(["genesis.cex"])
+#@time sefariaverblexemes = isolatesefariafiles(["genesis.cex"])
+@time sefariaverblexemes = isolatesefariafiles(cexsrc)
+sefariaverblexemes[1]
+
+sefariaverbstrings = map(sefariaverblexemes) do tupl
+    string(tupl.ref, "|", tupl.lexeme, "|", tupl.label, "|", tupl.form)
+end
+
+sefariahdr = hdr = "ref|lexeme|label|form\n"
+hebrewverbfile = joinpath(repo, "data", "hebrew", "sefariaverbs.cex")
+open(hebrewverbfile, "w") do io
+    write(io, hdr * join(sefariaverbstrings, "\n"))
+end
+
 
 
 # Find coocurrences:
