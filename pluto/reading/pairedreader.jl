@@ -174,6 +174,9 @@ function formatpsg(psgurn::CtsUrn, c::CitableTextCorpus; labelsdict = versiondic
 	join(vcat(mdlines, txtcontent), "\n")
 end
 
+# ╔═╡ b9279e2a-080c-43ea-b838-83e5d96f8a1a
+formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).$(col1):$(verse)"), corpus) |> Markdown.parse
+
 # ╔═╡ 4a46b1d5-395a-45e3-a078-93f0df69a6e8
 if adjacent
 	formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).$(col2):$(verse)"), corpus) |> Markdown.parse |> aside
@@ -181,9 +184,6 @@ else
 	formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).$(col2):$(verse)"), corpus) |> Markdown.parse 
 end
 
-
-# ╔═╡ b9279e2a-080c-43ea-b838-83e5d96f8a1a
-formatpsg(CtsUrn("urn:cts:compnov:bible.$(book).$(col1):$(verse)"), corpus) |> Markdown.parse
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """

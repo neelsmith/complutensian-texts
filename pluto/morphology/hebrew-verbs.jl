@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.46
+# v0.19.47
 
 using Markdown
 using InteractiveUtils
@@ -122,118 +122,118 @@ md""" ## Source files"""
 repo = pwd() |> dirname |> dirname
 
 # ╔═╡ 13d507b9-18ce-4739-a55e-3cf48ec08972
-genesisfile = joinpath(repo, "data", "genesis.cex")
+genesisfile = joinpath(repo, "data", "sefaria", "genesis.cex")
 
 # ╔═╡ e5b09a0d-7c16-4b7c-898e-060fe0e66118
-exodusfile = joinpath(repo, "data", "exodus.cex")
+exodusfile = joinpath(repo, "data", "sefaria", "exodus.cex")
 
 # ╔═╡ 90a26573-c8a7-462c-affb-2fb0bd4d26a9
-leviticusfile = joinpath(repo, "data", "leviticus.cex")
+leviticusfile = joinpath(repo, "data", "sefaria", "leviticus.cex")
 
 # ╔═╡ 338d61e1-eb43-4d83-addf-4b994dac9b84
-numbersfile = joinpath(repo, "data", "numbers.cex")
+numbersfile = joinpath(repo, "data", "sefaria", "numbers.cex")
 
 # ╔═╡ 06db4b52-9469-4e8a-9c3a-5ea694d4dfb5
-deuteronomyfile = joinpath(repo, "data", "deuteronomy.cex")
+deuteronomyfile = joinpath(repo, "data", "sefaria", "deuteronomy.cex")
 
 # ╔═╡ c760f46c-aa18-4e71-a5e8-ab3bea88d069
-joshuafile = joinpath(repo, "data", "joshua.cex")
+joshuafile = joinpath(repo, "data", "sefaria", "joshua.cex")
 
 # ╔═╡ ae2813d2-f79b-4d12-ba89-03c6c057a590
-judgesfile = joinpath(repo, "data", "judges.cex")
+judgesfile = joinpath(repo, "data", "sefaria", "judges.cex")
 
 # ╔═╡ 70fb2c80-557c-414a-936b-754f53a3b982
-ruthfile = joinpath(repo, "data", "ruth.cex")
+ruthfile = joinpath(repo, "data", "sefaria", "ruth.cex")
 
 # ╔═╡ c8abeabc-0259-4090-92ca-447b879e4c8d
-samuel1file = joinpath(repo, "data", "1samuel.cex")
+samuel1file = joinpath(repo, "data", "sefaria", "1samuel.cex")
 
 # ╔═╡ 91c69e74-fe47-4a05-a05f-bd6c2dd7a7ac
-samuel2file = joinpath(repo, "data", "2samuel.cex")
+samuel2file = joinpath(repo, "data", "sefaria", "2samuel.cex")
 
 # ╔═╡ 3ae1bc48-eb91-4c73-bc5f-7ea109a2c462
-kings1file = joinpath(repo, "data", "1kings.cex")
+kings1file = joinpath(repo, "data", "sefaria", "1kings.cex")
 
 # ╔═╡ c56ba726-6941-4d90-9eb6-5c5feb7da64f
-kings2file = joinpath(repo, "data", "2kings.cex")
+kings2file = joinpath(repo, "data", "sefaria", "2kings.cex")
 
 # ╔═╡ e15bd91a-c45d-4771-82b8-bcdcd57fcc20
-chronicles2file = joinpath(repo, "data", "2chronicles.cex")
+chronicles2file = joinpath(repo, "data","sefaria",  "2chronicles.cex")
 
 # ╔═╡ e45cd1bc-49e7-4291-be46-991cf32f110c
-ezrafile = joinpath(repo, "data", "ezra.cex")
+ezrafile = joinpath(repo, "data", "sefaria", "ezra.cex")
 
 # ╔═╡ f9fc625b-7c52-43f4-8d96-cc38c34b83de
-nehemiahfile = joinpath(repo, "data", "nehemiah.cex")
+nehemiahfile = joinpath(repo, "data","sefaria",  "nehemiah.cex")
 
 # ╔═╡ 058c0047-a3f4-45f2-afdc-2af3839bf4cb
-estherfile = joinpath(repo, "data", "esther.cex")
+estherfile = joinpath(repo, "data", "sefaria", "esther.cex")
 
 # ╔═╡ 263ca802-e0e3-4a68-bb7a-568ec35a605b
-jobfile = joinpath(repo, "data", "job.cex")
+jobfile = joinpath(repo, "data", "sefaria", "job.cex")
 
 # ╔═╡ e4eee511-5da9-45dd-9919-995550305ca1
-psalmsfile = joinpath(repo, "data", "psalms.cex")
+psalmsfile = joinpath(repo, "data", "sefaria", "psalms.cex")
 
 # ╔═╡ 1be84181-1999-40ca-8ed9-30d950ba8ca8
-proverbsfile = joinpath(repo, "data", "proverbs.cex")
+proverbsfile = joinpath(repo, "data", "sefaria", "proverbs.cex")
 
 # ╔═╡ a57a3138-5e69-495d-ae82-59a733b8dd9c
-ecclesiastesfile = joinpath(repo, "data", "ecclesiastes.cex")
+ecclesiastesfile = joinpath(repo, "data", "sefaria", "ecclesiastes.cex")
 
 # ╔═╡ 5f468021-eb9b-47f6-8a5e-eb56a97e0721
-songsfile = joinpath(repo, "data", "songs.cex")
+songsfile = joinpath(repo, "data", "sefaria", "songs.cex")
 
 # ╔═╡ aac41c94-b7f8-4e2f-ad1b-7bf1f9dd7219
-isaiahfile = joinpath(repo, "data", "isaiah.cex")
+isaiahfile = joinpath(repo, "data", "sefaria", "isaiah.cex")
 
 # ╔═╡ db346f4f-f67d-43b9-a8b0-7b86f8b08237
-jeremiahfile = joinpath(repo, "data", "jeremiah.cex")
+jeremiahfile = joinpath(repo, "data", "sefaria", "jeremiah.cex")
 
 # ╔═╡ 8d944450-f42c-4444-b4f8-75849f7f91e3
-lamentationsfile = joinpath(repo, "data", "lamentations.cex")
+lamentationsfile = joinpath(repo, "data", "sefaria", "lamentations.cex")
 
 # ╔═╡ 0048081e-a0ec-4d60-aac9-fbdf67f23cc5
-ezekielfile = joinpath(repo, "data", "ezekiel.cex")
+ezekielfile = joinpath(repo, "data","sefaria",  "ezekiel.cex")
 
 # ╔═╡ f51331e5-17a4-4e2a-bc31-1f60a406d265
-danielfile = joinpath(repo, "data", "daniel.cex")
+danielfile = joinpath(repo, "data","sefaria",  "daniel.cex")
 
 # ╔═╡ 2ac07776-7472-49f2-b665-170d5744ef77
-hoseafile = joinpath(repo, "data", "hosea.cex")
+hoseafile = joinpath(repo, "data", "sefaria", "hosea.cex")
 
 # ╔═╡ c2bd5717-ddc3-4a0e-b84e-365a786de53a
-joelfile = joinpath(repo, "data", "joel.cex")
+joelfile = joinpath(repo, "data", "sefaria", "joel.cex")
 
 # ╔═╡ 164de5e5-4acd-4afb-921c-1dd50ca7ad08
-amosfile = joinpath(repo, "data", "amos.cex")
+amosfile = joinpath(repo, "data", "sefaria", "amos.cex")
 
 # ╔═╡ a7565935-466c-480c-9b67-460feb7cfada
-obadiahfile = joinpath(repo, "data", "obadiah.cex")
+obadiahfile = joinpath(repo, "data", "sefaria", "obadiah.cex")
 
 # ╔═╡ e317bd48-dde0-49c1-98c7-f2c684b39802
-jonahfile = joinpath(repo, "data", "jonah.cex")
+jonahfile = joinpath(repo, "data", "sefaria", "jonah.cex")
 
 # ╔═╡ 8c69bdb0-4103-4351-be6c-0c52d915becf
-micahfile = joinpath(repo, "data", "micah.cex")
+micahfile = joinpath(repo, "data", "sefaria", "micah.cex")
 
 # ╔═╡ 6f1f43a6-8763-47eb-8748-c9457b5b152b
-nahumfile = joinpath(repo, "data", "nahum.cex")
+nahumfile = joinpath(repo, "data", "sefaria", "nahum.cex")
 
 # ╔═╡ c472f05e-5523-45c3-a76c-aabbc6db3edc
-habakkukfile = joinpath(repo, "data", "habakkuk.cex")
+habakkukfile = joinpath(repo, "data", "sefaria", "habakkuk.cex")
 
 # ╔═╡ c3ddf726-02f3-4a68-855b-68cdfdc8170b
-zephaniahfile = joinpath(repo, "data", "zephaniah.cex")
+zephaniahfile = joinpath(repo, "data", "sefaria", "zephaniah.cex")
 
 # ╔═╡ 99b988bb-5adb-4528-a5d7-a614ab019b21
-haggaifile = joinpath(repo, "data", "haggai.cex")
+haggaifile = joinpath(repo, "data", "sefaria", "haggai.cex")
 
 # ╔═╡ 95a6c43d-1e04-4a62-9979-df8f5d36da76
-zechariahfile = joinpath(repo, "data", "zechariah.cex")
+zechariahfile = joinpath(repo, "data", "sefaria", "zechariah.cex")
 
 # ╔═╡ 2311605e-8eb4-4345-89c2-0eadfbef3704
-malachifile = joinpath(repo, "data", "malachi.cex")
+malachifile = joinpath(repo, "data", "sefaria", "malachi.cex")
 
 # ╔═╡ 9dbf8ebe-abd3-45dd-8a48-6125c7bc7a3a
 filemenu = [
@@ -1194,43 +1194,43 @@ version = "17.4.0+2"
 # ╠═9dbf8ebe-abd3-45dd-8a48-6125c7bc7a3a
 # ╠═ebc4c624-06c1-4dd8-9092-6427834ca471
 # ╠═13d507b9-18ce-4739-a55e-3cf48ec08972
-# ╟─e5b09a0d-7c16-4b7c-898e-060fe0e66118
-# ╟─90a26573-c8a7-462c-affb-2fb0bd4d26a9
-# ╟─338d61e1-eb43-4d83-addf-4b994dac9b84
-# ╟─06db4b52-9469-4e8a-9c3a-5ea694d4dfb5
-# ╟─c760f46c-aa18-4e71-a5e8-ab3bea88d069
-# ╟─ae2813d2-f79b-4d12-ba89-03c6c057a590
-# ╟─70fb2c80-557c-414a-936b-754f53a3b982
-# ╟─c8abeabc-0259-4090-92ca-447b879e4c8d
-# ╟─91c69e74-fe47-4a05-a05f-bd6c2dd7a7ac
-# ╟─3ae1bc48-eb91-4c73-bc5f-7ea109a2c462
-# ╟─c56ba726-6941-4d90-9eb6-5c5feb7da64f
-# ╟─e15bd91a-c45d-4771-82b8-bcdcd57fcc20
-# ╟─e45cd1bc-49e7-4291-be46-991cf32f110c
-# ╟─f9fc625b-7c52-43f4-8d96-cc38c34b83de
-# ╟─058c0047-a3f4-45f2-afdc-2af3839bf4cb
-# ╟─263ca802-e0e3-4a68-bb7a-568ec35a605b
-# ╟─e4eee511-5da9-45dd-9919-995550305ca1
-# ╟─1be84181-1999-40ca-8ed9-30d950ba8ca8
-# ╟─a57a3138-5e69-495d-ae82-59a733b8dd9c
-# ╟─5f468021-eb9b-47f6-8a5e-eb56a97e0721
-# ╟─aac41c94-b7f8-4e2f-ad1b-7bf1f9dd7219
-# ╟─db346f4f-f67d-43b9-a8b0-7b86f8b08237
-# ╟─8d944450-f42c-4444-b4f8-75849f7f91e3
-# ╟─0048081e-a0ec-4d60-aac9-fbdf67f23cc5
-# ╟─f51331e5-17a4-4e2a-bc31-1f60a406d265
-# ╟─2ac07776-7472-49f2-b665-170d5744ef77
-# ╟─c2bd5717-ddc3-4a0e-b84e-365a786de53a
-# ╟─164de5e5-4acd-4afb-921c-1dd50ca7ad08
-# ╟─a7565935-466c-480c-9b67-460feb7cfada
-# ╟─e317bd48-dde0-49c1-98c7-f2c684b39802
-# ╟─8c69bdb0-4103-4351-be6c-0c52d915becf
-# ╟─6f1f43a6-8763-47eb-8748-c9457b5b152b
-# ╟─c472f05e-5523-45c3-a76c-aabbc6db3edc
-# ╟─c3ddf726-02f3-4a68-855b-68cdfdc8170b
-# ╟─99b988bb-5adb-4528-a5d7-a614ab019b21
-# ╟─95a6c43d-1e04-4a62-9979-df8f5d36da76
-# ╟─2311605e-8eb4-4345-89c2-0eadfbef3704
+# ╠═e5b09a0d-7c16-4b7c-898e-060fe0e66118
+# ╠═90a26573-c8a7-462c-affb-2fb0bd4d26a9
+# ╠═338d61e1-eb43-4d83-addf-4b994dac9b84
+# ╠═06db4b52-9469-4e8a-9c3a-5ea694d4dfb5
+# ╠═c760f46c-aa18-4e71-a5e8-ab3bea88d069
+# ╠═ae2813d2-f79b-4d12-ba89-03c6c057a590
+# ╠═70fb2c80-557c-414a-936b-754f53a3b982
+# ╠═c8abeabc-0259-4090-92ca-447b879e4c8d
+# ╠═91c69e74-fe47-4a05-a05f-bd6c2dd7a7ac
+# ╠═3ae1bc48-eb91-4c73-bc5f-7ea109a2c462
+# ╠═c56ba726-6941-4d90-9eb6-5c5feb7da64f
+# ╠═e15bd91a-c45d-4771-82b8-bcdcd57fcc20
+# ╠═e45cd1bc-49e7-4291-be46-991cf32f110c
+# ╠═f9fc625b-7c52-43f4-8d96-cc38c34b83de
+# ╠═058c0047-a3f4-45f2-afdc-2af3839bf4cb
+# ╠═263ca802-e0e3-4a68-bb7a-568ec35a605b
+# ╠═e4eee511-5da9-45dd-9919-995550305ca1
+# ╠═1be84181-1999-40ca-8ed9-30d950ba8ca8
+# ╠═a57a3138-5e69-495d-ae82-59a733b8dd9c
+# ╠═5f468021-eb9b-47f6-8a5e-eb56a97e0721
+# ╠═aac41c94-b7f8-4e2f-ad1b-7bf1f9dd7219
+# ╠═db346f4f-f67d-43b9-a8b0-7b86f8b08237
+# ╠═8d944450-f42c-4444-b4f8-75849f7f91e3
+# ╠═0048081e-a0ec-4d60-aac9-fbdf67f23cc5
+# ╠═f51331e5-17a4-4e2a-bc31-1f60a406d265
+# ╠═2ac07776-7472-49f2-b665-170d5744ef77
+# ╠═c2bd5717-ddc3-4a0e-b84e-365a786de53a
+# ╠═164de5e5-4acd-4afb-921c-1dd50ca7ad08
+# ╠═a7565935-466c-480c-9b67-460feb7cfada
+# ╠═e317bd48-dde0-49c1-98c7-f2c684b39802
+# ╠═8c69bdb0-4103-4351-be6c-0c52d915becf
+# ╠═6f1f43a6-8763-47eb-8748-c9457b5b152b
+# ╠═c472f05e-5523-45c3-a76c-aabbc6db3edc
+# ╠═c3ddf726-02f3-4a68-855b-68cdfdc8170b
+# ╠═99b988bb-5adb-4528-a5d7-a614ab019b21
+# ╠═95a6c43d-1e04-4a62-9979-df8f5d36da76
+# ╠═2311605e-8eb4-4345-89c2-0eadfbef3704
 # ╟─e7d6a7a2-b89d-4323-83d0-2d13023dc7f8
 # ╟─c987da96-66a7-4c59-87fa-e6b20d6ec47f
 # ╟─9abeb236-35d7-49a4-9a90-a1fdd5b8082a
@@ -1242,7 +1242,7 @@ version = "17.4.0+2"
 # ╟─469497ce-165a-4f52-b682-64eb3900fbd0
 # ╠═2013b63e-5933-4444-b1f9-e3166de2bf53
 # ╟─11f902c4-e18e-4e76-92cd-1fb73193d2a9
-# ╟─20a753fe-a194-46df-9729-fc5a1d06cf1f
+# ╠═20a753fe-a194-46df-9729-fc5a1d06cf1f
 # ╟─9870b618-cf59-4380-a1aa-de67adccf5ac
 # ╟─303ffcac-2a6d-4c12-a44a-889ad6bec209
 # ╟─61e4ab26-0441-4e4d-9a06-18a5dff5f598

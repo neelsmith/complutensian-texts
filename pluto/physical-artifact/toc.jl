@@ -66,8 +66,11 @@ md"""> **Data for ToC**"""
 # ╔═╡ fc31b758-512f-4d6c-80a9-33ac0af034de
 volmenu = collect(1:6) 
 
+# ╔═╡ a17b107b-6158-4381-931b-9139f930687a
+repo = dirname(pwd()) |> dirname
+
 # ╔═╡ 4ce2e147-c592-4b16-ad66-6b1370db65b5
-f = joinpath(dirname(pwd()), "indexing", "book-breaks.cex")
+f = joinpath(repo, "indexing", "book-breaks.cex")
 
 # ╔═╡ 823d7789-2074-44e3-9bf8-42bfed342515
 datalines = filter(readlines(f)[2:end]) do  ln
@@ -671,7 +674,8 @@ version = "17.4.0+2"
 # ╟─d21883b2-e4e6-498e-a28b-9b23e5597479
 # ╟─fc31b758-512f-4d6c-80a9-33ac0af034de
 # ╟─d425614b-63fa-424d-b7fa-84e8cef640b7
-# ╟─4ce2e147-c592-4b16-ad66-6b1370db65b5
+# ╠═a17b107b-6158-4381-931b-9139f930687a
+# ╠═4ce2e147-c592-4b16-ad66-6b1370db65b5
 # ╟─823d7789-2074-44e3-9bf8-42bfed342515
 # ╟─576c9c77-7b3a-43fd-a997-9727631ce78b
 # ╟─9282525b-6a71-47e6-b452-79d8491e0b5a

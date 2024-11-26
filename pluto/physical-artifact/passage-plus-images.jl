@@ -23,6 +23,9 @@ begin
 	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
+# ╔═╡ 4bae7086-10ad-4111-af41-45c7f5f6c622
+TableOfContents()
+
 # ╔═╡ 9ede2afe-121f-11ef-2fea-0f5c98f24f8c
 md"""# Read Vulgate text with link to image of page"""
 
@@ -35,11 +38,14 @@ html"""
 <br/><br/><br/><br/><br/>
 """
 
+# ╔═╡ 61bd2fd0-272a-4d1c-9db5-efb238cce23b
+md"""> # Mechanics"""
+
 # ╔═╡ 8ba148e3-80b3-4d70-9e81-39a927b64066
-md"""> **Compose text and image displays**"""
+md"""## Compose text and image displays"""
 
 # ╔═╡ 8fd6efe6-e931-462c-bc07-d4252264f980
-md"""> **Image service**"""
+md"""## Image service"""
 
 # ╔═╡ 059dd132-ce76-4a12-9def-5aef1f35a670
 baseurl = "http://www.homermultitext.org/iipsrv"
@@ -56,7 +62,7 @@ imgservice = IIIFservice(baseurl, root)
 ict = "http://www.homermultitext.org/ict2/?"
 
 # ╔═╡ a90332ed-5bcc-4a04-b33f-82bd67a3768e
-md"""> **UI**"""
+md"""## UI"""
 
 # ╔═╡ d4ec0f52-2cc6-42ed-95d7-ad415aa7a769
 function chaptermenu(book, index)
@@ -82,12 +88,15 @@ function versemenu(book, chapter, index)
 end
 
 # ╔═╡ cd0cbd07-05cd-4a75-8bf8-1d2da4f9062a
-md"""> **Build index**"""
+md"""## Build index"""
+
+# ╔═╡ e7075b79-46ab-4eab-9349-a143a5834b9c
+repo = pwd() |> dirname |> dirname
 
 # ╔═╡ 69820688-4d45-47df-b1e9-172cc1f3a10c
 filelist = [
-	joinpath(dirname(pwd()), "indexing", "vulgate-to-image-vol1.cex"),
-	joinpath(dirname(pwd()), "indexing", "vulgate-to-image-vol2.cex"),
+	joinpath(repo, "indexing", "vulgate-to-image-vol1.cex"),
+	joinpath(repo, "indexing", "vulgate-to-image-vol2.cex"),
 
 ]
 
@@ -99,7 +108,7 @@ rawdata = map(filelist) do f
 end |> Iterators.flatten |> collect
 
 # ╔═╡ 79b82e5c-4bd4-4f51-8469-0f26ceb5a136
-md"""> **Reference corpus**"""
+md"""## Reference corpus"""
 
 # ╔═╡ 5a986b08-51de-42c1-a44f-9155f510fbee
 srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
@@ -1607,6 +1616,7 @@ version = "17.4.0+2"
 
 # ╔═╡ Cell order:
 # ╟─ad962a57-3d81-4665-a74a-84a150b04971
+# ╟─4bae7086-10ad-4111-af41-45c7f5f6c622
 # ╟─9ede2afe-121f-11ef-2fea-0f5c98f24f8c
 # ╟─33174b97-b127-4e1b-930c-481de5108b66
 # ╟─1402fe34-e5f0-4992-a9df-198f2078a3d3
@@ -1615,22 +1625,24 @@ version = "17.4.0+2"
 # ╟─003b4ee4-4e89-43a3-8a6b-6cb5e7bea312
 # ╟─ee9ff91e-3481-43e3-844f-f1c3804b7aaa
 # ╟─70b7ffbe-cc15-4f71-b181-7f725c208e67
+# ╟─61bd2fd0-272a-4d1c-9db5-efb238cce23b
 # ╟─8ba148e3-80b3-4d70-9e81-39a927b64066
 # ╟─e0da9c3b-c02d-41c2-8c76-e0190ee50d9e
 # ╟─3bb2427a-4fa7-4a64-a464-ce4122803bb6
-# ╠═cb7d7867-1cd5-4aeb-9204-0022c01dbb93
+# ╟─cb7d7867-1cd5-4aeb-9204-0022c01dbb93
 # ╟─77576140-ead2-4994-a4db-793adbbc62d5
 # ╟─4e0e1ebe-827d-4ed1-9477-20b01eb1f5f9
 # ╟─8fd6efe6-e931-462c-bc07-d4252264f980
-# ╠═059dd132-ce76-4a12-9def-5aef1f35a670
-# ╠═ff40aa80-ed3a-478e-9064-33c7bc847011
-# ╠═a2036153-00aa-46ad-b0bf-02fac326d856
-# ╠═94474e0f-dd42-4abe-9905-d0122f0bd7eb
+# ╟─059dd132-ce76-4a12-9def-5aef1f35a670
+# ╟─ff40aa80-ed3a-478e-9064-33c7bc847011
+# ╟─a2036153-00aa-46ad-b0bf-02fac326d856
+# ╟─94474e0f-dd42-4abe-9905-d0122f0bd7eb
 # ╟─a90332ed-5bcc-4a04-b33f-82bd67a3768e
 # ╟─1c21bab5-ce49-4c3b-85b5-9c072df65708
 # ╟─d4ec0f52-2cc6-42ed-95d7-ad415aa7a769
 # ╟─d515ea81-7d41-4334-94e7-e7c8823874d5
 # ╟─cd0cbd07-05cd-4a75-8bf8-1d2da4f9062a
+# ╟─e7075b79-46ab-4eab-9349-a143a5834b9c
 # ╟─69820688-4d45-47df-b1e9-172cc1f3a10c
 # ╟─4e3c0831-fa03-49bb-ad9a-105852d4ad8c
 # ╟─700e6922-93a6-4547-b3c7-c8de5305b496

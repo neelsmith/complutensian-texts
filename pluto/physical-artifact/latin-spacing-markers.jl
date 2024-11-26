@@ -35,6 +35,9 @@ end
 # ╔═╡ be599f13-2129-4601-ba80-228205f1f65d
 md"""*Notebook version*:  **1.1.1**  *See version notes*: $(@bind versioninfo CheckBox())"""
 
+# ╔═╡ 6a3ac527-04fe-4eee-991b-a779a4c7e699
+TableOfContents()
+
 # ╔═╡ b73eda9e-f336-4673-ae69-3f346db591d0
 if versioninfo
 	md"""
@@ -97,8 +100,11 @@ md"""
 ---
 """
 
+# ╔═╡ 57dd4d1d-e055-4e54-95c0-e2d0877c4497
+md"""# Mechanics"""
+
 # ╔═╡ f5fb87ea-9df8-44e3-a232-1bc3ee036aa9
-md"""> Load indexing data for Latin spacers
+md"""> ## Load indexing data for Latin spacers
 """
 
 # ╔═╡ 61122160-bf90-43a9-81f3-bd92858a65ac
@@ -1933,6 +1939,7 @@ version = "17.4.0+2"
 # ╔═╡ Cell order:
 # ╟─a3e8dcf8-cb64-11ee-3271-eb9e084ace5b
 # ╟─be599f13-2129-4601-ba80-228205f1f65d
+# ╟─6a3ac527-04fe-4eee-991b-a779a4c7e699
 # ╟─b73eda9e-f336-4673-ae69-3f346db591d0
 # ╟─d2de56cb-b6ed-4c2a-81be-4fbc15ccc467
 # ╟─30199859-e3e6-4ce2-b73c-c98bf1465bf6
@@ -1947,6 +1954,7 @@ version = "17.4.0+2"
 # ╟─d0e54c19-822a-43e5-a76e-3734217d6b96
 # ╟─f7a3fbdd-c97d-413b-9c14-013616dece85
 # ╟─f14abd8c-fb48-45ec-b760-22b9ff6359ed
+# ╟─57dd4d1d-e055-4e54-95c0-e2d0877c4497
 # ╟─f5fb87ea-9df8-44e3-a232-1bc3ee036aa9
 # ╠═61122160-bf90-43a9-81f3-bd92858a65ac
 # ╟─6dc8bb4c-8d5c-436b-8854-696ded89f127
@@ -1962,7 +1970,7 @@ version = "17.4.0+2"
 # ╟─f798f575-7a0a-4bdc-b4c7-d37d61d82790
 # ╟─916e7a2e-2ce5-458a-9de1-61321031290f
 # ╟─3b87cd58-4766-4524-9d46-66a3b6e6c089
-# ╟─86c12aff-de9b-4b79-a494-a929d23a0e5b
+# ╠═86c12aff-de9b-4b79-a494-a929d23a0e5b
 # ╟─08773fc6-2a9e-4173-9785-7a76ac6d1919
 # ╟─b7598778-4f72-4815-892d-80886dcdc8d5
 # ╟─5929a6d3-0f33-44e8-a249-4311936ce73a

@@ -38,7 +38,7 @@ begin
 end
 
 # ╔═╡ 34e2e4d6-ba9e-4652-9d1c-be7a80386978
-nbversion = "0.2.0";
+nbversion = "pre release";
 
 # ╔═╡ 6afc33e1-0a59-4162-b2d3-b81e52ba1192
 md"""*Notebook version*: **$(nbversion)** *See release notes*: $(@bind releaseinfo CheckBox())"""
@@ -46,8 +46,7 @@ md"""*Notebook version*: **$(nbversion)** *See release notes*: $(@bind releasein
 # ╔═╡ 223d76fd-5f1d-46f4-954d-c3d2c526d947
 if releaseinfo
 md"""
-- version **0.2.0**: add Greek Septuagint
-- version **0.1.0**: initial release
+- not yet released
 """
 end
 
@@ -287,7 +286,7 @@ alignmenttab(verbchoice, verbdata)
 # ╠═50b2ada9-5bae-4fb7-993f-3228d27f5ccb
 # ╠═195b55f6-21e5-4a85-a2eb-40e95801dcc5
 # ╠═a09b12f6-1957-414b-b542-e6df7782ded3
-# ╟─121f116d-79dd-4b5e-a3c5-debb7187065c
+# ╠═121f116d-79dd-4b5e-a3c5-debb7187065c
 # ╟─0f533e23-757a-4882-8f8a-2ce16fee2b11
 # ╟─e8cffc02-fe2b-40bc-a446-38eda5a79657
 # ╟─30e16882-caac-406c-a50e-f05c981f7ead

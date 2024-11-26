@@ -162,7 +162,7 @@ md"""> ## Text corpus"""
 md"""### Septuagint glossses"""
 
 # ╔═╡ 5b876552-d296-4a12-87fe-65779766bbc4
-repo = dirname(pwd())
+repo = dirname(pwd()) |> dirname
 
 # ╔═╡ 2c583f26-39b3-4e91-8735-698d27c4b468
 septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")

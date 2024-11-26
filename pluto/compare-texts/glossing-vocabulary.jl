@@ -44,6 +44,9 @@ md"""
 """
 end
 
+# ╔═╡ 3c108481-0a07-4849-a973-5384d7a4bfcb
+TableOfContents()
+
 # ╔═╡ 36dd1391-3550-4c87-8ba8-4325e007316a
 md"""> This notebook lets you compare the Latin text of the Vulgate with the Latin text of the glossing commentary on the Septuagint in the Complutensis. For reference, it juxtaposes the Greek text of the Septuagint.
 """
@@ -66,8 +69,11 @@ html"""
 <br/><br/><br/><br/><br/><br/>
 """
 
+# ╔═╡ 2a25ecca-558a-46eb-b6a9-7c2ec76a066f
+md"""> #  Mechanics"""
+
 # ╔═╡ cf9ebba5-d90c-42ae-8a11-bdef4660991c
-md"""> Token lists"""
+md"""> ## Token lists"""
 
 # ╔═╡ 80e36d02-a7a0-4b18-9cf7-b26bbcadc345
 vulgateortho = latin24()
@@ -101,7 +107,7 @@ function formatdiff(psg1, psg2)
 end
 
 # ╔═╡ 5cf92532-b67a-40a3-ad1a-c7f03cdb0eda
-md"""> Load texts
+md"""> ## Load texts
 
 """
 
@@ -130,7 +136,7 @@ targum = filter(corpus.passages) do psg
 end |> CitableTextCorpus
 
 # ╔═╡ ed6016b0-ebba-4403-b6e7-697e8a36e719
-md"""> Menus for user selection of passages"""
+md"""> ## Menus for user selection of passages"""
 
 # ╔═╡ bb72f016-3098-4814-a2ff-1705bf938a6f
 begin
@@ -208,7 +214,7 @@ end
 
 
 # ╔═╡ c2fbb1d6-a63f-47ef-9f5d-fc98fb4f5f5a
-md"""> Load XML edition of Latin glosses on Septuagint."""
+md"""> ## Load XML edition of Latin glosses on Septuagint."""
 
 # ╔═╡ 1eabb81f-291a-4701-ab71-5eaaa8f03693
 bldr = diplomaticbuilder(; versionid = "lxxlatinnormed")
@@ -220,10 +226,10 @@ bldr = diplomaticbuilder(; versionid = "lxxlatinnormed")
   ╠═╡ =#
 
 # ╔═╡ 50966a9c-b83a-42c2-94b2-a1899fe51f12
-md"""> Load glossing text data"""
+md"""> ## Load glossing text data"""
 
 # ╔═╡ 13825cdf-a2da-4be9-8052-80a86adf024c
-repo = dirname(pwd())
+repo = dirname(pwd()) |> dirname
 
 # ╔═╡ 049e6845-f4e8-4223-a69d-8fbb877e98de
 septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
@@ -305,7 +311,7 @@ targumlatindiff = formatdiff( targumlatinpsg, vulgatepsg)
 """  |> HTML
 
 # ╔═╡ ffc7785d-1750-431d-877a-70c478d6fbc5
-md"> CSS + HTML"
+md"> ## CSS + HTML"
 
 # ╔═╡ 95d5cb19-ce6b-4e06-8cc6-451faa5ec194
 ortho = latin24()
@@ -1025,6 +1031,7 @@ version = "17.4.0+2"
 # ╟─505e5234-c399-11ee-2a14-bfee14a8bf57
 # ╟─01cd9b04-4308-4776-ad22-bcd4eb48a966
 # ╟─e38b36cc-af33-43df-804d-f65017a84888
+# ╟─3c108481-0a07-4849-a973-5384d7a4bfcb
 # ╟─36dd1391-3550-4c87-8ba8-4325e007316a
 # ╟─f56c3f61-cae0-4d1a-b755-86ddff6d3c53
 # ╟─a2171ec8-6691-4f52-b9ec-a6281594d4b2
@@ -1035,6 +1042,7 @@ version = "17.4.0+2"
 # ╟─77bbc155-3d5d-4941-9188-d664e45e2d81
 # ╟─9aca0d5f-f4ed-44a6-8470-1d0e91b006eb
 # ╟─b873d268-5af3-4d6c-a1b7-3af6f3c764bf
+# ╟─2a25ecca-558a-46eb-b6a9-7c2ec76a066f
 # ╟─cf9ebba5-d90c-42ae-8a11-bdef4660991c
 # ╟─80e36d02-a7a0-4b18-9cf7-b26bbcadc345
 # ╟─9f98852b-acf8-4740-92c5-00e291d2943c

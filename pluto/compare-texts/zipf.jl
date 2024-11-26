@@ -96,7 +96,7 @@ end
 md"""> ## Corpus"""
 
 # ╔═╡ b3088be4-8fa6-4891-a78f-4f72f1137369
-repo = dirname(pwd())
+repo = dirname(pwd()) |> dirname
 
 # ╔═╡ 4c330499-1e06-4ddb-be3d-63b6a660d374
 md"""### Septuagint glosses"""
@@ -1146,7 +1146,7 @@ version = "17.4.0+2"
 # ╠═dff3748b-5a5e-4af9-81d0-bfaca39d0066
 # ╠═113ca4a3-6dc8-476f-aca4-ff1c7d299405
 # ╟─9bc243a0-3204-4f75-a659-296d91137d55
-# ╟─b3088be4-8fa6-4891-a78f-4f72f1137369
+# ╠═b3088be4-8fa6-4891-a78f-4f72f1137369
 # ╟─4c330499-1e06-4ddb-be3d-63b6a660d374
 # ╟─9c6841b2-c621-4217-8e34-0852be2c2e38
 # ╟─cdf9b572-4c3f-43f0-9029-d7f447f70e1e
