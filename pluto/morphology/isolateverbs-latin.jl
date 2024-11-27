@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.46
+# v0.19.47
 
 using Markdown
 using InteractiveUtils
@@ -64,21 +64,6 @@ end
 # ╔═╡ 20bcdb8e-27d6-46b1-bedd-1caf625a2e6e
 md"""> ## Skip tokens"""
 
-# ╔═╡ bad510e7-19be-4e2e-8279-ba6252fe2f9d
-genA = joinpath(pwd() |> dirname, "notes", "verbs-gen1-16.cex") |> read |> String
-
-# ╔═╡ eda291f3-24bf-4865-96f3-6ca470a82624
-genAdatalines = filter(ln -> ! isempty(ln), split(genA,"\n")[2:end])
-
-# ╔═╡ c295820e-7185-447a-82c5-5cc9d07c3369
-	genAskipcol = map(genAdatalines) do ln
-		split(ln,"|")[3]
-	end
-
-# ╔═╡ d478cf0d-d303-4682-b3a9-f1338d2a8dce
-skiplist = filter(ln -> ! isempty(ln), genAskipcol) |> unique
-
-
 # ╔═╡ 713065c4-9d98-4e10-90cf-5f3c62023fa8
 md"""> ## Aligning passages"""
 
@@ -121,6 +106,30 @@ function retrieve(u::CtsUrn, c::CitableTextCorpus)
 	end
 end
 
+# ╔═╡ 9294ef16-705b-494e-96e5-f32e4f4d6491
+md"""> ## Text corpus"""
+
+# ╔═╡ 0ab274df-d0d3-4dab-9f87-252bfd71e811
+md"""### Septuagint glossses"""
+
+# ╔═╡ 5b876552-d296-4a12-87fe-65779766bbc4
+repo = dirname(pwd()) |> dirname
+
+# ╔═╡ bad510e7-19be-4e2e-8279-ba6252fe2f9d
+genA = joinpath(repo, "notes", "verbs-gen1-16.cex") |> read |> String
+
+# ╔═╡ eda291f3-24bf-4865-96f3-6ca470a82624
+genAdatalines = filter(ln -> ! isempty(ln), split(genA,"\n")[2:end])
+
+# ╔═╡ c295820e-7185-447a-82c5-5cc9d07c3369
+	genAskipcol = map(genAdatalines) do ln
+		split(ln,"|")[3]
+	end
+
+# ╔═╡ d478cf0d-d303-4682-b3a9-f1338d2a8dce
+skiplist = filter(ln -> ! isempty(ln), genAskipcol) |> unique
+
+
 # ╔═╡ 83ef729d-125c-41d6-9030-dc5d829f8116
 """Extract verb forms from a passage"""
 function retrieveverbs(psg, corpus, ortho, parser; stoplist = skiplist)
@@ -142,15 +151,6 @@ function retrieveverbs(psg, corpus, ortho, parser; stoplist = skiplist)
 	end
 	results
 end
-
-# ╔═╡ 9294ef16-705b-494e-96e5-f32e4f4d6491
-md"""> ## Text corpus"""
-
-# ╔═╡ 0ab274df-d0d3-4dab-9f87-252bfd71e811
-md"""### Septuagint glossses"""
-
-# ╔═╡ 5b876552-d296-4a12-87fe-65779766bbc4
-repo = dirname(pwd()) |> dirname
 
 # ╔═╡ 2c583f26-39b3-4e91-8735-698d27c4b468
 septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
@@ -1030,17 +1030,17 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═f82ebfde-453c-4e47-bfeb-df73c7633059
+# ╟─f82ebfde-453c-4e47-bfeb-df73c7633059
 # ╟─e4ab310c-a9aa-4ee6-854a-4935c27e6288
 # ╟─6568f1e0-2da5-11ef-27df-5f07fa823895
 # ╟─a04059ac-04d8-4ed8-a476-fd0231323783
 # ╟─7cfa1522-74ab-4c78-bd2d-239fd0032b1d
-# ╠═0c6ab1ee-b367-4512-bd7c-e1fdef5e97f6
+# ╟─0c6ab1ee-b367-4512-bd7c-e1fdef5e97f6
 # ╟─2e8e15ae-f0f6-4b22-a963-33570fcc5180
 # ╟─b53c4198-35f0-4f6b-a58e-20b6aee44e98
-# ╠═afb29d3a-55f6-40d6-ba47-99765cfe4a7a
+# ╟─afb29d3a-55f6-40d6-ba47-99765cfe4a7a
 # ╟─20bcdb8e-27d6-46b1-bedd-1caf625a2e6e
-# ╟─bad510e7-19be-4e2e-8279-ba6252fe2f9d
+# ╠═bad510e7-19be-4e2e-8279-ba6252fe2f9d
 # ╠═eda291f3-24bf-4865-96f3-6ca470a82624
 # ╟─c295820e-7185-447a-82c5-5cc9d07c3369
 # ╟─d478cf0d-d303-4682-b3a9-f1338d2a8dce

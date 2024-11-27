@@ -138,7 +138,7 @@ hebrewmatches = map(latinlines) do ln
 end
 
 # ╔═╡ 803b0416-5113-42e5-bebf-553e47ddb378
-md"""> Load indexing data for Hebrew spacers
+md"""> ## Load indexing data for Hebrew spacers
 """
 
 # ╔═╡ 3cecb01e-0e3b-41e8-b5b1-93af2e188b75
@@ -169,7 +169,7 @@ hebrewimgs = map(hebrewlines) do ln
 end
 
 # ╔═╡ 916e7a2e-2ce5-458a-9de1-61321031290f
-md"""> Load texts"""
+md"""> ## Load texts"""
 
 # ╔═╡ 3b87cd58-4766-4524-9d46-66a3b6e6c089
 vulgateortho = latin24()
@@ -197,7 +197,7 @@ end |> CitableTextCorpus
 tanachtkns = tokenize(tanach, HebrewOrthography())
 
 # ╔═╡ bfc265d1-d028-4ca6-af90-566c86282901
-md"""> UI menus"""
+md"""> ## UI menus"""
 
 # ╔═╡ 1955b9aa-a943-4781-8c34-60b6dff19ab6
 #workids = map(vulgate.passages) do psg
@@ -260,7 +260,7 @@ tanachpsg = filter(tanachtkns) do tkn
 end
 
 # ╔═╡ 861169fd-623a-4f35-97a8-a5077485f1f1
-md"""> Define citable image service"""
+md"""> ## Define citable image service"""
 
 # ╔═╡ 1ae07e30-0321-46b6-80f6-80f90d90be23
 baseurl = "http://www.homermultitext.org/iipsrv"

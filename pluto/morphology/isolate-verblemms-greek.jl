@@ -28,12 +28,7 @@ end
 TableOfContents()
 
 # ╔═╡ 8e52d024-f271-11ee-388e-8f75d05fa7af
-md"""# Syntactic alignments"""
-
-# ╔═╡ a3691f09-9bd6-4b8e-8a65-6067c4261ee6
-function lemmata(v)
-	[a.lexeme for a in v]	
-end
+md"""# Isolate verb forms"""
 
 # ╔═╡ b58b7554-e2c6-4145-b7a1-38e68236288d
 html"""
@@ -44,6 +39,11 @@ html"""
 
 # ╔═╡ f6f3f7f6-7a48-4633-ab4e-c2df99a578d5
 md"""> # Stuff you don't need to look at"""
+
+# ╔═╡ a3691f09-9bd6-4b8e-8a65-6067c4261ee6
+function lemmata(v)
+	[a.lexeme for a in v]	
+end
 
 # ╔═╡ e35dfe3d-6fa0-4f4b-938a-9b8e5ab6817d
 md"""> ## Parsing"""
@@ -259,6 +259,7 @@ greekvocab = map(t -> t.passage.text, greeklex) |> unique
 md"""> ## The lemmatized dictionary"""
 
 # ╔═╡ 5f80024f-31f7-46b6-8170-df3e1fc71d98
+# ╠═╡ show_logs = false
 greekparsedtokens = parsecorpus(greektcorpus, greekparser)
 
 # ╔═╡ 216bf433-e1df-464f-b85d-0c88541a69b2
@@ -1078,9 +1079,9 @@ version = "17.4.0+2"
 # ╟─ca9e73d5-ff00-4456-94fa-e72a9dd68207
 # ╟─b58b7554-e2c6-4145-b7a1-38e68236288d
 # ╟─f6f3f7f6-7a48-4633-ab4e-c2df99a578d5
-# ╠═8a71a3f6-a4e2-40c6-ad1c-ad98eab98002
-# ╠═a3691f09-9bd6-4b8e-8a65-6067c4261ee6
-# ╠═06a32bb3-b7c8-43e8-bdf4-a81c4460d894
+# ╟─8a71a3f6-a4e2-40c6-ad1c-ad98eab98002
+# ╟─a3691f09-9bd6-4b8e-8a65-6067c4261ee6
+# ╟─06a32bb3-b7c8-43e8-bdf4-a81c4460d894
 # ╟─e35dfe3d-6fa0-4f4b-938a-9b8e5ab6817d
 # ╟─d88a4262-e6f9-4106-a344-d2078a322186
 # ╟─3974854b-1427-46e4-91cf-5c0415a51082
@@ -1096,12 +1097,12 @@ version = "17.4.0+2"
 # ╟─525d8ee4-f7b9-4755-8169-8d2590ccd2b5
 # ╠═06c46514-7494-4c3e-b9c9-7e036048e8a8
 # ╟─19b95c0b-0109-449d-a9b2-4b99199b1588
-# ╠═4ca4fca7-3eea-40fc-a2ad-94de721e0050
-# ╠═b36fa27f-cd59-4993-b36f-736636b002ac
-# ╠═3c51355d-820d-411a-ae2f-5fc08949e4c0
-# ╠═fcc64828-fc6d-4cc5-bff7-4ed7d9097666
-# ╠═ad9489c9-a85a-4905-8670-4582de373b10
-# ╠═caa66d36-c45b-4717-8ae8-ccbe08dde554
+# ╟─4ca4fca7-3eea-40fc-a2ad-94de721e0050
+# ╟─b36fa27f-cd59-4993-b36f-736636b002ac
+# ╟─3c51355d-820d-411a-ae2f-5fc08949e4c0
+# ╟─fcc64828-fc6d-4cc5-bff7-4ed7d9097666
+# ╟─ad9489c9-a85a-4905-8670-4582de373b10
+# ╟─caa66d36-c45b-4717-8ae8-ccbe08dde554
 # ╟─e5c46abb-92e9-47b7-becd-e33020e87283
 # ╟─ed867179-f37b-4581-a356-ad4113a64c15
 # ╟─b416ec54-c49a-41fb-9104-62380d44670f
@@ -1111,15 +1112,15 @@ version = "17.4.0+2"
 # ╟─049546aa-cc41-4e17-8a2a-6b3d860a3691
 # ╟─e682eacf-6b41-4abf-808c-24033f2cd9aa
 # ╟─c7535699-32a2-414a-8072-116bfad60fba
-# ╠═63162376-13d9-42e5-a564-4b45d0ccd9e2
+# ╟─63162376-13d9-42e5-a564-4b45d0ccd9e2
 # ╟─92563350-22a1-42b5-9a93-9dafdc81d73a
 # ╠═5d98b1e7-1e5c-4e01-955c-05d5f330ebd7
-# ╠═e9acacb6-51eb-4864-949c-c27e20416597
-# ╠═8123f883-db88-4103-aa53-ffb6c90e11ee
+# ╟─e9acacb6-51eb-4864-949c-c27e20416597
+# ╟─8123f883-db88-4103-aa53-ffb6c90e11ee
 # ╟─3c8005f3-38d6-4b8f-9db9-772fcbd43e56
 # ╟─403d7f92-8656-4236-bd40-fd8c1154607e
-# ╠═5f80024f-31f7-46b6-8170-df3e1fc71d98
-# ╠═216bf433-e1df-464f-b85d-0c88541a69b2
+# ╟─5f80024f-31f7-46b6-8170-df3e1fc71d98
+# ╟─216bf433-e1df-464f-b85d-0c88541a69b2
 # ╠═6f6fbce0-b60d-43c1-8ad4-69edd6c45ebb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

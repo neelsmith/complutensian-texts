@@ -43,6 +43,9 @@ if versioninfo
 """	
 end
 
+# ╔═╡ 11dcb355-9a7c-44f6-8202-afac59e7ad46
+TableOfContents()
+
 # ╔═╡ 06b9ba91-49b4-4793-9ad0-96fb3b1ba5be
 @bind reloadtext Button("Reload editing of glosses")
 
@@ -55,8 +58,11 @@ html"""
 <br/><br/><br/><br/><br/>
 """
 
+# ╔═╡ 63467828-6f5d-4c77-bcf0-17a3804c5def
+md""" # Mechanics"""
+
 # ╔═╡ 947930b8-8cdb-4b69-ab7f-841f2d4f3957
-md"""> Load texts"""
+md"""> ## Load texts"""
 
 # ╔═╡ bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
 srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compnov.cex"
@@ -75,10 +81,10 @@ onkelos = filter(corpus.passages) do psg
 end |> CitableTextCorpus
 
 # ╔═╡ 5d04b924-b152-4bcd-8584-8f4e5140c50f
-md"""> Load local editing of glosses"""
+md"""> ## Load local editing of glosses"""
 
 # ╔═╡ 7dad7dcb-a26f-476b-ad52-b7c5216e738b
-repo = dirname(pwd())
+repo = dirname(pwd()) |> dirname
 
 # ╔═╡ 351d283b-566f-4017-92cf-eee688539de1
 lxxbldr = diplomaticbuilder(; versionid = "lxxlatinnormed")
@@ -114,7 +120,7 @@ targumlatin = edited(targbldr, targumlatinxmlcorpus)
 targumlatin.passages[1]
 
 # ╔═╡ 127f8b5d-a9cf-4612-816c-9f432bda1b0d
-md"""> Menus for user selections"""
+md"""> ## Menus for user selections"""
 
 # ╔═╡ 41de212e-92ed-407b-8aa3-ea82b686be27
 begin
@@ -884,6 +890,7 @@ version = "17.4.0+2"
 # ╟─403fca78-6436-48ac-961f-4b3812d79f86
 # ╟─5bfc5920-0d98-4a7d-8c60-fe3030981ab2
 # ╟─badbc51a-7d5d-4ca8-b57b-163fcc9bac42
+# ╟─11dcb355-9a7c-44f6-8202-afac59e7ad46
 # ╟─06b9ba91-49b4-4793-9ad0-96fb3b1ba5be
 # ╟─fbe09532-ccd0-11ee-3ed7-2bb05352d2c3
 # ╟─cfa5898e-7cd3-4158-ae02-41f734cd6927
@@ -891,13 +898,14 @@ version = "17.4.0+2"
 # ╟─865eff3a-b44e-428c-a439-00b387e5f442
 # ╟─2f3f28c1-80b0-41db-a645-7c82454ff608
 # ╟─c7f731c0-2e5d-4a28-a480-e37be59cb74e
-# ╟─947930b8-8cdb-4b69-ab7f-841f2d4f3957
+# ╟─63467828-6f5d-4c77-bcf0-17a3804c5def
+# ╠═947930b8-8cdb-4b69-ab7f-841f2d4f3957
 # ╟─bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
 # ╟─6802262c-d391-4bea-aa11-7a31925d547b
 # ╟─9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
 # ╟─834b2e1f-e262-46aa-87b0-4daa5370cad3
 # ╟─5d04b924-b152-4bcd-8584-8f4e5140c50f
-# ╟─7dad7dcb-a26f-476b-ad52-b7c5216e738b
+# ╠═7dad7dcb-a26f-476b-ad52-b7c5216e738b
 # ╟─351d283b-566f-4017-92cf-eee688539de1
 # ╟─5258de34-31fb-424a-8b25-d0bc2c1ba741
 # ╟─e3fd854f-3c48-4e97-a1b3-7feb65b82ea4
@@ -908,7 +916,7 @@ version = "17.4.0+2"
 # ╟─7961004b-a350-4040-8c10-8ba5b8f36385
 # ╟─574582d9-f692-4755-821d-021b3c38bb0c
 # ╟─127f8b5d-a9cf-4612-816c-9f432bda1b0d
-# ╠═41de212e-92ed-407b-8aa3-ea82b686be27
+# ╟─41de212e-92ed-407b-8aa3-ea82b686be27
 # ╟─cdf0b8ba-e502-4cb8-8cb2-315bfb2d9d65
 # ╟─53c0b147-b805-4fc9-a464-fa78a54acc5b
 # ╟─8edeed6e-1a70-4e2d-8dc0-2995c9a77aed

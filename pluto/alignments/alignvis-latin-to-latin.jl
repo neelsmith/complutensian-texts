@@ -44,6 +44,9 @@ md"""
 """
 end
 
+# ╔═╡ 18896021-53ce-4600-8b96-6a8edae405d3
+TableOfContents()
+
 # ╔═╡ ee7b33a1-e02c-459a-b9f5-3fb8b855bf1d
 md"""# Explore automated verb alignments"""
 
@@ -51,7 +54,12 @@ md"""# Explore automated verb alignments"""
 html"""
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 """
+
+# ╔═╡ 63f908ee-0fe0-4afe-b68a-dc7f478ddec9
+md"""# Mechanics"""
 
 # ╔═╡ e5ec8309-58cc-4127-998d-da4ff70ac34c
 md"""> ## HTMLing"""
@@ -182,11 +190,13 @@ eo in allverbs
 # ╟─6cd35fe4-32f3-11ef-23a7-25b03dbd4a6a
 # ╟─6afc33e1-0a59-4162-b2d3-b81e52ba1192
 # ╟─223d76fd-5f1d-46f4-954d-c3d2c526d947
+# ╟─18896021-53ce-4600-8b96-6a8edae405d3
 # ╟─ee7b33a1-e02c-459a-b9f5-3fb8b855bf1d
 # ╟─b2d023e3-a79a-4830-b276-b54525e8c0b7
 # ╟─08c0ab69-4b06-4243-ba87-b0d880e490cb
 # ╟─f61455da-0d8f-48b6-b5ab-9e14186281cf
 # ╟─d81c5cfd-8ebb-492d-a45c-44163e333379
+# ╟─63f908ee-0fe0-4afe-b68a-dc7f478ddec9
 # ╟─e5ec8309-58cc-4127-998d-da4ff70ac34c
 # ╠═e29fa791-8f01-43e8-8d2c-5673f7abe4fb
 # ╟─954fabb3-6c65-464a-9b3c-0f115df029db

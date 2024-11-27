@@ -69,7 +69,7 @@ srcurl = "https://raw.githubusercontent.com/neelsmith/compnov/main/corpus/compno
 corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 
 # ╔═╡ de29c0ec-1f77-40dd-bc38-a5ba34d352b3
-repo = dirname(pwd())
+repo = dirname(pwd()) |> dirname
 
 # ╔═╡ cec7d5b0-df32-4924-94fd-05bf8b1e3b0f
 septlatinxml = joinpath(repo, "editions", "septuagint_latin_genesis.xml")
@@ -1033,13 +1033,13 @@ version = "17.4.0+2"
 # ╠═673cf918-068b-4008-b235-8a41b0147963
 # ╠═7a38df63-a823-46de-9a4a-4b3ec62a0d6c
 # ╟─ad428771-b930-41a6-ab3c-8344cf2fec98
-# ╟─7d856b1e-9e60-4242-81a0-1695aa4c8ee0
+# ╠═7d856b1e-9e60-4242-81a0-1695aa4c8ee0
 # ╟─f1245ada-c035-4910-9b4a-26c06bbc6689
 # ╟─d7f8ef2e-2297-49a2-a77a-4d94877edca0
 # ╟─d76fee5c-7adf-4799-84da-5195de6fdae1
-# ╟─de29c0ec-1f77-40dd-bc38-a5ba34d352b3
+# ╠═de29c0ec-1f77-40dd-bc38-a5ba34d352b3
 # ╟─cec7d5b0-df32-4924-94fd-05bf8b1e3b0f
-# ╟─d36b5b5f-88e2-4d2a-b448-63fb6ab9a433
+# ╠═d36b5b5f-88e2-4d2a-b448-63fb6ab9a433
 # ╟─e0696cff-38c1-4f66-944b-bbdecdaf28bd
 # ╟─3ed6915e-5849-4274-ba0c-811ed6f7d923
 # ╟─1dc8dd59-62ac-4269-8190-417c14f9337a
