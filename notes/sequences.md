@@ -23,11 +23,11 @@
 
 ## Volume 6
 
-|  | Grenville | DeThou | George III | HDS | Madrid | Arundel |
-| --- | --- | --- | --- | --- | --- | --- | 
-| 1. | *Ad lectorem* | *Ad lectorem* |  *Ad lectorem* | *Ad lectorem* |  | *Ad lectorem* |
-| 2. | *vocabularium Hebraicum* | index of Latin terms| *vocabularium Hebraicum* | *vocabularium Hebraicum*  |  |  *interpretationes  nominum* |
-| 3. | index of Latin terms | *interpretationes  nominum* | *interpretationes  nominum* | *Introductiones artis grammatice hebraice*|  | *Nomina* |
-| 4. | *interpretationes  nominum* | *Nomina*  | *Nomina*  | *interpretationes  nominum* |  |  index of Latin terms |
-| 5. | *Nomina* |  *Introductiones artis grammatice hebraice* | index of Latin terms| *Nomina* |  | *Introductiones artis grammatice hebraice* |
-| 6. | *Introductiones artis grammatice hebraice* | *vocabularium Hebraicum*| *Introductiones artis grammatice hebraice*  | index of Latin terms |  | *vocabularium Hebraicum* |
+|  | Grenville | DeThou | George III | HDS | Madrid | Arundel | Huntington |
+| --- | --- | --- | --- | --- | --- | --- | --- | 
+| 1. | *Ad lectorem* | *Ad lectorem* |  *Ad lectorem* | *Ad lectorem* |  | *Ad lectorem* | *Ad lectorem*  |
+| 2. | *vocabularium Hebraicum* | index of Latin terms| *vocabularium Hebraicum* | *vocabularium Hebraicum*  |  |  *interpretationes  nominum* | *vocabularium Hebraicum* |
+| 3. | index of Latin terms | *interpretationes  nominum* | *interpretationes  nominum* | *Introductiones artis grammatice hebraice*|  | *Nomina* |  *Introductiones artis grammatice hebraice*
+| 4. | *interpretationes  nominum* | *Nomina*  | *Nomina*  | *interpretationes  nominum* |  |  index of Latin terms | index of Latin terms 
+| 5. | *Nomina* |  *Introductiones artis grammatice hebraice* | index of Latin terms| *Nomina* |  |  *Introductiones artis grammatice hebraice* | *interpretationes  nominum*
+| 6. | *Introductiones artis grammatice hebraice* | *vocabularium Hebraicum*| *Introductiones artis grammatice hebraice*  | index of Latin terms |  | *vocabularium Hebraicum* | *Nomina* 
