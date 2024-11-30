@@ -1,17 +1,19 @@
 ### A Pluto.jl notebook ###
-# v0.19.46
+# v0.20.3
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
+    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
+    #! format: on
 end
 
 # ╔═╡ 403fca78-6436-48ac-961f-4b3812d79f86
@@ -71,6 +73,9 @@ corpus = fromcex(srcurl, CitableTextCorpus, UrlReader)
 tanach = filter(corpus.passages) do psg
 	versionid(psg.urn) == "masoretic"
 end |> CitableTextCorpus
+
+# ╔═╡ 1a28f9ec-361b-4f88-a15a-a2fd051c19b2
+tanach.passages[1]
 
 # ╔═╡ 834b2e1f-e262-46aa-87b0-4daa5370cad3
 onkelos = filter(corpus.passages) do psg
@@ -213,7 +218,7 @@ PlutoUI = "~0.7.55"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.6"
+julia_version = "1.10.7"
 manifest_format = "2.0"
 project_hash = "fdbe8777bb7e054a3fae796c9664465479af709f"
 
@@ -858,6 +863,7 @@ version = "17.4.0+2"
 # ╟─865eff3a-b44e-428c-a439-00b387e5f442
 # ╟─2f3f28c1-80b0-41db-a645-7c82454ff608
 # ╟─c7f731c0-2e5d-4a28-a480-e37be59cb74e
+# ╠═1a28f9ec-361b-4f88-a15a-a2fd051c19b2
 # ╟─947930b8-8cdb-4b69-ab7f-841f2d4f3957
 # ╟─bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
 # ╟─6802262c-d391-4bea-aa11-7a31925d547b
