@@ -4,8 +4,21 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    #! format: off
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+    #! format: on
+end
+
 # ╔═╡ 2263f0fc-51ea-44e0-8c44-4e0f1808f71c
 begin
+	using CitableBase
 	using CitableObject
 	using CitableText
 	using PlutoUI
@@ -27,6 +40,22 @@ html"""
 # ╔═╡ d83a7f85-5314-45ca-a3d8-8705b44445a1
 md"""# Mechanics"""
 
+# ╔═╡ b70c3edf-f3c4-4af6-81c3-1230f480bc4b
+md"""> ## User choices"""
+
+# ╔═╡ 8b957fce-c76d-4669-bce5-ee131c51eed8
+volumemenu = [
+	1 => "Volume 1",
+	2 => "Volume 2",
+	3 => "Volume 3",
+	4 => "Volume 4",
+	5 => "Volume 5",
+	6 => "Volume 6",
+]
+
+# ╔═╡ 82b7a5be-476c-49d0-b87a-486301fe1405
+md"""*Volume*: $(@bind volume Select(volumemenu; default = 2))"""
+
 # ╔═╡ 391218d6-1e94-436e-b4db-b5e49abc7d8e
 md"""> ## Read data from repo"""
 
@@ -34,7 +63,7 @@ md"""> ## Read data from repo"""
 repo = pwd() |> dirname |> dirname
 
 # ╔═╡ 82b1fede-f8df-4342-8fb5-309b206c5988
-f = joinpath(repo, "data", "navigation.cex")
+f = joinpath(repo, "data", "incipits.cex")
 
 # ╔═╡ e697ff17-c3af-4152-80b4-12511963acc6
 datalines = filter(ln -> !isempty(ln), readlines(f)[2:end])
@@ -45,11 +74,29 @@ data = map(datalines) do ln
 	(passage = passage, page = page, image = image)
 end
 
+# ╔═╡ 3837ca22-857a-4f5f-9ad0-4f911a192de5
+data
+
 # ╔═╡ 0f87307c-d732-43c8-9471-0f5954988378
 v2 = filter(data) do tupl
 	contains(tupl.page, ":v2_")
 end
 
+
+# ╔═╡ dca2c588-01bf-4a30-9716-d81604788518
+v2data = map(v2) do trip
+	@info(trip.page)
+	if isnothing(trip.page)
+		@warn("Page is nothing for $(trip)")
+	else
+		try
+			u = trip.page |> Cite2Urn
+			@info("Succeeded wtih $(u)")
+		catch
+			@warn("Failed on $(trip.page)")
+		end
+	end
+end 
 
 # ╔═╡ 151247f6-1933-4349-a504-fa1829bd6654
 v2incipits = map(v2) do trip
@@ -57,6 +104,9 @@ v2incipits = map(v2) do trip
 	(vol, quire, page) = split(ref, "_")
 	(passage = CtsUrn(trip.passage), quire = quire, page = page)
 end
+
+# ╔═╡ 9fa4dfa2-0866-450a-9efd-7fe0febd1d95
+md"""> ## Volume 2"""
 
 # ╔═╡ 4d85f80a-e9c0-4aed-b2f0-c899a0dee8a3
 joshuaquires = map(c -> string(c), collect('a':'e'))
@@ -183,6 +233,41 @@ v2pages = getvol(v2quirelists, v2incipits)
 # ╔═╡ 97e3cd1b-c460-45b9-8538-9270ac41a2ae
 v2pagesall = vcat(v2pages,chron2pages )
 
+# ╔═╡ 5a7ac7ff-ec33-48a0-a850-700257570ecb
+v2quires = map(v2pagesall) do pg
+	(quire, page) = split(pg, "_")
+	quire
+end |> unique
+
+# ╔═╡ 9adb1048-534b-4327-b1e2-da4186edc039
+quirelists = 	["N/A"],
+	v2quires,
+	["N/A"],
+	["N/A"],
+	["N/A"],
+	["N/A"]
+
+# ╔═╡ 49f8eef1-aa14-43c5-bad4-4995a902a962
+pagelists = [
+	["N/A"],
+	v2pagesall,
+	["N/A"],
+	["N/A"],
+	["N/A"],
+	["N/A"]
+]	
+
+# ╔═╡ 8eea3e52-58e7-4d53-a0c2-bbc22183adcd
+function quiremenu(vol; options = pagelists)
+	quirelists[vol]
+end
+
+# ╔═╡ a702fd1d-a8d7-4503-a053-b13b7b7d3f86
+md"""*Quire*: $(@bind quire Select(quiremenu(volume)))"""
+
+# ╔═╡ 608356b2-cb8c-41e3-9eca-1dd3db78c5df
+quiremenu(volume)
+
 # ╔═╡ f9679f01-4d01-4251-8d2c-eed8abda9d9c
 v2pagesall |> length
 
@@ -198,11 +283,13 @@ findfirst(s -> s == "a_1v",spanners)
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
+CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableObject = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
+CitableBase = "~10.4.0"
 CitableObject = "~0.16.1"
 CitableText = "~0.16.2"
 PlutoUI = "~0.7.60"
@@ -214,7 +301,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.7"
 manifest_format = "2.0"
-project_hash = "1d28617beb0d719e27ac1c8265ff89409c192f87"
+project_hash = "5d9ef27030092fe2d8da2efca82bfa321752bce2"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -752,19 +839,31 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─2263f0fc-51ea-44e0-8c44-4e0f1808f71c
+# ╠═2263f0fc-51ea-44e0-8c44-4e0f1808f71c
 # ╟─cd8f6107-70ba-41d0-aff0-a7e759780357
 # ╟─50328be6-aff8-11ef-2447-55256930c8e9
+# ╟─82b7a5be-476c-49d0-b87a-486301fe1405
+# ╟─a702fd1d-a8d7-4503-a053-b13b7b7d3f86
+# ╠═5a7ac7ff-ec33-48a0-a850-700257570ecb
+# ╠═dca2c588-01bf-4a30-9716-d81604788518
+# ╠═3837ca22-857a-4f5f-9ad0-4f911a192de5
 # ╟─ef1fab15-69a6-4726-aa5b-e44125d8e949
 # ╟─d83a7f85-5314-45ca-a3d8-8705b44445a1
+# ╟─b70c3edf-f3c4-4af6-81c3-1230f480bc4b
+# ╠═49f8eef1-aa14-43c5-bad4-4995a902a962
+# ╠═9adb1048-534b-4327-b1e2-da4186edc039
+# ╟─8b957fce-c76d-4669-bce5-ee131c51eed8
+# ╠═8eea3e52-58e7-4d53-a0c2-bbc22183adcd
+# ╟─608356b2-cb8c-41e3-9eca-1dd3db78c5df
 # ╟─391218d6-1e94-436e-b4db-b5e49abc7d8e
 # ╟─ae62b17f-51b8-44ba-9e60-b0b1c300f9ed
 # ╟─82b1fede-f8df-4342-8fb5-309b206c5988
 # ╟─e697ff17-c3af-4152-80b4-12511963acc6
 # ╟─ffa13cc3-356b-4528-884d-be7746d4a432
-# ╟─0f87307c-d732-43c8-9471-0f5954988378
-# ╟─151247f6-1933-4349-a504-fa1829bd6654
+# ╠═0f87307c-d732-43c8-9471-0f5954988378
+# ╠═151247f6-1933-4349-a504-fa1829bd6654
 # ╟─7db3602c-7d3c-40e5-9e2d-5ab21d876626
+# ╟─9fa4dfa2-0866-450a-9efd-7fe0febd1d95
 # ╟─4d85f80a-e9c0-4aed-b2f0-c899a0dee8a3
 # ╟─a274500d-7dc5-4689-93d7-c3c6b494d67e
 # ╟─5dd9f353-1600-46ea-8054-e5c9db042be4
@@ -772,14 +871,14 @@ version = "17.4.0+2"
 # ╟─60bb8c7a-7bf3-4986-888d-970ef7dbc161
 # ╟─94bb7498-1a9f-402a-ab04-23b3f08560ca
 # ╟─848164e6-abcf-40c4-8f6b-db29dc0b2f24
-# ╠═b428099f-e31c-46b1-9b47-ba0048392580
-# ╠═14de61e7-6ffe-42df-b7db-6fe07c42ac03
-# ╠═a25169c5-60e5-4a04-beb6-44ebb49775ef
-# ╠═d7e6a3f8-5d12-4e4a-a3a8-e41f3f92f9f6
-# ╠═7736feae-5c5d-4214-9fae-1dc8810302ff
+# ╟─b428099f-e31c-46b1-9b47-ba0048392580
+# ╟─14de61e7-6ffe-42df-b7db-6fe07c42ac03
+# ╟─a25169c5-60e5-4a04-beb6-44ebb49775ef
+# ╟─d7e6a3f8-5d12-4e4a-a3a8-e41f3f92f9f6
 # ╟─d24cf876-a127-48bc-a6b3-b90323c78c41
 # ╟─f98b5e86-8f28-487b-8467-cf6a76b85d0d
-# ╠═97e3cd1b-c460-45b9-8538-9270ac41a2ae
+# ╟─7736feae-5c5d-4214-9fae-1dc8810302ff
+# ╟─97e3cd1b-c460-45b9-8538-9270ac41a2ae
 # ╠═f9679f01-4d01-4251-8d2c-eed8abda9d9c
 # ╟─8f5ee79b-1055-43c8-8b85-1cf53806a87b
 # ╟─da3ddf5a-a800-49d4-8a45-a19db088d1fc
