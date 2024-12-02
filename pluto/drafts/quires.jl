@@ -71,10 +71,41 @@ ruthquires = filter(map(c -> string(c), collect('i':'k'))) do s
 end
 	
 
+# ╔═╡ 47c41646-c9ac-45e6-b8bd-677462eba968
+kings1quires = ["x", "y", "z", "aa", "bb", "cc", "dd"]
+
+# ╔═╡ 60bb8c7a-7bf3-4986-888d-970ef7dbc161
+kings2quires = map(collect('d':'i')) do c
+	repeat(c, 2)
+end
+
 # ╔═╡ 94bb7498-1a9f-402a-ab04-23b3f08560ca
-sam1quires = filter(map(c -> string(c), collect('k':'x'))) do s
+sam1quires = filter(map(c -> string(c), collect('k':'q'))) do s
 	s != "u"
 end
+
+# ╔═╡ 848164e6-abcf-40c4-8f6b-db29dc0b2f24
+sam2quires = filter(map(c -> string(c), collect('q':'x'))) do s
+	s != "u"
+end
+
+# ╔═╡ b428099f-e31c-46b1-9b47-ba0048392580
+chron1quires = map(collect('i':'o')) do c
+	repeat(c, 2)
+end
+
+# ╔═╡ 14de61e7-6ffe-42df-b7db-6fe07c42ac03
+chron2quires = map(collect('o':'v')) do c
+	repeat(c, 2)
+end
+
+# ╔═╡ a25169c5-60e5-4a04-beb6-44ebb49775ef
+v2finish = "vv_4v"
+
+# ╔═╡ d7e6a3f8-5d12-4e4a-a3a8-e41f3f92f9f6
+v2quirelists = [
+	joshuaquires, judgesquires, ruthquires, sam1quires, sam2quires, kings1quires, kings2quires, chron1quires
+]
 
 # ╔═╡ 8f5ee79b-1055-43c8-8b85-1cf53806a87b
 md"""> ## Functions for working with quires"""
@@ -99,18 +130,28 @@ end
 function pagespan(quires, startpage, endpage; pagefunc = ternion)
 	spans  = []
 	for q in quires
+		#@info("Span $(q)")
 		for pg in pagefunc(q)
 			push!(spans, pg)
 		end
 	end
 	startidx = findfirst(s -> s == startpage, spans)
 	endidx = findfirst(s -> s == endpage, spans)
-	#	push!(spans,q)
-	#end
-	spans[startidx:endidx]
+	if isnothing(startidx) || isnothing(endidx)
+
+		@warn("Bad references: failed to get $(startpage)/$(endpage) ")
+		@warn("source was $(quires)")
+		[]
+	else
+		spans[startidx:endidx]
+	end
 end
 
+# ╔═╡ 7736feae-5c5d-4214-9fae-1dc8810302ff
+chron2pages = pagespan(chron2quires, "oo_5r", "vv_4v")
+
 # ╔═╡ 61c01e5b-2a96-48e5-bb87-7611dfe965a2
+"""Format quire + page as a reference string"""
 function ref(tuple)
 	string(tuple.quire, "_", tuple.page)
 end
@@ -122,6 +163,31 @@ function dovol(folincipits)
 		ref(folincipts[i])
 	end
 end
+
+# ╔═╡ f98b5e86-8f28-487b-8467-cf6a76b85d0d
+"""Get list of pages for a whole volume from list of quires and list of incipits"""
+function getvol(quires, incipits)
+	volume = []
+	for i in 1:length(quires)
+		pages = pagespan(quires[i], ref(incipits[i]), ref(incipits[i+1]))
+		for pg in pages
+			push!(volume, pg)
+		end
+	end
+	volume
+end
+
+# ╔═╡ d24cf876-a127-48bc-a6b3-b90323c78c41
+v2pages = getvol(v2quirelists, v2incipits)
+
+# ╔═╡ 97e3cd1b-c460-45b9-8538-9270ac41a2ae
+v2pagesall = vcat(v2pages,chron2pages )
+
+# ╔═╡ f9679f01-4d01-4251-8d2c-eed8abda9d9c
+v2pagesall |> length
+
+# ╔═╡ 9fcf8a17-7319-41e4-85f6-02ef2e75a1ce
+md"""> ## Sand box"""
 
 # ╔═╡ ad1b11fd-c889-4f6a-8543-25b4ecb6dffb
 spanners = pagespan(joshuaquires, ref(v2incipits[1]), ref(v2incipits[2]))
@@ -698,15 +764,28 @@ version = "17.4.0+2"
 # ╟─ffa13cc3-356b-4528-884d-be7746d4a432
 # ╟─0f87307c-d732-43c8-9471-0f5954988378
 # ╟─151247f6-1933-4349-a504-fa1829bd6654
-# ╠═7db3602c-7d3c-40e5-9e2d-5ab21d876626
+# ╟─7db3602c-7d3c-40e5-9e2d-5ab21d876626
 # ╟─4d85f80a-e9c0-4aed-b2f0-c899a0dee8a3
-# ╠═a274500d-7dc5-4689-93d7-c3c6b494d67e
-# ╠═5dd9f353-1600-46ea-8054-e5c9db042be4
-# ╠═94bb7498-1a9f-402a-ab04-23b3f08560ca
+# ╟─a274500d-7dc5-4689-93d7-c3c6b494d67e
+# ╟─5dd9f353-1600-46ea-8054-e5c9db042be4
+# ╟─47c41646-c9ac-45e6-b8bd-677462eba968
+# ╟─60bb8c7a-7bf3-4986-888d-970ef7dbc161
+# ╟─94bb7498-1a9f-402a-ab04-23b3f08560ca
+# ╟─848164e6-abcf-40c4-8f6b-db29dc0b2f24
+# ╠═b428099f-e31c-46b1-9b47-ba0048392580
+# ╠═14de61e7-6ffe-42df-b7db-6fe07c42ac03
+# ╠═a25169c5-60e5-4a04-beb6-44ebb49775ef
+# ╠═d7e6a3f8-5d12-4e4a-a3a8-e41f3f92f9f6
+# ╠═7736feae-5c5d-4214-9fae-1dc8810302ff
+# ╟─d24cf876-a127-48bc-a6b3-b90323c78c41
+# ╟─f98b5e86-8f28-487b-8467-cf6a76b85d0d
+# ╠═97e3cd1b-c460-45b9-8538-9270ac41a2ae
+# ╠═f9679f01-4d01-4251-8d2c-eed8abda9d9c
 # ╟─8f5ee79b-1055-43c8-8b85-1cf53806a87b
 # ╟─da3ddf5a-a800-49d4-8a45-a19db088d1fc
 # ╟─bfec4b02-6099-4c86-8506-20b67b9c2588
-# ╠═61c01e5b-2a96-48e5-bb87-7611dfe965a2
+# ╟─61c01e5b-2a96-48e5-bb87-7611dfe965a2
+# ╟─9fcf8a17-7319-41e4-85f6-02ef2e75a1ce
 # ╠═ad1b11fd-c889-4f6a-8543-25b4ecb6dffb
 # ╠═4c4f5449-870e-4ea8-a4a5-3cbda6846cb7
 # ╟─00000000-0000-0000-0000-000000000001
