@@ -93,10 +93,10 @@ v1doublealphaquires = filter(map(c -> repeat(c, 2), collect('a':'z'))) do s
 	s != "ii" && s != "uu"
 end
 
-v1alphas = vcat(v2singlealphaquires, v2doublealphaquires)
+v1alphas = vcat(v1singlealphaquires, v1doublealphaquires)
 # There are two non-alphabetic quire signs follwing these: one ternion and one quaternion.
 
-ternion.(v2alphas) |> Iterators.flatten |> collect
+ternion.(v1alphas) |> Iterators.flatten |> collect
 
 
 
