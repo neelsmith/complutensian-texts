@@ -84,22 +84,23 @@ function ref(tuple)
 end
 
 
-v1singlealphaquires = filter(map(c -> string(c), collect('a':'z'))) do ch
-    ch != "i" && ch != "u"
+"""Generate list of all pages in Complutensian volume 1."""
+function volume1pages()
+	v1singlealphaquires = filter(map(c -> string(c), collect('a':'z'))) do ch
+		ch != "i" && ch != "u"
+	end
+	v1doublealphaquires = filter(map(c -> repeat(c, 2), collect('a':'z'))) do s
+		s != "ii" && s != "uu"
+	end
+	v1alphapages = ternion.(v1alphas) |> Iterators.flatten |> collect
+	v1alphas = vcat(v1singlealphaquires, v1doublealphaquires)
+	# There are two non-alphabetic quire signs follwing these: one ternion and one quaternion.
+	et = ternion("et")
+	con = quaternion("con")
+	vcat(v1alphapages, et, con)
 end
 
-
-v1doublealphaquires = filter(map(c -> repeat(c, 2), collect('a':'z'))) do s
-	s != "ii" && s != "uu"
-end
-
-v1alphas = vcat(v1singlealphaquires, v1doublealphaquires)
-# There are two non-alphabetic quire signs follwing these: one ternion and one quaternion.
-
-ternion.(v1alphas) |> Iterators.flatten |> collect
-
-
-
+"""Generate list of all pages in Complutensian volume 2."""
 function volume2pages()
     v2singlealphaquires = filter(map(c -> string(c), collect('a':'z'))) do ch
         ch != "i" && ch != "u"

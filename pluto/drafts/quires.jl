@@ -236,6 +236,12 @@ v2quirelists = [
 	joshuaquires, judgesquires, ruthquires, sam1quires, sam2quires, kings1quires, kings2quires, chron1quires
 ]
 
+# ╔═╡ d24cf876-a127-48bc-a6b3-b90323c78c41
+# ╠═╡ disabled = true
+#=╠═╡
+v2pages = getvol(v2quirelists, v2incipits)
+  ╠═╡ =#
+
 # ╔═╡ 8f5ee79b-1055-43c8-8b85-1cf53806a87b
 md"""> ## Functions for working with quires"""
 
@@ -365,6 +371,9 @@ end
 
 
 
+# ╔═╡ b274b3bb-54d7-4490-ad37-68807e54d5b5
+v2pages = volume2pages()
+
 # ╔═╡ 97e3cd1b-c460-45b9-8538-9270ac41a2ae
 v2pagesall = vcat(v2pages,chron2pages )
 
@@ -429,15 +438,6 @@ quiremenu(volume)
 
 # ╔═╡ f9679f01-4d01-4251-8d2c-eed8abda9d9c
 v2pagesall |> length
-
-# ╔═╡ d24cf876-a127-48bc-a6b3-b90323c78c41
-# ╠═╡ disabled = true
-#=╠═╡
-v2pages = getvol(v2quirelists, v2incipits)
-  ╠═╡ =#
-
-# ╔═╡ b274b3bb-54d7-4490-ad37-68807e54d5b5
-v2pages = volume2pages()
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """

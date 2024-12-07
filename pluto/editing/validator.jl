@@ -1,17 +1,19 @@
 ### A Pluto.jl notebook ###
-# v0.19.47
+# v0.20.3
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
+    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
+    #! format: on
 end
 
 # ╔═╡ c98d7fb6-f37f-11ee-1031-096fd7191832
@@ -291,7 +293,7 @@ PlutoUI = "~0.7.59"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.6"
+julia_version = "1.10.7"
 manifest_format = "2.0"
 project_hash = "c0103ed0fa385dc44fd2eb35d825c580769f4221"
 
@@ -1799,7 +1801,7 @@ version = "17.4.0+2"
 # ╟─c959dc42-2db7-42a3-a869-84d29f6b207a
 # ╟─560e32f1-6504-4394-b113-d102a51309a6
 # ╟─dacb986b-fce3-4f71-a6e4-d6080ba72d71
-# ╟─f9d28ca9-6a20-46df-8700-7ddcf2fb1481
+# ╠═f9d28ca9-6a20-46df-8700-7ddcf2fb1481
 # ╟─160ef930-ee9b-4d4e-b628-bf8e686e9bc5
 # ╟─6747df46-3e31-4060-a9f6-029adc0111e3
 # ╟─9a56f31b-acf1-4be4-b8c8-72970a874fe5

@@ -28,6 +28,8 @@ begin
 	using CitableTeiReaders
 	using EditionBuilders
 	using Orthography
+	using LatinOrthography
+	using Tabulae
 
 	using PlutoUI
 	md"""*Unhide this cell to see the Julia environment*."""
@@ -102,6 +104,12 @@ septuagintglosses = filter(p -> versionid(urn(p)) == "sept_latin", corpus.passag
 
 # ╔═╡ 7d1d38e6-9ad3-4e59-939c-41e822209bf2
 targumglosses = filter(p -> versionid(urn(p)) == "targum_latin", corpus.passages) |> CitableTextCorpus
+
+# ╔═╡ d695f270-0aa0-4998-8a6b-1d3b0301dd78
+md"""> ## DSE"""
+
+# ╔═╡ b82f3eb5-8e83-4903-9258-e8559beb7a91
+dsetriples(r)
 
 # ╔═╡ df41d986-eb5e-4d23-887b-e084d8e26eb9
 md"""> ## Display"""
@@ -210,8 +218,10 @@ CitableTeiReaders = "b4325aa9-906c-402e-9c3f-19ab8a88308e"
 CitableText = "41e66566-473b-49d4-85b7-da83b66615d8"
 EditionBuilders = "2fb66cca-c1f8-4a32-85dd-1a01a9e8cd8f"
 EditorsRepo = "3fa2051c-bcb6-4d65-8a68-41ff86d56437"
+LatinOrthography = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
 Orthography = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
 
 [compat]
 CitableBase = "~10.4.0"
@@ -223,8 +233,10 @@ CitableTeiReaders = "~0.10.3"
 CitableText = "~0.16.2"
 EditionBuilders = "~0.8.5"
 EditorsRepo = "~0.19.4"
+LatinOrthography = "~0.7.3"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.60"
+Tabulae = "~0.15.0"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -233,7 +245,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.7"
 manifest_format = "2.0"
-project_hash = "20e47a08883a5fd8d072ae71cfc5c4aed159f0f8"
+project_hash = "2a8525856aa286f1c01a92c9a7e962b7ce2c0532"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -705,6 +717,11 @@ git-tree-sha1 = "399f4a308c804b446ae4c91eeafadb2fe2c54ff9"
 uuid = "f8c6e375-362e-5223-8a59-34ff63f689eb"
 version = "2.47.1+0"
 
+[[deps.Glob]]
+git-tree-sha1 = "97285bbd5230dd766e9ef6749b80fc617126d496"
+uuid = "c27321d9-0574-5035-807b-f59d2c89b15c"
+version = "1.3.1"
+
 [[deps.Graphics]]
 deps = ["Colors", "LinearAlgebra", "NaNMath"]
 git-tree-sha1 = "a641238db938fff9b2f60d08ed9030387daf428c"
@@ -999,6 +1016,12 @@ version = "4.0.0+0"
 git-tree-sha1 = "dda21b8cbd6a6c40d9d02a73230f9d70fed6918c"
 uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 version = "1.4.0"
+
+[[deps.LatinOrthography]]
+deps = ["CitableBase", "CitableCorpus", "CitableText", "DocStringExtensions", "Documenter", "Orthography", "Test"]
+git-tree-sha1 = "b1578be26f15a1864afd88540babb3c53f3766fc"
+uuid = "1e3032c9-fa1e-4efb-a2df-a06f238f6146"
+version = "0.7.3"
 
 [[deps.LayoutPointers]]
 deps = ["ArrayInterface", "LinearAlgebra", "ManualMemory", "SIMDTypes", "Static", "StaticArrayInterface"]
@@ -1637,6 +1660,12 @@ git-tree-sha1 = "598cd7c1f68d1e205689b1c2fe65a9f85846f297"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 version = "1.12.0"
 
+[[deps.Tabulae]]
+deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
+git-tree-sha1 = "3648328daa3bae1420e046870994038377d5f5b7"
+uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
+version = "0.15.0"
+
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
@@ -1796,7 +1825,7 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═c1de89d4-b401-11ef-1c0e-51b5e33d435e
+# ╟─c1de89d4-b401-11ef-1c0e-51b5e33d435e
 # ╟─c6755f78-8e52-4211-9f5d-ad9fe7845a7e
 # ╟─e6623fc1-5662-41ed-92fb-769da2cb345c
 # ╟─75d2862a-276b-40b2-a8d5-49193e204455
@@ -1813,6 +1842,8 @@ version = "17.4.0+2"
 # ╟─fa72404b-5a56-450b-8861-d957fd403b7f
 # ╟─91b540e7-4176-4f0d-89db-a6a559cebbd4
 # ╟─7d1d38e6-9ad3-4e59-939c-41e822209bf2
+# ╟─d695f270-0aa0-4998-8a6b-1d3b0301dd78
+# ╠═b82f3eb5-8e83-4903-9258-e8559beb7a91
 # ╟─df41d986-eb5e-4d23-887b-e084d8e26eb9
 # ╟─9f8b1221-ebb2-4973-ab86-e8907118e854
 # ╟─97fd23fa-ea28-4c8b-83b6-7cd86f610140
