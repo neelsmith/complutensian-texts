@@ -1,27 +1,31 @@
 ### A Pluto.jl notebook ###
-# v0.20.3
+# v0.20.0
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
 
 # ╔═╡ 53c72281-4ff3-4a84-8739-0ff4da040efd
+# ╠═╡ show_logs = false
 begin
 	using PlutoUI
 	using Tabulae
 	using CitableParserBuilder
 	using CitableBase
+
+	using CitableObject
+
+	using Markdown
+	using Downloads
 	md"""*Unhide this cell to see Julia environment.*"""
 end
 
@@ -31,11 +35,11 @@ TableOfContents()
 # ╔═╡ 34fa160a-b587-11ef-1440-01bb34445b54
 md"""# Interactive Latin parsing"""
 
-# ╔═╡ 65bd9e5a-69e5-47b2-a248-59e1feabab7e
-md"""*Enter a word to parse*: $(@bind token confirm(TextField()))"""
+# ╔═╡ b841c4ef-d2d5-4184-9a0e-b8291456136f
+md"""> *Choose parser to use, and submit a word to parser. Optionally display Lewis-Short article.*"""
 
-# ╔═╡ 636b9259-c560-4be5-9b70-7540bb56105c
-token
+# ╔═╡ 65bd9e5a-69e5-47b2-a248-59e1feabab7e
+md"""*Enter a word to parse*: $(@bind token confirm(TextField())) *Show Lewis-Short articles*: $(@bind lewisshort CheckBox(default = true))"""
 
 # ╔═╡ 2177ac85-30cd-4b7b-bd14-bc2620de5059
 html"""
@@ -63,7 +67,7 @@ parser23 = tabulaeStringParser(p23url, UrlReader)
 parser25 = tabulaeStringParser(p25url, UrlReader)
 
 # ╔═╡ 6a6e543e-f597-4e00-9c9a-a2fbc01b0f53
-md"""*Choose a parser*: $(@bind parser Select(
+md"""*Parser*: $(@bind parser Select(
 	[parser25 => "parser for 25-letter alphabet",
 	parser23 => "parser for 23-letter alphabet"]
 ))"""
@@ -71,25 +75,107 @@ md"""*Choose a parser*: $(@bind parser Select(
 # ╔═╡ 24cb62ce-412e-4127-87a7-42e0e2f2c572
 parses = parsetoken(token, parser)
 
-# ╔═╡ dc110174-43ab-418c-afce-b4062333dce7
-parse25 = parsetoken(token, parser25)[1] 
+# ╔═╡ b52cc6d0-f6f2-4ea5-9438-3404968b0307
+md"""> ## Lewis-Short"""
 
-# ╔═╡ 48c6439c-f36f-42eb-87c6-8c42b73ef7c9
-latinForm(parse25)
+# ╔═╡ f1a29e77-530d-4255-b88c-f43ccc3fe8c1
+"""Read Lewis-Short article from delimited-text source."""
+function read_ls()
+	url = "http://shot.holycross.edu/lexica/ls-articles.cex"
+	f = Downloads.download(url)
+	content = readlines(f)
+	rm(f)
+	content
+end
 
-# ╔═╡ 76412830-52c7-4761-b053-f6a76bf48d5e
-parse25 |> lexemeurn
+# ╔═╡ cbb0dc59-caa7-49e9-b123-e90ac8429b34
+ lsarticles = read_ls()
+
+# ╔═╡ 1fdc755f-4529-4bda-85ec-17f68cb32501
+
+"""Format a data line from delimited-text source as a single Markdown text.
+"""
+function formatls(entry)
+
+	cols = split(entry,"|")
+	urn = cols[2]
+	lemma = cols[3]
+	text = cols[4]
+
+	shorturn = objectcomponent(Cite2Urn(urn))
+	string("## `ls.", shorturn, "` *", lemma, "*\n\n", text)
+
+end
+
+# ╔═╡ fcea0182-7176-4b96-9232-57eb1b8006a0
+"""Search a list of articles for identifying ID matching a string."""
+function id(s, articles)
+	(collectionid, objectid) =  split(s, ".")
+    pttrn = "urn:cite2:hmt:ls.markdown:" * objectid * "\\|"
+    re = Regex(pttrn)
+    matches = filter(article -> occursin(re,article), articles)
+	if isempty(matches)
+		"No Lewis-Short article matching id `" * s * "`"
+	else
+		formatls(matches[1])
+	end
+	
+end
+
+# ╔═╡ c2ce674e-2a3f-4483-b763-de81eccdd889
+md"""> ## Format reply"""
+
+# ╔═╡ 49c8a773-fabb-4a19-8188-edeb91631d31
+function gatherlexicon( parses, lewisshort)
+	lexemeurns = map(p -> string(lexemeurn(p)), parses) |> unique
+	map(lex -> id(lex, lewisshort), lexemeurns)
+end
+
+# ╔═╡ a2e62f31-1289-4deb-a75f-80fa4e6f00ab
+"""Format markdown cell with results of parsing `token`."""
+function reply(token, parseresults, lexicon, showlexicon)
+	if isempty(token)
+		md""
+	
+	elseif isempty(parseresults)
+		"## No results parsing *$(token)*"
+		
+	else
+		
+		lines = String[]	
+		countstring = length(parseresults) == 1 ? "1 result" : "$(length(parseresults)) results"
+		push!(lines, "## Parsing *$(token)*: $(countstring)")
+		for pr in parseresults
+			lex = lexemeurn(pr) |> string
+			answer = string("- ", latinForm(pr), " from `", lex, "`")
+			push!(lines, answer)
+		end
+		if showlexicon
+			lexoption = gatherlexicon(parseresults, lexicon)
+			push!(lines, join(lexoption, ", "))
+		end
+		
+		join(lines, "\n")
+	end
+end
+
+# ╔═╡ ac77f687-2e7b-41c7-9b0c-a00425142dab
+isempty(token) ? nothing : (reply(token, parses, lsarticles, lewisshort) |> Markdown.parse)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
+CitableObject = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
 CitableParserBuilder = "c834cb9d-35b9-419a-8ff8-ecaeea9e2a2a"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 Tabulae = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
 
 [compat]
 CitableBase = "~10.4.0"
+CitableObject = "~0.16.1"
 CitableParserBuilder = "~0.30.1"
 PlutoUI = "~0.7.60"
 Tabulae = "~0.15.0"
@@ -99,9 +185,9 @@ Tabulae = "~0.15.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.7"
+julia_version = "1.11.2"
 manifest_format = "2.0"
-project_hash = "d9581748ee3554e7ca9c63c7da13034044abe976"
+project_hash = "7095dc921f584ebfc5e07a62260f320a91a3947d"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -133,13 +219,15 @@ version = "4.1.1"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
-version = "1.1.1"
+version = "1.1.2"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
+version = "1.11.0"
 
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+version = "1.11.0"
 
 [[deps.BitFlags]]
 git-tree-sha1 = "0691e34b3bb8be9307330f88d1a3c3f25466c24d"
@@ -251,6 +339,7 @@ version = "1.0.0"
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
+version = "1.11.0"
 
 [[deps.DeepDiffs]]
 git-tree-sha1 = "9824894295b62a6a4ab6adf1c7bf337b3a9ca34c"
@@ -266,6 +355,7 @@ version = "0.3.29"
 [[deps.Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+version = "1.11.0"
 
 [[deps.DocStringExtensions]]
 deps = ["LibGit2"]
@@ -309,6 +399,7 @@ weakdeps = ["Mmap", "Test"]
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
+version = "1.11.0"
 
 [[deps.FixedPointNumbers]]
 deps = ["Statistics"]
@@ -319,6 +410,7 @@ version = "0.8.5"
 [[deps.Future]]
 deps = ["Random"]
 uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
+version = "1.11.0"
 
 [[deps.Git]]
 deps = ["Git_jll"]
@@ -382,6 +474,7 @@ version = "1.4.2"
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
+version = "1.11.0"
 
 [[deps.InvertedIndices]]
 git-tree-sha1 = "0dc7b50b8d436461be01300fd8cd45aa0274b038"
@@ -434,16 +527,17 @@ version = "0.6.4"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.4.0+0"
+version = "8.6.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
+version = "1.11.0"
 
 [[deps.LibGit2_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll"]
 uuid = "e37daf67-58a4-590a-8e99-b0245dd2ffc5"
-version = "1.6.4+0"
+version = "1.7.2+0"
 
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
@@ -452,6 +546,7 @@ version = "1.11.0+1"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
+version = "1.11.0"
 
 [[deps.Libiconv_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -462,6 +557,7 @@ version = "1.17.0+1"
 [[deps.LinearAlgebra]]
 deps = ["Libdl", "OpenBLAS_jll", "libblastrampoline_jll"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+version = "1.11.0"
 
 [[deps.LogExpFunctions]]
 deps = ["DocStringExtensions", "IrrationalConstants", "LinearAlgebra"]
@@ -481,6 +577,7 @@ version = "0.3.28"
 
 [[deps.Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
+version = "1.11.0"
 
 [[deps.LoggingExtras]]
 deps = ["Dates", "Logging"]
@@ -496,6 +593,7 @@ version = "0.1.4"
 [[deps.Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
+version = "1.11.0"
 
 [[deps.MarkdownAST]]
 deps = ["AbstractTrees", "Markdown"]
@@ -512,7 +610,7 @@ version = "1.1.9"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.2+1"
+version = "2.28.6+0"
 
 [[deps.Missings]]
 deps = ["DataAPI"]
@@ -522,10 +620,11 @@ version = "1.2.0"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
+version = "1.11.0"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2023.1.10"
+version = "2023.12.12"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
@@ -534,7 +633,7 @@ version = "1.2.0"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.23+4"
+version = "0.3.27+1"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -571,9 +670,13 @@ uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
 version = "2.8.1"
 
 [[deps.Pkg]]
-deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
+deps = ["Artifacts", "Dates", "Downloads", "FileWatching", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "Random", "SHA", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.10.0"
+version = "1.11.0"
+weakdeps = ["REPL"]
+
+    [deps.Pkg.extensions]
+    REPLExt = "REPL"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
@@ -608,14 +711,17 @@ version = "2.4.0"
 [[deps.Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+version = "1.11.0"
 
 [[deps.REPL]]
-deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
+deps = ["InteractiveUtils", "Markdown", "Sockets", "StyledStrings", "Unicode"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
+version = "1.11.0"
 
 [[deps.Random]]
 deps = ["SHA"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+version = "1.11.0"
 
 [[deps.Reexport]]
 git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
@@ -646,6 +752,7 @@ version = "1.4.7"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+version = "1.11.0"
 
 [[deps.SimpleBufferStream]]
 git-tree-sha1 = "f305871d2f381d21527c770d4788c06c097c9bc1"
@@ -654,6 +761,7 @@ version = "1.2.0"
 
 [[deps.Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
+version = "1.11.0"
 
 [[deps.SortingAlgorithms]]
 deps = ["DataStructures"]
@@ -664,7 +772,7 @@ version = "1.2.1"
 [[deps.SparseArrays]]
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
-version = "1.10.0"
+version = "1.11.0"
 
 [[deps.SplitApplyCombine]]
 deps = ["Dictionaries", "Indexing"]
@@ -673,9 +781,14 @@ uuid = "03a91e81-4c3e-53e1-a0a4-9c0c8f19dd66"
 version = "1.2.3"
 
 [[deps.Statistics]]
-deps = ["LinearAlgebra", "SparseArrays"]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "ae3bb1eb3bba077cd276bc5cfc337cc65c3075c0"
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
-version = "1.10.0"
+version = "1.11.1"
+weakdeps = ["SparseArrays"]
+
+    [deps.Statistics.extensions]
+    SparseArraysExt = ["SparseArrays"]
 
 [[deps.StatsAPI]]
 deps = ["LinearAlgebra"]
@@ -695,10 +808,14 @@ git-tree-sha1 = "a6b1675a536c5ad1a60e5a5153e1fee12eb146e3"
 uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
 version = "0.4.0"
 
+[[deps.StyledStrings]]
+uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"
+version = "1.11.0"
+
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
-version = "7.2.1+1"
+version = "7.7.0+0"
 
 [[deps.TOML]]
 deps = ["Dates"]
@@ -731,6 +848,7 @@ version = "1.10.0"
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+version = "1.11.0"
 
 [[deps.TestSetExtensions]]
 deps = ["DeepDiffs", "Distributed", "Test"]
@@ -762,9 +880,11 @@ version = "1.5.1"
 [[deps.UUIDs]]
 deps = ["Random", "SHA"]
 uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+version = "1.11.0"
 
 [[deps.Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
+version = "1.11.0"
 
 [[deps.WeakRefStrings]]
 deps = ["DataAPI", "InlineStrings", "Parsers"]
@@ -790,7 +910,7 @@ version = "5.11.0+0"
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.52.0+1"
+version = "1.59.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -802,13 +922,10 @@ version = "17.4.0+2"
 # ╟─53c72281-4ff3-4a84-8739-0ff4da040efd
 # ╟─f2371ff7-8815-49bd-92ae-626f80d584a8
 # ╟─34fa160a-b587-11ef-1440-01bb34445b54
-# ╟─65bd9e5a-69e5-47b2-a248-59e1feabab7e
+# ╟─b841c4ef-d2d5-4184-9a0e-b8291456136f
 # ╟─6a6e543e-f597-4e00-9c9a-a2fbc01b0f53
-# ╠═636b9259-c560-4be5-9b70-7540bb56105c
-# ╠═24cb62ce-412e-4127-87a7-42e0e2f2c572
-# ╠═dc110174-43ab-418c-afce-b4062333dce7
-# ╠═48c6439c-f36f-42eb-87c6-8c42b73ef7c9
-# ╠═76412830-52c7-4761-b053-f6a76bf48d5e
+# ╟─65bd9e5a-69e5-47b2-a248-59e1feabab7e
+# ╟─ac77f687-2e7b-41c7-9b0c-a00425142dab
 # ╟─2177ac85-30cd-4b7b-bd14-bc2620de5059
 # ╟─cb28cf99-38b0-4329-ad4c-80d19a26eafe
 # ╟─74d7a977-5a32-4892-9f24-4e32c3a5e03a
@@ -816,5 +933,14 @@ version = "17.4.0+2"
 # ╟─ae3bb4ee-6105-4489-b4aa-b2482924339f
 # ╟─5d201081-a854-44dc-9e8d-17b6ca8fd2da
 # ╟─2c83b821-84e9-4a34-9bed-8c516f3216d5
+# ╟─24cb62ce-412e-4127-87a7-42e0e2f2c572
+# ╟─b52cc6d0-f6f2-4ea5-9438-3404968b0307
+# ╟─f1a29e77-530d-4255-b88c-f43ccc3fe8c1
+# ╟─cbb0dc59-caa7-49e9-b123-e90ac8429b34
+# ╟─1fdc755f-4529-4bda-85ec-17f68cb32501
+# ╟─fcea0182-7176-4b96-9232-57eb1b8006a0
+# ╟─c2ce674e-2a3f-4483-b763-de81eccdd889
+# ╟─49c8a773-fabb-4a19-8188-edeb91631d31
+# ╟─a2e62f31-1289-4deb-a75f-80fa4e6f00ab
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
