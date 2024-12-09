@@ -40,10 +40,6 @@ TableOfContents()
 # ╔═╡ e6623fc1-5662-41ed-92fb-769da2cb345c
 md"""# Morphological analysis of glosses
 
-- select a page
-- analyze tokens
-
-
 """
 
 # ╔═╡ 75d2862a-276b-40b2-a8d5-49193e204455
@@ -132,6 +128,12 @@ ortho23 = latin23()
 
 # ╔═╡ 53e58aa9-5ebb-4214-8fb6-bed8d55e43b5
 p23url = "http://shot.holycross.edu/tabulae/complut-lat23-current.cex"
+
+# ╔═╡ d284aa36-1c55-48f8-8f58-5bb90323efe3
+p23rules = "http://shot.holycross.edu/tabulae/complut-lat23-rules-current.cex"
+
+# ╔═╡ 1d5979d0-e116-4840-a51e-9c450be09282
+rules = ruleset(p23rules, UrlReader)
 
 # ╔═╡ 41cf6718-395b-4ea6-8b86-ff0b2e517c28
 parser23 = tabulaeStringParser(p23url, UrlReader)
@@ -2038,9 +2040,11 @@ version = "17.4.0+2"
 # ╟─27729813-2c4a-403a-bbf1-13f986899104
 # ╟─3e974ffa-3f85-457a-961a-0c39102f6593
 # ╟─53e58aa9-5ebb-4214-8fb6-bed8d55e43b5
+# ╟─d284aa36-1c55-48f8-8f58-5bb90323efe3
+# ╠═1d5979d0-e116-4840-a51e-9c450be09282
 # ╟─41cf6718-395b-4ea6-8b86-ff0b2e517c28
-# ╠═d9f967d1-e327-41a6-8b8b-01229f1beb18
-# ╠═db29da28-6209-4f12-a4c0-070f4e8afcea
+# ╟─d9f967d1-e327-41a6-8b8b-01229f1beb18
+# ╟─db29da28-6209-4f12-a4c0-070f4e8afcea
 # ╟─d695f270-0aa0-4998-8a6b-1d3b0301dd78
 # ╟─b82f3eb5-8e83-4903-9258-e8559beb7a91
 # ╟─20f0d978-add6-4347-a56b-b9c584d78879
