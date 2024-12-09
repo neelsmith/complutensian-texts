@@ -22,7 +22,7 @@ using CitableCorpus
 using CitableBase
 
 r = repository(root |> dirname)
-pgurn = Cite2Urn("urn:cite2:compnov:complutpages.v1:1")
+pgurn = Cite2Urn("urn:cite2:complut:pages.bne:vol1_a_1r")
 vizprs = surfacevizpairs(r, pgurn, strict = false)
 txtlist = map(vizprs) do pr
         pr[1]|> droppassage

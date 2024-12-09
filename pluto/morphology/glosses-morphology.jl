@@ -1,17 +1,19 @@
 ### A Pluto.jl notebook ###
-# v0.20.0
+# v0.20.3
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
+    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
+    #! format: on
 end
 
 # ╔═╡ c1de89d4-b401-11ef-1c0e-51b5e33d435e
@@ -41,6 +43,12 @@ TableOfContents()
 md"""# Morphological analysis of glosses
 
 """
+
+# ╔═╡ 3e2cdcb8-4ca6-4ec8-9f41-258915adc26d
+w = 200
+
+# ╔═╡ 73cb0519-a037-4e82-8746-6f1d2dbdae9d
+md"""*See image of indexed passages*: $(@bind showimage CheckBox())"""
 
 # ╔═╡ 75d2862a-276b-40b2-a8d5-49193e204455
 @bind loadem Button("Reload data from repository")
@@ -107,6 +115,15 @@ md"""## Choose a passage to verify
 # ╔═╡ 955cdb7f-8492-4aaf-9aba-082b2e6af6c5
 # ╠═╡ show_logs = false
 surfaceurn = isempty(surface) ? nothing  : Cite2Urn(surface)
+
+# ╔═╡ ba6cf97b-8fe0-4610-bac6-9b0500514eaf
+# ╠═╡ show_logs = false
+if isnothing(surfaceurn) 
+	nothing 
+
+elseif showimage
+	Markdown.parse(indexingcompleteness_md(r, surfaceurn; strict = false, width=w))
+end
 
 # ╔═╡ 53b24678-be41-40f2-a1a4-cb12aeaf859f
 md"""> ## Text corpora"""
@@ -183,13 +200,29 @@ if isnothing(surfaceurn)
 else
 	passagelist = selectedtexts(surfaceurn, alldse)
 	pagepassages = map(passagelist) do psg
-		filter(p -> dropexemplar(p.urn) == psg, corpus.passages)[1]
+		inpassage = filter(p -> dropexemplar(p.urn) == psg, corpus.passages)
+		if isempty(inpassage)
+			@warn("FAILED ON $(psg)")
+			[]
+		else
+			inpassage[1]
+		end
+		
 	end
 	userchoice  = filter(p -> versionid(p.urn) == gloss, pagepassages)
 	passagemenu = map(userchoice) do psg
 		string(workid(psg.urn), ":", passagecomponent(psg.urn))
 	end
 end
+
+# ╔═╡ 5ef9a6c7-c9c6-4b7b-8059-e1f13e4df32f
+passagelistx = selectedtexts(surfaceurn, alldse)
+
+# ╔═╡ 0ee23574-b264-434f-be4e-a8cd439b678c
+passagelistx
+
+# ╔═╡ f9c11ce0-62a1-4baa-a6a3-88bcedc25d9f
+md"""> ## Image services"""
 
 # ╔═╡ df41d986-eb5e-4d23-887b-e084d8e26eb9
 md"""> ## Display and utilities"""
@@ -217,11 +250,13 @@ function showfails(tknlist, parser)
 end
 
 # ╔═╡ dd674f2a-cfdf-4d55-9f02-07113a041f72
+"""Format string for length of vector."""
 function countstring(vect)
 	length(vect) == 1 ? "1 result" : string(length(vect), " results")
 end
 
 # ╔═╡ 9f8b1221-ebb2-4973-ab86-e8907118e854
+"""Format HTML display for cell while waiting for input."""
 function waiting()
 	"<span class=\"waiting\">No surface selected</span>"
 end
@@ -270,6 +305,26 @@ end
 # ╔═╡ 4a74d904-4731-492c-8045-6597559b0c73
 if showall
 	displayparses(lextokens, parser23) |> Markdown.parse
+end
+
+# ╔═╡ 3f899b52-b3d4-47a0-bf38-91ae271c9a60
+"""Format markdown label for page and contents."""
+function labelpage(u)
+	str = objectcomponent(u)
+	if startswith(str, "vol")
+		(volume, quire, pg) = split(str, "_")
+		string("> *", replace(volume, "vol" => "Volume "), ", quire `", quire, "`, page `", pg, "`*")
+	else
+		str
+	end
+end
+
+# ╔═╡ 76edc32d-edc8-454e-ae25-481ba99ce71d
+if isnothing(surfaceurn)
+else
+	rangestring = string("**", passagemenu[1],"-",passagemenu[end], "**")
+	lbl = labelpage(surfaceurn) * ", containing " * rangestring
+	lbl |> Markdown.parse
 end
 
 # ╔═╡ 97fd23fa-ea28-4c8b-83b6-7cd86f610140
@@ -2016,8 +2071,12 @@ version = "17.4.0+2"
 # ╟─c1de89d4-b401-11ef-1c0e-51b5e33d435e
 # ╟─c6755f78-8e52-4211-9f5d-ad9fe7845a7e
 # ╟─e6623fc1-5662-41ed-92fb-769da2cb345c
+# ╟─3e2cdcb8-4ca6-4ec8-9f41-258915adc26d
+# ╟─73cb0519-a037-4e82-8746-6f1d2dbdae9d
+# ╟─ba6cf97b-8fe0-4610-bac6-9b0500514eaf
 # ╟─75d2862a-276b-40b2-a8d5-49193e204455
 # ╟─eeca0331-3151-4604-982d-a991852fbd3c
+# ╟─76edc32d-edc8-454e-ae25-481ba99ce71d
 # ╟─b8c5c2c8-76b5-4266-ac4b-cb06103d612b
 # ╟─fba4d58a-54cd-4aa5-b52a-c6bae3d6e886
 # ╟─d0aa825c-2f3b-4de7-8dd4-fdcf886bf48e
@@ -2030,7 +2089,9 @@ version = "17.4.0+2"
 # ╟─895b88f1-19bf-4ee5-ba3c-ea1ffcc84a33
 # ╟─0f0e5da7-59ba-4f73-90a0-24c3ca0fe6d5
 # ╟─3fca0ce9-222a-4ff0-b185-d7cc75a05259
-# ╟─7dd26572-d863-45cc-b9e0-6cdd0fd9ede0
+# ╠═7dd26572-d863-45cc-b9e0-6cdd0fd9ede0
+# ╠═5ef9a6c7-c9c6-4b7b-8059-e1f13e4df32f
+# ╠═0ee23574-b264-434f-be4e-a8cd439b678c
 # ╟─6d71d46b-1937-4f23-958d-8d3972b026ea
 # ╟─c648e3e4-2951-4b11-bfff-d4927fff6d42
 # ╟─955cdb7f-8492-4aaf-9aba-082b2e6af6c5
@@ -2050,11 +2111,13 @@ version = "17.4.0+2"
 # ╟─b82f3eb5-8e83-4903-9258-e8559beb7a91
 # ╟─20f0d978-add6-4347-a56b-b9c584d78879
 # ╟─b11153e6-f3fe-4c4f-a2fe-f5ade227984b
+# ╟─f9c11ce0-62a1-4baa-a6a3-88bcedc25d9f
 # ╟─df41d986-eb5e-4d23-887b-e084d8e26eb9
 # ╟─7deb9b0e-c6ca-4e77-86f2-24ead2aeb6d6
 # ╟─5a4e5d55-3b38-4d7c-8abd-666fb11e8423
 # ╟─dd674f2a-cfdf-4d55-9f02-07113a041f72
 # ╟─9f8b1221-ebb2-4973-ab86-e8907118e854
+# ╟─3f899b52-b3d4-47a0-bf38-91ae271c9a60
 # ╟─97fd23fa-ea28-4c8b-83b6-7cd86f610140
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
