@@ -133,6 +133,7 @@ p23url = "http://shot.holycross.edu/tabulae/complut-lat23-current.cex"
 p23rules = "http://shot.holycross.edu/tabulae/complut-lat23-rules-current.cex"
 
 # ╔═╡ 1d5979d0-e116-4840-a51e-9c450be09282
+# ╠═╡ show_logs = false
 rules = ruleset(p23rules, UrlReader)
 
 # ╔═╡ 41cf6718-395b-4ea6-8b86-ff0b2e517c28
@@ -387,7 +388,7 @@ EditorsRepo = "~0.19.4"
 LatinOrthography = "~0.7.3"
 Orthography = "~0.22.0"
 PlutoUI = "~0.7.60"
-Tabulae = "~0.15.0"
+Tabulae = "~0.15.1"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -396,7 +397,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.2"
 manifest_format = "2.0"
-project_hash = "d9644e7105919eab0f618aaf65d43e25ac4511fc"
+project_hash = "c430d49642d1878e0c1a433db70665f07dca0a0b"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1846,9 +1847,9 @@ version = "1.12.0"
 
 [[deps.Tabulae]]
 deps = ["CitableBase", "CitableCorpus", "CitableObject", "CitableParserBuilder", "CitableText", "Compat", "DocStringExtensions", "Documenter", "Downloads", "Glob", "LatinOrthography", "Markdown", "Orthography", "Test", "TestSetExtensions", "Unicode"]
-git-tree-sha1 = "3648328daa3bae1420e046870994038377d5f5b7"
+git-tree-sha1 = "9152065e6dfa3b57776ed6622b7bfbcc1f122ef8"
 uuid = "a03c184b-2b42-4641-ae65-f14a9f5424c6"
-version = "0.15.0"
+version = "0.15.1"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -2041,7 +2042,7 @@ version = "17.4.0+2"
 # ╟─3e974ffa-3f85-457a-961a-0c39102f6593
 # ╟─53e58aa9-5ebb-4214-8fb6-bed8d55e43b5
 # ╟─d284aa36-1c55-48f8-8f58-5bb90323efe3
-# ╠═1d5979d0-e116-4840-a51e-9c450be09282
+# ╟─1d5979d0-e116-4840-a51e-9c450be09282
 # ╟─41cf6718-395b-4ea6-8b86-ff0b2e517c28
 # ╟─d9f967d1-e327-41a6-8b8b-01229f1beb18
 # ╟─db29da28-6209-4f12-a4c0-070f4e8afcea
