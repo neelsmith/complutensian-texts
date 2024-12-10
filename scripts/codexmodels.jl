@@ -301,14 +301,16 @@ function volume6pages()
 	ternions = ternion.(vcat(v6ucquires, v6doublealphaquires))
 	hebrewlexicon = vcat(ternions, [ff]) |> Iterators.flatten |> collect
 	
+
+
 	#hebrewgrammar = [ternion("A"), ternion("B"), singleton("C")] |> Iterators.flatten |> collect
 
-	#latinnames = ternions.(["A", "B", "C", "D"]) |> Iterators.flatten
+	latinnames = ternion.(["A-names", "B-names", "C-names", "D-names"]) |> Iterators.flatten |> collect
 
-	#bnesequence = vcat(hebrewlexicon, latinnames, )
+	bnesequence = vcat(hebrewlexicon, latinnames)
 
     
-    map(pg -> "vol6_" * pg, hebrewlexicon)
+    map(pg -> "vol6_" * pg, bnesequence)
 end
 
 function volume6images()
@@ -339,10 +341,11 @@ function volume6pairs()
 
 	pgidx = 0
 	#for i in 5:length(v6images)
-	for i in 3:length(v6pages)
+	for i in 3:length(v6pages) + 2
 		pgidx = pgidx + 1
 		img = v6images[i]
 		pg = v6pages[pgidx]
+		@info("pair $(pg) / $(img)")
 		push!(pairs, (volume = 6, page = pg, image = img))
 	end
 	pairs
@@ -357,3 +360,6 @@ v6modelfile = joinpath(repo, "codex", "bne_v6.cex")
 open(v6modelfile,"w") do io
 	write(io, v6model)
 end
+
+
+v6prs  = volume6pairs()
