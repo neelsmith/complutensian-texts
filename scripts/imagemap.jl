@@ -92,13 +92,76 @@ function volume1pages()
 	v1doublealphaquires = filter(map(c -> repeat(c, 2), collect('a':'z'))) do s
 		s != "ii" && s != "uu"
 	end
-	v1alphapages = ternion.(v1alphas) |> Iterators.flatten |> collect
 	v1alphas = vcat(v1singlealphaquires, v1doublealphaquires)
+	v1alphapages = ternion.(v1alphas) |> Iterators.flatten |> collect
+	
 	# There are two non-alphabetic quire signs follwing these: one ternion and one quaternion.
 	et = ternion("et")
 	con = quaternion("con")
 	vcat(v1alphapages, et, con)
 end
+
+
+function volume1images()
+	pageids  = []
+	centuries = [
+		"v1p", "v1a_p", "v1b_p", "v1c_p", "v1d_p", "v1e_p"
+	]
+	for c in centuries
+		for i in 1:100
+			push!(pageids, string(c,i))
+		end
+	end
+	pageids
+end
+
+
+function volume1pairs()
+	pairs = []
+	v1images = volume1images()
+	v1pages = volume1pages()
+	pgidx = 0
+	for i in 19:600
+		pgidx = pgidx + 1
+		img = v1images[i]
+		pg = v1pages[pgidx]
+		push!(pairs, (volume = 1, page = pg, image = img))
+	end
+	pairs
+end
+
+
+function v1codexmodel()
+
+	v1pairs = volume1pairs()
+
+
+	codexmodel = ["#!citedata",
+		"sequence|image|page|rv|label",
+	]
+	seq = 4
+
+	imgbaseurn = "urn:cite2:citebne:complutensian.v1:"
+	pagebaseurn = "urn:cite2:complut:pages.bne:vol1_"
+	for pr in v1pairs
+	seq = seq + 1
+		rv = endswith(pr.page, "v") ? "verso" : "recto"
+		(quire, pgref)  = split(pr.page, "_")
+		lbl = string("Complutensian Bible, BNE, volume ", pr.volume, " quire ", quire, ", page ", pgref)
+		pieces = [seq, imgbaseurn * pr.image, pagebaseurn * pr.page, rv, lbl]
+		push!(codexmodel, join(pieces,"|"))
+	end
+	join(codexmodel, "\n")
+end
+
+v1model = v1codexmodel()
+v1modelfile = joinpath(repo, "codex", "bne_v1.cex")
+open(v1modelfile,"w") do io
+	write(io, v1model)
+end
+
+
+#=
 
 """Generate list of all pages in Complutensian volume 2."""
 function volume2pages()
@@ -125,3 +188,4 @@ v2pages[98]
 ## vol 2 page j_1v == image 2a_p98
 
 
+=#
