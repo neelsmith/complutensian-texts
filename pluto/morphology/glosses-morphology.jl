@@ -1,19 +1,17 @@
 ### A Pluto.jl notebook ###
-# v0.20.3
+# v0.20.0
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
 
 # ╔═╡ c1de89d4-b401-11ef-1c0e-51b5e33d435e
@@ -44,11 +42,8 @@ md"""# Morphological analysis of glosses
 
 """
 
-# ╔═╡ 3e2cdcb8-4ca6-4ec8-9f41-258915adc26d
-w = 200
-
 # ╔═╡ 73cb0519-a037-4e82-8746-6f1d2dbdae9d
-md"""*See image of indexed passages*: $(@bind showimage CheckBox())"""
+md"""*See image of indexed passages*: $(@bind showimage CheckBox()) *Width of image(pixesls)*: $(@bind w Slider(100:10:500; default = 200, show_value = true))"""
 
 # ╔═╡ 75d2862a-276b-40b2-a8d5-49193e204455
 @bind loadem Button("Reload data from repository")
@@ -215,12 +210,6 @@ else
 	end
 end
 
-# ╔═╡ 5ef9a6c7-c9c6-4b7b-8059-e1f13e4df32f
-passagelistx = selectedtexts(surfaceurn, alldse)
-
-# ╔═╡ 0ee23574-b264-434f-be4e-a8cd439b678c
-passagelistx
-
 # ╔═╡ f9c11ce0-62a1-4baa-a6a3-88bcedc25d9f
 md"""> ## Image services"""
 
@@ -293,10 +282,10 @@ function displayparses(tokenlist, parser)
 	for tkn in lextokens
 		parselist = parsetoken(string(tkn.text), parser23)
 		
-		push!(lines, "- **Parses for** *$(tkn.text)*: $(countstring(parselist))\n")
+		push!(lines, "- Parses for *$(tkn.text)*: $(countstring(parselist))\n")
 		
 		for p in parselist
-			push!(lines, string("    - *", latinForm(p), "*\n"))
+			push!(lines, string("    - *", p.mtoken, "*: **", latinForm(p), "**\n"))
 		end
 	end
 	join(lines, "\n")
@@ -313,7 +302,7 @@ function labelpage(u)
 	str = objectcomponent(u)
 	if startswith(str, "vol")
 		(volume, quire, pg) = split(str, "_")
-		string("> *", replace(volume, "vol" => "Volume "), ", quire `", quire, "`, page `", pg, "`*")
+		string("> *", replace(volume, "vol" => "Volume `"), "`, quire `", quire, "`, page `", pg, "`*")
 	else
 		str
 	end
@@ -323,7 +312,7 @@ end
 if isnothing(surfaceurn)
 else
 	rangestring = string("**", passagemenu[1],"-",passagemenu[end], "**")
-	lbl = labelpage(surfaceurn) * ", containing " * rangestring
+	lbl = labelpage(surfaceurn) * ", *containing* " * rangestring
 	lbl |> Markdown.parse
 end
 
@@ -2071,7 +2060,6 @@ version = "17.4.0+2"
 # ╟─c1de89d4-b401-11ef-1c0e-51b5e33d435e
 # ╟─c6755f78-8e52-4211-9f5d-ad9fe7845a7e
 # ╟─e6623fc1-5662-41ed-92fb-769da2cb345c
-# ╟─3e2cdcb8-4ca6-4ec8-9f41-258915adc26d
 # ╟─73cb0519-a037-4e82-8746-6f1d2dbdae9d
 # ╟─ba6cf97b-8fe0-4610-bac6-9b0500514eaf
 # ╟─75d2862a-276b-40b2-a8d5-49193e204455
@@ -2087,11 +2075,9 @@ version = "17.4.0+2"
 # ╟─3341f91a-b4d5-45ca-9213-f833e2f60a17
 # ╟─f81d0d0e-c87c-498f-98d9-fe44c1253af4
 # ╟─895b88f1-19bf-4ee5-ba3c-ea1ffcc84a33
+# ╟─7dd26572-d863-45cc-b9e0-6cdd0fd9ede0
 # ╟─0f0e5da7-59ba-4f73-90a0-24c3ca0fe6d5
 # ╟─3fca0ce9-222a-4ff0-b185-d7cc75a05259
-# ╠═7dd26572-d863-45cc-b9e0-6cdd0fd9ede0
-# ╠═5ef9a6c7-c9c6-4b7b-8059-e1f13e4df32f
-# ╠═0ee23574-b264-434f-be4e-a8cd439b678c
 # ╟─6d71d46b-1937-4f23-958d-8d3972b026ea
 # ╟─c648e3e4-2951-4b11-bfff-d4927fff6d42
 # ╟─955cdb7f-8492-4aaf-9aba-082b2e6af6c5
