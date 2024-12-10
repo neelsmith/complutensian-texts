@@ -98,7 +98,9 @@ function volume1pages()
 	# There are two non-alphabetic quire signs follwing these: one ternion and one quaternion.
 	et = ternion("et")
 	con = quaternion("con")
-	vcat(v1alphapages, et, con)
+	map(vcat(v1alphapages, et, con)) do pg
+		"vol1_" * pg
+	end
 end
 
 
@@ -131,41 +133,42 @@ function volume1pairs()
 end
 
 
-function v1codexmodel()
-
-	v1pairs = volume1pairs()
-
+function codexmodel(pairs, seq)
+	imgbaseurn = "urn:cite2:citebne:complutensian.v1:"
+	pagebaseurn = "urn:cite2:complut:pages.bne:"
 
 	codexmodel = ["#!citedata",
 		"sequence|image|page|rv|label",
 	]
-	seq = 4
-
-	imgbaseurn = "urn:cite2:citebne:complutensian.v1:"
-	pagebaseurn = "urn:cite2:complut:pages.bne:vol1_"
-	for pr in v1pairs
-	seq = seq + 1
+	for pr in pairs
+		seq = seq + 1
 		rv = endswith(pr.page, "v") ? "verso" : "recto"
-		(quire, pgref)  = split(pr.page, "_")
-		lbl = string("Complutensian Bible, BNE, volume ", pr.volume, " quire ", quire, ", page ", pgref)
+		@info(pr.page)
+		(volume, quire, pgref)  = split(pr.page, "_")
+		lbl = string("Complutensian Bible, National Library of Spain, ", volume, ", quire ", quire, ", page ", pgref, ".")
 		pieces = [seq, imgbaseurn * pr.image, pagebaseurn * pr.page, rv, lbl]
 		push!(codexmodel, join(pieces,"|"))
 	end
 	join(codexmodel, "\n")
 end
 
-v1model = v1codexmodel()
+v1model = codexmodel(volume1pairs(), 4)
+
 v1modelfile = joinpath(repo, "codex", "bne_v1.cex")
 open(v1modelfile,"w") do io
 	write(io, v1model)
 end
 
 
-#=
+
+################### VOLUME 2 ##########################
 
 """Generate list of all pages in Complutensian volume 2."""
 function volume2pages()
-    v2singlealphaquires = filter(map(c -> string(c), collect('a':'z'))) do ch
+
+	a1 = vcat(ternion("a"), ["prolog_1r", "prolog_1v"])
+
+    v2singlealphaquires = filter(map(c -> string(c), collect('b':'z'))) do ch
         ch != "i" && ch != "u"
     end
 
@@ -175,17 +178,47 @@ function volume2pages()
 
     v2ternions = ternion.(vcat(v2singlealphaquires, v2doublealphaquires))
     trailer = quaternion("vv")
-    vcat(v2ternions, trailer) |> Iterators.flatten |> collect
+	pageids = vcat([a1], v2ternions, [trailer]) |> Iterators.flatten |> collect
+    map(pg -> "vol2_" * pg, pageids)
+end
+
+function volume2images()
+	pageids  = []
+	a = for i in 1:98
+		push!(pageids, string("v2a_p",i))
+	end
+	 
+	centuries = [
+		"v2b_p", "v2c_p", "v2d_p", "v2e_p"
+	]
+	for c in centuries
+		for i in 1:100
+			push!(pageids, string(c,i))
+		end
+	end
+	pageids
 end
 
 
+function volume2pairs()
+	pairs = []
+	#image p5 is page a 1r
+	v2pages = volume2pages()
+	v2images = volume2images()
 
-v2pages = volume2pages()
+	pgidx = 0
+	for i in 5:length(v2images)
+		pgidx = pgidx + 1
+		img = v2images[i]
+		pg = v2pages[pgidx]
+		push!(pairs, (volume = 2, page = pg, image = img))
+	end
+	pairs
+end
 
-v2pages[98]
-## vol 2 page a_1r == image 2a_p5
-# through
-## vol 2 page j_1v == image 2a_p98
 
-
-=#
+v2model = codexmodel(volume2pairs(), 4)
+v2modelfile = joinpath(repo, "codex", "bne_v2.cex")
+open(v2modelfile,"w") do io
+	write(io, v2model)
+end
