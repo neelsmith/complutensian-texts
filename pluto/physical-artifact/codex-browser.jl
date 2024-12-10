@@ -113,7 +113,7 @@ quiremenu = map(quirelist) do q
 end
 
 # ╔═╡ 34b9d7d6-e36b-46e8-a143-c79db286f144
-md"""*Quire*: $(@bind quire Select(quiremenu)) *Show pairings*: $(@bind showpairings CheckBox())"""
+md"""*Quire*: $(@bind quire Select(quiremenu)) *Show pairings*: $(@bind showpairings CheckBox()) *Image size* $(@bind thumbw Slider(20:10:200; default = 40, show_value = true))"""
 
 # ╔═╡ 5f58fa22-17ea-4d5c-8078-ecbb91115c64
 pagelist = map(filter(trip -> trip.quire == quire, reftriples)) do pg
@@ -165,18 +165,59 @@ linkedMarkdownImage(ict,image(currentpage), service) |> Markdown.parse
 md"""> ## Display gathers"""
 
 # ╔═╡ f19f1497-0760-4217-8ed0-93ee25fe561d
+"""Tabular display of relation of quires in a ternion"""
 function plotternion()
-	lines = ["| A | B |",
-		"| --- | --- |"
+	lines = ["| Bifolio 1| Bifolio 2 | Bifolio 3 |  Bifolio 3 | Bifolio 2 | Bifolio 1 |",
+		"| --- | --- |  --- | --- | --- |  --- | "
 	]
-	for i in 1:12
+
+
+	pads = Dict(
+		1 => 0,
+		2 => 0,
+		
+		3 => 1, 
+		4 => 1, 
+		
+		5 => 2, 
+		6 => 2, 
+
+		7 => 0, 
+		8 => 0,
+
+		9 => 2,
+		10 => 2,
+
+		11 => 4, 
+		12 => 4, 	
+	)
+	for i in 1:6
 		side2 = 13 - i
 		pg1 = currentquire[i]
 		pg2 = currentquire[13 - i]
-		img1 = linkedMarkdownImage(ict, image(pg1), service; w = 50) 
-		img2 = linkedMarkdownImage(ict, image(pg2), service; w = 50) 
-		
-		push!(lines, "| $(pagelist[i]) $(img1) |  $(pagelist[side2]) $(img2) |")
+		img1 = linkedMarkdownImage(ict, image(pg1), service; w = thumbw) 
+		img2 = linkedMarkdownImage(ict, image(pg2), service; w = thumbw) 
+
+		pads1 = pads[i]
+		pads2 = pads[side2]
+		row = []
+		if pads1 > 0
+			for i in 1:pads1
+				push!(row, " | ")
+			end
+		end
+		push!(row, "$(pagelist[i]) $(img1) |" )
+
+		if pads2 > 0
+			for i in 1:pads2
+				push!(row, " | ")
+			end
+		end
+
+		push!(row, "$(pagelist[side2]) $(img2) |" )
+
+		push!(lines, join(row,""))	
+		#push!(lines, "| pad $(pads1) $(pagelist[i]) $(img1) | pad $(pads2) $(pagelist[side2]) $(img2) |")
 	end
 	join(lines,"\n")
 end
@@ -188,7 +229,8 @@ elseif showpairings
 	
 	quiretype = classifyquire(length(pagelist))
 	if quiretype == "ternion"
-		plotternion() |> Markdown.parse
+
+		"(*Thumbnails are linked to image viewer*)\n\n" * plotternion() |> Markdown.parse
 	end
 end
 
