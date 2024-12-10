@@ -20,7 +20,43 @@ end
 
 
 
-"""Generate page IDs for a ternion with a given quire ID."""
+
+function codexmodel(pairs, seq)
+	imgbaseurn = "urn:cite2:citebne:complutensian.v1:"
+	pagebaseurn = "urn:cite2:complut:pages.bne:"
+
+	codexmodel = ["#!citedata",
+		"sequence|image|page|rv|label",
+	]
+	for pr in pairs
+		seq = seq + 1
+		rv = endswith(pr.page, "v") ? "verso" : "recto"
+		@info(pr.page)
+		(volume, quire, pgref)  = split(pr.page, "_")
+		lbl = string("Complutensian Bible, National Library of Spain, ", volume, ", quire ", quire, ", page ", pgref, ".")
+		pieces = [seq, imgbaseurn * pr.image, pagebaseurn * pr.page, rv, lbl]
+		push!(codexmodel, join(pieces,"|"))
+	end
+	join(codexmodel, "\n")
+end
+
+
+
+
+
+"""Generate page IDs for a single bifolio sheeet with a given quire ID."""
+function singleton(id)
+	ids = []
+	for folio in 1:2
+		for pg in ['r', 'v']
+			push!(ids, string(id, "_", folio, pg))
+		end
+	end
+	ids
+end
+
+
+"""Generate page IDs for a binion with a given quire ID."""
 function binion(id)
 	ids = []
 	for folio in 1:4
@@ -84,6 +120,14 @@ function ref(tuple)
 end
 
 
+
+
+
+
+
+
+
+##################### VOLUME 1 ###########################
 """Generate list of all pages in Complutensian volume 1."""
 function volume1pages()
 	v1singlealphaquires = filter(map(c -> string(c), collect('a':'z'))) do ch
@@ -132,25 +176,6 @@ function volume1pairs()
 	pairs
 end
 
-
-function codexmodel(pairs, seq)
-	imgbaseurn = "urn:cite2:citebne:complutensian.v1:"
-	pagebaseurn = "urn:cite2:complut:pages.bne:"
-
-	codexmodel = ["#!citedata",
-		"sequence|image|page|rv|label",
-	]
-	for pr in pairs
-		seq = seq + 1
-		rv = endswith(pr.page, "v") ? "verso" : "recto"
-		@info(pr.page)
-		(volume, quire, pgref)  = split(pr.page, "_")
-		lbl = string("Complutensian Bible, National Library of Spain, ", volume, ", quire ", quire, ", page ", pgref, ".")
-		pieces = [seq, imgbaseurn * pr.image, pagebaseurn * pr.page, rv, lbl]
-		push!(codexmodel, join(pieces,"|"))
-	end
-	join(codexmodel, "\n")
-end
 
 v1model = codexmodel(volume1pairs(), 4)
 
@@ -221,4 +246,92 @@ v2model = codexmodel(volume2pairs(), 4)
 v2modelfile = joinpath(repo, "codex", "bne_v2.cex")
 open(v2modelfile,"w") do io
 	write(io, v2model)
+end
+
+
+
+
+
+
+##################### VOLUME 1 ###########################
+
+#=
+In Huntington:
+
+1. title page with address to reader on verso
+
+√ 2. hebrew vocab in quires `A` - `FF`, final quire `FF` containing 4 pages with rectos numbered (binion). Colophon to this quire dates it to 17 March, 1515.
+√ 3. introduction to Hebrew grammar in quires `A` - `C`, final quire `C` with three pages of content, all rectos identified.
+4. A single blank page? 
+5. Index of Latin terms in a single quaternion with rectos labelled `A` or `a` 1 - 5.
+6. Interpretations of Latin names in quires `A` - `D` (all ternions)
+7. Same quire sequence continues with alternate forms of names, a sinqule binion with first recto labeled `E` .
+ 
+
+=#
+
+"""Generate list of all pages in Complutensian volume 6."""
+function volume6pages()
+
+
+    v6ucquires = filter(map(c -> string(c), collect('A':'Z'))) do ch
+        ch != "I" && ch != "U"
+    end
+    v6doublealphaquires = map(c -> repeat(c, 2), collect('A':'E'))
+	ff = [binion("FF")]
+	ternions = ternion.(vcat(v6ucquires, v6doublealphaquires))
+	hebrewlexicon = vcat(ternions, ff) |> Iterators.flatten |> collect
+	
+	#hebrewgrammar = [ternion("A"), ternion("B"), singleton("C")] |> Iterators.flatten |> collect
+
+	#latinnames = ternions.(["A", "B", "C", "D"]) |> Iterators.flatten
+
+	#bnesequence = vcat(hebrewlexicon, latinnames, )
+
+    
+    map(pg -> "vol6_" * pg, hebrewlexicon)
+end
+
+function volume6images()
+	pageids  = []
+	centuries = [
+		"v6p", "v6a_p", "v6b_p", "v6c_p", "v6d_p"
+	]
+	for c in centuries
+		for i in 1:100
+			push!(pageids, string(c,i))
+		end
+	end
+	for i in 1:48
+		push!(pageids, string("v6e_p", i))
+	end
+	pageids
+end
+
+
+function volume6pairs()
+	pairs = []
+	#image p3 is page a 1r
+	v6pages = volume6pages()
+	v6images = volume6images()
+
+	pgidx = 0
+	#for i in 5:length(v6images)
+	for i in 3:length(v6pages)
+		pgidx = pgidx + 1
+		img = v6images[i]
+		pg = v6pages[pgidx]
+		push!(pairs, (volume = 6, page = pg, image = img))
+	end
+	pairs
+end
+
+v6pairs = volume6pairs()
+v6pgs = volume6pages()
+
+
+v6model = codexmodel(volume6pairs(), 4)
+v6modelfile = joinpath(repo, "codex", "bne_v6.cex")
+open(v6modelfile,"w") do io
+	write(io, v6model)
 end
