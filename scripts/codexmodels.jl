@@ -291,15 +291,15 @@ In Huntington:
 
 """Generate list of all pages in Complutensian volume 6."""
 function volume6pages()
-
+	
 
     v6ucquires = filter(map(c -> string(c), collect('A':'Z'))) do ch
         ch != "I" && ch != "U"
     end
-    v6doublealphaquires = map(c -> repeat(c, 2), collect('A':'E'))
-	ff = [binion("FF")]
+    v6doublealphaquires = map(c -> repeat(c, 2), collect('A':'D'))
+	ff = vcat(binion("EE"), ["EE_4r", "EE_4v"] )
 	ternions = ternion.(vcat(v6ucquires, v6doublealphaquires))
-	hebrewlexicon = vcat(ternions, ff) |> Iterators.flatten |> collect
+	hebrewlexicon = vcat(ternions, [ff]) |> Iterators.flatten |> collect
 	
 	#hebrewgrammar = [ternion("A"), ternion("B"), singleton("C")] |> Iterators.flatten |> collect
 
@@ -313,8 +313,11 @@ end
 
 function volume6images()
 	pageids  = []
+	for i in 1:96
+		push!(pageids,string("v6p",i))
+	end
 	centuries = [
-		"v6p", "v6a_p", "v6b_p", "v6c_p", "v6d_p"
+	  "v6b_p", "v6c_p", "v6d_p"
 	]
 	for c in centuries
 		for i in 1:100
