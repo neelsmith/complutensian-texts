@@ -11,33 +11,52 @@ end
 
 
 incipits = map(data) do trip
-    @info(trip)
+    #@info(trip)
 	ref = split(trip.page, ":")[5]
 	(vol, quire, page) = split(ref, "_")
 	(passage = CtsUrn(trip.passage), quire = quire, page = page)
 end
 
+function preface(collurnstring, title)
+	collbase = replace(collurnstring, r":$" => "")
 
+"""
+#!datamodels
+Collection|Model|Label|Description
+$(collbase):|urn:cite2:hmt:datamodels.v1:codexmodel|HMT project model of a codex with recto and verso sides to each folio.
 
+#!citecollections
+URN|Description|Labelling property|Ordering property|License
+$(collbase):|$(title)|$(collbase).label:|$(collbase).sequence:|CC-attribution-share-alike
 
+#!citeproperties
+Property|Label|Type|Authority list
+$(collbase).sequence:|Page sequence|Number|
+$(collbase).image:|Image of page|Cite2Urn|
+$(collbase).page:|URN|Cite2Urn|
+$(collbase).rv:|Recto or Verso|String|recto,verso
+$(collbase).label:|Label|String|
+"""
 
-function codexmodel(pairs, seq)
+end
+
+function codexmodel(pairs, seq, title)
 	imgbaseurn = "urn:cite2:citebne:complutensian.v1:"
 	pagebaseurn = "urn:cite2:complut:pages.bne:"
 
 	codexmodel = ["#!citedata",
-		"sequence|image|page|rv|label",
+		"sequence|image|urn|rv|label",
 	]
 	for pr in pairs
 		seq = seq + 1
 		rv = endswith(pr.page, "v") ? "verso" : "recto"
-		@info(pr.page)
+		#@info(pr.page)
 		(volume, quire, pgref)  = split(pr.page, "_")
 		lbl = string("Complutensian Bible, National Library of Spain, ", volume, ", quire ", quire, ", page ", pgref, ".")
 		pieces = [seq, imgbaseurn * pr.image, pagebaseurn * pr.page, rv, lbl]
 		push!(codexmodel, join(pieces,"|"))
 	end
-	join(codexmodel, "\n")
+	preface(pagebaseurn, title) * "\n\n" * join(codexmodel, "\n")
 end
 
 
@@ -177,7 +196,7 @@ function volume1pairs()
 end
 
 
-v1model = codexmodel(volume1pairs(), 4)
+v1model = codexmodel(volume1pairs(), 4, "Complutensian Bible (BNE copy): volume 1 ")
 
 v1modelfile = joinpath(repo, "codex", "bne_v1.cex")
 open(v1modelfile,"w") do io
@@ -242,7 +261,7 @@ function volume2pairs()
 end
 
 
-v2model = codexmodel(volume2pairs(), 4)
+v2model = codexmodel(volume2pairs(), 4, "Complutensian Bible (BNE copy): volume 2")
 v2modelfile = joinpath(repo, "codex", "bne_v2.cex")
 open(v2modelfile,"w") do io
 	write(io, v2model)
@@ -330,7 +349,7 @@ v6pairs = volume6pairs()
 v6pgs = volume6pages()
 
 
-v6model = codexmodel(volume6pairs(), 4)
+v6model = codexmodel(volume6pairs(), 4, "Complutensian Bible (BNE copy): volume 6")
 v6modelfile = joinpath(repo, "codex", "bne_v6.cex")
 open(v6modelfile,"w") do io
 	write(io, v6model)

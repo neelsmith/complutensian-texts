@@ -4,83 +4,125 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 167eeed5-4ce9-486b-97d0-cc8f02818fab
-begin
-	
-	using PlutoUI
-	using CitableImage
-	using CitableObject
-
-	md"""*Unhide this cell to see the Julia environment.*"""
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
 end
 
-# ╔═╡ 1a64633c-d326-4c8d-88ab-97b24e693748
+# ╔═╡ ae4f1c16-b713-11ef-15c3-697bc0961205
+begin
+	using CitablePhysicalText, CitableBase, CitableObject
+	using PlutoUI
+
+	md"""*Unhide this cell to see the Julia environment*."""
+end
+
+# ╔═╡ bdebc83e-0e89-45a8-bdca-f251f19d7e8b
 TableOfContents()
 
-# ╔═╡ 46ee7270-87ba-11ef-27f8-95a73921a11b
-md"""# BNE, codex model"""
+# ╔═╡ 49b1b20e-a357-465c-974e-5395a024fc67
+md"""# Browse codex"""
 
-# ╔═╡ 6aacb979-bbe5-444d-8f33-31acfc71c827
-html"""
-<br/><br/><br/><br/><br/>
+# ╔═╡ 8ec7fb5b-f469-4118-8beb-bc5537c136a8
+md"""
+> Browse volumes of the Complutensian Bible in the BNE by quire.
 """
 
-# ╔═╡ 4ebcae37-3b7f-43a1-94a4-a5e464a983d6
-md"""># Under the hood"""
+# ╔═╡ a5056aec-456a-436c-91e6-91c2a858a584
+html"""
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
+"""
 
-# ╔═╡ efc5f691-1fe4-400f-ad25-85cf4939fd70
-md"""## Codex data"""
+# ╔═╡ 0e1335aa-c42a-4952-b708-b708eb551d64
+md"""# Mechanics"""
 
-# ╔═╡ 2bb423cc-3851-4d05-bc60-a1bb29376b37
-repo = dirname(pwd())
+# ╔═╡ 53d99796-5a3b-4784-919c-1f49a66a20c5
+repo = pwd() |> dirname |> dirname
 
-# ╔═╡ f06d52b8-e8f1-4660-8a31-5d7f88e6453f
-src = joinpath(repo, "notes", "quire-analysis", "bne-v1-codex.cex")
+# ╔═╡ 25555da6-44b6-4a42-adee-c0447890faad
+srcfiles = readdir(joinpath(repo, "codex"))
 
-# ╔═╡ 66e6d6b9-f42d-4920-a1ef-5b2c46031803
-data = filter(ln -> ! isempty(ln), readlines(src)[2:end])
-
-# ╔═╡ 816be53f-e854-4dba-842e-1d150ffd420d
-split(data[1],"|")[2]
-
-# ╔═╡ 23976eee-ed3c-4882-a9d5-e63b8e6c38e7
-displaytext = split(data[1],"|")[5]
-
-# ╔═╡ 88d5a9d7-3849-477b-a6fc-96a5783f2352
-u = split(data[1],"|")[2] |> Cite2Urn
-
-# ╔═╡ 1cf8ae80-a870-45d1-8f5d-de0220c5d721
-md"""## Image services"""
-
-# ╔═╡ 612d1019-0eea-46bb-b6b9-f4aff6de82ff
-iiifbaseurl = "http://www.homermultitext.org/iipsrv"
+# ╔═╡ 42264c48-c079-4676-9d03-49e0fefc4031
 
 
-# ╔═╡ 6f16d4f6-1eca-41dc-a8ba-4fa07917f7e1
-iiifroot = "/project/homer/pyramidal/deepzoom"
+# ╔═╡ 00f88fb2-32a3-4517-856a-65b01ab16e9d
+codexmenu = map(srcfiles) do f
+	volnum  = replace(replace(f, "bne_v" => ""), ".cex" => "")
+	(f => "Volume $(volnum)")
+end
 
+# ╔═╡ 6e9170a9-afc4-4beb-90d4-7263e45743fc
+md"""*Select a volume*: $(@bind codex Select(codexmenu))"""
 
-# ╔═╡ f50bd15b-f6b5-4056-b57f-0f2dabc7e157
-iiif = IIIFservice(iiifbaseurl, iiifroot)
+# ╔═╡ 84870ba9-09c2-4ba9-a060-df37481a1ab4
+codexfile = joinpath(repo, "codex", codex)
 
-# ╔═╡ 49cbbd82-923c-4f24-b73e-0de6767d7035
-ict = "http://www.homermultitext.org/ict2/?"
+# ╔═╡ c3ca58ae-cc55-4215-8a56-e77e647bdb8f
+citablecodex = fromcex(codexfile, Codex, FileReader)[1]
 
-# ╔═╡ ba242156-e551-4992-a39e-58da69a2d1a1
-linkedMarkdownImage(ict, u, iiif; w=100, caption=displaytext) |> Markdown.parse
+# ╔═╡ 859b5d6c-4123-439a-937e-245e0fb7974e
+md"""## $(label(citablecodex))"""
 
+# ╔═╡ bd4acebc-cdec-490a-b27b-4009d22af90c
+md"""> ## Quires"""
+
+# ╔═╡ 6daf94a9-96e8-42cb-909c-ade97a927c55
+pagereff = map(pg -> objectcomponent(urn(pg)), collect(citablecodex))
+
+# ╔═╡ 851f9abd-ade9-4cb3-bf13-0ae0a30bd7fa
+reftriples = map(pagereff) do pg
+	(volume, quire, page) =  split(pg, "_")
+	(volume = volume, quire = quire, page = page)
+end
+
+# ╔═╡ 44f7cbf2-d2e2-4335-8550-4fdd300a97e5
+quirelist = map(trip -> trip.quire, reftriples) |> unique
+
+# ╔═╡ 34b9d7d6-e36b-46e8-a143-c79db286f144
+md"""*Quire*: $(@bind quire Select(quirelist))"""
+
+# ╔═╡ 5f58fa22-17ea-4d5c-8078-ecbb91115c64
+pagelist = map(filter(trip -> trip.quire == quire, reftriples)) do pg
+	pg.page
+end
+
+# ╔═╡ 43dff4ac-34b7-427a-b8a5-8cf867ddaa2b
+md"""*Page*: $(@bind page Select(pagelist))"""
+
+# ╔═╡ f1a67e96-a02b-42a6-bfd1-5c4d0d134ec8
+volnum = replace(replace(codex, "bne_v" => ""), ".cex" => "")
+
+# ╔═╡ 1f21b8d1-83df-4cfc-83d4-0bca46332a9f
+pgref = join(["vol$(volnum)", quire, page], "_")
+
+# ╔═╡ 5853c5d9-067c-4561-8ec5-e9c04649d1b6
+currentpage = filter(collect(citablecodex)) do pg
+	objectcomponent(urn(pg)) == pgref
+end[1]
+
+# ╔═╡ 458fb956-bae1-4f49-9ae1-118e60a31f71
+md"""### $(label(currentpage))"""
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
-CitableImage = "17ccb2e5-db19-44b3-b354-4fd16d92c74e"
+CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
 CitableObject = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
+CitablePhysicalText = "e38a874e-a7c2-4ff3-8dea-81ae2e5c9b07"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
-CitableImage = "~0.7.1"
+CitableBase = "~10.4.0"
 CitableObject = "~0.16.1"
-PlutoUI = "~0.7.59"
+CitablePhysicalText = "~0.11.0"
+PlutoUI = "~0.7.60"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -89,7 +131,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.2"
 manifest_format = "2.0"
-project_hash = "60392edd966d7720a6dfd3ac9a2f5baae62350e0"
+project_hash = "19f4b3262b4677a0038fb82b85fc3759076c2d21"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -252,6 +294,18 @@ git-tree-sha1 = "86eb34cc98bc2c5b73dc96da5fe116adba903d56"
 uuid = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
 version = "0.16.1"
 
+[[deps.CitablePhysicalText]]
+deps = ["CitableBase", "CitableImage", "CitableObject", "CitableText", "CiteEXchange", "DocStringExtensions", "Documenter", "HTTP", "SplitApplyCombine", "Test", "TestSetExtensions"]
+git-tree-sha1 = "f009481579595f5d6a1d64150ca472c1e18ad51c"
+uuid = "e38a874e-a7c2-4ff3-8dea-81ae2e5c9b07"
+version = "0.11.0"
+
+[[deps.CitableText]]
+deps = ["CitableBase", "DocStringExtensions", "Documenter", "Test", "TestSetExtensions"]
+git-tree-sha1 = "00ddf4c75f3e2b8dd54a4e4808b8ec27053d9bb3"
+uuid = "41e66566-473b-49d4-85b7-da83b66615d8"
+version = "0.16.2"
+
 [[deps.CiteEXchange]]
 deps = ["CSV", "CitableBase", "DocStringExtensions", "Documenter", "HTTP", "Test"]
 git-tree-sha1 = "da30bc6866a19e0235319c7fa3ffa6ab7f27e02e"
@@ -384,6 +438,12 @@ version = "1.11.0"
 git-tree-sha1 = "9824894295b62a6a4ab6adf1c7bf337b3a9ca34c"
 uuid = "ab62b9b5-e342-54a8-a765-a90f495de1a6"
 version = "1.2.0"
+
+[[deps.Dictionaries]]
+deps = ["Indexing", "Random", "Serialization"]
+git-tree-sha1 = "61ab242274c0d44412d8eab38942a49aa46de9d0"
+uuid = "85a47980-9c8c-11e8-2b9f-f7ca1fa99fb4"
+version = "0.4.3"
 
 [[deps.Distances]]
 deps = ["LinearAlgebra", "Statistics", "StatsAPI"]
@@ -668,6 +728,11 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "0936ba688c6d201805a83da835b55c61a180db52"
 uuid = "905a6f67-0a94-5f89-b386-d35d92009cd1"
 version = "3.1.11+0"
+
+[[deps.Indexing]]
+git-tree-sha1 = "ce1566720fd6b19ff3411404d4b977acd4814f9f"
+uuid = "313cdc1a-70c2-5d6a-ae34-0150d3930a38"
+version = "1.1.1"
 
 [[deps.IndirectArrays]]
 git-tree-sha1 = "012e604e1c7458645cb8b436f8fba789a51b257f"
@@ -1329,6 +1394,12 @@ weakdeps = ["ChainRulesCore"]
     [deps.SpecialFunctions.extensions]
     SpecialFunctionsChainRulesCoreExt = "ChainRulesCore"
 
+[[deps.SplitApplyCombine]]
+deps = ["Dictionaries", "Indexing"]
+git-tree-sha1 = "c06d695d51cfb2187e6848e98d6252df9101c588"
+uuid = "03a91e81-4c3e-53e1-a0a4-9c0c8f19dd66"
+version = "1.2.3"
+
 [[deps.StackViews]]
 deps = ["OffsetArrays"]
 git-tree-sha1 = "46e589465204cd0c08b4bd97385e4fa79a0c770c"
@@ -1572,23 +1643,30 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─167eeed5-4ce9-486b-97d0-cc8f02818fab
-# ╟─1a64633c-d326-4c8d-88ab-97b24e693748
-# ╟─46ee7270-87ba-11ef-27f8-95a73921a11b
-# ╟─816be53f-e854-4dba-842e-1d150ffd420d
-# ╟─23976eee-ed3c-4882-a9d5-e63b8e6c38e7
-# ╟─88d5a9d7-3849-477b-a6fc-96a5783f2352
-# ╟─ba242156-e551-4992-a39e-58da69a2d1a1
-# ╟─6aacb979-bbe5-444d-8f33-31acfc71c827
-# ╟─4ebcae37-3b7f-43a1-94a4-a5e464a983d6
-# ╟─efc5f691-1fe4-400f-ad25-85cf4939fd70
-# ╟─2bb423cc-3851-4d05-bc60-a1bb29376b37
-# ╟─f06d52b8-e8f1-4660-8a31-5d7f88e6453f
-# ╟─66e6d6b9-f42d-4920-a1ef-5b2c46031803
-# ╟─1cf8ae80-a870-45d1-8f5d-de0220c5d721
-# ╟─612d1019-0eea-46bb-b6b9-f4aff6de82ff
-# ╟─6f16d4f6-1eca-41dc-a8ba-4fa07917f7e1
-# ╟─f50bd15b-f6b5-4056-b57f-0f2dabc7e157
-# ╟─49cbbd82-923c-4f24-b73e-0de6767d7035
+# ╟─ae4f1c16-b713-11ef-15c3-697bc0961205
+# ╟─bdebc83e-0e89-45a8-bdca-f251f19d7e8b
+# ╟─49b1b20e-a357-465c-974e-5395a024fc67
+# ╟─8ec7fb5b-f469-4118-8beb-bc5537c136a8
+# ╟─6e9170a9-afc4-4beb-90d4-7263e45743fc
+# ╟─859b5d6c-4123-439a-937e-245e0fb7974e
+# ╟─34b9d7d6-e36b-46e8-a143-c79db286f144
+# ╟─43dff4ac-34b7-427a-b8a5-8cf867ddaa2b
+# ╟─458fb956-bae1-4f49-9ae1-118e60a31f71
+# ╟─a5056aec-456a-436c-91e6-91c2a858a584
+# ╟─0e1335aa-c42a-4952-b708-b708eb551d64
+# ╟─53d99796-5a3b-4784-919c-1f49a66a20c5
+# ╟─25555da6-44b6-4a42-adee-c0447890faad
+# ╠═42264c48-c079-4676-9d03-49e0fefc4031
+# ╠═00f88fb2-32a3-4517-856a-65b01ab16e9d
+# ╟─84870ba9-09c2-4ba9-a060-df37481a1ab4
+# ╠═c3ca58ae-cc55-4215-8a56-e77e647bdb8f
+# ╟─bd4acebc-cdec-490a-b27b-4009d22af90c
+# ╠═6daf94a9-96e8-42cb-909c-ade97a927c55
+# ╠═851f9abd-ade9-4cb3-bf13-0ae0a30bd7fa
+# ╠═44f7cbf2-d2e2-4335-8550-4fdd300a97e5
+# ╠═5f58fa22-17ea-4d5c-8078-ecbb91115c64
+# ╠═f1a67e96-a02b-42a6-bfd1-5c4d0d134ec8
+# ╠═1f21b8d1-83df-4cfc-83d4-0bca46332a9f
+# ╠═5853c5d9-067c-4561-8ec5-e9c04649d1b6
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

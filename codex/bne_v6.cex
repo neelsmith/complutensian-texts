@@ -1,5 +1,22 @@
+#!datamodels
+Collection|Model|Label|Description
+urn:cite2:complut:pages.bne:|urn:cite2:hmt:datamodels.v1:codexmodel|HMT project model of a codex with recto and verso sides to each folio.
+
+#!citecollections
+URN|Description|Labelling property|Ordering property|License
+urn:cite2:complut:pages.bne:|Complutensian Bible (BNE copy): volume 6|urn:cite2:complut:pages.bne.label:|urn:cite2:complut:pages.bne.sequence:|CC-attribution-share-alike
+
+#!citeproperties
+Property|Label|Type|Authority list
+urn:cite2:complut:pages.bne.sequence:|Page sequence|Number|
+urn:cite2:complut:pages.bne.image:|Image of page|Cite2Urn|
+urn:cite2:complut:pages.bne.page:|URN|Cite2Urn|
+urn:cite2:complut:pages.bne.rv:|Recto or Verso|String|recto,verso
+urn:cite2:complut:pages.bne.label:|Label|String|
+
+
 #!citedata
-sequence|image|page|rv|label
+sequence|image|urn|rv|label
 5|urn:cite2:citebne:complutensian.v1:v6p3|urn:cite2:complut:pages.bne:vol6_A_1r|recto|Complutensian Bible, National Library of Spain, vol6, quire A, page 1r.
 6|urn:cite2:citebne:complutensian.v1:v6p4|urn:cite2:complut:pages.bne:vol6_A_1v|verso|Complutensian Bible, National Library of Spain, vol6, quire A, page 1v.
 7|urn:cite2:citebne:complutensian.v1:v6p5|urn:cite2:complut:pages.bne:vol6_A_2r|recto|Complutensian Bible, National Library of Spain, vol6, quire A, page 2r.
