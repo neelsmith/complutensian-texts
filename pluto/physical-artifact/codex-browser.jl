@@ -17,6 +17,9 @@ end
 # ╔═╡ ae4f1c16-b713-11ef-15c3-697bc0961205
 begin
 	using CitablePhysicalText, CitableBase, CitableObject
+	using CitableImage
+
+	using Markdown
 	using PlutoUI
 
 	md"""*Unhide this cell to see the Julia environment*."""
@@ -48,9 +51,6 @@ repo = pwd() |> dirname |> dirname
 
 # ╔═╡ 25555da6-44b6-4a42-adee-c0447890faad
 srcfiles = readdir(joinpath(repo, "codex"))
-
-# ╔═╡ 42264c48-c079-4676-9d03-49e0fefc4031
-
 
 # ╔═╡ 00f88fb2-32a3-4517-856a-65b01ab16e9d
 codexmenu = map(srcfiles) do f
@@ -85,8 +85,35 @@ end
 # ╔═╡ 44f7cbf2-d2e2-4335-8550-4fdd300a97e5
 quirelist = map(trip -> trip.quire, reftriples) |> unique
 
+# ╔═╡ f751e590-ec9d-4f24-8a23-79ad94398f2c
+"""Identify type of quire based on number of pages."""
+function classifyquire(n)
+	if n == 12
+		"ternion"
+	elseif n == 16
+		"quaternion"
+	elseif n == 8
+		"binion"
+	elseif n == 4
+		"single bifolio sheet"
+	else
+		"irregular gather"
+	end
+end
+
+# ╔═╡ 13e018f3-6abe-4a69-9ef1-db565d95bfbb
+quiremenu = map(quirelist) do q
+	
+	quirepages = map(filter(trip -> trip.quire == q, reftriples)) do pg
+		pg.page
+	end
+	lbl = string(q, " (", classifyquire(length(quirepages)), ")")
+	(q => lbl)
+	
+end
+
 # ╔═╡ 34b9d7d6-e36b-46e8-a143-c79db286f144
-md"""*Quire*: $(@bind quire Select(quirelist))"""
+md"""*Quire*: $(@bind quire Select(quiremenu)) *Show pairings*: $(@bind showpairings CheckBox())"""
 
 # ╔═╡ 5f58fa22-17ea-4d5c-8078-ecbb91115c64
 pagelist = map(filter(trip -> trip.quire == quire, reftriples)) do pg
@@ -110,16 +137,75 @@ end[1]
 # ╔═╡ 458fb956-bae1-4f49-9ae1-118e60a31f71
 md"""### $(label(currentpage))"""
 
+# ╔═╡ 3e2c6ca9-81ad-4598-8d0b-f71d8efb229d
+currentquire = filter(collect(citablecodex)) do pg
+	 ptrn = string("vol$(volnum)_", quire, "_")
+		startswith(objectcomponent(urn(pg)), ptrn) 
+end
+
+# ╔═╡ 734de5e4-109e-4ff1-950b-671db9a059b2
+md"""> ## Image services"""
+
+# ╔═╡ d9d2272b-bd74-42ab-aa3c-b7c8a112295d
+baseurl = "http://www.homermultitext.org/iipsrv"
+
+# ╔═╡ cc1137a4-a275-415c-9a5c-85c1c9ed0ef1
+root = "/project/homer/pyramidal/deepzoom"
+
+# ╔═╡ ba7efd81-9926-41ff-a7df-223a53deb4ec
+service = IIIFservice(baseurl, root)
+
+# ╔═╡ 56487086-7cff-4dc0-a47e-5a3ac4bf2eb9
+ict = "http://www.homermultitext.org/ict2/?"
+
+# ╔═╡ 3580766e-b083-49d7-9a14-57b768de599e
+linkedMarkdownImage(ict,image(currentpage), service) |> Markdown.parse
+
+# ╔═╡ 72dc0b38-ec2c-4f21-98ac-2279354dc74e
+md"""> ## Display gathers"""
+
+# ╔═╡ f19f1497-0760-4217-8ed0-93ee25fe561d
+function plotternion()
+	lines = ["| A | B |",
+		"| --- | --- |"
+	]
+	for i in 1:12
+		side2 = 13 - i
+		pg1 = currentquire[i]
+		pg2 = currentquire[13 - i]
+		img1 = linkedMarkdownImage(ict, image(pg1), service; w = 50) 
+		img2 = linkedMarkdownImage(ict, image(pg2), service; w = 50) 
+		
+		push!(lines, "| $(pagelist[i]) $(img1) |  $(pagelist[side2]) $(img2) |")
+	end
+	join(lines,"\n")
+end
+
+# ╔═╡ 6aba159d-cf22-437a-b4b8-62be53676250
+if (pagelist |> length |> isodd)
+	md"""> Odd number of pages in quire: can't diagram it"""
+elseif showpairings
+	
+	quiretype = classifyquire(length(pagelist))
+	if quiretype == "ternion"
+		plotternion() |> Markdown.parse
+	end
+end
+
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CitableBase = "d6f014bd-995c-41bd-9893-703339864534"
+CitableImage = "17ccb2e5-db19-44b3-b354-4fd16d92c74e"
 CitableObject = "e2b2f5ea-1cd8-4ce8-9b2b-05dad64c2a57"
 CitablePhysicalText = "e38a874e-a7c2-4ff3-8dea-81ae2e5c9b07"
+Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
 CitableBase = "~10.4.0"
+CitableImage = "~0.7.1"
 CitableObject = "~0.16.1"
 CitablePhysicalText = "~0.11.0"
 PlutoUI = "~0.7.60"
@@ -131,7 +217,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.2"
 manifest_format = "2.0"
-project_hash = "19f4b3262b4677a0038fb82b85fc3759076c2d21"
+project_hash = "bf7382e5b68df1b3fde1463131e38c318c993f90"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -1650,23 +1736,34 @@ version = "17.4.0+2"
 # ╟─6e9170a9-afc4-4beb-90d4-7263e45743fc
 # ╟─859b5d6c-4123-439a-937e-245e0fb7974e
 # ╟─34b9d7d6-e36b-46e8-a143-c79db286f144
+# ╟─6aba159d-cf22-437a-b4b8-62be53676250
 # ╟─43dff4ac-34b7-427a-b8a5-8cf867ddaa2b
 # ╟─458fb956-bae1-4f49-9ae1-118e60a31f71
+# ╟─3580766e-b083-49d7-9a14-57b768de599e
 # ╟─a5056aec-456a-436c-91e6-91c2a858a584
 # ╟─0e1335aa-c42a-4952-b708-b708eb551d64
 # ╟─53d99796-5a3b-4784-919c-1f49a66a20c5
 # ╟─25555da6-44b6-4a42-adee-c0447890faad
-# ╠═42264c48-c079-4676-9d03-49e0fefc4031
-# ╠═00f88fb2-32a3-4517-856a-65b01ab16e9d
+# ╟─00f88fb2-32a3-4517-856a-65b01ab16e9d
 # ╟─84870ba9-09c2-4ba9-a060-df37481a1ab4
 # ╠═c3ca58ae-cc55-4215-8a56-e77e647bdb8f
 # ╟─bd4acebc-cdec-490a-b27b-4009d22af90c
-# ╠═6daf94a9-96e8-42cb-909c-ade97a927c55
-# ╠═851f9abd-ade9-4cb3-bf13-0ae0a30bd7fa
-# ╠═44f7cbf2-d2e2-4335-8550-4fdd300a97e5
-# ╠═5f58fa22-17ea-4d5c-8078-ecbb91115c64
-# ╠═f1a67e96-a02b-42a6-bfd1-5c4d0d134ec8
-# ╠═1f21b8d1-83df-4cfc-83d4-0bca46332a9f
-# ╠═5853c5d9-067c-4561-8ec5-e9c04649d1b6
+# ╟─6daf94a9-96e8-42cb-909c-ade97a927c55
+# ╟─851f9abd-ade9-4cb3-bf13-0ae0a30bd7fa
+# ╟─44f7cbf2-d2e2-4335-8550-4fdd300a97e5
+# ╟─13e018f3-6abe-4a69-9ef1-db565d95bfbb
+# ╟─f751e590-ec9d-4f24-8a23-79ad94398f2c
+# ╟─5f58fa22-17ea-4d5c-8078-ecbb91115c64
+# ╟─f1a67e96-a02b-42a6-bfd1-5c4d0d134ec8
+# ╟─1f21b8d1-83df-4cfc-83d4-0bca46332a9f
+# ╟─5853c5d9-067c-4561-8ec5-e9c04649d1b6
+# ╟─3e2c6ca9-81ad-4598-8d0b-f71d8efb229d
+# ╟─734de5e4-109e-4ff1-950b-671db9a059b2
+# ╟─d9d2272b-bd74-42ab-aa3c-b7c8a112295d
+# ╟─cc1137a4-a275-415c-9a5c-85c1c9ed0ef1
+# ╟─ba7efd81-9926-41ff-a7df-223a53deb4ec
+# ╟─56487086-7cff-4dc0-a47e-5a3ac4bf2eb9
+# ╟─72dc0b38-ec2c-4f21-98ac-2279354dc74e
+# ╟─f19f1497-0760-4217-8ed0-93ee25fe561d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
