@@ -198,10 +198,10 @@ function volume1pairs()
 	for i in 5:(min(length(v1images), length(v1pages)) + 4)
 		
 		pgidx = pgidx + 1
-		@info("Indices $(i), $(pgidx)")
+		#@info("Indices $(i), $(pgidx)")
 		img = v1images[i]
 		pg = v1pages[pgidx]
-		@info("pair $(pg) / $(img)")
+		#@info("pair $(pg) / $(img)")
 		push!(pairs, (volume = 1, page = pg, image = img))
 	end
 	pairs
@@ -218,26 +218,41 @@ end
 
 
 ################### VOLUME 2 ##########################
+#=
 
+1. title page followed by 3 pages of prefatory material (binion?)
+2. text of Joshua begins with `a` - `vv` (end of *Paralipomenon*) with the final quire `vv` having only 4 pages (a binion) with the first three numbered.
+3. corrigenda in four pages, the first recto labelled `a`
+=#
 """Generate list of all pages in Complutensian volume 2."""
 function volume2pages()
-
+	pref = ["title_1r", "title_1v"]
 	a1 = vcat(ternion("a"), ["prolog_1r", "prolog_1v"])
 
     v2singlealphaquires = filter(map(c -> string(c), collect('b':'z'))) do ch
-        ch != "i" && ch != "u"
+        ch != "i" && ch != "u" && ch != "w"
     end
 
-    v2doublealphaquires = filter(map(c -> repeat(c, 2), collect('a':'t'))) do s
+    v2doublealphaquires = filter(map(c -> repeat(c, 2), collect('a':'q'))) do s
 	    s != "ii"
     end
+	rr = ["rr_2r", "rr_2v",
+	"rr_2bisr", "rr_2bisv",
+	"rr_3r", "rr_3v",
+	"rr_4r", "rr_4v",
+	"rr_5r", "rr_5v",
+	"rr_6r", "rr_6v",
+	
+	]
+	st = ternion.(["ss", "tt"])
 
     v2ternions = ternion.(vcat(v2singlealphaquires, v2doublealphaquires))
     trailer = quaternion("vv")
-	pageids = vcat([a1], v2ternions, [trailer]) |> Iterators.flatten |> collect
+	pageids = vcat([pref], [a1], v2ternions, [rr], st, [trailer]) |> Iterators.flatten |> collect
     map(pg -> "vol2_" * pg, pageids)
 end
 
+"""Generate list of all pages in Complutensian volume 2."""
 function volume2images()
 	pageids  = []
 	a = for i in 1:98
@@ -255,7 +270,7 @@ function volume2images()
 	pageids
 end
 
-
+"""Pair up images and pages for Complutensian volume 6."""
 function volume2pairs()
 	pairs = []
 	#image p5 is page a 1r
@@ -263,10 +278,11 @@ function volume2pairs()
 	v2images = volume2images()
 
 	pgidx = 0
-	for i in 5:length(v2images)
+	for i in 3:min(length(v2images), length(v2pages))
 		pgidx = pgidx + 1
 		img = v2images[i]
 		pg = v2pages[pgidx]
+		@info("pair $(pg) / $(img)")
 		push!(pairs, (volume = 2, page = pg, image = img))
 	end
 	pairs
@@ -418,6 +434,7 @@ function volume6pages()
     map(pg -> "vol6_" * pg, bnesequence)
 end
 
+"""Generate list of all images in Complutensian volume 6."""
 function volume6images()
 	pageids  = []
 	for i in 1:96
@@ -437,7 +454,7 @@ function volume6images()
 	pageids
 end
 
-
+"""Pair up images and pages for Complutensian volume 6."""
 function volume6pairs()
 	pairs = []
 	#image p3 is page a 1r
@@ -458,10 +475,6 @@ function volume6pairs()
 	pairs
 end
 
-v6pairs = volume6pairs()
-v6pgs = volume6pages()
-
-
 v6model = codexmodel(volume6pairs(), 4, "Complutensian Bible (BNE copy): volume 6")
 v6modelfile = joinpath(repo, "codex", "bne_v6.cex")
 open(v6modelfile,"w") do io
@@ -469,4 +482,4 @@ open(v6modelfile,"w") do io
 end
 
 
-v6prs  = volume6pairs()
+v2prs  = volume2pairs()
