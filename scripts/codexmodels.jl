@@ -280,11 +280,10 @@ In Huntington:
 1. title page with address to reader on verso
 
 √ 2. hebrew vocab in quires `A` - `FF`, final quire `FF` containing 4 pages with rectos numbered (binion). Colophon to this quire dates it to 17 March, 1515.
-√ 3. introduction to Hebrew grammar in quires `A` - `C`, final quire `C` with three pages of content, all rectos identified.
-4. A single blank page? 
-5. Index of Latin terms in a single quaternion with rectos labelled `A` or `a` 1 - 5.
-6. Interpretations of Latin names in quires `A` - `D` (all ternions)
-7. Same quire sequence continues with alternate forms of names, a sinqule binion with first recto labeled `E` .
+3. introduction to Hebrew grammar in quires `A` - `C`, final quire `C` with three pages of content, all rectos identified. A single blank page for final verso showing this is done by quire. 
+√ 4. Index of Latin terms in a single quaternion with rectos labelled `A` or `a` 1 - 5.
+√ 5. Interpretations of Latin names in quires `A` - `D` (all ternions)
+√ 6. Same quire sequence continues with alternate forms of names, a sinqule binion with first recto labeled `E` .
  
 
 =#
@@ -292,23 +291,35 @@ In Huntington:
 """Generate list of all pages in Complutensian volume 6."""
 function volume6pages()
 	
-
+	# section: Hebrew lexicon
     v6ucquires = filter(map(c -> string(c), collect('A':'Z'))) do ch
-        ch != "I" && ch != "U"
+        ch != "I" && ch != "U" && ch != "W"
     end
-    v6doublealphaquires = map(c -> repeat(c, 2), collect('A':'D'))
-	ff = vcat(binion("EE"), ["EE_4r", "EE_4v"] )
+    v6doublealphaquires = map(c -> repeat(c, 2), collect('A':'E'))
+	ff = [binion("FF")]
 	ternions = ternion.(vcat(v6ucquires, v6doublealphaquires))
-	hebrewlexicon = vcat(ternions, [ff]) |> Iterators.flatten |> collect
+	hebrewlexicon = vcat(ternions, ff) |> Iterators.flatten |> collect
 	
-
+	# section: Latin index
+	idx = quaternion("A-index")
 
 	#hebrewgrammar = [ternion("A"), ternion("B"), singleton("C")] |> Iterators.flatten |> collect
 
-	latinnames = ternion.(["A-names", "B-names", "C-names", "D-names"]) |> Iterators.flatten |> collect
+	# section: interpretation of names
+	# Messed up in BNE copy!
+	names_a1 = ternion("A-names")
+	names_continued = ternion.(["B-names", "C-names", "D-names"]) |> Iterators.flatten |> collect
 
-	bnesequence = vcat(hebrewlexicon, latinnames)
+	# section: alternate forms of names
+	altforms = singleton("E-names")
 
+	# section: hebrew grammar
+	grammarternions = vcat([ternion("A-grammar"), ternion("B-grammar"),singleton("C-grammar")])  |> Iterators.flatten |> collect
+	grammar = vcat(grammarternions, ["C-grammar_3r", "C-grammar_3v"])
+
+	bnesequence = vcat(hebrewlexicon, names_a1, idx, names_continued, altforms, grammar)
+
+	
     
     map(pg -> "vol6_" * pg, bnesequence)
 end
