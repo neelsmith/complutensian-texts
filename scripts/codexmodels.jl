@@ -290,7 +290,9 @@ In Huntington:
 
 """Generate list of all pages in Complutensian volume 6."""
 function volume6pages()
-	
+	# section: preface
+	preface = ["title_1r", "title_1v"]
+
 	# section: Hebrew lexicon
     v6ucquires = filter(map(c -> string(c), collect('A':'Z'))) do ch
         ch != "I" && ch != "U" && ch != "W"
@@ -317,7 +319,7 @@ function volume6pages()
 	grammarternions = vcat([ternion("A-grammar"), ternion("B-grammar"),singleton("C-grammar")])  |> Iterators.flatten |> collect
 	grammar = vcat(grammarternions, ["C-grammar_3r", "C-grammar_3v"])
 
-	bnesequence = vcat(hebrewlexicon, names_a1, idx, names_continued, altforms, grammar)
+	bnesequence = vcat(preface, hebrewlexicon, names_a1, idx, names_continued, altforms, grammar)
 
 	
     
@@ -352,7 +354,7 @@ function volume6pairs()
 
 	pgidx = 0
 	#for i in 5:length(v6images)
-	for i in 3:length(v6pages) + 2
+	for i in 1:length(v6pages)
 		pgidx = pgidx + 1
 		img = v6images[i]
 		pg = v6pages[pgidx]
