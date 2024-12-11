@@ -45,7 +45,6 @@ $(collbase).label:|Label|String|
 """
 end
 
-
 """Compose complete CEX document for a codex."""
 function codexmodel(pairs, seq, title)
 	imgbaseurn = "urn:cite2:citebne:complutensian.v1:"
@@ -108,8 +107,6 @@ function ref(tuple)
 	string(tuple.quire, "_", tuple.page)
 end
 
-
-
 """For a list of quires, generate list of all pages from a given starting page to a given ending.  If quires are note ternions, also supply a function to generte page ids for a quire.
 """
 function pagespan(quires, startpage, endpage; pagefunc = ternion)
@@ -164,14 +161,11 @@ function volume1pages()
 		s != "ii" && s != "uu"
 	end)
 	deficient = ["ee_1r", "ee_1v",  "ee_3r", "ee_3v", "ee_4r", "ee_4v", "ee_6r", "ee_6v", "ee_7r", "ee_7v"]
-	v1doublealphaquires2 = ternion.(filter(map(c -> repeat(c, 2), collect('f':'g'))) do s
-		s != "ii" && s != "uu"
+	v1doublealphaquires2 = ternion.(filter(map(c -> repeat(c, 2), collect('f':'z'))) do s
+		s != "ii" && s != "uu" && s != "ww"
 	end)
 	v1alphapages = vcat(v1singlealphaquires,  [badx], yz, v1doublealphaquires1, [deficient], v1doublealphaquires2 ) |> Iterators.flatten |> collect
-	
-	#v1alphas = vcat(v1singlealphaquires1, deficient, v1singlealphaquires2, v1doublealphaquires)
-	#v1alphapages = ternion.(v1alphas) |> Iterators.flatten |> collect
-	
+
 	# There are two non-alphabetic quire signs follwing these: one ternion and one quaternion.
 	et = ternion("et")
 	con = quaternion("con")
@@ -180,7 +174,6 @@ function volume1pages()
 	end
 end
 
-v1pgs = volume1pages()
 
 
 function volume1images()
@@ -202,10 +195,13 @@ function volume1pairs()
 	v1images = volume1images()
 	v1pages = volume1pages()
 	pgidx = 0
-	for i in 5:length(v1pages)
+	for i in 5:(min(length(v1images), length(v1pages)) + 4)
+		
 		pgidx = pgidx + 1
+		@info("Indices $(i), $(pgidx)")
 		img = v1images[i]
 		pg = v1pages[pgidx]
+		@info("pair $(pg) / $(img)")
 		push!(pairs, (volume = 1, page = pg, image = img))
 	end
 	pairs
@@ -449,12 +445,14 @@ function volume6pairs()
 	v6images = volume6images()
 
 	pgidx = 0
-	#for i in 5:length(v6images)
-	for i in 1:length(v6pages)
+	
+	
+	for i in 1:min(length(v6pages), length(v6images))
 		pgidx = pgidx + 1
+		#@info("Indices $(i), $(pgidx)")
 		img = v6images[i]
 		pg = v6pages[pgidx]
-		@info("pair $(pg) / $(img)")
+		#@info("pair $(pg) / $(img)")
 		push!(pairs, (volume = 6, page = pg, image = img))
 	end
 	pairs
