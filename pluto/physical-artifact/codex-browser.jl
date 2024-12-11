@@ -36,6 +36,9 @@ md"""
 > Browse volumes of the Complutensian Bible in the BNE by quire.
 """
 
+# ╔═╡ 9c3f94e2-603f-4e2b-831a-ea299cdddd65
+md"""*Image width (pixels)* $(@bind fullw Slider(200:50:800; default = 600, show_value = true))"""
+
 # ╔═╡ a5056aec-456a-436c-91e6-91c2a858a584
 html"""
 <br/><br/><br/><br/><br/><br/>
@@ -113,7 +116,7 @@ quiremenu = map(quirelist) do q
 end
 
 # ╔═╡ 34b9d7d6-e36b-46e8-a143-c79db286f144
-md"""*Quire*: $(@bind quire Select(quiremenu)) *Show pairings*: $(@bind showpairings CheckBox()) *Image size* $(@bind thumbw Slider(20:10:200; default = 40, show_value = true))"""
+md"""*Quire*: $(@bind quire Select(quiremenu)) *Show pairings*: $(@bind showpairings CheckBox()) *Thumbnail image size* $(@bind thumbw Slider(20:10:200; default = 40, show_value = true))"""
 
 # ╔═╡ 5f58fa22-17ea-4d5c-8078-ecbb91115c64
 pagelist = map(filter(trip -> trip.quire == quire, reftriples)) do pg
@@ -159,7 +162,7 @@ service = IIIFservice(baseurl, root)
 ict = "http://www.homermultitext.org/ict2/?"
 
 # ╔═╡ 3580766e-b083-49d7-9a14-57b768de599e
-linkedMarkdownImage(ict,image(currentpage), service) |> Markdown.parse
+linkedMarkdownImage(ict,image(currentpage), service; w = fullw) |> Markdown.parse
 
 # ╔═╡ 72dc0b38-ec2c-4f21-98ac-2279354dc74e
 md"""> ## Display gathers"""
@@ -1779,6 +1782,7 @@ version = "17.4.0+2"
 # ╟─859b5d6c-4123-439a-937e-245e0fb7974e
 # ╟─34b9d7d6-e36b-46e8-a143-c79db286f144
 # ╟─6aba159d-cf22-437a-b4b8-62be53676250
+# ╟─9c3f94e2-603f-4e2b-831a-ea299cdddd65
 # ╟─43dff4ac-34b7-427a-b8a5-8cf867ddaa2b
 # ╟─458fb956-bae1-4f49-9ae1-118e60a31f71
 # ╟─3580766e-b083-49d7-9a14-57b768de599e

@@ -1,7 +1,6 @@
 using CitableText
 repo = pwd()
 
-
 # Read data for incipits some other time...
 #=
 f = joinpath(repo, "data", "incipits.cex")
@@ -45,7 +44,6 @@ $(collbase).rv:|Recto or Verso|String|recto,verso
 $(collbase).label:|Label|String|
 """
 end
-
 
 
 """Compose complete CEX document for a codex."""
@@ -105,6 +103,13 @@ function quaternion(id)
 	bifoliopairs(id, 8)
 end
 
+"""Format quire + page as a reference string"""
+function ref(tuple)
+	string(tuple.quire, "_", tuple.page)
+end
+
+
+
 """For a list of quires, generate list of all pages from a given starting page to a given ending.  If quires are note ternions, also supply a function to generte page ids for a quire.
 """
 function pagespan(quires, startpage, endpage; pagefunc = ternion)
@@ -128,38 +133,54 @@ function pagespan(quires, startpage, endpage; pagefunc = ternion)
 end
 
 
-"""Format quire + page as a reference string"""
-function ref(tuple)
-	string(tuple.quire, "_", tuple.page)
-end
 
 
 
 
-
-
-
-
-
-##################### VOLUME 1 ###########################
+#########################################################################
+#
+####### COMPOSE CODEX MODELS FOR 6 VOLUMES OF COMPLUTENSIAN IN BNE ######
+#
+##################### VOLUME 1 ##########################################
 """Generate list of all pages in Complutensian volume 1."""
 function volume1pages()
-	v1singlealphaquires = filter(map(c -> string(c), collect('a':'z'))) do ch
-		ch != "i" && ch != "u"
-	end
-	v1doublealphaquires = filter(map(c -> repeat(c, 2), collect('a':'z'))) do s
+	pref = vcat(ternion("+"), ["+_7r", "+_7v"])
+
+	v1singlealphaquires = ternion.(filter(map(c -> string(c), collect('a':'v'))) do ch
+		ch != "i" && ch != "u" && ch != "w"
+	end)
+
+	badx = [
+		"x_2r", "x_2v",
+		"x_2bisr", "x_2bisv",
+		"x_3r", "x_3v",
+		"x_4r", "x_4v",
+		"x_5r", "x_5v",
+		"x_6r", "x_6v"
+	]
+	yz = ternion.(["y", "z"])
+
+	v1doublealphaquires1 = ternion.(filter(map(c -> repeat(c, 2), collect('a':'d'))) do s
 		s != "ii" && s != "uu"
-	end
-	v1alphas = vcat(v1singlealphaquires, v1doublealphaquires)
-	v1alphapages = ternion.(v1alphas) |> Iterators.flatten |> collect
+	end)
+	deficient = ["ee_1r", "ee_1v",  "ee_3r", "ee_3v", "ee_4r", "ee_4v", "ee_6r", "ee_6v", "ee_7r", "ee_7v"]
+	v1doublealphaquires2 = ternion.(filter(map(c -> repeat(c, 2), collect('f':'g'))) do s
+		s != "ii" && s != "uu"
+	end)
+	v1alphapages = vcat(v1singlealphaquires,  [badx], yz, v1doublealphaquires1, [deficient], v1doublealphaquires2 ) |> Iterators.flatten |> collect
+	
+	#v1alphas = vcat(v1singlealphaquires1, deficient, v1singlealphaquires2, v1doublealphaquires)
+	#v1alphapages = ternion.(v1alphas) |> Iterators.flatten |> collect
 	
 	# There are two non-alphabetic quire signs follwing these: one ternion and one quaternion.
 	et = ternion("et")
 	con = quaternion("con")
-	map(vcat(v1alphapages, et, con)) do pg
+	map(vcat(pref, v1alphapages, et, con)) do pg
 		"vol1_" * pg
 	end
 end
+
+v1pgs = volume1pages()
 
 
 function volume1images()
@@ -181,7 +202,7 @@ function volume1pairs()
 	v1images = volume1images()
 	v1pages = volume1pages()
 	pgidx = 0
-	for i in 19:600
+	for i in 5:length(v1pages)
 		pgidx = pgidx + 1
 		img = v1images[i]
 		pg = v1pages[pgidx]
