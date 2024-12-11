@@ -357,8 +357,6 @@ function volume3images()
 	imgids
 end
 
-
-
 """Pair up images and pages for Complutensian volume 3."""
 function volume3pairs()
 	pairs = []
@@ -377,15 +375,99 @@ function volume3pairs()
 	pairs
 end
 
-v3pgs = volume3pages()
-v3imgs = volume3images()
 v3model = codexmodel(volume3pairs(), 0, "Complutensian Bible (BNE copy): volume 3")
+
 v3modelfile = joinpath(repo, "codex", "bne_v3.cex")
 open(v3modelfile,"w") do io
 	write(io, v3model)
 end
 
-volume3pairs()
+
+
+##################### VOLUME 4 ###########################
+#=
+- √ title page has initial prolog on verso; recto `a ii` has more prefatory material; `a iii` then begins Isaiah. Continuation of the Latin OT in quires `a` - `z` and `aa` - `pp` with the final `pp` having only 4 pages (a binion), the first three identified. 
+- Maccabees, in quires `A` - `G`; the final quire `G` has only four pages (a binion), with the first three rectos labelled. The colophon dates vol. 4 to 10 July 1517.
+
+=#
+
+
+"""Generate list of all pages in Complutensian volume 4."""
+function volume4images()
+	imgids = []
+	for i in 1:96
+		push!(imgids,"v4a_p$(i)")
+	end
+	centuries = [
+	 "v4b_p", "v4c_p",  "v4d_p", "v4e_p"
+	]
+	for c in centuries
+		for i in 1:100
+			push!(imgids, string(c,i))
+		end
+	end
+	for i in 1:36
+		push!(imgids, "v4f_p$(i)")
+	end
+	imgids
+end
+
+"""Generate list of all pages in Complutensian volume 4."""
+function volume4pages()
+	v4singles = ternion.(filter(collect('a':'z')) do c
+		c != 'i' && c != 'u' && c != 'w'
+	end)
+
+	v4doubleids = filter(collect('a':'o')) do c
+		c != 'i'
+	end
+	v4doubles = ternion.(map(c -> repeat(c,2), v4doubleids))
+	p = binion("pp")
+
+	v4uc = ternion.(collect('A':'E'))
+	bigF = [
+		"F_1r", "F_1v",
+		"F_3r", "F_3v",
+		"F_3bisr", "F_3bisv",
+		"F_4r", "F_4v",
+		"F_5r", "F_5v",
+		"F_6r", "F_6v",
+	]
+	bigG = ternion('G')
+
+	pageids = vcat(v4singles,v4doubles,[p], v4uc, [bigF], [bigG] ) |> Iterators.flatten |> collect
+	map(pg -> "vol4_" * pg, pageids)
+end
+
+
+"""Pair up images and pages for Complutensian volume 4."""
+function volume4pairs()
+	pairs = []
+	
+	v4pages = volume4pages()
+	v4images = volume4images()
+
+	pgidx = 0
+	for i in 1:min(length(v4images), length(v4pages))
+		pgidx = pgidx + 1
+		img = v4images[i]
+		pg = v4pages[pgidx]
+		@info("pair $(pg) / $(img)")
+		push!(pairs, (volume = 4, page = pg, image = img))
+	end
+	pairs
+end
+
+
+
+v4model = codexmodel(volume4pairs(), 0, "Complutensian Bible (BNE copy): volume 4")
+
+v4modelfile = joinpath(repo, "codex", "bne_v4.cex")
+open(v4modelfile,"w") do io
+	write(io, v4model)
+end
+
+
 
 ##################### VOLUME 5 ###########################
 #=
