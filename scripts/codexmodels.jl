@@ -62,6 +62,16 @@ end
 
 
 
+"""Generate page IDs for a single bifolio sheeet with a given quire ID."""
+function bifoliopairs(id, num)
+	ids = []
+	for folio in 1:num
+		for pg in ['r', 'v']
+			push!(ids, string(id, "_", folio, pg))
+		end
+	end
+	ids
+end
 
 """Generate page IDs for a single bifolio sheeet with a given quire ID."""
 function singleton(id)
@@ -270,22 +280,78 @@ end
 
 
 
+##################### VOLUME 5 ###########################
+#=
+
+- √ quarternion: title page folowed by introductory material; only second recto is numbered `a ii`; total of 4 bifolios, same content as Madrid
+- √ the Gospels in continuously  numbered quires `A` - `O` (probably all ternions)
+- √ the travels of Paul in a single ternion `α` with all rectos labelled
+- √ the continuation of the NT from 'R` - `MM` presumably all ternions
+- √ explanations of names in a single gather of 10 bifolios, rectos `a` - `a vi` identified as normal
+- intro to Greek with vocabulary, in quires `a` - `g`. The final quire `g` has only three folios, all three rectos explicitly identified.
+=#
+function volume5images()
+	pageids  = []
+	for i in 1:96
+		push!(pageids, string("v5a_p",i))
+	end
+	 
+	centuries = [
+		"v5b_p", "v5c_p", "v5d_p", "v5e_p"
+	]
+	for c in centuries
+		for i in 1:100
+			push!(pageids, string(c,i))
+		end
+	end
+	for i in 1:46
+		push!(pageids, string("v5f_p",i))
+	end
+	pageids
+end
+
+function volume5pages()
+
+	preface = vcat(quaternion("a-preface"))
+
+    gospels = filter(map(c -> string(c), collect('A':'O'))) do ch
+        ch != 'I' 
+    end
+	paul = ternion("α")
+	ntsingles =  filter(map(c -> string(c), collect('R':'Z'))) do ch
+        ch != 'I'  && ch != 'U' && ch != 'W'
+    end
+	ntdoubles =  map(c -> repeat(c, 2), collect('A':'E'))
+
+	# gather of 10 bifolios!!!
+	# giant = ....
+	names = bifoliopairs("a-names", 10)
+
+	# vocabulary
+	vocabternions = ternion.(map(c -> string(c), collect('a':'f')))
+	vocabtrail = vcat(singleton("g"), ["g_3r", "g_3v"])
+	vocab = vcat(vocabternions, [vocabtrail])
+
+	pageids = vcat([preface],ternion.(gospels), [paul], ternion.(ntsingles), ternion.(ntdoubles), [names], vocab ) |> Iterators.flatten |> collect
 
 
-##################### VOLUME 1 ###########################
+    map(pg -> "vol5_" * pg, pageids)
+end
+
+v5pgs = volume5pages()
+
+##################### VOLUME 6 ###########################
 
 #=
 In Huntington:
 
-1. title page with address to reader on verso
-
+√ 1. title page with address to reader on verso
 √ 2. hebrew vocab in quires `A` - `FF`, final quire `FF` containing 4 pages with rectos numbered (binion). Colophon to this quire dates it to 17 March, 1515.
-3. introduction to Hebrew grammar in quires `A` - `C`, final quire `C` with three pages of content, all rectos identified. A single blank page for final verso showing this is done by quire. 
+√ 3. introduction to Hebrew grammar in quires `A` - `C`, final quire `C` with three pages of content, all rectos identified. A single blank page for final verso showing this is done by quire. 
 √ 4. Index of Latin terms in a single quaternion with rectos labelled `A` or `a` 1 - 5.
 √ 5. Interpretations of Latin names in quires `A` - `D` (all ternions)
 √ 6. Same quire sequence continues with alternate forms of names, a sinqule binion with first recto labeled `E` .
  
-
 =#
 
 """Generate list of all pages in Complutensian volume 6."""
