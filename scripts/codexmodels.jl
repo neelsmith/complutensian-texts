@@ -300,9 +300,9 @@ end
 
 ##################### VOLUME 3 ###########################
 #=
-- title page has prefatory material on verso, then two pages of prefatory with recto identified as `aaa ii`. Text of First Esdra continues on `aaa iii`, and runs through end of Nehemiah on `eee` 4. (`eee` is a binion.)
-- *Tobias* follows with quire `Aaa`- `Iii`. *Job* ends on `Iii` 4 recto; significantly, Jerome's preface to the Psalms appears on `Iii` 4 verso.  It *must* be followed by the text of the Psalms!
-- *Psalms* then begins with a reset to `a`- `p`, ending with *Songs* on `p` 8 verso (`p` is a quaternion).
+- √ title page has prefatory material on verso, then two pages of prefatory with recto identified as `aaa ii`. Text of First Esdra continues on `aaa iii`, and runs through end of Nehemiah on `eee` 4. (`eee` is a binion.)
+- √ *Tobias* follows with quire `Aaa`- `Iii`. *Job* ends on `Iii` 4 recto; significantly, Jerome's preface to the Psalms appears on `Iii` 4 verso.  It *must* be followed by the text of the Psalms!
+- √ *Psalms* then begins with a reset to `a`- `p`, ending with *Songs* on `p` 8 verso (`p` is a quaternion).
 - *Wisdom* resets to `A`, runs through `F`, ending *Ecclesiastes* on `F` 4 recto.  `F` 4 verso is a blank page. (`F` is a binion.)
 - corrigenda. 2 pages followed by a printed blank with red frames (so a binion) with intial recto identified as `a`.
 =#
@@ -310,9 +310,30 @@ end
 
 """Generate list of all pages in Complutensian volume 3."""
 function volume3pages()
-	v3triples1 = ternion.(map(c -> repeat(c, 3), collect('a':'d'))) |> Iterators.flatten |> collect
+	v3triples1 = ternion.(map(c -> repeat(c, 3), collect('a':'d')))
     eee = binion("eee")
-	pageids = vcat(v3triples1, eee) |> Iterators.flatten |> collect
+
+	v3triplesUC1 =  ternion.(map(collect('a':'b')) do c
+		uppercase(c) * repeat(c,2)
+	end)
+	ccc = binion("Ccc")
+	v3triplesUC2 =  ternion.(map(collect('d':'h')) do c
+		uppercase(c) * repeat(c,2)
+	end)
+	iii = binion("Iii") # end of Job
+	
+	v3singleids = filter(collect('a':'o')) do c
+		c != 'i'
+	end
+	v3singles  = ternion.(v3singleids)
+	p = quaternion("p")
+
+
+	v3uc = ternion.(collect('A':'E'))
+	bigF = binion("F")
+
+
+	pageids = vcat(v3triples1, [eee], v3triplesUC1, [ccc], v3triplesUC2, [iii], v3singles, [p], v3uc, [bigF]) |> Iterators.flatten |> collect
 	map(pg -> "vol3_" * pg, pageids)
 end
 
@@ -356,7 +377,8 @@ function volume3pairs()
 	pairs
 end
 
-
+v3pgs = volume3pages()
+v3imgs = volume3images()
 v3model = codexmodel(volume3pairs(), 0, "Complutensian Bible (BNE copy): volume 3")
 v3modelfile = joinpath(repo, "codex", "bne_v3.cex")
 open(v3modelfile,"w") do io
