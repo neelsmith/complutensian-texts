@@ -242,7 +242,6 @@ function volume2pages()
 	"rr_4r", "rr_4v",
 	"rr_5r", "rr_5v",
 	"rr_6r", "rr_6v",
-	
 	]
 	st = ternion.(["ss", "tt"])
 
@@ -260,12 +259,15 @@ function volume2images()
 	end
 	 
 	centuries = [
-		"v2b_p", "v2c_p", "v2d_p", "v2e_p"
+		"v2b_p", "v2c_p", "v2d_p", "v2e_p", "v2f_p"
 	]
 	for c in centuries
 		for i in 1:100
 			push!(pageids, string(c,i))
 		end
+	end
+	for i in 1:20
+		push!(pageids, "v2f_$(i)")
 	end
 	pageids
 end
