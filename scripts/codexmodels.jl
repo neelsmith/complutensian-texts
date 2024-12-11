@@ -1,5 +1,9 @@
 using CitableText
 repo = pwd()
+
+
+# Read data for incipits some other time...
+#=
 f = joinpath(repo, "data", "incipits.cex")
 
 datalines = filter(ln -> !isempty(ln), readlines(f)[2:end])
@@ -16,7 +20,10 @@ incipits = map(data) do trip
 	(vol, quire, page) = split(ref, "_")
 	(passage = CtsUrn(trip.passage), quire = quire, page = page)
 end
+=#
 
+
+"""Compose declaration of CEX model for a Codex."""
 function preface(collurnstring, title)
 	collbase = replace(collurnstring, r":$" => "")
 
@@ -37,9 +44,11 @@ $(collbase).page:|URN|Cite2Urn|
 $(collbase).rv:|Recto or Verso|String|recto,verso
 $(collbase).label:|Label|String|
 """
-
 end
 
+
+
+"""Compose complete CEX document for a codex."""
 function codexmodel(pairs, seq, title)
 	imgbaseurn = "urn:cite2:citebne:complutensian.v1:"
 	pagebaseurn = "urn:cite2:complut:pages.bne:"
@@ -59,10 +68,7 @@ function codexmodel(pairs, seq, title)
 	preface(pagebaseurn, title) * "\n\n" * join(codexmodel, "\n")
 end
 
-
-
-
-"""Generate page IDs for a single bifolio sheeet with a given quire ID."""
+"""Generate page IDs for a specified number of bifolio sheets with a given quire ID."""
 function bifoliopairs(id, num)
 	ids = []
 	for folio in 1:num
@@ -84,40 +90,19 @@ function singleton(id)
 	ids
 end
 
-
 """Generate page IDs for a binion with a given quire ID."""
 function binion(id)
-	ids = []
-	for folio in 1:4
-		for pg in ['r', 'v']
-			push!(ids, string(id, "_", folio, pg))
-		end
-	end
-	ids
+	bifoliopairs(id, 4)
 end
-
 
 """Generate page IDs for a ternion with a given quire ID."""
 function ternion(id)
-	ids = []
-	for folio in 1:6
-		for pg in ['r', 'v']
-			push!(ids, string(id, "_", folio, pg))
-		end
-	end
-	ids
+	bifoliopairs(id, 6)
 end
-
 
 """Generate page IDs for a ternion with a given quire ID."""
 function quaternion(id)
-	ids = []
-	for folio in 1:8
-		for pg in ['r', 'v']
-			push!(ids, string(id, "_", folio, pg))
-		end
-	end
-	ids
+	bifoliopairs(id, 8)
 end
 
 """For a list of quires, generate list of all pages from a given starting page to a given ending.  If quires are note ternions, also supply a function to generte page ids for a quire.
@@ -312,16 +297,19 @@ end
 
 function volume5pages()
 
-	preface = vcat(quaternion("a-preface"))
+	preface = vcat(binion("a-preface"))
 
-    gospels = filter(map(c -> string(c), collect('A':'O'))) do ch
-        ch != 'I' 
+    gospels = filter(map(c -> string(c), collect('A':'Q'))) do ch
+        ch != "I" 
     end
 	paul = ternion("α")
 	ntsingles =  filter(map(c -> string(c), collect('R':'Z'))) do ch
-        ch != 'I'  && ch != 'U' && ch != 'W'
+        ch != "I"  && ch != "U" && ch != "W"
     end
-	ntdoubles =  map(c -> repeat(c, 2), collect('A':'E'))
+	ntdoubles =  filter(map(c -> repeat(c, 2), collect('A':'L'))) do c
+		c != "II"
+	end
+	nttrail = quaternion("MM")
 
 	# gather of 10 bifolios!!!
 	# giant = ....
@@ -332,13 +320,34 @@ function volume5pages()
 	vocabtrail = vcat(singleton("g"), ["g_3r", "g_3v"])
 	vocab = vcat(vocabternions, [vocabtrail])
 
-	pageids = vcat([preface],ternion.(gospels), [paul], ternion.(ntsingles), ternion.(ntdoubles), [names], vocab ) |> Iterators.flatten |> collect
+	pageids = vcat([preface],ternion.(gospels), [paul], ternion.(ntsingles), ternion.(ntdoubles), [nttrail], [names], vocab ) |> Iterators.flatten |> collect
 
 
     map(pg -> "vol5_" * pg, pageids)
 end
 
+function volume5pairs()
+	pairs = []
+	v5images = volume5images()
+	v5pages = volume5pages()
+	pgidx = 0
+	for i in 1:length(v5pages)
+		pgidx = pgidx + 1
+		img = v5images[i]
+		pg = v5pages[pgidx]
+		push!(pairs, (volume = 5, page = pg, image = img))
+	end
+	pairs
+end
+
+
 v5pgs = volume5pages()
+
+v5model = codexmodel(volume5pairs(), 0, "Complutensian Bible (BNE copy): volume 5")
+v5modelfile = joinpath(repo, "codex", "bne_v5.cex")
+open(v5modelfile,"w") do io
+	write(io, v5model)
+end
 
 ##################### VOLUME 6 ###########################
 
