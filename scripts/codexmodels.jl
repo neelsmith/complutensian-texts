@@ -174,8 +174,7 @@ function volume1pages()
 	end
 end
 
-
-
+"""Generate list of all images in Complutensian volume 1."""
 function volume1images()
 	pageids  = []
 	centuries = [
@@ -189,7 +188,7 @@ function volume1images()
 	pageids
 end
 
-
+"""Pair up images and pages for Complutensian volume 1."""
 function volume1pairs()
 	pairs = []
 	v1images = volume1images()
@@ -246,7 +245,7 @@ function volume2pages()
 	st = ternion.(["ss", "tt"])
 
     v2ternions = ternion.(vcat(v2singlealphaquires, v2doublealphaquires))
-    trailer = quaternion("vv")
+    trailer = binion("vv")
 	pageids = vcat([pref], [a1], v2ternions, [rr], st, [trailer]) |> Iterators.flatten |> collect
     map(pg -> "vol2_" * pg, pageids)
 end
@@ -272,7 +271,7 @@ function volume2images()
 	pageids
 end
 
-"""Pair up images and pages for Complutensian volume 6."""
+"""Pair up images and pages for Complutensian volume 2."""
 function volume2pairs()
 	pairs = []
 	#image p5 is page a 1r
@@ -280,7 +279,7 @@ function volume2pairs()
 	v2images = volume2images()
 
 	pgidx = 0
-	for i in 3:min(length(v2images), length(v2pages))
+	for i in 3:(min(length(v2images), length(v2pages)) + 2)
 		pgidx = pgidx + 1
 		img = v2images[i]
 		pg = v2pages[pgidx]
