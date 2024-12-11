@@ -283,7 +283,7 @@ function volume2pairs()
 		pgidx = pgidx + 1
 		img = v2images[i]
 		pg = v2pages[pgidx]
-		@info("pair $(pg) / $(img)")
+		#@info("pair $(pg) / $(img)")
 		push!(pairs, (volume = 2, page = pg, image = img))
 	end
 	pairs
@@ -298,6 +298,72 @@ end
 
 
 
+##################### VOLUME 3 ###########################
+#=
+- title page has prefatory material on verso, then two pages of prefatory with recto identified as `aaa ii`. Text of First Esdra continues on `aaa iii`, and runs through end of Nehemiah on `eee` 4. (`eee` is a binion.)
+- *Tobias* follows with quire `Aaa`- `Iii`. *Job* ends on `Iii` 4 recto; significantly, Jerome's preface to the Psalms appears on `Iii` 4 verso.  It *must* be followed by the text of the Psalms!
+- *Psalms* then begins with a reset to `a`- `p`, ending with *Songs* on `p` 8 verso (`p` is a quaternion).
+- *Wisdom* resets to `A`, runs through `F`, ending *Ecclesiastes* on `F` 4 recto.  `F` 4 verso is a blank page. (`F` is a binion.)
+- corrigenda. 2 pages followed by a printed blank with red frames (so a binion) with intial recto identified as `a`.
+=#
+
+
+"""Generate list of all pages in Complutensian volume 3."""
+function volume3pages()
+	v3triples1 = ternion.(map(c -> repeat(c, 3), collect('a':'d'))) |> Iterators.flatten |> collect
+    eee = binion("eee")
+	pageids = vcat(v3triples1, eee) |> Iterators.flatten |> collect
+	map(pg -> "vol3_" * pg, pageids)
+end
+
+"""Generate list of all pages in Complutensian volume 3."""
+function volume3images()
+	imgids = []
+	for i in 21:100
+		push!(imgids, "v3a_p$(i)")
+	end
+	centuries = [
+	 "v3b_p", "v3c_p",  "v3d_p"
+	]
+	for c in centuries
+		for i in 1:100
+			push!(imgids, string(c,i))
+		end
+	end
+	for i in 1:23
+		push!(imgids, "v3e_p$(i)")
+	end
+	imgids
+end
+
+
+
+"""Pair up images and pages for Complutensian volume 3."""
+function volume3pairs()
+	pairs = []
+	
+	v3pages = volume3pages()
+	v3images = volume3images()
+
+	pgidx = 0
+	for i in 1:min(length(v3images), length(v3pages))
+		pgidx = pgidx + 1
+		img = v3images[i]
+		pg = v3pages[pgidx]
+		@info("pair $(pg) / $(img)")
+		push!(pairs, (volume = 3, page = pg, image = img))
+	end
+	pairs
+end
+
+
+v3model = codexmodel(volume3pairs(), 0, "Complutensian Bible (BNE copy): volume 3")
+v3modelfile = joinpath(repo, "codex", "bne_v3.cex")
+open(v3modelfile,"w") do io
+	write(io, v3model)
+end
+
+volume3pairs()
 
 ##################### VOLUME 5 ###########################
 #=

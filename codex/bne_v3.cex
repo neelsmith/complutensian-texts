@@ -1,0 +1,79 @@
+#!datamodels
+Collection|Model|Label|Description
+urn:cite2:complut:pages.bne:|urn:cite2:hmt:datamodels.v1:codexmodel|HMT project model of a codex with recto and verso sides to each folio.
+
+#!citecollections
+URN|Description|Labelling property|Ordering property|License
+urn:cite2:complut:pages.bne:|Complutensian Bible (BNE copy): volume 3|urn:cite2:complut:pages.bne.label:|urn:cite2:complut:pages.bne.sequence:|CC-attribution-share-alike
+
+#!citeproperties
+Property|Label|Type|Authority list
+urn:cite2:complut:pages.bne.sequence:|Page sequence|Number|
+urn:cite2:complut:pages.bne.image:|Image of page|Cite2Urn|
+urn:cite2:complut:pages.bne.page:|URN|Cite2Urn|
+urn:cite2:complut:pages.bne.rv:|Recto or Verso|String|recto,verso
+urn:cite2:complut:pages.bne.label:|Label|String|
+
+
+#!citedata
+sequence|image|urn|rv|label
+1|urn:cite2:citebne:complutensian.v1:v3a_p21|urn:cite2:complut:pages.bne:vol3_aaa_1r|recto|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 1r.
+2|urn:cite2:citebne:complutensian.v1:v3a_p22|urn:cite2:complut:pages.bne:vol3_aaa_1v|verso|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 1v.
+3|urn:cite2:citebne:complutensian.v1:v3a_p23|urn:cite2:complut:pages.bne:vol3_aaa_2r|recto|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 2r.
+4|urn:cite2:citebne:complutensian.v1:v3a_p24|urn:cite2:complut:pages.bne:vol3_aaa_2v|verso|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 2v.
+5|urn:cite2:citebne:complutensian.v1:v3a_p25|urn:cite2:complut:pages.bne:vol3_aaa_3r|recto|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 3r.
+6|urn:cite2:citebne:complutensian.v1:v3a_p26|urn:cite2:complut:pages.bne:vol3_aaa_3v|verso|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 3v.
+7|urn:cite2:citebne:complutensian.v1:v3a_p27|urn:cite2:complut:pages.bne:vol3_aaa_4r|recto|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 4r.
+8|urn:cite2:citebne:complutensian.v1:v3a_p28|urn:cite2:complut:pages.bne:vol3_aaa_4v|verso|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 4v.
+9|urn:cite2:citebne:complutensian.v1:v3a_p29|urn:cite2:complut:pages.bne:vol3_aaa_5r|recto|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 5r.
+10|urn:cite2:citebne:complutensian.v1:v3a_p30|urn:cite2:complut:pages.bne:vol3_aaa_5v|verso|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 5v.
+11|urn:cite2:citebne:complutensian.v1:v3a_p31|urn:cite2:complut:pages.bne:vol3_aaa_6r|recto|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 6r.
+12|urn:cite2:citebne:complutensian.v1:v3a_p32|urn:cite2:complut:pages.bne:vol3_aaa_6v|verso|Complutensian Bible, National Library of Spain, vol3, quire aaa, page 6v.
+13|urn:cite2:citebne:complutensian.v1:v3a_p33|urn:cite2:complut:pages.bne:vol3_bbb_1r|recto|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 1r.
+14|urn:cite2:citebne:complutensian.v1:v3a_p34|urn:cite2:complut:pages.bne:vol3_bbb_1v|verso|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 1v.
+15|urn:cite2:citebne:complutensian.v1:v3a_p35|urn:cite2:complut:pages.bne:vol3_bbb_2r|recto|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 2r.
+16|urn:cite2:citebne:complutensian.v1:v3a_p36|urn:cite2:complut:pages.bne:vol3_bbb_2v|verso|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 2v.
+17|urn:cite2:citebne:complutensian.v1:v3a_p37|urn:cite2:complut:pages.bne:vol3_bbb_3r|recto|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 3r.
+18|urn:cite2:citebne:complutensian.v1:v3a_p38|urn:cite2:complut:pages.bne:vol3_bbb_3v|verso|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 3v.
+19|urn:cite2:citebne:complutensian.v1:v3a_p39|urn:cite2:complut:pages.bne:vol3_bbb_4r|recto|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 4r.
+20|urn:cite2:citebne:complutensian.v1:v3a_p40|urn:cite2:complut:pages.bne:vol3_bbb_4v|verso|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 4v.
+21|urn:cite2:citebne:complutensian.v1:v3a_p41|urn:cite2:complut:pages.bne:vol3_bbb_5r|recto|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 5r.
+22|urn:cite2:citebne:complutensian.v1:v3a_p42|urn:cite2:complut:pages.bne:vol3_bbb_5v|verso|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 5v.
+23|urn:cite2:citebne:complutensian.v1:v3a_p43|urn:cite2:complut:pages.bne:vol3_bbb_6r|recto|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 6r.
+24|urn:cite2:citebne:complutensian.v1:v3a_p44|urn:cite2:complut:pages.bne:vol3_bbb_6v|verso|Complutensian Bible, National Library of Spain, vol3, quire bbb, page 6v.
+25|urn:cite2:citebne:complutensian.v1:v3a_p45|urn:cite2:complut:pages.bne:vol3_ccc_1r|recto|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 1r.
+26|urn:cite2:citebne:complutensian.v1:v3a_p46|urn:cite2:complut:pages.bne:vol3_ccc_1v|verso|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 1v.
+27|urn:cite2:citebne:complutensian.v1:v3a_p47|urn:cite2:complut:pages.bne:vol3_ccc_2r|recto|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 2r.
+28|urn:cite2:citebne:complutensian.v1:v3a_p48|urn:cite2:complut:pages.bne:vol3_ccc_2v|verso|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 2v.
+29|urn:cite2:citebne:complutensian.v1:v3a_p49|urn:cite2:complut:pages.bne:vol3_ccc_3r|recto|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 3r.
+30|urn:cite2:citebne:complutensian.v1:v3a_p50|urn:cite2:complut:pages.bne:vol3_ccc_3v|verso|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 3v.
+31|urn:cite2:citebne:complutensian.v1:v3a_p51|urn:cite2:complut:pages.bne:vol3_ccc_4r|recto|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 4r.
+32|urn:cite2:citebne:complutensian.v1:v3a_p52|urn:cite2:complut:pages.bne:vol3_ccc_4v|verso|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 4v.
+33|urn:cite2:citebne:complutensian.v1:v3a_p53|urn:cite2:complut:pages.bne:vol3_ccc_5r|recto|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 5r.
+34|urn:cite2:citebne:complutensian.v1:v3a_p54|urn:cite2:complut:pages.bne:vol3_ccc_5v|verso|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 5v.
+35|urn:cite2:citebne:complutensian.v1:v3a_p55|urn:cite2:complut:pages.bne:vol3_ccc_6r|recto|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 6r.
+36|urn:cite2:citebne:complutensian.v1:v3a_p56|urn:cite2:complut:pages.bne:vol3_ccc_6v|verso|Complutensian Bible, National Library of Spain, vol3, quire ccc, page 6v.
+37|urn:cite2:citebne:complutensian.v1:v3a_p57|urn:cite2:complut:pages.bne:vol3_ddd_1r|recto|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 1r.
+38|urn:cite2:citebne:complutensian.v1:v3a_p58|urn:cite2:complut:pages.bne:vol3_ddd_1v|verso|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 1v.
+39|urn:cite2:citebne:complutensian.v1:v3a_p59|urn:cite2:complut:pages.bne:vol3_ddd_2r|recto|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 2r.
+40|urn:cite2:citebne:complutensian.v1:v3a_p60|urn:cite2:complut:pages.bne:vol3_ddd_2v|verso|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 2v.
+41|urn:cite2:citebne:complutensian.v1:v3a_p61|urn:cite2:complut:pages.bne:vol3_ddd_3r|recto|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 3r.
+42|urn:cite2:citebne:complutensian.v1:v3a_p62|urn:cite2:complut:pages.bne:vol3_ddd_3v|verso|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 3v.
+43|urn:cite2:citebne:complutensian.v1:v3a_p63|urn:cite2:complut:pages.bne:vol3_ddd_4r|recto|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 4r.
+44|urn:cite2:citebne:complutensian.v1:v3a_p64|urn:cite2:complut:pages.bne:vol3_ddd_4v|verso|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 4v.
+45|urn:cite2:citebne:complutensian.v1:v3a_p65|urn:cite2:complut:pages.bne:vol3_ddd_5r|recto|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 5r.
+46|urn:cite2:citebne:complutensian.v1:v3a_p66|urn:cite2:complut:pages.bne:vol3_ddd_5v|verso|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 5v.
+47|urn:cite2:citebne:complutensian.v1:v3a_p67|urn:cite2:complut:pages.bne:vol3_ddd_6r|recto|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 6r.
+48|urn:cite2:citebne:complutensian.v1:v3a_p68|urn:cite2:complut:pages.bne:vol3_ddd_6v|verso|Complutensian Bible, National Library of Spain, vol3, quire ddd, page 6v.
+49|urn:cite2:citebne:complutensian.v1:v3a_p69|urn:cite2:complut:pages.bne:vol3_eee_1r|recto|Complutensian Bible, National Library of Spain, vol3, quire eee, page 1r.
+50|urn:cite2:citebne:complutensian.v1:v3a_p70|urn:cite2:complut:pages.bne:vol3_eee_1v|verso|Complutensian Bible, National Library of Spain, vol3, quire eee, page 1v.
+51|urn:cite2:citebne:complutensian.v1:v3a_p71|urn:cite2:complut:pages.bne:vol3_eee_2r|recto|Complutensian Bible, National Library of Spain, vol3, quire eee, page 2r.
+52|urn:cite2:citebne:complutensian.v1:v3a_p72|urn:cite2:complut:pages.bne:vol3_eee_2v|verso|Complutensian Bible, National Library of Spain, vol3, quire eee, page 2v.
+53|urn:cite2:citebne:complutensian.v1:v3a_p73|urn:cite2:complut:pages.bne:vol3_eee_3r|recto|Complutensian Bible, National Library of Spain, vol3, quire eee, page 3r.
+54|urn:cite2:citebne:complutensian.v1:v3a_p74|urn:cite2:complut:pages.bne:vol3_eee_3v|verso|Complutensian Bible, National Library of Spain, vol3, quire eee, page 3v.
+55|urn:cite2:citebne:complutensian.v1:v3a_p75|urn:cite2:complut:pages.bne:vol3_eee_4r|recto|Complutensian Bible, National Library of Spain, vol3, quire eee, page 4r.
+56|urn:cite2:citebne:complutensian.v1:v3a_p76|urn:cite2:complut:pages.bne:vol3_eee_4v|verso|Complutensian Bible, National Library of Spain, vol3, quire eee, page 4v.
+57|urn:cite2:citebne:complutensian.v1:v3a_p77|urn:cite2:complut:pages.bne:vol3_eee_5r|recto|Complutensian Bible, National Library of Spain, vol3, quire eee, page 5r.
+58|urn:cite2:citebne:complutensian.v1:v3a_p78|urn:cite2:complut:pages.bne:vol3_eee_5v|verso|Complutensian Bible, National Library of Spain, vol3, quire eee, page 5v.
+59|urn:cite2:citebne:complutensian.v1:v3a_p79|urn:cite2:complut:pages.bne:vol3_eee_6r|recto|Complutensian Bible, National Library of Spain, vol3, quire eee, page 6r.
+60|urn:cite2:citebne:complutensian.v1:v3a_p80|urn:cite2:complut:pages.bne:vol3_eee_6v|verso|Complutensian Bible, National Library of Spain, vol3, quire eee, page 6v.
