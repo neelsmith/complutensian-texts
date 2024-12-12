@@ -1,7 +1,20 @@
 # Editorial material
 
 
+
+> Summary: seven essays from the editors
+>
+> - 4 appear only in volume 1: overview of entire program
+> - on reading OT appears in all 4 OT volumes 1-4
+> - dedication to Pope appears only in first 4
+> - on reading NT appears in 1 and 5.
+>
+> 3 historical documents from key editors in history of Bible
+
+
 ## From the editors of the Complutensian
+
+
 
 1. Dedication to Pope Leo X (Lorenzo de Medici). Incipit *Ad sanctissimum ac clemenitissum dominum nostrum*.
     - volume 1 vol1_+_2r
