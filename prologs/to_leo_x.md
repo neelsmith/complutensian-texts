@@ -1,4 +1,8 @@
 
+## Transcribed from vol. 1  (page `vol1_+_2r`)
+
+>  Appears in first four volumes (the OT) vol1_+_2r,  vol2_title_1v, volume 3 vol3_aaa_1v, volume 4 vol4_a_1v
+
 Multa sunt beatissime Pater: wuae ad excudendas impressoriis formis originales sacrae scripturae linguas nos incitarunt.  Atque hae imprimis. 
 
 Quod cum vniuscuiusque idiomatis suae sint verborum proprietates: quarum totam vim non possit quamtumlibet absoluta traductio prorsus exprimere: tum id maxime in ea lingua accidit: per quam os domini locutum est. Cuius littera quamuis ex se mortua sit et uelut caro: quae non prodest quisque (Nam spiritus est qui viuificat) quia tamen Christus verborum figuris velatus intra eius uterum manet inclusus: non dubium: quin tam admiranda sit faecunditate repleta: tam exuberanti mysteriorum copia cumulata: ut cum plena semper sit et redundans: flumina de ventre eius fluant aquae viuae: vnde hi quibus datum est reuelata facie gloriam domini speculari: vt in eandem imaginem transformentur: possint assidue haurire mira diuinitatis eius arcana. 

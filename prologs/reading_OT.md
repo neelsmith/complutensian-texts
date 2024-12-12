@@ -1,6 +1,10 @@
-Read on this page:
+# On reading the Old Testament
 
-urn:cite2:citebne:complutensian.v1:v3a_p23
+
+>  Appears in first four volumes (the OT)
+
+
+## Transcribed from vol. 1  (page `vol1_+_2v`)
 
 Ad lectorem De his que ad lectionem Veteris testamenti diuersis linguis nunc primum impressi:sunt praenotanda.
 
