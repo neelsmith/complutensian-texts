@@ -2,12 +2,14 @@
 
 
 
-> Summary: seven essays from the editors
+> Summary: five essays from the editors
 >
-> - 4 appear only in volume 1: overview of entire program
+> - 2 appear only in volume 1: overview of entire program
 > - on reading OT appears in all 4 OT volumes 1-4
 > - dedication to Pope appears only in first 4
 > - on reading NT appears in 1 and 5.
+>
+> 2 historical surveys
 >
 > 3 historical documents from key editors in history of Bible
 
@@ -34,16 +36,22 @@
     - volume 5 vol5_a-preface_2v. Latin. Incipit *Ne mireris aut vitio vertas o studiose lector*
 5. Prolog to Hebrew and Aramaic dictionary.
     - volume 1 vol1_+_4r-vol1_+_4v
-6. Note on translations. Inicipit *Notandum: quod translatores et interpretes bibliae multi fuerunt*
-    - volume 1 vol1_+_4v-vol1_+_5r
-7. How to understand sacred scripture. Incipit: *Modi intelligendi sacram scripturam.  Notandum: quod omnis sacra scriptura quadriformi ratione distinguitur*
-    - volume 1 vol1_+_5r
+
 
 
 ## Papal authorization
 
 1. Papal authorization (only handwritten version in BNE text!)
     - volume 1 vol1_+_7v. In Huntington copy, see image [urn:cite2:citehunt:complutensian.v1:v1_plus_7v](https://www.homermultitext.org/ict2/?urn=urn:cite2:citehunt:complutensian.v1:v1_plus_7v)
+
+
+
+## Historical context reproduced from other incunabula
+
+1. Note on translations. Inicipit *Notandum: quod translatores et interpretes bibliae multi fuerunt*
+    - volume 1 vol1_+_4v-vol1_+_5r
+2. How to understand sacred scripture. Incipit: *Modi intelligendi sacram scripturam.  Notandum: quod omnis sacra scriptura quadriformi ratione distinguitur*
+    - volume 1 vol1_+_5r
 
 ## Historical documents
 
