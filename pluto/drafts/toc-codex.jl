@@ -4,239 +4,134 @@
 using Markdown
 using InteractiveUtils
 
-# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
-macro bind(def, element)
-    quote
-        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
-        local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
-        el
-    end
-end
-
-# ╔═╡ ae4f1c16-b713-11ef-15c3-697bc0961205
+# ╔═╡ f10a6a20-231c-4bda-91c2-2ac521db23c6
+# ╠═╡ show_logs = false
 begin
-	using CitablePhysicalText, CitableBase, CitableObject
-	using CitableImage
-
 	using Markdown
+	using CitableBase, CitablePhysicalText, CitableObject
+	using CitableImage
 	using PlutoUI
-
-	md"""*Unhide this cell to see the Julia environment*."""
+	md"""*Unhide this cell to see the Julia environment.*"""
 end
 
-# ╔═╡ bdebc83e-0e89-45a8-bdca-f251f19d7e8b
+# ╔═╡ 0d447c76-dcb4-4618-9b0d-eb7059d5a46c
 TableOfContents()
 
-# ╔═╡ 49b1b20e-a357-465c-974e-5395a024fc67
-md"""# Browse codex"""
+# ╔═╡ edadadf2-b96c-11ef-39ab-d183cfa102d0
+md"""# Complutensian Bible: Biblical books
 
-# ╔═╡ 8ec7fb5b-f469-4118-8beb-bc5537c136a8
-md"""
-> Browse volumes of the Complutensian Bible in the BNE by quire.
+
+> *Page references are linked to images of the Madrid copy of the Complutensian Bible.*
 """
 
-# ╔═╡ 9c3f94e2-603f-4e2b-831a-ea299cdddd65
-md"""*Image width (pixels)* $(@bind fullw Slider(200:50:800; default = 600, show_value = true))"""
-
-# ╔═╡ a5056aec-456a-436c-91e6-91c2a858a584
+# ╔═╡ fa7860d1-8642-4346-96e6-0fe81f46e4f6
 html"""
-<br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/>
 """
 
-# ╔═╡ 0e1335aa-c42a-4952-b708-b708eb551d64
+# ╔═╡ 5c948883-775a-4210-8278-55352daf1c22
 md"""# Mechanics"""
 
-# ╔═╡ 53d99796-5a3b-4784-919c-1f49a66a20c5
+# ╔═╡ f71ed54d-aceb-4018-989c-01649e583433
 repo = pwd() |> dirname |> dirname
 
-# ╔═╡ 25555da6-44b6-4a42-adee-c0447890faad
+# ╔═╡ bd68db3a-d985-4ad9-9c5f-80bc3ba65fd6
 srcfiles = readdir(joinpath(repo, "codex"))
 
-# ╔═╡ 00f88fb2-32a3-4517-856a-65b01ab16e9d
+# ╔═╡ 106ff3e6-fce9-46a1-90f2-a36fe67a3a86
 codexmenu = map(srcfiles) do f
 	volnum  = replace(replace(f, "bne_v" => ""), ".cex" => "")
 	(f => "Volume $(volnum)")
 end
 
-# ╔═╡ 6e9170a9-afc4-4beb-90d4-7263e45743fc
-md"""*Select a volume*: $(@bind codex Select(codexmenu))"""
+# ╔═╡ 52cf22bc-1f26-4fbd-9b1d-2e435b9115ad
+md"""> ## Indexing data"""
 
-# ╔═╡ 84870ba9-09c2-4ba9-a060-df37481a1ab4
-codexfile = joinpath(repo, "codex", codex)
+# ╔═╡ 7d9d1820-9778-4062-83b3-9b283342b36e
+bkboundsfile = joinpath(repo, "indexing", "book-boundaries.cex")
 
-# ╔═╡ c3ca58ae-cc55-4215-8a56-e77e647bdb8f
-citablecodex = fromcex(codexfile, Codex, FileReader)[1]
+# ╔═╡ 528684a9-9f66-4c1c-b2fd-e70503407001
+lines = readlines(bkboundsfile)[2:end]
 
-# ╔═╡ 859b5d6c-4123-439a-937e-245e0fb7974e
-md"""## $(label(citablecodex))"""
+# ╔═╡ 1b6c0d34-d3c0-4fc9-961d-8fd9acf40564
+rawdata = map(lines) do ln
+	(book, incipit, explicit) = split(ln, "|")
+	(book = book, incipit = incipit, explicit = explicit)
+end 
 
-# ╔═╡ bd4acebc-cdec-490a-b27b-4009d22af90c
-md"""> ## Quires"""
+# ╔═╡ 2447f62f-9d88-454f-b09a-2d71463a1be3
+data = filter(tripl -> !isempty(tripl.explicit), rawdata)
 
-# ╔═╡ 6daf94a9-96e8-42cb-909c-ade97a927c55
-pagereff = map(pg -> objectcomponent(urn(pg)), collect(citablecodex))
-
-# ╔═╡ 851f9abd-ade9-4cb3-bf13-0ae0a30bd7fa
-reftriples = map(pagereff) do pg
-	(volume, quire, page) =  split(pg, "_")
-	(volume = volume, quire = quire, page = page)
+# ╔═╡ 3256fd7e-6661-4344-a580-7b38a6ef49dd
+codices = map(srcfiles) do f
+	codexfile = joinpath(repo, "codex", f)
+	fromcex(codexfile, Codex, FileReader)[1]
 end
 
-# ╔═╡ 44f7cbf2-d2e2-4335-8550-4fdd300a97e5
-quirelist = map(trip -> trip.quire, reftriples) |> unique
+# ╔═╡ 32e014df-a664-435c-b578-883d54d42d2c
+md"""> ## Formatting/display"""
 
-# ╔═╡ f751e590-ec9d-4f24-8a23-79ad94398f2c
-"""Identify type of quire based on number of pages."""
-function classifyquire(n)
-	if n == 12
-		"ternion"
-	elseif n == 16
-		"quaternion"
-	elseif n == 8
-		"binion"
-	elseif n == 4
-		"single bifolio sheet"
-	else
-		"irregular gather"
-	end
+# ╔═╡ c020d481-f6d5-4663-8a61-5e6e80aace3f
+"""Parse reference element of page citation."""
+function formatref(ref)
+	(volraw, quire, pg) = split(ref, "_")
+	volumeclean = replace(volraw, "vol" => "")
+	(volume = parse(Int,volumeclean), quire = quire, page = pg)
+
 end
 
-# ╔═╡ 13e018f3-6abe-4a69-9ef1-db565d95bfbb
-quiremenu = map(quirelist) do q
-	
-	quirepages = map(filter(trip -> trip.quire == q, reftriples)) do pg
-		pg.page
-	end
-	lbl = string(q, " (", classifyquire(length(quirepages)), ")")
-	(q => lbl)
-	
+# ╔═╡ 6c8eb91d-bf69-4511-af32-2606ac26c014
+md"""> ## Image service"""
+
+# ╔═╡ a33a7827-c7e0-4dbd-84d7-cb635aae7d0e
+function  imgsrvc() 
+	baseurl = "http://www.homermultitext.org/iipsrv"
+	root = "/project/homer/pyramidal/deepzoom"
+	IIIFservice(baseurl, root)
 end
 
-# ╔═╡ 34b9d7d6-e36b-46e8-a143-c79db286f144
-md"""*Quire*: $(@bind quire Select(quiremenu)) *Show pairings*: $(@bind showpairings CheckBox()) *Thumbnail image size* $(@bind thumbw Slider(20:10:200; default = 40, show_value = true))"""
+# ╔═╡ 766cd182-d225-4993-a216-bff988b1298c
+service = imgsrvc()
 
-# ╔═╡ 5f58fa22-17ea-4d5c-8078-ecbb91115c64
-pagelist = map(filter(trip -> trip.quire == quire, reftriples)) do pg
-	pg.page
-end
-
-# ╔═╡ 43dff4ac-34b7-427a-b8a5-8cf867ddaa2b
-md"""*Page*: $(@bind page Select(pagelist))"""
-
-# ╔═╡ f1a67e96-a02b-42a6-bfd1-5c4d0d134ec8
-volnum = replace(replace(codex, "bne_v" => ""), ".cex" => "")
-
-# ╔═╡ 1f21b8d1-83df-4cfc-83d4-0bca46332a9f
-pgref = join(["vol$(volnum)", quire, page], "_")
-
-# ╔═╡ 5853c5d9-067c-4561-8ec5-e9c04649d1b6
-currentpage = filter(collect(citablecodex)) do pg
-	objectcomponent(urn(pg)) == pgref
-end[1]
-
-# ╔═╡ 458fb956-bae1-4f49-9ae1-118e60a31f71
-md"""### $(label(currentpage))"""
-
-# ╔═╡ 3e2c6ca9-81ad-4598-8d0b-f71d8efb229d
-currentquire = filter(collect(citablecodex)) do pg
-	 ptrn = string("vol$(volnum)_", quire, "_")
-		startswith(objectcomponent(urn(pg)), ptrn) 
-end
-
-# ╔═╡ 734de5e4-109e-4ff1-950b-671db9a059b2
-md"""> ## Image services"""
-
-# ╔═╡ d9d2272b-bd74-42ab-aa3c-b7c8a112295d
-baseurl = "http://www.homermultitext.org/iipsrv"
-
-# ╔═╡ cc1137a4-a275-415c-9a5c-85c1c9ed0ef1
-root = "/project/homer/pyramidal/deepzoom"
-
-# ╔═╡ ba7efd81-9926-41ff-a7df-223a53deb4ec
-service = IIIFservice(baseurl, root)
-
-# ╔═╡ 56487086-7cff-4dc0-a47e-5a3ac4bf2eb9
+# ╔═╡ 9d552660-3272-48cc-a08f-349eb5bbe7d5
 ict = "http://www.homermultitext.org/ict2/?"
 
-# ╔═╡ 3580766e-b083-49d7-9a14-57b768de599e
-linkedMarkdownImage(ict,image(currentpage), service; w = fullw) |> Markdown.parse
+# ╔═╡ 6d6b46fa-5dea-464e-8017-0634008e0386
+"""Format Markdown table of contents from data file with incipit/explicit data."""
+function formatdata(datav, codexlist)
+	baseurn = "urn:cite2:complut:pages.bne:"
+	lns = []
+	for tripl in datav
+		pg1ref = formatref(tripl.incipit)
 
-# ╔═╡ 72dc0b38-ec2c-4f21-98ac-2279354dc74e
-md"""> ## Display gathers"""
-
-# ╔═╡ f19f1497-0760-4217-8ed0-93ee25fe561d
-"""Tabular display of relation of quires in a ternion"""
-function plotternion()
-	lines = ["| Bifolio 1| Bifolio 2 | Bifolio 3 |  Bifolio 3 | Bifolio 2 | Bifolio 1 |",
-		"| --- | --- |  --- | --- | --- |  --- | "
-	]
-
-
-	pads = Dict(
-		1 => 0,
-		2 => 0,
+		codex = codexlist[pg1ref.volume]
 		
-		3 => 1, 
-		4 => 1, 
+		u = Cite2Urn(baseurn * tripl.incipit)
+		pg = filter(pg -> urn(pg) == u, collect(codex))[1]
+		img = image(pg)
+		imglink = string(ict, "urn=", img)
 		
-		5 => 2, 
-		6 => 2, 
 
-		7 => 0, 
-		8 => 0,
+		pg2ref = formatref(tripl.explicit)
+		pg2u = Cite2Urn(baseurn * tripl.explicit)
+		
+		pg2 = filter(pg -> urn(pg) == pg2u, collect(codex))[1]
+		img2 = image(pg2)
+		img2link = string(ict, "urn=", img2)
 
-		9 => 2,
-		10 => 2,
 
-		11 => 4, 
-		12 => 4, 	
-	)
-	for i in 1:6
-		side2 = 13 - i
-		pg1 = currentquire[i]
-		pg2 = currentquire[13 - i]
-		img1 = linkedMarkdownImage(ict, image(pg1), service; w = thumbw) 
-		img2 = linkedMarkdownImage(ict, image(pg2), service; w = thumbw) 
-
-		pads1 = pads[i]
-		pads2 = pads[side2]
-		row = []
-		if pads1 > 0
-			for i in 1:pads1
-				push!(row, " | ")
-			end
-		end
-		push!(row, "$(pagelist[i]) $(img1) |" )
-
-		if pads2 > 0
-			for i in 1:pads2
-				push!(row, " | ")
-			end
-		end
-
-		push!(row, "$(pagelist[side2]) $(img2) |" )
-
-		push!(lines, join(row,""))	
-		#push!(lines, "| pad $(pads1) $(pagelist[i]) $(img1) | pad $(pads2) $(pagelist[side2]) $(img2) |")
+		
+		str = string("1. *$(titlecase(tripl.book))*: begins on **Volume ", pg1ref.volume, " [quire ", pg1ref.quire, " page ", pg1ref.page, "](", imglink, ")**, and ends on  **Volume ", pg2ref.volume, " [quire ", pg2ref.quire, " page ",  pg2ref.page, "](", img2link, ")**")
+		#str = string("- ", tripl.incipit, " ", markdownImage())
+		push!(lns, str)
 	end
-	join(lines,"\n")
+	join(lns, "\n")
 end
 
-# ╔═╡ 6aba159d-cf22-437a-b4b8-62be53676250
-if (pagelist |> length |> isodd)
-	md"""> Odd number of pages in quire: can't diagram it"""
-elseif showpairings
-	
-	quiretype = classifyquire(length(pagelist))
-	if quiretype == "ternion"
-
-		"(*Thumbnails are linked to image viewer*)\n\n" * plotternion() |> Markdown.parse
-	end
-end
-
+# ╔═╡ ca3adb90-febd-48c4-9cc9-2fc13ec513b7
+formatdata(data, codices) |> Markdown.parse
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -301,6 +196,12 @@ weakdeps = ["StaticArrays"]
     [deps.Adapt.extensions]
     AdaptStaticArraysExt = "StaticArrays"
 
+[[deps.AliasTables]]
+deps = ["PtrArrays", "Random"]
+git-tree-sha1 = "9876e1e164b144ca45e9e3198d0b689cadfed9ff"
+uuid = "66dad0bd-aa9a-41b7-9441-69ab47430ed8"
+version = "1.1.3"
+
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
 version = "1.1.2"
@@ -313,9 +214,9 @@ version = "0.4.0"
 
 [[deps.ArrayInterface]]
 deps = ["Adapt", "LinearAlgebra"]
-git-tree-sha1 = "d5140b60b87473df18cf4fe66382b7c3596df047"
+git-tree-sha1 = "017fcb757f8e921fb44ee063a7aafe5f89b86dd1"
 uuid = "4fba245c-0d91-5ea0-9b3e-6abc04ee57a9"
-version = "7.17.1"
+version = "7.18.0"
 
     [deps.ArrayInterface.extensions]
     ArrayInterfaceBandedMatricesExt = "BandedMatrices"
@@ -707,9 +608,9 @@ version = "1.12.0"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "ConcurrentUtilities", "Dates", "ExceptionUnwrapping", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "PrecompileTools", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "6c22309e9a356ac1ebc5c8a217045f9bae6f8d9a"
+git-tree-sha1 = "627fcacdb7cb51dc67f557e1598cdffe4dda386d"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.10.13"
+version = "1.10.14"
 
 [[deps.HistogramThresholding]]
 deps = ["ImageBase", "LinearAlgebra", "MappedArrays"]
@@ -1054,9 +955,9 @@ version = "2.16.0+0"
 
 [[deps.LogExpFunctions]]
 deps = ["DocStringExtensions", "IrrationalConstants", "LinearAlgebra"]
-git-tree-sha1 = "a2d09619db4e765091ee5c6ffe8872849de0feea"
+git-tree-sha1 = "13ca9e2586b89836fd20cccf56e57e2b9ae7f38f"
 uuid = "2ab3a3ac-af41-5b50-aa03-7779005ae688"
-version = "0.3.28"
+version = "0.3.29"
 
     [deps.LogExpFunctions.extensions]
     LogExpFunctionsChainRulesCoreExt = "ChainRulesCore"
@@ -1353,6 +1254,11 @@ git-tree-sha1 = "8f6bc219586aef8baf0ff9a5fe16ee9c70cb65e4"
 uuid = "92933f4c-e287-5a05-a399-4b506db050ca"
 version = "1.10.2"
 
+[[deps.PtrArrays]]
+git-tree-sha1 = "77a42d78b6a92df47ab37e177b2deac405e1c88f"
+uuid = "43287f4e-b6f4-7ad1-bb20-aadabca52c3d"
+version = "1.2.1"
+
 [[deps.QOI]]
 deps = ["ColorTypes", "FileIO", "FixedPointNumbers"]
 git-tree-sha1 = "8b3fc30bc0390abdce15f8822c889f669baed73d"
@@ -1458,9 +1364,9 @@ version = "0.6.43"
 
 [[deps.SentinelArrays]]
 deps = ["Dates", "Random"]
-git-tree-sha1 = "d0553ce4031a081cc42387a9b9c8441b7d99f32d"
+git-tree-sha1 = "712fb0231ee6f9120e005ccd56297abbc053e7e0"
 uuid = "91c51154-3ec4-41a3-a24f-3f23e20d615c"
-version = "1.4.7"
+version = "1.4.8"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
@@ -1517,9 +1423,9 @@ version = "1.11.0"
 
 [[deps.SpecialFunctions]]
 deps = ["IrrationalConstants", "LogExpFunctions", "OpenLibm_jll", "OpenSpecFun_jll"]
-git-tree-sha1 = "2f5d4697f21388cbe1ff299430dd169ef97d7e14"
+git-tree-sha1 = "64cca0c26b4f31ba18f13f6c12af7c85f478cfde"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "2.4.0"
+version = "2.5.0"
 weakdeps = ["ChainRulesCore"]
 
     [deps.SpecialFunctions.extensions]
@@ -1587,10 +1493,10 @@ uuid = "82ae8749-77ed-4fe6-ae5f-f523153014b0"
 version = "1.7.0"
 
 [[deps.StatsBase]]
-deps = ["DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunctions", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]
-git-tree-sha1 = "5cf7606d6cef84b543b483848d4ae08ad9832b21"
+deps = ["AliasTables", "DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunctions", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]
+git-tree-sha1 = "29321314c920c26684834965ec2ce0dacc9cf8e5"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
-version = "0.34.3"
+version = "0.34.4"
 
 [[deps.StringDistances]]
 deps = ["Distances", "StatsAPI"]
@@ -1774,42 +1680,27 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─ae4f1c16-b713-11ef-15c3-697bc0961205
-# ╟─bdebc83e-0e89-45a8-bdca-f251f19d7e8b
-# ╟─49b1b20e-a357-465c-974e-5395a024fc67
-# ╟─8ec7fb5b-f469-4118-8beb-bc5537c136a8
-# ╟─859b5d6c-4123-439a-937e-245e0fb7974e
-# ╟─6e9170a9-afc4-4beb-90d4-7263e45743fc
-# ╟─34b9d7d6-e36b-46e8-a143-c79db286f144
-# ╟─6aba159d-cf22-437a-b4b8-62be53676250
-# ╟─9c3f94e2-603f-4e2b-831a-ea299cdddd65
-# ╟─43dff4ac-34b7-427a-b8a5-8cf867ddaa2b
-# ╟─458fb956-bae1-4f49-9ae1-118e60a31f71
-# ╟─3580766e-b083-49d7-9a14-57b768de599e
-# ╟─a5056aec-456a-436c-91e6-91c2a858a584
-# ╟─0e1335aa-c42a-4952-b708-b708eb551d64
-# ╟─53d99796-5a3b-4784-919c-1f49a66a20c5
-# ╠═25555da6-44b6-4a42-adee-c0447890faad
-# ╟─00f88fb2-32a3-4517-856a-65b01ab16e9d
-# ╠═84870ba9-09c2-4ba9-a060-df37481a1ab4
-# ╠═c3ca58ae-cc55-4215-8a56-e77e647bdb8f
-# ╟─bd4acebc-cdec-490a-b27b-4009d22af90c
-# ╟─6daf94a9-96e8-42cb-909c-ade97a927c55
-# ╟─851f9abd-ade9-4cb3-bf13-0ae0a30bd7fa
-# ╟─44f7cbf2-d2e2-4335-8550-4fdd300a97e5
-# ╟─13e018f3-6abe-4a69-9ef1-db565d95bfbb
-# ╟─f751e590-ec9d-4f24-8a23-79ad94398f2c
-# ╟─5f58fa22-17ea-4d5c-8078-ecbb91115c64
-# ╟─f1a67e96-a02b-42a6-bfd1-5c4d0d134ec8
-# ╟─1f21b8d1-83df-4cfc-83d4-0bca46332a9f
-# ╟─5853c5d9-067c-4561-8ec5-e9c04649d1b6
-# ╟─3e2c6ca9-81ad-4598-8d0b-f71d8efb229d
-# ╟─734de5e4-109e-4ff1-950b-671db9a059b2
-# ╠═d9d2272b-bd74-42ab-aa3c-b7c8a112295d
-# ╠═cc1137a4-a275-415c-9a5c-85c1c9ed0ef1
-# ╠═ba7efd81-9926-41ff-a7df-223a53deb4ec
-# ╠═56487086-7cff-4dc0-a47e-5a3ac4bf2eb9
-# ╟─72dc0b38-ec2c-4f21-98ac-2279354dc74e
-# ╟─f19f1497-0760-4217-8ed0-93ee25fe561d
+# ╟─f10a6a20-231c-4bda-91c2-2ac521db23c6
+# ╟─0d447c76-dcb4-4618-9b0d-eb7059d5a46c
+# ╟─edadadf2-b96c-11ef-39ab-d183cfa102d0
+# ╟─ca3adb90-febd-48c4-9cc9-2fc13ec513b7
+# ╟─fa7860d1-8642-4346-96e6-0fe81f46e4f6
+# ╟─5c948883-775a-4210-8278-55352daf1c22
+# ╟─f71ed54d-aceb-4018-989c-01649e583433
+# ╟─bd68db3a-d985-4ad9-9c5f-80bc3ba65fd6
+# ╟─106ff3e6-fce9-46a1-90f2-a36fe67a3a86
+# ╟─52cf22bc-1f26-4fbd-9b1d-2e435b9115ad
+# ╟─7d9d1820-9778-4062-83b3-9b283342b36e
+# ╠═528684a9-9f66-4c1c-b2fd-e70503407001
+# ╟─1b6c0d34-d3c0-4fc9-961d-8fd9acf40564
+# ╟─2447f62f-9d88-454f-b09a-2d71463a1be3
+# ╟─3256fd7e-6661-4344-a580-7b38a6ef49dd
+# ╟─32e014df-a664-435c-b578-883d54d42d2c
+# ╟─6d6b46fa-5dea-464e-8017-0634008e0386
+# ╟─c020d481-f6d5-4663-8a61-5e6e80aace3f
+# ╟─6c8eb91d-bf69-4511-af32-2606ac26c014
+# ╟─a33a7827-c7e0-4dbd-84d7-cb635aae7d0e
+# ╟─766cd182-d225-4993-a216-bff988b1298c
+# ╟─9d552660-3272-48cc-a08f-349eb5bbe7d5
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
