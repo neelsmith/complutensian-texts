@@ -322,10 +322,16 @@ function volume3pages()
 	end)
 	iii = binion("Iii") # end of Job
 	
-	v3singleids = filter(collect('a':'o')) do c
+	v3singleids1 = filter(collect('a':'j')) do c
 		c != 'i'
-	end
-	v3singles  = ternion.(v3singleids)
+	end .|> ternion
+	k = binion("k")
+	v3singleids2 = collect('l':'o') .|> ternion
+
+	
+	v3singles  = vcat(v3singleids1, [k], v3singleids2) 
+
+
 	p = quaternion("p")
 
 
