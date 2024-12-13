@@ -28,14 +28,14 @@ end
 TableOfContents()
 
 # ╔═╡ edadadf2-b96c-11ef-39ab-d183cfa102d0
-md"""# Complutensian Bible: Biblical books
+md"""# Complutensian Bible: index of Biblical books
 
 
 > *Page references are linked to images of the Madrid copy of the Complutensian Bible.*
 """
 
 # ╔═╡ cc31f3c5-d8cf-4d48-a2b0-2d37c79bfddd
-md"""*Display contents as a:* $(@bind outputformat Select(["table" => "table", "list" => "numbered list"]))"""
+md"""*Display contents as a:* $(@bind outputformat Select(["table" => "a table", "list" => "a numbered list"]))"""
 
 # ╔═╡ fa7860d1-8642-4346-96e6-0fe81f46e4f6
 html"""
@@ -94,6 +94,25 @@ function formatref(ref)
 	(volume = parse(Int,volumeclean), quire = quire, page = pg)
 
 end
+
+# ╔═╡ 06e5920f-3cf5-40d4-80e5-d4ac0d8d844e
+md"""> ## Debugging bad data"""
+
+# ╔═╡ 809c8f50-52ea-47aa-b2eb-2199c0f685ec
+u = Cite2Urn("urn:cite2:complut:pages.bne:vol4_a_3r")
+
+# ╔═╡ 54e4317a-b1f8-4613-83e4-4a69b7b76ac3
+function debugpage(pgurn, codices)
+	(v,q,p)= formatref(objectcomponent(pgurn))
+	codex = codices[v]
+	pg =  filter(pg -> urn(pg) == pgurn, collect(codex))[1]
+end
+
+# ╔═╡ 93b5cd89-e453-4246-bd3a-7f7aeb3be978
+debugpage(u, codices)
+
+# ╔═╡ fea8d6f4-b0f6-48fe-b4bb-0e4269809c0d
+debugpage(u, codices)
 
 # ╔═╡ 6c8eb91d-bf69-4511-af32-2606ac26c014
 md"""> ## Image service"""
@@ -164,7 +183,13 @@ function formatdata(datav, codexlist)
 		pg2ref = formatref(tripl.explicit)
 		pg2u = Cite2Urn(baseurn * tripl.explicit)
 		
-		pg2 = filter(pg -> urn(pg) == pg2u, collect(codex))[1]
+		pg2list = filter(pg -> urn(pg) == pg2u, collect(codex))
+		pg2 = nothing
+		if isempty(pg2list)
+			@error("No results for page $(pg2) from $(pg2ref)")
+		else
+			pg2 = pg2list[1]
+		end
 		img2 = image(pg2)
 		img2link = string(ict, "urn=", img2)
 
@@ -1746,10 +1771,15 @@ version = "17.4.0+2"
 # ╟─2447f62f-9d88-454f-b09a-2d71463a1be3
 # ╟─3256fd7e-6661-4344-a580-7b38a6ef49dd
 # ╟─32e014df-a664-435c-b578-883d54d42d2c
-# ╠═451c83f8-4c8f-4be1-a8ab-5ffe0753c9de
+# ╟─451c83f8-4c8f-4be1-a8ab-5ffe0753c9de
 # ╟─6d6b46fa-5dea-464e-8017-0634008e0386
 # ╟─c020d481-f6d5-4663-8a61-5e6e80aace3f
 # ╟─ddfa8851-08d9-41e9-8bb2-13272219468e
+# ╟─06e5920f-3cf5-40d4-80e5-d4ac0d8d844e
+# ╠═809c8f50-52ea-47aa-b2eb-2199c0f685ec
+# ╠═54e4317a-b1f8-4613-83e4-4a69b7b76ac3
+# ╠═93b5cd89-e453-4246-bd3a-7f7aeb3be978
+# ╠═fea8d6f4-b0f6-48fe-b4bb-0e4269809c0d
 # ╟─6c8eb91d-bf69-4511-af32-2606ac26c014
 # ╟─a33a7827-c7e0-4dbd-84d7-cb635aae7d0e
 # ╟─766cd182-d225-4993-a216-bff988b1298c
