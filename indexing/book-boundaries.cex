@@ -8,11 +8,12 @@ joshua|vol2_a_1r|vol2_c_2r|
 judges|vol2_c_2r|vol2_j_4r|
 ruth|vol2_j_4r|vol2_k_1v|
 1samuel|vol2_k_3r|vol2_q_2v| = "1st Kings"
-2samuel|vol2_q_2v||= "2nd Kings"
+2samuel|vol2_q_2v|vol2_x_3r|= "2nd Kings"
 1kings|vol2_x_3r|vol2_dd_3r| = "3rd Kings"
 2kings|vol2_dd_3r|vol2_jj_5r| = "4th Kings"
 1chronicles|vol2_jj_6r|vol2_oo_5v|
 2chronicles|vol2_oo_5v|vol2_vv_4v|
+manasseh|vol2_vv_4v|vol2_vv_4v|
 ezra|vol3_aaa_3r|vol3_ccc_1r|
 nehemiah|vol3_ccc_1r|vol3_eee_4v|
 tobith|vol3_Aaa_1r|vol3_Aaa_6v|
@@ -22,10 +23,9 @@ job|vol3_Eee_6r|vol3_Iii_4r|
 psalms|vol3_a_1r|vol3_k_3v|
 proverbs|vol3_l_1v|vol3_o_3r|
 ecclesiastes|vol3_o_3v|vol3_p_5r|
-songs|vol3_p_5r||Ends 
-wisdom|vol3_p_7r||Ends vol3_B_3r
-sirach|vol3_B_3v||
-ecclesiastes|||End of volume 3
+songs|vol3_p_5r|vol3_p_8v| Ends sequence
+wisdom|vol3_A_1r|vol3_B_3r|Ends vol3_B_3r
+sirach|vol3_B_3v|vol3_F_4r|= "Ecclesiasticus"
 isaiah|vol4_a_3r|vol4_j_1r|
 jeremiah|vol4_j_1v|vol4_s_5r|
 lamentations|vol4_s_5r|vol4_t_3r|

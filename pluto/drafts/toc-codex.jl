@@ -134,8 +134,8 @@ ict = "http://www.homermultitext.org/ict2/?"
 """Format Markdown table of contents from data file with incipit/explicit data."""
 function formattable(datav, codexlist)
 	baseurn = "urn:cite2:complut:pages.bne:"
-	lns = ["|Book|Incipit|Explicit|", "|:--- |:--- |:--- |"]
-	for tripl in datav
+	lns = ["| | Book|Incipit|Explicit|", "| --- |:--- |:--- |:--- |"]
+	for (i, tripl) in enumerate(datav)
 		pg1ref = formatref(tripl.incipit)
 
 		codex = codexlist[pg1ref.volume]
@@ -155,7 +155,7 @@ function formattable(datav, codexlist)
 
 		incip = string("Volume ", pg1ref.volume, " [quire ", pg1ref.quire, " page ", pg1ref.page, "](", imglink, ")")
 		explic = string("Volume ", pg1ref.volume, " [quire ", pg2ref.quire, " page ", pg2ref.page, "](", img2link, ")")
-		row = string("| *", titlecase(tripl.book), "* | ", incip, " | ", explic , " |")
+		row = string("| $(i) | *", titlecase(tripl.book), "* | ", incip, " | ", explic , " |")
 
 		
 		#str = string("1. *$(titlecase(tripl.book))*: begins on **Volume ", pg1ref.volume, " [quire `", pg1ref.quire, "` page ", pg1ref.page, "](", imglink, ")**, and ends on  **Volume ", pg2ref.volume, " [quire `", pg2ref.quire, "` page ",  pg2ref.page, "](", img2link, ")**")
