@@ -7,14 +7,17 @@ deuteronomy|vol1_rr_3v|vol1_con_8r|
 joshua|vol2_a_1r|vol2_c_2r|
 judges|vol2_c_2r|vol2_j_4r|
 ruth|vol2_j_4r|vol2_k_1v|
-1samuel|vol2_k_3r|vol2_q_2v|
-2samuel|vol2_q_2v||
-1kings|||
-2kings|||
-2chronicles|||
-ezra|||
-nehemiah|||
-esther|||
+1samuel|vol2_k_3r|vol2_q_2v| = "1st Kings"
+2samuel|vol2_q_2v||= "2nd Kings"
+1kings|vol2_x_3r|vol2_dd_3r| = "3rd Kings"
+2kings|vol2_dd_3r|vol2_jj_5r| = "4th Kings"
+1chronicles|vol2_jj_6r|vol2_oo_5v|
+2chronicles|vol2_oo_5v|vol2_vv_4v|
+ezra|vol3_aaa_3r|vol3_ccc_1r|
+nehemiah|vol3_ccc_1r|vol3_eee_4v|
+tobith|vol3_Aaa_1r|vol3_Aaa_6v|
+judith|vol3_Bbb_1r|vol3_Ccc_4v|
+esther|vol3_Ddd_1r|vol3_Eee_5v|
 job|||
 psalms|||
 proverbs|||

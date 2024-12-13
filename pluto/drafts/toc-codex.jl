@@ -4,6 +4,16 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+end
+
 # ╔═╡ f10a6a20-231c-4bda-91c2-2ac521db23c6
 # ╠═╡ show_logs = false
 begin
@@ -23,6 +33,9 @@ md"""# Complutensian Bible: Biblical books
 
 > *Page references are linked to images of the Madrid copy of the Complutensian Bible.*
 """
+
+# ╔═╡ cc31f3c5-d8cf-4d48-a2b0-2d37c79bfddd
+md"""*Display contents as a:* $(@bind outputformat Select(["table" => "table", "list" => "numbered list"]))"""
 
 # ╔═╡ fa7860d1-8642-4346-96e6-0fe81f46e4f6
 html"""
@@ -98,6 +111,40 @@ service = imgsrvc()
 # ╔═╡ 9d552660-3272-48cc-a08f-349eb5bbe7d5
 ict = "http://www.homermultitext.org/ict2/?"
 
+# ╔═╡ 451c83f8-4c8f-4be1-a8ab-5ffe0753c9de
+"""Format Markdown table of contents from data file with incipit/explicit data."""
+function formattable(datav, codexlist)
+	baseurn = "urn:cite2:complut:pages.bne:"
+	lns = ["|Book|Incipit|Explicit|", "|:--- |:--- |:--- |"]
+	for tripl in datav
+		pg1ref = formatref(tripl.incipit)
+
+		codex = codexlist[pg1ref.volume]
+		
+		u = Cite2Urn(baseurn * tripl.incipit)
+		pg = filter(pg -> urn(pg) == u, collect(codex))[1]
+		img = image(pg)
+		imglink = string(ict, "urn=", img)
+		
+
+		pg2ref = formatref(tripl.explicit)
+		pg2u = Cite2Urn(baseurn * tripl.explicit)
+		
+		pg2 = filter(pg -> urn(pg) == pg2u, collect(codex))[1]
+		img2 = image(pg2)
+		img2link = string(ict, "urn=", img2)
+
+		incip = string("Volume ", pg1ref.volume, " [quire ", pg1ref.quire, " page ", pg1ref.page, "](", imglink, ")")
+		explic = string("Volume ", pg1ref.volume, " [quire ", pg2ref.quire, " page ", pg2ref.page, "](", img2link, ")")
+		row = string("| *", titlecase(tripl.book), "* | ", incip, " | ", explic , " |")
+
+		
+		#str = string("1. *$(titlecase(tripl.book))*: begins on **Volume ", pg1ref.volume, " [quire `", pg1ref.quire, "` page ", pg1ref.page, "](", imglink, ")**, and ends on  **Volume ", pg2ref.volume, " [quire `", pg2ref.quire, "` page ",  pg2ref.page, "](", img2link, ")**")
+		push!(lns, row)
+	end
+	join(lns, "\n")
+end
+
 # ╔═╡ 6d6b46fa-5dea-464e-8017-0634008e0386
 """Format Markdown table of contents from data file with incipit/explicit data."""
 function formatdata(datav, codexlist)
@@ -123,15 +170,17 @@ function formatdata(datav, codexlist)
 
 
 		
-		str = string("1. *$(titlecase(tripl.book))*: begins on **Volume ", pg1ref.volume, " [quire ", pg1ref.quire, " page ", pg1ref.page, "](", imglink, ")**, and ends on  **Volume ", pg2ref.volume, " [quire ", pg2ref.quire, " page ",  pg2ref.page, "](", img2link, ")**")
-		#str = string("- ", tripl.incipit, " ", markdownImage())
+		str = string("1. *$(titlecase(tripl.book))*: begins on **Volume ", pg1ref.volume, " [quire `", pg1ref.quire, "` page ", pg1ref.page, "](", imglink, ")**, and ends on  **Volume ", pg2ref.volume, " [quire `", pg2ref.quire, "` page ",  pg2ref.page, "](", img2link, ")**")
 		push!(lns, str)
 	end
 	join(lns, "\n")
 end
 
-# ╔═╡ ca3adb90-febd-48c4-9cc9-2fc13ec513b7
-formatdata(data, codices) |> Markdown.parse
+# ╔═╡ ddfa8851-08d9-41e9-8bb2-13272219468e
+tocresults = outputformat == "table" ? formattable(data, codices) : formatdata(data, codices) 
+
+# ╔═╡ 06d34948-2e6b-4a53-aa77-042c918e9231
+tocresults |> Markdown.parse
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1683,7 +1732,8 @@ version = "17.4.0+2"
 # ╟─f10a6a20-231c-4bda-91c2-2ac521db23c6
 # ╟─0d447c76-dcb4-4618-9b0d-eb7059d5a46c
 # ╟─edadadf2-b96c-11ef-39ab-d183cfa102d0
-# ╟─ca3adb90-febd-48c4-9cc9-2fc13ec513b7
+# ╟─cc31f3c5-d8cf-4d48-a2b0-2d37c79bfddd
+# ╟─06d34948-2e6b-4a53-aa77-042c918e9231
 # ╟─fa7860d1-8642-4346-96e6-0fe81f46e4f6
 # ╟─5c948883-775a-4210-8278-55352daf1c22
 # ╟─f71ed54d-aceb-4018-989c-01649e583433
@@ -1696,8 +1746,10 @@ version = "17.4.0+2"
 # ╟─2447f62f-9d88-454f-b09a-2d71463a1be3
 # ╟─3256fd7e-6661-4344-a580-7b38a6ef49dd
 # ╟─32e014df-a664-435c-b578-883d54d42d2c
+# ╠═451c83f8-4c8f-4be1-a8ab-5ffe0753c9de
 # ╟─6d6b46fa-5dea-464e-8017-0634008e0386
 # ╟─c020d481-f6d5-4663-8a61-5e6e80aace3f
+# ╟─ddfa8851-08d9-41e9-8bb2-13272219468e
 # ╟─6c8eb91d-bf69-4511-af32-2606ac26c014
 # ╟─a33a7827-c7e0-4dbd-84d7-cb635aae7d0e
 # ╟─766cd182-d225-4993-a216-bff988b1298c
