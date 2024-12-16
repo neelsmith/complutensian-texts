@@ -1,26 +1,15 @@
-using CitableText
+# codexmodels.jl
+#
+# Model the 6 volumes of the Complutensian Bible, and write
+# the data for each model in a subdirectory named `codex`. 
+# Format the data in delimited text files following the Codex model
+# of the Julia CitablePhysicalText package.
+#
+# PREREQUISITES:
+#
+# Execute this from the root directory of the complutensian-texts github repository, 
+# or change the value of `repo` to point there:
 repo = pwd()
-
-# Read data for incipits some other time...
-#=
-f = joinpath(repo, "data", "incipits.cex")
-
-datalines = filter(ln -> !isempty(ln), readlines(f)[2:end])
-data = map(datalines) do ln
-	(passage, page, image) = split(ln, "|")
-	(passage = passage, page = page, image = image)
-end
-
-
-
-incipits = map(data) do trip
-    #@info(trip)
-	ref = split(trip.page, ":")[5]
-	(vol, quire, page) = split(ref, "_")
-	(passage = CtsUrn(trip.passage), quire = quire, page = page)
-end
-=#
-
 
 """Compose declaration of CEX model for a Codex."""
 function preface(collurnstring, title)
@@ -562,7 +551,7 @@ end
 ##################### VOLUME 6 ###########################
 
 #=
-In Huntington:
+Huntington copy:
 
 √ 1. title page with address to reader on verso
 √ 2. hebrew vocab in quires `A` - `FF`, final quire `FF` containing 4 pages with rectos numbered (binion). Colophon to this quire dates it to 17 March, 1515.
@@ -658,5 +647,3 @@ open(v6modelfile,"w") do io
 	write(io, v6model)
 end
 
-
-v2prs  = volume2pairs()
