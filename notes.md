@@ -43,19 +43,4 @@ urn:cts:ancJewLit:hebBible:
 Genesis:
 urn:cts:ancJewLit:hebBible.genesis:
 
-## For indexing books of Bible
 
-In vol. 4, pages 397-496, books begin on these images of BNE digital browser:
-
-- Jonah 1922
-- Micah 1926
-- Nahum 1934
-- Habakkuk 1937
-- Zephaniah 1941
-- Haggai 1946
-- Zacchariah 1949
-- Malachi 1967
-- 1 Maccabees 1973
-- 2 Maccabees 2014
-- 3 Maccabees 2043
-- List of all books at end: 2051
