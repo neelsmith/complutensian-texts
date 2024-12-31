@@ -4974,6 +4974,82 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
 
         </div>
 
+        <div n="41">
+        <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="41" type="ordinal">41.</num></ab>
+
+          <ab n="1">
+          Et factum est post duos annos: et <persName>pharao</persName> somniauit: et ecce stabat super flumen. 
+          </ab>
+
+          <ab n="2">
+          Et ecce de flumine ascendebant septem boues pulchre visu et pingues carnibus: et pascebantur in prato. 
+          </ab>
+
+          <ab n="3">
+          Et ecce septem boues alie ascendebant post eas de flumine deformes aspectu et macilente carnibus: et stabant contra boues in ripa fluminis. 
+          </ab>
+
+          <ab n="4">
+          Comedebantque boues deformes visu et macilente carnibus: septem alias boues pulchras visu et pingues: et expergefactus est <persName>pharao</persName>.
+          </ab>
+
+          <ab n="5">
+          Et obdormiuit: et somniauit iterum. Et ecce septem spice pullulabant in culmo vno pingues et optime. 
+          </ab>
+
+          <ab n="6">
+          Et ecce septem  spice concusse et percusse <unclear>vredine</unclear> oriebantur post eas: 
+          </ab>
+
+          <ab n="7">
+          et deuorabant spice concusse septem spicas pingues et plenas. Et expergefactus est <persName>pharao</persName>: et ecce somnium. 
+          </ab>
+
+          <ab n="8">
+          Et facto mane conturbatus est spiritus eius: et misit: et vocauit <choice><abbr>oes</abbr><expan>omnes</expan></choice> magistros <persName>egypti</persName> et <choice><abbr>oes</abbr><expan>omnes</expan></choice> sapientes eius: et narrauit eis <persName>pharao</persName> somnium suum: et non erat <choice><abbr>q</abbr><expan>qui</expan></choice> <choice><abbr>interptaretur</abbr><expan>interpretaretur</expan></choice> illud <persName>pharaoni</persName>. 
+          </ab>
+
+          <ab n="9">
+          Et locutus est <choice><abbr>pnceps</abbr><expan>princeps</expan></choice> pincernarum <persName>pharaoni</persName>: dicens. 
+          </ab>
+
+          <ab n="10">
+          <unclear>Pefi</unclear> mei ego recordor hodie. <persName>Pharao</persName> iratus est contra suos: et posuit me in custodia domus principis militum: <choice><abbr>pncipem</abbr><expan>principem</expan></choice> quoque pistorum mecum posuit. 
+          </ab>
+
+          <ab n="11">
+          Et somniauimus ego et ille in vna nocte somnium: <choice><abbr>vnusqsque</abbr><expan>vnusquisque</expan></choice> iuxta interpretationem somnii sui somniauimus. 
+          </ab>
+
+          <ab n="12">
+          Eratque ibi nobiscum puer <persName>hebreus</persName> suus <choice><abbr>pncipis</abbr><expan>principis</expan></choice> militum: et narrauimus ei somnia: et <choice><abbr>interptatus</abbr><expan>interpretatus</expan></choice> est nobis: iuxta <choice><abbr>interptationem</abbr><expan>interpretationem</expan></choice> vnius cuiusque somnii <choice><abbr>iterptatus</abbr><expan>interpretatus</expan></choice> est. 
+          </ab>
+
+          <ab n="13">
+          Et factum est sicut <choice><abbr>interptatus</abbr><expan>interpretatus</expan></choice> est nobis: ita fuit. me reduxit ad ministerium meum: <choice><abbr>ipm</abbr><expan>ipsum</expan></choice> <choice><abbr>aut</abbr><expan>autem</expan></choice> suspendit. 
+          </ab>
+
+          <ab n="14">
+          Et misit <persName>pharao</persName> et vocauit <persName>ioseph</persName> et fecerunt eum festinanter exire de carcere: et attonsus est: et mutauit vestimenta sua: et ingressus est ad <persName>pharaonem</persName>. 
+          </ab>
+
+          <ab n="15">
+          Dixitque <persName>pharao</persName> ad <persName>ioseph</persName>. Somnium somniaui et non est <choice><abbr>q</abbr><expan>qui</expan></choice> <choice><abbr>interptaris</abbr><expan>interpretaris</expan></choice> illud. 
+          </ab>
+
+          <ab n="16">
+          <choice><abbr>Rnditque</abbr><expan>Responditque</expan></choice> <persName>ioseph</persName> <persName>pharaoni</persName> dicens. Non ex sapina mea <unclear>sm</unclear> a facie <choice><abbr>dni</abbr><expan>domini</expan></choice> <choice><abbr>rndebitur</abbr><expan>respondebitur</expan></choice> pax <persName>pharaoni</persName>. 
+          </ab>
+
+          <ab n="17">
+          Locutusque est <persName>pharao</persName> cum <persName>ioseph</persName>: dicens. In somnio meo ecce ego stabat super ripam fluminis: 
+          </ab>
+
+          <ab n="18">
+          et ecce de flumine ascendebant septem boues pulchre et pingues carne et formose aspectu: et pascebantur
+          </ab>
+        </div>
+
     </body>
     </text>
 </TEI>

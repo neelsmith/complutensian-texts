@@ -5017,7 +5017,82 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
         et non recordatus est princeps pincernarum <persName>ioseph</persName>: sed oblitus est eius. 
         </ab>
 
+        </div>
 
+        <div n="41">
+          <ab n="title"> <choice><abbr>Ca.</abbr><expan>Capitulum</expan></choice> <num value="41" type="ordinal">41.</num></ab>
+
+          <ab n="1">
+          FActum est <choice><abbr>at</abbr><expan>autem</expan></choice> post duos annos dierum: <persName>pharao</persName> vidit somnium. existimabat stare super flumen: 
+          </ab>
+
+          <ab n="2">
+          et ecce <choice><abbr>qsi</abbr><expan>quasi</expan></choice> ex flumine ascendebant septem boues: pulchre facie: et electe carnibus: et pascebantur in achi. 
+          </ab>
+
+          <ab n="3">
+          alie <choice><abbr>at</abbr><expan>autem</expan></choice> boues septem ascendebant post <choice><abbr>ipas</abbr><expan>ipsas</expan></choice> de flumine: turpes facie: et graciles carnibus: et pascebantur apud boues: apud labium fluminis. 
+          </ab>
+
+          <ab n="4">
+          et deuorarunt septem boues turpes et grailes carnibus: septem boues pulchras facie et electas. excitatus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>pharao</persName>: 
+          </ab>
+
+          <ab n="5">
+          et somniauit <choice><abbr>scdo</abbr><expan>secundo</expan></choice>. et ecce septem spice ascendebant in propagine vna electe et pulchre: 
+          </ab>
+
+          <ab n="6">
+          et ecce septem spice tenues et <unclear>avento</unclear> corrupte oriebantur post eas: 
+          </ab>
+
+          <ab n="7">
+          et deuorabant septem spice tenues et avento corrupte: septem spicas electas et plenas. excitatus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>pharao</persName>: et erat somnium. 
+          </ab>
+
+          <ab n="8">
+          factum est <choice><abbr>at</abbr><expan>autem</expan></choice> mane: et conturbata est anima eius. et mittens: vocauit <choice><abbr>oes</abbr><expan>omnes</expan></choice> expositores <persName>egypti</persName>: et <choice><abbr>oes</abbr><expan>omnes</expan></choice> sapientes eius: et narrauit eis <persName>pharao</persName> somnium suum: et non erat indicans illud <persName>pharaoni</persName>. 
+          </ab>
+
+          <ab n="9">
+          et locutus est <choice><abbr>pnceps</abbr><expan>princeps</expan></choice> pincernarum ad <persName>pharaonem</persName>: dicens: <choice><abbr>pctm</abbr><expan>peccatum</expan></choice> meum recordor hodie: 
+          </ab>
+
+          <ab n="10">
+          <persName>pharao</persName> iratus fuit seruis suis: et posuit nos in custodia: in domo <choice><abbr>pncipis</abbr><expan>principis</expan></choice> coquorum: me <unclear>qm</unclear> et <choice><abbr>pncipem</abbr><expan>principem</expan></choice> pistorum. 
+          </ab>
+
+          <ab n="11">
+          et vidimus somnium in nocte vna ego que et <choice><abbr>ipe</abbr><expan>ipse</expan></choice>: <choice><abbr>vnsqsque</abbr><expan>vnusquisque</expan></choice> <choice><abbr>sm</abbr><expan>secundum</expan></choice> suum somnium vidimus. 
+          </ab>
+
+          <ab n="12">
+          erat <choice><abbr>at</abbr><expan>autem</expan></choice> ibi nobiscum iuuenis serus <persName>hebreus</persName> <choice><abbr>pncipis</abbr><expan>principis</expan></choice> coquorum: et narrauimus ei: et coniectauit nobis. 
+          </ab>
+
+          <ab n="13">
+          factum est <choice><abbr>at</abbr><expan>autem</expan></choice>: sicut coniectauit nobis: sic et accidit: me que restitui ad <choice><abbr>pncipatum</abbr><expan>principatum</expan></choice> meum: illum <choice><abbr>at</abbr><expan>autem</expan></choice> suspendi. 
+          </ab>
+
+          <ab n="14">
+          mittens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>pharao</persName>: vocauit <persName>ioseph</persName>. et eduxerunt eum ex munitione: et totomderunt eum: et mutauerunt vestimentum eius. et venit ad <persName>pharaonem</persName>. 
+          </ab>
+
+          <ab n="15">
+          dixit <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>pharao</persName> <persName>ioseph</persName>: somnium vidi: et coniectans non est illud. ego <choice><abbr>at</abbr><expan>autem</expan></choice> audiui de te dicentes: audientem te somnia: coniectare ea. 
+          </ab>
+
+          <ab n="16">
+          respondens <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>ioseph</persName>: dixit <persName>pharaoni</persName>: sine deo non respondebitur salutare <persName>pharaoni</persName>. 
+          </ab>
+
+          <ab n="17">
+          locutus est <choice><abbr>at</abbr><expan>autem</expan></choice> <persName>pharao</persName> <persName>ioseph</persName>: dicens: in somnio meo putabam stare iuxta labium fluminis: 
+          </ab>
+
+          <ab n="18">
+          et <choice><abbr>qsi</abbr><expan>quasi</expan></choice> ex flumine ascendebant septem boues electe carnibus: et pulchre facie: et pascebantur
+          </ab>
 
 
         </div>
