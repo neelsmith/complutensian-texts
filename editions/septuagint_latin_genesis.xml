@@ -5091,8 +5091,49 @@ schematypens="http://relaxng.org/ns/structure/1.0" type="application/xml"?>
           </ab>
 
           <ab n="18">
-          et <choice><abbr>qsi</abbr><expan>quasi</expan></choice> ex flumine ascendebant septem boues electe carnibus: et pulchre facie: et pascebantur
+          et <choice><abbr>qsi</abbr><expan>quasi</expan></choice> ex flumine ascendebant septem boues electe carnibus: et pulchre facie: et pascebantur in achi. 
           </ab>
+
+          <ab n="19">
+          et ecce septem boues alie ascendebant post eas ex flumine: male et deformes aspecturet graciles carnibus: <choice><abbr>qles</abbr><expan>quales</expan></choice> non vidi tales in <choice><abbr>oi</abbr><expan>omni</expan></choice> terra <placeName>egypti</placeName> turpiores. 
+          </ab>
+
+          <ab n="20">
+          et deuorauerunt septem boues graciles et turpes septem boues <choice><abbr>pmas</abbr><expan>primas</expan></choice> pulchras et electas: 
+          </ab>
+
+          <ab n="21">
+          et ingresse sunt in ventres earum. et aspectus earum deformes: sicut et <choice><abbr>pus</abbr><expan>primus</expan></choice>. suscitatus <choice><abbr>at</abbr><expan>autem</expan></choice>: dormiui.
+          </ab>
+
+          <ab n="22">
+          et vidi rursus in somno meo: et <choice><abbr>qsi</abbr><expan>quasi</expan></choice> septem spice ascendebant in propagine vna plene et pulchre: 
+          </ab>
+
+          <ab n="23">
+          alie <choice><abbr>at</abbr><expan>autem</expan></choice> septem spice tenues et a vento corrupte pullulabant: vicine earum: 
+          </ab>
+
+          <ab n="24">
+          et deuorauerunt septem spice tenues et a vento corrupte septem spicas pulchras et plenas. dixi ergo expositoribus: non fuit indicans mihi illud. 
+          </ab>
+
+          <ab n="25">
+          et dixit <persName>ioseph</persName> <persName>pharaoni</persName>: somnium <persName>pharaonis</persName> vnum est. <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> deus facit: <unclear><choice><abbr>ondit</abbr><expan>ostendit</expan></choice></unclear> <persName>pharaoni</persName>. 
+          </ab>
+
+          <ab n="26">
+          septem boues pulchre: septem anni sunt. et septem spice pulchre: septem anni sunt. somnium <persName>pharaonis</persName> vnum est. 
+          </ab>
+
+          <ab n="27">
+          et septem boues tenues ascendentes post eas: septem anni sunt. et septem spice tenues et avento corrupte: septem anni sunt. erunt septem anni famis. 
+          </ab>
+
+          <ab n="28">
+          at verbum quod dixi <persName>pharaoni</persName>: <choice><abbr>qcumque</abbr><expan>quicumque</expan></choice> deus
+          </ab>
+
 
 
         </div>
