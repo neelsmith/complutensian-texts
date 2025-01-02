@@ -1,0 +1,84 @@
+---
+engine: julia
+format: 
+    revealjs:
+        output-file: "multiformat-slides.html"
+        theme: [default]
+    typst: default
+    docx: default
+    html: default
+---
+
+
+# Live work in Quarto
+
+> **Problem**: Find the order of books in the *Vulgate*
+
+
+1. compose a Markdown document
+2. use Quarto to generate output in multiple formats
+3. (optional: specify output formats in YAML header)
+
+## Include libraries we'll need
+
+```{julia}
+#| echo: true
+using CitableBase, CitableCorpus, CitableText
+```
+
+
+## Download a corpus
+
+```{julia}
+#| echo: true
+corpusurl = "https://github.com/neelsmith/compnov/raw/refs/heads/main/corpus/compnov.cex"
+corpus = fromcex(corpusurl, CitableTextCorpus, UrlReader)
+```
+
+
+## Extract Latin Vulgate from corpus
+
+
+```{julia}
+#| echo: true
+vulgate = filter(p -> endswith(workcomponent(p.urn), "vulgate"), corpus.passages) |> CitableTextCorpus
+```
+
+
+
+## Find the book part of the URN reference
+
+- a sample passage:
+
+```{julia}
+#| echo: true
+passage1 = vulgate.passages[1]
+```
+
+- here's its URN component:
+
+```{julia}
+#| echo: true
+passage1.urn
+```
+
+- here's the book-level (work) part of the ID:
+
+```{julia}
+#| echo: true
+workid(passage1.urn)
+```
+
+
+
+## Find the list of unique book references
+
+
+
+```{julia}
+#| echo: true
+
+books = map(vulgate.passages) do passage
+    workid(passage.urn)
+end |> unique
+```
