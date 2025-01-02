@@ -1,0 +1,30 @@
+---
+engine: julia
+format: 
+    revealjs: default        
+    html:
+        output-file: "wizard-webpage.html"
+    typst: default
+    odt: default    
+    docx: default
+---
+
+
+
+# Live work in Quarto
+
+> **Problem**: Find the order of books in the *Vulgate*
+
+**Solution**:
+
+```{julia}
+#| echo: false
+using CitableBase, CitableCorpus, CitableText
+corpusurl = "https://github.com/neelsmith/compnov/raw/refs/heads/main/corpus/compnov.cex"
+corpus = fromcex(corpusurl, CitableTextCorpus, UrlReader)
+
+vulgate = filter(p -> endswith(workcomponent(p.urn), "vulgate"), corpus.passages) |> CitableTextCorpus
+books = map(vulgate.passages) do passage
+    workid(passage.urn)
+end |> unique
+```

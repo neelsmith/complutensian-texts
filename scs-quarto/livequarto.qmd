@@ -1,12 +1,13 @@
 ---
 engine: julia
 format: 
-    revealjs:
-        output-file: "multiformat-slides.html"
-        theme: [default]
+    revealjs: default        
+    html:
+        output-file: "livequarto-webpage.html"
     typst: default
+    odt: default    
     docx: default
-    html: default
+
 ---
 
 
