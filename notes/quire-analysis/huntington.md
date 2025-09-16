@@ -38,7 +38,7 @@ Notes: in vol. 4, same spacing markers used in Greek that are used in Latin in v
 ## Volume 5
 
 - quarternion: title page folowed by introductory material; only second recto is numbered `a ii`; total of 4 bifolios, same content as Madrid
-- the Gospels in continuously  numbered quires `A` - `O` (probably all ternions)
+- the Gospels in continuously  numbered quires `A` - `Q` (probably all ternions)
 - the travels of Paul in a single ternion `α` with all rectos labelled
 - the continuation of the NT from 'R` - `MM` presumably all ternions
 - explanations of names in a single gather of 10 bifolios, rectos `a` - `a vi` identified as normal

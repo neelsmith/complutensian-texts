@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -29,10 +29,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="sequences_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="sequences_files/libs/quarto-html/anchor.min.js"></script>
 <link href="sequences_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="sequences_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="sequences_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="sequences_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="sequences_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="sequences_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="sequences_files/libs/bootstrap/bootstrap-973236bd072d72a04ee9cd82dcc9cb29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
@@ -142,13 +142,14 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="volume-6">Volume 6</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -159,6 +160,7 @@ ul.task-list li input[type="checkbox"] {
 <th>HDS</th>
 <th>Madrid</th>
 <th>Arundel</th>
+<th>Huntington</th>
 </tr>
 </thead>
 <tbody>
@@ -170,6 +172,7 @@ ul.task-list li input[type="checkbox"] {
 <td><em>Ad lectorem</em></td>
 <td></td>
 <td><em>Ad lectorem</em></td>
+<td><em>Ad lectorem</em></td>
 </tr>
 <tr class="even">
 <td>2.</td>
@@ -179,6 +182,7 @@ ul.task-list li input[type="checkbox"] {
 <td><em>vocabularium Hebraicum</em></td>
 <td></td>
 <td><em>interpretationes nominum</em></td>
+<td><em>vocabularium Hebraicum</em></td>
 </tr>
 <tr class="odd">
 <td>3.</td>
@@ -188,6 +192,7 @@ ul.task-list li input[type="checkbox"] {
 <td><em>Introductiones artis grammatice hebraice</em></td>
 <td></td>
 <td><em>Nomina</em></td>
+<td><em>Introductiones artis grammatice hebraice</em></td>
 </tr>
 <tr class="even">
 <td>4.</td>
@@ -196,6 +201,7 @@ ul.task-list li input[type="checkbox"] {
 <td><em>Nomina</em></td>
 <td><em>interpretationes nominum</em></td>
 <td></td>
+<td>index of Latin terms</td>
 <td>index of Latin terms</td>
 </tr>
 <tr class="odd">
@@ -206,6 +212,7 @@ ul.task-list li input[type="checkbox"] {
 <td><em>Nomina</em></td>
 <td></td>
 <td><em>Introductiones artis grammatice hebraice</em></td>
+<td><em>interpretationes nominum</em></td>
 </tr>
 <tr class="even">
 <td>6.</td>
@@ -215,6 +222,7 @@ ul.task-list li input[type="checkbox"] {
 <td>index of Latin terms</td>
 <td></td>
 <td><em>vocabularium Hebraicum</em></td>
+<td><em>Nomina</em></td>
 </tr>
 </tbody>
 </table>
@@ -305,8 +313,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -417,7 +423,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

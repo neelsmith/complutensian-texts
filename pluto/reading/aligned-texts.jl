@@ -1,17 +1,19 @@
 ### A Pluto.jl notebook ###
-# v0.20.0
+# v0.20.4
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
+    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
+    #! format: on
 end
 
 # ╔═╡ 403fca78-6436-48ac-961f-4b3812d79f86
@@ -35,6 +37,9 @@ end
 # ╔═╡ 5bfc5920-0d98-4a7d-8c60-fe3030981ab2
 md"""*Notebook version*: **1.0.2** *See version info*: $(@bind versioninfo CheckBox())"""
 
+# ╔═╡ ad5bcade-f250-4942-9fd3-73fe31275c60
+TableOfContents()
+
 # ╔═╡ 9cfd5713-a21b-4f98-8ece-f3cf17657818
 if versioninfo
 	md"""
@@ -57,6 +62,9 @@ html"""
 <br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/>
 """
+
+# ╔═╡ 3e74017d-16aa-4486-8f6a-d935b89a3b8f
+md"""> # Mechanics"""
 
 # ╔═╡ 947930b8-8cdb-4b69-ab7f-841f2d4f3957
 md"""> Load texts"""
@@ -216,7 +224,7 @@ PlutoUI = "~0.7.55"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.11.2"
+julia_version = "1.11.3"
 manifest_format = "2.0"
 project_hash = "142f65635c99cb8f6a77518209c2979bb075ea7e"
 
@@ -888,17 +896,19 @@ version = "17.4.0+2"
 # ╔═╡ Cell order:
 # ╟─403fca78-6436-48ac-961f-4b3812d79f86
 # ╟─5bfc5920-0d98-4a7d-8c60-fe3030981ab2
+# ╟─ad5bcade-f250-4942-9fd3-73fe31275c60
 # ╟─9cfd5713-a21b-4f98-8ece-f3cf17657818
 # ╟─06b9ba91-49b4-4793-9ad0-96fb3b1ba5be
 # ╟─fbe09532-ccd0-11ee-3ed7-2bb05352d2c3
 # ╟─cfa5898e-7cd3-4158-ae02-41f734cd6927
 # ╟─a80a4bc5-8ef3-4b8b-88d7-7ad4214826d9
 # ╟─865eff3a-b44e-428c-a439-00b387e5f442
-# ╟─2f3f28c1-80b0-41db-a645-7c82454ff608
+# ╠═2f3f28c1-80b0-41db-a645-7c82454ff608
 # ╟─c7f731c0-2e5d-4a28-a480-e37be59cb74e
 # ╠═1a28f9ec-361b-4f88-a15a-a2fd051c19b2
+# ╟─3e74017d-16aa-4486-8f6a-d935b89a3b8f
 # ╟─947930b8-8cdb-4b69-ab7f-841f2d4f3957
-# ╟─bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
+# ╠═bfd218c4-b8a1-41e6-bbbe-184f2035d3ce
 # ╟─6802262c-d391-4bea-aa11-7a31925d547b
 # ╟─9b1112b5-d2d4-4ad2-acc8-f5308c2f1b8d
 # ╟─834b2e1f-e262-46aa-87b0-4daa5370cad3
