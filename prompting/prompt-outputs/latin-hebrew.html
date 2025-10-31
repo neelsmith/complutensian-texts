@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parallel Texts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .text-container {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        /* Hebrew text specific styles (Right-to-Left) */
+        .hebrew-text {
+            direction: rtl;
+            text-align: right;
+            font-size: 1.2em;
+            line-height: 1.8;
+            background-color: #f0f0ff;
+        }
+
+        /* Latin text specific styles (Left-to-Right) */
+        .latin-text {
+            direction: ltr;
+            text-align: left;
+            font-size: 1.1em;
+            line-height: 1.8;
+            background-color: #fff0f0;
+        }
+
+        /* Styling for individual words */
+        .hebrew-word, .latin-word {
+            display: inline-block;
+            cursor: pointer;
+            padding: 2px 4px;
+            margin: 0 1px;
+            border-radius: 3px;
+        }
+
+        /* Highlight style (Requires JavaScript for cross-paragraph linking) */
+        .highlight {
+            background-color: #ffff99;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        /* Unmarked Latin words (no interaction) */
+        .unmarked {
+             padding: 2px 4px;
+             margin: 0 1px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="text-container hebrew-text">
+    <span class="hebrew-word" data-pair="1a">תֶּרֶךְ</span>
+    <span class="hebrew-word" data-pair="2b">הַמֶּלֶךְ</span>
+    <span class="hebrew-word" data-pair="3c">מְהוּמָה</span>
+    <span class="hebrew-word" data-pair="4d">כִּי</span>
+    <span class="hebrew-word" data-pair="5e">עָלֶיהָ</span>
+    <span class="hebrew-word" data-pair="6f">חֵמָה</span>
+    <span class="hebrew-word" data-pair="7g">יְהוָה</span>
+    <span class="hebrew-word" data-pair="8h">בְּכָל</span>
+    <span class="hebrew-word" data-pair="9i">הַגּוֹיִם</span>
+    <span class="hebrew-word" data-pair="10j">מְהוּמָה</span>
+    <span class="hebrew-word" data-pair="11k">תְחֻרַם</span>
+    <span class="hebrew-word" data-pair="12l">כָּל</span>
+    <span class="hebrew-word" data-pair="13m">צְבָאָם</span>
+    <span class="hebrew-word" data-pair="14n">תַּמֵּס</span>
+    <span class="hebrew-word" data-pair="15o">בָּם</span>
+    <span class="hebrew-word" data-pair="16p">כָּל</span>
+    <span class="hebrew-word" data-pair="17q">הַשָּׁמָיִם</span>
+    <span class="hebrew-word" data-pair="18r">נָמַקּוּ</span>
+    <span class="hebrew-word" data-pair="19s">וְנָגַלּוּ</span>
+    <span class="hebrew-word" data-pair="20t">כַסֵּפֶר</span>
+    <span class="hebrew-word" data-pair="21u">הַשָּׁמָיִם</span>
+    <span class="hebrew-word" data-pair="22v">כַעֲנַבְּלֶת</span>
+    <span class="hebrew-word" data-pair="23w">גֶּפֶן</span>
+    <span class="hebrew-word" data-pair="24x">וּכְנֹבֶלֶת</span>
+    <span class="hebrew-word" data-pair="25y">מִתְאֵנָה</span>
+    <span class="hebrew-word" data-pair="26z">כֵּן</span>
+    <span class="hebrew-word" data-pair="27a">תְּבַל</span>
+    <span class="hebrew-word" data-pair="28b">כָּל</span>
+    <span class="hebrew-word" data-pair="29c">צְבָאָם</span>
+    <span class="hebrew-word" data-pair="30d">וְהָיְתָה</span>
+    <span class="hebrew-word" data-pair="31e">בַּשָּׁמַיִם</span>
+    <span class="hebrew-word" data-pair="32f">כִּי</span>
+    <span class="hebrew-word" data-pair="33g">וּרְדָה</span>
+    <span class="hebrew-word" data-pair="34h">לְאֵדוֹם</span>
+    <span class="hebrew-word" data-pair="35i">עַל</span>
+    <span class="hebrew-word" data-pair="36j">עַם</span>
+    <span class="hebrew-word" data-pair="37k">חֶרְמִי</span>
+    <span class="hebrew-word" data-pair="38l">לְמִשְׁפָּט</span>
+    <span class="hebrew-word" data-pair="39m">וְחָרְבִּי</span>
+    <span class="hebrew-word" data-pair="40n">מָלְאָה</span>
+    <span class="hebrew-word" data-pair="41o">דָם</span>
+    <span class="hebrew-word" data-pair="42p">מִדָּם</span>
+    <span class="hebrew-word" data-pair="43q">כָּרִים</span>
+    <span class="hebrew-word" data-pair="44r">וְעַתּוּדִים</span>
+    <span class="hebrew-word" data-pair="45s">וְחֵלֶב</span>
+    <span class="hebrew-word" data-pair="46t">כִּלְיּוֹת</span>
+    <span class="hebrew-word" data-pair="47u">אֵילִים</span>
+    <span class="hebrew-word" data-pair="48v">כִּי</span>
+    <span class="hebrew-word" data-pair="49w">כִּי</span>
+    <span class="hebrew-word" data-pair="50x">הוּא</span>
+    <span class="hebrew-word" data-pair="51y">זֶבַח</span>
+    <span class="hebrew-word" data-pair="52z">לַיהוָה</span>
+    <span class="hebrew-word" data-pair="53a">וְטָמְאָה</span>
+    <span class="hebrew-word" data-pair="54b">כָל</span>
+    <span class="hebrew-word" data-pair="55c">הָאָרֶץ</span>
+    <span class="hebrew-word" data-pair="56d">וּבָאוּ</span>
+    <span class="hebrew-word" data-pair="57e">וְרֵעֵם</span>
+    <span class="hebrew-word" data-pair="58f">הַיְאֹרִים</span>
+    <span class="hebrew-word" data-pair="59g">וְשָׁקְעָה</span>
+    <span class="hebrew-word" data-pair="60h">אַרְצָה</span>
+    <span class="hebrew-word" data-pair="61i">לָעַד</span>
+    <span class="hebrew-word" data-pair="62j">לְנֵצַח</span>
+</div>
+
+<div class="text-container latin-text">
+    <span class="unmarked">Editio</span>
+    <span class="unmarked">B.</span>
+    <span class="unmarked">Minteri.</span>
+    <span class="unmarked">Damra</span>
+    <span class="unmarked">patris</span>
+    <span class="unmarked">filio</span>
+    <span class="unmarked">fuo</span>
+    <span class="unmarked">conuerti</span>
+    <span class="unmarked">quidus</span>
+    <span class="unmarked">fideritis</span>
+    <span class="unmarked">terra</span>
+    <span class="unmarked">Anne</span>
+    <span class="latin-word" data-pair="1a">defecto</span>
+    <span class="latin-word" data-pair="2b">militaris</span>
+    <span class="latin-word" data-pair="3c">terror</span>
+    <span class="latin-word" data-pair="4d">quia</span>
+    <span class="latin-word" data-pair="5e">super</span>
+    <span class="latin-word" data-pair="6f">indignatio</span>
+    <span class="latin-word" data-pair="7g">Dei</span>
+    <span class="latin-word" data-pair="8h">super</span>
+    <span class="latin-word" data-pair="9i">gentes</span>
+    <span class="latin-word" data-pair="10j">terrore</span>
+    <span class="latin-word" data-pair="11k">perdita</span>
+    <span class="latin-word" data-pair="12l">omnis</span>
+    <span class="latin-word" data-pair="13m">exercitus</span>
+    <span class="latin-word" data-pair="14n">minuetur</span>
+    <span class="latin-word" data-pair="15o">ab</span>
+    <span class="latin-word" data-pair="16p">omnes</span>
+    <span class="latin-word" data-pair="17q">stellae</span>
+    <span class="latin-word" data-pair="18r">caeli</span>
+    <span class="latin-word" data-pair="19s">dissoluti</span>
+    <span class="latin-word" data-pair="20t">ac</span>
+    <span class="latin-word" data-pair="21u">liber</span>
+    <span class="latin-word" data-pair="22v">sicut</span>
+    <span class="latin-word" data-pair="23w">folia</span>
+    <span class="latin-word" data-pair="24x">de</span>
+    <span class="latin-word" data-pair="25y">vite</span>
+    <span class="latin-word" data-pair="26z">ut</span>
+    <span class="latin-word" data-pair="27a">folia</span>
+    <span class="latin-word" data-pair="28b">ficuum</span>
+    <span class="latin-word" data-pair="29c">ita</span>
+    <span class="latin-word" data-pair="30d">exercitus</span>
+    <span class="latin-word" data-pair="31e">concidet</span>
+    <span class="latin-word" data-pair="32f">quum</span>
+    <span class="latin-word" data-pair="33g">caelis</span>
+    <span class="latin-word" data-pair="34h">apparebit</span>
+    <span class="latin-word" data-pair="35i">super</span>
+    <span class="latin-word" data-pair="36j">idumeam</span>
+    <span class="latin-word" data-pair="37k">populus</span>
+    <span class="latin-word" data-pair="38l">meus</span>
+    <span class="latin-word" data-pair="39m">ut</span>
+    <span class="latin-word" data-pair="40n">proferam</span>
+    <span class="latin-word" data-pair="41o">iudicium</span>
+    <span class="latin-word" data-pair="42p">gladius</span>
+    <span class="latin-word" data-pair="43q">plenus</span>
+    <span class="latin-word" data-pair="44r">sanguine</span>
+    <span class="latin-word" data-pair="45s">ex</span>
+    <span class="latin-word" data-pair="46t">sanguine</span>
+    <span class="latin-word" data-pair="47u">ovium</span>
+    <span class="latin-word" data-pair="48v">hircorum</span>
+    <span class="latin-word" data-pair="49w">adeps</span>
+    <span class="latin-word" data-pair="50x">renum</span>
+    <span class="latin-word" data-pair="51y">arietum</span>
+    <span class="latin-word" data-pair="52z">quia</span>
+    <span class="latin-word" data-pair="53a">quia</span>
+    <span class="latin-word" data-pair="54b">est</span>
+    <span class="latin-word" data-pair="55c">sacrificium</span>
+    <span class="latin-word" data-pair="56d">domino</span>
+    <span class="latin-word" data-pair="57e">polluta</span>
+    <span class="latin-word" data-pair="58f">est</span>
+    <span class="latin-word" data-pair="59g">omnis</span>
+    <span class="latin-word" data-pair="60h">terra</span>
+    <span class="latin-word" data-pair="61i">fluviis</span>
+    <span class="latin-word" data-pair="62j">et</span>
+</div>
+
+<script>
+    // NOTE: This JavaScript section is included to fulfill the dynamic highlighting requirement,
+    // as it cannot be achieved reliably across separate paragraph elements using pure CSS.
+    document.addEventListener('DOMContentLoaded', () => {
+        const hebrewWords = document.querySelectorAll('.hebrew-word');
+        const latinWords = document.querySelectorAll('.latin-word');
+
+        // Function to handle hover events
+        const handleHover = (targetWord, isHovering) => {
+            const pairId = targetWord.getAttribute('data-pair');
+            if (pairId) {
+                // Find the corresponding word in the other language
+                let correspondingWord;
+                if (targetWord.classList.contains('hebrew-word')) {
+                    correspondingWord = document.querySelector(`.latin-word[data-pair="${pairId}"]`);
+                } else {
+                    correspondingWord = document.querySelector(`.hebrew-word[data-pair="${pairId}"]`);
+                }
+
+                if (correspondingWord) {
+                    if (isHovering) {
+                        targetWord.classList.add('highlight');
+                        correspondingWord.classList.add('highlight');
+                    } else {
+                        targetWord.classList.remove('highlight');
+                        correspondingWord.classList.remove('highlight');
+                    }
+                }
+            }
+        };
+
+        // Attach event listeners to all Hebrew and Latin words
+        [...hebrewWords, ...latinWords].forEach(word => {
+            word.addEventListener('mouseenter', () => handleHover(word, true));
+            word.addEventListener('mouseleave', () => handleHover(word, false));
+        });
+    });
+</script>
+
+</body>
+</html>

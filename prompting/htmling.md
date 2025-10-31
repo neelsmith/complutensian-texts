@@ -1,0 +1,1 @@
+Now present the Hebrew and the Latin texts as continuous paragraphs in HTML + CSS. When the reader hovers above a Hebrew term, the corresponding term in the Latin text should be highlighted.
