@@ -1,17 +1,19 @@
 ### A Pluto.jl notebook ###
-# v0.19.47
+# v0.20.20
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    quote
+    #! format: off
+    return quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
+    #! format: on
 end
 
 # ╔═╡ 6cd35fe4-32f3-11ef-23a7-25b03dbd4a6a
@@ -20,9 +22,6 @@ begin
 	using Pkg
 	Pkg.add(url = "https://github.com/neelsmith/Complutensian.jl")
 	using Complutensian
-
-	#Pkg.add("Kanones")
-	#using Kanones
 
 	Pkg.add("CitableText")
 	using CitableText
@@ -33,6 +32,11 @@ begin
 	
 	Pkg.add("PlutoUI")
 	using PlutoUI
+
+	Pkg.add("CSV")
+	using CSV
+	Pkg.add("TypedTables")
+	using TypedTables
 
 	md"""*To see Julia environment, unhide this cell.*"""
 end
@@ -82,10 +86,6 @@ css = html"""
 # ╔═╡ b7cb6ead-9d89-4532-a5e5-bddaecef8338
 md"""> ## Data"""
 
-# ╔═╡ 9988e7cd-7d52-43ea-8bbc-4237a56a002e
-verbdataraw = loadverbdata()
-
-
 # ╔═╡ d26fff15-871c-424b-bc68-3df2cf48752a
 md"""Tweak skip list:"""
 
@@ -106,35 +106,6 @@ fero = "ls.n17964"
 
 # ╔═╡ 50b2ada9-5bae-4fb7-993f-3228d27f5ccb
 skips = [Complutensian.SUM, dico, eo, facio, fero]
-
-# ╔═╡ 121f116d-79dd-4b5e-a3c5-debb7187065c
-verbdata = filter(v -> (v.lexeme in skips) == false, verbdataraw)
-
-# ╔═╡ 195b55f6-21e5-4a85-a2eb-40e95801dcc5
-length(verbdata)
-
-# ╔═╡ 0f533e23-757a-4882-8f8a-2ce16fee2b11
-labels = loadlabels()
-
-# ╔═╡ e8cffc02-fe2b-40bc-a446-38eda5a79657
- allverbs = verblist(verbdata)
-
-# ╔═╡ a09b12f6-1957-414b-b542-e6df7782ded3
-length(allverbs)
-
-# ╔═╡ 30e16882-caac-406c-a50e-f05c981f7ead
-lsjverbs = filter(v -> startswith(v, "lsj"), allverbs)
-
-# ╔═╡ 629286fc-323c-4412-83db-0979c503a716
-latverbs = filter(v -> ! startswith(v, "lsj"), allverbs)
-
-# ╔═╡ e29fa791-8f01-43e8-8d2c-5673f7abe4fb
-verbsmenu =  map(latverbs) do v
-	Pair(v, labellex(v; labelsdict = labels))
-end
-
-# ╔═╡ 07969ca0-7ec5-43d8-99b9-4d86dceb396c
-eo in allverbs
 
 # ╔═╡ c319c43c-ac4f-443c-9640-8018d68072fa
 md"""### Labelling"""
@@ -171,9 +142,83 @@ function labelgreek(vb; labels = lsjlabels)
 	end
 end
 
+# ╔═╡ cb71136e-4842-4935-8e6c-172e0574c4d1
+repo = pwd() |> dirname |> dirname
+
+
+# ╔═╡ 3438cd88-5522-449c-89ef-bc3d704c91ba
+vlexdata = joinpath(repo, "parses", "verblexemes-current.csv")
+
+# ╔═╡ 5a96e917-2333-4a8b-af2d-55066c260e73
+labelsfile = joinpath(repo, "parses", "labels.cex")
+
+# ╔═╡ ca591f71-4c85-4420-9728-9e541853babb
+md"""## Local data"""
+
+# ╔═╡ aeea2592-f96a-48a0-bb3d-c460deae332d
+"""Get data from local copy of `verblexemes-current.csv`"""
+function verbdatalocal(f)
+    #url = "http://shot.holycross.edu/complutensian/verblexemes-current.csv"
+    dataraw = CSV.File(f) |> Table
+	baddata = misaligned(dataraw)
+	filter(r -> (r.sequence in baddata) == false, dataraw)
+end
+
+# ╔═╡ 9988e7cd-7d52-43ea-8bbc-4237a56a002e
+verbdataraw = verbdatalocal(vlexdata) #loadverbdata()
+
+
+# ╔═╡ 121f116d-79dd-4b5e-a3c5-debb7187065c
+verbdata = filter(v -> (v.lexeme in skips) == false, verbdataraw)
+
+# ╔═╡ 195b55f6-21e5-4a85-a2eb-40e95801dcc5
+length(verbdata)
+
+# ╔═╡ e8cffc02-fe2b-40bc-a446-38eda5a79657
+ allverbs = verblist(verbdata)
+
+# ╔═╡ a09b12f6-1957-414b-b542-e6df7782ded3
+length(allverbs)
+
+# ╔═╡ 30e16882-caac-406c-a50e-f05c981f7ead
+lsjverbs = filter(v -> startswith(v, "lsj"), allverbs)
+
 # ╔═╡ 35d7f0b6-8648-4a50-b230-1bd7853a9508
 greekverbsmenu =  map(lsjverbs) do v
 	Pair(v, labelgreek(v))
+end
+
+# ╔═╡ 629286fc-323c-4412-83db-0979c503a716
+latverbs = filter(v -> ! startswith(v, "lsj"), allverbs)
+
+# ╔═╡ 07969ca0-7ec5-43d8-99b9-4d86dceb396c
+eo in allverbs
+
+# ╔═╡ 4be3291e-b133-47aa-8a5e-a7579568b730
+verbdatalocal(vlexdata)
+
+# ╔═╡ 8e6a708f-3ac1-4643-8fdf-42f6be4409c1
+"""Get labels data from local copy of `labels.cex`"""
+function labelslocal(f)
+    #lblurl = "http://shot.holycross.edu/complutensian/labels.cex"
+	#tmplbls = Downloads.download(lblurl)
+	#lns = readlines(tmplbls)
+	lns = readlines(f)
+	#rm(tmplbls)
+	dict = Dict()
+	for ln in lns
+		parts = split(ln, "|")
+		dict[parts[1]] = string(parts[1], " (", parts[2], ")")
+	end
+	dict
+end
+
+# ╔═╡ 0f533e23-757a-4882-8f8a-2ce16fee2b11
+labels = labelslocal(labelsfile) # loadlabels()
+
+# ╔═╡ e29fa791-8f01-43e8-8d2c-5673f7abe4fb
+verbsmenu =  map(latverbs) do v
+	Pair(v, labellex(v; labelsdict = labels))
 end
 
 # ╔═╡ b2d023e3-a79a-4830-b276-b54525e8c0b7
@@ -259,6 +304,9 @@ end
 # ╔═╡ f61455da-0d8f-48b6-b5ab-9e14186281cf
 alignmenttab(verbchoice, verbdata)
 
+# ╔═╡ d958149f-00c3-496b-8695-ded2941e34a7
+labelslocal(labelsfile)
+
 # ╔═╡ Cell order:
 # ╟─34e2e4d6-ba9e-4652-9d1c-be7a80386978
 # ╟─6cd35fe4-32f3-11ef-23a7-25b03dbd4a6a
@@ -298,3 +346,11 @@ alignmenttab(verbchoice, verbdata)
 # ╟─380a1611-25aa-473c-b137-e6e90200ee26
 # ╟─ba3d4590-d85e-4b88-b03d-4f22837c493c
 # ╟─57499957-c9a6-4150-b9b9-56fe5d44edc7
+# ╠═cb71136e-4842-4935-8e6c-172e0574c4d1
+# ╠═3438cd88-5522-449c-89ef-bc3d704c91ba
+# ╠═4be3291e-b133-47aa-8a5e-a7579568b730
+# ╠═5a96e917-2333-4a8b-af2d-55066c260e73
+# ╠═d958149f-00c3-496b-8695-ded2941e34a7
+# ╟─ca591f71-4c85-4420-9728-9e541853babb
+# ╠═aeea2592-f96a-48a0-bb3d-c460deae332d
+# ╠═8e6a708f-3ac1-4643-8fdf-42f6be4409c1
