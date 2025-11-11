@@ -310,7 +310,7 @@ labelslocal(labelsfile)
 # ╔═╡ Cell order:
 # ╟─34e2e4d6-ba9e-4652-9d1c-be7a80386978
 # ╟─6cd35fe4-32f3-11ef-23a7-25b03dbd4a6a
-# ╟─6afc33e1-0a59-4162-b2d3-b81e52ba1192
+# ╠═6afc33e1-0a59-4162-b2d3-b81e52ba1192
 # ╟─223d76fd-5f1d-46f4-954d-c3d2c526d947
 # ╟─175c5696-a2eb-4117-8c8c-d99ade8afe45
 # ╟─ee7b33a1-e02c-459a-b9f5-3fb8b855bf1d
@@ -352,5 +352,5 @@ labelslocal(labelsfile)
 # ╠═5a96e917-2333-4a8b-af2d-55066c260e73
 # ╠═d958149f-00c3-496b-8695-ded2941e34a7
 # ╟─ca591f71-4c85-4420-9728-9e541853babb
-# ╠═aeea2592-f96a-48a0-bb3d-c460deae332d
-# ╠═8e6a708f-3ac1-4643-8fdf-42f6be4409c1
+# ╟─aeea2592-f96a-48a0-bb3d-c460deae332d
+# ╟─8e6a708f-3ac1-4643-8fdf-42f6be4409c1

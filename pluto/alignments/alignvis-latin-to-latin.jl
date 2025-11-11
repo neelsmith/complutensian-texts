@@ -30,6 +30,11 @@ begin
 	Pkg.add("PlutoUI")
 	using PlutoUI
 
+	Pkg.add("CSV")
+	using CSV
+	Pkg.add("TypedTables")
+	using TypedTables
+
 	md"""*To see Julia environment, unhide this cell.*"""
 end
 
@@ -79,10 +84,6 @@ css = html"""
 # ╔═╡ b7cb6ead-9d89-4532-a5e5-bddaecef8338
 md"""> ## Data"""
 
-# ╔═╡ 9988e7cd-7d52-43ea-8bbc-4237a56a002e
-verbdataraw = loadverbdata()
-
-
 # ╔═╡ d26fff15-871c-424b-bc68-3df2cf48752a
 md"""Tweak skip list:"""
 
@@ -104,14 +105,36 @@ fero = "ls.n17964"
 # ╔═╡ 50b2ada9-5bae-4fb7-993f-3228d27f5ccb
 skips = [Complutensian.SUM, dico, eo, facio, fero]
 
-# ╔═╡ 121f116d-79dd-4b5e-a3c5-debb7187065c
-verbdata = filter(v -> (v.lexeme in skips) == false, verbdataraw)
+# ╔═╡ 92143449-98ee-4f2f-ab02-ef0aad75996b
+md"""## Local data"""
 
-# ╔═╡ 195b55f6-21e5-4a85-a2eb-40e95801dcc5
-length(verbdata)
+# ╔═╡ 3c6b384f-476f-4379-bbb4-1545eeda9114
+repo = pwd() |> dirname |> dirname
+
+# ╔═╡ c9afd2db-5370-49db-9ed7-7f0a80c645aa
+labelsfile = joinpath(repo, "parses", "labels.cex")
+
+# ╔═╡ a7b2e433-87d8-413f-915b-703ab0bed3f5
+vlexdata = joinpath(repo, "parses", "verblexemes-current.csv")
+
+# ╔═╡ aa8f2894-08fd-4aaa-a99c-8cc2433e1b52
+"""Get labels data from local copy of `labels.cex`"""
+function labelslocal(f)
+    #lblurl = "http://shot.holycross.edu/complutensian/labels.cex"
+	#tmplbls = Downloads.download(lblurl)
+	#lns = readlines(tmplbls)
+	lns = readlines(f)
+	#rm(tmplbls)
+	dict = Dict()
+	for ln in lns
+		parts = split(ln, "|")
+		dict[parts[1]] = string(parts[1], " (", parts[2], ")")
+	end
+	dict
+end
 
 # ╔═╡ 0f533e23-757a-4882-8f8a-2ce16fee2b11
-labels = loadlabels()
+labels = labelslocal(labelsfile) #loadlabels()
 
 # ╔═╡ 954fabb3-6c65-464a-9b3c-0f115df029db
 """Compose an HTML table for table of alignments."""
@@ -163,6 +186,25 @@ function alignmenttab(vrb, data; lbls = labels)
 	push!(htmlout, "</table>")
 	join(htmlout) |> HTML
 end
+
+# ╔═╡ 7a088e2b-ffec-411c-94a5-ff8fe085d702
+"""Get data from local copy of `verblexemes-current.csv`"""
+function verbdatalocal(f)
+    #url = "http://shot.holycross.edu/complutensian/verblexemes-current.csv"
+    dataraw = CSV.File(f) |> Table
+	baddata = misaligned(dataraw)
+	filter(r -> (r.sequence in baddata) == false, dataraw)
+end
+
+# ╔═╡ 9988e7cd-7d52-43ea-8bbc-4237a56a002e
+verbdataraw = verbdatalocal(vlexdata) # loadverbdata()
+
+
+# ╔═╡ 121f116d-79dd-4b5e-a3c5-debb7187065c
+verbdata = filter(v -> (v.lexeme in skips) == false, verbdataraw)
+
+# ╔═╡ 195b55f6-21e5-4a85-a2eb-40e95801dcc5
+length(verbdata)
 
 # ╔═╡ e8cffc02-fe2b-40bc-a446-38eda5a79657
  allverbs = verblist(verbdata)
@@ -218,3 +260,9 @@ eo in allverbs
 # ╟─0f533e23-757a-4882-8f8a-2ce16fee2b11
 # ╟─e8cffc02-fe2b-40bc-a446-38eda5a79657
 # ╠═07969ca0-7ec5-43d8-99b9-4d86dceb396c
+# ╟─92143449-98ee-4f2f-ab02-ef0aad75996b
+# ╟─3c6b384f-476f-4379-bbb4-1545eeda9114
+# ╟─c9afd2db-5370-49db-9ed7-7f0a80c645aa
+# ╟─a7b2e433-87d8-413f-915b-703ab0bed3f5
+# ╟─aa8f2894-08fd-4aaa-a99c-8cc2433e1b52
+# ╟─7a088e2b-ffec-411c-94a5-ff8fe085d702
