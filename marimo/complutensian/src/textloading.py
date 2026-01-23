@@ -8,4 +8,4 @@ def load_corpus():
 
 def lxx(c: CitableCorpus):
     psgs = [p for p in c.passages if p.urn.version == "lxx"]
-    CitableCorpus(passages=psgs)
+    CitableCorpus(passages=psgs)    
