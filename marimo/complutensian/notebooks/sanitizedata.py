@@ -27,12 +27,13 @@ def _(file_picker):
 
 
 @app.cell(hide_code=True)
-def _(lines, mo):
-    if lines:
-        mo.md("Read **{len(lines)}** source lines from `{f}`")
-    else:
-        mo.md("")
+def _(read_msg):
+    read_msg
+    return
 
+
+@app.cell
+def _():
     return
 
 
@@ -41,6 +42,12 @@ def _(mo):
     mo.md("""
     ## Find short lines
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(short_msg):
+    short_msg
     return
 
 
@@ -75,18 +82,6 @@ def _(mo):
 
 
 @app.cell
-def _(Path):
-    f = Path.cwd() / 'public' / 'torah-verbs.cex'
-    return (f,)
-
-
-@app.cell
-def _(f):
-    type(f)
-    return
-
-
-@app.cell
 def _(file_picker):
     if file_picker.value:
         rawlines = file_picker.contents().decode('utf-8').splitlines()
@@ -97,22 +92,9 @@ def _(file_picker):
 
 
 @app.cell
-def _():
-    #rawlines = rawstr.splitlines()
-    return
-
-
-@app.cell
 def _(rawlines):
     lines = [line.strip() for line in rawlines]
     return (lines,)
-
-
-@app.cell
-def _(f):
-    with open(f, 'r') as file:
-        xlines = [line.strip() for line in file]
-    return
 
 
 @app.cell
@@ -160,6 +142,25 @@ def _(mo):
 
 
 @app.cell
+def _(file_picker, lines, mo):
+    if file_picker.value:
+        read_msg = mo.md(f"Read **{len(lines)}** lines from `{file_picker.name()}`.")
+    else:
+        read_msg = mo.md("")
+
+    return (read_msg,)
+
+
+@app.cell
+def _(file_picker, mo, shorties):
+    if file_picker.value:
+        short_msg = mo.md(f"**{len(shorties)}** lines with too few columns.")
+    else:
+        short_msg = mo.md("")
+    return (short_msg,)
+
+
+@app.cell
 def _(mo, short_lines, shorties):
     resultscols = mo.hstack([
         shorties,
@@ -178,7 +179,7 @@ def _(cutoff, mo):
 @app.cell
 def _(headercount, mo):
     if headercount > 0:
-        cutoff = mo.ui.slider(start=8, stop=headercount, step=1, value=10)
+        cutoff = mo.ui.slider(start=8, stop=headercount, step=1, value=headercount)
     else:
         cutoff = mo.md("*Please choose a delimited file.*")
     return (cutoff,)
@@ -198,7 +199,7 @@ def _():
     import io
     from collections import Counter
     from pathlib import Path
-    return Path, mo
+    return (mo,)
 
 
 if __name__ == "__main__":
