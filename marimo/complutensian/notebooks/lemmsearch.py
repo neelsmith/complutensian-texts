@@ -24,60 +24,35 @@ def _(mo):
     return
 
 
-@app.cell
-def _(refversion):
-    refversion
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    *Choose a text version and vocabulary item*
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(lemma, mo, refversion):
+    mo.hstack([refversion, lemma], justify = "center")
     return
 
 
 @app.cell
-def _(df, pl):
-    type(df.select(pl.col("greek_lemma").value_counts(sort=True)))
+def _(psg_list):
+    psg_list
     return
 
 
 @app.cell
-def _():
-    import plotly.express as px
-    return (px,)
-
-
-@app.cell
-def _(df, pl):
-    # 1. Calculate counts and unnest into a flat structure
-    # 'sort=True' puts the most frequent values first
-    counts_df = df.select(pl.col("greek_lemma").value_counts(sort=True)).unnest("greek_lemma")
-
-    return (counts_df,)
+def _(df, lemma, lemmacol, pl):
+    psg_list = df.filter(pl.col(lemmacol) ==lemma.value)["passage"].to_list()
+    return (psg_list,)
 
 
 @app.cell
 def _(counts_df):
     counts_df
-    return
-
-
-@app.cell
-def _(counts_df, px):
-    fig = px.bar(
-        counts_df, 
-        x="greek_lemma", 
-        y="count", 
-        title="Frequency of Greek Vocabulary",
-        #color="greek", # Optional: adds distinct colors
-        labels={"greek_lemma": "Lexeme", "count": "Occurrences"}
-    )
-    return (fig,)
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _(fig):
-    fig
     return
 
 
@@ -87,19 +62,9 @@ def _(df):
     return
 
 
-@app.cell
-def _():
-    return
-
-
 @app.cell(hide_code=True)
 def _(mo):
     mo.Html("<hr/><hr/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>")
-    return
-
-
-@app.cell
-def _():
     return
 
 
@@ -114,7 +79,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **UI**:
+    **Data source**:
     """)
     return
 
@@ -123,22 +88,6 @@ def _(mo):
 def _(mo):
     file_picker = mo.ui.file(label="Select delimited file",   filetypes=[".csv", ".cex"],)
     return (file_picker,)
-
-
-@app.cell
-def _(mo, versions_menu):
-    refversion = mo.ui.dropdown(
-        options=versions_menu,
-        label="Select a version",
-    )
-    return (refversion,)
-
-
-@app.cell
-def _():
-    versions_menu = {"Greek Septuagint": "lxx", "Latin Vulgate": "vulgate", "Masoretic Hebrew": "masoretic",
-                "Aramaic Targum Onkelos": "onkelos"}
-    return (versions_menu,)
 
 
 @app.cell
@@ -153,17 +102,82 @@ def _(file_picker, mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Data**:
+    **Version of text**:
     """)
     return
 
 
 @app.cell
 def _():
-    #if fil#e_picker.value:
-    #    c#sv_content = file_picker.contents()
-    #else#:
-    #    #csv_content = None
+    versions_menu = {"Greek Septuagint": "lxx", "Latin Vulgate": "vulgate", "Masoretic Hebrew": "masoretic",
+                "Aramaic Targum Onkelos": "onkelos"}
+    return (versions_menu,)
+
+
+@app.function
+def find_lemma_col(versionstring):
+    """Get name of lemma column for selected version of the text."""
+    if versionstring == "lxx":
+        return "greek_lemma"
+    elif versionstring == "vulgate":
+        return "latin_lemma"
+    elif versionstring == "masoretic":
+        return "hebrew_lemma"
+    elif versionstring == "onkelos":
+        return "aramaic_lemma"
+    else:
+        return None
+
+
+@app.cell
+def _(mo, versions_menu):
+    refversion = mo.ui.dropdown(
+        options=versions_menu,
+        label="Text version:",
+    )
+    return (refversion,)
+
+
+@app.cell
+def _(refversion):
+    if refversion.value:
+        lemmacol = find_lemma_col(refversion.value)
+    else:
+        lemmacol = ""
+    return (lemmacol,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Vocabulary choice**:
+    """)
+    return
+
+
+@app.cell
+def _(mo, vocab):
+    lemma = mo.ui.dropdown(
+        options=vocab,
+        label="Lexeme:",
+    )
+    return (lemma,)
+
+
+@app.cell
+def _(counts_df, lemmacol):
+    if counts_df.is_empty():
+        vocab = []
+    else:
+        vocab = counts_df[lemmacol].to_list()
+    return (vocab,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Data**:
+    """)
     return
 
 
@@ -173,8 +187,27 @@ def _(file_picker, io, pl):
         df = pl.read_csv(io.BytesIO(file_picker.contents()), separator = "|",truncate_ragged_lines=True)
     else:
         df = None
-
     return (df,)
+
+
+@app.cell
+def _(df, lemmacol, pl):
+    # 1. Calculate counts and unnest into a flat structure
+    # 'sort=True' puts the most frequent values first
+    if df.is_empty():
+        counts_df = None
+    else:
+        counts_df = df.select(pl.col(lemmacol).value_counts(sort=True)).unnest(lemmacol)
+    
+    return (counts_df,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Imports**:
+    """)
+    return
 
 
 @app.cell
@@ -183,6 +216,16 @@ def _():
     import marimo as mo
     import io
     return io, mo, pl
+
+
+@app.cell
+def _(df, file_picker, lemmacol, pl):
+    if file_picker.value and file_picker.value:
+        reftype = df.select(pl.col(lemmacol).value_counts(sort=True))
+    else:
+        reftype = None
+
+    return
 
 
 if __name__ == "__main__":
