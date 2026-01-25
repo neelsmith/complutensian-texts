@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.19.6"
+__generated_with = "0.19.4"
 app = marimo.App(width="medium")
 
 
@@ -21,18 +21,18 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    > **NB**: Run this notebook from root of marimo/complutensian project.
-    """)
+def _(file_picker):
+    file_picker
     return
 
 
 @app.cell(hide_code=True)
-def _(f, lines, mo):
-    mo.md(f"""
-    Read **{len(lines)}** source lines from `{f}`
-    """)
+def _(lines, mo):
+    if lines:
+        mo.md("Read **{len(lines)}** source lines from `{f}`")
+    else:
+        mo.md("")
+
     return
 
 
@@ -87,15 +87,32 @@ def _(f):
 
 
 @app.cell
+def _(file_picker):
+    if file_picker.value:
+        rawlines = file_picker.contents().decode('utf-8').splitlines()
+    else:
+        rawlines = []
+
+    return (rawlines,)
+
+
+@app.cell
 def _():
+    #rawlines = rawstr.splitlines()
     return
+
+
+@app.cell
+def _(rawlines):
+    lines = [line.strip() for line in rawlines]
+    return (lines,)
 
 
 @app.cell
 def _(f):
     with open(f, 'r') as file:
-        lines = [line.strip() for line in file]
-    return (lines,)
+        xlines = [line.strip() for line in file]
+    return
 
 
 @app.cell
@@ -106,13 +123,19 @@ def _(lines):
 
 @app.cell
 def _(linelenn):
-    headercount = linelenn[0][1]
+    if not linelenn:
+        headercount = 0
+    else:
+        headercount = linelenn[0][1]
     return (headercount,)
 
 
 @app.cell
 def _(cutoff, linelenn):
-    shorties = [tup for tup in linelenn if tup[1] < cutoff.value]
+    if not linelenn:
+        shorties = []
+    else:
+        shorties = [tup for tup in linelenn if tup[1] < cutoff.value]
     return (shorties,)
 
 
@@ -131,11 +154,17 @@ def _(mo):
 
 
 @app.cell
+def _(mo):
+    file_picker = mo.ui.file(filetypes=[".csv", ".cex"], label="Choose delimited file")
+    return (file_picker,)
+
+
+@app.cell
 def _(mo, short_lines, shorties):
     resultscols = mo.hstack([
         shorties,
         short_lines
-    
+
         ])
     return (resultscols,)
 
@@ -148,7 +177,10 @@ def _(cutoff, mo):
 
 @app.cell
 def _(headercount, mo):
-    cutoff = mo.ui.slider(start=8, stop=headercount, step=1, value=10)
+    if headercount > 0:
+        cutoff = mo.ui.slider(start=8, stop=headercount, step=1, value=10)
+    else:
+        cutoff = mo.md("*Please choose a delimited file.*")
     return (cutoff,)
 
 
