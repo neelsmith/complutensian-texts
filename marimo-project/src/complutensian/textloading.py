@@ -1,4 +1,4 @@
-from citable_corpus import CitableCorpus#, CitablePassage
+from citable_corpus import CitableCorpus
 
 def load_corpora(path: str = "public/compnov.cex") -> dict[str, CitableCorpus]:
     """From a CEX file with corpora of the Complutensian Bible, return a dict of CitableCorpus objects for each version."""
