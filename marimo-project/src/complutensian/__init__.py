@@ -6,8 +6,6 @@ except PackageNotFoundError:
     # Package is not installed (e.g., running from a local script)
     __version__ = "unknown"
 
-from .textloading import lxx
+from .textloading import load_corpora, lxx, masoretic, vulgate, onkelos
 
-
-
-__all__ = ["lxx"]
+__all__ = ["lxx", "masoretic","vulgate", "onkelos", "load_corpora"]
