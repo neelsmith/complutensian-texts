@@ -1,8 +1,14 @@
 from citable_corpus import CitableCorpus
 
-def load_corpora(path: str = "public/compnov.cex") -> dict[str, CitableCorpus]:
+def load_corpora(path: str | None = None) -> dict[str, CitableCorpus]:
     """From a CEX file with corpora of the Complutensian Bible, return a dict of CitableCorpus objects for each version."""
-    corpus = CitableCorpus.from_cex_file(path)
+
+    if path is None:
+        url = 'https://raw.githubusercontent.com/neelsmith/complutensian-texts/refs/heads/main/marimo-project/public/compnov.cex'
+        corpus = CitableCorpus.from_cex_url(url)
+    else:
+        corpus = CitableCorpus.from_cex_file(path)
+        
     return {
         "lxx": lxx(corpus),
         "masoretic": masoretic(corpus),
