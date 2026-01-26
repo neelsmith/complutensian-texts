@@ -1,8 +1,8 @@
 from citable_corpus import CitableCorpus
 
 
-def load_corpus():
-    corpus = CitableCorpus.from_cex_file("public/compnov.cex")
+def load_corpus(path: str = "public/compnov.cex") -> CitableCorpus:
+    corpus = CitableCorpus.from_cex_file(path)
     return corpus
     
 
