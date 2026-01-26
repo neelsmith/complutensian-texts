@@ -47,5 +47,28 @@ def _(corpdict):
     return
 
 
+@app.cell
+def _(corpdict):
+    corpdict['onkelos'].passages[0].urn.passage
+    return
+
+
+@app.cell
+def _(corpdict):
+    torahreff = [p.urn.work + ":" + p.urn.passage for p in corpdict['onkelos'].passages]
+    return (torahreff,)
+
+
+@app.cell
+def _(torahreff):
+    torahreff[len(torahreff)-10:]
+    return
+
+
+@app.cell
+def _():
+    return
+
+
 if __name__ == "__main__":
     app.run()
