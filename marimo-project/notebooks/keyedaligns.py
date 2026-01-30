@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.19.6"
+__generated_with = "0.19.7"
 app = marimo.App(width="medium")
 
 
@@ -48,7 +48,8 @@ def _(cf_select, lemma, mo, refversion):
 
 @app.cell(hide_code=True)
 def _(cf_select, lemma, lemmacol, mo, refversion):
-    mo.md(f"""/// attention | Debugging
+    mo.md(f"""
+    /// attention | Debugging
     Text **{refversion.value}** search column **{lemmacol}** for **{lemma.value}**, cf with **{cf_select.value}**
     ///
     """)
