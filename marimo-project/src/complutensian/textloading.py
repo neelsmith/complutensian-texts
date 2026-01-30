@@ -5,6 +5,7 @@ def load_corpora(path: str | None = None) -> dict[str, CitableCorpus]:
 
     if path is None:
         url = 'https://raw.githubusercontent.com/neelsmith/complutensian-texts/refs/heads/main/marimo-project/public/compnov.cex'
+        #print("Woohoo, I'm loading...")
         corpus = CitableCorpus.from_cex_url(url)
     else:
         corpus = CitableCorpus.from_cex_file(path)
