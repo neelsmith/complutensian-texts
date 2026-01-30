@@ -40,7 +40,7 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(cf_select, lemma, mo, refversion):
     mo.hstack([refversion, lemma, cf_select], justify="center")
     return
@@ -48,29 +48,16 @@ def _(cf_select, lemma, mo, refversion):
 
 @app.cell(hide_code=True)
 def _(cf_select, lemma, lemmacol, mo, refversion):
-    mo.md(f"Text **{refversion.value}** search column **{lemmacol}** for **{lemma.value}**, cf with **{cf_select.value}**")
+    mo.md(f"""/// attention | Debugging
+    Text **{refversion.value}** search column **{lemmacol}** for **{lemma.value}**, cf with **{cf_select.value}**
+    ///
+    """)
     return
 
 
 @app.cell
-def _(cf_options):
-    cf_columns = [find_lemma_col(item) for item in cf_options]
-    return (cf_columns,)
-
-
-@app.cell
-def _(aligns, cf_columns):
-    lemmacounts = (
-        aligns.group_by(cf_columns)
-        .len(name="count")
-        .sort("count", descending=True)
-    )
-    return (lemmacounts,)
-
-
-@app.cell
-def _(lemmacounts):
-    lemmacounts
+def _(aligns, selected_columns):
+    aligns.select(selected_columns)
     return
 
 
@@ -102,6 +89,54 @@ def _(mo):
     mo.md("""
     # Under the hood
     """)
+    return
+
+
+@app.cell
+def _(aligns, cf_columns):
+    if aligns is not None:
+        lemmacounts = (
+            aligns.group_by(cf_columns)
+            .len(name="count")
+            .sort("count", descending=True)
+        )
+    else:
+        lemmacounts = None
+    return (lemmacounts,)
+
+
+@app.cell
+def _(cf_options):
+    cf_columns = [find_lemma_col(item) for item in cf_options]
+    return (cf_columns,)
+
+
+@app.cell
+def _(cf_select):
+    selected_columns = [find_lemma_col(item) for item in cf_select.value]
+    return (selected_columns,)
+
+
+@app.cell
+def _(selected_columns):
+    selected_columns
+    return
+
+
+@app.cell
+def _(cf_columns):
+    cf_columns
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _(lemmacounts):
+    lemmacounts
     return
 
 
@@ -141,6 +176,11 @@ def _(cf_options, mo):
         options=cf_options, label="Compare with:"
     )
     return (cf_select,)
+
+
+@app.cell
+def _():
+    return
 
 
 @app.cell(hide_code=True)
