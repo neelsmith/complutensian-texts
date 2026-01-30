@@ -39,15 +39,16 @@ def score_pair_directed(df, col1, col2) -> pl.DataFrame:
 
 
 
-def score_pair_two_way(scores1, scores2, col1, col2) -> pl.DataFrame:
-    return None
-
-# This seems to work:
-#final_df = gl.join(
-#   lg, 
-#    on=["greek_lemma", "latin_lemma"], 
-#    how="outer",  # Keep everything
-#    suffix="_rev"
-#).fill_null(0).with_columns(
-#    ((pl.col("scores") + pl.col("scores_rev")) / 2).alias("average_score")
-#)
+def score_pair_two_way(scores, col1, col2) -> pl.DataFrame:
+    scores1 = score_pair_directed(scores, col1, col2)
+    scores2 = score_pair_directed(scores, col2, col1)
+    two_way = scores1.join(
+        scores2,
+        on=[col1, col2],
+        how = "outer",
+        suffix="_rev"
+    ).fill_null(0).with_columns(
+        ((pl.col("scores") + pl.col("scores_rev")) / 2).alias("average_score")
+    )
+    return two_way
+    
