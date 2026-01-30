@@ -19,14 +19,14 @@ def _(file_picker):
 
 
 @app.cell(hide_code=True)
-def _(bad_greek, bad_hebrew, mo):
+def _(bad_greek, bad_hebrew, gpct_rounded, hpct_rounded, mo):
     if bad_greek is not None:
         display_total = mo.md(f"""/// admonition | Totals
-    Found **{len(bad_greek)}** bad Greek values and **{len(bad_hebrew)}** bad Hebrew values.
+    Found **{len(bad_greek)}** bad Greek values (**{gpct_rounded}%**) and **{len(bad_hebrew)}** bad Hebrew values  (**{hpct_rounded}%**).
     ///
-    
+
             """)
-    
+
     else:
         display_total = mo.md(f"*Please choose a file to load*.")
     display_total    
@@ -111,6 +111,26 @@ def _(df, greek_regex, pl):
     else:
         bad_greek = None
     return (bad_greek,)
+
+
+@app.cell
+def _(bad_hebrew, df):
+    if bad_hebrew is not None:
+        hpct = (len(bad_hebrew) / len(df)) * 100
+        hpct_rounded = round(hpct, 2)
+    else:
+        hpct_rounded = None
+    return (hpct_rounded,)
+
+
+@app.cell
+def _(bad_greek, df):
+    if bad_greek is not None:
+        gpct = (len(bad_greek) / len(df)) * 100
+        gpct_rounded = round(gpct, 2)
+    else:
+        gpct_rounded = None
+    return (gpct_rounded,)
 
 
 @app.cell(hide_code=True)
