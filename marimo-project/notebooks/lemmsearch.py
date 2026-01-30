@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.19.6"
+__generated_with = "0.19.7"
 app = marimo.App(width="medium")
 
 
@@ -46,7 +46,10 @@ def _(psg_list):
 
 @app.cell
 def _(df, lemma, lemmacol, pl):
-    psg_list = df.filter(pl.col(lemmacol) ==lemma.value)["passage"].to_list()
+    if df is not None and lemmacol:
+        psg_list = df.filter(pl.col(lemmacol) ==lemma.value)["passage"].to_list()
+    else:
+        psg_list = []
     return (psg_list,)
 
 
@@ -143,7 +146,7 @@ def _(refversion):
     if refversion.value:
         lemmacol = find_lemma_col(refversion.value)
     else:
-        lemmacol = ""
+        lemmacol = None
     return (lemmacol,)
 
 
@@ -166,10 +169,10 @@ def _(mo, vocab):
 
 @app.cell
 def _(counts_df, lemmacol):
-    if counts_df.is_empty():
-        vocab = []
-    else:
+    if counts_df is not None:
         vocab = counts_df[lemmacol].to_list()
+    else:
+        vocab = []
     return (vocab,)
 
 
@@ -194,11 +197,12 @@ def _(file_picker, io, pl):
 def _(df, lemmacol, pl):
     # 1. Calculate counts and unnest into a flat structure
     # 'sort=True' puts the most frequent values first
-    if df.is_empty():
-        counts_df = None
-    else:
+    if df is not None and lemmacol:
         counts_df = df.select(pl.col(lemmacol).value_counts(sort=True)).unnest(lemmacol)
+    else:
+        counts_df = None
     
+
     return (counts_df,)
 
 
@@ -219,12 +223,11 @@ def _():
 
 
 @app.cell
-def _(df, file_picker, lemmacol, pl):
-    if file_picker.value and file_picker.value:
+def _(df, lemmacol, pl):
+    if df is not None and lemmacol:
         reftype = df.select(pl.col(lemmacol).value_counts(sort=True))
     else:
         reftype = None
-
     return
 
 
