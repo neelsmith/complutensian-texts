@@ -20,10 +20,17 @@ def _(file_picker):
 
 @app.cell(hide_code=True)
 def _(gk_lat_gr, mo):
-    mo.md(f"""/// admonition | *Debugging*
+    mo.md(f"""
+    /// admonition | *Debugging*
     In Greek-Latin graph: **total nodes**: {gk_lat_gr.number_of_nodes()}, **total edges**: {gk_lat_gr.number_of_edges()}
     ///
     """)
+    return
+
+
+@app.cell
+def _(threshold_slider):
+    threshold_slider
     return
 
 
@@ -88,6 +95,12 @@ def _(co, df):
 
 
 @app.cell
+def _(df):
+    df
+    return
+
+
+@app.cell
 def _(mo):
     mo.md("""
     **Graph building**
@@ -109,6 +122,23 @@ def _(gk_lat, gk_lat_gr):
 
 
 @app.cell
+def _():
+    return
+
+
+@app.cell
+def _(gk_lat_gr, mo):
+    mo.md(f"In Greek-Latin graph: **total nodes**: {gk_lat_gr.number_of_nodes()}, **total edges**: {gk_lat_gr.number_of_edges()}")
+    return
+
+
+@app.cell
+def _(threshold_slider):
+    threshold_slider.value
+    return
+
+
+@app.cell
 def _(get_significant_subgraph, gk_lat_gr, threshold_slider):
     subgr_gk_lat = get_significant_subgraph(gk_lat_gr, threshold_slider.value)
     return (subgr_gk_lat,)
@@ -120,18 +150,18 @@ def _(np, nx):
         # Calculate weight threshold
         weights = [d['weight'] for u, v, d in G.edges(data=True)]
         q = np.percentile(weights, weight_percentile)
-    
+
         # Filter edges and the resulting induced nodes
         strong_edges = [(u, v, d) for u, v, d in G.edges(data=True) if d['weight'] >= q]
-    
+
         H = nx.Graph()
         H.add_edges_from(strong_edges)
-    
+
         # Optionally: Keep only the largest connected component to remove isolates
         if len(H) > 0:
             main_comp = max(nx.connected_components(H), key=len)
             H = H.subgraph(main_comp).copy()
-    
+
         return H
     return (get_significant_subgraph,)
 
@@ -169,7 +199,6 @@ def _(gk_lat_pos, gl_edge_x, gl_edge_y, subgr_gk_lat):
 @app.cell
 def _(gl_edge_x, gl_edge_y, go):
     gl_edge_trace = go.Scatter(x=gl_edge_x, y=gl_edge_y, line=dict(width=0.5, color='#888'), mode='lines')
-
     return (gl_edge_trace,)
 
 
