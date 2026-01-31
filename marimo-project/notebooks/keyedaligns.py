@@ -58,7 +58,8 @@ def _(cf_select, lemma, lemmacol, mo, refversion):
 
 @app.cell
 def _(aligns, selected_columns):
-    aligns.select(selected_columns)
+    if aligns is not None:
+        aligns.select(selected_columns)
     return
 
 
