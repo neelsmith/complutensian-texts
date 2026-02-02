@@ -7,23 +7,6 @@ app = marimo.App(width="medium")
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    /// admonition | 1. Load data
-
-    Choose a delimited-text file to load.
-    ///
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(file_picker):
-    file_picker
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     # Find correlations
     """)
     return
@@ -32,17 +15,45 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    /// admonition | 2. Settings
+    /// admonition | Settings
 
-    Choose a text version, a vocabulary item, and one or more texts to compare it to.
+    - Choose a delimited-text file to load.
+    - Choose a text version, a vocabulary item, and one or more texts to compare it to.
     ///
     """)
     return
 
 
 @app.cell(hide_code=True)
-def _(cf_select, lemma, mo, refversion):
-    mo.hstack([refversion, lemma, cf_select], justify="center")
+def _(cf_select, file_picker, lemma, mo, refversion):
+    mo.vstack([file_picker, mo.hstack([refversion, lemma, cf_select], justify="center"), ], justify="center")
+    return
+
+
+@app.cell(hide_code=True)
+def _(counts_df, mo):
+    if counts_df is not None:
+        plotlimit = mo.ui.slider(
+            start=0,
+            stop=len(counts_df) - 1,
+            step=1,
+            value=len(counts_df) - 1,
+            label="Vocabulary to plot:",
+        )
+    return (plotlimit,)
+
+
+@app.cell(hide_code=True)
+def _(barplot):
+    barplot
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Debugging
+    """)
     return
 
 
@@ -230,6 +241,43 @@ def _(counts_df):
     return
 
 
+@app.cell
+def _(first_col):
+    first_col
+    return
+
+
+@app.cell
+def _(barplot):
+    barplot
+    return
+
+
+@app.cell
+def _(counts_df, mo, plotlimit, px):
+    if counts_df is not None and len(counts_df) > 0:
+        # Get the first column name (which varies based on user selection)
+        first_col = counts_df.columns[0]
+
+        # Slice the dataframe to only plot the first n rows
+        plot_data = counts_df.head(plotlimit.value)
+
+        # Create a bar chart using plotly
+
+        fig = px.bar(
+            plot_data.to_pandas(),
+            x=first_col,
+            y="count",
+            title=f"Counts by {first_col}",
+            labels={"count": "Count", first_col: first_col},
+        )
+
+        barplot = mo.ui.plotly(fig)
+    else:
+        barplot = None
+    return barplot, first_col
+
+
 @app.function
 def find_lemma_col(versionstring):
     """Get name of lemma column for selected version of the text."""
@@ -300,7 +348,9 @@ def _():
     import polars as pl
     import io
     import complutensian as co
-    return io, mo, pl
+    import pyarrow as pa
+    import plotly.express as px
+    return io, mo, pl, px
 
 
 if __name__ == "__main__":
