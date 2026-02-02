@@ -271,6 +271,9 @@ def _(counts_df, mo, plotlimit, px):
             title=f"Counts by {first_col}",
             labels={"count": "Count", first_col: first_col},
         )
+        
+        # Angle x-axis labels to 45 degrees and show all labels
+        fig.update_xaxes(tickangle=-45, tickmode='linear')
 
         barplot = mo.ui.plotly(fig)
     else:
