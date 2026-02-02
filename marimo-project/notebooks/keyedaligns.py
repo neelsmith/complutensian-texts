@@ -32,14 +32,16 @@ def _(cf_select, file_picker, lemma, mo, refversion):
 
 @app.cell(hide_code=True)
 def _(counts_df, mo):
-    if counts_df is not None:
+    if counts_df is not None and len(counts_df) > 0:
         plotlimit = mo.ui.slider(
-            start=0,
-            stop=len(counts_df) - 1,
+            start=1,
+            stop=len(counts_df),
             step=1,
-            value=len(counts_df) - 1,
-            label="Vocabulary to plot:",
+            value=min(20, len(counts_df)),
+            label="Number of items to plot:",
         )
+    else:
+        plotlimit = None
     return (plotlimit,)
 
 
@@ -255,7 +257,7 @@ def _(barplot):
 
 @app.cell
 def _(counts_df, mo, plotlimit, px):
-    if counts_df is not None and len(counts_df) > 0:
+    if counts_df is not None and len(counts_df) > 0 and plotlimit is not None:
         # Get the first column name (which varies based on user selection)
         first_col = counts_df.columns[0]
 
@@ -277,8 +279,8 @@ def _(counts_df, mo, plotlimit, px):
 
         barplot = mo.ui.plotly(fig)
     else:
-        barplot = None
-    return barplot, first_col
+        barplot = mo.md("*Select a reference version to see vocabulary counts*")
+    return (barplot,)
 
 
 @app.function
