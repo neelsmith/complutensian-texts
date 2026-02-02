@@ -124,7 +124,8 @@ def _(gk_lat, gk_lat_gr):
 
 @app.cell(hide_code=True)
 def _(gk_lat_gr, mo, threshold_slider):
-    mo.md(f"""/// admonition | *Debugging*
+    mo.md(f"""
+    /// admonition | *Debugging*
     In Greek-Latin graph: **total nodes**: {gk_lat_gr.number_of_nodes()}, **total edges**: {gk_lat_gr.number_of_edges()}
 
     Percentage **cut off**: {threshold_slider.value}
@@ -185,18 +186,48 @@ def _(nx, subgr_gk_lat):
 
 
 @app.cell
-def _(gk_lat_pos, go, subgr_gk_lat):
+def _(df, gk_lat_pos, go, subgr_gk_lat):
     gl_edge_x, gl_edge_y = [], []
     for u, v in subgr_gk_lat.edges():
         x0, y0 = gk_lat_pos[u]
         x1, y1 = gk_lat_pos[v]
         gl_edge_x.extend([x0, x1, None])
         gl_edge_y.extend([y0, y1, None])
-    gl_edge_trace = go.Scatter(x=gl_edge_x, y=gl_edge_y, line=dict(width=0.5, color='#888'), mode='lines')
+    gl_edge_trace = go.Scatter(x=gl_edge_x, y=gl_edge_y, line=dict(width=0.5, color='#888'), mode='lines', showlegend=False)
     gl_node_x = [gk_lat_pos[node][0] for node in subgr_gk_lat.nodes()]
     gl_node_y = [gk_lat_pos[node][1] for node in subgr_gk_lat.nodes()]
     gl_node_labels = list(subgr_gk_lat.nodes())
-    gl_node_trace = go.Scatter(x=gl_node_x, y=gl_node_y, mode='markers', text=gl_node_labels, hovertemplate='<b>%{text}</b><extra></extra>', marker=dict(size=10, color='skyblue'))
+
+    greek_nodes = set()
+    latin_nodes = set()
+    if df is not None:
+        if "greek_lemma" in df.columns:
+            greek_nodes = set(df["greek_lemma"].drop_nulls().to_list())
+        if "latin_lemma" in df.columns:
+            latin_nodes = set(df["latin_lemma"].drop_nulls().to_list())
+
+    gl_node_colors = []
+    for node in gl_node_labels:
+        in_greek = node in greek_nodes
+        in_latin = node in latin_nodes
+        if in_greek and in_latin:
+            gl_node_colors.append("#9467bd")  # both
+        elif in_greek:
+            gl_node_colors.append("#1f77b4")  # greek
+        elif in_latin:
+            gl_node_colors.append("#d62728")  # latin
+        else:
+            gl_node_colors.append("#7f7f7f")  # unknown
+
+    gl_node_trace = go.Scatter(
+        x=gl_node_x,
+        y=gl_node_y,
+        mode='markers',
+        text=gl_node_labels,
+        hovertemplate='<b>%{text}</b><extra></extra>',
+        marker=dict(size=10, color=gl_node_colors),
+        showlegend=False,
+    )
     return gl_edge_trace, gl_node_trace
 
 
