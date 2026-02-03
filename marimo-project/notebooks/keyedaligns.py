@@ -13,7 +13,7 @@ def _():
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    # Find correlations
+    # *Genesis* in the Complutensian Bible: alignments of verbal forms
     """)
     return
 
@@ -21,33 +21,19 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    /// admonition | Settings
-    - Choose a delimited-text file to load.
-    - Choose a text version, a vocabulary item, and one or more texts to compare it to.
+    /// admonition | Using this notebook
+    Choose a text version (reference version), a vocabulary item (lexeme), and then choose one or more texts to find alignments in.
+
+    Optionally, limit the number of items to display in the barchart.
     ///
     """)
     return
 
 
 @app.cell(hide_code=True)
-def _(cf_select, file_picker, lemma, mo, refversion):
-    mo.vstack([file_picker, mo.hstack([refversion, lemma, cf_select], justify="center"), ], justify="center")
+def _(cf_select, lemma, mo, plotlimit, refversion):
+    mo.vstack([mo.hstack([refversion, lemma, cf_select], justify="center"), plotlimit], justify="center")
     return
-
-
-@app.cell(hide_code=True)
-def _(counts_df, mo):
-    if counts_df is not None and len(counts_df) > 0:
-        plotlimit = mo.ui.slider(
-            start=1,
-            stop=len(counts_df),
-            step=1,
-            value=min(20, len(counts_df)),
-            label="Number of items to plot:",
-        )
-    else:
-        plotlimit = None
-    return (plotlimit,)
 
 
 @app.cell(hide_code=True)
@@ -65,7 +51,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    # Debugging
+    # Debugging data values
     """)
     return
 
@@ -73,7 +59,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(cf_select, lemma, lemmacol, mo, refversion):
     mo.md(f"""
-    /// attention | Debugging
+    /// attention | User-selected settings
     In text **{refversion.value}**, search column **{lemmacol}** for **{lemma.value}**, and compare with **{cf_select.value}**
     ///
     """)
@@ -141,9 +127,24 @@ def _(debug, df):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    # Under the hood
+    # UI and computation
     """)
     return
+
+
+@app.cell
+def _(counts_df, lemmacounts, mo):
+    if counts_df is not None and lemmacounts is not None:
+        plotlimit = mo.ui.slider(
+            start=1,
+            stop=len(lemmacounts),
+            step=1,
+            value=len(lemmacounts),
+            label="Number of items to plot:",
+        )
+    else:
+        plotlimit = None
+    return (plotlimit,)
 
 
 @app.cell
@@ -334,25 +335,20 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    file_picker = mo.ui.file(label="Select delimited file",   filetypes=[".csv", ".cex"],)
-    return (file_picker,)
+    srcpath= mo.notebook_location() / "public" / "genesis-verbs-numbered.cex"
+    return (srcpath,)
 
 
 @app.cell
-def _(file_picker):
-    if file_picker.value:
-        csv_content = file_picker.contents()
-    else:
-        csv_content = None
-    return (csv_content,)
+def _(datetime, os, srcpath):
+    lastmodstamp = os.path.getmtime(srcpath)
+    lastmod = datetime.datetime.fromtimestamp(lastmodstamp).strftime('%Y-%m-%d %H:%M:%S')
+    return
 
 
 @app.cell
-def _(csv_content, io, pl):
-    if csv_content:
-        df = pl.read_csv(io.BytesIO(csv_content), separator = "|",truncate_ragged_lines=True)
-    else:
-        df = None
+def _(pl, srcpath):
+    df = pl.read_csv(str(srcpath),  separator = "|", truncate_ragged_lines=True)
     return (df,)
 
 
@@ -368,10 +364,12 @@ def _(mo):
 def _():
     import polars as pl
     import io
+    import os
     import complutensian as co
-    import pyarrow as pa
+    #import pyarrow as pa
     import plotly.express as px
-    return io, pl, px
+    import datetime
+    return datetime, os, pl, px
 
 
 if __name__ == "__main__":
