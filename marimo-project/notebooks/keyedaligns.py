@@ -42,7 +42,7 @@ def _(counts_df, mo):
         )
     else:
         plotlimit = None
-    return (plotlimit,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -88,6 +88,23 @@ def _(mo):
 
 
 @app.cell
+def _(lemmacounts):
+    lemmacounts
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _(aligns):
+    aligns
+    return
+
+
+@app.cell
 def _(df):
     df
     return
@@ -108,10 +125,11 @@ def _(mo):
 
 
 @app.cell
-def _(aligns, cf_columns):
+def _(aligns, selected_columns):
     if aligns is not None:
+    
         lemmacounts = (
-            aligns.group_by(cf_columns)
+            aligns.group_by(selected_columns)
             .len(name="count")
             .sort("count", descending=True)
         )
@@ -141,17 +159,6 @@ def _(selected_columns):
 @app.cell
 def _(cf_columns):
     cf_columns
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _(lemmacounts):
-    lemmacounts
     return
 
 
@@ -243,46 +250,6 @@ def _(counts_df):
     return
 
 
-@app.cell
-def _(first_col):
-    first_col
-    return
-
-
-@app.cell
-def _(barplot):
-    barplot
-    return
-
-
-@app.cell
-def _(counts_df, mo, plotlimit, px):
-    if counts_df is not None and len(counts_df) > 0 and plotlimit is not None:
-        # Get the first column name (which varies based on user selection)
-        first_col = counts_df.columns[0]
-
-        # Slice the dataframe to only plot the first n rows
-        plot_data = counts_df.head(plotlimit.value)
-
-        # Create a bar chart using plotly
-
-        fig = px.bar(
-            plot_data.to_pandas(),
-            x=first_col,
-            y="count",
-            title=f"Counts by {first_col}",
-            labels={"count": "Count", first_col: first_col},
-        )
-        
-        # Angle x-axis labels to 45 degrees and show all labels
-        fig.update_xaxes(tickangle=-45, tickmode='linear')
-
-        barplot = mo.ui.plotly(fig)
-    else:
-        barplot = mo.md("*Select a reference version to see vocabulary counts*")
-    return (barplot,)
-
-
 @app.function
 def find_lemma_col(versionstring):
     """Get name of lemma column for selected version of the text."""
@@ -305,6 +272,45 @@ def _(df, lemma, lemmacol, pl):
     else:
         aligns = None
     return (aligns,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Plotting**
+    """)
+    return
+
+
+@app.cell
+def _(lemmacounts, px, plotlimit):
+    if lemmacounts is not None and plotlimit is not None:
+        # Get all columns except 'count'
+        label_cols = [col for col in lemmacounts.columns if col != "count"]
+        
+        # Create labels by concatenating columns with spaces
+        data = lemmacounts.head(plotlimit.value).with_columns(
+            label=pl.concat_str(label_cols, separator=" ")
+        )
+        
+        # Create bar chart
+        barplot = px.bar(
+            data,
+            x="label",
+            y="count",
+            labels={"label": "", "count": "Count"},
+            title="Verb Form Alignments"
+        )
+        
+        # Rotate x-axis labels to 45 degrees
+        barplot.update_layout(
+            xaxis_tickangle=-45,
+            height=500,
+            showlegend=False
+        )
+    else:
+        barplot = None
+    return (barplot,)
 
 
 @app.cell(hide_code=True)
@@ -355,7 +361,7 @@ def _():
     import complutensian as co
     import pyarrow as pa
     import plotly.express as px
-    return io, mo, pl, px
+    return io, mo, pl
 
 
 if __name__ == "__main__":
