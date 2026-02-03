@@ -5,6 +5,12 @@ app = marimo.App(width="medium")
 
 
 @app.cell(hide_code=True)
+def _():
+    import marimo as mo
+    return (mo,)
+
+
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""
     # Find correlations
@@ -360,13 +366,12 @@ def _(mo):
 
 @app.cell
 def _():
-    import marimo as mo
     import polars as pl
     import io
     import complutensian as co
     import pyarrow as pa
     import plotly.express as px
-    return io, mo, pl, px
+    return io, pl, px
 
 
 if __name__ == "__main__":
