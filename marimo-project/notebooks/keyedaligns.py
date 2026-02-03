@@ -11,6 +11,24 @@ def _():
 
 
 @app.cell(hide_code=True)
+def _(versioninfo):
+    versioninfo
+    return
+
+
+@app.cell(hide_code=True)
+def _(lastmod, mo, versioninfo):
+    versiondisplay = None
+    if versioninfo.value is True:
+        versiondisplay = mo.md(f"""*Notebook version*: **0.1.0** (Feb. 3, 2026)
+
+        *Data last updated*: {lastmod}
+        """)
+    versiondisplay    
+    return
+
+
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""
     # *Genesis* in the Complutensian Bible: alignments of verbal forms
@@ -180,6 +198,12 @@ def _(selected_columns):
 
 
 @app.cell
+def _(mo):
+    versioninfo = mo.ui.checkbox(label="*See version info*")
+    return (versioninfo,)
+
+
+@app.cell
 def _(cf_columns):
     cf_columns
     return
@@ -328,6 +352,14 @@ def _(lemma, lemmacounts, pl, plotlimit, px):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ### Initialization
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     **Loading data**:
     """)
     return
@@ -340,16 +372,11 @@ def _(mo):
 
 
 @app.cell
-def _(datetime, os, srcpath):
+def _(datetime, os, pl, srcpath):
     lastmodstamp = os.path.getmtime(srcpath)
     lastmod = datetime.datetime.fromtimestamp(lastmodstamp).strftime('%Y-%m-%d %H:%M:%S')
-    return
-
-
-@app.cell
-def _(pl, srcpath):
     df = pl.read_csv(str(srcpath),  separator = "|", truncate_ragged_lines=True)
-    return (df,)
+    return df, lastmod
 
 
 @app.cell(hide_code=True)
