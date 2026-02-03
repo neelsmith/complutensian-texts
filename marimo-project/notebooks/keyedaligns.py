@@ -16,7 +16,6 @@ def _(mo):
 def _(mo):
     mo.md("""
     /// admonition | Settings
-
     - Choose a delimited-text file to load.
     - Choose a text version, a vocabulary item, and one or more texts to compare it to.
     ///
@@ -42,7 +41,7 @@ def _(counts_df, mo):
         )
     else:
         plotlimit = None
-    return
+    return (plotlimit,)
 
 
 @app.cell(hide_code=True)
@@ -53,8 +52,14 @@ def _(barplot):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.Html("<hr/><hr/><br/><br/><br/><br/><br/><br/><br/><br/>")
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
-    ## Debugging
+    # Debugging
     """)
     return
 
@@ -63,56 +68,67 @@ def _(mo):
 def _(cf_select, lemma, lemmacol, mo, refversion):
     mo.md(f"""
     /// attention | Debugging
-    Text **{refversion.value}** search column **{lemmacol}** for **{lemma.value}**, cf with **{cf_select.value}**
+    In text **{refversion.value}**, search column **{lemmacol}** for **{lemma.value}**, and compare with **{cf_select.value}**
     ///
     """)
     return
 
 
-@app.cell
-def _(aligns, selected_columns):
-    if aligns is not None:
-        aligns.select(selected_columns)
+@app.cell(hide_code=True)
+def _(mo):
+    debug = mo.ui.checkbox(label="Show dataframes")
+    debug
+    return (debug,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Alignments**:
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(aligns, debug):
+    showaligns = None
+    if aligns is not None and debug.value:
+        showaligns = aligns #aligns.select(selected_columns)
+    showaligns   
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    /// attention | Debugging
-
-    *Loaded dataset for reference while developing nb.*
-    ///
+    **Counts**:
     """)
     return
 
 
-@app.cell
-def _(lemmacounts):
-    lemmacounts
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _(aligns):
-    aligns
-    return
-
-
-@app.cell
-def _(df):
-    df
+@app.cell(hide_code=True)
+def _(debug, lemmacounts):
+    showcounts = None
+    if debug.value:
+        showcounts = lemmacounts
+    showcounts    
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.Html("<hr/><hr/><br/><br/><br/><br/><br/><br/><br/><br/>")
+    mo.md("""
+    **Full df**:
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(debug, df):
+    showdf = None
+    if debug.value:
+        showdf = df
+    showdf    
     return
 
 
@@ -126,8 +142,8 @@ def _(mo):
 
 @app.cell
 def _(aligns, selected_columns):
-    if aligns is not None:
-    
+    if aligns is not None and selected_columns:
+
         lemmacounts = (
             aligns.group_by(selected_columns)
             .len(name="count")
@@ -200,11 +216,6 @@ def _(cf_options, mo):
     return (cf_select,)
 
 
-@app.cell
-def _():
-    return
-
-
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
@@ -244,12 +255,6 @@ def _(mo, vocab):
     return (lemma,)
 
 
-@app.cell
-def _(counts_df):
-    counts_df
-    return
-
-
 @app.function
 def find_lemma_col(versionstring):
     """Get name of lemma column for selected version of the text."""
@@ -283,25 +288,25 @@ def _(mo):
 
 
 @app.cell
-def _(lemmacounts, px, plotlimit):
+def _(lemma, lemmacounts, pl, plotlimit, px):
     if lemmacounts is not None and plotlimit is not None:
         # Get all columns except 'count'
         label_cols = [col for col in lemmacounts.columns if col != "count"]
-        
+
         # Create labels by concatenating columns with spaces
         data = lemmacounts.head(plotlimit.value).with_columns(
             label=pl.concat_str(label_cols, separator=" ")
         )
-        
+
         # Create bar chart
         barplot = px.bar(
             data,
             x="label",
             y="count",
             labels={"label": "", "count": "Count"},
-            title="Verb Form Alignments"
+            title=f"Alignments with {lemma.value}"
         )
-        
+
         # Rotate x-axis labels to 45 degrees
         barplot.update_layout(
             xaxis_tickangle=-45,
@@ -361,7 +366,7 @@ def _():
     import complutensian as co
     import pyarrow as pa
     import plotly.express as px
-    return io, mo, pl
+    return io, mo, pl, px
 
 
 if __name__ == "__main__":
