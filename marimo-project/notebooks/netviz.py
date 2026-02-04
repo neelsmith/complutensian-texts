@@ -248,6 +248,12 @@ def _(mo):
 @app.cell
 def _():
     import marimo as mo
+    return (mo,)
+
+
+@app.cell
+def _():
+
     import networkx as nx
     import polars as pl
     import io
@@ -255,7 +261,7 @@ def _():
     import numpy as np
     import scipy as sp
     import plotly.graph_objects as go
-    return co, go, io, mo, np, nx, pl
+    return co, go, io, np, nx, pl
 
 
 if __name__ == "__main__":
