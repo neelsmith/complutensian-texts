@@ -68,7 +68,7 @@ wheels = [
 
 [[package]]
 name = "citable-corpus"
-version = "0.1.0"
+version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cite-exchange" },
@@ -76,9 +76,9 @@ dependencies = [
     { name = "pydantic" },
     { name = "urn-citation" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e2/ed/941a798f42d3ad1264ae28d45d185396a017b2606bb793da4250ab6d67b3/citable_corpus-0.1.0.tar.gz", hash = "sha256:4c66cd85dc19218e3f271a68128d80e972ce89ea710dc21a5ad0247282fd1a1b", size = 116637, upload-time = "2026-01-15T21:11:47.165Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c8/cd/1831322f11e094513ec953ea26473e06242ef78c96c02ff8bfba29d55539/citable_corpus-0.2.0.tar.gz", hash = "sha256:9f914c93739846970284fbb20dd26b0c6750b4a8554d89f799c0e46d86a696f7", size = 184586, upload-time = "2026-02-21T22:21:44.296Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/97/dc/a0d3bb9094e65e50c1fafe0d3a95064641b639627701a769fa3d10a4a03e/citable_corpus-0.1.0-py3-none-any.whl", hash = "sha256:ad8b2a50dfa88fea1f53020c63c013b12670f6916e78b1641ed77c4c53bb89b7", size = 17287, upload-time = "2026-01-15T21:11:45.987Z" },
+    { url = "https://files.pythonhosted.org/packages/03/59/eb8fd5c60b2f60264026832dd90c9a36f76b0947378ff20f85b0ccf9e2cc/citable_corpus-0.2.0-py3-none-any.whl", hash = "sha256:a2ec46d004d704873c345623a0cd0b82c13e4f379c99eea9bb19e30c9cceb34b", size = 19212, upload-time = "2026-02-21T22:21:43.063Z" },
 ]
 
 [[package]]
@@ -136,11 +136,11 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "citable-corpus" },
+    { name = "citable-corpus", specifier = ">=0.2.0" },
     { name = "marimo" },
     { name = "networkx" },
     { name = "plotly", specifier = ">=6.5.2" },
-    { name = "urn-citation" },
+    { name = "urn-citation", specifier = ">=0.7.2" },
 ]
 
 [package.metadata.requires-dev]

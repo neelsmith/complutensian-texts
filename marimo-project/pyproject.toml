@@ -5,8 +5,8 @@ description = "Use marimo to search the texts of the Complutensian Bible"
 
 dependencies = [
     "marimo",
-    "urn_citation",
-    "citable_corpus",
+    "urn_citation>=0.7.2",
+    "citable_corpus>=0.2.0",
     "networkx",
     "plotly>=6.5.2",
 ]
