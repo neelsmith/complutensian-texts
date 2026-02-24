@@ -59,7 +59,7 @@ def _(bookchoice, lxxdisplaychoices, mo, passagechoice):
     return (lxxdisplay,)
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _(lxxblocks, lxxdisplay, mo):
     showlxx = None
     if lxxdisplay:
