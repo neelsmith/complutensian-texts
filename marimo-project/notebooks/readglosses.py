@@ -68,7 +68,7 @@ def _(lxxblocks, lxxdisplay, mo):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _(bookchoice, mo, passagechoice, targumdisplaychoices):
     targumdisplay = None
     if passagechoice.value:
@@ -83,7 +83,7 @@ def _(bookchoice, mo, passagechoice, targumdisplaychoices):
     return (targumdisplay,)
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _(mo, targumblocks, targumdisplay):
     showtargum = None
     if targumdisplay:
@@ -293,7 +293,7 @@ def _(targumdiplresult, targumnormresult, visual_diff):
     return (targumdiffs,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(difflib, escape):
     def visual_diff(string1: str, string2: str) -> str:
         """

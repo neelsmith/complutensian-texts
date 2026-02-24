@@ -3,48 +3,185 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="./favicon.ico" />
-    <!-- Preload is necessary because we show these images when we disconnect from the server,
-    but at that point we cannot load these images from the server -->
-    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
-    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
-    <!-- Preload the fonts -->
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+    
+    <!-- Preload the fonts to match marimo styling -->
     <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
     <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
     <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
-    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
-    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
-    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-  
-    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-    <link rel="manifest" href="./manifest.json" />
-
+    <meta name="description" content="Complutensian Bible: Latin Glosses" />
     
+    <title>Complutensian Bible</title>
     
     <style>
-        #save-button {
-            display: none !important;
+      @font-face {
+        font-family: 'Lora';
+        src: url('./assets/Lora-VariableFont_wght-B2ootaw-.ttf') format('truetype');
+        font-weight: 100 900;
+        font-display: swap;
+      }
+      
+      @font-face {
+        font-family: 'PT Sans';
+        src: url('./assets/PTSans-Regular-CxL0S8W7.ttf') format('truetype');
+        font-weight: normal;
+        font-display: swap;
+      }
+      
+      @font-face {
+        font-family: 'PT Sans';
+        src: url('./assets/PTSans-Bold-D9fedIX3.ttf') format('truetype');
+        font-weight: bold;
+        font-display: swap;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #fafafa;
+        color: #1a1a1a;
+        line-height: 1.6;
+      }
+      
+      .container {
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+      
+      h1 {
+        font-family: 'Lora', Georgia, 'Times New Roman', serif;
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #1a1a1a;
+      }
+      
+      .subtitle {
+        font-size: 1.125rem;
+        color: #666;
+        margin-bottom: 3rem;
+        font-weight: normal;
+      }
+      
+      .card {
+        background: white;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+      
+      .card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-color: #d0d0d0;
+      }
+      
+      .card h2 {
+        font-family: 'Lora', Georgia, 'Times New Roman', serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #1a1a1a;
+      }
+      
+      .card p {
+        color: #4a4a4a;
+        margin-bottom: 1.25rem;
+        line-height: 1.65;
+      }
+      
+      .card a {
+        display: inline-block;
+        padding: 0.625rem 1.25rem;
+        background-color: #5e81ac;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+      }
+      
+      .card a:hover {
+        background-color: #4c6c92;
+      }
+      
+      .version-info {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        font-size: 0.875rem;
+        color: #666;
+        font-style: italic;
+        margin-bottom: 2rem;
+      }
+      
+      .version-info strong {
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+      
+      footer {
+        text-align: center;
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid #e5e5e5;
+        color: #888;
+        font-size: 0.875rem;
+      }
+      
+      @media (max-width: 768px) {
+        .container {
+          padding: 2rem 1.5rem;
         }
-        #filename-input {
-            display: none !important;
+        
+        h1 {
+          font-size: 2rem;
         }
+        
+        .card {
+          padding: 1.5rem;
+        }
+      }
     </style>
-    </head>
+  </head>
   <body>
-    <div id="root">
-      <h1>Complutensian Bible: dashboards</h1>
-
-      <ul>
-        <li><a href="./test1.html">Test dashboard publication</a></li>
-        <li><a href="./test2.html">Second dashboard published to same directory</a></li>
-
-      </ul>
-
+    <div class="container">
+      <h1>Complutensian Bible</h1>
+      <p class="subtitle">Latin Glosses to Translations</p>
+      
+      <div class="version-info">
+        <span><em>Notebook version:</em> <strong>1.0.0</strong></span>
+        <span><em>Data updated:</em> <strong>2026-12-24</strong></span>
+      </div>
+      
+      <div class="card">
+        <h2>Read Latin Glosses</h2>
+        <p>
+          Interactive notebook for exploring Latin glosses to the Septuagint and Targum translations 
+          from the Complutensian Polyglot Bible. Browse diplomatic and normalized texts, 
+          view differences, and navigate through the book of Genesis.
+        </p>
+        <a href="./readglosses.html">Launch Notebook</a>
+      </div>
+      
+      <footer>
+        <p>Complutensian Polyglot Bible Digital Edition</p>
+      </footer>
     </div>
-    <!-- This is a portal for the data editor to render in -->
-    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
-    
   </body>
 </html>
