@@ -9,7 +9,7 @@
 
 import marimo
 
-__generated_with = "0.20.1"
+__generated_with = "0.20.2"
 app = marimo.App(width="medium")
 
 
@@ -22,7 +22,9 @@ def _():
 
 @app.cell(hide_code=True)
 def _(datasource, mo):
-    mo.md(f"*Data source:* {datasource}")
+    mo.md(f"""
+    *Data source:* {datasource}
+    """)
     return
 
 
@@ -155,7 +157,6 @@ def _(mo):
 @app.cell
 def _(targumdisplaychoices):
     targumdisplaychoices.value
-
     return
 
 
@@ -174,7 +175,7 @@ def _(lxxdiffs, lxxdiplresult, lxxdisplaychoices, lxxnormresult, mo):
             lxxblocks.append(mo.vstack([mo.md("**Normalized text**"), mo.md(lxxnormresult)]))   
         if "lxxdiffs" in lxxdisplaychoices.value:
             lxxblocks.append(mo.vstack([mo.md("**Difference**"), mo.md(lxxdiffs)]))        
-    
+
     return (lxxblocks,)
 
 
@@ -297,11 +298,11 @@ def _(difflib, escape):
     def visual_diff(string1: str, string2: str) -> str:
         """
         Generate an HTML visual diff of two strings.
-    
+
         Args:
             string1: The first string to compare
             string2: The second string to compare
-    
+
         Returns:
             HTML string with highlighted differences:
             - Common text: no highlighting
@@ -310,9 +311,9 @@ def _(difflib, escape):
         """
         # Use SequenceMatcher to find differences at character level
         matcher = difflib.SequenceMatcher(None, string1, string2)
-    
+
         html_parts = []
-    
+
         for opcode, i1, i2, j1, j2 in matcher.get_opcodes():
             if opcode == 'equal':
                 # Common text - no highlighting
@@ -333,7 +334,7 @@ def _(difflib, escape):
                 if j1 < j2:
                     text = escape(string2[j1:j2])
                     html_parts.append(f'<span style="background-color: #c6efce;">{text}</span>')
-    
+
         return ''.join(html_parts)
 
 

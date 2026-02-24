@@ -4,3 +4,4 @@ scratch/
 .DS_Store
 *_files/
 data/src/
+__marimo__/
