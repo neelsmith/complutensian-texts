@@ -28,6 +28,12 @@ def _(mo):
     return
 
 
+@app.cell
+def _(lxx):
+    lxx.df
+    return
+
+
 @app.cell(hide_code=True)
 def _(manifest):
     manifest
@@ -41,6 +47,44 @@ def _(imageheight):
 
 
 @app.cell
+def _(currentimage, lxx, pl):
+    imagematches = lxx.df.filter(
+        pl.col("image").cast(pl.Utf8).str.starts_with(currentimage)
+    )
+    return (imagematches,)
+
+
+@app.cell
+def _():
+    ["roi"].to_list()
+    return
+
+
+@app.cell
+def _(getroi, imagematches):
+    currentrois = imagematches.with_columns(getroi())["roi"].to_list()
+    return (currentrois,)
+
+
+@app.cell
+def _(currentrois):
+    currentrois
+    return
+
+
+@app.cell
+def _(currentimage, lxx):
+    lxx.passagesforimage(currentimage)
+    return
+
+
+@app.cell
+def _(imagematches):
+    imagematches
+    return
+
+
+@app.cell(hide_code=True)
 def _(info_url2urn, mo, service, ustate):
     mo.vstack([
         mo.md("*Currently displayed image*:"),
@@ -48,6 +92,18 @@ def _(info_url2urn, mo, service, ustate):
         mo.md(f"*Equivalent URN*:"),
         mo.md(f"`{info_url2urn(ustate["url"],service)}`")
     ])
+    return
+
+
+@app.cell
+def _(info_url2urn, service, ustate):
+    currentimage = info_url2urn(ustate["url"],service)
+    return (currentimage,)
+
+
+@app.cell
+def _(currentimage):
+    currentimage
     return
 
 
@@ -147,7 +203,8 @@ def _(infourl_eg, mo):
 
 
 @app.cell
-def _():
+def _(currentrois):
+    currentrois
     return
 
 
@@ -186,6 +243,56 @@ def _(lxxfile, pl):
 @app.cell
 def _(DSE, lxxdf):
     lxx = DSE(lxxdf)
+    return (lxx,)
+
+
+@app.cell
+def _(pl):
+    def roi():
+        pl.col("image").str.extract(r"@((?:\d+,){3}\d+)$", 1)
+
+    return
+
+
+@app.cell
+def _(lxx, pl):
+    lxx.df = lxx.df.with_columns(
+        pl.col("image")
+          .cast(pl.Utf8)
+          .str.replace(r"@.*$", "")
+          .alias("alt")
+    )
+    return
+
+
+@app.cell
+def _(getroi, lxx):
+    roidf2 = lxx.df.with_columns(getroi())
+    return (roidf2,)
+
+
+@app.cell
+def _(getroi, lxx):
+    roidf = lxx.df = lxx.df.with_columns(getroi())
+    #pl.col("image").cast(pl.Utf8).str.replace(r"^.*@", "").alias("roi")
+    #)
+    return
+
+
+@app.cell
+def _(pl):
+    def getroi():
+        "Extract RoIs from image references"
+        pl.col("image").cast(pl.Utf8).str.replace(r"^.*@", "").alias("roi")
+    
+
+    return (getroi,)
+
+
+@app.cell
+def _(roidf2):
+    roidf2["roi"].to_list()
+
     return
 
 
