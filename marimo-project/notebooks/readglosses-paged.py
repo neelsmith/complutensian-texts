@@ -1,6 +1,6 @@
 # /// script
 # dependencies = [
-#     "dse-polars==0.3.0",
+#     "dse-polars==0.3.2",
 #     "marimo",
 #     "polars==1.38.1",
 # ]
@@ -29,10 +29,17 @@ def _(mo):
 
 
 @app.cell
-def _():
-    from dse_polars  import DSE
+def _(page):
+    page
+    return
 
-    return (DSE,)
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### UI
+    """)
+    return
 
 
 @app.cell
@@ -43,25 +50,18 @@ def _():
 
 @app.cell
 def _(dse, leaveobject, pl):
-    matches = (
-        dse.surfaces().select(
+    pagelist = (
+        dse.surfaces().drop_nulls().select(
             pl.col("surface").str.extract_all(leaveobject).flatten()
         )
     ).to_series().to_list()
-    return (matches,)
+    return (pagelist,)
 
 
 @app.cell
-def _(matches):
-    matches
-    return
-
-
-@app.cell
-def _(dse):
-    dse.surfaces()
-
-    return
+def _(mo, pagelist):
+    page = mo.ui.dropdown(pagelist)
+    return (page,)
 
 
 @app.cell(hide_code=True)
@@ -79,23 +79,11 @@ def _(loadeditions):
 
 
 @app.cell
-def _(targumdf):
-    targumdf.head(5)
-    return
-
-
-@app.cell
-def _(dse):
-    dse.df.with_row_index(name="id", offset=1)
-    return
-
-
-@app.cell
 def _(DSE, loaddse, lxxsrc, pl, targumsrc):
     lxxdf = loaddse(lxxsrc)
     targumdf = loaddse(targumsrc)
-    dse = DSE(pl.concat([lxxdf, targumdf]).unique())
-    return dse, targumdf
+    dse = DSE(pl.concat([lxxdf, targumdf]).unique(maintain_order=True))
+    return (dse,)
 
 
 @app.cell
@@ -184,6 +172,13 @@ def _():
     import re
 
     return
+
+
+@app.cell
+def _():
+    from dse_polars import DSE
+
+    return (DSE,)
 
 
 if __name__ == "__main__":
