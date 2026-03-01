@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "marimo>=0.20.2",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.20.2"
@@ -364,13 +371,17 @@ def _(roilist):
 
 @app.cell
 def _(currentdsepage, mo):
-    mo.md(f"Current page: `{currentdsepage}`")
+    mo.md(f"""
+    Current page: `{currentdsepage}`
+    """)
     return
 
 
 @app.cell
 def _(currentrects, mo):
-    mo.md(f"Current rects: {currentrects}")
+    mo.md(f"""
+    Current rects: {currentrects}
+    """)
     return
 
 
@@ -380,7 +391,7 @@ def _(pagedf, ptinrect, x_state, y_state):
         clickedon = pagedf
     else:
         clickedon = pagedf.filter(ptinrect(x_state, y_state))
-    
+
     return (clickedon,)
 
 
