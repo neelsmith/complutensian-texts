@@ -367,18 +367,18 @@ def _(mo):
 
 
 @app.cell
-def _(readeditions):
-    lxxdipl, lxxnorm, targumdipl, targumnorm = readeditions()
+def _(loadeditions):
+    lxxdipl, lxxnorm, targumdipl, targumnorm = loadeditions()
     return lxxdipl, lxxnorm, targumdipl, targumnorm
 
 
 @app.cell
-def _(mo, readedition):
-    def readeditions():
+def _(loadedition, mo):
+    def loadeditions():
         nb_location = mo.notebook_location()
         filenames = ["septuagint_latin_genesis_dipl.cex","septuagint_latin_genesis_norm.cex",
                      "targum_latin_genesis_dipl.cex","targum_latin_genesis_norm.cex"]
-        
+
         # Check if running in WASM (URL) or local (Path)
         if isinstance(nb_location, str):
             # WASM mode - nb_location is a URL
@@ -388,11 +388,33 @@ def _(mo, readedition):
             # Local mode - nb_location is a Path
             editionsdir = nb_location / "public" 
             fullpaths = [str(editionsdir / f) for f in filenames]
-        
-        return [readedition(f) for f in fullpaths]
+
+        return [loadedition(f) for f in fullpaths]
+
+    return (loadeditions,)
 
 
-    return (readeditions,)
+@app.cell
+def _(StringIO, pl):
+    def loadedition(fname: str):
+        """Read a CEX file with a single labelled block of delimited data, so omitting initial line.
+        Return a polars dataframe
+        """
+        # Check if fname is a URL or local file path
+        if fname.startswith('http://') or fname.startswith('https://'):
+            # WASM mode - fetch from URL
+            import urllib.request
+            with urllib.request.urlopen(fname) as response:
+                content = response.read().decode('utf-8')
+                src = '\n'.join(content.split('\n')[2:])
+        else:
+            # Local mode - read from file
+            with open(fname, 'r', encoding='utf-8') as file:
+                src = '\n'.join(file.readlines()[2:])
+
+        return pl.read_csv(StringIO(src), separator='|', has_header=False, new_columns=["urn", "text"]).drop_nulls()
+
+    return (loadedition,)
 
 
 @app.cell
@@ -412,12 +434,12 @@ def _(StringIO, pl):
             # Local mode - read from file
             with open(fname, 'r', encoding='utf-8') as file:
                 src = '\n'.join(file.readlines()[2:])
-        
+
         return pl.read_csv(StringIO(src), separator='|', has_header=False, new_columns=["urn", "text"]).drop_nulls()
 
-        
 
-    return (readedition,)
+
+    return
 
 
 @app.cell(hide_code=True)
