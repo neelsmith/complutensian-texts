@@ -10,7 +10,10 @@
 import marimo
 
 __generated_with = "0.20.2"
-app = marimo.App(width="medium")
+app = marimo.App(
+    width="medium",
+    layout_file="layouts/readglosses-paged.grid.json",
+)
 
 
 @app.cell(hide_code=True)
@@ -79,20 +82,6 @@ def _(lxxblocks, lxxdisplay, mo):
     if lxxdisplay:
         showlxx = mo.hstack(lxxblocks)
     showlxx  
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.Html("<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><hr/>")
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Computation
-    """)
     return
 
 

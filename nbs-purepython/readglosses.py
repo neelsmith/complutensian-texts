@@ -417,31 +417,6 @@ def _(StringIO, pl):
     return (loadedition,)
 
 
-@app.cell
-def _(StringIO, pl):
-    def readedition(fname: str):
-        """Read a CEX file with a single labelled block of delimited data, so omitting initial line.
-        Return a polars dataframe
-        """
-        # Check if fname is a URL or local file path
-        if fname.startswith('http://') or fname.startswith('https://'):
-            # WASM mode - fetch from URL
-            import urllib.request
-            with urllib.request.urlopen(fname) as response:
-                content = response.read().decode('utf-8')
-                src = '\n'.join(content.split('\n')[2:])
-        else:
-            # Local mode - read from file
-            with open(fname, 'r', encoding='utf-8') as file:
-                src = '\n'.join(file.readlines()[2:])
-
-        return pl.read_csv(StringIO(src), separator='|', has_header=False, new_columns=["urn", "text"]).drop_nulls()
-
-
-
-    return
-
-
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
