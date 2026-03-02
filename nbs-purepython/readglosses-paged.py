@@ -358,9 +358,13 @@ def _():
 @app.cell
 def _(dse, leaveobject, pl):
     pagelist = (
-        dse.surfaces().drop_nulls().select(
-            pl.col("surface").str.extract_all(leaveobject).flatten()
+        dse.surfaces()
+        .drop_nulls()
+        .select(
+            pl.col("surface").str.extract(leaveobject, 0).alias("page")
         )
+        .drop_nulls()
+        .unique(maintain_order=True)
     ).to_series().to_list()
     return (pagelist,)
 
@@ -386,37 +390,26 @@ def _(loadeditions):
 
 
 @app.cell
-def _(targumsrc):
-    targumsrc
-    return
-
-
-@app.cell
-def _(targumdf):
-    targumdf
-    return
-
-
-@app.cell
 def _(DSE, loaddse, lxxsrc, pl, targumsrc):
     lxxdf = loaddse(lxxsrc)
     targumdf = loaddse(targumsrc)
     dse = DSE(pl.concat([lxxdf, targumdf]).unique(maintain_order=True))
-    return dse, targumdf
+    return (dse,)
 
 
 @app.cell
 def _(mo):
-    lxxsrc = str(mo.notebook_dir() / "public" / "septuagint_latin_genesis_dse.cex")
-    targumsrc = str(mo.notebook_dir() / "public" / "targum_latin_genesis_dse.cex")
+    lxxsrc = str(mo.notebook_location() / "public" / "septuagint_latin_genesis_dse.cex")
+    targumsrc = str(mo.notebook_location() / "public" / "targum_latin_genesis_dse.cex")
     return lxxsrc, targumsrc
 
 
 @app.cell
-def _(StringIO, pl, urlopen):
+def _(StringIO, pl):
     def loaddse(src):
         if src.startswith(("http://", "https://")):
-            with urlopen(src) as response:
+            import urllib.request
+            with urllib.request.urlopen(src) as response:
                 csv_text = response.read().decode("utf-8")
                 return pl.read_csv(StringIO(csv_text), separator="|", quote_char=None)
         else:
