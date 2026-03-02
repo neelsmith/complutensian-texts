@@ -1,6 +1,6 @@
 # /// script
 # dependencies = [
-#     "dse-polars==0.3.2",
+#     "dse-polars==0.3.3",
 #     "marimo",
 #     "polars==1.38.1",
 # ]
@@ -31,6 +31,30 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(page):
     page
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo, page, targumdisplaychoices):
+    targumdisplay = None
+    if page.value:
+        targumdisplay = mo.md(f"""## Latin glosses to Targum: page id `{page.value}`
+
+    *Display* {targumdisplaychoices}
+
+
+    """)
+
+    targumdisplay 
+    return (targumdisplay,)
+
+
+@app.cell(hide_code=True)
+def _(mo, targumblocks, targumdisplay):
+    showtargum = None
+    if targumdisplay:
+        showtargum = mo.hstack(targumblocks)
+    showtargum 
     return
 
 
@@ -89,7 +113,7 @@ def _(lxxdisplayblocks, mo):
 @app.cell
 def _(mo, targumdisplayblocks):
     targumdisplaychoices = mo.ui.multiselect(options = targumdisplayblocks, value = list(targumdisplayblocks.keys()))
-    return
+    return (targumdisplaychoices,)
 
 
 @app.cell
@@ -130,6 +154,24 @@ def _(lxxdiffs, lxxdipltext, lxxdisplaychoices, lxxnormtext, mo):
     return (lxxblocks,)
 
 
+@app.cell
+def _(mo, targumdiffs, targumdipltext, targumdisplaychoices, targumnormtext):
+    targumblocks = []
+    targumcandidates = [
+      "targumdiplresult",
+      "targumnormresult",
+      "targumdiffs"
+    ]
+    if targumnormtext:
+        if "targumdiplresult" in targumdisplaychoices.value:
+            targumblocks.append(mo.vstack([mo.md("**Diplomatic text**"), mo.md(targumdipltext)]))
+        if "targumnormresult" in targumdisplaychoices.value:
+            targumblocks.append(mo.vstack([mo.md("**Normalized text**"), mo.md(targumnormtext)]))   
+        if "targumdiffs" in targumdisplaychoices.value:
+            targumblocks.append(mo.vstack([mo.md("**Difference**"), mo.md(targumdiffs)]))  
+    return (targumblocks,)
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
@@ -144,6 +186,12 @@ def _(collection, dse, page):
     if page.value:
         psglist = dse.passagesforsurface(collection + page.value).to_series().to_list()
     return (psglist,)
+
+
+@app.cell
+def _(psglist):
+    psglist
+    return
 
 
 @app.cell
@@ -182,6 +230,30 @@ def _(lxxnormpage, textcontents):
     return (lxxnormtext,)
 
 
+@app.cell
+def _(normlist, pl, targumnorm):
+    targumnormpage = targumnorm.filter(pl.col("urn").is_in(normlist))
+    return (targumnormpage,)
+
+
+@app.cell
+def _(targumnormpage, textcontents):
+    targumnormtext = " ".join(textcontents(targumnormpage))
+    return (targumnormtext,)
+
+
+@app.cell
+def _(dipllist, pl, targumdipl):
+    targumdiplpage = targumdipl.filter(pl.col("urn").is_in(dipllist))
+    return (targumdiplpage,)
+
+
+@app.cell
+def _(targumdiplpage, textcontents):
+    targumdipltext = " ".join(textcontents(targumdiplpage))
+    return (targumdipltext,)
+
+
 @app.function
 def addversion(ctsu: str, version: str) -> str:
     parts = ctsu.split(":")
@@ -194,6 +266,20 @@ def _(lxxdipltext, lxxnormtext, visual_diff):
     if lxxdipltext:
         lxxdiffs = visual_diff(lxxdipltext, lxxnormtext)
     return (lxxdiffs,)
+
+
+@app.cell
+def _(targumdipltext, targumnormtext, visual_diff):
+    targumdiffs = None
+    if targumdipltext:
+        targumdiffs = visual_diff(targumdipltext, targumnormtext)
+    return (targumdiffs,)
+
+
+@app.cell
+def _(targumdiffs):
+    targumdiffs
+    return
 
 
 @app.cell
@@ -296,7 +382,19 @@ def _(mo):
 @app.cell
 def _(loadeditions):
     lxxdipl, lxxnorm, targumdipl, targumnorm = loadeditions()
-    return lxxdipl, lxxnorm
+    return lxxdipl, lxxnorm, targumdipl, targumnorm
+
+
+@app.cell
+def _(targumsrc):
+    targumsrc
+    return
+
+
+@app.cell
+def _(targumdf):
+    targumdf
+    return
 
 
 @app.cell
@@ -304,7 +402,7 @@ def _(DSE, loaddse, lxxsrc, pl, targumsrc):
     lxxdf = loaddse(lxxsrc)
     targumdf = loaddse(targumsrc)
     dse = DSE(pl.concat([lxxdf, targumdf]).unique(maintain_order=True))
-    return (dse,)
+    return dse, targumdf
 
 
 @app.cell
@@ -315,14 +413,14 @@ def _(mo):
 
 
 @app.cell
-def _(StringIO, lxxsrc, pl, urlopen):
+def _(StringIO, pl, urlopen):
     def loaddse(src):
         if src.startswith(("http://", "https://")):
             with urlopen(src) as response:
                 csv_text = response.read().decode("utf-8")
                 return pl.read_csv(StringIO(csv_text), separator="|", quote_char=None)
         else:
-            return pl.read_csv(lxxsrc,separator="|",quote_char=None)
+            return pl.read_csv(src,separator="|",quote_char=None)
 
     return (loaddse,)
 
