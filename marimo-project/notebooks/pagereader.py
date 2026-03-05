@@ -24,37 +24,8 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(pagefrom):
-    pagefrom
-    return
-
-
-@app.cell(hide_code=True)
-def _(dse, iiif, pagefrom, pagemenu, passagemenu, service):
-    choiceblock = None
-    pagelist = None
-    gallery = None
-
-    if pagefrom.value == "page_id":
-        choiceblock = pagemenu
-
-
-    elif pagefrom.value == "passage":
-        choiceblock = passagemenu
-
-    elif pagefrom.value == "image_gallery":
-        imgs = dse.images().to_series().to_list()
-        infourls = [service.urn2info_url(img) for img in imgs]
-        gallery = iiif.IIIFThumbnailGallery(info_urls=infourls)
-        choiceblock = gallery  # mo.md(f"COming for {pagefrom.value}...here's one {imgs[0]}")
-
+def _(choiceblock):
     choiceblock
-    return (gallery,)
-
-
-@app.cell
-def _(currentclickpage):
-    currentclickpage
     return
 
 
@@ -169,6 +140,22 @@ def _(mo):
 
 
 @app.cell
+def _(gallery, mo, pagefrom, pagemenu, passagemenu):
+    choiceblock = None
+    if pagefrom.value == "page_id":
+        choiceblock = mo.hstack([pagefrom,pagemenu],widths=[30,40])
+
+    elif pagefrom.value == "passage":
+        choiceblock = mo.hstack([pagefrom,passagemenu],widths=[30,40])
+
+    elif pagefrom.value == "image_gallery":
+        choiceblock = mo.hstack([pagefrom,gallery],widths=[20,80])  # mo.md(f"COming for {pagefrom.value}...here's one {imgs[0]}")
+    else:
+        choiceblock = pagefrom
+    return (choiceblock,)
+
+
+@app.cell
 def _(mo):
     pagefrom = mo.ui.dropdown(
         {
@@ -183,7 +170,7 @@ def _(mo):
 
 @app.cell
 def _(dse, mo, pl):
-    newpagemenudf = dse.surfaces().with_columns(
+    pagemenudf = dse.surfaces().with_columns(
                 pl.col("surface")
                 .cast(pl.Utf8)
                 .str.replace_all(r"[\[\]\"']", "")
@@ -192,8 +179,8 @@ def _(dse, mo, pl):
                 .str.replace(r"^.*:", "")
                 .alias("label")
             )
-    pagemenulabels = newpagemenudf["label"].to_list()
-    pagemenuvals = newpagemenudf["surface"].to_list()
+    pagemenulabels = pagemenudf["label"].to_list()
+    pagemenuvals = pagemenudf["surface"].to_list()
     pagemenuoptions = dict(zip(pagemenulabels, pagemenuvals))
     pagemenu = mo.ui.dropdown(pagemenuoptions,label="*Select a page*")
     return (pagemenu,)
@@ -232,6 +219,14 @@ def _(mo):
 def _(dse_polars):
     service = dse_polars.CitableIIIFService(urlbase = "https://www.homermultitext.org/iipsrv?IIIF=/project/homer/pyramidal/deepzoom/", extension = "tif")
     return (service,)
+
+
+@app.cell
+def _(dse, iiif, service):
+    imgs = dse.images().to_series().to_list()
+    infourls = [service.urn2info_url(img) for img in imgs]
+    gallery = iiif.IIIFThumbnailGallery(info_urls=infourls)
+    return (gallery,)
 
 
 @app.cell(hide_code=True)
