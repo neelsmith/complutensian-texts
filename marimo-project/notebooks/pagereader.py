@@ -1,7 +1,8 @@
 # /// script
 # dependencies = [
 #     "cite_exchange>=0.3.0",
-#     "dse-polars==0.5.0",
+#     "dse-polars==0.6.1",
+#     "iiif-anywidget==0.7.0",
 #     "marimo",
 #     "polars==1.38.1",
 # ]
@@ -28,55 +29,64 @@ def _(pagefrom):
     return
 
 
-@app.cell
-def _(dse, mo, pagefrom, passagemenu):
+@app.cell(hide_code=True)
+def _(dse, iiif, mo, pagefrom, passagemenu, service):
     choiceblock = None
+    pagelist = None
+    gallery = None
 
     if pagefrom.value == "page_id":
         pagemenu = dse.df["surface"].drop_nulls().unique(maintain_order=True).str.split(":").list.last().to_list()
-    
+
         pagelist = mo.ui.dropdown(pagemenu, label="*Select page id*:")
         choiceblock = pagelist
 
 
     elif pagefrom.value == "passage":
-        choiceblock = passagemenu    
+        choiceblock = passagemenu
 
-    choiceblock    
-    return (pagelist,)
+    elif pagefrom.value == "image_gallery":
+        imgs = dse.images().to_series().to_list()
+        infourls = [service.urn2info_url(img) for img in imgs]
+        gallery = iiif.IIIFThumbnailGallery(info_urls=infourls)
+        choiceblock = gallery  # mo.md(f"COming for {pagefrom.value}...here's one {imgs[0]}")
+
+    choiceblock
+    return gallery, pagelist
 
 
-@app.cell
-def _(dse, mo, pagefrom, pagelist, passagemenu):
+@app.cell(hide_code=True)
+def _(dse, gallery, mo, pagefrom, pagelist, passagemenu, service):
     currentpage = None
     if pagefrom.value == "page_id":
         currentpage = pagelist.value
+
     elif pagefrom.value == "passage":
         if passagemenu.value:
             psgurn = "urn:cts:compnov:bible.genesis.sept_latin:" + passagemenu.value
-            psgmatches = dse.surfacesforpassage(psgurn)
-    #elif pagefrom.value == "image_gallery":
+            psgmatches = dse.surfacesforpassage(psgurn).to_series().to_list()
+            if len(psgmatches) == 1:
+                currentpage = psgmatches[0]
+
+    elif pagefrom.value == "image_gallery":
+        clickie = service.info_url2urn(gallery.selected_info_url)
+        pagematches  = dse.surfacesforimage(clickie)
+        if len(pagematches) == 1:
+            currentpage = pagematches.to_series().to_list()[0]
+
 
     hdr = None
     if currentpage:
         hdr = mo.md(f"## Page `{currentpage}`")
 
-    
+
     hdr
-    return (psgurn,)
-
-
-@app.cell
-def _(dse, passagemenu, psgurn):
-    psgu = "urn:cts:compnov:bible.genesis.sept_latin:" + passagemenu.value
-    dse.surfacesforpassage(psgurn)
-
     return
 
 
 @app.cell(column=1)
-def _(dse):
-    dse.df
+def _():
+    #dse.images().to_series().to_list()
     return
 
 
@@ -104,30 +114,30 @@ def _():
 
 @app.cell
 def _():
-    import polars as pl
+    import iiif_anywidget as iiif
+    import cite_exchange as cex
+    import dse_polars
 
-    return (pl,)
+    return dse_polars, iiif
 
 
 @app.cell
-def _():
-    import cite_exchange
-
+def _(dse_polars):
+    dse_polars.CitableIIIFService
     return
 
 
 @app.cell
 def _():
-    from dse_polars import DSE
+    import polars as pl
+    from io import StringIO
 
-    return (DSE,)
+    return StringIO, pl
 
 
 @app.cell
 def _():
-    from io import StringIO
-
-    return (StringIO,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -175,6 +185,20 @@ def _(dse, mo, pl):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Image data
+    """)
+    return
+
+
+@app.cell
+def _(dse_polars):
+    service = dse_polars.CitableIIIFService(urlbase = "https://www.homermultitext.org/iipsrv?IIIF=/project/homer/pyramidal/deepzoom/", extension = "tif")
+    return (service,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Load DSE data
     """)
     return
@@ -207,10 +231,10 @@ def _(mo):
 
 
 @app.cell
-def _(DSE, loaddf, lxxsrc, pl, targumsrc):
+def _(dse_polars, loaddf, lxxsrc, pl, targumsrc):
     lxxdf = loaddf(lxxsrc)
     targumdf = loaddf(targumsrc)
-    dse = DSE(pl.concat([lxxdf, targumdf]).unique(maintain_order=True))
+    dse = dse_polars.DSE(pl.concat([lxxdf, targumdf]).unique(maintain_order=True))
     return (dse,)
 
 
