@@ -1,6 +1,7 @@
 # /// script
 # dependencies = [
-#     "dse-polars==0.3.3",
+#     "cite_exchange>=0.3.0",
+#     "dse-polars==0.5.0",
 #     "marimo",
 #     "polars==1.38.1",
 # ]
@@ -9,13 +10,80 @@
 
 import marimo
 
-__generated_with = "0.20.2"
+__generated_with = "0.20.4"
 app = marimo.App(width="columns")
 
 
-@app.cell(column=0)
+@app.cell(column=0, hide_code=True)
+def _(mo):
+    mo.md("""
+    # Read pages of the Complutensian polyglot Bible
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(pagefrom):
+    pagefrom
+    return
+
+
+@app.cell
+def _(dse, mo, pagefrom, passagemenu):
+    choiceblock = None
+
+    if pagefrom.value == "page_id":
+        pagemenu = dse.df["surface"].drop_nulls().unique(maintain_order=True).str.split(":").list.last().to_list()
+    
+        pagelist = mo.ui.dropdown(pagemenu, label="*Select page id*:")
+        choiceblock = pagelist
+
+
+    elif pagefrom.value == "passage":
+        choiceblock = passagemenu    
+
+    choiceblock    
+    return (pagelist,)
+
+
+@app.cell
+def _(dse, mo, pagefrom, pagelist, passagemenu):
+    currentpage = None
+    if pagefrom.value == "page_id":
+        currentpage = pagelist.value
+    elif pagefrom.value == "passage":
+        if passagemenu.value:
+            psgurn = "urn:cts:compnov:bible.genesis.sept_latin:" + passagemenu.value
+            psgmatches = dse.surfacesforpassage(psgurn)
+    #elif pagefrom.value == "image_gallery":
+
+    hdr = None
+    if currentpage:
+        hdr = mo.md(f"## Page `{currentpage}`")
+
+    
+    hdr
+    return (psgurn,)
+
+
+@app.cell
+def _(dse, passagemenu, psgurn):
+    psgu = "urn:cts:compnov:bible.genesis.sept_latin:" + passagemenu.value
+    dse.surfacesforpassage(psgurn)
+
+    return
+
+
+@app.cell(column=1)
 def _(dse):
     dse.df
+    return
+
+
+@app.cell
+def _():
+
+
     return
 
 
@@ -39,6 +107,13 @@ def _():
     import polars as pl
 
     return (pl,)
+
+
+@app.cell
+def _():
+    import cite_exchange
+
+    return
 
 
 @app.cell
@@ -77,9 +152,24 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
-    pagelist = mo.ui.dropdown(["Page id"])
-    return (pagelist,)
+def _(dse, mo, pl):
+    passagemenudf = (
+            dse.df
+            .select(["work", "passageref"])
+            .drop_nulls()
+            .unique(subset=["passageref"], keep="first", maintain_order=True)
+            .with_columns(
+                (
+                    pl.col("work").str.replace_all("_", " ").str.to_titlecase()
+                    + pl.lit(" ")
+                    + pl.col("passageref")
+                ).alias("label")
+            )
+        )
+
+    passageoptions = dict(zip(passagemenudf["label"].to_list(), passagemenudf["passageref"].to_list()))
+    passagemenu = mo.ui.dropdown(passageoptions, label="*Select a passage*")
+    return (passagemenu,)
 
 
 @app.cell(hide_code=True)
@@ -157,31 +247,6 @@ def _(StringIO, pl):
         return df.drop_nulls()
 
     return (loaddf,)
-
-
-@app.cell(column=1, hide_code=True)
-def _(mo):
-    mo.md("""
-    # Read pages of the Complutensian polyglot Bible
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(pagefrom):
-    pagefrom
-    return
-
-
-@app.cell
-def _(pagefrom, pagelist):
-    currentpage = None
-    if pagefrom.value == "page_id":
-        currentpage = pagelist.value
-    #elif pagefrom.value == "image_gallery":
-
-    currentpage
-    return
 
 
 if __name__ == "__main__":
