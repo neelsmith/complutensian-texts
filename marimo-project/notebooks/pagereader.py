@@ -30,16 +30,13 @@ def _(pagefrom):
 
 
 @app.cell(hide_code=True)
-def _(dse, iiif, mo, pagefrom, passagemenu, service):
+def _(dse, iiif, pagefrom, pagemenu, passagemenu, service):
     choiceblock = None
     pagelist = None
     gallery = None
 
     if pagefrom.value == "page_id":
-        pagemenu = dse.df["surface"].drop_nulls().unique(maintain_order=True).str.split(":").list.last().to_list()
-
-        pagelist = mo.ui.dropdown(pagemenu, label="*Select page id*:")
-        choiceblock = pagelist
+        choiceblock = pagemenu
 
 
     elif pagefrom.value == "passage":
@@ -52,14 +49,14 @@ def _(dse, iiif, mo, pagefrom, passagemenu, service):
         choiceblock = gallery  # mo.md(f"COming for {pagefrom.value}...here's one {imgs[0]}")
 
     choiceblock
-    return gallery, pagelist
+    return (gallery,)
 
 
 @app.cell(hide_code=True)
-def _(dse, gallery, mo, pagefrom, pagelist, passagemenu, service):
+def _(dse, gallery, mo, pagefrom, pagemenu, passagemenu, service):
     currentpage = None
     if pagefrom.value == "page_id":
-        currentpage = pagelist.value
+        currentpage = pagemenu.value
 
     elif pagefrom.value == "passage":
         if passagemenu.value:
@@ -77,9 +74,7 @@ def _(dse, gallery, mo, pagefrom, pagelist, passagemenu, service):
 
     hdr = None
     if currentpage:
-        hdr = mo.md(f"## Page `{currentpage}`")
-
-
+        hdr = mo.md(f"## Read page `{currentpage}`")
     hdr
     return
 
@@ -87,13 +82,6 @@ def _(dse, gallery, mo, pagefrom, pagelist, passagemenu, service):
 @app.cell(column=1)
 def _():
     #dse.images().to_series().to_list()
-    return
-
-
-@app.cell
-def _():
-
-
     return
 
 
@@ -122,22 +110,11 @@ def _():
 
 
 @app.cell
-def _(dse_polars):
-    dse_polars.CitableIIIFService
-    return
-
-
-@app.cell
 def _():
     import polars as pl
     from io import StringIO
 
     return StringIO, pl
-
-
-@app.cell
-def _():
-    return
 
 
 @app.cell(hide_code=True)
@@ -159,6 +136,24 @@ def _(mo):
 
     )
     return (pagefrom,)
+
+
+@app.cell
+def _(dse, mo, pl):
+    newpagemenudf = dse.surfaces().with_columns(
+                pl.col("surface")
+                .cast(pl.Utf8)
+                .str.replace_all(r"[\[\]\"']", "")
+                .str.replace_all(",", ":")
+                .str.replace_all(r"\s+", "")
+                .str.replace(r"^.*:", "")
+                .alias("label")
+            )
+    pagemenulabels = newpagemenudf["label"].to_list()
+    pagemenuvals = newpagemenudf["surface"].to_list()
+    pagemenuoptions = dict(zip(pagemenulabels, pagemenuvals))
+    pagemenu = mo.ui.dropdown(pagemenuoptions,label="*Select a page*")
+    return (pagemenu,)
 
 
 @app.cell
