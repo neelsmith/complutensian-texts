@@ -52,9 +52,16 @@ def _(dse, iiif, pagefrom, pagemenu, passagemenu, service):
     return (gallery,)
 
 
+@app.cell
+def _(currentclickpage):
+    currentclickpage
+    return
+
+
 @app.cell(hide_code=True)
-def _(dse, gallery, mo, pagefrom, pagemenu, passagemenu, service):
+def _(currentclickpage, dse, mo, pagefrom, pagemenu, passagemenu, service):
     currentpage = None
+    debugs = ""
     if pagefrom.value == "page_id":
         currentpage = pagemenu.value
 
@@ -65,16 +72,18 @@ def _(dse, gallery, mo, pagefrom, pagemenu, passagemenu, service):
             if len(psgmatches) == 1:
                 currentpage = psgmatches[0]
 
-    elif pagefrom.value == "image_gallery":
-        clickie = service.info_url2urn(gallery.selected_info_url)
-        pagematches  = dse.surfacesforimage(clickie)
+    elif pagefrom.value == "image_gallery" and currentclickpage:
+        clickie = service.info_url2urn(currentclickpage)
+        pagematches = dse.surfacesforimage(clickie)
+        debugs = f"for {clickie} found {pagematches.to_series().to_list()}"
         if len(pagematches) == 1:
             currentpage = pagematches.to_series().to_list()[0]
 
 
     hdr = None
     if currentpage:
-        hdr = mo.md(f"## Read page `{currentpage}`")
+        hdr = mo.md(f"""## Read page `{currentpage}`
+        """)
     hdr
     return
 
@@ -115,6 +124,40 @@ def _():
     from io import StringIO
 
     return StringIO, pl
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Wiring gallery reaction
+    """)
+    return
+
+
+@app.cell
+def _(gallery, mo, pagefrom):
+    currentclickpage_state, set_currentclickpage_state = mo.state(None)
+
+    if pagefrom.value == "image_gallery" and gallery is not None:
+        def push_currentclickpage(_change=None):
+            set_currentclickpage_state(gallery.selected_info_url)
+
+        old_observer = getattr(gallery, "_marimo_selected_info_observer", None)
+        if old_observer is not None:
+            gallery.unobserve(old_observer, names=["selected_info_url"])
+
+        gallery.observe(push_currentclickpage, names=["selected_info_url"])
+        gallery._marimo_selected_info_observer = push_currentclickpage
+        push_currentclickpage()
+    else:
+        set_currentclickpage_state(None)
+    return (currentclickpage_state,)
+
+
+@app.cell
+def _(currentclickpage_state):
+    currentclickpage = currentclickpage_state()
+    return (currentclickpage,)
 
 
 @app.cell(hide_code=True)
