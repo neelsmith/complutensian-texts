@@ -72,6 +72,115 @@ def _(imagetab, mo, texttab):
 @app.cell(column=1, hide_code=True)
 def _(mo):
     mo.md("""
+    ## Image tab
+    """)
+    return
+
+
+@app.cell
+def _(currentpage, currentpageimg, currentpageinfourl, mo, viewer):
+    imagetab = mo.md(f""" 
+
+    - page {currentpage} 
+    - image {currentpageimg}
+    - info url is {currentpageinfourl}
+
+
+    {viewer}
+    """)
+    return (imagetab,)
+
+
+@app.cell
+def _(currentpage):
+    currentpage
+    return
+
+
+@app.cell
+def _(imglist):
+
+    currentpageimg = None
+    if len(imglist) == 1:
+        currentpageimg = imglist[0]
+    
+    return (currentpageimg,)
+
+
+@app.cell
+def _(currentpageimg, service):
+    currentpageinfourl = None
+    if currentpageimg:
+        currentpageinfourl = service.urn2info_url(currentpageimg)
+    return (currentpageinfourl,)
+
+
+@app.cell
+def _(currentpageimg):
+    currentpageimg
+    return
+
+
+@app.cell
+def _():
+    viewer = None
+    #viewer = iiif.IIIFImageOverlayViewer(url = currentpageinfourl, rectangles_csv = "\n".join(pagerect_strings))
+    return (viewer,)
+
+
+@app.cell
+def _(currentpage, dse):
+    imglist = dse.wholeimagesforsurface(currentpage).to_series().to_list()
+    imglist
+    return (imglist,)
+
+
+@app.cell
+def _(currentpage, dse):
+    pagerect_strings = []
+    if currentpage:
+        pagerects = dse.rectsforsurface(currentpage)
+
+        if hasattr(pagerects, "columns"):
+            cols = set(pagerects.columns)
+            if {"x", "y", "w", "h"}.issubset(cols):
+                rows = pagerects.select(["x", "y", "w", "h"]).iter_rows(named=True)
+                pagerect_strings = [
+                    ",".join(str(row[key]) for key in ("x", "y", "w", "h"))
+                    for row in rows
+                ]
+            elif "rect" in cols:
+                for rect in pagerects.get_column("rect").to_list():
+                    if isinstance(rect, dict) and {"x", "y", "w", "h"}.issubset(rect):
+                        pagerect_strings.append(
+                            ",".join(str(rect[key]) for key in ("x", "y", "w", "h"))
+                        )
+                    elif isinstance(rect, (list, tuple)) and len(rect) == 4:
+                        pagerect_strings.append(",".join(str(v) for v in rect))
+                    else:
+                        pagerect_strings.append(str(rect))
+        else:
+            for rect in pagerects:
+                if isinstance(rect, dict) and {"x", "y", "w", "h"}.issubset(rect):
+                    pagerect_strings.append(
+                        ",".join(str(rect[key]) for key in ("x", "y", "w", "h"))
+                    )
+                elif isinstance(rect, (list, tuple)) and len(rect) == 4:
+                    pagerect_strings.append(",".join(str(v) for v in rect))
+                else:
+                    pagerect_strings.append(str(rect))
+    return (pagerect_strings,)
+
+
+@app.cell
+def _(pagerect_strings):
+    pagerect_strings
+    return
+
+
+@app.cell(column=2, hide_code=True)
+def _(mo):
+    mo.md("""
     ## Text tab
     """)
     return
@@ -124,10 +233,13 @@ def _(pagepassagelist):
 @app.cell
 def _(lxxdiff, lxxdiplformatted, lxxnormformatted, mo):
     lxxstack =mo.hstack([lxxdiplformatted,mo.md(""), lxxnormformatted, mo.Html(lxxdiff)], widths=[30, 5, 30, 30])
-    
-    
-
     return (lxxstack,)
+
+
+@app.cell
+def _(lxxdiff):
+    lxxdiff
+    return
 
 
 @app.cell(hide_code=True)
@@ -194,7 +306,6 @@ def _(formatpagetext, lxxnorm, pagepassagenormed, targumnorm):
 @app.cell
 def _(lxxdipl, pagepassagediplomatic, pl):
     pagelxxdipltext =    " ".join(lxxdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["text"]).to_series().to_list())
-
     return (pagelxxdipltext,)
 
 
@@ -203,6 +314,12 @@ def _(lxxnorm, pagepassagenormed, pl):
     pagelxxdnormtext =    " ".join(lxxnorm.filter(pl.col("urn").is_in(pagepassagenormed)).select(["text"]).to_series().to_list())
     pagelxxdnormtext
     return (pagelxxdnormtext,)
+
+
+@app.cell
+def _(pagelxxdipltext):
+    pagelxxdipltext
+    return
 
 
 @app.cell
@@ -250,27 +367,7 @@ def _(mo):
     return (targumstack,)
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Image tab
-    """)
-    return
-
-
-@app.cell
-def _(currentpage, mo):
-    imagetab = mo.md(f"Image view of page {currentpage} will go here")
-    return (imagetab,)
-
-
-@app.cell
-def _(currentpage, dse):
-    dse.wholeimagesforsurface(currentpage)
-    return
-
-
-@app.cell(column=2)
+@app.cell(column=3)
 def _():
     #dse.images().to_series().to_list()
     return
