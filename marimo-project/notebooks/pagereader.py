@@ -77,53 +77,24 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    debug = mo.ui.checkbox(label="*Debug*")
-    debug
-    return (debug,)
+@app.cell
+def _(debugmsg, lxxclickformatted, mo, targumclickformatted, viewer):
+    imagetab = mo.vstack([
+      
+        lxxclickformatted,
+        targumclickformatted,
+        mo.md(f"""{debugmsg}
+
+
+    *Select text with Option-click (Alt-click)*."""),
+        viewer])
+    return (imagetab,)
 
 
 @app.cell
 def _(coords_state):
     coords = coords_state()
     return (coords,)
-
-
-@app.cell
-def _(coords, currentpage, currentpageimg, currentpageinfourl, debug):
-    pixmsg = f"x,y {coords['pixel_x']}, {coords['pixel_y']}"
-    normmsg = f"normalized {coords['normalized_x']}, {coords['normalized_y']}"
-
-    debugmsg = ""
-    if debug.value:
-        debugmsg = f"""
-    
-    - page {currentpage} 
-    - image {currentpageimg}
-    - info url is {currentpageinfourl}
-
-    pixels {pixmsg} {normmsg}
-        """
-    return (debugmsg,)
-
-
-@app.cell
-def _(debugmsg, lxxclickformatted, mo, viewer):
-    imagetab = mo.vstack([
-        mo.md(f"""{debugmsg}
-
-    {lxxclickformatted}
-
-    *Select text with Option-click (Alt-click)*."""),  
-        viewer])
-    return (imagetab,)
-
-
-@app.cell
-def _(lxxclickformatted):
-    lxxclickformatted
-    return
 
 
 @app.cell
@@ -272,12 +243,6 @@ def _(coords_state, currentpage, dse, pl, ptinrect):
 
 
 @app.cell
-def _():
-    #clickedrows
-    return
-
-
-@app.cell
 def _(clickedrows, pl):
     diplclicks = clickedrows.select(pl.lit("urn:cts:compnov:bible.") + pl.col("work")  + pl.lit(".") + pl.col("version") + pl.lit(".diplomatic:") + pl.col("passageref")).to_series().to_list()
     return (diplclicks,)
@@ -290,8 +255,18 @@ def _(diplclicks, lxxdipl, pl):
 
 
 @app.cell
-def _(lxxclickcorpus, md_passages):
-    lxxclickformatted = "\n\n".join(md_passages(lxxclickcorpus,highlighter="**"))
+def _(lxxclickcorpus):
+    lxxclicklist = lxxclickcorpus.to_series().to_list()
+    return (lxxclicklist,)
+
+
+@app.cell
+def _(lxxclickcorpus, lxxclicklist, md_passages, mo):
+    lxxclickformatted = ""
+
+    if lxxclicklist:
+        lxxclickmd = "\n\n".join(md_passages(lxxclickcorpus,highlighter="**"))
+        lxxclickformatted = mo.callout(mo.md(lxxclickmd), kind="info"),
     return (lxxclickformatted,)
 
 
@@ -303,14 +278,50 @@ def _(diplclicks, pl, targumdipl):
 
 @app.cell
 def _(targumclickcorpus):
-    targumclickcorpus
-    return
+    targumclicklist = targumclickcorpus.to_series().to_list()
+    return (targumclicklist,)
 
 
 @app.cell
-def _(pagepassagediplomatic):
-    pagepassagediplomatic
+def _(md_passages, mo, targumclickcorpus, targumclicklist):
+    targumclickformatted = ""
+    if targumclicklist:
+        targumclickmd = "\n\n".join(md_passages(targumclickcorpus,highlighter="**"))
+        targumclickformatted = mo.callout(mo.md(targumclickmd), kind="info")
+    return (targumclickformatted,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Debug
+    """)
     return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    debug = mo.ui.checkbox(label="*Debug*")
+    debug
+    return (debug,)
+
+
+@app.cell
+def _(coords, currentpage, currentpageimg, currentpageinfourl, debug):
+    pixmsg = f"x,y {coords['pixel_x']}, {coords['pixel_y']}"
+    normmsg = f"normalized {coords['normalized_x']}, {coords['normalized_y']}"
+
+    debugmsg = ""
+    if debug.value:
+        debugmsg = f"""
+
+    - page {currentpage} 
+    - image {currentpageimg}
+    - info url is {currentpageinfourl}
+
+    pixels {pixmsg} {normmsg}
+        """
+    return (debugmsg,)
 
 
 @app.cell(column=2, hide_code=True)
