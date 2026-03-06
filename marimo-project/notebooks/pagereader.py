@@ -78,11 +78,18 @@ def _(mo):
 
 
 @app.cell
-def _(currentpage, lxxstack, mo):
-    texttab = mo.md(f"""Text view of {currentpage}
+def _(lxxstack, mo, targumstack):
+    texttab = mo.md(f"""
 
+    ### Latin glosses on Septuagint
 
     {lxxstack}
+
+
+
+    ### Latin glosses on Targum Onkelos
+
+    {targumstack}
 
     """)
     return (texttab,)
@@ -105,36 +112,6 @@ def _(pagepassagelist):
 
 
 @app.cell
-def _(lxxdiplformatted, lxxnormformatted, mo):
-    lxxstack = mo.vstack(
-        [
-        mo.md("**Septuagint glosses**"),
-
-        mo.hstack([lxxdiplformatted,mo.md(""), lxxnormformatted], widths=[40,10,40])
-        ]
-        )
-
-    return (lxxstack,)
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _(lxxnormformatted):
-    lxxnormformatted
-    return
-
-
-@app.cell
-def _(lxxdiplformatted):
-    lxxdiplformatted
-    return
-
-
-@app.cell
 def _(pagepassagelist):
     pagepassagenormed = [
         f"{head}.normalized:{tail}"
@@ -142,6 +119,62 @@ def _(pagepassagelist):
         for head, _, tail in [u.rpartition(":")]
     ]
     return (pagepassagenormed,)
+
+
+@app.cell
+def _(lxxdiff, lxxdiplformatted, lxxnormformatted, mo):
+    lxxstack =mo.hstack([lxxdiplformatted,mo.md(""), lxxnormformatted, mo.Html(lxxdiff)], widths=[30, 5, 30, 30])
+    
+    
+
+    return (lxxstack,)
+
+
+@app.cell(hide_code=True)
+def _(difflib, escape):
+    def visual_diff(string1: str, string2: str) -> str:
+        """
+        Generate an HTML visual diff of two strings.
+
+        Args:
+            string1: The first string to compare
+            string2: The second string to compare
+
+        Returns:
+            HTML string with highlighted differences:
+            - Common text: no highlighting
+            - Text only in string1: pastel yellow background
+            - Text only in string2: pastel green background
+        """
+        # Use SequenceMatcher to find differences at character level
+        matcher = difflib.SequenceMatcher(None, string1, string2)
+
+        html_parts = []
+
+        for opcode, i1, i2, j1, j2 in matcher.get_opcodes():
+            if opcode == 'equal':
+                # Common text - no highlighting
+                html_parts.append(escape(string1[i1:i2]))
+            elif opcode == 'delete':
+                # Text only in string1 - yellow background
+                text = escape(string1[i1:i2])
+                html_parts.append(f'<span style="background-color: #ffe4b3;">{text}</span>')
+            elif opcode == 'insert':
+                # Text only in string2 - green background
+                text = escape(string2[j1:j2])
+                html_parts.append(f'<span style="background-color: #c6efce;">{text}</span>')
+            elif opcode == 'replace':
+                # Text changed - show deleted part in yellow and inserted part in green
+                if i1 < i2:
+                    text = escape(string1[i1:i2])
+                    html_parts.append(f'<span style="background-color: #ffe4b3;">{text}</span>')
+                if j1 < j2:
+                    text = escape(string2[j1:j2])
+                    html_parts.append(f'<span style="background-color: #c6efce;">{text}</span>')
+
+        return ''.join(html_parts)
+
+    return (visual_diff,)
 
 
 @app.cell
@@ -159,6 +192,26 @@ def _(formatpagetext, lxxnorm, pagepassagenormed, targumnorm):
 
 
 @app.cell
+def _(lxxdipl, pagepassagediplomatic, pl):
+    pagelxxdipltext =    " ".join(lxxdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["text"]).to_series().to_list())
+
+    return (pagelxxdipltext,)
+
+
+@app.cell
+def _(lxxnorm, pagepassagenormed, pl):
+    pagelxxdnormtext =    " ".join(lxxnorm.filter(pl.col("urn").is_in(pagepassagenormed)).select(["text"]).to_series().to_list())
+    pagelxxdnormtext
+    return (pagelxxdnormtext,)
+
+
+@app.cell
+def _(pagelxxdipltext, pagelxxdnormtext, visual_diff):
+    lxxdiff = visual_diff(pagelxxdipltext, pagelxxdnormtext)
+    return (lxxdiff,)
+
+
+@app.cell
 def _(md_passages, mo, pl):
     def formatpagetext(corpus, filterlist):
         pagefiltered = corpus.filter(pl.col("urn").is_in(filterlist)).select(["urn", "text"])
@@ -168,21 +221,7 @@ def _(md_passages, mo, pl):
 
 
 @app.cell
-def _(lxxdipl, pagepassagediplomatic, pl):
-    lxxpagediplpassages = lxxdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["urn", "text"])
-    return (lxxpagediplpassages,)
-
-
-@app.cell
-def _(lxxpagediplpassages, md_passages, mo):
-    lxxdipdisplay = mo.md("\n\n".join(md_passages(lxxpagediplpassages, highlighter='**')))
-    return
-
-
-@app.cell
 def _():
-    #def filteredforpage(corpus, pagepsgs):
-    #    return corpus.filter(pl.col("urn").is_in(pagepsgs))
     return
 
 
@@ -201,6 +240,14 @@ def _(pl):
         ]
 
     return (md_passages,)
+
+
+@app.cell
+def _(mo):
+    targumstack=mo.md("""
+    Targum stack goes here
+    """)
+    return (targumstack,)
 
 
 @app.cell(hide_code=True)
@@ -266,6 +313,14 @@ def _():
     from pathlib import Path
 
     return
+
+
+@app.cell
+def _():
+    import difflib
+    from html import escape
+
+    return difflib, escape
 
 
 @app.cell(hide_code=True)
