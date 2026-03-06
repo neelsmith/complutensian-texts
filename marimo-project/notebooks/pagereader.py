@@ -71,6 +71,12 @@ def _(imagetab, mo, texttab):
 
 @app.cell(column=1, hide_code=True)
 def _(mo):
+    mo.md("")
+    return
+
+
+@app.cell(column=2, hide_code=True)
+def _(mo):
     mo.md("""
     ## Text tab
     """)
@@ -306,7 +312,7 @@ def _(difflib, escape):
     return (visual_diff,)
 
 
-@app.cell(column=2, hide_code=True)
+@app.cell(column=3, hide_code=True)
 def _(mo):
     mo.md("""
     ## Image tab
@@ -317,7 +323,7 @@ def _(mo):
 @app.cell
 def _(debugmsg, lxxclickformatted, mo, targumclickformatted, viewer):
     imagetab = mo.vstack([
-      
+
         lxxclickformatted,
         targumclickformatted,
         mo.md(f"""{debugmsg}
@@ -561,7 +567,7 @@ def _(coords, currentpage, currentpageimg, currentpageinfourl, debug):
     return (debugmsg,)
 
 
-@app.cell(column=3, hide_code=True)
+@app.cell(column=4, hide_code=True)
 def _(mo):
     mo.md("""
     ## Imports
