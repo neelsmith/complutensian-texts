@@ -101,14 +101,13 @@ def _(
     pixels {pixmsg}
     {normmsg}
 
-    Use Option-click (Alt-click) in the viewer to update coordinates.
+    Select text with Option-click (Alt-click).
     """), viewer])
     return (imagetab,)
 
 
 @app.cell
 def _(imglist):
-
     currentpageimg = None
     if len(imglist) == 1:
         currentpageimg = imglist[0]
@@ -228,6 +227,40 @@ def _(set_coords_state, viewer):
 
 
     return (push_state,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Get values from alt-clicking
+    """)
+    return
+
+
+@app.cell
+def _(coords_state, currentpage, dse, pl, ptinrect):
+    _coords = coords_state()
+    _nx = float(_coords.get("normalized_x", -1.0))
+    _ny = float(_coords.get("normalized_y", -1.0))
+
+    if currentpage is None or _nx < 0.0 or _ny < 0.0:
+        clickedrows = dse.df.head(0)
+    else:
+        _click_page_rows = dse.df.filter(pl.col("surface") == currentpage)
+        clickedrows = _click_page_rows.filter(ptinrect(_nx, _ny))
+    return (clickedrows,)
+
+
+@app.cell
+def _(clickedrows):
+    clickedrows
+    return
+
+
+@app.cell
+def _(pagepassagediplomatic):
+    pagepassagediplomatic
+    return
 
 
 @app.cell(column=2, hide_code=True)
@@ -436,6 +469,13 @@ def _():
     import dse_polars
 
     return dse_polars, iiif
+
+
+@app.cell
+def _():
+    from dse_polars import ptinrect
+
+    return (ptinrect,)
 
 
 @app.cell
