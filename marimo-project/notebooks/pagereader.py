@@ -77,33 +77,53 @@ def _(mo):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    debug = mo.ui.checkbox(label="*Debug*")
+    debug
+    return (debug,)
+
+
 @app.cell
-def _(
-    coords_state,
-    currentpage,
-    currentpageimg,
-    currentpageinfourl,
-    mo,
-    viewer,
-):
+def _(coords_state):
     coords = coords_state()
+    return (coords,)
+
+
+@app.cell
+def _(coords, currentpage, currentpageimg, currentpageinfourl, debug):
     pixmsg = f"x,y {coords['pixel_x']}, {coords['pixel_y']}"
     normmsg = f"normalized {coords['normalized_x']}, {coords['normalized_y']}"
-    imagetab = mo.vstack([
-        mo.md(f""" 
 
+    debugmsg = ""
+    if debug.value:
+        debugmsg = f"""
+    
     - page {currentpage} 
     - image {currentpageimg}
     - info url is {currentpageinfourl}
 
+    pixels {pixmsg} {normmsg}
+        """
+    return (debugmsg,)
 
 
-    pixels {pixmsg}
-    {normmsg}
+@app.cell
+def _(debugmsg, lxxclickformatted, mo, viewer):
+    imagetab = mo.vstack([
+        mo.md(f"""{debugmsg}
 
-    Select text with Option-click (Alt-click).
-    """), viewer])
+    {lxxclickformatted}
+
+    *Select text with Option-click (Alt-click)*."""),  
+        viewer])
     return (imagetab,)
+
+
+@app.cell
+def _(lxxclickformatted):
+    lxxclickformatted
+    return
 
 
 @app.cell
@@ -252,8 +272,38 @@ def _(coords_state, currentpage, dse, pl, ptinrect):
 
 
 @app.cell
-def _(clickedrows):
-    clickedrows
+def _():
+    #clickedrows
+    return
+
+
+@app.cell
+def _(clickedrows, pl):
+    diplclicks = clickedrows.select(pl.lit("urn:cts:compnov:bible.") + pl.col("work")  + pl.lit(".") + pl.col("version") + pl.lit(".diplomatic:") + pl.col("passageref")).to_series().to_list()
+    return (diplclicks,)
+
+
+@app.cell
+def _(diplclicks, lxxdipl, pl):
+    lxxclickcorpus = lxxdipl.filter(pl.col("urn").is_in(diplclicks)).select(["urn", "text"])
+    return (lxxclickcorpus,)
+
+
+@app.cell
+def _(lxxclickcorpus, md_passages):
+    lxxclickformatted = "\n\n".join(md_passages(lxxclickcorpus,highlighter="**"))
+    return (lxxclickformatted,)
+
+
+@app.cell
+def _(diplclicks, pl, targumdipl):
+    targumclickcorpus  = targumdipl.filter(pl.col("urn").is_in(diplclicks)).select(["urn", "text"])
+    return (targumclickcorpus,)
+
+
+@app.cell
+def _(targumclickcorpus):
+    targumclickcorpus
     return
 
 
