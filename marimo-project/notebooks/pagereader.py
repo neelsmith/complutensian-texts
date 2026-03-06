@@ -79,15 +79,12 @@ def _(mo):
 
 @app.cell
 def _(currentpage, currentpageimg, currentpageinfourl, mo, viewer):
-    imagetab = mo.md(f""" 
+    imagetab = mo.vstack([
+        mo.md(f""" 
 
     - page {currentpage} 
     - image {currentpageimg}
-    - info url is {currentpageinfourl}
-
-
-    {viewer}
-    """)
+    - info url is {currentpageinfourl}"""), viewer])
     return (imagetab,)
 
 
@@ -122,9 +119,10 @@ def _(currentpageimg):
 
 
 @app.cell
-def _():
+def _(currentpageinfourl, iiif, pagerect_strings):
     viewer = None
-    #viewer = iiif.IIIFImageOverlayViewer(url = currentpageinfourl, rectangles_csv = "\n".join(pagerect_strings))
+    if currentpageinfourl:
+        viewer = iiif.IIIFImageOverlayViewer(url = currentpageinfourl, rectangles_csv = "\n".join(pagerect_strings))
     return (viewer,)
 
 
