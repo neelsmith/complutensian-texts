@@ -78,20 +78,44 @@ def _(mo):
 
 
 @app.cell
-def _(currentpage, currentpageimg, currentpageinfourl, mo, viewer):
+def _(coords):
+    coords
+    return
+
+
+@app.cell
+def _(
+    coords_state,
+    currentpage,
+    currentpageimg,
+    currentpageinfourl,
+    mo,
+    observer_status,
+    viewer,
+):
+    coords = coords_state()
+    pixmsg = f"x,y {coords['pixel_x']}, {coords['pixel_y']}"
+    normmsg = f"normalized {coords['normalized_x']}, {coords['normalized_y']}"
+    last_change = coords.get("last_change", "")
+    last_new = coords.get("last_new", "")
     imagetab = mo.vstack([
         mo.md(f""" 
 
     - page {currentpage} 
     - image {currentpageimg}
-    - info url is {currentpageinfourl}"""), viewer])
-    return (imagetab,)
+    - info url is {currentpageinfourl}
 
 
-@app.cell
-def _(currentpage):
-    currentpage
-    return
+
+    pixels {pixmsg}
+    {normmsg}
+    observer {observer_status}
+    last change {last_change}
+    last new {last_new}
+
+    Use Option-click (Alt-click) in the viewer to update coordinates.
+    """), viewer])
+    return coords, imagetab
 
 
 @app.cell
@@ -100,7 +124,6 @@ def _(imglist):
     currentpageimg = None
     if len(imglist) == 1:
         currentpageimg = imglist[0]
-    
     return (currentpageimg,)
 
 
@@ -110,12 +133,6 @@ def _(currentpageimg, service):
     if currentpageimg:
         currentpageinfourl = service.urn2info_url(currentpageimg)
     return (currentpageinfourl,)
-
-
-@app.cell
-def _(currentpageimg):
-    currentpageimg
-    return
 
 
 @app.cell
@@ -129,7 +146,6 @@ def _(currentpageinfourl, iiif, pagerect_strings):
 @app.cell
 def _(currentpage, dse):
     imglist = dse.wholeimagesforsurface(currentpage).to_series().to_list()
-    imglist
     return (imglist,)
 
 
@@ -170,10 +186,72 @@ def _(currentpage, dse):
     return (pagerect_strings,)
 
 
-@app.cell
-def _(pagerect_strings):
-    pagerect_strings
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Wiring alt-click action
+    """)
     return
+
+
+@app.cell
+def _(mo):
+    coords_state, set_coords_state = mo.state(
+        {
+            "pixel_x": -1.0,
+            "pixel_y": -1.0,
+            "normalized_x": -1.0,
+            "normalized_y": -1.0,
+            "last_change": "",
+            "last_new": "",
+        }
+    )
+    return coords_state, set_coords_state
+
+
+@app.cell
+def _(push_state, viewer):
+    observer_status = "viewer_missing"
+    if viewer is not None:
+        _viewer_trait_names = ["pixel_x", "pixel_y", "normalized_x", "normalized_y"]
+
+        _viewer_old_observer = getattr(viewer, "_marimo_observer", None)
+        if _viewer_old_observer is not None:
+            viewer.unobserve(_viewer_old_observer, names=_viewer_trait_names)
+
+        viewer.observe(push_state, names=_viewer_trait_names)
+        viewer._marimo_observer = push_state
+        push_state()
+        observer_status = "attached"
+    return (observer_status,)
+
+
+@app.cell
+def _(set_coords_state, viewer):
+    def push_state(_change=None):
+        "Update value of coordinates state from viewer object."
+        if viewer is None:
+            return
+
+        _change_name = "initial"
+        _change_new = ""
+        if isinstance(_change, dict):
+            _change_name = str(_change.get("name", ""))
+            _change_new = str(_change.get("new", ""))
+
+        set_coords_state(
+            {
+                "pixel_x": float(viewer.pixel_x),
+                "pixel_y": float(viewer.pixel_y),
+                "normalized_x": float(viewer.normalized_x),
+                "normalized_y": float(viewer.normalized_y),
+                "last_change": _change_name,
+                "last_new": _change_new,
+            }
+        )
+
+
+    return (push_state,)
 
 
 @app.cell(column=2, hide_code=True)
@@ -365,13 +443,7 @@ def _(mo):
     return (targumstack,)
 
 
-@app.cell(column=3)
-def _():
-    #dse.images().to_series().to_list()
-    return
-
-
-@app.cell(hide_code=True)
+@app.cell(column=3, hide_code=True)
 def _(mo):
     mo.md("""
     ## Imports
