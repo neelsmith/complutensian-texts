@@ -78,26 +78,17 @@ def _(mo):
 
 
 @app.cell
-def _(coords):
-    coords
-    return
-
-
-@app.cell
 def _(
     coords_state,
     currentpage,
     currentpageimg,
     currentpageinfourl,
     mo,
-    observer_status,
     viewer,
 ):
     coords = coords_state()
     pixmsg = f"x,y {coords['pixel_x']}, {coords['pixel_y']}"
     normmsg = f"normalized {coords['normalized_x']}, {coords['normalized_y']}"
-    last_change = coords.get("last_change", "")
-    last_new = coords.get("last_new", "")
     imagetab = mo.vstack([
         mo.md(f""" 
 
@@ -109,13 +100,10 @@ def _(
 
     pixels {pixmsg}
     {normmsg}
-    observer {observer_status}
-    last change {last_change}
-    last new {last_new}
 
     Use Option-click (Alt-click) in the viewer to update coordinates.
     """), viewer])
-    return coords, imagetab
+    return (imagetab,)
 
 
 @app.cell
@@ -202,8 +190,6 @@ def _(mo):
             "pixel_y": -1.0,
             "normalized_x": -1.0,
             "normalized_y": -1.0,
-            "last_change": "",
-            "last_new": "",
         }
     )
     return coords_state, set_coords_state
@@ -211,7 +197,6 @@ def _(mo):
 
 @app.cell
 def _(push_state, viewer):
-    observer_status = "viewer_missing"
     if viewer is not None:
         _viewer_trait_names = ["pixel_x", "pixel_y", "normalized_x", "normalized_y"]
 
@@ -222,8 +207,7 @@ def _(push_state, viewer):
         viewer.observe(push_state, names=_viewer_trait_names)
         viewer._marimo_observer = push_state
         push_state()
-        observer_status = "attached"
-    return (observer_status,)
+    return
 
 
 @app.cell
@@ -233,20 +217,12 @@ def _(set_coords_state, viewer):
         if viewer is None:
             return
 
-        _change_name = "initial"
-        _change_new = ""
-        if isinstance(_change, dict):
-            _change_name = str(_change.get("name", ""))
-            _change_new = str(_change.get("new", ""))
-
         set_coords_state(
             {
                 "pixel_x": float(viewer.pixel_x),
                 "pixel_y": float(viewer.pixel_y),
                 "normalized_x": float(viewer.normalized_x),
                 "normalized_y": float(viewer.normalized_y),
-                "last_change": _change_name,
-                "last_new": _change_new,
             }
         )
 
@@ -411,11 +387,6 @@ def _(md_passages, mo, pl):
         return mo.md("\n\n".join(md_passages(pagefiltered, highlighter='**')))
 
     return (formatpagetext,)
-
-
-@app.cell
-def _():
-    return
 
 
 @app.cell
