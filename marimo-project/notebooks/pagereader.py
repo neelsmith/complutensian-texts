@@ -56,10 +56,174 @@ def _(currentclickpage, dse, mo, pagefrom, pagemenu, passagemenu, service):
         hdr = mo.md(f"""## Read page `{currentpage}`
         """)
     hdr
+    return (currentpage,)
+
+
+@app.cell(hide_code=True)
+def _(imagetab, mo, texttab):
+    tabs = mo.ui.tabs({
+        "Text view": texttab,
+        "Image view": imagetab
+    })
+    tabs
     return
 
 
-@app.cell(column=1)
+@app.cell(column=1, hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Text tab
+    """)
+    return
+
+
+@app.cell
+def _(currentpage, lxxstack, mo):
+    texttab = mo.md(f"""Text view of {currentpage}
+
+
+    {lxxstack}
+
+    """)
+    return (texttab,)
+
+
+@app.cell
+def _(currentpage, dse):
+    pagepassagelist = dse.passagesforsurface(currentpage).to_series().to_list()
+    return (pagepassagelist,)
+
+
+@app.cell
+def _(pagepassagelist):
+    pagepassagediplomatic = [
+        f"{head}.diplomatic:{tail}"
+        for u in pagepassagelist
+        for head, _, tail in [u.rpartition(":")]
+    ]
+    return (pagepassagediplomatic,)
+
+
+@app.cell
+def _(lxxdiplformatted, lxxnormformatted, mo):
+    lxxstack = mo.vstack(
+        [
+        mo.md("**Septuagint glosses**"),
+
+        mo.hstack([lxxdiplformatted,mo.md(""), lxxnormformatted], widths=[40,10,40])
+        ]
+        )
+
+    return (lxxstack,)
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _(lxxnormformatted):
+    lxxnormformatted
+    return
+
+
+@app.cell
+def _(lxxdiplformatted):
+    lxxdiplformatted
+    return
+
+
+@app.cell
+def _(pagepassagelist):
+    pagepassagenormed = [
+        f"{head}.normalized:{tail}"
+        for u in pagepassagelist
+        for head, _, tail in [u.rpartition(":")]
+    ]
+    return (pagepassagenormed,)
+
+
+@app.cell
+def _(formatpagetext, lxxdipl, pagepassagediplomatic, targumdipl):
+    lxxdiplformatted = formatpagetext(lxxdipl, pagepassagediplomatic)
+    targdiplformatted = formatpagetext(targumdipl, pagepassagediplomatic)
+    return (lxxdiplformatted,)
+
+
+@app.cell
+def _(formatpagetext, lxxnorm, pagepassagenormed, targumnorm):
+    lxxnormformatted = formatpagetext(lxxnorm, pagepassagenormed)
+    targnormformatted = formatpagetext(targumnorm, pagepassagenormed)
+    return (lxxnormformatted,)
+
+
+@app.cell
+def _(md_passages, mo, pl):
+    def formatpagetext(corpus, filterlist):
+        pagefiltered = corpus.filter(pl.col("urn").is_in(filterlist)).select(["urn", "text"])
+        return mo.md("\n\n".join(md_passages(pagefiltered, highlighter='**')))
+
+    return (formatpagetext,)
+
+
+@app.cell
+def _(lxxdipl, pagepassagediplomatic, pl):
+    lxxpagediplpassages = lxxdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["urn", "text"])
+    return (lxxpagediplpassages,)
+
+
+@app.cell
+def _(lxxpagediplpassages, md_passages, mo):
+    lxxdipdisplay = mo.md("\n\n".join(md_passages(lxxpagediplpassages, highlighter='**')))
+    return
+
+
+@app.cell
+def _():
+    #def filteredforpage(corpus, pagepsgs):
+    #    return corpus.filter(pl.col("urn").is_in(pagepsgs))
+    return
+
+
+@app.cell
+def _(pl):
+    def md_passages(df: pl.DataFrame, highlighter = "*") -> list[str]:
+        "Generates a formatted string for each passage in the dataframe consisting of the final passage component of the urn, surrounded by the highlighter string, followed by a space and the text content."
+        rows = (
+            df.select("urn", "text")
+            .filter(pl.col("urn").is_not_null() & pl.col("text").is_not_null())
+            .iter_rows(named=True)
+        )
+        return [
+            f"{highlighter}{row['urn'].rsplit(':', 1)[-1]}{highlighter} {row['text']}"
+            for row in rows
+        ]
+
+    return (md_passages,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Image tab
+    """)
+    return
+
+
+@app.cell
+def _(currentpage, mo):
+    imagetab = mo.md(f"Image view of page {currentpage} will go here")
+    return (imagetab,)
+
+
+@app.cell
+def _(currentpage, dse):
+    dse.wholeimagesforsurface(currentpage)
+    return
+
+
+@app.cell(column=2)
 def _():
     #dse.images().to_series().to_list()
     return
@@ -95,6 +259,13 @@ def _():
     from io import StringIO
 
     return StringIO, pl
+
+
+@app.cell
+def _():
+    from pathlib import Path
+
+    return
 
 
 @app.cell(hide_code=True)
@@ -149,7 +320,7 @@ def _(gallery, mo, pagefrom, pagemenu, passagemenu):
         choiceblock = mo.hstack([pagefrom,passagemenu],widths=[30,40])
 
     elif pagefrom.value == "image_gallery":
-        choiceblock = mo.hstack([pagefrom,gallery],widths=[20,80])  # mo.md(f"COming for {pagefrom.value}...here's one {imgs[0]}")
+        choiceblock = mo.vstack([pagefrom,gallery])
     else:
         choiceblock = pagefrom
     return (choiceblock,)
@@ -225,7 +396,7 @@ def _(dse_polars):
 def _(dse, iiif, service):
     imgs = dse.images().to_series().to_list()
     infourls = [service.urn2info_url(img) for img in imgs]
-    gallery = iiif.IIIFThumbnailGallery(info_urls=infourls)
+    gallery = iiif.IIIFThumbnailGallery(info_urls=infourls, height="150px")
     return (gallery,)
 
 
@@ -240,26 +411,16 @@ def _(mo):
 @app.cell
 def _(mo):
     nb_dir = mo.notebook_location()
-    if isinstance(nb_dir, str):
-        base_url = nb_dir.rstrip("/") + "/public"
-        lxxsrc = f"{base_url}/septuagint_latin_genesis_dse.cex"
-        targumsrc = f"{base_url}/targum_latin_genesis_dse.cex"
-    else:
-        from pathlib import Path
+    local_public = nb_dir / "public"
+    lxx_path = local_public / "septuagint_latin_genesis_dse.cex"
+    targum_path = local_public / "targum_latin_genesis_dse.cex"
+    return lxx_path, targum_path
 
-        local_public = Path(nb_dir) / "public"
-        local_dse = Path(nb_dir).parents[1] / "dse"
 
-        lxx_path = local_public / "septuagint_latin_genesis_dse.cex"
-        if not lxx_path.exists():
-            lxx_path = local_dse / "septuagint_latin_genesis_dse.cex"
-
-        targum_path = local_public / "targum_latin_genesis_dse.cex"
-        if not targum_path.exists():
-            targum_path = local_dse / "targum_latin_genesis_dse.cex"
-
-        lxxsrc = str(lxx_path)
-        targumsrc = str(targum_path)
+@app.cell
+def _(lxx_path, targum_path):
+    lxxsrc = str(lxx_path)
+    targumsrc = str(targum_path)
     return lxxsrc, targumsrc
 
 
@@ -304,6 +465,65 @@ def _(StringIO, pl):
         return df.drop_nulls()
 
     return (loaddf,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Load texts
+    """)
+    return
+
+
+@app.cell
+def _(loadeditions):
+    lxxdipl, lxxnorm, targumdipl, targumnorm = loadeditions()
+    return lxxdipl, lxxnorm, targumdipl, targumnorm
+
+
+@app.cell
+def _(StringIO, pl):
+    def loadedition(fname: str):
+        """Read a CEX file with a single labelled block of delimited data, so omitting initial line.
+        Return a polars dataframe
+        """
+        # Check if fname is a URL or local file path
+        if fname.startswith('http://') or fname.startswith('https://'):
+            # WASM mode - fetch from URL
+            import urllib.request
+            with urllib.request.urlopen(fname) as response:
+                content = response.read().decode('utf-8')
+                src = '\n'.join(content.split('\n')[2:])
+        else:
+            # Local mode - read from file
+            with open(fname, 'r', encoding='utf-8') as file:
+                src = '\n'.join(file.readlines()[2:])
+
+        return pl.read_csv(StringIO(src), separator='|', has_header=False, new_columns=["urn", "text"]).drop_nulls()
+
+    return (loadedition,)
+
+
+@app.cell
+def _(loadedition, mo):
+    def loadeditions():
+        nb_location = mo.notebook_location()
+        filenames = ["septuagint_latin_genesis_dipl.cex","septuagint_latin_genesis_norm.cex",
+                     "targum_latin_genesis_dipl.cex","targum_latin_genesis_norm.cex"]
+
+        # Check if running in WASM (URL) or local (Path)
+        if isinstance(nb_location, str):
+            # WASM mode - nb_location is a URL
+            base_url = nb_location.rstrip('/') + '/public/'
+            fullpaths = [base_url + f for f in filenames]
+        else:
+            # Local mode - nb_location is a Path
+            editionsdir = nb_location / "public" 
+            fullpaths = [str(editionsdir / f) for f in filenames]
+
+        return [loadedition(f) for f in fullpaths]
+
+    return (loadeditions,)
 
 
 if __name__ == "__main__":
