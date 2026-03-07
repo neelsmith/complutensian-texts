@@ -153,8 +153,10 @@ def _(lxxdiff, lxxdiplformatted, lxxnormformatted, mo, pagepassagelist):
         lxxhdr = mo.md("### Latin glosses on Septuagint")
 
 
-    lxxdiplstack = mo.vstack([mo.md("Diplomatic text"), lxxdiplformatted])
-    lxxnormstack = mo.vstack([mo.md("Normalized text"),lxxnormformatted])
+    lxxdiplstack = mo.vstack([mo.Html("<p>Diplomatic text</p>"), lxxdiplformatted])
+    #lxxnormstack = mo.vstack([mo.md("Normalized text"),lxxnormformatted])
+
+    lxxnormstack = mo.vstack([mo.Html("<p>Normalized text</p>"),lxxnormformatted])
     lxxdiffstack = mo.Html("<p>Visual differences<p>" + lxxdiff)
     lxxhstack = mo.hstack([lxxdiplstack, mo.md(""), lxxnormstack,lxxdiffstack ], widths=[30, 5, 30, 30])
 
@@ -287,12 +289,29 @@ def _(mo):
 
 
 @app.cell
-def _(md_passages, mo, pl):
+def _(html_passages, mo, pl):
     def formatpagetext(corpus, filterlist):
         pagefiltered = corpus.filter(pl.col("urn").is_in(filterlist)).select(["urn", "text"])
-        return mo.md("\n\n".join(md_passages(pagefiltered, highlighter='**')))
+        return mo.md("\n\n".join(html_passages(pagefiltered, highlighter='b')))
 
     return (formatpagetext,)
+
+
+@app.cell
+def _(pl):
+    def html_passages(df: pl.DataFrame, highlighter = "i") -> list[str]:
+        "Generates a formatted string for each passage in the dataframe consisting of the final passage component of the urn, surrounded by the highlighter string, followed by a space and the text content."
+        rows = (
+            df.select("urn", "text")
+            .filter(pl.col("urn").is_not_null() & pl.col("text").is_not_null())
+            .iter_rows(named=True)
+        )
+        return [
+            f"<p><{highlighter}>{row['urn'].rsplit(':', 1)[-1]}</{highlighter}> {row['text']}</p>"
+            for row in rows
+        ]
+
+    return (html_passages,)
 
 
 @app.cell
