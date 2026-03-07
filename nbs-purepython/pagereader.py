@@ -140,11 +140,26 @@ def _(mo):
 
 
 @app.cell
+def _(lxxdipl, pagepassagediplomatic, pl, re):
+    lxxfiltered = lxxdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["urn", "text"]).to_series().to_list()
+    lxxpagepassagereff = [re.sub(r'[^:]+:',"",u) for u in lxxfiltered]
+    return (lxxpagepassagereff,)
+
+
+@app.cell
 def _(lxxdiff, lxxdiplformatted, lxxnormformatted, mo, pagepassagelist):
     lxxhdr = mo.md("")
     if pagepassagelist:
         lxxhdr = mo.md("### Latin glosses on Septuagint")
-    lxxhstack = mo.hstack([lxxdiplformatted,mo.md(""), lxxnormformatted, mo.Html(lxxdiff)], widths=[30, 5, 30, 30])
+
+
+    lxxdiplstack = mo.vstack([mo.md("Diplomatic text"), lxxdiplformatted])
+    lxxnormstack = mo.vstack([mo.md("Normalized text"),lxxnormformatted])
+    lxxdiffstack = mo.Html("<p>Visual differences<p>" + lxxdiff)
+    lxxhstack = mo.hstack([lxxdiplstack, mo.md(""), lxxnormstack,lxxdiffstack ], widths=[30, 5, 30, 30])
+
+
+
     lxxstack = mo.vstack([lxxhdr, lxxhstack])
     return (lxxstack,)
 
@@ -174,8 +189,13 @@ def _(lxxnorm, pagepassagenormed, pl):
 
 
 @app.cell
-def _(pagelxxdipltextlist, pagelxxnormtextlist, visual_diff):
-    lxxdiff = " ".join(["<p>" + visual_diff(pagelxxdipltextlist[i], row) + "</p>" for i,row in enumerate(pagelxxnormtextlist)])
+def _(
+    lxxpagepassagereff,
+    pagelxxdipltextlist,
+    pagelxxnormtextlist,
+    visual_diff,
+):
+    lxxdiff = " ".join([f"<p><b>{lxxpagepassagereff[i]}</b>" + visual_diff(pagelxxdipltextlist[i], row) + "</p>" for i,row in enumerate(pagelxxnormtextlist)])
     return (lxxdiff,)
 
 
@@ -188,12 +208,35 @@ def _(mo):
 
 
 @app.cell
+def _(pagepassagediplomatic, pl, re, targumdipl):
+    targumfiltered = targumdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["urn", "text"]).to_series().to_list()
+    targumpagepassagereff = [re.sub(r'[^:]+:',"",u) for u in targumfiltered]
+    return (targumpagepassagereff,)
+
+
+@app.cell
+def _():
+
+
+    #targumhstack=mo.hstack([targdiplformatted,mo.md(""), targnormformatted, mo.Html(targumdiff)], widths=[30, 5, 30, 30])
+    #targumstack = mo.vstack([targumhdr, targumhstack])
+    return
+
+
+@app.cell
 def _(mo, pagepassagelist, targdiplformatted, targnormformatted, targumdiff):
     targumhdr = mo.md("")
     if pagepassagelist:
         targumhdr = mo.md("### Latin glosses on Targum Onkelos")
 
-    targumhstack=mo.hstack([targdiplformatted,mo.md(""), targnormformatted, mo.Html(targumdiff)], widths=[30, 5, 30, 30])
+
+    targumdiplstack = mo.vstack([mo.md("Diplomatic text"), targdiplformatted])
+    targumnormstack = mo.vstack([mo.md("Normalized text"),targnormformatted])
+    targumdiffstack = mo.Html("<p>Visual differences<p>" + targumdiff)
+    targumhstack = mo.hstack([targumdiplstack, mo.md(""), targumnormstack,targumdiffstack ], widths=[30, 5, 30, 30])
+
+
+
     targumstack = mo.vstack([targumhdr, targumhstack])
     return (targumstack,)
 
@@ -224,9 +267,15 @@ def _(pagepassagenormed, pl, targumnorm):
 
 
 @app.cell
-def _(pagetargumdipltextlist, visual_diff):
-    targumdiff =  " ".join(["<p>" + visual_diff(pagetargumdipltextlist[i], row) + "</p>" for i,row in enumerate(pagetargumdipltextlist)])#visual_diff(pagetargumdipltext, pagetargumnormtext)
+def _(pagetargumdipltextlist, targumpagepassagereff, visual_diff):
+    targumdiff =  " ".join([f"<p><b>{targumpagepassagereff[i]}</b>" + visual_diff(pagetargumdipltextlist[i], row) + "</p>" for i,row in enumerate(pagetargumdipltextlist)])#visual_diff(pagetargumdipltext, pagetargumnormtext)
     return (targumdiff,)
+
+
+@app.cell
+def _():
+    #lxxdiff = " ".join([f"<p><b>{lxxpagepassagereff[i]}</b>" + visual_diff(pagelxxdipltextlist[i], row) + "</p>" for i,row in enumerate(pagelxxnormtextlist)])
+    return
 
 
 @app.cell(hide_code=True)
@@ -629,8 +678,16 @@ def _():
 
 @app.cell
 def _():
+    import re
+
+    return (re,)
+
+
+@app.cell
+def _():
     import difflib
     from html import escape
+
 
     return difflib, escape
 
