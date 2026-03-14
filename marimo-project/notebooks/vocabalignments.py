@@ -235,12 +235,14 @@ def _(np, nx):
 
 @app.cell(hide_code=True)
 def _(gk_lat_gr, mo, threshold_slider):
-    mo.md(f"""/// admonition | *Debugging*
+    mo.md(f"""
+    /// admonition | *Debugging*
     In Greek-Latin graph: **total nodes**: {gk_lat_gr.number_of_nodes()}, **total edges**: {gk_lat_gr.number_of_edges()}
 
     Percentage **cut off**: {threshold_slider.value}
 
-    ///""")
+    ///
+    """)
     return
 
 
