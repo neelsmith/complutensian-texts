@@ -64,6 +64,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(cf_select, lemma, mo, plotlimit, refversion):
     mo.vstack([mo.hstack([refversion, lemma, cf_select], justify="center"), plotlimit], justify="center")
+
     return
 
 
@@ -98,10 +99,34 @@ def _(cf_select, lemma, lemmacol, mo, refversion):
 
 
 @app.cell(hide_code=True)
+def _(lemmasortbycount):
+    lemmasortbycount
+    return
+
+
+@app.cell(hide_code=True)
 def _(mo):
     debug = mo.ui.checkbox(label="Show dataframes")
     debug
     return (debug,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Vocab
+    """)
+    return
+
+
+@app.cell
+def _(debug, vocab):
+    showvocab = None
+    if debug.value:
+        showvocab = vocab
+
+    showvocab    
+    return
 
 
 @app.cell(hide_code=True)
@@ -170,6 +195,12 @@ def _(mo):
 
 
 @app.cell
+def _(mo):
+    lemmasortbycount = mo.ui.checkbox(label="*Sort vocabulary menu by count*",value=True)
+    return (lemmasortbycount,)
+
+
+@app.cell
 def _(counts_df, lemmacounts, mo):
     if counts_df is not None and lemmacounts is not None:
         plotlimit = mo.ui.slider(
@@ -185,13 +216,12 @@ def _(counts_df, lemmacounts, mo):
 
 
 @app.cell
-def _(aligns, selected_columns):
+def _(aligns, lemmasortbycount, selected_columns):
     if aligns is not None and selected_columns:
-
         lemmacounts = (
             aligns.group_by(selected_columns)
             .len(name="count")
-            .sort("count", descending=True)
+            .sort("count", descending=lemmasortbycount.value)
         )
     else:
         lemmacounts = None
@@ -266,16 +296,38 @@ def _(refversion):
 
 
 @app.cell
-def _(df, lemmacol, pl):
+def _(df, lemmacol, lemmasortbycount, pl):
     # 1. Calculate counts and unnest into a flat structure
     # 'sort=True' puts the most frequent values first
     if df is not None and lemmacol:
-        counts_df = df.select(pl.col(lemmacol).value_counts(sort=True)).unnest(lemmacol).drop_nulls()
-        vocab = counts_df[lemmacol].to_list()
+        counts_df = df.select(pl.col(lemmacol).value_counts(sort=lemmasortbycount.value)).unnest(lemmacol).drop_nulls()
+    
+        if lemmasortbycount.value == True:
+            vocab = counts_df[lemmacol].to_list()
+        else:
+            vocab = counts_df[lemmacol].to_list()#.sort()
     else:
         counts_df = None
         vocab = []
     return counts_df, vocab
+
+
+@app.cell
+def _(vocab):
+    x = vocab.sort()
+    return (x,)
+
+
+@app.cell(hide_code=True)
+def _(vocab):
+    vocab
+    return
+
+
+@app.cell
+def _(x):
+    x
+    return
 
 
 @app.cell
