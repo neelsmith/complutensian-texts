@@ -94,13 +94,14 @@ def _(alignment_counts, mo):
 @app.cell
 def _(mo):
     summarysort = mo.ui.dropdown({"Number of aligned terms" : "total_avg", "Coverage of top aligned term": "top_term", "Frequency of Hebrew lemma": "hebrew_count"},value="Frequency of Hebrew lemma",label="*Sort by*")
-
     return (summarysort,)
 
 
 @app.cell
 def _(mo, numtodisplay, summarysort):
-    mo.md(f"{summarysort} {numtodisplay}")
+    mo.md(f"""
+    {summarysort} {numtodisplay}
+    """)
     return
 
 
@@ -463,7 +464,7 @@ def _(mo):
 
 
 @app.cell
-def _(alignment_counts, go, pl, summary_select, summarysort):
+def _(alignment_counts, go, numtodisplay, pl, summary_select, summarysort):
     if not summary_select.value:
         summary_barplot = None
     else:
@@ -498,6 +499,7 @@ def _(alignment_counts, go, pl, summary_select, summarysort):
         if summarysort.value and summarysort.value in plot_df.columns:
             plot_df = plot_df.sort(summarysort.value, descending=True)
 
+        plot_df = plot_df.head(numtodisplay.value)
         x_vals = plot_df["hebrew_lemma_stripped"].to_list()
 
         summary_barplot = go.Figure()
