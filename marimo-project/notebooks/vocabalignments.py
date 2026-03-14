@@ -16,62 +16,7 @@ __generated_with = "0.20.4"
 app = marimo.App(width="columns")
 
 
-@app.cell(column=0)
-def _(summary_select):
-    summary_select
-    return
-
-
-@app.cell
-def _(mo):
-    mo.md("""
-    ## Add new DF here!
-    """)
-    return
-
-
-@app.cell
-def _(alignment_counts):
-    alignment_counts
-    return
-
-
-@app.cell
-def _(df, pl):
-    base = df.filter(pl.col("hebrew_lemma_stripped").is_not_null())
-
-    alignment_counts = base.group_by("hebrew_lemma_stripped").agg(
-        pl.len().alias("hebrew_count"),
-        pl.col("greek_lemma_stripped").drop_nulls().n_unique().alias("greek_forms"),
-        pl.col("latin_lemma_stripped").drop_nulls().n_unique().alias("latin_forms"),
-        pl.col("aramaic_lemma_stripped").drop_nulls().n_unique().alias("aramaic_forms"),
-    )
-
-    for lang in ["greek", "latin", "aramaic"]:
-        lemma_col = f"{lang}_lemma_stripped"
-        top_counts = (
-            base
-            .filter(pl.col(lemma_col).is_not_null())
-            .group_by(["hebrew_lemma_stripped", lemma_col])
-            .len(name="_n")
-            .group_by("hebrew_lemma_stripped")
-            .agg(pl.max("_n").alias(f"{lang}_top"))
-        )
-        alignment_counts = alignment_counts.join(top_counts, on="hebrew_lemma_stripped", how="left")
-
-    alignment_counts = alignment_counts.with_columns(
-        pl.col("hebrew_count").cast(pl.Int64),
-        pl.col("greek_forms").cast(pl.Int64),
-        pl.col("latin_forms").cast(pl.Int64),
-        pl.col("aramaic_forms").cast(pl.Int64),
-        pl.col("greek_top").fill_null(0).cast(pl.Int64),
-        pl.col("latin_top").fill_null(0).cast(pl.Int64),
-        pl.col("aramaic_top").fill_null(0).cast(pl.Int64),
-    )
-    return (alignment_counts,)
-
-
-@app.cell(column=1, hide_code=True)
+@app.cell(column=0, hide_code=True)
 def _():
     import marimo as mo
 
@@ -131,6 +76,51 @@ def _(stacked_by_column_plot):
 @app.cell(hide_code=True)
 def _(barplot):
     barplot
+    return
+
+
+@app.cell(column=1)
+def _(summary_select):
+    summary_select
+    return
+
+
+@app.cell
+def _(alignment_counts, mo):
+    numtodisplay = mo.ui.slider(start=5,step=1,stop=len(alignment_counts),label="*Terms to display*",debounce=True,show_value=True,value=20)
+    return (numtodisplay,)
+
+
+@app.cell
+def _(mo):
+    summarysort = mo.ui.dropdown({"Number of aligned terms" : "total_avg", "Coverage of top aligned term": "top_term", "Frequency of Hebrew lemma": "hebrew_count"},value="Frequency of Hebrew lemma",label="*Sort by*")
+
+    return (summarysort,)
+
+
+@app.cell
+def _(mo, numtodisplay, summarysort):
+    mo.md(f"{summarysort} {numtodisplay}")
+    return
+
+
+@app.cell
+def _(summary_barplot):
+    summary_barplot
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    ## Add new DF here!
+    """)
+    return
+
+
+@app.cell
+def _(alignment_counts):
+    alignment_counts
     return
 
 
@@ -328,7 +318,7 @@ def _(mo, summary_options):
 
 @app.cell
 def _():
-    summary_options = ["lxx", "vulgate", "onkelos"] # [v for v in versions_menu.values() if v != refversion.value]
+    summary_options = {"lxx": 'greek', "vulgate": 'latin', "onkelos": 'aramaic'} # [v for v in versions_menu.values() if v != refversion.value]
     return (summary_options,)
 
 
@@ -421,12 +411,110 @@ def _(df, lemma, lemmacol, pl):
     return (aligns,)
 
 
+@app.cell
+def _(df, pl):
+    base = df.filter(pl.col("hebrew_lemma_stripped").is_not_null())
+
+    alignment_counts = base.group_by("hebrew_lemma_stripped").agg(
+        pl.len().alias("hebrew_count"),
+        pl.col("greek_lemma_stripped").drop_nulls().n_unique().alias("greek_forms"),
+        pl.col("latin_lemma_stripped").drop_nulls().n_unique().alias("latin_forms"),
+        pl.col("aramaic_lemma_stripped").drop_nulls().n_unique().alias("aramaic_forms"),
+    )
+
+    for lang in ["greek", "latin", "aramaic"]:
+        lemma_col = f"{lang}_lemma_stripped"
+        top_counts = (
+            base
+            .filter(pl.col(lemma_col).is_not_null())
+            .group_by(["hebrew_lemma_stripped", lemma_col])
+            .len(name="_n")
+            .group_by("hebrew_lemma_stripped")
+            .agg(pl.max("_n").alias(f"{lang}_top"))
+        )
+        alignment_counts = alignment_counts.join(top_counts, on="hebrew_lemma_stripped", how="left")
+
+    alignment_counts = alignment_counts.with_columns(
+        pl.col("hebrew_count").cast(pl.Int64),
+        pl.col("greek_forms").cast(pl.Int64),
+        pl.col("latin_forms").cast(pl.Int64),
+        pl.col("aramaic_forms").cast(pl.Int64),
+        pl.col("greek_top").fill_null(0).cast(pl.Int64),
+        pl.col("latin_top").fill_null(0).cast(pl.Int64),
+        pl.col("aramaic_top").fill_null(0).cast(pl.Int64),
+    )
+    return (alignment_counts,)
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
     ## Plotting
     """)
     return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Total series
+    """)
+    return
+
+
+@app.cell
+def _(alignment_counts, go, pl, summary_select, summarysort):
+    if not summary_select.value:
+        summary_barplot = None
+    else:
+        langs = summary_select.value
+        n_langs = len(langs)
+
+        plot_df = alignment_counts.with_columns(
+            *[
+                (pl.col(f"{lang}_forms") / pl.col("hebrew_count")).alias(f"{lang}_avg_alignment")
+                for lang in langs
+            ],
+            *[
+                (pl.col(f"{lang}_top") / pl.col("hebrew_count")).alias(f"{lang}_top_alignment")
+                for lang in langs
+            ],
+            (
+                sum(pl.col(f"{lang}_forms") for lang in langs)
+                / (pl.col("hebrew_count") * n_langs)
+            ).alias("total_avg"),
+            (
+                sum(pl.col(f"{lang}_top") for lang in langs)
+                / (pl.col("hebrew_count") * n_langs)
+            ).alias("total_top"),
+        )
+
+        series_cols = (
+            [f"{lang}_avg_alignment" for lang in langs]
+            + [f"{lang}_top_alignment" for lang in langs]
+            + ["total_avg", "total_top"]
+        )
+
+        if summarysort.value and summarysort.value in plot_df.columns:
+            plot_df = plot_df.sort(summarysort.value, descending=True)
+
+        x_vals = plot_df["hebrew_lemma_stripped"].to_list()
+
+        summary_barplot = go.Figure()
+        for _col in series_cols:
+            summary_barplot.add_bar(
+                x=x_vals,
+                y=plot_df[_col].to_list(),
+                name=_col,
+            )
+        summary_barplot.update_layout(
+            barmode="group",
+            xaxis_title="Hebrew lemma",
+            yaxis_title="Normalized alignment",
+            title="Alignment summary by language",
+            height=500,
+        )
+    return (summary_barplot,)
 
 
 @app.cell(hide_code=True)
@@ -538,6 +626,11 @@ def _(aligns, go, label_cols, pl):
     else:
         stacked_by_column_plot = None
     return (stacked_by_column_plot,)
+
+
+@app.cell
+def _():
+    return
 
 
 @app.cell(hide_code=True)
