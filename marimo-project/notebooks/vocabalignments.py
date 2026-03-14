@@ -16,7 +16,21 @@ __generated_with = "0.20.4"
 app = marimo.App(width="columns")
 
 
-@app.cell(column=0, hide_code=True)
+@app.cell(column=0)
+def _(summary_select):
+    summary_select
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    ## Add new DF here!
+    """)
+    return
+
+
+@app.cell(column=1, hide_code=True)
 def _():
     import marimo as mo
 
@@ -64,7 +78,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(cf_select, lemma, mo, plotlimit, refversion):
     mo.vstack([mo.hstack([refversion, lemma, cf_select], justify="center"), plotlimit], justify="center")
-
     return
 
 
@@ -80,7 +93,7 @@ def _(barplot):
     return
 
 
-@app.cell(column=1, hide_code=True)
+@app.cell(column=2, hide_code=True)
 def _(mo):
     mo.md("""
     ## Debugging data values
@@ -265,6 +278,20 @@ def _(mo, versions_menu):
 
 
 @app.cell
+def _(mo, summary_options):
+    summary_select = mo.ui.multiselect(
+        options=summary_options, label="Compare with:"
+    )
+    return (summary_select,)
+
+
+@app.cell
+def _():
+    summary_options = ["lxx", "vulgate", "onkelos"] # [v for v in versions_menu.values() if v != refversion.value]
+    return (summary_options,)
+
+
+@app.cell
 def _(refversion, versions_menu):
     cf_options = [v for v in versions_menu.values() if v != refversion.value]
     return (cf_options,)
@@ -301,7 +328,7 @@ def _(df, lemmacol, lemmasortbycount, pl):
     # 'sort=True' puts the most frequent values first
     if df is not None and lemmacol:
         counts_df = df.select(pl.col(lemmacol).value_counts(sort=lemmasortbycount.value)).unnest(lemmacol).drop_nulls()
-    
+
         if lemmasortbycount.value == True:
             vocab = counts_df[lemmacol].to_list()
         else:
@@ -310,24 +337,6 @@ def _(df, lemmacol, lemmasortbycount, pl):
         counts_df = None
         vocab = []
     return counts_df, vocab
-
-
-@app.cell
-def _(vocab):
-    x = vocab.sort()
-    return (x,)
-
-
-@app.cell(hide_code=True)
-def _(vocab):
-    vocab
-    return
-
-
-@app.cell
-def _(x):
-    x
-    return
 
 
 @app.cell
@@ -371,12 +380,6 @@ def _(df, lemma, lemmacol, pl):
     return (aligns,)
 
 
-@app.cell
-def _(label_cols):
-    label_cols
-    return
-
-
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
@@ -385,7 +388,7 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""
     ### Grouped
@@ -573,7 +576,7 @@ def _():
     return datetime, go, os, pl, px, unicodedata
 
 
-@app.cell(column=2, hide_code=True)
+@app.cell(column=3, hide_code=True)
 def _(mo):
     mo.md("""
     ## Widebody view
