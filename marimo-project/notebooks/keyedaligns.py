@@ -1,12 +1,25 @@
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "marimo>=0.20.4",
+#     "nump==5.5.5.5",
+#     "numpy==2.4.3",
+#     "plotly[express]==6.6.0",
+#     "polars==1.39.0",
+#     "requests==2.32.5",
+# ]
+# ///
+
 import marimo
 
-__generated_with = "0.19.7"
-app = marimo.App(width="medium")
+__generated_with = "0.20.4"
+app = marimo.App(width="columns")
 
 
-@app.cell(hide_code=True)
+@app.cell(column=0, hide_code=True)
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -54,22 +67,65 @@ def _(cf_select, lemma, mo, plotlimit, refversion):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _(barplot):
     barplot
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _(mo):
-    mo.Html("<hr/><hr/><br/><br/><br/><br/><br/><br/><br/><br/>")
+    mo.md("""
+    ## Add second plot here
+    """)
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
+def _(aligns, label_cols, pl, px):
+    if aligns is not None and label_cols:
+        stacked_counts_parts = []
+        for col in label_cols:
+            if col in aligns.columns:
+                counts = (
+                    aligns.group_by(col)
+                    .len(name="count")
+                    .drop_nulls(col)
+                    .rename({col: "value"})
+                    .with_columns(pl.lit(col).alias("column"))
+                )
+                stacked_counts_parts.append(counts)
+
+        if stacked_counts_parts:
+            stacked_counts = pl.concat(stacked_counts_parts, how="vertical_relaxed")
+            stacked_by_column_plot = px.bar(
+                stacked_counts,
+                x="column",
+                y="count",
+                color="value",
+                barmode="stack",
+                labels={"column": "Column", "count": "Count", "value": "Value"},
+                title="Value counts by alignment column",
+            )
+            stacked_by_column_plot.update_layout(height=550)
+        else:
+            stacked_by_column_plot = None
+    else:
+        stacked_by_column_plot = None
+
+    return (stacked_by_column_plot,)
+
+
+@app.cell
+def _(stacked_by_column_plot):
+    stacked_by_column_plot
+    return
+
+
+@app.cell(column=1, hide_code=True)
 def _(mo):
     mo.md("""
-    # Debugging data values
+    ## Debugging data values
     """)
     return
 
@@ -94,7 +150,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Alignments**:
+    ### Alignments
     """)
     return
 
@@ -111,7 +167,7 @@ def _(aligns, debug):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Counts**:
+    ### Counts
     """)
     return
 
@@ -128,7 +184,7 @@ def _(debug, lemmacounts):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Full df**:
+    ### Full df
     """)
     return
 
@@ -145,9 +201,15 @@ def _(debug, df):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    # UI and computation
+    ## UI and computation
     """)
     return
+
+
+@app.cell
+def _(mo):
+    versioninfo = mo.ui.checkbox(label="*See version info*")
+    return (versioninfo,)
 
 
 @app.cell
@@ -182,7 +244,7 @@ def _(aligns, selected_columns):
 @app.cell
 def _(cf_options):
     cf_columns = [find_lemma_col(item) for item in cf_options]
-    return (cf_columns,)
+    return
 
 
 @app.cell
@@ -191,28 +253,10 @@ def _(cf_select):
     return (selected_columns,)
 
 
-@app.cell
-def _(selected_columns):
-    selected_columns
-    return
-
-
-@app.cell
-def _(mo):
-    versioninfo = mo.ui.checkbox(label="*See version info*")
-    return (versioninfo,)
-
-
-@app.cell
-def _(cf_columns):
-    cf_columns
-    return
-
-
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Language choices**:
+    ### Language choices
     """)
     return
 
@@ -250,7 +294,7 @@ def _(cf_options, mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Vocabulary choices**:
+    ### Vocabulary choices
     """)
     return
 
@@ -286,17 +330,25 @@ def _(mo, vocab):
     return (lemma,)
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Data selection
+    """)
+    return
+
+
 @app.function
 def find_lemma_col(versionstring):
     """Get name of lemma column for selected version of the text."""
     if versionstring == "lxx":
-        return "greek_lemma"
+        return "greek_lemma_stripped"
     elif versionstring == "vulgate":
-        return "latin_lemma"
+        return "latin_lemma_stripped"
     elif versionstring == "masoretic":
-        return "hebrew_lemma"
+        return "hebrew_lemma_stripped"
     elif versionstring == "onkelos":
-        return "aramaic_lemma"
+        return "aramaic_lemma_stripped"
     else:
         return None
 
@@ -310,10 +362,16 @@ def _(df, lemma, lemmacol, pl):
     return (aligns,)
 
 
+@app.cell
+def _(label_cols):
+    label_cols
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Plotting**
+    ## Plotting
     """)
     return
 
@@ -346,23 +404,30 @@ def _(lemma, lemmacounts, pl, plotlimit, px):
         )
     else:
         barplot = None
-    return (barplot,)
+        label_cols = []
+    return barplot, label_cols
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Initialization
+    ## Loading data
     """)
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Loading data**:
-    """)
-    return
+@app.cell
+def _(unicodedata):
+    def strip_to_alphabetic(value):
+        """Keep alphabetic characters only (drops niqqud and other marks)."""
+        if value is None:
+            return None
+
+
+        normalized = unicodedata.normalize("NFKD", value)
+        return "".join(ch for ch in normalized if ch.isalpha())
+
+    return (strip_to_alphabetic,)
 
 
 @app.cell
@@ -372,17 +437,33 @@ def _(mo):
 
 
 @app.cell
-def _(datetime, os, pl, srcpath):
+def _(datetime, os, pl, srcpath, strip_to_alphabetic):
     lastmodstamp = os.path.getmtime(srcpath)
     lastmod = datetime.datetime.fromtimestamp(lastmodstamp).strftime('%Y-%m-%d %H:%M:%S')
     df = pl.read_csv(str(srcpath),  separator = "|", truncate_ragged_lines=True)
+
+    strip_targets = [
+        ("hebrew_lemma", "hebrew_lemma_stripped"),
+        ("latin_lemma", "latin_lemma_stripped"),
+        ("greek_lemma", "greek_lemma_stripped"),
+        ("aramaic_lemma", "aramaic_lemma_stripped"),
+    ]
+    strip_exprs = [
+        pl.col(source)
+        .map_elements(strip_to_alphabetic, return_dtype=pl.Utf8)
+        .alias(target)
+        for source, target in strip_targets
+        if source in df.columns
+    ]
+    if strip_exprs:
+        df = df.with_columns(strip_exprs)
     return df, lastmod
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Imports**:
+    ## Imports
     """)
     return
 
@@ -394,9 +475,37 @@ def _():
     import os
     import complutensian as co
     #import pyarrow as pa
+    import numpy
     import plotly.express as px
     import datetime
-    return datetime, os, pl, px
+
+    import unicodedata
+
+    return datetime, os, pl, px, unicodedata
+
+
+@app.cell
+def _(mo):
+    _df = mo.sql(
+        f"""
+        SELECT * FROM
+        """
+    )
+    return
+
+
+@app.cell(column=2, hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Widebody view
+    """)
+    return
+
+
+@app.cell
+def _(df):
+    df
+    return
 
 
 if __name__ == "__main__":
