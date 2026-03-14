@@ -80,48 +80,32 @@ def _(barplot):
 
 
 @app.cell(column=1)
-def _(summary_select):
-    summary_select
+def _():
     return
 
 
 @app.cell
-def _(alignment_counts, mo):
-    numtodisplay = mo.ui.slider(start=5,step=1,stop=len(alignment_counts),label="*Terms to display*",debounce=True,show_value=True,value=20)
-    return (numtodisplay,)
-
-
-@app.cell
-def _(mo):
-    summarysort = mo.ui.dropdown({"Number of aligned terms" : "total_avg", "Coverage of top aligned term": "top_term", "Frequency of Hebrew lemma": "hebrew_count"},value="Frequency of Hebrew lemma",label="*Sort by*")
-    return (summarysort,)
-
-
-@app.cell
-def _(mo, numtodisplay, summarysort):
+def _(mo, numtodisplay, summary_select, summarysort):
     mo.md(f"""
-    {summarysort} {numtodisplay}
+    {summary_select} {summarysort} {numtodisplay}
     """)
     return
 
 
-@app.cell
-def _(summary_barplot):
-    summary_barplot
+@app.cell(hide_code=True)
+def _(avg_barplot):
+    avg_barplot
+    return
+
+
+@app.cell(hide_code=True)
+def _(top_barplot):
+    top_barplot
     return
 
 
 @app.cell
-def _(mo):
-    mo.md("""
-    ## Add new DF here!
-    """)
-    return
-
-
-@app.cell
-def _(alignment_counts):
-    alignment_counts
+def _():
     return
 
 
@@ -231,6 +215,18 @@ def _(mo):
     ## UI and computation
     """)
     return
+
+
+@app.cell
+def _(mo):
+    summarysort = mo.ui.dropdown({"Number of aligned terms" : "total_avg", "Coverage of top aligned term": "top_term", "Frequency of Hebrew lemma": "hebrew_count"},value="Frequency of Hebrew lemma",label="*Sort by*")
+    return (summarysort,)
+
+
+@app.cell
+def _(alignment_counts, mo):
+    numtodisplay = mo.ui.slider(start=5,step=1,stop=len(alignment_counts),label="*Terms to display*",debounce=True,show_value=True,value=20)
+    return (numtodisplay,)
 
 
 @app.cell
@@ -464,59 +460,86 @@ def _(mo):
 
 
 @app.cell
-def _(alignment_counts, go, numtodisplay, pl, summary_select, summarysort):
+def _(alignment_counts, numtodisplay, pl, summary_select, summarysort):
     if not summary_select.value:
-        summary_barplot = None
+        summary_plot_df = None
+        summary_x_vals = []
+        summary_langs = []
     else:
-        langs = summary_select.value
-        n_langs = len(langs)
+        summary_langs = summary_select.value
+        n_langs = len(summary_langs)
 
-        plot_df = alignment_counts.with_columns(
+        _df = alignment_counts.with_columns(
             *[
                 (pl.col(f"{lang}_forms") / pl.col("hebrew_count")).alias(f"{lang}_avg_alignment")
-                for lang in langs
+                for lang in summary_langs
             ],
             *[
                 (pl.col(f"{lang}_top") / pl.col("hebrew_count")).alias(f"{lang}_top_alignment")
-                for lang in langs
+                for lang in summary_langs
             ],
             (
-                sum(pl.col(f"{lang}_forms") for lang in langs)
+                sum(pl.col(f"{lang}_forms") for lang in summary_langs)
                 / (pl.col("hebrew_count") * n_langs)
             ).alias("total_avg"),
             (
-                sum(pl.col(f"{lang}_top") for lang in langs)
+                sum(pl.col(f"{lang}_top") for lang in summary_langs)
                 / (pl.col("hebrew_count") * n_langs)
             ).alias("total_top"),
         )
 
-        series_cols = (
-            [f"{lang}_avg_alignment" for lang in langs]
-            + [f"{lang}_top_alignment" for lang in langs]
-            + ["total_avg", "total_top"]
-        )
+        if summarysort.value and summarysort.value in _df.columns:
+            _df = _df.sort(summarysort.value, descending=True)
 
-        if summarysort.value and summarysort.value in plot_df.columns:
-            plot_df = plot_df.sort(summarysort.value, descending=True)
+        summary_plot_df = _df.head(numtodisplay.value)
+        summary_x_vals = summary_plot_df["hebrew_lemma_stripped"].to_list()
+    return summary_langs, summary_plot_df, summary_x_vals
 
-        plot_df = plot_df.head(numtodisplay.value)
-        x_vals = plot_df["hebrew_lemma_stripped"].to_list()
 
-        summary_barplot = go.Figure()
-        for _col in series_cols:
-            summary_barplot.add_bar(
-                x=x_vals,
-                y=plot_df[_col].to_list(),
+@app.cell
+def _(go, summary_langs, summary_plot_df, summary_x_vals):
+    if summary_plot_df is None:
+        avg_barplot = None
+    else:
+        avg_cols = [f"{lang}_avg_alignment" for lang in summary_langs] + ["total_avg"]
+        avg_barplot = go.Figure()
+        for _col in avg_cols:
+            avg_barplot.add_bar(
+                x=summary_x_vals,
+                y=summary_plot_df[_col].to_list(),
                 name=_col,
             )
-        summary_barplot.update_layout(
+        avg_barplot.update_layout(
             barmode="group",
             xaxis_title="Hebrew lemma",
             yaxis_title="Normalized alignment",
-            title="Alignment summary by language",
+            title="Average alignment by language",
             height=500,
         )
-    return (summary_barplot,)
+    return (avg_barplot,)
+
+
+@app.cell
+def _(go, summary_langs, summary_plot_df, summary_x_vals):
+    if summary_plot_df is None:
+        top_barplot = None
+    else:
+        top_cols = [f"{lang}_top_alignment" for lang in summary_langs] + ["total_top"]
+        top_barplot = go.Figure()
+        for _col in top_cols:
+            top_barplot.add_bar(
+                x=summary_x_vals,
+                y=summary_plot_df[_col].to_list(),
+                name=_col,
+            )
+        top_barplot.update_layout(
+            barmode="group",
+            xaxis_title="Hebrew lemma",
+            yaxis_title="Normalized alignment",
+            title="Top-term alignment by language",
+            height=500,
+        )
+    return (top_barplot,)
 
 
 @app.cell(hide_code=True)
