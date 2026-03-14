@@ -30,6 +30,47 @@ def _(mo):
     return
 
 
+@app.cell
+def _(alignment_counts):
+    alignment_counts
+    return
+
+
+@app.cell
+def _(df, pl):
+    base = df.filter(pl.col("hebrew_lemma_stripped").is_not_null())
+
+    alignment_counts = base.group_by("hebrew_lemma_stripped").agg(
+        pl.len().alias("hebrew_count"),
+        pl.col("greek_lemma_stripped").drop_nulls().n_unique().alias("greek_forms"),
+        pl.col("latin_lemma_stripped").drop_nulls().n_unique().alias("latin_forms"),
+        pl.col("aramaic_lemma_stripped").drop_nulls().n_unique().alias("aramaic_forms"),
+    )
+
+    for lang in ["greek", "latin", "aramaic"]:
+        lemma_col = f"{lang}_lemma_stripped"
+        top_counts = (
+            base
+            .filter(pl.col(lemma_col).is_not_null())
+            .group_by(["hebrew_lemma_stripped", lemma_col])
+            .len(name="_n")
+            .group_by("hebrew_lemma_stripped")
+            .agg(pl.max("_n").alias(f"{lang}_top"))
+        )
+        alignment_counts = alignment_counts.join(top_counts, on="hebrew_lemma_stripped", how="left")
+
+    alignment_counts = alignment_counts.with_columns(
+        pl.col("hebrew_count").cast(pl.Int64),
+        pl.col("greek_forms").cast(pl.Int64),
+        pl.col("latin_forms").cast(pl.Int64),
+        pl.col("aramaic_forms").cast(pl.Int64),
+        pl.col("greek_top").fill_null(0).cast(pl.Int64),
+        pl.col("latin_top").fill_null(0).cast(pl.Int64),
+        pl.col("aramaic_top").fill_null(0).cast(pl.Int64),
+    )
+    return (alignment_counts,)
+
+
 @app.cell(column=1, hide_code=True)
 def _():
     import marimo as mo
