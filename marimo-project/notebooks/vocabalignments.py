@@ -2,11 +2,13 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "marimo>=0.20.4",
+#     "networkx==3.6.1",
 #     "nump==5.5.5.5",
 #     "numpy==2.4.3",
 #     "plotly[express]==6.6.0",
 #     "polars==1.39.0",
 #     "requests==2.32.5",
+#     "scipy==1.17.1",
 # ]
 # ///
 
@@ -33,7 +35,7 @@ def _(versioninfo):
 def _(lastmod, mo, versioninfo):
     versiondisplay = None
     if versioninfo.value is True:
-        versiondisplay = mo.md(f"""*Notebook version*: **0.1.0** (Feb. 3, 2026)
+        versiondisplay = mo.md(f"""*Notebook version*: **0.2.0** (Mar. 14, 2026)
 
         *Data last updated*: {lastmod}
         """)
@@ -50,26 +52,18 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    /// admonition | Using this notebook
-    Choose a text version (reference version), a vocabulary item (lexeme), and then choose one or more texts to find alignments in.
+def _(graphtab, hotspottab, mo, wordquerytab):
+    mo.ui.tabs({ "Overview": hotspottab, "Individual terms": wordquerytab, "Network visualization": graphtab})
+    return
 
-    Optionally, limit the number of items to display in the barchart.
-    ///
-    """)
+
+@app.cell
+def _():
     return
 
 
 @app.cell(hide_code=True)
-def _(cf_select, lemma, mo, plotlimit, refversion):
-    mo.vstack([mo.hstack([refversion, lemma, cf_select], justify="center"), plotlimit], justify="center")
-    return
-
-
-@app.cell(hide_code=True)
-def _(stacked_by_column_plot):
-    stacked_by_column_plot
+def _():
     return
 
 
@@ -79,37 +73,244 @@ def _(barplot):
     return
 
 
-@app.cell(column=1)
-def _():
-    return
-
-
-@app.cell
-def _(mo, numtodisplay, summary_select, summarysort):
-    mo.md(f"""
-    {summary_select} {summarysort} {numtodisplay}
+@app.cell(column=1, hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Assemble lego blocks
     """)
     return
 
 
-@app.cell(hide_code=True)
-def _(avg_barplot):
-    avg_barplot
-    return
+@app.cell
+def _(mo):
+    searchguide=mo.md("""
+    /// admonition | Using this notebook
+    Choose a text version (reference version), a vocabulary item (lexeme), and then choose one or more texts to find alignments in.
+
+    Optionally, limit the number of items to display in the barchart.
+    ///
+    """)
+    return (searchguide,)
+
+
+@app.cell
+def _(cf_select, lemma, mo, plotlimit, refversion):
+    querystack = mo.vstack([mo.hstack([refversion, lemma, cf_select], justify="center"), plotlimit], justify="center")
+    return (querystack,)
+
+
+@app.cell
+def _(barplot, mo, querystack, searchguide, stacked_by_column_plot):
+    wordquerytab = mo.vstack([mo.md("## Explore individual word alignments"),searchguide,querystack,stacked_by_column_plot,barplot
+                             ])
+    return (wordquerytab,)
+
+
+@app.cell
+def _(
+    avg_barplot,
+    barplot,
+    mo,
+    numtodisplay,
+    stacked_by_column_plot,
+    summary_select,
+    summarysort,
+    top_barplot,
+):
+    hotspottab = mo.vstack([
+        mo.md('## Overview of alignments: translation "hot spots"'),
+          mo.md(f"""
+    {summary_select} {summarysort} {numtodisplay}
+    """),avg_barplot,top_barplot,
+
+        stacked_by_column_plot, barplot
+    ])
+    return (hotspottab,)
+
+
+@app.cell
+def _(fig, graphguide, graphstack, mo):
+    graphtab = mo.vstack([
+        graphguide,
+        graphstack,
+        fig
+    ])
+    return (graphtab,)
+
+
+@app.cell(column=2)
+def _(mo):
+    threshold_slider = mo.ui.slider(start=0, stop=100, step=5, value=75, label="*Cut-off percentage*")
+    return (threshold_slider,)
+
+
+@app.cell
+def _(mo, subgr_gk_lat, threshold_slider):
+    graphstack = mo.hstack([ threshold_slider, mo.md(f"**Selected nodes**: {subgr_gk_lat.number_of_nodes()}, **Selected edges**: {subgr_gk_lat.number_of_edges()}")], justify="center")
+    return (graphstack,)
+
+
+@app.cell
+def _(mo):
+    graphguide=mo.md(f"""
+    **Choose a value for cut-off percentage**. The graph display will show relations of all nodes with connections stronger than your cut-off point.
+
+
+    /// attention | Note
+
+    *You will need to set the cut-off percentage at least once for the graph to display*.
+
+    ///
+    """)
+    return (graphguide,)
 
 
 @app.cell(hide_code=True)
-def _(top_barplot):
-    top_barplot
+def _(mo):
+    mo.md("""
+    ## Graph building
+    """)
     return
 
 
 @app.cell
-def _():
+def _(co, df):
+    if df is not None:
+        gk_lat_clean = df.drop_nulls(subset=["greek_lemma_stripped", "latin_lemma_stripped"])
+        gk_lat = co.score_pair_two_way(gk_lat_clean, "greek_lemma_stripped", "latin_lemma_stripped")
+    else:
+        gk_lat = None
+    return (gk_lat,)
+
+
+@app.cell
+def _(nx):
+    gk_lat_gr = nx.Graph()  # Undirected
+    return (gk_lat_gr,)
+
+
+@app.cell
+def _(gk_lat, gk_lat_gr):
+    if gk_lat is not None:
+        gk_lat_gr.add_weighted_edges_from(gk_lat.select(["greek_lemma_stripped", "latin_lemma_stripped", "average_score"]).iter_rows())
     return
 
 
-@app.cell(column=2, hide_code=True)
+@app.cell
+def _(get_significant_subgraph, gk_lat_gr, threshold_slider):
+    if gk_lat_gr is not None:
+        subgr_gk_lat = get_significant_subgraph(gk_lat_gr, threshold_slider.value)
+    else:
+        subgr_gk_lat = None
+    return (subgr_gk_lat,)
+
+
+@app.cell
+def _(np, nx):
+    def get_significant_subgraph(G, weight_percentile):
+        # Calculate weight threshold
+        weights = [d['weight'] for u, v, d in G.edges(data=True)]
+
+        # Handle empty graph or no edges
+        if len(weights) == 0:
+            return nx.Graph()
+
+        q = np.percentile(weights, weight_percentile)
+
+        # Filter edges and the resulting induced nodes
+        strong_edges = [(u, v, d) for u, v, d in G.edges(data=True) if d['weight'] >= q]
+
+        H = nx.Graph()
+        H.add_edges_from(strong_edges)
+
+        # Optionally: Keep only the largest connected component to remove isolates
+        if len(H) > 0:
+            main_comp = max(nx.connected_components(H), key=len)
+            H = H.subgraph(main_comp).copy()
+
+        return H
+
+    return (get_significant_subgraph,)
+
+
+@app.cell(hide_code=True)
+def _(gk_lat_gr, mo, threshold_slider):
+    mo.md(f"""/// admonition | *Debugging*
+    In Greek-Latin graph: **total nodes**: {gk_lat_gr.number_of_nodes()}, **total edges**: {gk_lat_gr.number_of_edges()}
+
+    Percentage **cut off**: {threshold_slider.value}
+
+    ///""")
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Graph plotting
+    """)
+    return
+
+
+@app.cell
+def _(nx, subgr_gk_lat):
+    gk_lat_pos = nx.spring_layout(subgr_gk_lat)
+    return (gk_lat_pos,)
+
+
+@app.cell
+def _(df, gk_lat_pos, go, subgr_gk_lat):
+    gl_edge_x, gl_edge_y = [], []
+    for u, v in subgr_gk_lat.edges():
+        x0, y0 = gk_lat_pos[u]
+        x1, y1 = gk_lat_pos[v]
+        gl_edge_x.extend([x0, x1, None])
+        gl_edge_y.extend([y0, y1, None])
+    gl_edge_trace = go.Scatter(x=gl_edge_x, y=gl_edge_y, line=dict(width=0.5, color='#888'), mode='lines', showlegend=False)
+    gl_node_x = [gk_lat_pos[node][0] for node in subgr_gk_lat.nodes()]
+    gl_node_y = [gk_lat_pos[node][1] for node in subgr_gk_lat.nodes()]
+    gl_node_labels = list(subgr_gk_lat.nodes())
+
+    greek_nodes = set()
+    latin_nodes = set()
+    if df is not None:
+        if "greek_lemma" in df.columns:
+            greek_nodes = set(df["greek_lemma"].drop_nulls().to_list())
+        if "latin_lemma" in df.columns:
+            latin_nodes = set(df["latin_lemma"].drop_nulls().to_list())
+
+    gl_node_colors = []
+    for node in gl_node_labels:
+        in_greek = node in greek_nodes
+        in_latin = node in latin_nodes
+        if in_greek and in_latin:
+            gl_node_colors.append("#9467bd")  # both
+        elif in_greek:
+            gl_node_colors.append("#1f77b4")  # greek
+        elif in_latin:
+            gl_node_colors.append("#d62728")  # latin
+        else:
+            gl_node_colors.append("#7f7f7f")  # unknown
+
+    gl_node_trace = go.Scatter(
+        x=gl_node_x,
+        y=gl_node_y,
+        mode='markers',
+        text=gl_node_labels,
+        hovertemplate='<b>%{text}</b><extra></extra>',
+        marker=dict(size=10, color=gl_node_colors),
+        showlegend=False,
+    )
+    return gl_edge_trace, gl_node_trace
+
+
+@app.cell
+def _(gl_edge_trace, gl_node_trace, go):
+    fig = go.Figure(data=[gl_edge_trace, gl_node_trace])
+    return (fig,)
+
+
+@app.cell(column=3, hide_code=True)
 def _(mo):
     mo.md("""
     ## Debugging data values
@@ -148,7 +349,7 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(debug, vocab):
     showvocab = None
     if debug.value:
@@ -667,6 +868,12 @@ def _(mo):
 
 
 @app.cell
+def _(mo):
+    srcpath= mo.notebook_location() / "public" / "genesis-verbs-numbered.cex"
+    return (srcpath,)
+
+
+@app.cell
 def _(unicodedata):
     def strip_to_alphabetic(value):
         """Keep alphabetic characters only (drops niqqud and other marks)."""
@@ -678,12 +885,6 @@ def _(unicodedata):
         return "".join(ch for ch in normalized if ch.isalpha())
 
     return (strip_to_alphabetic,)
-
-
-@app.cell
-def _(mo):
-    srcpath= mo.notebook_location() / "public" / "genesis-verbs-numbered.cex"
-    return (srcpath,)
 
 
 @app.cell
@@ -725,17 +926,26 @@ def _():
     import os
     import complutensian as co
     #import pyarrow as pa
-    import numpy
     import plotly.express as px
     import plotly.graph_objects as go
     import datetime
 
     import unicodedata
 
-    return datetime, go, os, pl, px, unicodedata
+    return co, datetime, go, os, pl, px, unicodedata
 
 
-@app.cell(column=3, hide_code=True)
+@app.cell
+def _():
+    import networkx as nx
+    import numpy as np
+    import scipy as sp
+
+
+    return np, nx
+
+
+@app.cell(column=4, hide_code=True)
 def _(mo):
     mo.md("""
     ## Widebody view
