@@ -67,58 +67,15 @@ def _(cf_select, lemma, mo, plotlimit, refversion):
     return
 
 
-@app.cell
-def _(barplot):
-    barplot
-    return
-
-
-@app.cell
-def _(mo):
-    mo.md("""
-    ## Add second plot here
-    """)
-    return
-
-
-@app.cell
-def _(aligns, label_cols, pl, px):
-    if aligns is not None and label_cols:
-        stacked_counts_parts = []
-        for col in label_cols:
-            if col in aligns.columns:
-                counts = (
-                    aligns.group_by(col)
-                    .len(name="count")
-                    .drop_nulls(col)
-                    .rename({col: "value"})
-                    .with_columns(pl.lit(col).alias("column"))
-                )
-                stacked_counts_parts.append(counts)
-
-        if stacked_counts_parts:
-            stacked_counts = pl.concat(stacked_counts_parts, how="vertical_relaxed")
-            stacked_by_column_plot = px.bar(
-                stacked_counts,
-                x="column",
-                y="count",
-                color="value",
-                barmode="stack",
-                labels={"column": "Column", "count": "Count", "value": "Value"},
-                title="Value counts by alignment column",
-            )
-            stacked_by_column_plot.update_layout(height=550)
-        else:
-            stacked_by_column_plot = None
-    else:
-        stacked_by_column_plot = None
-
-    return (stacked_by_column_plot,)
-
-
-@app.cell
+@app.cell(hide_code=True)
 def _(stacked_by_column_plot):
     stacked_by_column_plot
+    return
+
+
+@app.cell(hide_code=True)
+def _(barplot):
+    barplot
     return
 
 
@@ -377,6 +334,14 @@ def _(mo):
 
 
 @app.cell
+def _(mo):
+    mo.md("""
+    ### Grouped
+    """)
+    return
+
+
+@app.cell
 def _(lemma, lemmacounts, pl, plotlimit, px):
     if lemmacounts is not None and plotlimit is not None:
         # Get all columns except 'count'
@@ -387,13 +352,15 @@ def _(lemma, lemmacounts, pl, plotlimit, px):
             label=pl.concat_str(label_cols, separator=" ")
         )
 
+
+        langlist = ", ".join([s.removesuffix("_lemma_stripped").title() for s in label_cols])
         # Create bar chart
         barplot = px.bar(
             data,
             x="label",
             y="count",
             labels={"label": "", "count": "Count"},
-            title=f"Alignments with {lemma.value}"
+            title=f"Alignments of {langlist} with {lemma.value}"
         )
 
         # Rotate x-axis labels to 45 degrees
@@ -406,6 +373,75 @@ def _(lemma, lemmacounts, pl, plotlimit, px):
         barplot = None
         label_cols = []
     return barplot, label_cols
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Stacked
+    """)
+    return
+
+
+@app.cell
+def _(aligns, go, label_cols, pl):
+    if aligns is not None and label_cols:
+        stacked_counts_parts = []
+        for col in label_cols:
+            if col in aligns.columns:
+                counts = (
+                    aligns.group_by(col)
+                    .len(name="count")
+                    .sort("count", descending=True)
+                    .drop_nulls(col)
+                    .rename({col: "value"})
+                    .with_columns(pl.lit(col).alias("language"))
+                )
+                stacked_counts_parts.append(counts)
+
+        if stacked_counts_parts:
+            stacked_counts = pl.concat(stacked_counts_parts, how="vertical_relaxed")
+            stacked_by_column_plot = go.Figure()
+            seen_values = set()
+
+            for col in label_cols:
+                if col not in stacked_counts.get_column("language").unique().to_list():
+                    continue
+
+                col_rows = (
+                    stacked_counts
+                    .filter(pl.col("language") == col)
+                    .sort("count", descending=True)
+                )
+
+                for row in col_rows.iter_rows(named=True):
+                    value_label = str(row["value"])
+                    stacked_by_column_plot.add_bar(
+                        x=[col],
+                        y=[row["count"]],
+                        name=value_label,
+                        legendgroup=value_label,
+                        showlegend=value_label not in seen_values,
+                        hovertemplate=(
+                            f"Language: {col}<br>"
+                            f"Value: {value_label}<br>"
+                            "Count: %{y}<extra></extra>"
+                        ),
+                    )
+                    seen_values.add(value_label)
+
+            stacked_by_column_plot.update_layout(
+                barmode="stack",
+                xaxis_title="Language",
+                yaxis_title="Count",
+                title="Corresponding terms by language",
+                height=550,
+            )
+        else:
+            stacked_by_column_plot = None
+    else:
+        stacked_by_column_plot = None
+    return (stacked_by_column_plot,)
 
 
 @app.cell(hide_code=True)
@@ -477,21 +513,12 @@ def _():
     #import pyarrow as pa
     import numpy
     import plotly.express as px
+    import plotly.graph_objects as go
     import datetime
 
     import unicodedata
 
-    return datetime, os, pl, px, unicodedata
-
-
-@app.cell
-def _(mo):
-    _df = mo.sql(
-        f"""
-        SELECT * FROM
-        """
-    )
-    return
+    return datetime, go, os, pl, px, unicodedata
 
 
 @app.cell(column=2, hide_code=True)
