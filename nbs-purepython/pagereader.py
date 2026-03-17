@@ -11,8 +11,8 @@
 
 import marimo
 
-__generated_with = "0.20.4"
-app = marimo.App(width="columns")
+__generated_with = "0.21.0"
+app = marimo.App(width="columns", layout_file="layouts/pagereader.grid.json")
 
 
 @app.cell(column=0, hide_code=True)
@@ -29,7 +29,7 @@ def _(choiceblock):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _(currentclickpage, dse, mo, pagefrom, pagemenu, passagemenu, service):
     currentpage = None
     debugs = ""
@@ -53,8 +53,10 @@ def _(currentclickpage, dse, mo, pagefrom, pagemenu, passagemenu, service):
 
     hdr = None
     if currentpage:
-        hdr = mo.md(f"""## Read page `{currentpage}`
-        """)
+        pageid  = currentpage.split(':')[-1]
+        vol,quire,pg = pageid.split('_')
+        hdr = mo.vstack([mo.md("*Selected page*:"), mo.md(f"**{vol}**, *quire* **{quire}**, *page* **{pg}**")])
+
     hdr
     return (currentpage,)
 
