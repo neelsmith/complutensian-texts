@@ -1,5 +1,6 @@
 # /// script
 # dependencies = [
+#     "alignviz-anywidget==0.1.0",
 #     "marimo",
 #     "polars==1.39.0",
 #     "requests==2.32.5",
@@ -9,7 +10,7 @@
 
 import marimo
 
-__generated_with = "0.20.4"
+__generated_with = "0.21.0"
 app = marimo.App(width="columns")
 
 
@@ -22,11 +23,138 @@ def _():
 
 @app.cell
 def _(mo, passagechoice, versionchoices):
-    mo.md(f"{passagechoice} {versionchoices}")
+    mo.md(f"""
+    {passagechoice} {versionchoices}
+    """)
     return
 
 
-@app.cell(column=1, hide_code=True)
+@app.cell
+def _(showme):
+    showme
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
+def _(corpdict, genesis, passagechoice, pl, versionchoices):
+    def assemblecfdict():
+        "Uses ugly globals to find input to widget"
+        dictlist = []
+        psgalignments = genesis.filter(pl.col("passage") == "genesis " + passagechoice.value)
+        for vrsn in versionchoices.value:
+        
+            corpus = corpdict[vrsn]
+            psg = [p.text for p in corpus.passages if p.urn.work == 'genesis' and p.urn.passage == passagechoice.value ]
+
+
+
+            alignlist = []
+            if vrsn == 'lxx':
+                alignlist = psgalignments.select("lxx_token").to_series().to_list()
+            elif vrsn == 'vulgate':
+                alignlist = psgalignments.select("vulgate_token").to_series().to_list()
+            elif vrsn == 'onkelos':
+                alignlist = psgalignments.select("onkelos_token").to_series().to_list()
+            elif vrsn == 'masoretic':
+                alignlist = psgalignments.select("hebrew_token").to_series().to_list()
+
+            #print(alignlist)
+
+            sublisted = [""]
+            if alignlist:
+                sublisted = [s.split(" ") for s in alignlist]        
+            if corpus is None:
+                return(f"ERROR on {vrsn}!")
+            dict = {
+                "label" : f"**{vrsn}**",
+                "text" : "\n".join(psg),
+                "alignments" :  sublisted
+            }
+            dictlist.append(dict)
+        return dictlist
+    
+
+    return (assemblecfdict,)
+
+
+@app.cell
+def _(assemblecfdict, av, passagechoice):
+    showme = av.ParallelTextAlignWidget(
+            title=f"Genesis {passagechoice.value}",
+            versions=assemblecfdict(),
+            layout="horizontal",
+            base_highlight="#cfe8ff",
+            hover_highlight="#ffcf66",
+    )
+    return (showme,)
+
+
+@app.cell
+def _(genesis, passagechoice, pl):
+    thesealigned = genesis.filter(pl.col("passage") == "genesis " + passagechoice.value)
+    thesealigned.select("hebrew_token").to_series().to_list()
+    return
+
+
+@app.cell
+def _(genesis):
+    genesis
+    return
+
+
+@app.cell
+def _():
+    #corpus = corpdict['lxx']
+    #psg = [p.text for p in corpus.passages if p.urn.work == 'genesis' and p.urn.passage == passagechoice.value ]
+    #psg
+    return
+
+
+@app.cell(column=1)
+def _(av):
+    versions_data = [
+            {
+                "label": "**Latin** _original_",
+                "text": "Gallia est omnis divisa in partes tres",
+                "alignments": [["Gallia"], ["est", "divisa"], ["partes"]],
+            },
+            {
+                "label": "**English** _translation_",
+                "text": "All of Gaul is divided into three parts",
+                "alignments": [["Gaul"], ["is", "divided"], ["parts"]],
+            },
+            {
+                "label": "**French** _traduction_",
+                "text": "Toute la Gaule est divisee en trois parties",
+                "alignments": [["Gaule"], ["est", "divisee"], ["parties"]],
+            },
+        ]
+
+    caesar = av.ParallelTextAlignWidget(
+        title="Caesar *BG* 1.1 (horizontal layout)",
+        versions=versions_data,
+        layout="horizontal",
+        width="100%",
+        height="260px",
+        base_highlight="#cfe8ff",
+        hover_highlight="#ffcf66",
+    )	
+
+    return (caesar,)
+
+
+@app.cell
+def _(caesar):
+    caesar
+    return
+
+
+@app.cell(column=2, hide_code=True)
 def _(mo):
     mo.md("""
     ## UI
@@ -43,7 +171,6 @@ def _(genesis, pl):
 @app.cell
 def _(mo, psglist):
     passagechoice = mo.ui.dropdown(psglist, label="*Genesis passage*:")
-
     return (passagechoice,)
 
 
@@ -52,7 +179,6 @@ def _(mo, versions_menu):
     versionchoices = mo.ui.multiselect(
         options=versions_menu, label="*Versions to include*:"
     )
-
     return (versionchoices,)
 
 
@@ -194,7 +320,9 @@ def _():
 
 @app.cell
 def _():
-    return
+    import alignviz_anywidget as av
+
+    return (av,)
 
 
 if __name__ == "__main__":
