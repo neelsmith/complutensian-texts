@@ -15,7 +15,10 @@
 import marimo
 
 __generated_with = "0.21.0"
-app = marimo.App(width="columns")
+app = marimo.App(
+    width="columns",
+    layout_file="layouts/verbalignments.grid.json",
+)
 
 
 @app.cell(column=0, hide_code=True)
@@ -38,7 +41,7 @@ def _(mo, versioninfo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    # *Genesis* in the Complutensian Bible: alignments of verbal forms
+    # Complutensian Bible, *Genesis*: alignments of verbal forms
     """)
     return
 
@@ -49,13 +52,13 @@ def _(complutensian_alignment_app):
     return
 
 
-@app.cell(column=1, hide_code=True)
+@app.cell(hide_code=True)
 def _():
     # spacer
     return
 
 
-@app.cell(column=2, hide_code=True)
+@app.cell(column=1, hide_code=True)
 def _(mo):
     mo.md("""
     # App assembly
@@ -175,7 +178,7 @@ def _():
     return np, nx
 
 
-@app.cell(column=3, hide_code=True)
+@app.cell(column=2, hide_code=True)
 def _(mo):
     mo.md("""
     # Individual lexemes tab
@@ -570,7 +573,7 @@ def _():
     return
 
 
-@app.cell(column=4, hide_code=True)
+@app.cell(column=3, hide_code=True)
 def _(mo):
     mo.md("""
     # Overview tab
@@ -819,7 +822,7 @@ def _(mo):
     return
 
 
-@app.cell(column=5, hide_code=True)
+@app.cell(column=4, hide_code=True)
 def _(mo):
     mo.md("""
     # Network viz tab
@@ -957,12 +960,12 @@ def _(np, nx):
 
         H = nx.Graph()
         H.add_edges_from(strong_edges)
-        print(f"H has {H.number_of_edges()}")
+        #print(f"H has {H.number_of_edges()}")
         # Optionally: Keep only the largest connected component to remove isolates
         if len(H) > 0:
             main_comp = max(nx.connected_components(H), key=len)
             H = H.subgraph(main_comp).copy()
-        print(f"adjusted H has {H.number_of_edges()} edges for {H.number_of_nodes()} nodes")
+        #print(f"adjusted H has {H.number_of_edges()} edges for {H.number_of_nodes()} nodes")
         return H
 
     return (get_significant_subgraph,)
@@ -1055,7 +1058,7 @@ def _(mo):
     return
 
 
-@app.cell(column=6, hide_code=True)
+@app.cell(column=5, hide_code=True)
 def _(mo):
     mo.md("""
     ## Debugging data values

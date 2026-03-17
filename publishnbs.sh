@@ -1,7 +1,9 @@
-MARIMO=`which marimo`
+#DEST_DIR="scratch/export/"
+DEST_DIR="docs/"
 
+MARIMO=`which marimo`
 NEW_EXT="html"
-DEST_DIR="scratch/export/"
+
 for FILE in "$@"; do
     # Check if the file actually exists
     if [ -f "$FILE" ]; then
@@ -15,7 +17,7 @@ for FILE in "$@"; do
         DEST="$DEST_DIR$NEW_NAME"
         #mv "$FILE" "$NEW_NAME"
         echo "publishing $FILE -> $DEST ..."
-        $MARIMO export html-wasm "$FILE" --output "$DEST" --mode run
+        yes | $MARIMO export html-wasm "$FILE" --output "$DEST" --mode run
     else
         echo "Error: $FILE not found, skipping."
     fi
