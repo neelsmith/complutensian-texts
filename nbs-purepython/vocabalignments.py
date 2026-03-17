@@ -14,7 +14,7 @@
 
 import marimo
 
-__generated_with = "0.20.4"
+__generated_with = "0.21.0"
 app = marimo.App(width="columns")
 
 
@@ -25,12 +25,11 @@ def _(versioninfo):
 
 
 @app.cell(hide_code=True)
-def _(lastmod, mo, versioninfo):
+def _(mo, versioninfo):
     versiondisplay = None
     if versioninfo.value is True:
         versiondisplay = mo.md(f"""*Notebook version*: **0.2.0** (Mar. 14, 2026)
 
-        *Data last updated*: {lastmod}
         """)
     versiondisplay    
     return
@@ -51,6 +50,12 @@ def _(complutensian_alignment_app):
 
 
 @app.cell(column=1, hide_code=True)
+def _():
+    # spacer
+    return
+
+
+@app.cell(column=2, hide_code=True)
 def _(mo):
     mo.md("""
     # App assembly
@@ -114,9 +119,9 @@ def _(unicodedata):
 
 
 @app.cell
-def _(datetime, os, pl, srcpath, strip_to_alphabetic):
-    lastmodstamp = os.path.getmtime(srcpath)
-    lastmod = datetime.datetime.fromtimestamp(lastmodstamp).strftime('%Y-%m-%d %H:%M:%S')
+def _(pl, srcpath, strip_to_alphabetic):
+    #lastmodstamp = os.path.getmtime(srcpath)
+    #lastmod = datetime.datetime.fromtimestamp(lastmodstamp).strftime('%Y-%m-%d %H:%M:%S')
     df = pl.read_csv(str(srcpath),  separator = "|", truncate_ragged_lines=True)
 
     strip_targets = [
@@ -134,7 +139,7 @@ def _(datetime, os, pl, srcpath, strip_to_alphabetic):
     ]
     if strip_exprs:
         df = df.with_columns(strip_exprs)
-    return df, lastmod
+    return (df,)
 
 
 @app.cell(hide_code=True)
@@ -143,13 +148,6 @@ def _(mo):
     ## Imports
     """)
     return
-
-
-@app.cell
-def _():
-    import complutensian as co
-
-    return (co,)
 
 
 @app.cell
@@ -164,7 +162,7 @@ def _():
 
     import unicodedata
 
-    return datetime, go, os, pl, px, unicodedata
+    return go, pl, px, unicodedata
 
 
 @app.cell
@@ -177,7 +175,7 @@ def _():
     return np, nx
 
 
-@app.cell(column=2, hide_code=True)
+@app.cell(column=3, hide_code=True)
 def _(mo):
     mo.md("""
     # Individual lexemes tab
@@ -217,8 +215,6 @@ def _(cluster_plot, mo, querystack, searchguide, stacked_by_column_plot):
 
     if cluster_plot:
         workquerytabstack.append(cluster_plot)
-
-
     return (workquerytabstack,)
 
 
@@ -574,7 +570,7 @@ def _():
     return
 
 
-@app.cell(column=3, hide_code=True)
+@app.cell(column=4, hide_code=True)
 def _(mo):
     mo.md("""
     # Overview tab
@@ -624,6 +620,62 @@ def _(avg_barplot, top_barplot):
     if top_barplot:    
          ovtabdict["Top alignment by language"] = top_barplot
     return (ovtabdict,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Compute pairings
+    """)
+    return
+
+
+@app.cell
+def _(pl):
+
+    def score_pair_directed(df, col1, col2) -> pl.DataFrame:
+        """Score alignments between two columns in the DataFrame.
+
+        # Arguments:
+            df: Polars DataFrame containing the data.
+            col1: Name of the first column to compare.
+            col2: Name of the second column to compare.
+
+        # Returns:
+            A Polars DataFrame with the normalized scores of non-null alignments between the two columns .
+        """
+        #xtab = (
+         #   df.filter(pl.col(col1).is_not_null() & pl.col(col2).is_not_null())
+        xtab = (
+            df.filter(pl.col(col1).is_not_null())
+            .group_by([col1, col2])
+            .len()
+            .sort([col1, "len"], descending=[False, True])
+        )
+        #print("Xtab computed:")
+
+        scoresdf = xtab.with_columns(
+            (pl.col("len") / pl.col("len").sum().over(col1)).alias("scores")
+        )
+        return scoresdf
+
+
+
+    def score_pair_two_way(scores, col1, col2) -> pl.DataFrame:
+        scores1 = score_pair_directed(scores, col1, col2)
+        scores2 = score_pair_directed(scores, col2, col1)
+        two_way = scores1.join(
+            scores2,
+            on=[col1, col2],
+            how = "outer",
+            suffix="_rev"
+        ).fill_null(0).with_columns(
+            ((pl.col("scores") + pl.col("scores_rev")) / 2).alias("average_score")
+        )
+        return two_way
+
+
+    return (score_pair_two_way,)
 
 
 @app.cell(hide_code=True)
@@ -767,7 +819,7 @@ def _(mo):
     return
 
 
-@app.cell(column=4, hide_code=True)
+@app.cell(column=5, hide_code=True)
 def _(mo):
     mo.md("""
     # Network viz tab
@@ -776,8 +828,8 @@ def _(mo):
 
 
 @app.cell
-def _(graphtab):
-    graphtab
+def _():
+    #graphtab
     return
 
 
@@ -849,10 +901,10 @@ def _(gk_lat):
 
 
 @app.cell
-def _(co, df):
+def _(df, score_pair_two_way):
     if df is not None:
         gk_lat_clean = df.drop_nulls(subset=["greek_lemma_stripped", "latin_lemma_stripped"])
-        gk_lat = co.score_pair_two_way(gk_lat_clean, "greek_lemma_stripped", "latin_lemma_stripped")
+        gk_lat = score_pair_two_way(gk_lat_clean, "greek_lemma_stripped", "latin_lemma_stripped")
     else:
         gk_lat = None
     return (gk_lat,)
@@ -1003,7 +1055,7 @@ def _(mo):
     return
 
 
-@app.cell(column=5, hide_code=True)
+@app.cell(column=6, hide_code=True)
 def _(mo):
     mo.md("""
     ## Debugging data values
