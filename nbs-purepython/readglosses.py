@@ -8,8 +8,8 @@
 
 import marimo
 
-__generated_with = "0.20.2"
-app = marimo.App(width="medium")
+__generated_with = "0.21.0"
+app = marimo.App(width="medium", layout_file="layouts/readglosses.grid.json")
 
 
 @app.cell(hide_code=True)

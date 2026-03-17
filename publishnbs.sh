@@ -1,5 +1,6 @@
 #DEST_DIR="scratch/export/"
 DEST_DIR="docs/"
+#DEST_DIR="scratch/"
 
 MARIMO=`which marimo`
 NEW_EXT="html"

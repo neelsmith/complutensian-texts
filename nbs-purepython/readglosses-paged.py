@@ -9,7 +9,7 @@
 
 import marimo
 
-__generated_with = "0.20.2"
+__generated_with = "0.21.0"
 app = marimo.App(
     width="medium",
     layout_file="layouts/readglosses-paged.grid.json",
@@ -41,8 +41,9 @@ def _(page):
 def _(mo, page, targumdisplaychoices):
     targumdisplay = None
     if page.value:
-        targumdisplay = mo.md(f"""## Latin glosses to Targum: page id `{page.value}`
-
+        vol,quire,pageid = page.value.split("_")
+        targumdisplay = mo.md(f"""*Latin glosses to Targum*: **{vol}** *quire*, **{quire}**, *page* **{pageid}**
+    
     *Display* {targumdisplaychoices}
 
 
@@ -61,11 +62,13 @@ def _(mo, targumblocks, targumdisplay):
     return
 
 
-@app.cell(hide_code=True)
+@app.cell
 def _(lxxdisplaychoices, mo, page):
     lxxdisplay = None
     if page.value:
-        lxxdisplay = mo.md(f"""## Latin glosses to Septuagint: page id `{page.value}`
+        v,q,pgid = page.value.split("_")
+    
+        lxxdisplay = mo.md(f"""*Latin glosses to Septuagint*:**{v}** *quire*, **{q}**, *page* **{pgid}**
 
     *Display* {lxxdisplaychoices}
 
