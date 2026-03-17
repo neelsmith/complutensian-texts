@@ -69,250 +69,15 @@ def _(imagetab, mo, texttab):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+ 
+    """)
+    return
+
+
 @app.cell(column=1, hide_code=True)
-def _(mo):
-    mo.md("")
-    return
-
-
-@app.cell(column=2, hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Text tab
-    """)
-    return
-
-
-@app.cell
-def _(lxxstack, mo, targumstack):
-    texttab = mo.md(f"""
-
-    ### Latin glosses on Septuagint
-
-    {lxxstack}
-
-
-
-    ### Latin glosses on Targum Onkelos
-
-    {targumstack}
-
-    """)
-    return (texttab,)
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Passages for page
-    """)
-    return
-
-
-@app.cell
-def _(currentpage, dse):
-    pagepassagelist = dse.passagesforsurface(currentpage).to_series().to_list()
-    return (pagepassagelist,)
-
-
-@app.cell
-def _(pagepassagelist):
-    pagepassagediplomatic = [
-        f"{head}.diplomatic:{tail}"
-        for u in pagepassagelist
-        for head, _, tail in [u.rpartition(":")]
-    ]
-    return (pagepassagediplomatic,)
-
-
-@app.cell
-def _(pagepassagelist):
-    pagepassagenormed = [
-        f"{head}.normalized:{tail}"
-        for u in pagepassagelist
-        for head, _, tail in [u.rpartition(":")]
-    ]
-    return (pagepassagenormed,)
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## LXX stack
-    """)
-    return
-
-
-@app.cell
-def _(lxxdiff, lxxdiplformatted, lxxnormformatted, mo):
-    lxxstack =mo.hstack([lxxdiplformatted,mo.md(""), lxxnormformatted, mo.Html(lxxdiff)], widths=[30, 5, 30, 30])
-    return (lxxstack,)
-
-
-@app.cell
-def _(formatpagetext, lxxdipl, pagepassagediplomatic):
-    lxxdiplformatted = formatpagetext(lxxdipl, pagepassagediplomatic)
-    return (lxxdiplformatted,)
-
-
-@app.cell
-def _(formatpagetext, lxxnorm, pagepassagenormed):
-    lxxnormformatted = formatpagetext(lxxnorm, pagepassagenormed)
-    return (lxxnormformatted,)
-
-
-@app.cell
-def _(lxxdipl, pagepassagediplomatic, pl):
-    pagelxxdipltext =    " ".join(lxxdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["text"]).to_series().to_list())
-    return (pagelxxdipltext,)
-
-
-@app.cell
-def _(lxxnorm, pagepassagenormed, pl):
-    pagelxxdnormtext =    " ".join(lxxnorm.filter(pl.col("urn").is_in(pagepassagenormed)).select(["text"]).to_series().to_list())
-    pagelxxdnormtext
-    return (pagelxxdnormtext,)
-
-
-@app.cell
-def _(pagelxxdipltext, pagelxxdnormtext, visual_diff):
-    lxxdiff = visual_diff(pagelxxdipltext, pagelxxdnormtext)
-    return (lxxdiff,)
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Targum stack
-    """)
-    return
-
-
-@app.cell
-def _(mo, targdiplformatted, targnormformatted, targumdiff):
-    targumstack=mo.hstack([targdiplformatted,mo.md(""), targnormformatted, mo.Html(targumdiff)], widths=[30, 5, 30, 30])
-    return (targumstack,)
-
-
-@app.cell
-def _(formatpagetext, pagepassagediplomatic, targumdipl):
-    targdiplformatted = formatpagetext(targumdipl, pagepassagediplomatic)
-    return (targdiplformatted,)
-
-
-@app.cell
-def _(formatpagetext, pagepassagenormed, targumnorm):
-    targnormformatted = formatpagetext(targumnorm, pagepassagenormed)
-    return (targnormformatted,)
-
-
-@app.cell
-def _(pagepassagediplomatic, pl, targumdipl):
-    pagetargumdipltext =    " ".join(targumdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["text"]).to_series().to_list())
-    return (pagetargumdipltext,)
-
-
-@app.cell
-def _(pagepassagenormed, pl, targumnorm):
-    pagetargumnormtext =    " ".join(targumnorm.filter(pl.col("urn").is_in(pagepassagenormed)).select(["text"]).to_series().to_list())
-    pagetargumnormtext
-    return (pagetargumnormtext,)
-
-
-@app.cell
-def _(pagetargumdipltext, pagetargumnormtext, visual_diff):
-    targumdiff = visual_diff(pagetargumdipltext, pagetargumnormtext)
-    return (targumdiff,)
-
-
-@app.cell
-def _(targumdiff):
-    targumdiff
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Publish properly in `dse_polars`
-    """)
-    return
-
-
-@app.cell
-def _(md_passages, mo, pl):
-    def formatpagetext(corpus, filterlist):
-        pagefiltered = corpus.filter(pl.col("urn").is_in(filterlist)).select(["urn", "text"])
-        return mo.md("\n\n".join(md_passages(pagefiltered, highlighter='**')))
-
-    return (formatpagetext,)
-
-
-@app.cell
-def _(pl):
-    def md_passages(df: pl.DataFrame, highlighter = "*") -> list[str]:
-        "Generates a formatted string for each passage in the dataframe consisting of the final passage component of the urn, surrounded by the highlighter string, followed by a space and the text content."
-        rows = (
-            df.select("urn", "text")
-            .filter(pl.col("urn").is_not_null() & pl.col("text").is_not_null())
-            .iter_rows(named=True)
-        )
-        return [
-            f"{highlighter}{row['urn'].rsplit(':', 1)[-1]}{highlighter} {row['text']}"
-            for row in rows
-        ]
-
-    return (md_passages,)
-
-
-@app.cell
-def _(difflib, escape):
-    def visual_diff(string1: str, string2: str) -> str:
-        """
-        Generate an HTML visual diff of two strings.
-
-        Args:
-            string1: The first string to compare
-            string2: The second string to compare
-
-        Returns:
-            HTML string with highlighted differences:
-            - Common text: no highlighting
-            - Text only in string1: pastel yellow background
-            - Text only in string2: pastel green background
-        """
-        # Use SequenceMatcher to find differences at character level
-        matcher = difflib.SequenceMatcher(None, string1, string2)
-
-        html_parts = []
-
-        for opcode, i1, i2, j1, j2 in matcher.get_opcodes():
-            if opcode == 'equal':
-                # Common text - no highlighting
-                html_parts.append(escape(string1[i1:i2]))
-            elif opcode == 'delete':
-                # Text only in string1 - yellow background
-                text = escape(string1[i1:i2])
-                html_parts.append(f'<span style="background-color: #ffe4b3;">{text}</span>')
-            elif opcode == 'insert':
-                # Text only in string2 - green background
-                text = escape(string2[j1:j2])
-                html_parts.append(f'<span style="background-color: #c6efce;">{text}</span>')
-            elif opcode == 'replace':
-                # Text changed - show deleted part in yellow and inserted part in green
-                if i1 < i2:
-                    text = escape(string1[i1:i2])
-                    html_parts.append(f'<span style="background-color: #ffe4b3;">{text}</span>')
-                if j1 < j2:
-                    text = escape(string2[j1:j2])
-                    html_parts.append(f'<span style="background-color: #c6efce;">{text}</span>')
-
-        return ''.join(html_parts)
-
-    return (visual_diff,)
-
-
-@app.cell(column=3, hide_code=True)
 def _(mo):
     mo.md("""
     ## Image tab
@@ -321,8 +86,24 @@ def _(mo):
 
 
 @app.cell
-def _(debugmsg, lxxclickformatted, mo, targumclickformatted, viewer):
-    imagetab = mo.vstack([
+def _(currentpage):
+    type(currentpage)
+    return
+
+
+@app.cell
+def _(
+    currentpage,
+    debugmsg,
+    lxxclickformatted,
+    mo,
+    targumclickformatted,
+    viewer,
+):
+    imagetab = mo.md("")
+
+    if currentpage:
+        imagetab = mo.vstack([
 
         lxxclickformatted,
         targumclickformatted,
@@ -492,6 +273,17 @@ def _(clickedrows, pl):
 
 
 @app.cell
+def _(clickedrows, pl):
+    clickedrows.select(pl.col("image")).to_series().to_list()
+    return
+
+
+@app.cell
+def _():
+    return
+
+
+@app.cell
 def _(diplclicks, lxxdipl, pl):
     lxxclickcorpus = lxxdipl.filter(pl.col("urn").is_in(diplclicks)).select(["urn", "text"])
     return (lxxclickcorpus,)
@@ -504,9 +296,14 @@ def _(lxxclickcorpus):
 
 
 @app.cell
+def _(lxxclicklist):
+    lxxclicklist
+    return
+
+
+@app.cell
 def _(lxxclickcorpus, lxxclicklist, md_passages, mo):
     lxxclickformatted = ""
-
     if lxxclicklist:
         lxxclickmd = "\n\n".join(md_passages(lxxclickcorpus,highlighter="**"))
         lxxclickformatted = mo.callout(mo.md(lxxclickmd), kind="info"),
@@ -567,7 +364,384 @@ def _(coords, currentpage, currentpageimg, currentpageinfourl, debug):
     return (debugmsg,)
 
 
-@app.cell(column=4, hide_code=True)
+@app.cell(column=2, hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Text tab
+    """)
+    return
+
+
+@app.cell
+def _(lxxstack, mo, targumstack):
+    texttab = mo.md(f"""
+
+    {lxxstack}
+
+    {targumstack}
+
+    """)
+    return (texttab,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Passages for page
+    """)
+    return
+
+
+@app.cell
+def _(currentpage, dse):
+    pagepassagelist = dse.passagesforsurface(currentpage).to_series().to_list()
+    return (pagepassagelist,)
+
+
+@app.cell
+def _(pagepassagelist):
+    pagepassagediplomatic = [
+        f"{head}.diplomatic:{tail}"
+        for u in pagepassagelist
+        for head, _, tail in [u.rpartition(":")]
+    ]
+    return (pagepassagediplomatic,)
+
+
+@app.cell
+def _(pagepassagelist):
+    pagepassagenormed = [
+        f"{head}.normalized:{tail}"
+        for u in pagepassagelist
+        for head, _, tail in [u.rpartition(":")]
+    ]
+    return (pagepassagenormed,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Text UI options
+    """)
+    return
+
+
+@app.cell
+def _(lxxdisplayblocks, mo, pagepassagelist):
+    lxxdisplaychoices = mo.md("")
+    if pagepassagelist:
+        lxxdisplaychoices = mo.ui.multiselect(options = lxxdisplayblocks, value = list(lxxdisplayblocks.keys()), label="*Display*")
+    return (lxxdisplaychoices,)
+
+
+@app.cell
+def _(mo, pagepassagelist, targumdisplayblocks):
+    targumdisplaychoices = mo.md("")
+    if pagepassagelist:
+        targumdisplaychoices = mo.ui.multiselect(options = targumdisplayblocks, value = list(targumdisplayblocks.keys()),  label="*Display*")
+    return (targumdisplaychoices,)
+
+
+@app.cell
+def _():
+    lxxdisplayblocks = {
+        "Septuagint glosses: diplomatic text": "lxxdiplresult",
+        "Septuagint glosses: normalized": "lxxnormresult",
+        "Septuagint glosses: visual diff": "lxxdiffs"
+    }
+    return (lxxdisplayblocks,)
+
+
+@app.cell
+def _():
+    targumdisplayblocks = {
+        "Targum glosses: diplomatic text": "targumdiplresult",
+        "Targum glosses: normalized": "targumnormresult",
+        "Targum glosses: visual diff": "targumdiffs"
+    }
+    return (targumdisplayblocks,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## LXX stack
+    """)
+    return
+
+
+@app.cell
+def _(lxxdisplaychoices, lxxhdr, lxxhstack, mo):
+    lxxstack = mo.vstack([lxxhdr, lxxdisplaychoices, mo.hstack(lxxhstack,widths=[30,30,30])])
+    return (lxxstack,)
+
+
+@app.cell
+def _(mo, pagepassagelist):
+    lxxhdr = mo.md("")
+    if pagepassagelist:
+        lxxhdr = mo.md("### Latin glosses on Septuagint")
+    return (lxxhdr,)
+
+
+@app.cell
+def _(lxxdipl, pagepassagediplomatic, pl, re):
+    lxxfiltered = lxxdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["urn", "text"]).to_series().to_list()
+    lxxpagepassagereff = [re.sub(r'[^:]+:',"",u) for u in lxxfiltered]
+    return (lxxpagepassagereff,)
+
+
+@app.cell
+def _(formatpagetext, lxxdipl, pagepassagediplomatic):
+    lxxdiplformatted = formatpagetext(lxxdipl, pagepassagediplomatic)
+    return (lxxdiplformatted,)
+
+
+@app.cell
+def _(formatpagetext, lxxnorm, pagepassagenormed):
+    lxxnormformatted = formatpagetext(lxxnorm, pagepassagenormed)
+    return (lxxnormformatted,)
+
+
+@app.cell
+def _(lxxdipl, pagepassagediplomatic, pl):
+    pagelxxdipltextlist = lxxdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["text"]).to_series().to_list()
+    return (pagelxxdipltextlist,)
+
+
+@app.cell
+def _(lxxnorm, pagepassagenormed, pl):
+    pagelxxnormtextlist =  lxxnorm.filter(pl.col("urn").is_in(pagepassagenormed)).select(["text"]).to_series().to_list()
+    return (pagelxxnormtextlist,)
+
+
+@app.cell
+def _(
+    lxxpagepassagereff,
+    pagelxxdipltextlist,
+    pagelxxnormtextlist,
+    visual_diff,
+):
+    lxxdiff = " ".join([f"<p><b>{lxxpagepassagereff[i]}</b>" + visual_diff(pagelxxdipltextlist[i], row) + "</p>" for i,row in enumerate(pagelxxnormtextlist)])
+    return (lxxdiff,)
+
+
+@app.cell
+def _(
+    lxxdiff,
+    lxxdiplformatted,
+    lxxdisplaychoices,
+    lxxnormformatted,
+    mo,
+    pagepassagelist,
+):
+    lxxhstack = []
+    lxxcandidates = [
+      "lxxdiplresult",
+      "lxxnormresult",
+      "lxxdiffs"
+    ]
+
+    if pagepassagelist:  
+        if "lxxdiplresult" in lxxdisplaychoices.value:
+            lxxdiplstack = mo.vstack([mo.Html("<p><i>Diplomatic text</i></p>"), lxxdiplformatted])
+            lxxhstack.append(lxxdiplstack)
+        if "lxxnormresult" in lxxdisplaychoices.value:
+            lxxnormstack = mo.vstack([mo.md("<p><i>Normalized text</i></p>"),lxxnormformatted])
+            lxxhstack.append(lxxnormstack)   
+        if "lxxdiffs" in lxxdisplaychoices.value:
+            lxxdiffstack = mo.Html("<p><i>Visual differences</i><p>" + lxxdiff)
+            lxxhstack.append(lxxdiffstack)
+    return (lxxhstack,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Targum stack
+    """)
+    return
+
+
+@app.cell
+def _(mo, targumdisplaychoices, targumhdr, targumhstack):
+    targumstack = mo.vstack([targumhdr, targumdisplaychoices,  mo.hstack(targumhstack,widths=[30,30,30])])
+    return (targumstack,)
+
+
+@app.cell
+def _(mo, pagepassagelist):
+    targumhdr = mo.md("")
+    if pagepassagelist:
+        targumhdr = mo.md("### Latin glosses on Targum Onkelos")
+    return (targumhdr,)
+
+
+@app.cell
+def _(formatpagetext, pagepassagediplomatic, targumdipl):
+    targdiplformatted = formatpagetext(targumdipl, pagepassagediplomatic)
+    return (targdiplformatted,)
+
+
+@app.cell
+def _(pagepassagediplomatic, pl, re, targumdipl):
+    targumfiltered = targumdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["urn", "text"]).to_series().to_list()
+    targumpagepassagereff = [re.sub(r'[^:]+:',"",u) for u in targumfiltered]
+    return (targumpagepassagereff,)
+
+
+@app.cell
+def _(formatpagetext, pagepassagenormed, targumnorm):
+    targnormformatted = formatpagetext(targumnorm, pagepassagenormed)
+    return (targnormformatted,)
+
+
+@app.cell
+def _(pagepassagediplomatic, pl, targumdipl):
+    pagetargumdipltextlist = targumdipl.filter(pl.col("urn").is_in(pagepassagediplomatic)).select(["text"]).to_series().to_list()
+    return (pagetargumdipltextlist,)
+
+
+@app.cell
+def _(pagepassagenormed, pl, targumnorm):
+    pagetargumnormtextlist = targumnorm.filter(pl.col("urn").is_in(pagepassagenormed)).select(["text"]).to_series().to_list()
+    return
+
+
+@app.cell
+def _(pagetargumdipltextlist, targumpagepassagereff, visual_diff):
+    targumdiff =  " ".join([f"<p><b>{targumpagepassagereff[i]}</b>" + visual_diff(pagetargumdipltextlist[i], row) + "</p>" for i,row in enumerate(pagetargumdipltextlist)])#visual_diff(pagetargumdipltext, pagetargumnormtext)
+    return (targumdiff,)
+
+
+@app.cell
+def _(
+    mo,
+    pagepassagelist,
+    targdiplformatted,
+    targnormformatted,
+    targumdiff,
+    targumdisplaychoices,
+):
+    targumhstack = []
+    targumcandidates = [
+      "targumdiplresult",
+      "targumnormresult",
+      "targumdiffs"
+    ]
+
+    if pagepassagelist:  
+        if "targumdiplresult" in targumdisplaychoices.value:
+            targumdiplstack = mo.vstack([mo.Html("<p>Diplomatic text</p>"), targdiplformatted])
+            targumhstack.append(targumdiplstack)
+        if "targumnormresult" in targumdisplaychoices.value:
+            targumnormstack = mo.vstack([mo.md("Normalized text"),targnormformatted])
+            targumhstack.append(targumnormstack)   
+        if "targumdiffs" in targumdisplaychoices.value:
+            targumdiffstack = mo.Html("<p>Visual differences<p>" + targumdiff)
+            targumhstack.append(targumdiffstack)
+    return (targumhstack,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Publish properly in `dse_polars`
+    """)
+    return
+
+
+@app.cell
+def _(html_passages, mo, pl):
+    def formatpagetext(corpus, filterlist):
+        pagefiltered = corpus.filter(pl.col("urn").is_in(filterlist)).select(["urn", "text"])
+        return mo.md("\n\n".join(html_passages(pagefiltered, highlighter='b')))
+
+    return (formatpagetext,)
+
+
+@app.cell
+def _(pl):
+    def html_passages(df: pl.DataFrame, highlighter = "i") -> list[str]:
+        "Generates a formatted string for each passage in the dataframe consisting of the final passage component of the urn, surrounded by the highlighter string, followed by a space and the text content."
+        rows = (
+            df.select("urn", "text")
+            .filter(pl.col("urn").is_not_null() & pl.col("text").is_not_null())
+            .iter_rows(named=True)
+        )
+        return [
+            f"<p><{highlighter}>{row['urn'].rsplit(':', 1)[-1]}</{highlighter}> {row['text']}</p>"
+            for row in rows
+        ]
+
+    return (html_passages,)
+
+
+@app.cell
+def _(pl):
+    def md_passages(df: pl.DataFrame, highlighter = "*") -> list[str]:
+        "Generates a formatted string for each passage in the dataframe consisting of the final passage component of the urn, surrounded by the highlighter string, followed by a space and the text content."
+        rows = (
+            df.select("urn", "text")
+            .filter(pl.col("urn").is_not_null() & pl.col("text").is_not_null())
+            .iter_rows(named=True)
+        )
+        return [
+            f"{highlighter}{row['urn'].rsplit(':', 1)[-1]}{highlighter} {row['text']}"
+            for row in rows
+        ]
+
+    return (md_passages,)
+
+
+@app.cell
+def _(difflib, escape):
+    def visual_diff(string1: str, string2: str) -> str:
+        """
+        Generate an HTML visual diff of two strings.
+
+        Args:
+            string1: The first string to compare
+            string2: The second string to compare
+
+        Returns:
+            HTML string with highlighted differences:
+            - Common text: no highlighting
+            - Text only in string1: pastel yellow background
+            - Text only in string2: pastel green background
+        """
+        # Use SequenceMatcher to find differences at character level
+        matcher = difflib.SequenceMatcher(None, string1, string2)
+
+        html_parts = []
+
+        for opcode, i1, i2, j1, j2 in matcher.get_opcodes():
+            if opcode == 'equal':
+                # Common text - no highlighting
+                html_parts.append(escape(string1[i1:i2]))
+            elif opcode == 'delete':
+                # Text only in string1 - yellow background
+                text = escape(string1[i1:i2])
+                html_parts.append(f'<span style="background-color: #ffe4b3;">{text}</span>')
+            elif opcode == 'insert':
+                # Text only in string2 - green background
+                text = escape(string2[j1:j2])
+                html_parts.append(f'<span style="background-color: #c6efce;">{text}</span>')
+            elif opcode == 'replace':
+                # Text changed - show deleted part in yellow and inserted part in green
+                if i1 < i2:
+                    text = escape(string1[i1:i2])
+                    html_parts.append(f'<span style="background-color: #ffe4b3;">{text}</span>')
+                if j1 < j2:
+                    text = escape(string2[j1:j2])
+                    html_parts.append(f'<span style="background-color: #c6efce;">{text}</span>')
+
+        return ''.join(html_parts)
+
+    return (visual_diff,)
+
+
+@app.cell(column=3, hide_code=True)
 def _(mo):
     mo.md("""
     ## Imports
@@ -615,8 +789,16 @@ def _():
 
 @app.cell
 def _():
+    import re
+
+    return (re,)
+
+
+@app.cell
+def _():
     import difflib
     from html import escape
+
 
     return difflib, escape
 

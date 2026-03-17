@@ -2,17 +2,28 @@
 # requires-python = ">=3.10"
 # dependencies = [
 #     "marimo>=0.19.11",
+#     "polars==1.39.0",
+#     "requests==2.32.5",
 # ]
 # ///
+
 import marimo
 
-__generated_with = "0.19.6"
+__generated_with = "0.20.4"
 app = marimo.App(width="medium")
 
 
 @app.cell
 def _():
     import marimo as mo
+
+    return
+
+
+@app.cell
+def _():
+    import requests
+
     return
 
 
@@ -20,6 +31,7 @@ def _():
 def _():
     import complutensian as co
     from pathlib import Path
+
     return Path, co
 
 
