@@ -1,0 +1,6 @@
+nbs-purepython/pagereader.py        nbs-purepython/readglosses.py
+nbs-purepython/readglosses-paged.py nbs-purepython/verbalignments.py
+
+
+
+marimo export html-wasm nbs-purepython/readglosses-paged.py --mode run -o scratch/readglosses-paged.html
