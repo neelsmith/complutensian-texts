@@ -67,8 +67,8 @@ def _(mo):
 
 
 @app.cell
-def _(hotspottab):
-    hotspottab
+def _():
+    #hotspottab
     return
 
 
@@ -87,26 +87,42 @@ def _(hotspotvstack, mo):
 
 
 @app.cell
-def _(avg_barplot, mo, numtodisplay, ovtabdict, summary_select, summarysort):
+def _(
+    avg_barplot,
+    bar_or_line,
+    mo,
+    numtodisplay,
+    ovtabdict,
+    summary_select,
+    summarysort,
+):
     hotspotvstack = [
         mo.md('## Overview of alignments: translation "hot spots"'),
           mo.md(f"""
-    {summary_select} {summarysort} {numtodisplay}
+    {summary_select} {summarysort} {numtodisplay} {bar_or_line}
     """)
     ]
     if avg_barplot:
         hotspotvstack.append(mo.ui.tabs(ovtabdict))
+
+    
     return (hotspotvstack,)
 
 
 @app.cell
-def _(avg_barplot, top_barplot):
+def _(avg_barplot, avg_lineplot, bar_or_line, top_barplot, top_lineplot):
     ovtabdict = {}
     if avg_barplot:
-        #hotspotvstack.append(avg_barplot)
-        ovtabdict["Average alignments by language"] = avg_barplot
+        if bar_or_line.value == "bar plot":
+            ovtabdict["Average alignments by language"] = avg_barplot
+        else:
+            ovtabdict["Average alignments by language"] = avg_lineplot
+        
     if top_barplot:    
-         ovtabdict["Top alignment by language"] = top_barplot
+        if bar_or_line.value == "bar plot":
+             ovtabdict["Top alignment by language"] = top_barplot
+        else:
+            ovtabdict["Top alignment by language"] = top_lineplot
     return (ovtabdict,)
 
 
@@ -172,6 +188,12 @@ def _(mo):
     ## UI
     """)
     return
+
+
+@app.cell
+def _(mo):
+    bar_or_line = mo.ui.dropdown(["bar plot","line plot"], value="line plot",label="*Plot as*")
+    return (bar_or_line,)
 
 
 @app.cell
@@ -257,14 +279,22 @@ def _(alignment_counts, numtodisplay, pl, summary_select, summarysort):
 def _(go, summary_langs, summary_plot_df, summary_x_vals):
     if summary_plot_df is None:
         avg_barplot = None
+        avg_lineplot = None
     else:
         avg_cols = [f"{lang}_avg_alignment" for lang in summary_langs] + ["total_avg"]
         avg_barplot = go.Figure()
+        avg_lineplot = go.Figure()
         for _col in avg_cols:
             avg_barplot.add_bar(
                 x=summary_x_vals,
                 y=summary_plot_df[_col].to_list(),
                 name=_col,
+            )
+            avg_lineplot.add_scatter(
+                x=summary_x_vals,
+                y=summary_plot_df[_col].to_list(),
+                name=_col,
+                mode="lines+markers"
             )
         avg_barplot.update_layout(
             barmode="group",
@@ -273,21 +303,36 @@ def _(go, summary_langs, summary_plot_df, summary_x_vals):
             title="Average alignment by language",
             height=500,
         )
-    return (avg_barplot,)
+        avg_lineplot.update_layout(
+            xaxis_title="Hebrew lemma",
+            yaxis_title="Normalized alignment",
+            title="Average alignment by language",
+            height=500,
+            hovermode="x unified" # Optional: makes it easier to compare lines on hover
+        )
+    return avg_barplot, avg_lineplot
 
 
 @app.cell
 def _(go, summary_langs, summary_plot_df, summary_x_vals):
     if summary_plot_df is None:
         top_barplot = None
+        top_lineplot = None
     else:
         top_cols = [f"{lang}_top_alignment" for lang in summary_langs] + ["total_top"]
         top_barplot = go.Figure()
+        top_lineplot = go.Figure()
         for _col in top_cols:
             top_barplot.add_bar(
                 x=summary_x_vals,
                 y=summary_plot_df[_col].to_list(),
                 name=_col,
+            )
+            top_lineplot.add_scatter(
+                x=summary_x_vals,
+                y=summary_plot_df[_col].to_list(),
+                name=_col,
+                mode="lines+markers"
             )
         top_barplot.update_layout(
             barmode="group",
@@ -296,7 +341,14 @@ def _(go, summary_langs, summary_plot_df, summary_x_vals):
             title="Top-term alignment by language",
             height=500,
         )
-    return (top_barplot,)
+        top_lineplot.update_layout(
+            xaxis_title="Hebrew lemma",
+            yaxis_title="Normalized alignment",
+            title="Top-term alignment by language",
+            height=500,
+            hovermode="x unified" 
+        )
+    return top_barplot, top_lineplot
 
 
 @app.cell(hide_code=True)
