@@ -239,6 +239,12 @@ def _(mo):
 
 
 @app.cell
+def _(n_langs):
+    n_langs
+    return
+
+
+@app.cell
 def _(alignment_counts, numtodisplay, pl, summary_select, summarysort):
     if not summary_select.value:
         summary_plot_df = None
@@ -248,48 +254,59 @@ def _(alignment_counts, numtodisplay, pl, summary_select, summarysort):
         summary_langs = summary_select.value
         n_langs = len(summary_langs)
 
+
+
         _df = alignment_counts.with_columns(
-            *[
-                (pl.col(f"{lang}_forms") / pl.col("hebrew_count")).alias(f"{lang}_avg_alignment")
-                for lang in summary_langs
-            ],
-            *[
-                (pl.col(f"{lang}_top") / pl.col("hebrew_count")).alias(f"{lang}_top_alignment")
-                for lang in summary_langs
-            ],
-            (
-                sum(pl.col(f"{lang}_forms") for lang in summary_langs)
-                / (pl.col("hebrew_count") * n_langs)
-            ).alias("total_avg"),
-            (
-                sum(pl.col(f"{lang}_top") for lang in summary_langs)
-                / (pl.col("hebrew_count") * n_langs)
-            ).alias("total_top"),
-        )
+        *[
+            (pl.col(f"{lang}_forms") / pl.col("hebrew_count")).alias(f"{lang}_avg_alignment")
+            for lang in summary_langs
+        ],
+        *[
+            (pl.col(f"{lang}_top") / pl.col("hebrew_count")).alias(f"{lang}_top_alignment")
+            for lang in summary_langs
+        ],
+        (
+            sum(pl.col(f"{lang}_forms") for lang in summary_langs)
+            / (pl.col("hebrew_count") * n_langs)
+        ).alias("total_avg"),
+        (
+            sum(pl.col(f"{lang}_top") for lang in summary_langs)
+            / (pl.col("hebrew_count") * n_langs)
+        ).alias("total_top"),
+    )
+
 
         if summarysort.value and summarysort.value in _df.columns:
             _df = _df.sort(summarysort.value, descending=True)
 
         summary_plot_df = _df.head(numtodisplay.value)
         summary_x_vals = summary_plot_df["hebrew_lemma_stripped"].to_list()
-    return summary_langs, summary_plot_df, summary_x_vals
+    return n_langs, summary_langs, summary_plot_df, summary_x_vals
 
 
 @app.cell
-def _(go, summary_langs, summary_plot_df, summary_x_vals):
+def _(n_langs):
+    n_langs
+    return
+
+
+@app.cell
+def _(go, n_langs, summary_langs, summary_plot_df, summary_x_vals):
     if summary_plot_df is None:
         avg_barplot = None
         avg_lineplot = None
     else:
-        avg_cols = [f"{lang}_avg_alignment" for lang in summary_langs] + ["total_avg"]
+        if n_langs > 1:
+            avg_cols = [f"{lang}_avg_alignment" for lang in summary_langs] + ["total_avg"]
+        else:
+            avg_cols = [f"{lang}_avg_alignment" for lang in summary_langs] 
         avg_barplot = go.Figure()
         avg_lineplot = go.Figure()
         for _col in avg_cols:
             avg_barplot.add_bar(
                 x=summary_x_vals,
                 y=summary_plot_df[_col].to_list(),
-                name=_col,
-            )
+                name=_col,        )
             avg_lineplot.add_scatter(
                 x=summary_x_vals,
                 y=summary_plot_df[_col].to_list(),
@@ -314,12 +331,15 @@ def _(go, summary_langs, summary_plot_df, summary_x_vals):
 
 
 @app.cell
-def _(go, summary_langs, summary_plot_df, summary_x_vals):
+def _(go, n_langs, summary_langs, summary_plot_df, summary_x_vals):
     if summary_plot_df is None:
         top_barplot = None
         top_lineplot = None
     else:
-        top_cols = [f"{lang}_top_alignment" for lang in summary_langs] + ["total_top"]
+        if n_langs > 1:
+            top_cols = [f"{lang}_top_alignment" for lang in summary_langs] + ["total_top"]
+        else:
+            top_cols = [f"{lang}_top_alignment" for lang in summary_langs] 
         top_barplot = go.Figure()
         top_lineplot = go.Figure()
         for _col in top_cols:
